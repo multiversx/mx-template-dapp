@@ -25,7 +25,7 @@ export default function App() {
                 component={() => (
                   <Dapp.Pages.Unlock
                     callbackRoute={routeNames.dashboard}
-                    title="Maiar Exchange"
+                    title="Dapp Template"
                     lead="Please select your login method:"
                     ledgerRoute={routeNames.ledger}
                     walletConnectRoute={routeNames.walletconnect}
