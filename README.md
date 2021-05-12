@@ -1,6 +1,6 @@
 # @elrondnetwork/dapp-template
-The __Elrond Dapp Template__, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
-This library will help you get up and running in offering a pleasent User Experience to Elrond Blockchain users.
+The __Elrond Starter dApp__, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
+It's a template that provides the basics for Elrond authentication and TX signing.
 
 ## Requirements
 * Node.js version 12.16.2+
