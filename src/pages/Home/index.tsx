@@ -9,14 +9,20 @@ const Home = () => {
         <div className="col-12 col-md-8 col-lg-5 mx-auto">
           <div className="card shadow-sm rounded p-4 border-0">
             <div className="card-body text-center">
-              <h2 className="mb-3">Dapp</h2>
+              <h2 className="mb-3" data-testid="title">
+                Dapp
+              </h2>
 
               <p className="mb-3">
                 This is an Elrond dapp sample.
                 <br /> Login using your Elrond wallet.
               </p>
 
-              <Link to={routeNames.unlock} className="btn btn-primary mt-3">
+              <Link
+                to={routeNames.unlock}
+                className="btn btn-primary mt-3"
+                data-testid="loginBtn"
+              >
                 Login
               </Link>
             </div>

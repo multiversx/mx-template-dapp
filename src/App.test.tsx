@@ -1,9 +1,7 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { renderWithRouter } from "testUtils";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test("renders home page", () => {
+  const screen = renderWithRouter({ route: "/" });
+  const title = screen.getByTestId("title");
+  expect(title).toBeInTheDocument();
 });
