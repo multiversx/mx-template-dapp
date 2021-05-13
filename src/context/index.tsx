@@ -1,6 +1,7 @@
 import * as React from "react";
-import { ActionType, reducer } from "./reducer";
-import initialState, { StateType } from "./state";
+import {reducer} from "./reducer";
+import initialState from "./state";
+import {ActionType, StateType} from "./types";
 
 type DispatchType = (action: ActionType) => void;
 export interface ContextType {

@@ -2,10 +2,11 @@ import moment from "moment";
 import * as Dapp from "@elrondnetwork/dapp";
 import React from "react";
 import Denominate from "components/Denominate";
-import { TransactionType } from "context/state";
 import StatusIcon from "./StatusIcon";
 import txStatus from "./txStatus";
+import {TransactionType} from "../../../context/types";
 
+//TODO:: again use lodash and extract this from our component file.
 function sortByDate(a: TransactionType, b: TransactionType) {
   if (a.timestamp < b.timestamp) {
     return 1;
@@ -28,11 +29,13 @@ const TransactionList = ({
   const incoming = (sender: string) =>
     sender === address && sender !== fakeSender;
 
+  //TODO::Consider extracting this in another file
   // eslint-disable-next-line
   const doubleOwnTransactions = transactions
     .filter((tx) => tx.sender === tx.receiver && tx.blockHash !== "")
     .map((tx) => ({ ...tx, sender: fakeSender, timestamp: tx.timestamp + 1 }));
 
+  //TODO::Extract in a function ? and move it in a separate folder.
   const sortedTransactions: TransactionType[] = ([
     ...transactions,
     ...(doubleOwnTransactions.length > 0 ? doubleOwnTransactions : []),

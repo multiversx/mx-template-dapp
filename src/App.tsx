@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import * as Dapp from "@elrondnetwork/dapp";
-import { walletConnectBridge, walletConnectDeepLink, network } from "./config";
+import { walletConnectBridge, walletConnectDeepLink, network } from "./config.testnet";
 import { ContextProvider } from "./context";
 import Layout from "./components/Layout";
 import routes, { routeNames } from "./routes";
@@ -22,6 +22,8 @@ export default function App() {
             <Switch>
               <Route
                 path={routeNames.unlock}
+                    //TODO::Consider wrapping external pages in a local component and use that one.
+                    // component with all predefined things. this route will grow with time
                 component={() => (
                   <Dapp.Pages.Unlock
                     callbackRoute={routeNames.dashboard}

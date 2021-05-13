@@ -8,7 +8,7 @@ import {
   ChainID,
   TransactionVersion,
 } from "@elrondnetwork/erdjs";
-import { RawTransactionType } from "helpers/types";
+import { RawTransactionType } from "models/types";
 
 export default function newTransaction(rawTransaction: RawTransactionType) {
   return new Transaction({

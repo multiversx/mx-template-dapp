@@ -6,8 +6,8 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TransactionType } from "./../../../context/state";
 import txStatus from "./txStatus";
+import { TransactionType } from "context/types";
 
 interface StatusIconType {
   tx: TransactionType;
@@ -16,6 +16,7 @@ interface StatusIconType {
 
 const StatusIcon = ({ tx, incomingTransaction }: StatusIconType) => {
   let Icon = () => <></>;
+  //TODO::Not sure if this works..
   switch (tx.status) {
     case txStatus.notExecuted:
       Icon = () => <FontAwesomeIcon icon={faBan} className="text-danger" />;

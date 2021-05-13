@@ -1,10 +1,4 @@
-import { StateType, TransactionType } from "./state";
-
-export type ActionType = {
-  type: "setTransactions";
-  transactions: TransactionType[];
-  transactionsFetched: StateType["transactionsFetched"];
-};
+import {ActionType, StateType, TransactionType} from "./types";
 
 export function reducer(state: StateType, action: ActionType): StateType {
   switch (action.type) {

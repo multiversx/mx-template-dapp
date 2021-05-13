@@ -6,11 +6,11 @@ import {
   // faCaretDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { contractAddress, gasPrice, version } from "config";
+import { contractAddress, gasPrice, version } from "config.testnet";
 import { routeNames } from "routes";
 import {} from "module";
 import newTransaction from "pages/Transaction/newTransaction";
-import { RawTransactionType } from "helpers/types";
+import { RawTransactionType } from "models/types";
 
 const Actions = () => {
   const sendTransaction = Dapp.useSendTransaction();
@@ -24,6 +24,7 @@ const Actions = () => {
     });
   };
 
+  //TODO: consider dispatching this from another folder... to many things in this page.
   const stakeTransaction: RawTransactionType = {
     receiver: contractAddress,
     data: "stake",

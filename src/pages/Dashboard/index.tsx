@@ -8,7 +8,7 @@ import Actions from "./Actions";
 import Transactions from "./Transactions";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { contractAddress } from "config";
+import { contractAddress } from "config.testnet";
 
 const Dashboard = () => {
   const ref = React.useRef(null);
@@ -35,11 +35,13 @@ const Dashboard = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   React.useEffect(fetchData, []);
 
+  //TODO::Maybe we have a smell here we have 2 checks one for undefined and one for false boolean!
+  //maybe this should be a loading indicator?
   if (transactionsFetched === undefined) {
     return <PageState svgComponent={<></>} spin />;
   }
 
-  if (transactionsFetched === false) {
+  if (!transactionsFetched) {
     return (
       <PageState
         svgComponent={

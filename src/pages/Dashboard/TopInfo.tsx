@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Dapp from "@elrondnetwork/dapp";
 import Denominate from "./../../components/Denominate";
-import { contractAddress } from "config";
+import { contractAddress } from "config.testnet";
 
 const TopInfo = () => {
   const {

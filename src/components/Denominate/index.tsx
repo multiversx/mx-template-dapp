@@ -1,6 +1,6 @@
 import React from "react";
 import * as Dapp from "@elrondnetwork/dapp";
-import { decimals as configDecimals, denomination } from "config";
+import { decimals as configDecimals, denomination } from "config.testnet";
 import denominate from "./denominate";
 
 interface DenominateType {
