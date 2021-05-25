@@ -1,10 +1,6 @@
 import * as React from "react";
 import * as Dapp from "@elrondnetwork/dapp";
-import {
-  faArrowUp,
-  faArrowDown,
-  // faCaretDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { contractAddress, gasPrice, version } from "config";
 import { routeNames } from "routes";
