@@ -16,7 +16,7 @@ const TopInfo = () => {
       </div>
       <div className="mb-4">
         <span className="opacity-6 mr-1">Contract address:</span>
-        <span>{contractAddress}</span>
+        <span data-testid="contractAddress">{contractAddress}</span>
       </div>
       <div>
         <h3 className="py-2">

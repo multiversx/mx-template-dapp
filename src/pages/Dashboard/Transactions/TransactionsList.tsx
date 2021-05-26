@@ -51,7 +51,7 @@ const TransactionList = ({
               <th className="border-0 font-weight-normal">Amount</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody data-testid="transactionsList">
             {sortedTransactions.map((tx: TransactionType, i) => {
               const incomingTransaction = incoming(tx.sender);
               return (

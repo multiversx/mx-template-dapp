@@ -1,6 +1,7 @@
 import React from "react";
 import { routeNames } from "routes";
 import { renderWithRouter, testAddress } from "testUtils";
+import { contractAddress as configContractAddress } from "config";
 
 jest.mock("@elrondnetwork/dapp", () => {
   const dapp = jest.requireActual("@elrondnetwork/dapp");
@@ -34,11 +35,20 @@ describe("Dashboard page", () => {
     const screen = renderWithRouter({
       route: `${routeNames.dashboard}?address=${testAddress}`,
     });
-    expect(screen.history.location.pathname).toBe(routeNames.dashboard);
     const topInfo = await screen.findByTestId("topInfo");
     expect(topInfo).toBeDefined();
 
     const accountAddress = screen.getByTestId("accountAddress");
     expect(accountAddress.innerHTML).toBe(testAddress);
+
+    const contractAddress = screen.getByTestId("contractAddress");
+    expect(contractAddress.innerHTML).toBe(configContractAddress);
+  });
+  it("shows transactions list", async () => {
+    const screen = renderWithRouter({
+      route: `${routeNames.dashboard}?address=${testAddress}`,
+    });
+    const transactionsList = await screen.findByTestId("transactionsList");
+    expect(transactionsList.childElementCount).toBe(6);
   });
 });
