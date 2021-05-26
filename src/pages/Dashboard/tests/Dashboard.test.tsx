@@ -43,6 +43,10 @@ describe("Dashboard page", () => {
 
     const contractAddress = screen.getByTestId("contractAddress");
     expect(contractAddress.innerHTML).toBe(configContractAddress);
+
+    const balance: any = screen.getByTestId("balance");
+    expect(balance.querySelector(".int-amount").textContent).toBe("3,859");
+    expect(balance.querySelector(".decimals").textContent).toBe(".83");
   });
   it("shows transactions list", async () => {
     const screen = renderWithRouter({

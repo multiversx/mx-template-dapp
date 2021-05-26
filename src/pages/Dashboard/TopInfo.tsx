@@ -20,7 +20,7 @@ const TopInfo = () => {
       </div>
       <div>
         <h3 className="py-2">
-          <Denominate value={balance} />
+          <Denominate value={balance} dataTestId="balance" />
         </h3>
       </div>
     </div>

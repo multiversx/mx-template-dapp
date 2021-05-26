@@ -8,12 +8,14 @@ interface DenominateType {
   showLastNonZeroDecimal?: boolean;
   showErd?: boolean;
   decimals?: number;
+  dataTestId?: string;
 }
 
 const Denominate = ({
   value,
   showLastNonZeroDecimal = false,
   showErd = true,
+  dataTestId,
   decimals,
 }: DenominateType) => {
   decimals = decimals !== undefined ? decimals : configDecimals;
@@ -41,7 +43,7 @@ const Denominate = ({
   }
 
   return (
-    <span data-testid="denominateComponent">
+    <span data-testid={dataTestId}>
       <span className="int-amount">{valueParts[0]}</span>
       {valueParts.length > 1 && (
         <span className="decimals">.{valueParts[1]}</span>
