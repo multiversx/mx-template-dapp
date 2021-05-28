@@ -14,10 +14,12 @@ const Dashboard = () => {
   const ref = React.useRef(null);
   const { apiAddress, address } = Dapp.useContext();
   const { transactionsFetched } = useContext();
+  const refreshAccount = Dapp.useRefreshAccount();
 
   const dispatch = useDispatch();
 
   const fetchData = () => {
+    refreshAccount();
     getTransactions({
       apiAddress,
       address,
