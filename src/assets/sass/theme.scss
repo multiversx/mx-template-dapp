@@ -8,7 +8,12 @@ $light: #fafafa;
 /* Do not move the imports from here. 
 Override Bootstrap variables only above.
 -------------------------------------------------- */
-@import './../../../node_modules/bootstrap/scss/bootstrap.scss';
+
+// Bootstrap
+@import "./../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+// Dapp
+@import "./../../../node_modules/@elrondnetwork/dapp/dist/index.css";
 
 /* Base
 -------------------------------------------------- */
