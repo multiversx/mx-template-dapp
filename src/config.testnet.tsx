@@ -16,7 +16,7 @@ export const network: Dapp.NetworkType = {
   id: "testnet",
   name: "Testnet",
   egldLabel: "xEGLD",
-  walletAddress: "https://testnet-wallet.elrond.com/dapp/init",
+  walletAddress: "https://testnet-wallet.elrond.com",
   apiAddress: "https://testnet-api.elrond.com",
   gatewayAddress: "https://testnet-gateway.elrond.com",
   explorerAddress: "http://testnet-explorer.elrond.com/",
