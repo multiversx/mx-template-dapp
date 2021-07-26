@@ -1,5 +1,5 @@
-import React from 'react';
-import { ReactComponent as HeartIcon } from '../../../assets/img/heart.svg';
+import React from "react";
+import { ReactComponent as HeartIcon } from "../../../assets/img/heart.svg";
 
 const Footer = () => {
   return (
@@ -7,7 +7,7 @@ const Footer = () => {
       <div>
         <a
           {...{
-            target: '_blank',
+            target: "_blank",
           }}
           className="d-flex align-items-center"
           href="https://elrond.com/"

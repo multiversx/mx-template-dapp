@@ -9,6 +9,7 @@ interface DenominateType {
   showErd?: boolean;
   decimals?: number;
   dataTestId?: string;
+  token?: string;
 }
 
 const Denominate = ({
@@ -17,6 +18,7 @@ const Denominate = ({
   showErd = true,
   dataTestId,
   decimals,
+  token,
 }: DenominateType) => {
   decimals = decimals !== undefined ? decimals : configDecimals;
   const { egldLabel } = Dapp.useContext();
@@ -48,7 +50,9 @@ const Denominate = ({
       {valueParts.length > 1 && (
         <span className="decimals">.{valueParts[1]}</span>
       )}
-      {showErd && <span className="symbol">&nbsp;{egldLabel}</span>}
+      {showErd && (
+        <span className="symbol">&nbsp;{token ? token : egldLabel}</span>
+      )}
     </span>
   );
 };

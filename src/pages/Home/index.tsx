@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { routeNames } from "../../routes";
+import { routeNames } from "routes";
+import { dAppName } from "config";
 
 const Home = () => {
   return (
@@ -10,7 +11,7 @@ const Home = () => {
           <div className="card shadow-sm rounded p-4 border-0">
             <div className="card-body text-center">
               <h2 className="mb-3" data-testid="title">
-                Dapp
+                {dAppName}
               </h2>
 
               <p className="mb-3">

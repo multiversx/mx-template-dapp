@@ -4,6 +4,7 @@ import withPageTitle from "./components/PageTitle";
 import Home from "./pages/Home";
 import Transaction from "./pages/Transaction";
 import Dashboard from "./pages/Dashboard";
+import { dAppName } from "config";
 
 type RouteType = Dapp.RouteType & { title: string };
 
@@ -37,7 +38,9 @@ const routes: RouteType[] = [
 
 const wrappedRoutes = () =>
   routes.map((route) => {
-    const title = route.title ? `${route.title} • Elrond Dapp` : "Elrond Dapp";
+    const title = route.title
+      ? `${route.title} • Elrond ${dAppName}`
+      : `Elrond ${dAppName}`;
     return {
       path: route.path,
       authenticatedRoute: Boolean(route.authenticatedRoute),
