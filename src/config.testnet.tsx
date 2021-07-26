@@ -1,5 +1,6 @@
 import * as Dapp from "@elrondnetwork/dapp";
 
+export const dAppName = "Dapp";
 export const decimals = 2;
 export const denomination = 18;
 export const gasPrice = 1000000000;
