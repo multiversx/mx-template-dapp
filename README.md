@@ -5,32 +5,36 @@ It's a basic implementation of [@elrondnetwork/dapp](https://www.npmjs.com/packa
 See [Dapp template](https://dapp-template.elrond.com/) for live demo.
 
 ## Requirements
+
 * Node.js version 12.16.2+
 * Npm version 6.14.4+
 
 ## Getting Started
 
-The dapp is a client side only poject and is built using the [Create React App](https://create-react-app.dev)  scripts. 
+The dapp is a client side only poject and is built using the [Create React App](https://create-react-app.dev)  scripts.
 
 ### Instalation and running
 
 ### Step 1. Install modules
 
 From a terminal, navigate to the project folder and run:
+
 ```bash
 npm install
 ```
 
 ### Step 2. Update Configs
 
-Create a new file `src/config.tsx` and copy the content of `src/config.testnet.tsx`
+Create a new file `src/config.tsx` and copy the content of `src/config.testnet.tsx`. If you want to develop against `devnet`, change all instances of `testnet` to `devnet`.
 
 ### Step 3. Running in development mode
 
 In the project folder run:
+
 ```bash
 npm run start
 ```
+
 This will start the React app in development mode, using the configs found in the `config.tsx` file.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
@@ -41,6 +45,7 @@ You will also see any lint errors in the console.
 
 A build of the app is necessary to deploy for testing purposes or for production use.
 To build the project run:
+
 ```bash
 npm run build
 ```
