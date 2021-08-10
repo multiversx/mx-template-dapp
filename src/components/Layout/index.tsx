@@ -5,6 +5,16 @@ import Navbar from "./Navbar";
 import routes, { routeNames } from "routes";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { loggedIn } = Dapp.useContext();
+  const refreshAccount = Dapp.useRefreshAccount();
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      refreshAccount();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loggedIn]);
+
   return (
     <div className="bg-light d-flex flex-column flex-fill wrapper">
       <Navbar />
