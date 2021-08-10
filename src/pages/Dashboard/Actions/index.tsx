@@ -1,16 +1,15 @@
-import * as React from "react";
-import * as Dapp from "@elrondnetwork/dapp";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { contractAddress, gasPrice, version } from "config";
-import { routeNames } from "routes";
-import {} from "module";
-import newTransaction from "pages/Transaction/newTransaction";
-import { RawTransactionType } from "helpers/types";
+import * as React from 'react';
+import * as Dapp from '@elrondnetwork/dapp';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { contractAddress } from 'config';
+import { routeNames } from 'routes';
+import useNewTransaction from 'pages/Transaction/useNewTransaction';
+import { RawTransactionType } from 'helpers/types';
 
 const Actions = () => {
   const sendTransaction = Dapp.useSendTransaction();
-  const { chainId } = Dapp.useContext();
+  const newTransaction = useNewTransaction();
 
   const send = (transaction: RawTransactionType) => (e: React.MouseEvent) => {
     e.preventDefault();
@@ -20,24 +19,19 @@ const Actions = () => {
     });
   };
 
+  /* TIP: for basic transactions, only receiver and value are mandatory */
   const stakeTransaction: RawTransactionType = {
     receiver: contractAddress,
-    data: "stake",
-    value: "10",
+    data: 'stake',
+    value: '10',
     gasLimit: 250000000,
-    chainID: chainId.valueOf(),
-    gasPrice,
-    version,
   };
 
   const claimRewardsTransaction: RawTransactionType = {
     receiver: contractAddress,
-    data: "claimRewards",
-    value: "0",
+    data: 'claimRewards',
+    value: '0',
     gasLimit: 250000000,
-    chainID: chainId.valueOf(),
-    gasPrice,
-    version,
   };
 
   return (
