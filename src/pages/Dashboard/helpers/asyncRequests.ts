@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface GetLatestTransactionsType {
   apiAddress: string;
@@ -17,26 +17,31 @@ const fetchTransactions = (url: string) =>
     timeout,
   }: GetLatestTransactionsType) {
     try {
-      const { data } = await axios.get(`${apiAddress}${url}`, {
-        params: {
-          sender: address,
-          receiver: contractAddress,
-          condition: "must",
-          size: 25,
-        },
-        timeout,
-      });
+      const promises = [address, contractAddress].map((receiver) =>
+        axios.get(`${apiAddress}${url}`, {
+          params: {
+            sender: address,
+            receiver,
+            condition: 'must',
+            size: 25,
+          },
+          timeout,
+        })
+      );
+
+      const [ownTransactions, contractTransactions] = await Promise.all(promises);
 
       return {
-        data: data,
-        success: data !== undefined,
+        data: [...ownTransactions.data, ...contractTransactions.data],
+        success: ownTransactions.data !== undefined && contractTransactions.data !== undefined,
       };
     } catch (err) {
       return {
+        data: [],
         success: false,
       };
     }
   };
 
-export const getTransactions = fetchTransactions("/transactions");
-export const getTransactionsCount = fetchTransactions("/transactions/count");
+export const getTransactions = fetchTransactions('/transactions');
+export const getTransactionsCount = fetchTransactions('/transactions/count');

@@ -6,9 +6,11 @@ import { contractAddress } from 'config';
 import { routeNames } from 'routes';
 import useNewTransaction from 'pages/Transaction/useNewTransaction';
 import { RawTransactionType } from 'helpers/types';
+import { network } from 'config';
 
 const Actions = () => {
   const sendTransaction = Dapp.useSendTransaction();
+  const { address } = Dapp.useContext();
   const newTransaction = useNewTransaction();
 
   const send = (transaction: RawTransactionType) => (e: React.MouseEvent) => {
@@ -19,12 +21,9 @@ const Actions = () => {
     });
   };
 
-  /* TIP: for basic transactions, only receiver and value are mandatory */
-  const stakeTransaction: RawTransactionType = {
-    receiver: contractAddress,
-    data: 'stake',
-    value: '10',
-    gasLimit: 250000000,
+  const basicTransaction: RawTransactionType = {
+    receiver: address,
+    value: '1',
   };
 
   const claimRewardsTransaction: RawTransactionType = {
@@ -37,15 +36,15 @@ const Actions = () => {
   return (
     <div className="d-flex mt-4 justify-content-center">
       <div className="action-btn">
-        <button className="btn" onClick={send(stakeTransaction)}>
+        <button className="btn" onClick={send(basicTransaction)}>
           <FontAwesomeIcon icon={faArrowUp} className="text-primary" />
         </button>
         <a
           href={routeNames.home}
-          onClick={send(stakeTransaction)}
+          onClick={send(basicTransaction)}
           className="text-white text-decoration-none"
         >
-          Stake
+          Send {network.egldLabel}
         </a>
       </div>
 
