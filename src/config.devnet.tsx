@@ -4,8 +4,6 @@ export const dAppName = 'Dapp';
 export const decimals = 2;
 export const denomination = 18;
 export const gasPrice = 1000000000;
-export const gasLimit = 50000;
-export const gasPerDataByte = 1500;
 export const version = 1;
 
 export const walletConnectBridge = 'https://bridge.walletconnect.org';
@@ -15,11 +13,11 @@ export const walletConnectDeepLink =
 export const contractAddress = 'erd1qqqqqqqqqqqqqpgqp699jngundfqw07d8jzkepucvpzush6k3wvqyc44rx';
 
 export const network: Dapp.NetworkType = {
-  id: 'testnet',
-  name: 'Testnet',
+  id: 'devnet',
+  name: 'Devnet',
   egldLabel: 'xEGLD',
-  walletAddress: 'https://testnet-wallet.elrond.com',
-  apiAddress: 'https://testnet-api.elrond.com',
-  gatewayAddress: 'https://testnet-gateway.elrond.com',
-  explorerAddress: 'http://testnet-explorer.elrond.com/',
+  walletAddress: 'https://devnet-wallet.elrond.com',
+  apiAddress: 'https://devnet-api.elrond.com',
+  gatewayAddress: 'https://devnet-gateway.elrond.com',
+  explorerAddress: 'http://devnet-explorer.elrond.com/',
 };
