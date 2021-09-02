@@ -17,27 +17,22 @@ const fetchTransactions = (url: string) =>
     timeout,
   }: GetLatestTransactionsType) {
     try {
-      const promises = [address, contractAddress].map((receiver) =>
-        axios.get(`${apiAddress}${url}`, {
-          params: {
-            sender: address,
-            receiver,
-            condition: 'must',
-            size: 25,
-          },
-          timeout,
-        })
-      );
-
-      const [ownTransactions, contractTransactions] = await Promise.all(promises);
+      const { data } = await axios.get(`${apiAddress}${url}`, {
+        params: {
+          sender: address,
+          receiver: contractAddress,
+          condition: 'must',
+          size: 25,
+        },
+        timeout,
+      });
 
       return {
-        data: [...ownTransactions.data, ...contractTransactions.data],
-        success: ownTransactions.data !== undefined && contractTransactions.data !== undefined,
+        data: data,
+        success: data !== undefined,
       };
     } catch (err) {
       return {
-        data: [],
         success: false,
       };
     }
