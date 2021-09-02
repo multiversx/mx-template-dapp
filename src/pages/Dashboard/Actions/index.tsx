@@ -9,6 +9,7 @@ import useNewTransaction from 'pages/Transaction/useNewTransaction';
 import { RawTransactionType } from 'helpers/types';
 import { network } from 'config';
 import { Address } from '@elrondnetwork/erdjs';
+import moment from 'moment';
 
 const Actions = () => {
   const sendTransaction = Dapp.useSendTransaction();
@@ -54,7 +55,7 @@ const Actions = () => {
             break;
           case '':
             setSecondsLeft(0);
-            setHasPing(true);
+            setHasPing(false);
             break;
           default: {
             const decoded = Buffer.from(encoded, 'base64').toString('hex');
@@ -63,7 +64,11 @@ const Actions = () => {
             break;
           }
         }
+      })
+      .catch((err) => {
+        console.error('Unable to call VM query', err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const send = (transaction: RawTransactionType) => (e: React.MouseEvent) => {
@@ -89,9 +94,14 @@ const Actions = () => {
   };
 
   const pongAllowed = secondsLeft === 0;
-  const notAllowed = {
+  const style = {
     ...(pongAllowed ? {} : { cursor: 'not-allowed' }),
   };
+
+  const timeRemaining = moment()
+    .startOf('day')
+    .seconds(secondsLeft || 0)
+    .format('mm:ss');
 
   return (
     <div className="d-flex mt-4 justify-content-center">
@@ -107,24 +117,31 @@ const Actions = () => {
               </a>
             </div>
           ) : (
-            <div
-              className="action-btn"
-              onClick={pongAllowed ? send(pongTransaction) : () => {}}
-              style={notAllowed}
-            >
-              <button className={`btn ${!pongAllowed ? 'disabled' : ''}`} style={notAllowed}>
-                <FontAwesomeIcon icon={faArrowDown} className="text-primary" />
-              </button>
-              <span className="text-white">
-                {pongAllowed ? (
-                  <a href="/" className="text-white text-decoration-none">
-                    Pong
-                  </a>
-                ) : (
-                  <>{secondsLeft}s until Pong</>
+            <>
+              <div className="d-flex flex-column">
+                <div
+                  className="action-btn"
+                  onClick={pongAllowed ? send(pongTransaction) : () => {}}
+                  style={style}
+                >
+                  <button className={`btn ${!pongAllowed ? 'disabled' : ''}`} style={style}>
+                    <FontAwesomeIcon icon={faArrowDown} className="text-primary" />
+                  </button>
+                  <span className="text-white">
+                    {pongAllowed ? (
+                      <a href="/" className="text-white text-decoration-none">
+                        Pong
+                      </a>
+                    ) : (
+                      <>Pong</>
+                    )}
+                  </span>
+                </div>
+                {!pongAllowed && (
+                  <span className="text-white">{timeRemaining} until able to Pong</span>
                 )}
-              </span>
-            </div>
+              </div>
+            </>
           )}
         </>
       )}
