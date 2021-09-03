@@ -97,9 +97,7 @@ const Actions = () => {
   };
 
   const pongAllowed = secondsLeft === 0;
-  const style = {
-    ...(pongAllowed ? {} : { cursor: "not-allowed" }),
-  };
+  const notAllowedClass = pongAllowed ? "" : "not-allowed disabled";
 
   const timeRemaining = moment()
     .startOf("day")
@@ -123,16 +121,12 @@ const Actions = () => {
             <>
               <div className="d-flex flex-column">
                 <div
-                  className="action-btn"
                   {...{
+                    className: `action-btn ${notAllowedClass}`,
                     ...(pongAllowed ? { onClick: send(pongTransaction) } : {}),
                   }}
-                  style={style}
                 >
-                  <button
-                    className={`btn ${!pongAllowed ? "disabled" : ""}`}
-                    style={style}
-                  >
+                  <button className={`btn ${notAllowedClass}`}>
                     <FontAwesomeIcon
                       icon={faArrowDown}
                       className="text-primary"
