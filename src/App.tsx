@@ -1,16 +1,16 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
 import * as Dapp from "@elrondnetwork/dapp";
+import { Route, Switch } from "react-router-dom";
+import Layout from "./components/Layout";
+import PageNotFoud from "./components/PageNotFoud";
 import * as config from "./config";
 import { ContextProvider } from "./context";
-import Layout from "./components/Layout";
 import routes, { routeNames } from "./routes";
-import PageNotFoud from "./components/PageNotFoud";
 
 export default function App() {
   return (
-    <ContextProvider>
-      <Dapp.Context config={config}>
+    <Dapp.Context config={config}>
+      <ContextProvider>
         <Layout>
           <Switch>
             <Route
@@ -57,7 +57,7 @@ export default function App() {
             <Route component={PageNotFoud} />
           </Switch>
         </Layout>
-      </Dapp.Context>
-    </ContextProvider>
+      </ContextProvider>
+    </Dapp.Context>
   );
 }

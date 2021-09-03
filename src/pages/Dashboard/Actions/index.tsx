@@ -1,18 +1,18 @@
 import * as React from "react";
 import * as Dapp from "@elrondnetwork/dapp";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { contractAddress } from "config";
-import { routeNames } from "routes";
-import useNewTransaction from "pages/Transaction/useNewTransaction";
-import { RawTransactionType } from "helpers/types";
 import {
   Address,
   AddressValue,
   ContractFunction,
   Query,
 } from "@elrondnetwork/erdjs";
+import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
+import { contractAddress } from "config";
+import { RawTransactionType } from "helpers/types";
+import useNewTransaction from "pages/Transaction/useNewTransaction";
+import { routeNames } from "routes";
 
 const Actions = () => {
   const sendTransaction = Dapp.useSendTransaction();
@@ -124,7 +124,9 @@ const Actions = () => {
               <div className="d-flex flex-column">
                 <div
                   className="action-btn"
-                  onClick={pongAllowed ? send(pongTransaction) : () => {}}
+                  {...{
+                    ...(pongAllowed ? { onClick: send(pongTransaction) } : {}),
+                  }}
                   style={style}
                 >
                   <button
@@ -147,7 +149,7 @@ const Actions = () => {
                   </span>
                 </div>
                 {!pongAllowed && (
-                  <span className="text-white">
+                  <span className="opacity-6 text-white">
                     {timeRemaining} until able to Pong
                   </span>
                 )}

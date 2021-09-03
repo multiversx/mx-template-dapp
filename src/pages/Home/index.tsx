@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
-import { routeNames } from "routes";
 import { dAppName } from "config";
+import { routeNames } from "routes";
 
 const Home = () => {
   return (
