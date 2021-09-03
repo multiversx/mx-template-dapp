@@ -1,10 +1,10 @@
 import React from "react";
 import * as Dapp from "@elrondnetwork/dapp";
+import { dAppName } from "config";
 import withPageTitle from "./components/PageTitle";
+import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Transaction from "./pages/Transaction";
-import Dashboard from "./pages/Dashboard";
-import { dAppName } from "config";
 
 type RouteType = Dapp.RouteType & { title: string };
 
@@ -44,10 +44,10 @@ const wrappedRoutes = () =>
     return {
       path: route.path,
       authenticatedRoute: Boolean(route.authenticatedRoute),
-      component: (withPageTitle(
+      component: withPageTitle(
         title,
-        route.component
-      ) as any) as React.ComponentClass<{}, any>,
+        route.component,
+      ) as any as React.ComponentClass<any, any>,
     };
   });
 

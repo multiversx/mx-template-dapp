@@ -1,3 +1,4 @@
+import * as Dapp from "@elrondnetwork/dapp";
 import {
   Transaction,
   GasPrice,
@@ -7,10 +8,14 @@ import {
   ChainID,
   TransactionVersion,
   GasLimit,
-} from '@elrondnetwork/erdjs';
-import { RawTransactionType } from 'helpers/types';
-import * as Dapp from '@elrondnetwork/dapp';
-import { gasPrice, version, gasLimit as configGasLimit, gasPerDataByte } from 'config';
+} from "@elrondnetwork/erdjs";
+import {
+  gasPrice,
+  version,
+  gasLimit as configGasLimit,
+  gasPerDataByte,
+} from "config";
+import { RawTransactionType } from "helpers/types";
 
 export default function useNewTransaction() {
   const { chainId } = Dapp.useContext();
@@ -19,7 +24,7 @@ export default function useNewTransaction() {
     const gasLimit = rawTransaction.gasLimit
       ? new GasLimit(rawTransaction.gasLimit)
       : Dapp.calculateGasLimit({
-          data: rawTransaction.data || '',
+          data: rawTransaction.data || "",
           gasLimit: configGasLimit,
           gasPerDataByte,
         });

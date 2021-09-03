@@ -1,9 +1,9 @@
 import React from "react";
-import { useContext } from "context";
-import TransactionsList from "./TransactionsList";
-import PageState from "components/PageState";
 import { faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PageState from "components/PageState";
+import { useContext } from "context";
+import TransactionsList from "./TransactionsList";
 
 const Transactions = () => {
   const { transactions } = useContext();

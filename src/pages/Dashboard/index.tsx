@@ -1,14 +1,14 @@
 import * as React from "react";
 import * as Dapp from "@elrondnetwork/dapp";
-import { useContext, useDispatch } from "context";
-import { getTransactions } from "./helpers/asyncRequests";
-import PageState from "components/PageState";
-import TopInfo from "./TopInfo";
-import Actions from "./Actions";
-import Transactions from "./Transactions";
 import { faBan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PageState from "components/PageState";
 import { contractAddress } from "config";
+import { useContext, useDispatch } from "context";
+import Actions from "./Actions";
+import { getTransactions } from "./helpers/asyncRequests";
+import TopInfo from "./TopInfo";
+import Transactions from "./Transactions";
 
 const Dashboard = () => {
   const ref = React.useRef(null);
