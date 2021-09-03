@@ -33,10 +33,12 @@ const TransactionList = ({
     .filter((tx) => tx.sender === tx.receiver && tx.blockHash !== "")
     .map((tx) => ({ ...tx, sender: fakeSender, timestamp: tx.timestamp + 1 }));
 
-  const sortedTransactions: TransactionType[] = ([
-    ...transactions,
-    ...(doubleOwnTransactions.length > 0 ? doubleOwnTransactions : []),
-  ].filter((el: any) => el !== undefined) as any).sort(sortByDate);
+  const sortedTransactions: TransactionType[] = (
+    [
+      ...transactions,
+      ...(doubleOwnTransactions.length > 0 ? doubleOwnTransactions : []),
+    ].filter((el: any) => el !== undefined) as any
+  ).sort(sortByDate);
 
   return (
     <div className="p-3 mt-3">

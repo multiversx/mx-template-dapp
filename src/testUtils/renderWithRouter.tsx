@@ -17,7 +17,7 @@ export const renderWithHistory = ({
     ...render(
       <Router history={history}>
         <App />
-      </Router>
+      </Router>,
     ),
     // adding `history` to the returned utilities to allow us
     // to reference it in our tests (just try to avoid using

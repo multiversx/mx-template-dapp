@@ -1,9 +1,9 @@
-import React from 'react';
-import { Navbar as BsNavbar, NavItem, Nav } from 'react-bootstrap';
-import * as Dapp from '@elrondnetwork/dapp';
-import { useHistory } from 'react-router-dom';
-import { ReactComponent as ElrondLogo } from './../../../assets/img/elrond.svg';
-import { dAppName } from 'config';
+import React from "react";
+import { Navbar as BsNavbar, NavItem, Nav } from "react-bootstrap";
+import * as Dapp from "@elrondnetwork/dapp";
+import { useHistory } from "react-router-dom";
+import { ReactComponent as ElrondLogo } from "./../../../assets/img/elrond.svg";
+import { dAppName } from "config";
 
 const Navbar = () => {
   const { loggedIn } = Dapp.useContext();
@@ -13,7 +13,7 @@ const Navbar = () => {
   const logOut = (e: React.MouseEvent) => {
     e.preventDefault();
     dappLogout({ callbackUrl: `${window.location.origin}/` });
-    history.push('/');
+    history.push("/");
   };
 
   return (
