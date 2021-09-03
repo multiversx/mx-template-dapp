@@ -1,9 +1,9 @@
 import React from "react";
-import { Navbar as BsNavbar, NavItem, Nav } from "react-bootstrap";
 import * as Dapp from "@elrondnetwork/dapp";
-import { useHistory } from "react-router-dom";
-import { ReactComponent as ElrondLogo } from "./../../../assets/img/elrond.svg";
+import { Navbar as BsNavbar, NavItem, Nav } from "react-bootstrap";
+import { Link, useHistory } from "react-router-dom";
 import { dAppName } from "config";
+import { ReactComponent as ElrondLogo } from "./../../../assets/img/elrond.svg";
 
 const Navbar = () => {
   const { loggedIn } = Dapp.useContext();
@@ -19,10 +19,13 @@ const Navbar = () => {
   return (
     <BsNavbar className="bg-white border-bottom px-4 py-3">
       <div className="container-fluid">
-        <NavItem className="d-flex align-items-center">
+        <Link
+          className="d-flex align-items-center navbar-brand mr-0"
+          to={loggedIn ? "/dashboard" : "/"}
+        >
           <ElrondLogo className="elrond-logo" />
           <span className="dapp-name text-muted">{dAppName}</span>
-        </NavItem>
+        </Link>
 
         <Nav className="ml-auto">
           {loggedIn && (
