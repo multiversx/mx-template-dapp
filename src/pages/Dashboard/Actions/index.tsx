@@ -1,19 +1,22 @@
-import * as React from 'react';
-import axios from 'axios';
-import * as Dapp from '@elrondnetwork/dapp';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { contractAddress } from 'config';
-import { routeNames } from 'routes';
-import useNewTransaction from 'pages/Transaction/useNewTransaction';
-import { RawTransactionType } from 'helpers/types';
-import { network } from 'config';
-import { Address } from '@elrondnetwork/erdjs';
-import moment from 'moment';
+import * as React from "react";
+import * as Dapp from "@elrondnetwork/dapp";
+import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { contractAddress } from "config";
+import { routeNames } from "routes";
+import useNewTransaction from "pages/Transaction/useNewTransaction";
+import { RawTransactionType } from "helpers/types";
+import {
+  Address,
+  AddressValue,
+  ContractFunction,
+  Query,
+} from "@elrondnetwork/erdjs";
+import moment from "moment";
 
 const Actions = () => {
   const sendTransaction = Dapp.useSendTransaction();
-  const { address } = Dapp.useContext();
+  const { address, dapp } = Dapp.useContext();
   const newTransaction = useNewTransaction();
   const [secondsLeft, setSecondsLeft] = React.useState<number>();
   const [hasPing, setHasPing] = React.useState<boolean>();
@@ -40,25 +43,25 @@ const Actions = () => {
   React.useEffect(mount, [hasPing]);
 
   React.useEffect(() => {
-    axios
-      .post(`${network.apiAddress}/vm-values/query`, {
-        scAddress: contractAddress,
-        funcName: 'getTimeToPong',
-        args: [Address.fromBech32(address).hex()],
-      })
-      .then(({ data: { data } }) => {
-        const [encoded] = data.data.returnData;
-
+    const query = new Query({
+      address: new Address(contractAddress),
+      func: new ContractFunction("getTimeToPong"),
+      args: [new AddressValue(new Address(address))],
+    });
+    dapp.proxy
+      .queryContract(query)
+      .then(({ returnData }) => {
+        const [encoded] = returnData;
         switch (encoded) {
           case undefined:
             setHasPing(true);
             break;
-          case '':
+          case "":
             setSecondsLeft(0);
             setHasPing(false);
             break;
           default: {
-            const decoded = Buffer.from(encoded, 'base64').toString('hex');
+            const decoded = Buffer.from(encoded, "base64").toString("hex");
             setSecondsLeft(parseInt(decoded, 16));
             setHasPing(false);
             break;
@@ -66,7 +69,7 @@ const Actions = () => {
         }
       })
       .catch((err) => {
-        console.error('Unable to call VM query', err);
+        console.error("Unable to call VM query", err);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -81,27 +84,27 @@ const Actions = () => {
 
   const pongTransaction: RawTransactionType = {
     receiver: contractAddress,
-    data: 'pong',
-    value: '0',
+    data: "pong",
+    value: "0",
     gasLimit: 10000000,
   };
 
   const pingTransaction: RawTransactionType = {
     receiver: contractAddress,
-    data: 'ping',
-    value: '1',
+    data: "ping",
+    value: "1",
     gasLimit: 10000000,
   };
 
   const pongAllowed = secondsLeft === 0;
   const style = {
-    ...(pongAllowed ? {} : { cursor: 'not-allowed' }),
+    ...(pongAllowed ? {} : { cursor: "not-allowed" }),
   };
 
   const timeRemaining = moment()
-    .startOf('day')
+    .startOf("day")
     .seconds(secondsLeft || 0)
-    .format('mm:ss');
+    .format("mm:ss");
 
   return (
     <div className="d-flex mt-4 justify-content-center">
@@ -124,8 +127,14 @@ const Actions = () => {
                   onClick={pongAllowed ? send(pongTransaction) : () => {}}
                   style={style}
                 >
-                  <button className={`btn ${!pongAllowed ? 'disabled' : ''}`} style={style}>
-                    <FontAwesomeIcon icon={faArrowDown} className="text-primary" />
+                  <button
+                    className={`btn ${!pongAllowed ? "disabled" : ""}`}
+                    style={style}
+                  >
+                    <FontAwesomeIcon
+                      icon={faArrowDown}
+                      className="text-primary"
+                    />
                   </button>
                   <span className="text-white">
                     {pongAllowed ? (
@@ -138,7 +147,9 @@ const Actions = () => {
                   </span>
                 </div>
                 {!pongAllowed && (
-                  <span className="text-white">{timeRemaining} until able to Pong</span>
+                  <span className="text-white">
+                    {timeRemaining} until able to Pong
+                  </span>
                 )}
               </div>
             </>
