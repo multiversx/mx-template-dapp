@@ -1,12 +1,11 @@
 import React from "react";
-import * as Dapp from "@elrondnetwork/dapp";
 import { dAppName } from "config";
 import withPageTitle from "./components/PageTitle";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Transaction from "./pages/Transaction";
 
-type RouteType = Dapp.RouteType & { title: string };
+// type RouteType = Dapp.RouteType & { title: string };
 
 export const routeNames = {
   home: "/",
@@ -17,38 +16,38 @@ export const routeNames = {
   walletconnect: "/walletconnect",
 };
 
-const routes: RouteType[] = [
+const routes: Array<any> = [
   {
-    path: "/",
+    path: routeNames.home,
     title: "Home",
     component: Home,
   },
   {
-    path: "/dashboard",
+    path: routeNames.dashboard,
     title: "Dashboard",
     component: Dashboard,
     authenticatedRoute: true,
   },
   {
-    path: "/transaction",
+    path: routeNames.transaction,
     title: "Transaction",
     component: Transaction,
   },
 ];
 
-const wrappedRoutes = () =>
-  routes.map((route) => {
-    const title = route.title
-      ? `${route.title} • Elrond ${dAppName}`
-      : `Elrond ${dAppName}`;
-    return {
-      path: route.path,
-      authenticatedRoute: Boolean(route.authenticatedRoute),
-      component: withPageTitle(
-        title,
-        route.component,
-      ) as any as React.ComponentClass<any, any>,
-    };
-  });
+const mappedRoutes = routes.map((route) => {
+  const title = route.title
+    ? `${route.title} • Elrond ${dAppName}`
+    : `Elrond ${dAppName}`;
 
-export default wrappedRoutes();
+  const requiresAuth = Boolean(route.authenticatedRoute);
+  const wrappedComponent = withPageTitle(title, route.component);
+
+  return {
+    path: route.path,
+    component: wrappedComponent,
+    authenticatedRoute: requiresAuth,
+  };
+});
+
+export default mappedRoutes;

@@ -21,7 +21,6 @@ const Denominate = ({
   token,
 }: DenominateType) => {
   decimals = decimals !== undefined ? decimals : configDecimals;
-  const { egldLabel } = Dapp.useContext();
 
   const denominatedValue = denominate({
     input: value,
@@ -51,7 +50,7 @@ const Denominate = ({
         <span className="decimals">.{valueParts[1]}</span>
       )}
       {showErd && (
-        <span className="symbol">&nbsp;{token ? token : egldLabel}</span>
+        <span className="symbol">&nbsp;{token ? token : "egldLabel"}</span>
       )}
     </span>
   );
