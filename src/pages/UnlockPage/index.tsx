@@ -2,7 +2,7 @@ import React from "react";
 import { DappUI, getIsLoggedIn } from "@elrondnetwork/dapp-core";
 import { routeNames } from "routes";
 
-export const UnlockPage: () => JSX.Element = () => {
+export const UnlockPage = () => {
   const {
     ExtensionLoginButton,
     WebWalletLoginButton,
