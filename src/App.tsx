@@ -20,7 +20,7 @@ export const App = () => {
       <DappProvider
         networkConfig={{ network, walletConnectBridge, walletConnectDeepLink }}
       >
-        <AuthenticatedRoutesWrapper routes={routes} unlockRoute={"unlock"}>
+        <AuthenticatedRoutesWrapper routes={routes} unlockRoute="unlock">
           <TransactionsToastList />
           <ContextProvider>
             <Layout>

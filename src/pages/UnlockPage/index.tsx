@@ -1,5 +1,6 @@
 import React from "react";
 import { DappUI, getIsLoggedIn } from "@elrondnetwork/dapp-core";
+import { routeNames } from "routes";
 
 export const UnlockPage: () => JSX.Element = () => {
   const {
@@ -12,7 +13,7 @@ export const UnlockPage: () => JSX.Element = () => {
   React.useEffect(() => {
     const isLoggedIn = getIsLoggedIn();
     if (isLoggedIn) {
-      window.location.href = "/home";
+      window.location.href = routeNames.dashboard;
     }
   }, []);
 
