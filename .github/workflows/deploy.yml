@@ -1,0 +1,38 @@
+name: deploy
+
+on:
+  push:
+    branches: [master]
+  repository_dispatch:
+    types: deploy
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: cp ./src/config.devnet.tsx ./src/config.tsx
+      - run: npm install
+      - run: npm run build
+        env:
+          CI: false
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'us-east-1'
+      - run: aws s3 sync ./build/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
+      - uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_ICON_EMOJI: ':nerd_face:'
+          SLACK_USERNAME: ${{ secrets.AWS_S3_BUCKET }}
+          SLACK_MESSAGE: ${{ secrets.AWS_S3_BUCKET }}
+          SLACK_FOOTER: ''
+          MSG_MINIMAL: true
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

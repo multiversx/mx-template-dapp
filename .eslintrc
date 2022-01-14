@@ -10,7 +10,6 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "project": "./tsconfig.json"
   },
   "settings": {
     "import/parsers": {
@@ -72,7 +71,7 @@
     "react/prop-types": "off",
     "react/display-name": "off",
     "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "double"],
+    "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "object-curly-newline": "off",
     "arrow-body-style": "off",
