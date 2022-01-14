@@ -2,7 +2,7 @@ import React from "react";
 import { DappUI, getIsLoggedIn } from "@elrondnetwork/dapp-core";
 import { routeNames } from "routes";
 
-export const UnlockPage = () => {
+export const UnlockRoute: () => JSX.Element = () => {
   const {
     ExtensionLoginButton,
     WebWalletLoginButton,
@@ -26,20 +26,20 @@ export const UnlockPage = () => {
             <p className="mb-4">pick a login method</p>
 
             <ExtensionLoginButton
-              callbackRoute={"/home"}
+              callbackRoute={routeNames.dashboard}
               loginButtonText={"Extension"}
             />
             <WebWalletLoginButton
-              callbackRoute={"/home"}
+              callbackRoute={routeNames.dashboard}
               loginButtonText={"Web wallet"}
             />
             <LedgerLoginButton
               loginButtonText={"Ledger"}
-              callbackRoute={"/home"}
+              callbackRoute={routeNames.dashboard}
               className={"test-class_name"}
             />
             <WalletConnectLoginButton
-              callbackRoute={"/home"}
+              callbackRoute={routeNames.dashboard}
               loginButtonText={"Maiar"}
             />
           </div>
@@ -49,4 +49,4 @@ export const UnlockPage = () => {
   );
 };
 
-export default UnlockPage;
+export default UnlockRoute;

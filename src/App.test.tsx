@@ -1,7 +1,9 @@
-import { renderWithRouter } from "testUtils";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-test("renders home page", () => {
-  const screen = renderWithRouter({ route: "/" });
-  const title = screen.getByTestId("title");
-  expect(title).toBeInTheDocument();
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
 });

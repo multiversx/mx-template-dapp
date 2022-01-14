@@ -1,48 +1,42 @@
-import React from "react";
-import {
-  DappProvider,
-  AuthenticatedRoutesWrapper,
-  DappUI,
-} from "@elrondnetwork/dapp-core";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
-import UnlockPage from "pages/UnlockPage";
-import Layout from "./components/Layout";
-import PageNotFoud from "./components/PageNotFoud";
-import { walletConnectBridge, walletConnectDeepLink, network } from "./config";
-import { ContextProvider } from "./context";
-import routes, { routeNames } from "./routes";
+import React from 'react';
+import { DappProvider, DappUI } from '@elrondnetwork/dapp-core';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import Layout from 'components/Layout';
+import { network, walletConnectBridge, walletConnectDeepLink } from 'config';
+import PageNotFound from 'pages/PageNotFound';
+import { routeNames } from 'routes';
+import routes from 'routes';
+import '@elrondnetwork/dapp-core/build/index.css';
 
-export const App = () => {
-  const { TransactionsToastList } = DappUI;
+const {
+  TransactionsToastList,
+  DappCorePages: { UnlockPage }
+} = DappUI;
+
+const App = () => {
   return (
     <Router>
       <DappProvider
         networkConfig={{ network, walletConnectBridge, walletConnectDeepLink }}
+        modalClassName='custom-class-for-modals'
       >
-        <AuthenticatedRoutesWrapper routes={routes} unlockRoute="unlock">
+        <Layout>
           <TransactionsToastList />
-          <ContextProvider>
-            <Layout>
-              <Switch>
-                <Route
-                  path={routeNames.unlock}
-                  component={UnlockPage}
-                  exact={true}
-                />
-                {routes.map((route: any, index: number) => (
-                  <Route
-                    path={route.path}
-                    key={"route-key-" + index}
-                    component={route.component}
-                    exact={true}
-                  />
-                ))}
-                <Route component={PageNotFoud} />
-              </Switch>
-            </Layout>
-          </ContextProvider>
-        </AuthenticatedRoutesWrapper>
+          <Routes>
+            <Route
+              path={routeNames.unlock}
+              element={<UnlockPage loginRoute={routeNames.dashboard} />}
+            />
+            {routes.map((route: any, index: number) => (
+              <Route
+                path={route.path}
+                key={'route-key-' + index}
+                element={<route.component />}
+              />
+            ))}
+            <Route element={PageNotFound} />
+          </Routes>
+        </Layout>
       </DappProvider>
     </Router>
   );

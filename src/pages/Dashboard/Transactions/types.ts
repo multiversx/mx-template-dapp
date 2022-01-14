@@ -11,7 +11,7 @@ interface ScResultType {
   returnMessage?: string;
 }
 
-type TxStatusType = "pending" | "notExecuted" | "success" | "fail";
+type TxStatusType = 'pending' | 'notExecuted' | 'success' | 'fail';
 
 export interface TransactionType {
   fee?: string;
@@ -39,12 +39,3 @@ export interface StateType {
   transactions: TransactionType[];
   transactionsFetched: boolean | undefined;
 }
-
-const initialState = (): StateType => {
-  return {
-    transactions: [],
-    transactionsFetched: undefined,
-  };
-};
-
-export default initialState;

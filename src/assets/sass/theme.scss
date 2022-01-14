@@ -5,15 +5,12 @@ $headings-font-weight: 300 !important;
 $primary: #1b46c2;
 $light: #fafafa;
 
-/* Do not move the imports from here. 
+/* Do not move the imports from here.
 Override Bootstrap variables only above.
 -------------------------------------------------- */
 
 // Bootstrap
-@import "./../../../node_modules/bootstrap/scss/bootstrap.scss";
-
-// Dapp-utils
-@import "./../../../node_modules/@elrondnetwork/dapp-utils/dist/dapp-utils.scss";
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
 /* Base
 -------------------------------------------------- */
@@ -115,7 +112,7 @@ html {
       white-space: nowrap;
       vertical-align: middle;
     }
- 
+
     tr:last-of-type {
       td {
         border-bottom: 1px solid #dee2e6;

@@ -1,38 +1,35 @@
-import React from "react";
-import { dAppName } from "config";
-import withPageTitle from "./components/PageTitle";
-import Dashboard from "./pages/Dashboard";
-import Home from "./pages/Home";
-import Transaction from "./pages/Transaction";
-
-// type RouteType = Dapp.RouteType & { title: string };
+import { dAppName } from 'config';
+import withPageTitle from './components/PageTitle';
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
+import Transaction from './pages/Transaction';
 
 export const routeNames = {
-  home: "/",
-  dashboard: "/dashboard",
-  transaction: "/transaction",
-  unlock: "/unlock",
-  ledger: "/ledger",
-  walletconnect: "/walletconnect",
+  home: '/',
+  dashboard: '/dashboard',
+  transaction: '/transaction',
+  unlock: '/unlock',
+  ledger: '/ledger',
+  walletconnect: '/walletconnect'
 };
 
 const routes: Array<any> = [
   {
     path: routeNames.home,
-    title: "Home",
-    component: Home,
+    title: 'Home',
+    component: Home
   },
   {
     path: routeNames.dashboard,
-    title: "Dashboard",
+    title: 'Dashboard',
     component: Dashboard,
-    authenticatedRoute: true,
+    authenticatedRoute: true
   },
   {
     path: routeNames.transaction,
-    title: "Transaction",
-    component: Transaction,
-  },
+    title: 'Transaction',
+    component: Transaction
+  }
 ];
 
 const mappedRoutes = routes.map((route) => {
@@ -46,7 +43,7 @@ const mappedRoutes = routes.map((route) => {
   return {
     path: route.path,
     component: wrappedComponent,
-    authenticatedRoute: requiresAuth,
+    authenticatedRoute: requiresAuth
   };
 });
 

@@ -1,25 +1,32 @@
-import * as React from "react";
-import * as Dapp from "@elrondnetwork/dapp";
+import * as React from 'react';
+import {
+  transactionServices,
+  useGetAccountInfo,
+  useGetPendingTransactions,
+  refreshAccount
+} from '@elrondnetwork/dapp-core';
 import {
   Address,
   AddressValue,
   ContractFunction,
-  Query,
-} from "@elrondnetwork/erdjs";
-import { faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
-import { contractAddress } from "config";
-import { RawTransactionType } from "helpers/types";
-import useNewTransaction from "pages/Transaction/useNewTransaction";
-import { routeNames } from "routes";
+  ProxyProvider,
+  Query
+} from '@elrondnetwork/erdjs';
+import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import moment from 'moment';
+import { contractAddress, network } from 'config';
 
 const Actions = () => {
-  const sendTransaction = Dapp.useSendTransaction();
-  const { address, dapp } = Dapp.useContext();
-  const newTransaction = useNewTransaction();
+  const account = useGetAccountInfo();
+  const { hasPendingTransactions } = useGetPendingTransactions();
+  const { address } = account;
+
   const [secondsLeft, setSecondsLeft] = React.useState<number>();
   const [hasPing, setHasPing] = React.useState<boolean>();
+  const /*transactionSessionId*/ [, setTransactionSessionId] = React.useState<
+      string | null
+    >(null);
 
   const mount = () => {
     if (secondsLeft) {
@@ -45,10 +52,11 @@ const Actions = () => {
   React.useEffect(() => {
     const query = new Query({
       address: new Address(contractAddress),
-      func: new ContractFunction("getTimeToPong"),
-      args: [new AddressValue(new Address(address))],
+      func: new ContractFunction('getTimeToPong'),
+      args: [new AddressValue(new Address(address))]
     });
-    dapp.proxy
+    const proxy = new ProxyProvider(network.gatewayAddress);
+    proxy
       .queryContract(query)
       .then(({ returnData }) => {
         const [encoded] = returnData;
@@ -56,12 +64,12 @@ const Actions = () => {
           case undefined:
             setHasPing(true);
             break;
-          case "":
+          case '':
             setSecondsLeft(0);
             setHasPing(false);
             break;
           default: {
-            const decoded = Buffer.from(encoded, "base64").toString("hex");
+            const decoded = Buffer.from(encoded, 'base64').toString('hex');
             setSecondsLeft(parseInt(decoded, 16));
             setHasPing(false);
             break;
@@ -69,72 +77,96 @@ const Actions = () => {
         }
       })
       .catch((err) => {
-        console.error("Unable to call VM query", err);
+        console.error('Unable to call VM query', err);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [hasPendingTransactions]);
 
-  const send = (transaction: RawTransactionType) => (e: React.MouseEvent) => {
-    e.preventDefault();
-    sendTransaction({
-      transaction: newTransaction(transaction),
-      callbackRoute: routeNames.transaction,
+  const { sendTransactions } = transactionServices;
+
+  const sendPingTransaction = async () => {
+    const pingTransaction = {
+      value: '1000000000000000000',
+      data: 'ping',
+      receiver: contractAddress
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: pingTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing Ping transaction',
+        errorMessage: 'An error has occured during Ping',
+        successMessage: 'Ping transaction successful',
+        transactionDuration: 10000
+      }
     });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
   };
 
-  const pongTransaction: RawTransactionType = {
-    receiver: contractAddress,
-    data: "pong",
-    value: "0",
-    gasLimit: 10000000,
+  const sendPongTransaction = async () => {
+    const pongTransaction = {
+      value: '0',
+      data: 'pong',
+      receiver: contractAddress
+    };
+    await refreshAccount();
+
+    const { sessionId /*, error*/ } = await sendTransactions({
+      transactions: pongTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing Pong transaction',
+        errorMessage: 'An error has occured during Pong',
+        successMessage: 'Pong transaction successful',
+        transactionDuration: 10000
+      }
+    });
+    if (sessionId != null) {
+      setTransactionSessionId(sessionId);
+    }
   };
 
-  const pingTransaction: RawTransactionType = {
-    receiver: contractAddress,
-    data: "ping",
-    value: "1",
-    gasLimit: 10000000,
-  };
-
-  const pongAllowed = secondsLeft === 0;
-  const notAllowedClass = pongAllowed ? "" : "not-allowed disabled";
+  const pongAllowed = secondsLeft === 0 && !hasPendingTransactions;
+  const notAllowedClass = pongAllowed ? '' : 'not-allowed disabled';
 
   const timeRemaining = moment()
-    .startOf("day")
+    .startOf('day')
     .seconds(secondsLeft || 0)
-    .format("mm:ss");
+    .format('mm:ss');
 
   return (
-    <div className="d-flex mt-4 justify-content-center">
+    <div className='d-flex mt-4 justify-content-center'>
       {hasPing !== undefined && (
         <>
-          {hasPing ? (
-            <div className="action-btn" onClick={send(pingTransaction)}>
-              <button className="btn">
-                <FontAwesomeIcon icon={faArrowUp} className="text-primary" />
+          {hasPing && !hasPendingTransactions ? (
+            <div className='action-btn' onClick={sendPingTransaction}>
+              <button className='btn'>
+                <FontAwesomeIcon icon={faArrowUp} className='text-primary' />
               </button>
-              <a href="/" className="text-white text-decoration-none">
+              <a href='/' className='text-white text-decoration-none'>
                 Ping
               </a>
             </div>
           ) : (
             <>
-              <div className="d-flex flex-column">
+              <div className='d-flex flex-column'>
                 <div
                   {...{
                     className: `action-btn ${notAllowedClass}`,
-                    ...(pongAllowed ? { onClick: send(pongTransaction) } : {}),
+                    ...(pongAllowed ? { onClick: sendPongTransaction } : {})
                   }}
                 >
                   <button className={`btn ${notAllowedClass}`}>
                     <FontAwesomeIcon
                       icon={faArrowDown}
-                      className="text-primary"
+                      className='text-primary'
                     />
                   </button>
-                  <span className="text-white">
+                  <span className='text-white'>
                     {pongAllowed ? (
-                      <a href="/" className="text-white text-decoration-none">
+                      <a href='/' className='text-white text-decoration-none'>
                         Pong
                       </a>
                     ) : (
@@ -142,8 +174,8 @@ const Actions = () => {
                     )}
                   </span>
                 </div>
-                {!pongAllowed && (
-                  <span className="opacity-6 text-white">
+                {!pongAllowed && !hasPendingTransactions && (
+                  <span className='opacity-6 text-white'>
                     {timeRemaining} until able to Pong
                   </span>
                 )}

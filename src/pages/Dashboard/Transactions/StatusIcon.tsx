@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 import {
   faArrowUp,
   faArrowDown,
   faBan,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TransactionType } from "./../../../context/state";
-import txStatus from "./txStatus";
+  faTimes
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import txStatus from './txStatus';
+import { TransactionType } from './types';
 
 interface StatusIconType {
   tx: TransactionType;
@@ -18,16 +18,16 @@ const StatusIcon = ({ tx, incomingTransaction }: StatusIconType) => {
   let Icon = () => <></>;
   switch (tx.status) {
     case txStatus.notExecuted:
-      Icon = () => <FontAwesomeIcon icon={faBan} className="text-danger" />;
+      Icon = () => <FontAwesomeIcon icon={faBan} className='text-danger' />;
       break;
     case txStatus.fail:
-      Icon = () => <FontAwesomeIcon icon={faTimes} className="text-danger" />;
+      Icon = () => <FontAwesomeIcon icon={faTimes} className='text-danger' />;
       break;
     case txStatus.success:
       Icon = () => (
         <FontAwesomeIcon
           icon={incomingTransaction ? faArrowUp : faArrowDown}
-          className="text-secondary"
+          className='text-secondary'
         />
       );
       break;
@@ -35,12 +35,12 @@ const StatusIcon = ({ tx, incomingTransaction }: StatusIconType) => {
       Icon = () => (
         <FontAwesomeIcon
           icon={incomingTransaction ? faArrowUp : faArrowDown}
-          className="text-secondary"
+          className='text-secondary'
         />
       );
   }
   return (
-    <i className="m-3 circle">
+    <i className='m-3 circle'>
       <Icon />
     </i>
   );
