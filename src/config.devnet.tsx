@@ -15,9 +15,6 @@ export const walletConnectBridge: string =
 
 export const walletConnectDeepLink =
   'https://maiar.page.link/?apn=com.elrond.maiar.wallet&isi=1519405832&ibi=com.elrond.maiar.wallet&link=https://maiar.com/';
-export const maiarIdApi = 'https://devnet-id.maiar.com/api/v1';
-export const socketApi = 'https://devnet-socket.elrond.com';
-export const extrasApi = 'https://devnet-extras-api.elrond.com';
 
 export const contractAddress =
   'erd1qqqqqqqqqqqqqpgquvt728n40ssd8n2qns9jrlqpwq2jc4rj4cysfuj3ad';

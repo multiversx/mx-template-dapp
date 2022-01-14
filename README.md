@@ -1,6 +1,6 @@
 # @elrondnetwork/dapp-template
 The __Elrond dApp Template__, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
-It's a basic implementation of [@elrondnetwork/dapp](https://www.npmjs.com/package/@elrondnetwork/dapp), providing the basics for Elrond authentication and TX signing.
+It's a basic implementation of [@elrondnetwork/dapp-core](https://www.npmjs.com/package/@elrondnetwork/dapp-core), providing the basics for Elrond authentication and TX signing.
 
 See [Dapp template](https://dapp-template.elrond.com/) for live demo.
 
@@ -25,7 +25,7 @@ npm install
 
 ### Step 2. Update Configs
 
-Create a new file `src/config.tsx` and copy the content of `src/config.testnet.tsx`. If you want to develop against `devnet`, change all instances of `testnet` to `devnet`.
+Edit a new file `src/config.tsx` and copy the content of `src/config.devnet.tsx`. If you want to develop against `testnet`, change all instances of `devnet` to `testnet`.
 
 ### Step 3. Running in development mode
 
