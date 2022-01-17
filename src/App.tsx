@@ -34,7 +34,7 @@ const App = () => {
                 element={<route.component />}
               />
             ))}
-            <Route element={PageNotFound} />
+            <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Layout>
       </DappProvider>
