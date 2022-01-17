@@ -1,63 +1,45 @@
-import React from "react";
-import * as Dapp from "@elrondnetwork/dapp";
-import { Route, Switch } from "react-router-dom";
-import Layout from "./components/Layout";
-import PageNotFoud from "./components/PageNotFoud";
-import * as config from "./config";
-import { ContextProvider } from "./context";
-import routes, { routeNames } from "./routes";
+import React from 'react';
+import { DappProvider, DappUI } from '@elrondnetwork/dapp-core';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import Layout from 'components/Layout';
+import { network, walletConnectBridge, walletConnectDeepLink } from 'config';
+import PageNotFound from 'pages/PageNotFound';
+import { routeNames } from 'routes';
+import routes from 'routes';
+import '@elrondnetwork/dapp-core/build/index.css';
 
-export default function App() {
+const {
+  TransactionsToastList,
+  DappCorePages: { UnlockPage }
+} = DappUI;
+
+const App = () => {
   return (
-    <Dapp.Context config={config}>
-      <ContextProvider>
+    <Router>
+      <DappProvider
+        networkConfig={{ network, walletConnectBridge, walletConnectDeepLink }}
+        modalClassName='custom-class-for-modals'
+      >
         <Layout>
-          <Switch>
+          <TransactionsToastList />
+          <Routes>
             <Route
               path={routeNames.unlock}
-              component={() => (
-                <Dapp.Pages.Unlock
-                  callbackRoute={routeNames.dashboard}
-                  title={config.dAppName}
-                  lead="Please select your login method:"
-                  ledgerRoute={routeNames.ledger}
-                  walletConnectRoute={routeNames.walletconnect}
-                />
-              )}
-              exact={true}
+              element={<UnlockPage loginRoute={routeNames.dashboard} />}
             />
-            <Route
-              path={routeNames.ledger}
-              component={() => (
-                <Dapp.Pages.Ledger callbackRoute={routeNames.dashboard} />
-              )}
-              exact={true}
-            />
-            <Route
-              path={routeNames.walletconnect}
-              component={() => (
-                <Dapp.Pages.WalletConnect
-                  callbackRoute={routeNames.dashboard}
-                  logoutRoute={routeNames.home}
-                  title="Maiar Login"
-                  lead="Scan the QR code using Maiar"
-                />
-              )}
-              exact={true}
-            />
-
-            {routes.map((route, i) => (
+            {routes.map((route: any, index: number) => (
               <Route
                 path={route.path}
-                key={route.path + i}
-                component={route.component}
-                exact={true}
+                key={'route-key-' + index}
+                element={<route.component />}
               />
             ))}
-            <Route component={PageNotFoud} />
-          </Switch>
+            <Route element={PageNotFound} />
+          </Routes>
         </Layout>
-      </ContextProvider>
-    </Dapp.Context>
+      </DappProvider>
+    </Router>
   );
-}
+};
+
+export default App;
