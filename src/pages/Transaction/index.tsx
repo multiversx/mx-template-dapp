@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DappUI } from '@elrondnetwork/dapp-core';
+import { DappUI } from '@elrondnetwork/dapp-core-components';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, Link } from 'react-router-dom';
 import { network } from 'config';

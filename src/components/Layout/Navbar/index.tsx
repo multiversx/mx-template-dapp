@@ -1,5 +1,5 @@
 import React from 'react';
-import { logout, useGetAccountInfo } from '@elrondnetwork/dapp-core';
+import { logout, useGetAccountInfo } from '@elrondnetwork/dapp-core-components';
 import { Navbar as BsNavbar, NavItem, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { dAppName } from 'config';

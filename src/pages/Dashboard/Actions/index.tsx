@@ -4,7 +4,7 @@ import {
   useGetAccountInfo,
   useGetPendingTransactions,
   refreshAccount
-} from '@elrondnetwork/dapp-core';
+} from '@elrondnetwork/dapp-core-components';
 import {
   Address,
   AddressValue,
