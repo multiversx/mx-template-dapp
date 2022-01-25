@@ -6,7 +6,7 @@ export const gasPerDataByte = 1500;
 export const timeout = 10000; // 10 sec
 
 export const walletConnectBridgeAddresses: string[] = [
-  'https://walletconnect-bridge.maiar.com'
+  'https://bridge.walletconnect.org'
 ];
 export const walletConnectBridge: string =
   walletConnectBridgeAddresses[
