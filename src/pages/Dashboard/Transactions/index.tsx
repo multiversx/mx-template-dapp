@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGetAccountInfo, DappUI } from '@elrondnetwork/dapp-core-components';
+import { useGetAccountInfo, DappUI } from '@elrondnetwork/dapp-core';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
 import { contractAddress, network } from 'config';
