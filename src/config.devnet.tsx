@@ -1,4 +1,4 @@
-import { NetworkType } from '@elrondnetwork/dapp-core-components';
+import { NetworkType } from '@elrondnetwork/dapp-core';
 
 export const decimals = 4;
 export const denomination = 18;
@@ -6,7 +6,7 @@ export const gasPerDataByte = 1500;
 export const timeout = 10000; // 10 sec
 
 export const walletConnectBridgeAddresses: string[] = [
-  'https://bridge.walletconnect.org'
+  'https://walletconnect-bridge.maiar.com'
 ];
 export const walletConnectBridge: string =
   walletConnectBridgeAddresses[

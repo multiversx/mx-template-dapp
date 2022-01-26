@@ -15,7 +15,7 @@ interface StatusIconType {
 }
 
 const StatusIcon = ({ tx, incomingTransaction }: StatusIconType) => {
-  let Icon = () => <></>;
+  let Icon;
   switch (tx.status) {
     case txStatus.notExecuted:
       Icon = () => <FontAwesomeIcon icon={faBan} className='text-danger' />;

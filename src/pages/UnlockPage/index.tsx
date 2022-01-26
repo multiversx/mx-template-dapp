@@ -1,5 +1,5 @@
 import React from 'react';
-import { DappUI, getIsLoggedIn } from '@elrondnetwork/dapp-core-components';
+import { getIsLoggedIn, DappUI } from '@elrondnetwork/dapp-core';
 import { routeNames } from 'routes';
 
 export const UnlockRoute: () => JSX.Element = () => {

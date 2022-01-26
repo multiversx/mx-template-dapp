@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGetAccountInfo, DappUI } from '@elrondnetwork/dapp-core-components';
+import { useGetAccountInfo, DappUI } from '@elrondnetwork/dapp-core';
 import { Ui } from '@elrondnetwork/dapp-utils';
 import moment from 'moment';
 import { network } from 'config';
@@ -73,7 +73,7 @@ const TransactionList = ({
                   </td>
                   <td className='transaction-hash'>
                     <a
-                      href={`${network.explorerAddress}transactions/${tx.txHash}`}
+                      href={`${network.explorerAddress}/transactions/${tx.txHash}`}
                       {...{
                         target: '_blank'
                       }}
@@ -101,7 +101,7 @@ const TransactionList = ({
       </div>
       <div className='d-flex justify-content-center'>
         <a
-          href={`${network.explorerAddress}address/${account.address}`}
+          href={`${network.explorerAddress}/address/${account.address}`}
           {...{
             target: '_blank'
           }}

@@ -1,19 +1,18 @@
 import React from 'react';
-import {
-  DappCoreUIWrapper,
-  DappProvider,
-  DappUI
-} from '@elrondnetwork/dapp-core-components';
+import { DappCoreUIWrapper, DappUI } from '@elrondnetwork/dapp-core';
+import { DappProvider } from '@elrondnetwork/dapp-core';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import Layout from 'components/Layout';
 import { network, walletConnectBridge, walletConnectDeepLink } from 'config';
 import PageNotFound from 'pages/PageNotFound';
 import { routeNames } from 'routes';
 import routes from 'routes';
-import '@elrondnetwork/dapp-core-components/build/index.css';
+import '@elrondnetwork/dapp-core/build/index.css';
 
 const {
   TransactionsToastList,
+  SignTransactionsModals,
+  NotificationModal,
   DappCorePages: { UnlockPage }
 } = DappUI;
 
@@ -26,6 +25,8 @@ const App = () => {
         <DappCoreUIWrapper>
           <Layout>
             <TransactionsToastList />
+            <NotificationModal />
+            <SignTransactionsModals className='custom-class-for-modals' />
             <Routes>
               <Route
                 path={routeNames.unlock}
