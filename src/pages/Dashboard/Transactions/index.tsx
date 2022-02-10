@@ -1,5 +1,10 @@
 import React from 'react';
-import { useGetAccountInfo, DappUI } from '@elrondnetwork/dapp-core';
+import {
+  useGetAccountInfo,
+  DappUI,
+  transactionServices,
+  refreshAccount
+} from '@elrondnetwork/dapp-core';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
 import { contractAddress, network } from 'config';
@@ -8,6 +13,8 @@ import { StateType } from './types';
 
 const Transactions = () => {
   const { apiAddress } = network;
+  const { successful, hasActiveTransactions } =
+    transactionServices.useGetActiveTransactionsStatus();
 
   const [state, setState] = React.useState<StateType>({
     transactions: [],
@@ -16,20 +23,23 @@ const Transactions = () => {
 
   const account = useGetAccountInfo();
   const fetchData = () => {
-    getTransactions({
-      apiAddress,
-      address: account.address,
-      timeout: 3000,
-      contractAddress
-    }).then(({ data, success }) => {
-      setState({
-        transactions: data,
-        transactionsFetched: success
+    if (successful || !hasActiveTransactions) {
+      getTransactions({
+        apiAddress,
+        address: account.address,
+        timeout: 3000,
+        contractAddress
+      }).then(({ data, success }) => {
+        refreshAccount();
+        setState({
+          transactions: data,
+          transactionsFetched: success
+        });
       });
-    });
+    }
   };
 
-  React.useEffect(fetchData, []);
+  React.useEffect(fetchData, [successful]);
 
   const { transactions } = state;
 
