@@ -19,7 +19,6 @@
     "@types/react-router-dom": "5.1.7",
     "axios": "0.21.1",
     "bootstrap": "4.6.0",
-    "dapp-core": "^0.7.15",
     "moment": "2.29.1",
     "node-sass": "^6.0.1",
     "react": "17.0.2",
