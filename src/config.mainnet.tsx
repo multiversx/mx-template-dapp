@@ -24,11 +24,11 @@ export const dAppName = 'Dapp';
 export const network: NetworkType & {
   graphQlAddress: string;
 } = {
-  id: 'devnet',
-  name: 'Devnet',
-  egldLabel: 'xEGLD',
-  walletAddress: 'https://devnet-wallet.elrond.com',
-  apiAddress: 'https://devnet-api.elrond.com',
-  explorerAddress: 'http://devnet-explorer.elrond.com',
-  graphQlAddress: 'https://devnet-exchange-graph.elrond.com/graphql'
+  id: 'mainnet',
+  name: 'Mainnet',
+  egldLabel: 'EGLD',
+  walletAddress: 'https://wallet.elrond.com',
+  apiAddress: 'https://internal-api.elrond.com',
+  explorerAddress: 'https://explorer.elrond.com',
+  graphQlAddress: 'https://graph.maiar.exchange/graphql'
 };
