@@ -13,7 +13,7 @@ import { StateType } from './types';
 
 const Transactions = () => {
   const { apiAddress } = network;
-  const { successful, hasActiveTransactions } =
+  const { successful: activeTxSuccessful, hasActiveTransactions } =
     transactionServices.useGetActiveTransactionsStatus();
 
   const [state, setState] = React.useState<StateType>({
@@ -23,7 +23,7 @@ const Transactions = () => {
 
   const account = useGetAccountInfo();
   const fetchData = () => {
-    if (successful || !hasActiveTransactions) {
+    if (activeTxSuccessful || !hasActiveTransactions) {
       getTransactions({
         apiAddress,
         address: account.address,
@@ -39,7 +39,7 @@ const Transactions = () => {
     }
   };
 
-  React.useEffect(fetchData, [successful, hasActiveTransactions]);
+  React.useEffect(fetchData, [activeTxSuccessful, hasActiveTransactions]);
 
   const { transactions } = state;
 
