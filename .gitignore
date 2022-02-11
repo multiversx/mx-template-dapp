@@ -12,7 +12,6 @@
 /build
 
 # misc
-/src/config.tsx
 .DS_Store
 .env.local
 .env.development.local
