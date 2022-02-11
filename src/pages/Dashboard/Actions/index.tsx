@@ -55,7 +55,7 @@ const Actions = () => {
       func: new ContractFunction('getTimeToPong'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.gatewayAddress);
+    const proxy = new ProxyProvider(network.apiAddress);
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
