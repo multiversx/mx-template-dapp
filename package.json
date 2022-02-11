@@ -6,7 +6,7 @@
   "license": "GPL-3.0-or-later",
   "repository": "@elrondnetwork/dapp-template",
   "dependencies": {
-    "@elrondnetwork/dapp-core": "0.6.0",
+    "@elrondnetwork/dapp-core": "^0.6.3",
     "@elrondnetwork/dapp-utils": "0.1.2",
     "@elrondnetwork/erdjs": "9.0.3",
     "@testing-library/jest-dom": "5.11.4",
