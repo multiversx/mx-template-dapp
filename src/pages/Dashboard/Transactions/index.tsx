@@ -39,7 +39,7 @@ const Transactions = () => {
     }
   };
 
-  React.useEffect(fetchData, [successful]);
+  React.useEffect(fetchData, [successful, hasActiveTransactions]);
 
   const { transactions } = state;
 
