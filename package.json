@@ -1,12 +1,12 @@
 {
   "name": "@elrondnetwork/dapp-template",
   "description": "Elrond Dapp Template",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "ElrondNetwork",
   "license": "GPL-3.0-or-later",
   "repository": "@elrondnetwork/dapp-template",
   "dependencies": {
-    "@elrondnetwork/dapp-core": "^0.6.5",
+    "@elrondnetwork/dapp-core": "0.7.0",
     "@elrondnetwork/dapp-utils": "0.1.3",
     "@elrondnetwork/erdjs": "9.0.3",
     "axios": "0.21.1",
