@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { DappUI } from '@elrondnetwork/dapp-core';
+import { DappUI, useGetNetworkConfig } from '@elrondnetwork/dapp-core';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, Link } from 'react-router-dom';
-import { network } from 'config';
 import { routeNames } from 'routes';
 
 const Transaction = () => {
   const { search } = useLocation();
+  const { network } = useGetNetworkConfig();
 
   const query = new URLSearchParams(search);
   const { status, txHash } = Object.fromEntries(query);

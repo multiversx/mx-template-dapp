@@ -1,5 +1,5 @@
 import React from 'react';
-import { getIsLoggedIn, DappUI } from '@elrondnetwork/dapp-core';
+import { DappUI, useGetLoginInfo } from '@elrondnetwork/dapp-core';
 import { routeNames } from 'routes';
 
 export const UnlockRoute: () => JSX.Element = () => {
@@ -9,13 +9,13 @@ export const UnlockRoute: () => JSX.Element = () => {
     LedgerLoginButton,
     WalletConnectLoginButton
   } = DappUI;
+  const { isLoggedIn } = useGetLoginInfo();
 
   React.useEffect(() => {
-    const isLoggedIn = getIsLoggedIn();
     if (isLoggedIn) {
       window.location.href = routeNames.dashboard;
     }
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <div className='home d-flex flex-fill align-items-center'>

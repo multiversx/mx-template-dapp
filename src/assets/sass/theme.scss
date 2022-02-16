@@ -1,17 +1,29 @@
 /* Bootstrap overrides
 -------------------------------------------------- */
-$body: #000;
-$headings-font-weight: 300 !important;
+
+  $body: #000;
+  $headings-font-weight: 300 !important;
 $primary: #1b46c2;
-$light: #fafafa;
+  $light: #fafafa;
+
+  $headings-font-weight: 300 !important;
+  $a: #1392ff;
 
 /* Do not move the imports from here.
 Override Bootstrap variables only above.
 -------------------------------------------------- */
 
 // Bootstrap
-@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
+@import '~bootstrap/scss/bootstrap.scss';
+
+@import '~bootstrap/scss/reboot';
+
+
+
+.custom-classname.btn-primary {
+  background-color: green;
+}
 /* Base
 -------------------------------------------------- */
 html {
@@ -128,7 +140,7 @@ html {
   cursor: not-allowed;
 }
 
-/* Loader, Transaction Success/Fail
+/* Loader, Transaction success/Fail
 -------------------------------------------------- */
 .page-state {
   .lds-ellipsis {

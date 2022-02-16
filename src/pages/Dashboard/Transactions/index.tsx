@@ -3,43 +3,46 @@ import {
   useGetAccountInfo,
   DappUI,
   transactionServices,
-  refreshAccount
+  refreshAccount,
+  useGetNetworkConfig
 } from '@elrondnetwork/dapp-core';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
-import { contractAddress, network } from 'config';
+import { contractAddress } from 'config';
 import TransactionsList from './TransactionsList';
 import { StateType } from './types';
 
 const Transactions = () => {
-  const { apiAddress } = network;
-  const { successful: activeTxSuccessful, hasActiveTransactions } =
+  const {
+    network: { apiAddress }
+  } = useGetNetworkConfig();
+  const { success, fail, hasActiveTransactions } =
     transactionServices.useGetActiveTransactionsStatus();
 
   const [state, setState] = React.useState<StateType>({
     transactions: [],
     transactionsFetched: undefined
   });
-
   const account = useGetAccountInfo();
+
   const fetchData = () => {
-    if (activeTxSuccessful || !hasActiveTransactions) {
+    if (success || fail || !hasActiveTransactions) {
       getTransactions({
         apiAddress,
         address: account.address,
         timeout: 3000,
         contractAddress
-      }).then(({ data, success }) => {
+      }).then(({ data, success: transactionsFetched }) => {
         refreshAccount();
         setState({
           transactions: data,
-          transactionsFetched: success
+          transactionsFetched
         });
       });
     }
   };
 
-  React.useEffect(fetchData, [activeTxSuccessful, hasActiveTransactions]);
+  React.useEffect(fetchData, [success, fail, hasActiveTransactions]);
 
   const { transactions } = state;
 
