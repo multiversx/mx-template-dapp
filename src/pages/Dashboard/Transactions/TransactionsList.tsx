@@ -1,8 +1,10 @@
 import React from 'react';
-import { useGetAccountInfo, DappUI } from '@elrondnetwork/dapp-core';
-import { Ui } from '@elrondnetwork/dapp-utils';
+import {
+  useGetAccountInfo,
+  DappUI,
+  useGetNetworkConfig
+} from '@elrondnetwork/dapp-core';
 import moment from 'moment';
-import { network } from 'config';
 import StatusIcon from './StatusIcon';
 import txStatus from './txStatus';
 import { TransactionType } from './types';
@@ -25,6 +27,7 @@ const TransactionList = ({
 }: {
   transactions: TransactionType[];
 }) => {
+  const { network } = useGetNetworkConfig();
   const account = useGetAccountInfo();
   const incoming = (sender: string) =>
     sender === account.address && sender !== fakeSender;
@@ -79,7 +82,7 @@ const TransactionList = ({
                       }}
                       title='View in Explorer'
                     >
-                      <Ui.Trim data-testid='txHash' text={tx.txHash} />
+                      <DappUI.Trim data-testid='txHash' text={tx.txHash} />
                     </a>
                   </td>
                   <td>

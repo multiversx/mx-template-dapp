@@ -29,9 +29,9 @@ const Navbar = () => {
         <Nav className='ml-auto'>
           {isLoggedIn && (
             <NavItem>
-              <a href={routeNames.home} onClick={handleLogout}>
+              <button className='btn btn-link' onClick={handleLogout}>
                 Close
-              </a>
+              </button>
             </NavItem>
           )}
         </Nav>
