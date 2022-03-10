@@ -1,0 +1,67 @@
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: $white;
+  margin: 0 7px;
+
+  button {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    background-color: $white;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.transactions {
+  .transaction-icon {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+
+  &.table {
+    .transaction-hash .trim {
+      @include media-breakpoint-down(xl) {
+        max-width: none;
+      }
+      @include media-breakpoint-down(lg) {
+        max-width: 26rem;
+      }
+      @include media-breakpoint-down(md) {
+        max-width: 12rem;
+      }
+      @include media-breakpoint-down(sm) {
+        max-width: 8rem;
+      }
+    }
+
+    td,
+    tr {
+      padding: 0.65rem;
+    }
+
+    td {
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    tr:last-of-type {
+      td {
+        border-bottom: 1px solid #dee2e6;
+      }
+    }
+  }
+}
+
+/* Actions
+-------------------------------------------------- */
+
+.not-allwed {
+  cursor: not-allowed;
+}

@@ -1,0 +1,26 @@
+footer {
+  div {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.155rem;
+
+    a {
+      color: $black;
+
+      &:hover {
+        color: $black;
+      }
+
+      #heart {
+        height: 16px;
+        width: 16px;
+
+        path {
+          fill: #c00;
+        }
+      }
+    }
+  }
+}

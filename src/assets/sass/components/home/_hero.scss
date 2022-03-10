@@ -1,0 +1,31 @@
+.hero_title {
+  font-size: 55px;
+  text-transform: uppercase;
+}
+.twice_btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: $box-shadow;
+  padding: 5px 10px;
+  border-radius: 30px;
+  background: #fff;
+  border: none;
+  transition: all 0.1s ease-in;
+
+  & > img {
+    display: block;
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+  }
+
+  &:hover {
+    margin-top: -2px;
+    box-shadow: $box-shadow-medium;
+  }
+  &:focus {
+    // box-shadow: none !important;
+    box-shadow: $box-shadow-medium;
+  }
+}

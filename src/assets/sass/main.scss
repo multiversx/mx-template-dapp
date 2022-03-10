@@ -1,0 +1,25 @@
+/* Bootstrap overrides
+-------------------------------------------------- */
+// Sass Variables
+@import './abstracts/variables';
+
+/* Do not move the imports from here.
+Override Bootstrap variables only above.
+-------------------------------------------------- */
+// Bootstrap
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/reboot';
+
+// Reset/normalize
+@import './base/reset';
+
+// pages/
+@import './pages/home';
+
+// layout/
+@import './layout/navigation';
+@import './layout/dashboard';
+@import './layout/footer';
+
+// themes/
+@import './themes/pageState';

@@ -9,7 +9,7 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    },
+    }
   },
   "settings": {
     "import/parsers": {
