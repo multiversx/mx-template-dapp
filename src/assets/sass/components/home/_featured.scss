@@ -1,0 +1,29 @@
+.featured {
+  .featured__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e6e6e6;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+
+    div {
+      display: flex;
+      align-items: center;
+
+      p {
+        margin: 0;
+        margin-left: 14px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+
+    > p {
+      font-size: 18px;
+      color: $secondary;
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+}

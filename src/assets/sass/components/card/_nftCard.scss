@@ -1,0 +1,110 @@
+.NFTCard {
+  margin-bottom: 30px;
+
+  .NFTCard__imageSection {
+    position: relative;
+    margin-bottom: 5px;
+
+    .NFTCard__image {
+      width: 100%;
+      max-inline-size: 100%;
+      block-size: auto;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .NFTCard__elrond {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      margin-left: 25px;
+      background-color: $light;
+      padding: 3px;
+      border-radius: 50%;
+      bottom: -20px;
+
+      img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .NFTCard__details {
+    box-shadow: $box-shadow;
+    padding: 25px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+
+    .NFTCard__detailsTitle {
+      font-weight: 600;
+    }
+
+    .NFTCard__detailsBrand {
+      display: flex;
+      align-items: center;
+
+      img {
+        margin-right: 12px;
+        height: 24px;
+        width: 24px;
+        border-radius: 2px;
+      }
+
+      p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 16px;
+      }
+    }
+
+    .NFTCard__detailsCurrentBid {
+      font-size: 16px;
+      font-weight: 600;
+      color: $secondary;
+      margin: 0;
+      margin-top: 20px;
+    }
+
+    .NFTCard__detailsBidPrice {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      p {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        margin-top: 4px;
+      }
+
+      > div {
+        display: flex;
+        align-items: center;
+        background-color: black;
+        padding: 2px 10px;
+        border-radius: 20px;
+
+        .NFTCard__detailsBidSpinner {
+          margin-right: 2px;
+        }
+
+        p {
+          margin: 0;
+          color: #fff;
+          font-size: 16px;
+          padding-top: 2px;
+        }
+
+        p:last-child {
+          font-weight: 400;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,77 @@
+.featuredCard {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+  padding-bottom: 40px;
+  margin-bottom: 30px;
+  background-image: url('https://f8n-production.imgix.net/collections/e51151a9v-ShaneLavalette_OneSunOneShadow_027_09.jpg?q=75&w=1600&auto=format%2Ccompress&fit=fill');
+
+  .featuredCard__top {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    div {
+      margin-top: 35px;
+      margin-left: 35px;
+      margin-bottom: 200px;
+      width: 90px;
+      height: 90px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: lightgray;
+      border-radius: 6px;
+
+      img {
+        height: 80px;
+        width: 80px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+    }
+
+    p {
+      background-color: rgba(211, 211, 211, 0.527);
+      margin: 0;
+      margin-top: 35px;
+      margin-right: 35px;
+      height: 40px;
+      padding: 10px 15px;
+      border-radius: 20px;
+    }
+  }
+
+  h1 {
+    margin-left: 35px;
+    margin-right: 35px;
+    color: white;
+  }
+
+  .featuredCard__bottom {
+    margin-left: 35px;
+    background-color: #d3d3d388;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 30px;
+    width: fit-content;
+    margin-top: 20px;
+
+    img {
+      height: 36px;
+      width: 36px;
+      border-radius: 30px;
+      margin-right: 5px;
+    }
+
+    p {
+      margin: 0;
+      padding-right: 10px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+}
