@@ -1,5 +1,5 @@
-.featured {
-  .featured__top {
+.featuredNft {
+  .featuredNft__top {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,7 +13,6 @@
 
       p {
         margin: 0;
-        margin-left: 14px;
         font-size: 18px;
         font-weight: 600;
       }
@@ -25,11 +24,5 @@
       margin: 0;
       font-weight: 600;
     }
-  }
-
-  .featured__bottomCard {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
   }
 }

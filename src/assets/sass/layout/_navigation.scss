@@ -1,11 +1,187 @@
-.elrond-logo {
-  width: 85px;
-  height: 25px;
+.nav {
+  position: relative;
+
+  .nav__detailsOpen {
+    position: fixed;
+    top: 0;
+    padding: 7px 14px;
+    z-index: 100;
+  }
+
+  .nav__details {
+    background-color: $light;
+    width: 100%;
+
+    .navBar__search {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 0;
+
+      .nav-item:first-child {
+        width: 80%;
+
+        input {
+          height: 50px;
+          border-radius: 10px;
+          width: 100%;
+          border: 3px solid black;
+          border-radius: 30px;
+          outline: none;
+        }
+      }
+
+      .nav-item:last-child {
+        button {
+          background-color: $light;
+          box-shadow: $box-shadow-medium;
+          border: none;
+          border-radius: 50px;
+          padding: 15px;
+          margin-left: 10px;
+
+          svg {
+            color: #000;
+          }
+        }
+      }
+    }
+
+    .navBar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 0;
+
+      .navBar__logo {
+        width: 85px;
+        height: 25px;
+      }
+
+      .navBar__navItem {
+        display: none;
+      }
+
+      .navBar__button {
+        button {
+          background-color: $light;
+          box-shadow: $box-shadow-medium;
+          border: none;
+          border-radius: 50px;
+          padding: 15px;
+          margin-left: 10px;
+
+          svg {
+            color: #000;
+          }
+        }
+      }
+    }
+  }
+
+  .navBar__menu {
+    width: 100%;
+    position: fixed;
+    background-color: $light;
+    top: 80px;
+    padding: 0 20px;
+    height: 95%;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 100px;
+
+    h3 {
+      font-size: 36px;
+      margin: 0;
+      color: #000;
+      font-weight: 600;
+    }
+
+    div {
+      justify-self: flex-end;
+      bottom: 0;
+
+      button {
+        width: 100%;
+        color: $light;
+        background-color: $dark;
+        font-size: 18px;
+        font-weight: 600;
+        height: 60px;
+        border-radius: 50px;
+        bottom: 0;
+        z-index: 200;
+        bottom: 0;
+      }
+
+      > div {
+        display: flex;
+        margin-top: 10px;
+
+        div {
+          display: block;
+          width: 50%;
+
+          p {
+            font-size: 16px;
+            color: $secondary;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
 }
 
-.dapp-name {
-  line-height: 1;
-  border-left: 1px solid $gray-400;
-  padding-left: 3px;
-  margin-left: 4px;
+@media only screen and (min-width: $lg) {
+  .nav {
+    .nav__details {
+      .navBar {
+        .navBar__logo {
+          width: 125px;
+          height: 55px;
+        }
+
+        .navBar__navItem {
+          display: block;
+
+          h4 {
+            margin: 0;
+            font-size: 18px;
+            color: $secondary;
+          }
+
+          input {
+            height: 55px;
+            width: 100%;
+            border-radius: 30px;
+            border: 1px solid lightgray;
+            padding-left: 20px;
+            font-size: 18px;
+            font-weight: 600;
+          }
+
+          button {
+            height: 55px;
+            font-size: 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            padding: 0 30px;
+          }
+        }
+
+        .nav-item:nth-child(2) {
+          width: 40%;
+        }
+
+        .navBar__button {
+          display: none;
+        }
+      }
+    }
+  }
 }
