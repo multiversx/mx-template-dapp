@@ -1,4 +1,6 @@
 .featuredProfile {
+  padding: 70px 0;
+  
   .featuredProfile__top {
     display: flex;
     justify-content: space-between;
@@ -13,7 +15,7 @@
 
       p {
         margin: 0;
-        font-size: 18px;
+        font-size: 26px;
         font-weight: 600;
       }
     }

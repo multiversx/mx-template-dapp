@@ -1,12 +1,23 @@
 .featuredCard {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.card__content {
   width: 100%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border-radius: 10px;
   padding-bottom: 40px;
-  margin-bottom: 30px;
-  background-image: url('https://f8n-production.imgix.net/collections/e51151a9v-ShaneLavalette_OneSunOneShadow_027_09.jpg?q=75&w=1600&auto=format%2Ccompress&fit=fill');
+  background-image: url("https://f8n-production.imgix.net/collections/e51151a9v-ShaneLavalette_OneSunOneShadow_027_09.jpg?q=75&w=1600&auto=format%2Ccompress&fit=fill");
+  transition: 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 
   .featuredCard__top {
     display: flex;

@@ -10,9 +10,9 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const { address } = useGetAccountInfo();
 
-  const handleLogout = () => {
-    logout(`${window.location.origin}/unlock`);
-  };
+  // const handleLogout = () => {
+  //   logout(`${window.location.origin}/unlock`);
+  // };
 
   const isLoggedIn = Boolean(address);
 
@@ -60,13 +60,19 @@ const Navbar = () => {
               <input type='text' placeholder='Search Foundation...' />
             </NavItem>
             <NavItem className='navBar__navItem'>
-              <h4>Explore</h4>
+              <Link to={'/explore'}>
+                <h4>Explore</h4>
+              </Link>
             </NavItem>
             <NavItem className='navBar__navItem'>
-              <h4>About</h4>
+              <Link to={'/about'}>
+                <h4>About</h4>
+              </Link>
             </NavItem>
             <NavItem className='navBar__navItem'>
-              <h4>Blog</h4>
+              <Link to={'/blog'}>
+                <h4>Blog</h4>
+              </Link>
             </NavItem>
             <NavItem className='navBar__navItem'>
               <Button variant='dark'>Connect wallet</Button>

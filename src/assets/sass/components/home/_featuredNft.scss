@@ -1,4 +1,6 @@
 .featuredNft {
+  padding: 80px 0;
+
   .featuredNft__top {
     display: flex;
     justify-content: space-between;
@@ -11,9 +13,9 @@
       display: flex;
       align-items: center;
 
-      p {
+      h2 {
         margin: 0;
-        font-size: 18px;
+        font-size: 26px;
         font-weight: 600;
       }
     }
@@ -23,6 +25,25 @@
       color: $secondary;
       margin: 0;
       font-weight: 600;
+    }
+  }
+
+  .featuredNft__bottom {
+    text-align: center;
+    padding-top: 15px;
+    button {
+      background-color: $light;
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      border: 1px solid $light-gray;
+      padding: 15px 18px;
+      margin-left: 10px;
+      &:hover{
+        color: $light;
+        background-color: $dark;
+      }
     }
   }
 }

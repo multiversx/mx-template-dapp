@@ -4,6 +4,11 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   width: 100%;
+  transition: all 0.3s;
+
+  &:hover{
+    transform: translateY(-5px);
+  }
 
   .profileCard__top {
     position: relative;
@@ -85,12 +90,16 @@
       }
 
       button {
-        border: 1px solid $secondary;
+        border: 1px solid lightgray;
         height: 50px;
         border-radius: 30px;
         font-size: 18px;
-        font-weight: 600;
+        font-weight: 700;
         padding: 0 25px;
+        &:hover{
+          color: $light;
+          background-color: $dark;
+        }
       }
     }
   }

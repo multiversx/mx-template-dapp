@@ -1,23 +1,25 @@
 import React from 'react';
+import { Button, Row } from 'react-bootstrap';
 import NFTCard from 'components/Card/NFTCard';
-
-const NFTs = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24
-];
+import { featuredNftData } from './featuredNftData';
 
 const index = () => {
   return (
     <div className='featuredNft'>
       <div className='featuredNft__top'>
         <div>
-          <p>Featured NFTs</p>
+          <h2>Featured NFTs</h2>
         </div>
         <p>View all NFTs</p>
       </div>
-      {NFTs.map((nft) => (
-        <NFTCard key={nft} />
-      ))}
+      <Row className=''>
+        {featuredNftData.map((img, i) => (
+          <NFTCard key={i} image={img} />
+        ))}
+      </Row>
+      <div className='featuredNft__bottom'>
+        <Button variant='light'>View all NFTs</Button>
+      </div>
     </div>
   );
 };

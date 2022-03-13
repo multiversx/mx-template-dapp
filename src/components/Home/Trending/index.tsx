@@ -17,7 +17,7 @@ const index = () => {
         </div>
         <p>View all auctions</p>
       </div>
-      <Row xs={1} md={2} lg={3} xl={4} className='g-4'>
+      <Row xs={1} md={2} lg={3} xl={3} className='g-4'>
         {data.map((img, i) => (
           <NFTCard key={i} image={img} />
         ))}

@@ -19,9 +19,10 @@
       width: 100%;
       padding: 10px 0;
 
-      .nav-item:first-child {
-        width: 80%;
+      
 
+      .nav-item:first-child {
+        width: 90%;
         input {
           height: 50px;
           border-radius: 10px;
@@ -49,10 +50,10 @@
     }
 
     .navBar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
+      // display: flex;
+      // justify-content: space-between;
+      // align-items: center;
+      // width: 100%;
       padding: 10px 0;
 
       .navBar__logo {
