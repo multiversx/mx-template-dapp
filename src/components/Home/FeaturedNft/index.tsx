@@ -1,10 +1,8 @@
 import React from 'react';
 import NFTCard from 'components/Card/NFTCard';
+import NFTImg1 from '../../../assets/img/nft-img/nft-crypto.gif';
 
-const NFTs = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24
-];
+const data = [NFTImg1, NFTImg1, NFTImg1, NFTImg1];
 
 const index = () => {
   return (
@@ -15,8 +13,8 @@ const index = () => {
         </div>
         <p>View all NFTs</p>
       </div>
-      {NFTs.map((nft) => (
-        <NFTCard key={nft} />
+      {data.map((img, i) => (
+        <NFTCard key={i} image={img} />
       ))}
     </div>
   );

@@ -1,4 +1,5 @@
 import { dAppName } from 'config';
+import NFTs from 'pages/NFTs';
 import withPageTitle from './components/PageTitle';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
@@ -10,7 +11,8 @@ export const routeNames = {
   transaction: '/transaction',
   unlock: '/unlock',
   ledger: '/ledger',
-  walletconnect: '/walletconnect'
+  walletconnect: '/walletconnect',
+  nfts: '/nfts'
 };
 
 const routes: Array<any> = [
@@ -29,6 +31,11 @@ const routes: Array<any> = [
     path: routeNames.transaction,
     title: 'Transaction',
     component: Transaction
+  },
+  {
+    path: routeNames.nfts,
+    title: 'View all auctions',
+    component: NFTs
   }
 ];
 
