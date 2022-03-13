@@ -7,17 +7,32 @@ const TabNavigation = () => {
       <div className='tab'>
         <div className='tab__menu'>
           <ul>
-            <NavLink to='/nfts' activeClassName='selected'>
+            <NavLink
+              to='/nfts'
+              className={(navData) =>
+                navData.isActive ? 'active-style' : 'none'
+              }
+            >
               <li>
                 NFTs <span>175,455</span>
               </li>
             </NavLink>
-            <NavLink to='/collections' activeClassName='selected'>
+            <NavLink
+              to='/collections'
+              className={(navData) =>
+                navData.isActive ? 'active-style' : 'none'
+              }
+            >
               <li>
                 Collections <span>175,455</span>
               </li>
             </NavLink>
-            <NavLink to='/profiles' activeClassName='selected'>
+            <NavLink
+              to='/profiles'
+              className={(navData) =>
+                navData.isActive ? 'active-style' : 'none'
+              }
+            >
               <li>
                 Profiles <span>175,455</span>
               </li>
