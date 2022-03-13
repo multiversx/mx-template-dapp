@@ -1,8 +1,11 @@
 import React from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Row, Spinner } from 'react-bootstrap';
 import NFTCard from 'components/Card/NFTCard';
+import NFTImage1 from '../../../assets/img/nft-img/nft1.jpg';
+import NFTImage2 from '../../../assets/img/nft-img/nft2.jpg';
+import NFTImage3 from '../../../assets/img/nft-img/nft3.jpg';
 
-const NFTs = [1, 2, 3, 4, 5, 6, 7, 8];
+const data = [NFTImage1, NFTImage2, NFTImage3, NFTImage2, NFTImage3, NFTImage1];
 
 const index = () => {
   return (
@@ -14,9 +17,11 @@ const index = () => {
         </div>
         <p>View all auctions</p>
       </div>
-      {NFTs.map((nft) => (
-        <NFTCard key={nft} />
-      ))}
+      <Row xs={1} md={2} lg={3} xl={4} className='g-4'>
+        {data.map((img, i) => (
+          <NFTCard key={i} image={img} />
+        ))}
+      </Row>
     </div>
   );
 };
