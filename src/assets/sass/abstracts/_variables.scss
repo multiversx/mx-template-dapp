@@ -11,3 +11,10 @@ $dark: #000000;
 $a: #1392ff;
 $box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
 $box-shadow-medium: 0px 10px 20px rgba(0, 0, 0, 0.1);
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1480px,
+  //   xxl: 1920px
+);
