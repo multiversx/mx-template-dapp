@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
 import NFTCard from 'components/common/NFTCard';
-import NfTsSidebar from './NfTsSidebar';
+import ProfileSidebar from './ProfileSidebar';
 
-const NFTs = () => {
+const Profile = () => {
   return (
     <div className='container-xl'>
       <div className='my-3 nfts__container'>
         <div className='d-none d-md-block'>
           {/* sidebar */}
-          <NfTsSidebar />
+          <ProfileSidebar />
         </div>
 
         {/* content */}
@@ -25,4 +25,4 @@ const NFTs = () => {
   );
 };
 
-export default NFTs;
+export default Profile;

@@ -1,21 +1,22 @@
 import React from 'react';
 import { Button, Card, Col, Spinner } from 'react-bootstrap';
+import NFTImg1 from '../../assets/img/nft-img/nft-crypto.gif';
 
-const NFTCard = ({ image }: { image: string; key: number }) => {
+const NFTCard = () => {
   return (
     <Col md='6' lg='4'>
       <Card className='card__root'>
         <div className='card__img'>
-          <Card.Img variant='top' src={image} />
+          <Card.Img variant='top' src={NFTImg1} />
         </div>
         <div className='card__blank'></div>
         <Card.Body className='card__body'>
           <div className='card__body__img'>
-            <img src={image} alt='...' />
+            <img src={NFTImg1} alt='...' />
           </div>
           <h3 className='text-dark my-2'>Sunshine</h3>
           <div className='card__body__details'>
-            <img src={image} alt='...' />
+            <img src={NFTImg1} alt='...' />
             <p>Endless War</p>
           </div>
           <p className='mt-3 mb-0 current__bid__title'>Current Bid</p>

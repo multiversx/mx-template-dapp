@@ -10,9 +10,9 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const { address } = useGetAccountInfo();
 
-  const handleLogout = () => {
-    logout(`${window.location.origin}/unlock`);
-  };
+  // const handleLogout = () => {
+  //   logout(`${window.location.origin}/unlock`);
+  // };
 
   const isLoggedIn = Boolean(address);
 
