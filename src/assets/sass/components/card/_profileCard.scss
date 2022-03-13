@@ -1,0 +1,109 @@
+.profileCard {
+  box-shadow: $box-shadow-medium;
+  margin-bottom: 30px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 100%;
+
+  .profileCard__top {
+    position: relative;
+
+    > img {
+      width: 100%;
+      height: 200px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    div {
+      position: absolute;
+      background-color: $light;
+      z-index: 99;
+      bottom: -40px;
+      left: 30px;
+      height: 80px;
+      width: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50px;
+
+      img {
+        width: 66px;
+        height: 66px;
+
+        border-radius: 50px;
+      }
+    }
+  }
+
+  .profileCard__bottom {
+    margin-top: 60px;
+    margin-left: 30px;
+    margin-right: 30px;
+
+    h3 {
+      font-size: 36px;
+      font-weight: 600;
+    }
+
+    h4 {
+      background: linear-gradient(
+        to right,
+        green 0%,
+        orange 2%,
+        red 4%,
+        #ff4967 20%,
+        blue 40%,
+        aqua 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    > div {
+      padding-top: 20px;
+      padding-bottom: 10px;
+      margin-top: 30px;
+      border-top: 1px solid lightgrey;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      div {
+        p:first-child {
+          font-size: 24px;
+          font-weight: 600;
+          margin: 0;
+        }
+
+        p:last-child {
+          font-size: 16px;
+          font-weight: 600;
+          color: $secondary;
+        }
+      }
+
+      button {
+        border: 1px solid $secondary;
+        height: 50px;
+        border-radius: 30px;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 0 25px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $sm) {
+  .profileCard {
+    width: 48%;
+  }
+}
+
+@media only screen and (min-width: $lg) {
+  .profileCard {
+    width: 32%;
+  }
+}

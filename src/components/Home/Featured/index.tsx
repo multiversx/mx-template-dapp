@@ -12,9 +12,11 @@ const index = () => {
         </div>
         <p>View all auctions</p>
       </div>
-      {NFTs.map((nft) => (
-        <Featured key={nft} />
-      ))}
+      <div className='featured__bottomCard'>
+        {NFTs.map((nft) => (
+          <Featured key={nft} />
+        ))}
+      </div>
     </div>
   );
 };

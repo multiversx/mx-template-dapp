@@ -1,4 +1,5 @@
 .featuredCard {
+  width: 100%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -73,5 +74,17 @@
       font-size: 18px;
       font-weight: 600;
     }
+  }
+}
+
+@media only screen and (min-width: $sm) {
+  .featuredCard {
+    width: 48%;
+  }
+}
+
+@media only screen and (min-width: $lg) {
+  .featuredCard {
+    width: 32%;
   }
 }

@@ -1,24 +1,132 @@
 footer {
-  div {
-    margin-top: 0.5rem;
-    font-size: 0.75rem;
-    display: inline-block;
-    font-weight: 400;
-    line-height: 1.155rem;
+  background-color: $dark;
+  display: flex;
+  justify-content: center;
 
-    a {
-      color: $black;
+  .footer {
+    margin: 20px 0;
 
-      &:hover {
-        color: $black;
+    .footer__top {
+      .footer__topItems {
+        margin-bottom: 30px;
+
+        h3 {
+          color: #7f7f7f;
+          margin: 0;
+          margin-bottom: 4px;
+          font-size: 24px;
+        }
       }
 
-      #heart {
-        height: 16px;
-        width: 16px;
+      .footer__topSubscribe {
+        h3,
+        p {
+          display: none;
+        }
 
-        path {
-          fill: #c00;
+        button {
+          background-color: $dark;
+          color: $light;
+          border: 0.1px solid $secondary;
+          border-radius: 10px;
+          font-size: 16px;
+          font-weight: 600;
+          height: 60px;
+          padding: 0 20px;
+        }
+      }
+    }
+
+    .footer__bottom {
+      margin-top: 20px;
+      border-top: 1px solid $secondary;
+
+      .footer__bottomTop {
+        margin-top: 20px;
+        padding-top: 20px;
+
+        .footer__logo {
+          background-color: $light;
+          margin-bottom: 15px;
+          height: 21px;
+          width: 21px;
+        }
+
+        p {
+          font-size: 16px;
+          color: #7f7f7f;
+          margin: 0;
+          font-weight: 600;
+        }
+      }
+
+      .footer__bottomBottom {
+        display: flex;
+        margin-top: 30px;
+
+        svg {
+          color: #7f7f7f;
+          margin-right: 16px;
+          height: 24px;
+          width: 24px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $md) {
+  footer {
+    .footer {
+      margin: 40px 0;
+
+      .footer__top {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+
+        .footer__topItems {
+          width: 65%;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
+
+        .footer__topSubscribe {
+          width: 35%;
+
+          h3,
+          p {
+            display: block;
+          }
+
+          h3 {
+            color: $light;
+            margin: 0;
+            margin-bottom: 4px;
+            font-size: 24px;
+          }
+
+          p {
+            color: #7f7f7f;
+            font-size: 16px;
+            font-weight: 600;
+          }
+
+          button {
+            margin-top: 20px;
+          }
+        }
+      }
+
+      .footer__bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .footer__bottomTop {
+          display: flex;
+          gap: 20px;
         }
       }
     }
