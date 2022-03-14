@@ -6,7 +6,7 @@
   width: 100%;
   transition: all 0.3s;
 
-  &:hover{
+  &:hover {
     transform: translateY(-5px);
   }
 
@@ -50,6 +50,10 @@
     h3 {
       font-size: 36px;
       font-weight: 600;
+
+      @media (max-width: 1200px) {
+        font-size: 2rem;
+      }
     }
 
     h4 {
@@ -96,23 +100,11 @@
         font-size: 18px;
         font-weight: 700;
         padding: 0 25px;
-        &:hover{
+        &:hover {
           color: $light;
           background-color: $dark;
         }
       }
     }
-  }
-}
-
-@media only screen and (min-width: $sm) {
-  .profileCard {
-    width: 48%;
-  }
-}
-
-@media only screen and (min-width: $lg) {
-  .profileCard {
-    width: 32%;
   }
 }

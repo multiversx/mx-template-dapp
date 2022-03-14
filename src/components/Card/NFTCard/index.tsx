@@ -3,7 +3,9 @@ import { Button, Card, Col, Spinner } from 'react-bootstrap';
 
 const NFTCard = ({ image }: { image: string; key: number }) => {
   return (
-    <Col md='6' lg='4'>
+    <Col
+    // sm={6} lg={4} xl={3}
+    >
       <Card className='card__root'>
         <div className='card__img'>
           <Card.Img variant='top' src={image} />

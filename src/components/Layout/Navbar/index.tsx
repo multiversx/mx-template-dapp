@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { logout, useGetAccountInfo } from '@elrondnetwork/dapp-core';
 import { Navbar as BsNavbar, NavItem, Nav, Button } from 'react-bootstrap';
+import { AiOutlineSearch } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { routeNames } from 'routes';
 import { ReactComponent as ElrondLogo } from './../../../assets/img/elrond.svg';
@@ -17,12 +18,15 @@ const Navbar = () => {
   const isLoggedIn = Boolean(address);
 
   return (
-    <BsNavbar className='nav flex-column'>
+    <BsNavbar className='nav flex-column px-4'>
       <div className={`nav__details ${menuOpen && 'nav__detailsOpen'}`}>
         {searchOpen ? (
           <Nav className='navBar__search'>
             <NavItem>
-              <input type='text' placeholder='Search Foundation...' />
+              <div className='d-flex align-items-center'>
+                <AiOutlineSearch className='search__icon' />
+                <input type='text' placeholder='Search Foundation...' />
+              </div>
             </NavItem>
             <NavItem>
               <Button
@@ -57,7 +61,10 @@ const Navbar = () => {
               </Link>
             </NavItem>
             <NavItem className='navBar__navItem'>
-              <input type='text' placeholder='Search Foundation...' />
+              <div className='d-flex align-items-center'>
+                <AiOutlineSearch className='search__icon' />
+                <input type='text' placeholder='Search Foundation...' />
+              </div>
             </NavItem>
             <NavItem className='navBar__navItem'>
               <Link to={'/explore'}>

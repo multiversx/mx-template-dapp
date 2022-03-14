@@ -19,10 +19,9 @@
       width: 100%;
       padding: 10px 0;
 
-      
-
       .nav-item:first-child {
-        width: 90%;
+        width: 80%;
+
         input {
           height: 50px;
           border-radius: 10px;
@@ -30,6 +29,10 @@
           border: 3px solid black;
           border-radius: 30px;
           outline: none;
+          padding: 0 0 0 3rem;
+          font-size: 1.2rem;
+          font-weight: $fw-600;
+          color: $secondary;
         }
       }
 
@@ -47,13 +50,25 @@
           }
         }
       }
+      .search__icon {
+        height: 1.8rem;
+        width: 1.8rem;
+        font-weight: bold;
+        stroke-width: 1.8;
+        color: $secondary;
+        position: relative;
+        top: 2px;
+        left: 35px;
+        background-color: #fff;
+        border-radius: 50%;
+      }
     }
 
     .navBar {
-      // display: flex;
-      // justify-content: space-between;
-      // align-items: center;
-      // width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
       padding: 10px 0;
 
       .navBar__logo {
@@ -63,6 +78,19 @@
 
       .navBar__navItem {
         display: none;
+
+        .search__icon {
+          height: 1.8rem;
+          width: 1.8rem;
+          font-weight: bold;
+          stroke-width: 1.8;
+          color: $secondary;
+          position: relative;
+          top: 2px;
+          left: 40px;
+          background-color: #fff;
+          border-radius: 50%;
+        }
       }
 
       .navBar__button {
@@ -163,7 +191,9 @@
             border: 1px solid lightgray;
             padding-left: 20px;
             font-size: 18px;
-            font-weight: 600;
+            padding: 0 0 0 3.5rem;
+            font-weight: $fw-600;
+            color: $secondary;
           }
 
           button {
@@ -176,7 +206,14 @@
         }
 
         .nav-item:nth-child(2) {
-          width: 40%;
+          width: 55%;
+          transition: width 0.3s ease-in;
+          @media (max-width: 1234px) {
+            width: 50%;
+          }
+          @media (max-width: 1100px) {
+            width: 45%;
+          }
         }
 
         .navBar__button {

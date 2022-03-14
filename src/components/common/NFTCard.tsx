@@ -4,7 +4,7 @@ import NFTImg1 from '../../assets/img/nft-img/nft-crypto.gif';
 
 const NFTCard = () => {
   return (
-    <Col md='6' lg='4'>
+    <Col md='6' xxl='4'>
       <Card className='card__root'>
         <div className='card__img'>
           <Card.Img variant='top' src={NFTImg1} />

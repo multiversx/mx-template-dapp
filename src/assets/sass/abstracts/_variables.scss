@@ -6,7 +6,7 @@ $body: #000;
 $headings-font-weight: 600 !important;
 $primary: #1b46c2;
 $secondary: #666666;
-$light-gray: #DACCCC;
+$light-gray: #dacccc;
 $light: #fafafa;
 $dark: #000000;
 $a: #1392ff;
@@ -24,3 +24,5 @@ $container-max-widths: (
   xl: 1480px,
   //   xxl: 1920px
 );
+
+$accordion-icon-transform: rotate(-45deg);

@@ -1,0 +1,44 @@
+.blog__card {
+  border: 2px solid $dark;
+  cursor: pointer;
+  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: transform;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.25);
+  }
+
+  .card-img-top {
+    border-bottom: 2px solid $dark;
+  }
+
+  .card-body {
+    padding: 1.87rem 1rem;
+
+    .card-title {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      font-weight: $fw-600;
+      color: $dark;
+    }
+    .card-text {
+      font-size: 1.2rem;
+      color: $dark;
+    }
+  }
+
+  .card-footer {
+    background-color: transparent;
+    border-top: none;
+
+    & > p {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}

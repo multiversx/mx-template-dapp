@@ -4,6 +4,11 @@
   width: 100%;
   border-radius: 10px;
   margin-bottom: 30px;
+  transition: margin-top 0.3s ease-in-out;
+
+  &:hover {
+    margin-top: -0.37rem;
+  }
 }
 
 .card__content {
@@ -12,11 +17,12 @@
   background-position: center;
   background-size: cover;
   padding-bottom: 40px;
-  background-image: url("https://f8n-production.imgix.net/collections/e51151a9v-ShaneLavalette_OneSunOneShadow_027_09.jpg?q=75&w=1600&auto=format%2Ccompress&fit=fill");
-  transition: 0.2s;
+  background-image: url('https://f8n-production.imgix.net/collections/e51151a9v-ShaneLavalette_OneSunOneShadow_027_09.jpg?q=75&w=1600&auto=format%2Ccompress&fit=fill');
+  // transition: all 500ms ease-in-out;
+  transition: all 500ms cubic-bezier(0.71, 0.05, 0.08, 0.89);
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.07);
   }
 
   .featuredCard__top {
@@ -85,17 +91,5 @@
       font-size: 18px;
       font-weight: 600;
     }
-  }
-}
-
-@media only screen and (min-width: $sm) {
-  .featuredCard {
-    width: 48%;
-  }
-}
-
-@media only screen and (min-width: $lg) {
-  .featuredCard {
-    width: 32%;
   }
 }

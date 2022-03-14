@@ -21,6 +21,11 @@
           font-weight: $fw-600;
           background-color: transparent;
           box-shadow: none;
+
+          &::after {
+            content: '';
+            background-image: url('../../icons/plus-solid.svg');
+          }
         }
       }
     }

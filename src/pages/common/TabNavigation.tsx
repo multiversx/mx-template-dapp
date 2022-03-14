@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsChevronDown } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 
 const TabNavigation = () => {
@@ -47,6 +48,7 @@ const TabNavigation = () => {
             <option>Total Volume</option>
             <option>Total Volume</option>
           </select>
+          <BsChevronDown className='down__indicate' />
         </div>
       </div>
     </div>

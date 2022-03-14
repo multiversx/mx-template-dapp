@@ -1,15 +1,12 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import NftLargeImg from '../../../assets/img/nft-img/nft-large.gif';
 
 const Hero = () => {
   return (
     <div className='hero'>
       <div className='hero__imageSection'>
-        <img
-          className='hero__image'
-          src='https://f8n-production-collection-assets.imgix.net/0xd058C94f4EDf80e6457c430d38e5f38C0f9F7608/7/nft.jpg?q=80&auto=format%2Ccompress&cs=srgb&max-w=1680&max-h=1680'
-          alt='hero_image'
-        />
+        <img className='hero__image' src={NftLargeImg} alt='hero_image' />
       </div>
       <div className='hero__details'>
         <h1 className='hero__detailsTitle'>robe</h1>

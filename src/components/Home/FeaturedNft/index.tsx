@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import NFTCard from 'components/Card/NFTCard';
 import NFTImg1 from '../../../assets/img/nft-img/nft-crypto.gif';
 
@@ -12,11 +13,15 @@ const index = () => {
         <div>
           <h2>Featured NFTs</h2>
         </div>
-        <p>View all NFTs</p>
+        <Link to='/nfts' className='link'>
+          <p>View all NFTs</p>
+        </Link>
       </div>
-      {data.map((img, i) => (
-        <NFTCard key={i} image={img} />
-      ))}
+      <Row xs={1} sm={2} md={3} xxl={4} className='g-4'>
+        {data.map((img, i) => (
+          <NFTCard key={i} image={img} />
+        ))}
+      </Row>
     </div>
   );
 };

@@ -7,9 +7,12 @@
   border-bottom: 1px solid #ddd;
 
   .tab__menu {
+    overflow-x: auto;
+    overflow-y: hidden;
     flex-grow: 1;
 
     & > ul {
+      min-width: 485px;
       display: flex;
       padding: 0;
       list-style: none;
@@ -66,8 +69,18 @@
       color: $dark;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 820px) {
       display: none;
+    }
+
+    .down__indicate {
+      height: 1.5rem;
+      width: 1.5rem;
+      font-weight: bold;
+      stroke-width: 1.5;
+      font-size: 1;
+      position: relative;
+      right: 10%;
     }
   }
 }

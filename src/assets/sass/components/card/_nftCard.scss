@@ -27,6 +27,10 @@
     bottom: 0;
     transition: bottom 0.2s ease-in-out;
 
+    @media (max-width: 832px) {
+      bottom: -5px;
+    }
+
     .card__body__img {
       margin-top: -35px;
       height: 45px;

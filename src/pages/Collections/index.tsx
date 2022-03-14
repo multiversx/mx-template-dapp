@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { Row } from 'react-bootstrap';
-import FeaturedCard from 'components/common/FeaturedCard';
+import Featured from 'components/Card/FeaturedCard';
 
 const Collections = () => {
   return (
     <div className='container-xl'>
-      <Row>
-        {Array.from({ length: 8 }).map((item, _idx) => (
-          // <Col xs={12} lg={4} key={_idx}>
-          <FeaturedCard key={_idx} />
-          // </Col>
+      <Row xs={1} sm={2} md={3} xxl={4} className='g-4'>
+        {Array.from({ length: 5 }).map((_, idx) => (
+          <Featured key={idx} />
         ))}
       </Row>
     </div>

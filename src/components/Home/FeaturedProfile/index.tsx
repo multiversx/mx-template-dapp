@@ -1,7 +1,9 @@
 import React from 'react';
+import { Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import ProfileCard from 'components/Card/ProfileCard';
 
-const profiles = [1, 2, 3, 4];
+const profiles = [1, 2, 3, 4, 5];
 
 const index = () => {
   return (
@@ -11,13 +13,15 @@ const index = () => {
           <div>
             <p>Featured Profiles</p>
           </div>
-          <p>View all profiles</p>
+          <Link to='/profiles' className='link'>
+            <p>View all profiles</p>
+          </Link>
         </div>
-        <div className='featuredProfile__cards'>
+        <Row xs={1} sm={2} md={3} xxl={4}>
           {profiles.map((profile) => (
             <ProfileCard key={profile} />
           ))}
-        </div>
+        </Row>
       </div>
     </div>
   );

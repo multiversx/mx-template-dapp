@@ -1,7 +1,9 @@
 import React from 'react';
+import { Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Featured from 'components/Card/FeaturedCard';
 
-const NFTs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const NFTs = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const index = () => {
   return (
@@ -10,13 +12,15 @@ const index = () => {
         <div>
           <p>Featured Collection</p>
         </div>
-        <p>View all auctions</p>
+        <Link to='/collections' className='link'>
+          <p>View all collections</p>
+        </Link>
       </div>
-      <div className='featured__bottomCard'>
+      <Row xs={1} sm={2} md={3} xxl={4} className='g-4'>
         {NFTs.map((nft) => (
           <Featured key={nft} />
         ))}
-      </div>
+      </Row>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 .featuredProfile {
   padding: 70px 0;
-  
+
   .featuredProfile__top {
     display: flex;
     justify-content: space-between;
@@ -26,11 +26,5 @@
       margin: 0;
       font-weight: 600;
     }
-  }
-
-  .featuredProfile__cards {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
   }
 }
