@@ -1,0 +1,9 @@
+.nfts__container {
+  display: grid;
+  grid-template-columns: 320px auto;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}

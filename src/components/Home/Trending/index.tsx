@@ -1,11 +1,11 @@
 import React from 'react';
 import { Row, Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import NFTCard from 'components/Card/NFTCard';
-import NFTImage1 from '../../../assets/img/nft-img/nft1.jpg';
-import NFTImage2 from '../../../assets/img/nft-img/nft2.jpg';
-import NFTImage3 from '../../../assets/img/nft-img/nft3.jpg';
+import NFTImage1 from '../../../assets/img/nft-img/nft-crypto.gif';
+import NFTImage2 from '../../../assets/img/nft-img/nft2.gif';
 
-const data = [NFTImage1, NFTImage2, NFTImage3, NFTImage2, NFTImage3, NFTImage1];
+const data = [NFTImage1, NFTImage2, NFTImage1, NFTImage2, NFTImage1, NFTImage2];
 
 const index = () => {
   return (
@@ -15,7 +15,9 @@ const index = () => {
           <Spinner animation='grow' size='sm' />
           <p>Trending auctions</p>
         </div>
-        <p>View all auctions</p>
+        <Link to='/nfts'>
+          <p>View all auctions</p>
+        </Link>
       </div>
       <Row xs={1} md={2} lg={3} xl={3} className='g-4'>
         {data.map((img, i) => (

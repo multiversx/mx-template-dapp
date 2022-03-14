@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button, Row } from 'react-bootstrap';
 import NFTCard from 'components/Card/NFTCard';
-import { featuredNftData } from './featuredNftData';
+import NFTImg1 from '../../../assets/img/nft-img/nft-crypto.gif';
+
+const data = [NFTImg1, NFTImg1, NFTImg1, NFTImg1];
 
 const index = () => {
   return (
@@ -12,14 +14,9 @@ const index = () => {
         </div>
         <p>View all NFTs</p>
       </div>
-      <Row className=''>
-        {featuredNftData.map((img, i) => (
-          <NFTCard key={i} image={img} />
-        ))}
-      </Row>
-      <div className='featuredNft__bottom'>
-        <Button variant='light'>View all NFTs</Button>
-      </div>
+      {data.map((img, i) => (
+        <NFTCard key={i} image={img} />
+      ))}
     </div>
   );
 };

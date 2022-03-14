@@ -21,11 +21,18 @@
       }
     }
 
-    > p {
+    > a,
+    p {
+      text-decoration: none;
       font-size: 18px;
       color: $secondary;
       margin: 0;
       font-weight: 600;
+
+      &:hover {
+        text-decoration: none;
+        color: $dark;
+      }
     }
   }
 }

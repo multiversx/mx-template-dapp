@@ -7,7 +7,7 @@
 Override Bootstrap variables only above.
 -------------------------------------------------- */
 // Bootstrap
-@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/bootstrap';
 @import '~bootstrap/scss/reboot';
 
 // Reset/normalize
@@ -15,6 +15,7 @@ Override Bootstrap variables only above.
 
 // pages/
 @import './pages/home';
+@import './pages/common/tabnavigation';
 
 // layout/
 @import './layout/navigation';
@@ -24,3 +25,7 @@ Override Bootstrap variables only above.
 // themes/
 @import './themes/pageState';
 @import './themes/custom';
+
+// components
+@import './components/nftSidebar';
+@import './components/_nfts';

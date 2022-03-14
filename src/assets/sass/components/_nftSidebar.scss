@@ -1,0 +1,114 @@
+.sidebar__wrap {
+  width: 400px;
+}
+.nftSidebar {
+  display: block;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow: auto;
+
+  .accordion {
+    .accordion-item {
+      border: 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+      .accordion-header {
+        .accordion-button {
+          padding: 1.4rem 1.25rem;
+          color: $dark;
+          font-size: 1.3rem;
+          font-weight: $fw-600;
+          background-color: transparent;
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  .input_wrap {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .input {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 8px 10px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+
+      &:focus-within {
+        box-shadow: 0 0 0 0.25rem black !important;
+      }
+
+      & > input {
+        border: 0;
+        font-size: 1.3rem;
+        color: $secondary;
+        font-weight: 500;
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+
+      .inputEnd {
+        font-size: 1.3rem;
+        color: $dark;
+        font-weight: 500;
+      }
+    }
+  }
+  .price__btn {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+
+  .checkInput {
+    min-height: 60px;
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid $border-color;
+    padding-top: 15px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: border-color 0.3s ease;
+
+    &:hover {
+      border-color: $hover-color;
+    }
+
+    .form-check-input {
+      margin-right: 10px;
+      width: 1.2em;
+      height: 1.2em;
+      margin-top: 0.3em;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    .form-check-input:checked {
+      background-color: $dark;
+      border-color: $dark;
+    }
+    .form-check-label {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: $dark;
+    }
+
+    & > p {
+      color: $secondary;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  }
+}
