@@ -2,6 +2,7 @@ import React from 'react';
 import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Featured from 'components/Card/FeaturedCard';
+import { routeNames } from 'routes';
 
 const NFTs = [1, 2, 3, 4, 5, 6, 7, 8];
 
@@ -12,7 +13,7 @@ const index = () => {
         <div>
           <p>Featured Collection</p>
         </div>
-        <Link to='/collections' className='link'>
+        <Link to={routeNames.collections} className='link'>
           <p>View all collections</p>
         </Link>
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
+import { routeNames } from 'routes';
 
 const TabNavigation = () => {
   return (
@@ -9,7 +10,7 @@ const TabNavigation = () => {
         <div className='tab__menu'>
           <ul>
             <NavLink
-              to='/nfts'
+              to={routeNames.nfts}
               className={(navData) =>
                 navData.isActive ? 'active-style' : 'none'
               }
@@ -19,7 +20,7 @@ const TabNavigation = () => {
               </li>
             </NavLink>
             <NavLink
-              to='/collections'
+              to={routeNames.collections}
               className={(navData) =>
                 navData.isActive ? 'active-style' : 'none'
               }
@@ -29,7 +30,7 @@ const TabNavigation = () => {
               </li>
             </NavLink>
             <NavLink
-              to='/profiles'
+              to={routeNames.profiles}
               className={(navData) =>
                 navData.isActive ? 'active-style' : 'none'
               }

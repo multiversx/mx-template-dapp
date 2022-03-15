@@ -2,6 +2,7 @@ import React from 'react';
 import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ProfileCard from 'components/Card/ProfileCard';
+import { routeNames } from 'routes';
 
 const profiles = [1, 2, 3, 4, 5];
 
@@ -13,7 +14,7 @@ const index = () => {
           <div>
             <p>Featured Profiles</p>
           </div>
-          <Link to='/profiles' className='link'>
+          <Link to={routeNames.profiles} className='link'>
             <p>View all profiles</p>
           </Link>
         </div>
