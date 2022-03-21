@@ -1,7 +1,20 @@
+import { useEffect, useState } from 'react';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { dAppName } from 'config';
 import { routeNames } from 'routes';
+import { Web3ReactProvider } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
+import { connectors } from './connectors';
+import { useWeb3React } from '@web3-react/core';
+
+function getLibrary(provider) {
+  return new Web3Provider(provider);
+}
+
+function App() {
+  const { activate, deactivate } = useWeb3React();
+}
 
 const Home = () => {
   return (
@@ -18,6 +31,7 @@ const Home = () => {
                 This is an Elrond dapp sample.
                 <br /> Login using your Elrond wallet.
               </p>
+              <button onClick={() => { activate(CoinbaseWallet) }}>Coinbase Wallet</button>
 
               <Link
                 to={routeNames.unlock}
