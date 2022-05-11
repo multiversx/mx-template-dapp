@@ -90,7 +90,8 @@ const Actions = () => {
     const pingTransaction = {
       value: '1000000000000000000',
       data: 'ping',
-      receiver: contractAddress
+      receiver: contractAddress,
+      gasLimit: '60000000'
     };
     await refreshAccount();
 
