@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   useGetAccountInfo,
-  DappUI,
-  transactionServices,
-  refreshAccount,
-  useGetNetworkConfig
-} from '@elrondnetwork/dapp-core';
+  useGetNetworkConfig,
+  useGetActiveTransactionsStatus
+} from '@elrondnetwork/dapp-core/dist/hooks';
+import DappUI from '@elrondnetwork/dapp-core/dist/UI';
+import { refreshAccount } from '@elrondnetwork/dapp-core/dist/utils';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
 import { contractAddress } from 'config';
@@ -17,7 +17,7 @@ const Transactions = () => {
     network: { apiAddress }
   } = useGetNetworkConfig();
   const { success, fail, hasActiveTransactions } =
-    transactionServices.useGetActiveTransactionsStatus();
+    useGetActiveTransactionsStatus();
 
   const [state, setState] = React.useState<StateType>({
     transactions: [],

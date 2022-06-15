@@ -1,9 +1,9 @@
 import React from 'react';
 import {
   useGetAccountInfo,
-  DappUI,
   useGetNetworkConfig
-} from '@elrondnetwork/dapp-core';
+} from '@elrondnetwork/dapp-core/dist/hooks';
+import DappUI from '@elrondnetwork/dapp-core/dist/UI';
 import moment from 'moment';
 import StatusIcon from './StatusIcon';
 import txStatus from './txStatus';

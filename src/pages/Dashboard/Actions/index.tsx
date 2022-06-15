@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
-  transactionServices,
   useGetAccountInfo,
   useGetPendingTransactions,
-  refreshAccount,
   useGetNetworkConfig
-} from '@elrondnetwork/dapp-core';
+} from '@elrondnetwork/dapp-core/dist/hooks';
+import { sendTransactions } from '@elrondnetwork/dapp-core/dist/services';
+import { refreshAccount } from '@elrondnetwork/dapp-core/dist/utils';
 import {
   Address,
   AddressValue,
@@ -83,8 +83,6 @@ const Actions = () => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
-
-  const { sendTransactions } = transactionServices;
 
   const sendPingTransaction = async () => {
     const pingTransaction = {
