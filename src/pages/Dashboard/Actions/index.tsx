@@ -10,9 +10,9 @@ import {
   Address,
   AddressValue,
   ContractFunction,
-  ProxyProvider,
   Query
 } from '@elrondnetwork/erdjs';
+import { ProxyNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
@@ -57,7 +57,7 @@ const Actions = () => {
       func: new ContractFunction('getTimeToPong'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyNetworkProvider(network.apiAddress);
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
