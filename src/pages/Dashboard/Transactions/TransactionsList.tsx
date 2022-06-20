@@ -3,7 +3,7 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig
 } from '@elrondnetwork/dapp-core/dist/hooks';
-import DappUI from '@elrondnetwork/dapp-core/dist/UI';
+import { Denominate, Trim } from '@elrondnetwork/dapp-core/dist/UI';
 import moment from 'moment';
 import StatusIcon from './StatusIcon';
 import txStatus from './txStatus';
@@ -82,7 +82,7 @@ const TransactionList = ({
                       }}
                       title='View in Explorer'
                     >
-                      <DappUI.Trim data-testid='txHash' text={tx.txHash} />
+                      <Trim data-testid='txHash' text={tx.txHash} />
                     </a>
                   </td>
                   <td>
@@ -94,7 +94,7 @@ const TransactionList = ({
                     ) : (
                       <>{tx.sender === account.address ? '-' : '+'}</>
                     )}
-                    <DappUI.Denominate value={tx.value} decimals={2} />
+                    <Denominate value={tx.value} decimals={2} />
                   </td>
                 </tr>
               );

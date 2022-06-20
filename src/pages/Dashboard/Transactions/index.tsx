@@ -4,7 +4,7 @@ import {
   useGetNetworkConfig,
   useGetActiveTransactionsStatus
 } from '@elrondnetwork/dapp-core/dist/hooks';
-import DappUI from '@elrondnetwork/dapp-core/dist/UI';
+import { PageState } from '@elrondnetwork/dapp-core/dist/UI';
 import { refreshAccount } from '@elrondnetwork/dapp-core/dist/utils';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
@@ -50,7 +50,7 @@ const Transactions = () => {
     <TransactionsList transactions={transactions} />
   ) : (
     <div className='my-5'>
-      <DappUI.PageState
+      <PageState
         icon={faExchangeAlt}
         className='text-muted fa-3x'
         title='No Transactions'
