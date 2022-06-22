@@ -1,11 +1,11 @@
 import React from 'react';
-import { useGetLoginInfo } from '@elrondnetwork/dapp-core/dist/hooks';
+import { useGetLoginInfo } from '@elrondnetwork/dapp-core/hooks';
 import {
   ExtensionLoginButton,
   WebWalletLoginButton,
   LedgerLoginButton,
   WalletConnectLoginButton
-} from '@elrondnetwork/dapp-core/dist/UI';
+} from '@elrondnetwork/dapp-core/UI';
 import { routeNames } from 'routes';
 
 export const UnlockRoute: () => JSX.Element = () => {

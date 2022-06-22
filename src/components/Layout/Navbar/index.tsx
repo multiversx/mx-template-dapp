@@ -1,6 +1,6 @@
 import React from 'react';
-import { useGetAccountInfo } from '@elrondnetwork/dapp-core/dist/hooks';
-import { logout } from '@elrondnetwork/dapp-core/dist/utils';
+import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks';
+import { logout } from '@elrondnetwork/dapp-core/utils';
 import { Navbar as BsNavbar, NavItem, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { dAppName } from 'config';

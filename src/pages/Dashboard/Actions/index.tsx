@@ -1,11 +1,9 @@
 import * as React from 'react';
-import {
-  useGetAccountInfo,
-  useGetPendingTransactions,
-  useGetNetworkConfig
-} from '@elrondnetwork/dapp-core/dist/hooks';
-import { sendTransactions } from '@elrondnetwork/dapp-core/dist/services';
-import { refreshAccount } from '@elrondnetwork/dapp-core/dist/utils';
+import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks/account/useGetAccountInfo';
+import { useGetPendingTransactions } from '@elrondnetwork/dapp-core/hooks/transactions/useGetPendingTransactions';
+import useGetNetworkConfig from '@elrondnetwork/dapp-core/hooks/useGetNetworkConfig';
+import { sendTransactions } from '@elrondnetwork/dapp-core/services';
+import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
 import {
   Address,
   AddressValue,
@@ -102,6 +100,7 @@ const Actions = () => {
       },
       redirectAfterSign: false
     });
+    console.log(sessionId);
     if (sessionId != null) {
       setTransactionSessionId(sessionId);
     }

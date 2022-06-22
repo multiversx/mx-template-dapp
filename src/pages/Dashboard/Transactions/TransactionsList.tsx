@@ -2,8 +2,8 @@ import React from 'react';
 import {
   useGetAccountInfo,
   useGetNetworkConfig
-} from '@elrondnetwork/dapp-core/dist/hooks';
-import { Denominate, Trim } from '@elrondnetwork/dapp-core/dist/UI';
+} from '@elrondnetwork/dapp-core/hooks';
+import { Denominate, Trim } from '@elrondnetwork/dapp-core/UI';
 import moment from 'moment';
 import StatusIcon from './StatusIcon';
 import txStatus from './txStatus';

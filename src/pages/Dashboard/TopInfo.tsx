@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useGetAccountInfo } from '@elrondnetwork/dapp-core/dist/hooks';
-import { Denominate } from '@elrondnetwork/dapp-core/dist/UI';
+import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks';
+import { Denominate } from '@elrondnetwork/dapp-core/UI';
 import { contractAddress } from 'config';
 
 const TopInfo = () => {

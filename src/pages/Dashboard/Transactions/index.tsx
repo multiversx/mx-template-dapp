@@ -3,9 +3,9 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetActiveTransactionsStatus
-} from '@elrondnetwork/dapp-core/dist/hooks';
-import { PageState } from '@elrondnetwork/dapp-core/dist/UI';
-import { refreshAccount } from '@elrondnetwork/dapp-core/dist/utils';
+} from '@elrondnetwork/dapp-core/hooks';
+import { PageState } from '@elrondnetwork/dapp-core/UI';
+import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
 import { contractAddress } from 'config';

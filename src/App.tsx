@@ -3,8 +3,8 @@ import {
   TransactionsToastList,
   SignTransactionsModals,
   NotificationModal
-} from '@elrondnetwork/dapp-core/dist/UI';
-import { DappProvider } from '@elrondnetwork/dapp-core/dist/wrappers';
+} from '@elrondnetwork/dapp-core/UI';
+import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
 
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import Layout from 'components/Layout';

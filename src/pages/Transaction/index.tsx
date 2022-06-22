@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useGetNetworkConfig } from '@elrondnetwork/dapp-core/dist/hooks';
-import { PageState } from '@elrondnetwork/dapp-core/dist/UI';
+import { useGetNetworkConfig } from '@elrondnetwork/dapp-core/hooks';
+import { PageState } from '@elrondnetwork/dapp-core/UI';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, Link } from 'react-router-dom';
 import { routeNames } from 'routes';
