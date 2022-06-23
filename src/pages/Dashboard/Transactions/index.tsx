@@ -16,17 +16,15 @@ const Transactions = () => {
   const {
     network: { apiAddress }
   } = useGetNetworkConfig();
-  const { success, fail, hasActiveTransactions } =
-    useGetActiveTransactionsStatus();
+  const { success, fail, pending } = useGetActiveTransactionsStatus();
 
   const [state, setState] = React.useState<StateType>({
     transactions: [],
     transactionsFetched: undefined
   });
   const account = useGetAccountInfo();
-
   const fetchData = () => {
-    if (success || fail || !hasActiveTransactions) {
+    if (success || fail || !pending) {
       getTransactions({
         apiAddress,
         address: account.address,
@@ -42,11 +40,11 @@ const Transactions = () => {
     }
   };
 
-  React.useEffect(fetchData, [success, fail, hasActiveTransactions]);
+  React.useEffect(fetchData, [success, fail, pending]);
 
   const { transactions } = state;
 
-  return transactions.length > 0 ? (
+  return transactions?.length > 0 ? (
     <TransactionsList transactions={transactions} />
   ) : (
     <div className='my-5'>
