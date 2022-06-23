@@ -6,7 +6,7 @@
   "license": "GPL-3.0-or-later",
   "repository": "@elrondnetwork/dapp-template",
   "dependencies": {
-    "@elrondnetwork/dapp-core": "^2.0.0-alpha.10",
+    "@elrondnetwork/dapp-core": "2.0.0-alpha.10",
     "@elrondnetwork/erdjs": "10.2.5",
     "@elrondnetwork/erdjs-network-providers": "0.1.5",
     "@fortawesome/fontawesome-svg-core": "6.1.0",
@@ -79,6 +79,6 @@
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-react-hooks": "4.2.0",
     "prettier": "2.3.2",
-    "react-error-overlay": "^6.0.9"
+    "react-error-overlay": "6.0.9"
   }
 }
