@@ -100,7 +100,6 @@ const Actions = () => {
       },
       redirectAfterSign: false
     });
-    console.log(sessionId);
     if (sessionId != null) {
       setTransactionSessionId(sessionId);
     }
