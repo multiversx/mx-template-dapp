@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthenticatedRoutesWrapper } from '@elrondnetwork/dapp-core';
+import { AuthenticatedRoutesWrapper } from '@elrondnetwork/dapp-core/wrappers';
 import { useLocation } from 'react-router-dom';
 import routes, { routeNames } from 'routes';
 import Footer from './Footer';

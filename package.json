@@ -6,7 +6,7 @@
   "license": "GPL-3.0-or-later",
   "repository": "@elrondnetwork/dapp-template",
   "dependencies": {
-    "@elrondnetwork/dapp-core": "1.2.7",
+    "@elrondnetwork/dapp-core": "^2.0.0-alpha.10",
     "@elrondnetwork/erdjs": "10.2.5",
     "@elrondnetwork/erdjs-network-providers": "0.1.5",
     "@fortawesome/fontawesome-svg-core": "6.1.0",

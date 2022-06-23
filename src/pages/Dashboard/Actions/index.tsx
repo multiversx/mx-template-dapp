@@ -1,11 +1,9 @@
 import * as React from 'react';
-import {
-  transactionServices,
-  useGetAccountInfo,
-  useGetPendingTransactions,
-  refreshAccount,
-  useGetNetworkConfig
-} from '@elrondnetwork/dapp-core';
+import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks/account/useGetAccountInfo';
+import { useGetPendingTransactions } from '@elrondnetwork/dapp-core/hooks/transactions/useGetPendingTransactions';
+import useGetNetworkConfig from '@elrondnetwork/dapp-core/hooks/useGetNetworkConfig';
+import { sendTransactions } from '@elrondnetwork/dapp-core/services';
+import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
 import {
   Address,
   AddressValue,
@@ -83,8 +81,6 @@ const Actions = () => {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
-
-  const { sendTransactions } = transactionServices;
 
   const sendPingTransaction = async () => {
     const pingTransaction = {
