@@ -1,20 +1,19 @@
 import React from 'react';
-import { DappUI, DappProvider } from '@elrondnetwork/dapp-core';
+import {
+  TransactionsToastList,
+  SignTransactionsModals,
+  NotificationModal
+} from '@elrondnetwork/dapp-core/UI';
+import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
+
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import Layout from 'components/Layout';
 import PageNotFound from 'pages/PageNotFound';
 import { routeNames } from 'routes';
 import routes from 'routes';
-import '@elrondnetwork/dapp-core/build/index.css';
+import UnlockPage from './pages/UnlockPage';
 
 const environment = 'devnet';
-
-const {
-  TransactionsToastList,
-  SignTransactionsModals,
-  NotificationModal,
-  DappCorePages: { UnlockPage }
-} = DappUI;
 
 const App = () => {
   return (
@@ -22,17 +21,13 @@ const App = () => {
       <DappProvider
         environment={environment}
         customNetworkConfig={{ name: 'customConfig', apiTimeout: 6000 }}
-        completedTransactionsDelay={200}
       >
         <Layout>
           <TransactionsToastList />
           <NotificationModal />
           <SignTransactionsModals className='custom-class-for-modals' />
           <Routes>
-            <Route
-              path={routeNames.unlock}
-              element={<UnlockPage loginRoute={routeNames.dashboard} />}
-            />
+            <Route path={routeNames.unlock} element={<UnlockPage />} />
             {routes.map((route: any, index: number) => (
               <Route
                 path={route.path}

@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   useGetAccountInfo,
-  DappUI,
-  transactionServices,
-  refreshAccount,
-  useGetNetworkConfig
-} from '@elrondnetwork/dapp-core';
+  useGetNetworkConfig,
+  useGetActiveTransactionsStatus
+} from '@elrondnetwork/dapp-core/hooks';
+import { PageState } from '@elrondnetwork/dapp-core/UI';
+import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { getTransactions } from 'apiRequests';
 import { contractAddress } from 'config';
@@ -16,17 +16,15 @@ const Transactions = () => {
   const {
     network: { apiAddress }
   } = useGetNetworkConfig();
-  const { success, fail, hasActiveTransactions } =
-    transactionServices.useGetActiveTransactionsStatus();
+  const { success, fail, pending } = useGetActiveTransactionsStatus();
 
   const [state, setState] = React.useState<StateType>({
     transactions: [],
     transactionsFetched: undefined
   });
   const account = useGetAccountInfo();
-
   const fetchData = () => {
-    if (success || fail || !hasActiveTransactions) {
+    if (success || fail || !pending) {
       getTransactions({
         apiAddress,
         address: account.address,
@@ -42,15 +40,15 @@ const Transactions = () => {
     }
   };
 
-  React.useEffect(fetchData, [success, fail, hasActiveTransactions]);
+  React.useEffect(fetchData, [success, fail, pending]);
 
   const { transactions } = state;
 
-  return transactions.length > 0 ? (
+  return transactions?.length > 0 ? (
     <TransactionsList transactions={transactions} />
   ) : (
     <div className='my-5'>
-      <DappUI.PageState
+      <PageState
         icon={faExchangeAlt}
         className='text-muted fa-3x'
         title='No Transactions'

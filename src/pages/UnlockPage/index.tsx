@@ -1,14 +1,14 @@
 import React from 'react';
-import { DappUI, useGetLoginInfo } from '@elrondnetwork/dapp-core';
+import { useGetLoginInfo } from '@elrondnetwork/dapp-core/hooks';
+import {
+  ExtensionLoginButton,
+  WebWalletLoginButton,
+  LedgerLoginButton,
+  WalletConnectLoginButton
+} from '@elrondnetwork/dapp-core/UI';
 import { routeNames } from 'routes';
 
 export const UnlockRoute: () => JSX.Element = () => {
-  const {
-    ExtensionLoginButton,
-    WebWalletLoginButton,
-    LedgerLoginButton,
-    WalletConnectLoginButton
-  } = DappUI;
   const { isLoggedIn } = useGetLoginInfo();
 
   React.useEffect(() => {

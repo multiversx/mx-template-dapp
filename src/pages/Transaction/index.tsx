@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { DappUI, useGetNetworkConfig } from '@elrondnetwork/dapp-core';
+import { useGetNetworkConfig } from '@elrondnetwork/dapp-core/hooks';
+import { PageState } from '@elrondnetwork/dapp-core/UI';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, Link } from 'react-router-dom';
 import { routeNames } from 'routes';
@@ -12,7 +13,7 @@ const Transaction = () => {
   const { status, txHash } = Object.fromEntries(query);
 
   return status === 'success' ? (
-    <DappUI.PageState
+    <PageState
       icon={faCheck}
       iconClass='fa-3x text-success'
       className='dapp-icon icon-medium'
@@ -38,7 +39,7 @@ const Transaction = () => {
       }
     />
   ) : (
-    <DappUI.PageState
+    <PageState
       icon={faTimes}
       iconClass='fa-3x text-danger'
       className='dapp-icon icon-medium'

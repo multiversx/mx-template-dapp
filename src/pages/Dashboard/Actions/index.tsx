@@ -1,18 +1,16 @@
 import * as React from 'react';
-import {
-  transactionServices,
-  useGetAccountInfo,
-  useGetPendingTransactions,
-  refreshAccount,
-  useGetNetworkConfig
-} from '@elrondnetwork/dapp-core';
+import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks/account/useGetAccountInfo';
+import { useGetPendingTransactions } from '@elrondnetwork/dapp-core/hooks/transactions/useGetPendingTransactions';
+import useGetNetworkConfig from '@elrondnetwork/dapp-core/hooks/useGetNetworkConfig';
+import { sendTransactions } from '@elrondnetwork/dapp-core/services';
+import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
 import {
   Address,
   AddressValue,
   ContractFunction,
-  ProxyProvider,
   Query
 } from '@elrondnetwork/erdjs';
+import { ProxyNetworkProvider } from '@elrondnetwork/erdjs-network-providers';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
@@ -57,7 +55,7 @@ const Actions = () => {
       func: new ContractFunction('getTimeToPong'),
       args: [new AddressValue(new Address(address))]
     });
-    const proxy = new ProxyProvider(network.apiAddress);
+    const proxy = new ProxyNetworkProvider(network.apiAddress);
     proxy
       .queryContract(query)
       .then(({ returnData }) => {
@@ -84,13 +82,12 @@ const Actions = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasPendingTransactions]);
 
-  const { sendTransactions } = transactionServices;
-
   const sendPingTransaction = async () => {
     const pingTransaction = {
       value: '1000000000000000000',
       data: 'ping',
-      receiver: contractAddress
+      receiver: contractAddress,
+      gasLimit: '60000000'
     };
     await refreshAccount();
 
