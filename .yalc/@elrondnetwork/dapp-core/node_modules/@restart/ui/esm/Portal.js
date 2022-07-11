@@ -1,0 +1,32 @@
+import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
+import * as React from 'react';
+import useWaitForDOMRef from './useWaitForDOMRef';
+import { Fragment as _Fragment } from "react/jsx-runtime";
+import { jsx as _jsx } from "react/jsx-runtime";
+const propTypes = {
+  /**
+   * A DOM element, Ref to an element, or function that returns either. The `container` will have the Portal children
+   * appended to it.
+   */
+  container: PropTypes.any,
+  onRendered: PropTypes.func
+};
+
+/**
+ * @public
+ */
+const Portal = ({
+  container,
+  children,
+  onRendered
+}) => {
+  const resolvedContainer = useWaitForDOMRef(container, onRendered);
+  return resolvedContainer ? /*#__PURE__*/_jsx(_Fragment, {
+    children: /*#__PURE__*/ReactDOM.createPortal(children, resolvedContainer)
+  }) : null;
+};
+
+Portal.displayName = 'Portal';
+Portal.propTypes = propTypes;
+export default Portal;
