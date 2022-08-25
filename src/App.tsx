@@ -1,4 +1,5 @@
 import React from 'react';
+import { EnvironmentsEnum } from '@elrondnetwork/dapp-core/types';
 import {
   TransactionsToastList,
   SignTransactionsModals,
@@ -13,7 +14,7 @@ import { routeNames } from 'routes';
 import routes from 'routes';
 import UnlockPage from './pages/UnlockPage';
 
-const environment = 'devnet';
+const environment = EnvironmentsEnum.devnet;
 
 const App = () => {
   return (
