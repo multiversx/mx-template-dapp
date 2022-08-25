@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks';
-import { Denominate } from '@elrondnetwork/dapp-core/UI';
+import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount';
 import { contractAddress } from 'config';
 
 const TopInfo = () => {
@@ -18,7 +18,7 @@ const TopInfo = () => {
       </div>
       <div>
         <h3 className='py-2'>
-          <Denominate value={account.balance} data-testid='balance' />
+          <FormatAmount value={account.balance} data-testid='balance' />
         </h3>
       </div>
     </div>
