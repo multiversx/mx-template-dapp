@@ -3,7 +3,8 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig
 } from '@elrondnetwork/dapp-core/hooks';
-import { Denominate, Trim } from '@elrondnetwork/dapp-core/UI';
+import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount';
+import { Trim } from '@elrondnetwork/dapp-core/UI/Trim';
 import moment from 'moment';
 import StatusIcon from './StatusIcon';
 import txStatus from './txStatus';
@@ -94,7 +95,7 @@ const TransactionList = ({
                     ) : (
                       <>{tx.sender === account.address ? '-' : '+'}</>
                     )}
-                    <Denominate value={tx.value} decimals={2} />
+                    <FormatAmount value={tx.value} digits={2} />
                   </td>
                 </tr>
               );
