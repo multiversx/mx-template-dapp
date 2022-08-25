@@ -95,7 +95,7 @@ const TransactionList = ({
                     ) : (
                       <>{tx.sender === account.address ? '-' : '+'}</>
                     )}
-                    <FormatAmount value={tx.value} digits={2} aasd={1} />
+                    <FormatAmount value={tx.value} digits={2} />
                   </td>
                 </tr>
               );
