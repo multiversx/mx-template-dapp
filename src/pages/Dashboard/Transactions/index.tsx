@@ -16,7 +16,7 @@ const Transactions = () => {
   const {
     network: { apiAddress }
   } = useGetNetworkConfig();
-  const { success, fail, pending } = useGetActiveTransactionsStatus();
+  const { success, fail } = useGetActiveTransactionsStatus();
 
   const [state, setState] = React.useState<StateType>({
     transactions: [],
@@ -24,23 +24,27 @@ const Transactions = () => {
   });
   const account = useGetAccountInfo();
   const fetchData = () => {
-    if (success || fail || !pending) {
-      getTransactions({
-        apiAddress,
-        address: account.address,
-        timeout: 3000,
-        contractAddress
-      }).then(({ data, success: transactionsFetched }) => {
-        refreshAccount();
-        setState({
-          transactions: data,
-          transactionsFetched
-        });
+    getTransactions({
+      apiAddress,
+      address: account.address,
+      timeout: 3000,
+      contractAddress
+    }).then(({ data, success: transactionsFetched }) => {
+      refreshAccount();
+      setState({
+        transactions: data,
+        transactionsFetched
       });
-    }
+    });
   };
 
-  React.useEffect(fetchData, [success, fail, pending]);
+  React.useEffect(() => {
+    if (success || fail) {
+      fetchData();
+    }
+  }, [success, fail]);
+
+  React.useEffect(fetchData, []);
 
   const { transactions } = state;
 
@@ -50,7 +54,7 @@ const Transactions = () => {
     <div className='my-5'>
       <PageState
         icon={faExchangeAlt}
-        className='text-muted fa-3x'
+        className='text-muted'
         title='No Transactions'
       />
     </div>
