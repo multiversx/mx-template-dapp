@@ -1,26 +1,66 @@
-import * as React from 'react';
-import Actions from './Actions';
-import TopInfo from './TopInfo';
-import Transactions from './Transactions';
+import React, { useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
+
+import {
+  useGetAccountInfo,
+  useGetNetworkConfig
+} from '@elrondnetwork/dapp-core/hooks';
+import {
+  ServerTransactionType,
+  InterpretedTransactionType
+} from '@elrondnetwork/dapp-core/types';
+import { TransactionsTable } from '@elrondnetwork/dapp-core/UI';
+import { getInterpretedTransaction } from '@elrondnetwork/dapp-core/utils/transactions/getInterpretedTransaction/getInterpretedTransaction';
+
+interface TransactionsFetchType {
+  data: ServerTransactionType[];
+  loading: boolean;
+  fetched: boolean;
+}
 
 const Dashboard = () => {
+  const [transactions, setTransactions] = useState<TransactionsFetchType>({
+    data: [],
+    loading: false,
+    fetched: false
+  });
+
+  const { account } = useGetAccountInfo();
+  const { network } = useGetNetworkConfig();
+
+  const fetchTransactions = useCallback(() => {
+    const fetchData = async () => {
+      const endpoint = `${network.apiAddress}/accounts/${account.address}/transactions`;
+      const { data } = await axios.get<ServerTransactionType[]>(endpoint, {
+        params: { size: 150 }
+      });
+
+      setTransactions({
+        data,
+        loading: false,
+        fetched: true
+      });
+    };
+
+    if (!transactions.fetched) {
+      setTransactions((transactions) => ({ ...transactions, loading: true }));
+      fetchData();
+    }
+  }, [
+    account.address,
+    network.apiAddress,
+    transactions.fetched,
+    network.explorerAddress
+  ]);
+
+  useEffect(fetchTransactions, [fetchTransactions]);
+
   return (
-    <div className='container py-4'>
-      <div className='row'>
-        <div className='col-12 col-md-10 mx-auto'>
-          <div className='card shadow-sm rounded border-0'>
-            <div className='card-body p-1'>
-              <div className='card rounded border-0 bg-primary'>
-                <div className='card-body text-center p-4'>
-                  <TopInfo />
-                  <Actions />
-                </div>
-              </div>
-              <Transactions />
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className='container'>
+      <TransactionsTable
+        transactions={transactions.data as InterpretedTransactionType[]}
+        address={account.address}
+      />
     </div>
   );
 };
