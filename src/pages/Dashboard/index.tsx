@@ -10,7 +10,8 @@ import {
   InterpretedTransactionType
 } from '@elrondnetwork/dapp-core/types';
 import { TransactionsTable } from '@elrondnetwork/dapp-core/UI';
-import { getInterpretedTransaction } from '@elrondnetwork/dapp-core/utils/transactions/getInterpretedTransaction/getInterpretedTransaction';
+
+import styles from './dashboard.module.scss';
 
 interface TransactionsFetchType {
   data: ServerTransactionType[];
@@ -56,7 +57,7 @@ const Dashboard = () => {
   useEffect(fetchTransactions, [fetchTransactions]);
 
   return (
-    <div className='container'>
+    <div className={`container ${styles.transactions}`}>
       <TransactionsTable
         transactions={transactions.data as InterpretedTransactionType[]}
         address={account.address}
