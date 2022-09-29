@@ -1,13 +1,13 @@
 /* Bootstrap overrides
 -------------------------------------------------- */
 
-  $body: #000;
-  $headings-font-weight: 300 !important;
+$body: #000;
+$headings-font-weight: 300 !important;
 $primary: #1b46c2;
-  $light: #fafafa;
+$light: #fafafa;
 
-  $headings-font-weight: 300 !important;
-  $a: #1392ff;
+$headings-font-weight: 300 !important;
+$a: #1392ff;
 
 /* Do not move the imports from here.
 Override Bootstrap variables only above.
@@ -18,8 +18,6 @@ Override Bootstrap variables only above.
 @import '~bootstrap/scss/bootstrap.scss';
 
 @import '~bootstrap/scss/reboot';
-
-
 
 .custom-classname.btn-primary {
   background-color: green;
@@ -100,7 +98,6 @@ html {
   }
 
   &.table {
-
     .transaction-hash .trim {
       @include media-breakpoint-down(xl) {
         max-width: none;
@@ -116,7 +113,8 @@ html {
       }
     }
 
-    td, tr {
+    td,
+    tr {
       padding: 0.65rem;
     }
 
