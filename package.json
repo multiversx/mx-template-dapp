@@ -23,14 +23,8 @@
   },
   "scripts": {
     "start": "HTTPS=true PORT=3001 react-scripts start",
-    "start-testnet": "yarn run copy-testnet-config & yarn start",
-    "start-devnet": "yarn run copy-devnet-config & yarn start",
     "build": "react-scripts build",
-    "build-testnet": "yarn run copy-testnet-config & yarn run build",
-    "build-devnet": "yarn run copy-devnet-config & yarn run build",
     "test": "react-scripts test",
-    "copy-testnet-config": "cp ./src/config.testnet.tsx ./src/config.tsx",
-    "copy-devnet-config": "cp ./src/config.devnet.tsx ./src/config.tsx",
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,ts,tsx src"
   },
