@@ -1,22 +1,14 @@
 import React from 'react';
-import { useGetLoginInfo } from '@elrondnetwork/dapp-core/hooks';
 import {
   ExtensionLoginButton,
   WebWalletLoginButton,
   LedgerLoginButton,
   WalletConnectLoginButton
 } from '@elrondnetwork/dapp-core/UI';
+import { walletConnectV2ProjectId } from 'config';
 import { routeNames } from 'routes';
 
 export const UnlockRoute: () => JSX.Element = () => {
-  const { isLoggedIn } = useGetLoginInfo();
-
-  React.useEffect(() => {
-    if (isLoggedIn) {
-      window.location.href = routeNames.dashboard;
-    }
-  }, [isLoggedIn]);
-
   return (
     <div className='home d-flex flex-fill align-items-center'>
       <div className='m-auto' data-testid='unlockPage'>
@@ -41,6 +33,11 @@ export const UnlockRoute: () => JSX.Element = () => {
             <WalletConnectLoginButton
               callbackRoute={routeNames.dashboard}
               loginButtonText={'Maiar'}
+              {...(walletConnectV2ProjectId
+                ? {
+                    isWalletConnectV2: true
+                  }
+                : {})}
             />
           </div>
         </div>

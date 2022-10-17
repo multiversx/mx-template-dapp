@@ -1,0 +1,181 @@
+{
+  "buildInfo": {
+    "rustc": {
+      "version": "1.61.0-nightly",
+      "commitHash": "1d9c262eea411ec5230f8a4c9ba50b3647064da4",
+      "commitDate": "2022-03-26",
+      "channel": "Nightly",
+      "short": "rustc 1.61.0-nightly (1d9c262ee 2022-03-26)"
+    },
+    "contractCrate": {
+      "name": "ping-pong",
+      "version": "0.0.2",
+      "git_version": "23ff9bd"
+    },
+    "framework": {
+      "name": "elrond-wasm",
+      "version": "0.34.1"
+    }
+  },
+  "docs": [
+    "A contract that allows anyone to send a fixed sum, locks it for a while and then allows users to take it back.",
+    "Sending funds to the contract is called \"ping\".",
+    "Taking the same funds back is called \"pong\".",
+    "",
+    "Restrictions:",
+    "- Only the set amount can be `ping`-ed, no more, no less.",
+    "- `pong` can only be called after a certain period after `ping`."
+  ],
+  "name": "PingPong",
+  "constructor": {
+    "docs": [
+      "Necessary configuration when deploying:",
+      "`ping_amount` - the exact amount that needs to be sent when `ping`-ing.  ",
+      "`duration_in_seconds` - how much time (in seconds) until `pong` can be called after the initial `ping` call  ",
+      "`token_id` - Optional. The Token Identifier of the token that is going to be used. Default is \"EGLD\"."
+    ],
+    "inputs": [
+      {
+        "name": "ping_amount",
+        "type": "BigUint"
+      },
+      {
+        "name": "duration_in_seconds",
+        "type": "u64"
+      },
+      {
+        "name": "opt_token_id",
+        "type": "optional<EgldOrEsdtTokenIdentifier>",
+        "multi_arg": true
+      }
+    ],
+    "outputs": []
+  },
+  "endpoints": [
+    {
+      "docs": [
+        "User sends some tokens to be locked in the contract for a period of time."
+      ],
+      "name": "ping",
+      "mutability": "mutable",
+      "payableInTokens": ["*"],
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "docs": [
+        "User can take back funds from the contract.",
+        "Can only be called after expiration."
+      ],
+      "name": "pong",
+      "mutability": "mutable",
+      "inputs": [],
+      "outputs": []
+    },
+    {
+      "name": "didUserPing",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "getPongEnableTimestamp",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getTimeToPong",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "optional<u64>",
+          "multi_result": true
+        }
+      ]
+    },
+    {
+      "name": "getAcceptedPaymentToken",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "EgldOrEsdtTokenIdentifier"
+        }
+      ]
+    },
+    {
+      "name": "getPingAmount",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "BigUint"
+        }
+      ]
+    },
+    {
+      "name": "getDurationTimestamp",
+      "mutability": "readonly",
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "getUserPingTimestamp",
+      "mutability": "readonly",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "Address"
+        }
+      ],
+      "outputs": [
+        {
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "identifier": "pongEvent",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "Address",
+          "indexed": true
+        }
+      ]
+    }
+  ],
+  "hasCallback": false,
+  "types": []
+}

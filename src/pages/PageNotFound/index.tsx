@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 
 const PageNotFound = () => {
   const { pathname } = useLocation();
+
   return (
     <div className='d-flex flex-fill align-items-center container'>
       <div className='row w-100'>
