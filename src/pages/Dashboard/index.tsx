@@ -1,20 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import {
-  useGetAccountInfo,
-  useGetNetworkConfig
-} from '@elrondnetwork/dapp-core/hooks';
-
-import {
   ACCOUNTS_ENDPOINT,
   TRANSACTIONS_ENDPOINT
 } from '@elrondnetwork/dapp-core/apiCalls/endpoints';
+import {
+  useGetAccountInfo,
+  useGetNetworkConfig
+} from '@elrondnetwork/dapp-core/hooks';
 
 import { ServerTransactionType } from '@elrondnetwork/dapp-core/types';
 import { TransactionsTable, Loader } from '@elrondnetwork/dapp-core/UI';
 import axios from 'axios';
 
+import Actions from './Actions';
 import styles from './dashboard.module.scss';
+import TopInfo from './TopInfo';
 
 interface TransactionsFetchType {
   data: ServerTransactionType[];
@@ -74,8 +75,24 @@ const Dashboard = () => {
   }
 
   return (
-    <div className={`container ${styles.transactions}`}>
-      <TransactionsTable transactions={transactions.data} />
+    <div className='container py-4'>
+      <div className='row'>
+        <div className='col-12 col-md-10 mx-auto'>
+          <div className='card shadow-sm border-0'>
+            <div className='card-body p-1'>
+              <div className='card border-0 bg-primary'>
+                <div className='card-body text-center p-4'>
+                  <TopInfo />
+                  <Actions />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.transactions}>
+            <TransactionsTable transactions={transactions.data} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
