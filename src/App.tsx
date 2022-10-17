@@ -9,6 +9,7 @@ import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
 
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import Layout from 'components/Layout';
+import { walletConnectV2ProjectId } from 'config';
 import PageNotFound from 'pages/PageNotFound';
 import { routeNames } from 'routes';
 import routes from 'routes';
@@ -21,7 +22,11 @@ const App = () => {
     <Router>
       <DappProvider
         environment={environment}
-        customNetworkConfig={{ name: 'customConfig', apiTimeout: 6000 }}
+        customNetworkConfig={{
+          name: 'customConfig',
+          apiTimeout: 6000,
+          walletConnectV2ProjectId
+        }}
       >
         <Layout>
           <TransactionsToastList />

@@ -5,6 +5,7 @@ import {
   LedgerLoginButton,
   WalletConnectLoginButton
 } from '@elrondnetwork/dapp-core/UI';
+import { walletConnectV2ProjectId } from 'config';
 import { routeNames } from 'routes';
 
 export const UnlockRoute: () => JSX.Element = () => {
@@ -32,6 +33,11 @@ export const UnlockRoute: () => JSX.Element = () => {
             <WalletConnectLoginButton
               callbackRoute={routeNames.dashboard}
               loginButtonText={'Maiar'}
+              {...(walletConnectV2ProjectId
+                ? {
+                    isWalletConnectV2: true
+                  }
+                : {})}
             />
           </div>
         </div>
