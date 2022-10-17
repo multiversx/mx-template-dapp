@@ -67,7 +67,7 @@ const Actions = () => {
 
   const sendPingTransaction = async () => {
     const pingTransaction = {
-      value: pingAmount, // '1000000000000000000',
+      value: pingAmount,
       data: 'ping',
       receiver: contractAddress,
       gasLimit: '60000000'
