@@ -7,8 +7,8 @@ import {
 import { PageState } from '@elrondnetwork/dapp-core/UI';
 import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
-import { getTransactions } from 'apiRequests';
 import { contractAddress } from 'config';
+import { getTransactions } from 'services/transactions';
 import TransactionsList from './TransactionsList';
 import { StateType } from './types';
 

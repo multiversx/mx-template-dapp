@@ -1,9 +1,30 @@
-import * as React from 'react';
+import React from 'react';
+import { useLocalStorage } from 'hooks';
+import { getCredentials } from 'services/auth';
 import Actions from './Actions';
 import TopInfo from './TopInfo';
 import Transactions from './Transactions';
 
 const Dashboard = () => {
+  const [, setCredentials] = useLocalStorage('credentials', {});
+
+  React.useEffect(() => {
+    (async () => {
+      const {
+        accessToken,
+        accessTokenExpirationTime,
+        refreshToken,
+        refreshTokenExpirationTime
+      } = await getCredentials();
+      setCredentials({
+        accessToken,
+        accessTokenExpirationTime,
+        refreshToken,
+        refreshTokenExpirationTime
+      });
+    })();
+  }, []);
+
   return (
     <div className='container py-4'>
       <div className='row'>

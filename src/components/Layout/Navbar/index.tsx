@@ -10,7 +10,14 @@ import { ReactComponent as ElrondLogo } from './../../../assets/img/elrond.svg';
 const Navbar = () => {
   const { address } = useGetAccountInfo();
 
+  const cleanLocalStorage = () => {
+    localStorage.removeItem('loginToken');
+    localStorage.removeItem('credentials');
+    window.dispatchEvent(new Event('storage'));
+  };
+
   const handleLogout = () => {
+    cleanLocalStorage();
     logout(`${window.location.origin}/unlock`);
   };
 
