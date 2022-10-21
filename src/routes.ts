@@ -1,5 +1,4 @@
-import React from 'react';
-import { AuthRedirectWrapper } from 'components';
+import { RouteType } from '@elrondnetwork/dapp-core/types';
 import { dAppName } from 'config';
 import { withPageTitle } from './components/PageTitle';
 
@@ -11,15 +10,15 @@ export const routeNames = {
   unlock: '/unlock'
 };
 
-export const routes = [
+interface RouteWithTitleType extends RouteType {
+  title: string;
+}
+
+export const routes: RouteWithTitleType[] = [
   {
     path: routeNames.home,
     title: 'Home',
-    component: () => (
-      <AuthRedirectWrapper>
-        <Home />
-      </AuthRedirectWrapper>
-    )
+    component: Home
   },
   {
     path: routeNames.dashboard,
