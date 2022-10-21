@@ -1,39 +1,25 @@
-import React from 'react';
-import { AuthRedirectWrapper } from 'components';
 import { dAppName } from 'config';
 import { withPageTitle } from './components/PageTitle';
 
-import { Transaction, Dashboard, Home } from './pages';
+import { Dashboard, Home } from './pages';
 
 export const routeNames = {
   home: '/',
   dashboard: '/dashboard',
-  transaction: '/transaction',
-  unlock: '/unlock',
-  ledger: '/ledger',
-  walletconnect: '/walletconnect'
+  unlock: '/unlock'
 };
 
-export const routes: Array<any> = [
+export const routes = [
   {
     path: routeNames.home,
     title: 'Home',
-    component: () => (
-      <AuthRedirectWrapper>
-        <Home />
-      </AuthRedirectWrapper>
-    )
+    component: Home
   },
   {
     path: routeNames.dashboard,
     title: 'Dashboard',
     component: Dashboard,
     authenticatedRoute: true
-  },
-  {
-    path: routeNames.transaction,
-    title: 'Transaction',
-    component: Transaction
   }
 ];
 
