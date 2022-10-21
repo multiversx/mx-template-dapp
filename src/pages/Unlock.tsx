@@ -5,10 +5,11 @@ import {
   LedgerLoginButton,
   WalletConnectLoginButton
 } from '@elrondnetwork/dapp-core/UI';
+import { AuthRedirectWrapper } from 'components';
 import { walletConnectV2ProjectId } from 'config';
 import { routeNames } from 'routes';
 
-export const UnlockPage = () => {
+const UnlockPage = () => {
   return (
     <div className='home d-flex flex-fill align-items-center'>
       <div className='m-auto' data-testid='unlockPage'>
@@ -45,3 +46,9 @@ export const UnlockPage = () => {
     </div>
   );
 };
+
+export const Unlock = () => (
+  <AuthRedirectWrapper>
+    <UnlockPage />
+  </AuthRedirectWrapper>
+);
