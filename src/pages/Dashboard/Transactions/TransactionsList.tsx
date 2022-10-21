@@ -6,8 +6,8 @@ import {
 import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount';
 import { Trim } from '@elrondnetwork/dapp-core/UI/Trim';
 import moment from 'moment';
-import StatusIcon from './StatusIcon';
-import txStatus from './txStatus';
+import { StatusIcon } from './StatusIcon';
+import { txStatus } from './txStatus';
 import { TransactionType } from './types';
 
 function sortByDate(a: TransactionType, b: TransactionType) {
@@ -23,7 +23,7 @@ function sortByDate(a: TransactionType, b: TransactionType) {
 const fakeSender =
   'erd000000000000000000000000000000000000000000000000000000000a';
 
-const TransactionList = ({
+export const TransactionsList = ({
   transactions
 }: {
   transactions: TransactionType[];
@@ -116,5 +116,3 @@ const TransactionList = ({
     </div>
   );
 };
-
-export default TransactionList;

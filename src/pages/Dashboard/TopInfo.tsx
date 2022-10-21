@@ -3,7 +3,7 @@ import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks';
 import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount';
 import { contractAddress } from 'config';
 
-const TopInfo = () => {
+export const TopInfo = () => {
   const { address, account } = useGetAccountInfo();
 
   return (
@@ -24,5 +24,3 @@ const TopInfo = () => {
     </div>
   );
 };
-
-export default TopInfo;
