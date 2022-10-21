@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { useGetPendingTransactions } from '@elrondnetwork/dapp-core/hooks/transactions/useGetPendingTransactions';
 import { sendTransactions } from '@elrondnetwork/dapp-core/services';
 import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
-
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
@@ -14,9 +14,9 @@ export const Actions = () => {
   const getTimeToPong = useGetTimeToPong();
   const pingAmount = useGetPingAmount();
 
-  const [secondsLeft, setSecondsLeft] = React.useState<number>();
-  const [hasPing, setHasPing] = React.useState<boolean>();
-  const /*transactionSessionId*/ [, setTransactionSessionId] = React.useState<
+  const [secondsLeft, setSecondsLeft] = useState<number>();
+  const [hasPing, setHasPing] = useState<boolean>();
+  const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
       string | null
     >(null);
 
@@ -38,7 +38,7 @@ export const Actions = () => {
     }
   };
 
-  React.useEffect(mount, [hasPing]);
+  useEffect(mount, [hasPing]);
 
   const setSecondsRemaining = async () => {
     const secondsRemaining = await getTimeToPong();
@@ -60,7 +60,7 @@ export const Actions = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setSecondsRemaining();
   }, [hasPendingTransactions]);
 
