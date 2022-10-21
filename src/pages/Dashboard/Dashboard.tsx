@@ -17,7 +17,7 @@ import {
 import { faBan, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { AxiosError } from 'axios';
 
-import { contractAddress } from 'config';
+import { apiTimeout, contractAddress, transactionSize } from 'config';
 import { DashboardLayout } from './components';
 
 const DashboardPage = () => {
@@ -31,7 +31,7 @@ const DashboardPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>();
 
-  const fetchData = async () => {
+  const fetchTransactions = async () => {
     try {
       setIsLoading(true);
       const { data } = await getTransactions({
@@ -39,8 +39,8 @@ const DashboardPage = () => {
         sender: address,
         receiver: contractAddress,
         condition: 'must',
-        transactionSize: 15,
-        apiTimeout: 3000
+        transactionSize,
+        apiTimeout
       });
       setTransactions(data);
     } catch (err) {
@@ -52,12 +52,12 @@ const DashboardPage = () => {
 
   useEffect(() => {
     if (success || fail) {
-      fetchData();
+      fetchTransactions();
     }
   }, [success, fail]);
 
   useEffect(() => {
-    fetchData();
+    fetchTransactions();
   }, []);
 
   if (isLoading) {
