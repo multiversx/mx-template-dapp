@@ -8,16 +8,15 @@ import {
 import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
 
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import Layout from 'components/Layout';
+import { AuthRedirectWrapper, Layout } from 'components';
 import { walletConnectV2ProjectId } from 'config';
-import PageNotFound from 'pages/PageNotFound';
+import { PageNotFound, UnlockPage } from 'pages';
 import { routeNames } from 'routes';
-import routes from 'routes';
-import UnlockPage from './pages/UnlockPage';
+import { routes } from 'routes';
 
 const environment = EnvironmentsEnum.devnet;
 
-const App = () => {
+export const App = () => {
   return (
     <Router>
       <DappProvider
@@ -33,7 +32,14 @@ const App = () => {
           <NotificationModal />
           <SignTransactionsModals className='custom-class-for-modals' />
           <Routes>
-            <Route path={routeNames.unlock} element={<UnlockPage />} />
+            <Route
+              path={routeNames.unlock}
+              element={
+                <AuthRedirectWrapper>
+                  <UnlockPage />
+                </AuthRedirectWrapper>
+              }
+            />
             {routes.map((route: any, index: number) => (
               <Route
                 path={route.path}
@@ -48,5 +54,3 @@ const App = () => {
     </Router>
   );
 };
-
-export default App;

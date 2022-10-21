@@ -3,7 +3,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useLocation } from 'react-router-dom';
 
-const PageNotFound = () => {
+export const PageNotFound = () => {
   const { pathname } = useLocation();
 
   return (
@@ -27,5 +27,3 @@ const PageNotFound = () => {
     </div>
   );
 };
-
-export default PageNotFound;
