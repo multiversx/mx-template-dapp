@@ -7,7 +7,11 @@ import {
   ContractFunction,
   ResultsParser
 } from '@elrondnetwork/erdjs/out';
+<<<<<<<< HEAD:src/pages/Dashboard/components/Actions/helpers/helpers/useGetTimeToPong.ts
 import { smartContract } from '../../helpers/smartContract';
+========
+import { smartContract } from './smartContract';
+>>>>>>>> tm-temp:src/pages/Dashboard/components/Actions/helpers/useGetTimeToPong.ts
 
 const resultsParser = new ResultsParser();
 
