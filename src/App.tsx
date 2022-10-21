@@ -8,23 +8,20 @@ import {
 import { DappProvider } from '@elrondnetwork/dapp-core/wrappers';
 
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import Layout from 'components/Layout';
-import { walletConnectV2ProjectId } from 'config';
-import PageNotFound from 'pages/PageNotFound';
+import { Layout } from 'components';
+import { apiTimeout, walletConnectV2ProjectId } from 'config';
+import { PageNotFound, Unlock } from 'pages';
 import { routeNames } from 'routes';
-import routes from 'routes';
-import UnlockPage from './pages/UnlockPage';
+import { routes } from 'routes';
 
-const environment = EnvironmentsEnum.devnet;
-
-const App = () => {
+export const App = () => {
   return (
     <Router>
       <DappProvider
-        environment={environment}
+        environment={EnvironmentsEnum.devnet}
         customNetworkConfig={{
           name: 'customConfig',
-          apiTimeout: 6000,
+          apiTimeout,
           walletConnectV2ProjectId
         }}
       >
@@ -33,8 +30,8 @@ const App = () => {
           <NotificationModal />
           <SignTransactionsModals className='custom-class-for-modals' />
           <Routes>
-            <Route path={routeNames.unlock} element={<UnlockPage />} />
-            {routes.map((route: any, index: number) => (
+            <Route path={routeNames.unlock} element={<Unlock />} />
+            {routes.map((route, index) => (
               <Route
                 path={route.path}
                 key={'route-key-' + index}
@@ -48,5 +45,3 @@ const App = () => {
     </Router>
   );
 };
-
-export default App;

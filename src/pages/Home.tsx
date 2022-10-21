@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { AuthRedirectWrapper } from 'components';
 import { dAppName } from 'config';
 import { routeNames } from 'routes';
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div className='d-flex flex-fill align-items-center container'>
       <div className='row w-100'>
@@ -34,4 +35,8 @@ const Home = () => {
   );
 };
 
-export default Home;
+export const Home = () => (
+  <AuthRedirectWrapper>
+    <HomePage />
+  </AuthRedirectWrapper>
+);

@@ -1,19 +1,20 @@
+import { RouteType } from '@elrondnetwork/dapp-core/types';
 import { dAppName } from 'config';
-import withPageTitle from './components/PageTitle';
-import Dashboard from './pages/Dashboard';
-import Home from './pages/Home';
-import Transaction from './pages/Transaction';
+import { withPageTitle } from './components/PageTitle';
+
+import { Dashboard, Home } from './pages';
 
 export const routeNames = {
   home: '/',
   dashboard: '/dashboard',
-  transaction: '/transaction',
-  unlock: '/unlock',
-  ledger: '/ledger',
-  walletconnect: '/walletconnect'
+  unlock: '/unlock'
 };
 
-const routes: Array<any> = [
+interface RouteWithTitleType extends RouteType {
+  title: string;
+}
+
+export const routes: RouteWithTitleType[] = [
   {
     path: routeNames.home,
     title: 'Home',
@@ -24,15 +25,10 @@ const routes: Array<any> = [
     title: 'Dashboard',
     component: Dashboard,
     authenticatedRoute: true
-  },
-  {
-    path: routeNames.transaction,
-    title: 'Transaction',
-    component: Transaction
   }
 ];
 
-const mappedRoutes = routes.map((route) => {
+export const mappedRoutes = routes.map((route) => {
   const title = route.title
     ? `${route.title} • Elrond ${dAppName}`
     : `Elrond ${dAppName}`;
@@ -46,5 +42,3 @@ const mappedRoutes = routes.map((route) => {
     authenticatedRoute: requiresAuth
   };
 });
-
-export default mappedRoutes;
