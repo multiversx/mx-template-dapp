@@ -6,7 +6,7 @@ import {
   faTimes
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import txStatus from './txStatus';
+import { txStatus } from './txStatus';
 import { TransactionType } from './types';
 
 interface StatusIconType {
@@ -14,7 +14,7 @@ interface StatusIconType {
   incomingTransaction: boolean;
 }
 
-const StatusIcon = ({ tx, incomingTransaction }: StatusIconType) => {
+export const StatusIcon = ({ tx, incomingTransaction }: StatusIconType) => {
   let Icon;
   switch (tx.status) {
     case txStatus.notExecuted:
@@ -45,5 +45,3 @@ const StatusIcon = ({ tx, incomingTransaction }: StatusIconType) => {
     </i>
   );
 };
-
-export default StatusIcon;

@@ -7,7 +7,7 @@ import {
   ContractFunction,
   ResultsParser
 } from '@elrondnetwork/erdjs/out';
-import { smartContract } from '../helpers';
+import { smartContract } from '../../helpers/smartContract';
 
 const resultsParser = new ResultsParser();
 

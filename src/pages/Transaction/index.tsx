@@ -5,7 +5,7 @@ import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useLocation, Link } from 'react-router-dom';
 import { routeNames } from 'routes';
 
-const Transaction = () => {
+export const Transaction = () => {
   const { search } = useLocation();
   const { network } = useGetNetworkConfig();
 
@@ -55,5 +55,3 @@ const Transaction = () => {
     />
   );
 };
-
-export default Transaction;

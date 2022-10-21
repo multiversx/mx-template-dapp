@@ -1,8 +1,9 @@
+import React from 'react';
+import { AuthRedirectWrapper } from 'components';
 import { dAppName } from 'config';
-import withPageTitle from './components/PageTitle';
-import Dashboard from './pages/Dashboard';
-import Home from './pages/Home';
-import Transaction from './pages/Transaction';
+import { withPageTitle } from './components/PageTitle';
+
+import { Transaction, Dashboard, Home } from './pages';
 
 export const routeNames = {
   home: '/',
@@ -13,11 +14,15 @@ export const routeNames = {
   walletconnect: '/walletconnect'
 };
 
-const routes: Array<any> = [
+export const routes: Array<any> = [
   {
     path: routeNames.home,
     title: 'Home',
-    component: Home
+    component: () => (
+      <AuthRedirectWrapper>
+        <Home />
+      </AuthRedirectWrapper>
+    )
   },
   {
     path: routeNames.dashboard,
@@ -32,7 +37,7 @@ const routes: Array<any> = [
   }
 ];
 
-const mappedRoutes = routes.map((route) => {
+export const mappedRoutes = routes.map((route) => {
   const title = route.title
     ? `${route.title} • Elrond ${dAppName}`
     : `Elrond ${dAppName}`;
@@ -46,5 +51,3 @@ const mappedRoutes = routes.map((route) => {
     authenticatedRoute: requiresAuth
   };
 });
-
-export default mappedRoutes;

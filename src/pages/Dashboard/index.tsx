@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
+import { getTransactions } from '@elrondnetwork/dapp-core/apiCalls';
 import {
   ACCOUNTS_ENDPOINT,
   TRANSACTIONS_ENDPOINT
 } from '@elrondnetwork/dapp-core/apiCalls/endpoints';
 import {
+  useGetAccount,
   useGetAccountInfo,
   useGetNetworkConfig
 } from '@elrondnetwork/dapp-core/hooks';
@@ -13,9 +15,9 @@ import { ServerTransactionType } from '@elrondnetwork/dapp-core/types';
 import { TransactionsTable, Loader } from '@elrondnetwork/dapp-core/UI';
 import axios from 'axios';
 
-import Actions from './Actions';
+import { Actions } from './Actions';
 import styles from './dashboard.module.scss';
-import TopInfo from './TopInfo';
+import { TopInfo } from './TopInfo';
 
 interface TransactionsFetchType {
   data: ServerTransactionType[];
@@ -24,7 +26,7 @@ interface TransactionsFetchType {
   error: unknown;
 }
 
-const Dashboard = () => {
+export const Dashboard = () => {
   const [transactions, setTransactions] = useState<TransactionsFetchType>({
     data: [],
     loading: false,
@@ -32,15 +34,23 @@ const Dashboard = () => {
     error: false
   });
 
-  const { account } = useGetAccountInfo();
+  const { address } = useGetAccount();
+
   const { network } = useGetNetworkConfig();
 
-  const fetchTransactions = useCallback(() => {
+  const fetchTransactions = () => {
     const fetchData = async () => {
       try {
         const endpoint = `${network.apiAddress}/${ACCOUNTS_ENDPOINT}/${account.address}/${TRANSACTIONS_ENDPOINT}`;
-        const { data } = await axios.get<ServerTransactionType[]>(endpoint, {
-          params: { size: 15 }
+        const { data } = await getTransactions({
+          // sender: address,
+          // receiver: con
+          // page = 1,
+          // transactionSize = 15,
+          // condition = 'should',
+          // withScResults = true,
+          // after,
+          // before
         });
 
         setTransactions({
@@ -61,12 +71,7 @@ const Dashboard = () => {
       setTransactions((payload) => ({ ...payload, loading: true }));
       fetchData();
     }
-  }, [
-    account,
-    network.apiAddress,
-    transactions.fetched,
-    network.explorerAddress
-  ]);
+  };
 
   useEffect(fetchTransactions, [fetchTransactions]);
 
@@ -96,5 +101,3 @@ const Dashboard = () => {
     </div>
   );
 };
-
-export default Dashboard;

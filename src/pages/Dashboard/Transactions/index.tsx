@@ -9,10 +9,10 @@ import { PageState } from '@elrondnetwork/dapp-core/UI';
 import { refreshAccount } from '@elrondnetwork/dapp-core/utils';
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { contractAddress } from 'config';
-import TransactionsList from './TransactionsList';
+import { TransactionsList } from './TransactionsList';
 import { StateType } from './types';
 
-const Transactions = () => {
+export const Transactions = () => {
   const {
     network: { apiAddress }
   } = useGetNetworkConfig();
@@ -70,5 +70,3 @@ const Transactions = () => {
     </div>
   );
 };
-
-export default Transactions;
