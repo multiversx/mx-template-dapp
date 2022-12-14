@@ -10,6 +10,11 @@ import { walletConnectV2ProjectId } from 'config';
 import { routeNames } from 'routes';
 
 const UnlockPage = () => {
+  const commonProps = {
+    callbackRoute: routeNames.dashboard,
+    nativeAuth: true // optional
+  };
+
   return (
     <div className='home d-flex flex-fill align-items-center'>
       <div className='m-auto' data-testid='unlockPage'>
@@ -19,21 +24,22 @@ const UnlockPage = () => {
             <p className='mb-4'>pick a login method</p>
 
             <ExtensionLoginButton
-              callbackRoute={routeNames.dashboard}
-              loginButtonText={'Extension'}
+              loginButtonText='Extension'
+              {...commonProps}
             />
+
             <WebWalletLoginButton
-              callbackRoute={routeNames.dashboard}
-              loginButtonText={'Web wallet'}
+              loginButtonText='Web wallet'
+              {...commonProps}
             />
             <LedgerLoginButton
-              loginButtonText={'Ledger'}
-              callbackRoute={routeNames.dashboard}
-              className={'test-class_name'}
+              loginButtonText='Ledger'
+              className='test-class_name'
+              {...commonProps}
             />
             <WalletConnectLoginButton
-              callbackRoute={routeNames.dashboard}
-              loginButtonText={'Maiar'}
+              loginButtonText='Maiar'
+              {...commonProps}
               {...(walletConnectV2ProjectId
                 ? {
                     isWalletConnectV2: true

@@ -21,7 +21,7 @@ The dapp is a client side only project and is built using the [Create React App]
 From a terminal, navigate to the project folder and run:
 
 ```bash
-npm install
+yarn
 ```
 
 ### Step 2. Update environment
