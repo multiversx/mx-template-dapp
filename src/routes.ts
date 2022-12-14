@@ -2,11 +2,12 @@ import { RouteType } from '@elrondnetwork/dapp-core/types';
 import { dAppName } from 'config';
 import { withPageTitle } from './components/PageTitle';
 
-import { Dashboard, Home } from './pages';
+import { Dashboard, Home, Statistics } from './pages';
 
 export const routeNames = {
   home: '/',
   dashboard: '/dashboard',
+  statistics: '/statistics',
   unlock: '/unlock'
 };
 
@@ -19,6 +20,12 @@ export const routes: RouteWithTitleType[] = [
     path: routeNames.home,
     title: 'Home',
     component: Home
+  },
+  {
+    path: routeNames.statistics,
+    title: 'Statistics',
+    component: Statistics,
+    authenticatedRoute: true
   },
   {
     path: routeNames.dashboard,
