@@ -7,7 +7,7 @@ import {
 } from '@elrondnetwork/dapp-core/UI';
 import {
   DappProvider,
-  AxiosInterceptorContext
+  AxiosInterceptorContext // using this is optional
 } from '@elrondnetwork/dapp-core/wrappers';
 
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
