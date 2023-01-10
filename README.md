@@ -1,9 +1,9 @@
-# @elrondnetwork/dapp-template
+# @multiversx/dapp-template
 
-The **Elrond dApp Template**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
-It's a basic implementation of [@elrondnetwork/dapp-core](https://www.npmjs.com/package/@elrondnetwork/dapp-core), providing the basics for Elrond authentication and TX signing.
+The **MultiversX dApp Template**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
+It's a basic implementation of [@multiversx/dapp-core](https://www.npmjs.com/package/@elrondnetwork/dapp-core), providing the basics for MultiversX authentication and TX signing.
 
-See [Dapp template](https://dapp-template.elrond.com/) for live demo.
+See [Dapp template](https://dapp-template.multiversx.com/) for live demo.
 
 ## Requirements
 
@@ -30,7 +30,7 @@ Go to `App.tsx` and edit the `environment` variable according to the environment
 Valid values are `testnet`, `devnet` or `mainnet`
 
 If you need to edit the network configuration, you can pass in a `customNetworkConfig` object.
-More info about this can be found in [dapp-core documentation](https://github.com/ElrondNetwork/dapp-core)
+More info about this can be found in [dapp-core documentation](https://github.com/multiversx/mx-sdk-dapp)
 
 ### Step 3. Running in development mode
 
@@ -57,7 +57,7 @@ npm run build
 
 ## Roadmap
 
-See the [open issues](https://github.com/ElrondNetwork/dapp-template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/multiversx/mx-template-dapp/issues) for a list of proposed features (and known issues).
 
 ## Contributing
 
@@ -71,6 +71,3 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## Developers
-
-The [Elrond Team](https://elrond.com/team/).
