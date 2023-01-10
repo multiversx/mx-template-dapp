@@ -3,7 +3,7 @@ import {
   SmartContractAbi,
   SmartContract,
   Address
-} from '@elrondnetwork/erdjs/out';
+} from '@multiversx/erdjs/out';
 import { contractAddress } from 'config';
 import json from 'ping-pong.abi.json';
 
