@@ -7,7 +7,7 @@ import { Navbar as BsNavbar, NavItem, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { dAppName } from 'config';
 import { routeNames } from 'routes';
-import { ReactComponent as ElrondLogo } from './../../../assets/img/elrond.svg';
+import { ReactComponent as MultiversXLogo } from '../../../assets/img/multiversx.svg';
 
 export const Navbar = () => {
   const isLoggedIn = useGetIsLoggedIn();
@@ -23,7 +23,7 @@ export const Navbar = () => {
           className='d-flex align-items-center navbar-brand mr-0'
           to={isLoggedIn ? routeNames.dashboard : routeNames.home}
         >
-          <ElrondLogo className='elrond-logo' />
+          <MultiversXLogo className='multiversx-logo' />
           <span className='dapp-name text-muted'>{dAppName}</span>
         </Link>
 
