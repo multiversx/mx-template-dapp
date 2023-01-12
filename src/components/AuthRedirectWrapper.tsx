@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { useGetIsLoggedIn } from '@elrondnetwork/dapp-core/hooks';
+import { useGetIsLoggedIn } from '@multiversx/sdk-dapp/hooks';
 import { Navigate } from 'react-router-dom';
 import { routeNames } from 'routes';
 

@@ -1,4 +1,4 @@
-import { RouteType } from '@elrondnetwork/dapp-core/types';
+import { RouteType } from '@multiversx/sdk-dapp/types';
 import { dAppName } from 'config';
 import { withPageTitle } from './components/PageTitle';
 

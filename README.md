@@ -1,7 +1,7 @@
 # @elrondnetwork/dapp-template
 
 The **Elrond dApp Template**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
-It's a basic implementation of [@elrondnetwork/dapp-core](https://www.npmjs.com/package/@elrondnetwork/dapp-core), providing the basics for Elrond authentication and TX signing.
+It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for Elrond authentication and TX signing.
 
 See [Dapp template](https://dapp-template.elrond.com/) for live demo.
 
