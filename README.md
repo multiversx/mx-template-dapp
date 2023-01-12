@@ -3,7 +3,7 @@
 The **MultiversX dApp Template**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
 It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and TX signing.
 
-See [Dapp template](https://dapp-template.multiversx.com/) for live demo.
+See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
 
 ## Requirements
 
@@ -57,7 +57,7 @@ npm run build
 
 ## Roadmap
 
-See the [open issues](https://github.com/multiversx/dapp-template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/multiversx/mx-template-dapp/issues) for a list of proposed features (and known issues).
 
 ## Contributing
 
