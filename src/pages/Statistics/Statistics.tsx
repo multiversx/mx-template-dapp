@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Loader, PageState } from '@elrondnetwork/dapp-core/UI';
+import { Loader, PageState } from '@multiversx/sdk-dapp/UI';
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { Link } from 'react-router-dom';

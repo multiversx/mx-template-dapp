@@ -4,7 +4,7 @@ import {
   WebWalletLoginButton,
   LedgerLoginButton,
   WalletConnectLoginButton
-} from '@elrondnetwork/dapp-core/UI';
+} from '@multiversx/sdk-dapp/UI';
 import { AuthRedirectWrapper } from 'components';
 import { walletConnectV2ProjectId } from 'config';
 import { routeNames } from 'routes';

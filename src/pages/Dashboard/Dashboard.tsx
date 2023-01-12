@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { getTransactions } from '@elrondnetwork/dapp-core/apiCalls';
+import { getTransactions } from '@multiversx/sdk-dapp/apiCalls';
 
 import {
   useGetAccount,
   useGetActiveTransactionsStatus,
   useGetNetworkConfig
-} from '@elrondnetwork/dapp-core/hooks';
+} from '@multiversx/sdk-dapp/hooks';
 
-import { ServerTransactionType } from '@elrondnetwork/dapp-core/types';
-import {
-  TransactionsTable,
-  Loader,
-  PageState
-} from '@elrondnetwork/dapp-core/UI';
+import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
+import { TransactionsTable, Loader, PageState } from '@multiversx/sdk-dapp/UI';
 import { faBan, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { AxiosError } from 'axios';
 

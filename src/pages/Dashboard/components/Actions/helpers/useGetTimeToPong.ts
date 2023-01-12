@@ -1,13 +1,12 @@
-import { useGetAccount } from '@elrondnetwork/dapp-core/hooks';
-import { useGetNetworkConfig } from '@elrondnetwork/dapp-core/hooks/useGetNetworkConfig';
-import { ProxyNetworkProvider } from '@multiversx/erdjs-network-providers/out';
+import { useGetAccount } from '@multiversx/sdk-dapp/hooks';
+import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers';
 import {
-  ResultsParser,
-  ContractFunction,
+  Address,
   AddressValue,
-  Address
-} from '@multiversx/erdjs/out';
-
+  ContractFunction,
+  ResultsParser
+} from '@multiversx/sdk-core/out';
 import { smartContract } from './smartContract';
 
 const resultsParser = new ResultsParser();

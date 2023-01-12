@@ -1,9 +1,9 @@
-# @multiversx/dapp-template
+# @multiversx/template-dapp
 
 The **MultiversX dApp Template**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
-It's a basic implementation of [@multiversx/dapp-core](https://www.npmjs.com/package/@elrondnetwork/dapp-core), providing the basics for MultiversX authentication and TX signing.
+It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and TX signing.
 
-See [Dapp template](https://dapp-template.multiversx.com/) for live demo.
+See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
 
 ## Requirements
 
@@ -30,7 +30,7 @@ Go to `App.tsx` and edit the `environment` variable according to the environment
 Valid values are `testnet`, `devnet` or `mainnet`
 
 If you need to edit the network configuration, you can pass in a `customNetworkConfig` object.
-More info about this can be found in [dapp-core documentation](https://github.com/multiversx/mx-sdk-dapp)
+More info about this can be found in [sdk-dapp documentation](https://github.com/multiversx/sdk-dapp)
 
 ### Step 3. Running in development mode
 
@@ -70,4 +70,3 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
