@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useGetNetworkConfig } from '@elrondnetwork/dapp-core/hooks/useGetNetworkConfig';
-import { ProxyNetworkProvider } from '@elrondnetwork/erdjs-network-providers/out';
-import { ContractFunction, ResultsParser } from '@elrondnetwork/erdjs/out';
+import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers/out';
+import { ContractFunction, ResultsParser } from '@multiversx/sdk-core/out';
 import { smartContract } from './smartContract';
 
 const resultsParser = new ResultsParser();

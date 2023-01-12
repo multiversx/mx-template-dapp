@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks';
-import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount';
+import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
+import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount';
 import { contractAddress } from 'config';
 
 export const TopInfo = () => {

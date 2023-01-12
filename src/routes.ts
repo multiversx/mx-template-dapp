@@ -1,4 +1,4 @@
-import { RouteType } from '@elrondnetwork/dapp-core/types';
+import { RouteType } from '@multiversx/sdk-dapp/types';
 import { dAppName } from 'config';
 import { withPageTitle } from './components/PageTitle';
 
@@ -37,8 +37,8 @@ export const routes: RouteWithTitleType[] = [
 
 export const mappedRoutes = routes.map((route) => {
   const title = route.title
-    ? `${route.title} • Elrond ${dAppName}`
-    : `Elrond ${dAppName}`;
+    ? `${route.title} • MultiversX ${dAppName}`
+    : `MultiversX ${dAppName}`;
 
   const requiresAuth = Boolean(route.authenticatedRoute);
   const wrappedComponent = withPageTitle(title, route.component);
