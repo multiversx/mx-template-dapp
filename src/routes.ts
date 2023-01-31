@@ -2,12 +2,13 @@ import { RouteType } from '@multiversx/sdk-dapp/types';
 import { dAppName } from 'config';
 import { withPageTitle } from './components/PageTitle';
 
-import { Dashboard, Home, Statistics } from './pages';
+import { Dashboard, Home, SignMessage, Statistics } from './pages';
 
 export const routeNames = {
   home: '/',
   dashboard: '/dashboard',
   statistics: '/statistics',
+  signMessage: '/sign-message',
   unlock: '/unlock'
 };
 
@@ -31,6 +32,12 @@ export const routes: RouteWithTitleType[] = [
     path: routeNames.dashboard,
     title: 'Dashboard',
     component: Dashboard,
+    authenticatedRoute: true
+  },
+  {
+    path: routeNames.signMessage,
+    title: 'Sign Message',
+    component: SignMessage,
     authenticatedRoute: true
   }
 ];
