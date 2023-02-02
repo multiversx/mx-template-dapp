@@ -23,10 +23,6 @@
       "typescript": {
         "alwaysTryTypes": true
       }
-    },
-    "react": {
-      "pragma": "React",
-      "version": "detect"
     }
   },
   "extends": [
