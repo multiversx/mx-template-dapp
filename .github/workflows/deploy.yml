@@ -19,8 +19,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      - run: npm install
-      - run: npm run build
+      - name: Setup yarn
+        run: npm install -g yarn
+      - run: yarn install
+      - run: yarn build
         env:
           CI: false
       - name: Configure AWS Credentials

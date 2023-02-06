@@ -14,14 +14,11 @@
     "@multiversx/sdk-network-providers": "1.2.1",
     "axios": "0.24.0",
     "bootstrap": "4.6.2",
-    "crypto-browserify": "3.12.0",
-    "moment": "2.29.1",
-    "path-browserify": "^1.0.1",
+    "moment": "2.29.4",
     "react": "18.2.0",
     "react-bootstrap": "2.1.2",
     "react-dom": "18.2.0",
     "react-router-dom": "6.4.2",
-    "stream-browserify": "^3.0.0",
     "web-vitals": "1.0.1"
   },
   "scripts": {
@@ -31,12 +28,6 @@
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,ts,tsx src"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
@@ -44,10 +35,13 @@
   ],
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.1",
+    "stream-browserify": "3.0.0",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "13.5.0",
+    "path-browserify": "1.0.1",
     "@types/jest": "26.0.15",
     "@types/node": "12.0.0",
+    "crypto-browserify": "3.12.0",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
     "@types/react-router-dom": "5.1.7",
@@ -68,5 +62,8 @@
     "react-scripts": "5.0.1",
     "sass": "1.55.0",
     "typescript": "4.1.2"
+  },
+  "resolutions": {
+    "**/*/nth-check": "2.0.1"
   }
 }

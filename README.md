@@ -21,7 +21,7 @@ The dapp is a client side only project and is built using the [Create React App]
 From a terminal, navigate to the project folder and run:
 
 ```bash
-npm install
+yarn install
 ```
 
 ### Step 2. Update environment
@@ -37,7 +37,7 @@ More info about this can be found in [sdk-dapp documentation](https://github.com
 In the project folder run:
 
 ```bash
-npm run start
+yarn start
 ```
 
 This will start the React app in development mode, using the configs found in the `config.tsx` file.
@@ -52,7 +52,7 @@ A build of the app is necessary to deploy for testing purposes or for production
 To build the project run:
 
 ```bash
-npm run build
+yarn build
 ```
 
 ## Roadmap
