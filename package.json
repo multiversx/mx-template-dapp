@@ -10,7 +10,7 @@
     "@fortawesome/free-solid-svg-icons": "6.1.0",
     "@fortawesome/react-fontawesome": "0.1.18",
     "@multiversx/sdk-core": "11.2.0",
-    "@multiversx/sdk-dapp": "2.3.1",
+    "@multiversx/sdk-dapp": "^2.5.1",
     "@multiversx/sdk-network-providers": "1.2.1",
     "axios": "0.24.0",
     "bootstrap": "4.6.2",
