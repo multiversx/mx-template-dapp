@@ -12,7 +12,7 @@ export const Footer = () => {
           className='d-flex align-items-center'
           href='https://multiversx.com/'
         >
-          Made with <HeartIcon className='mx-1' /> by MultiversX Network.
+          Made with <HeartIcon className='mx-1' /> by the MultiversX team
         </a>
       </div>
     </footer>
