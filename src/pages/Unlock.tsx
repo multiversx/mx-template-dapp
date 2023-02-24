@@ -44,7 +44,7 @@ const UnlockPage = () => {
               {...commonProps}
             />
             <WalletConnectLoginButton
-              loginButtonText='Maiar'
+              loginButtonText='xPortal'
               {...commonProps}
               {...(walletConnectV2ProjectId
                 ? {
