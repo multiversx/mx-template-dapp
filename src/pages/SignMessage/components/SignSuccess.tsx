@@ -26,20 +26,22 @@ export const SignSuccess = () => {
 
   return (
     <PageState
-      className='px-4 py-0'
+      className='py-0'
       icon={faCheck}
       iconClass='success'
       title='Message signed'
       description={
         <>
           <div className='text-secondary text-left'>Signature:</div>
-          <textarea
-            readOnly
-            className='form-control cursor-text'
-            rows={7}
-            defaultValue={signature}
-          />
-          <CopyButton className='mt-2' text={signature} />
+          <div className='textarea-with-copy'>
+            <textarea
+              readOnly
+              className='form-control cursor-text'
+              rows={7}
+              defaultValue={signature}
+            />
+            <CopyButton className='mt-2' text={signature} />
+          </div>
         </>
       }
       action={

@@ -25,7 +25,7 @@ const UnlockPage = () => {
             <p className='mb-4'>pick a login method</p>
 
             <ExtensionLoginButton
-              loginButtonText='Extension'
+              loginButtonText='MultiversX DeFi Wallet'
               {...commonProps}
             />
 
@@ -35,7 +35,7 @@ const UnlockPage = () => {
             />
 
             <WebWalletLoginButton
-              loginButtonText='Web wallet'
+              loginButtonText='MultiversX Web Wallet'
               {...commonProps}
             />
             <LedgerLoginButton
@@ -44,7 +44,7 @@ const UnlockPage = () => {
               {...commonProps}
             />
             <WalletConnectLoginButton
-              loginButtonText='Maiar'
+              loginButtonText='xPortal App'
               {...commonProps}
               {...(walletConnectV2ProjectId
                 ? {

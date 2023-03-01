@@ -1,12 +1,13 @@
-import { useGetAccount } from '@multiversx/sdk-dapp/hooks';
-import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
-import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers';
 import {
   Address,
   AddressValue,
   ContractFunction,
   ResultsParser
 } from '@multiversx/sdk-core/out';
+import { useGetAccount } from '@multiversx/sdk-dapp/hooks';
+import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
+import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers';
+
 import { smartContract } from './smartContract';
 
 const resultsParser = new ResultsParser();
