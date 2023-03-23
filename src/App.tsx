@@ -28,7 +28,7 @@ export const App = () => {
       >
         <Router>
           <DappProvider
-            environment={EnvironmentsEnum.devnet}
+            environment={EnvironmentsEnum.testnet}
             customNetworkConfig={{
               name: 'customConfig',
               apiTimeout,
