@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { faBan, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
-import { getTransactions } from '@multiversx/sdk-dapp/apiCalls';
+
+import { AxiosError } from 'axios';
+import { Loader, PageState, TransactionsTable } from 'components';
+
+import { apiTimeout, contractAddress, transactionSize } from 'config';
+import { getTransactions } from 'helpers';
 import {
   useGetAccount,
   useGetActiveTransactionsStatus,
   useGetNetworkConfig
-} from '@multiversx/sdk-dapp/hooks';
-import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
-import { TransactionsTable, Loader, PageState } from '@multiversx/sdk-dapp/UI';
-import { AxiosError } from 'axios';
-
-import { apiTimeout, contractAddress, transactionSize } from 'config';
+} from 'hooks';
+import { ServerTransactionType } from 'types';
 import { DashboardLayout } from './components';
 
 const DashboardPage = () => {

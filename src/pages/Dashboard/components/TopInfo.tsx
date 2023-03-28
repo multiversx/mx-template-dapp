@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useGetAccountInfo } from '@multiversx/sdk-dapp/hooks';
-import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount';
+import { FormatAmount } from 'components';
 import { contractAddress } from 'config';
+import { useGetAccountInfo } from 'hooks';
 
 export const TopInfo = () => {
   const { address, account } = useGetAccountInfo();

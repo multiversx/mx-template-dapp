@@ -1,12 +1,12 @@
 import React from 'react';
 import {
+  AuthRedirectWrapper,
   ExtensionLoginButton,
-  WebWalletLoginButton,
   LedgerLoginButton,
+  OperaWalletLoginButton,
   WalletConnectLoginButton,
-  OperaWalletLoginButton
-} from '@multiversx/sdk-dapp/UI';
-import { AuthRedirectWrapper } from 'components';
+  WebWalletLoginButton
+} from 'components';
 import { walletConnectV2ProjectId } from 'config';
 import { routeNames } from 'routes';
 

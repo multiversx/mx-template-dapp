@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
-import { useGetIsLoggedIn } from '@multiversx/sdk-dapp/hooks';
 import { Navigate } from 'react-router-dom';
+import { useGetIsLoggedIn } from 'hooks';
 import { routeNames } from 'routes';
 
 export const AuthRedirectWrapper = ({ children }: PropsWithChildren) => {

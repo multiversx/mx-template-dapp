@@ -1,12 +1,9 @@
 import React from 'react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import {
-  useSignMessage,
-  useGetLastSignedMessageSession
-} from '@multiversx/sdk-dapp/hooks/signMessage';
-import { PageState } from '@multiversx/sdk-dapp/UI';
-import { CopyButton } from '@multiversx/sdk-dapp/UI/CopyButton';
+
 import { Link } from 'react-router-dom';
+import { CopyButton, PageState } from 'components';
+import { useGetLastSignedMessageSession, useSignMessage } from 'hooks';
 import { routeNames } from 'routes';
 
 export const SignSuccess = () => {
