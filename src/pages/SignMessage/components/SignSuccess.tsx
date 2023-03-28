@@ -1,12 +1,9 @@
 import React from 'react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import {
-  useSignMessage,
-  useGetLastSignedMessageSession
-} from '@multiversx/sdk-dapp/hooks/signMessage';
-import { PageState } from '@multiversx/sdk-dapp/UI';
-import { CopyButton } from '@multiversx/sdk-dapp/UI/CopyButton';
+
 import { Link } from 'react-router-dom';
+import { CopyButton, PageState } from 'components';
+import { useGetLastSignedMessageSession, useSignMessage } from 'hooks';
 import { routeNames } from 'routes';
 
 export const SignSuccess = () => {
@@ -26,20 +23,22 @@ export const SignSuccess = () => {
 
   return (
     <PageState
-      className='px-4 py-0'
+      className='py-0'
       icon={faCheck}
       iconClass='success'
       title='Message signed'
       description={
         <>
           <div className='text-secondary text-left'>Signature:</div>
-          <textarea
-            readOnly
-            className='form-control cursor-text'
-            rows={7}
-            defaultValue={signature}
-          />
-          <CopyButton className='mt-2' text={signature} />
+          <div className='textarea-with-copy'>
+            <textarea
+              readOnly
+              className='form-control cursor-text'
+              rows={7}
+              defaultValue={signature}
+            />
+            <CopyButton className='mt-2' text={signature} />
+          </div>
         </>
       }
       action={

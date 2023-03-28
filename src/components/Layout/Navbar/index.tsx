@@ -4,11 +4,11 @@ import {
   faFileSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useGetIsLoggedIn } from '@multiversx/sdk-dapp/hooks';
-import { logout } from '@multiversx/sdk-dapp/utils';
 import { Navbar as BsNavbar, NavItem, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { dAppName } from 'config';
+import { logout } from 'helpers';
+import { useGetIsLoggedIn } from 'hooks';
 import { routeNames } from 'routes';
 import { ReactComponent as MultiversXLogo } from '../../../assets/img/multiversx.svg';
 

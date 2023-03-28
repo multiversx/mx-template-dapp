@@ -4,9 +4,8 @@ import {
   ContractFunction,
   ResultsParser
 } from '@multiversx/sdk-core/out';
-import { useGetAccount } from '@multiversx/sdk-dapp/hooks';
-import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers';
+import { useGetAccount, useGetNetworkConfig } from 'hooks';
 
 import { smartContract } from './smartContract';
 

@@ -92,6 +92,37 @@ html {
   }
 }
 
+/* Sign Message
+-------------------------------------------------- */
+.sign-message {
+
+  & h1 {
+    font-size: 24px;
+  }
+
+  & textarea {
+    min-height: 100px;
+  }
+
+  & button {
+    align-self: center;
+  }
+}
+
+.textarea-with-copy {
+  position: relative;
+
+  & a {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+  }
+
+  @include media-breakpoint-up(md) {
+    min-width: 650px;
+  }
+}
+
 .transactions {
   .transaction-icon {
     border-radius: 50%;

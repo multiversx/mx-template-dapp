@@ -1,17 +1,15 @@
 import React from 'react';
-import { EnvironmentsEnum } from '@multiversx/sdk-dapp/types';
+import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import {
+  AxiosInterceptorContext, // using this is optional
+  DappProvider,
+  Layout
+} from 'components';
 import {
   TransactionsToastList,
-  SignTransactionsModals,
-  NotificationModal
-} from '@multiversx/sdk-dapp/UI';
-import {
-  DappProvider,
-  AxiosInterceptorContext // using this is optional
-} from '@multiversx/sdk-dapp/wrappers';
-
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import { Layout } from 'components';
+  NotificationModal,
+  SignTransactionsModals
+} from 'components';
 import {
   apiTimeout,
   walletConnectV2ProjectId,
@@ -20,6 +18,7 @@ import {
 import { PageNotFound, Unlock } from 'pages';
 import { routeNames } from 'routes';
 import { routes } from 'routes';
+import { EnvironmentsEnum } from 'types';
 
 export const App = () => {
   return (

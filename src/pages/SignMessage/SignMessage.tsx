@@ -1,12 +1,13 @@
 import React from 'react';
+
+import { Loader } from 'components';
 import {
-  useSignMessage,
+  useGetLastSignedMessageSession,
   useGetSignMessageInfoStatus,
-  useGetLastSignedMessageSession
-} from '@multiversx/sdk-dapp/hooks/signMessage';
-import { SignedMessageStatusesEnum } from '@multiversx/sdk-dapp/types';
-import { Loader } from '@multiversx/sdk-dapp/UI';
-import { SignFailure, SignSuccess } from './components';
+  useSignMessage
+} from 'hooks';
+import { SignedMessageStatusesEnum } from 'types';
+import { SignFailure, SignMessageWrapper, SignSuccess } from './components';
 
 export const SignMessage = () => {
   const { signMessage } = useSignMessage();
@@ -29,26 +30,20 @@ export const SignMessage = () => {
 
   if (!signedMessageInfo) {
     return (
-      <div className='d-flex flex-fill align-items-center container'>
-        <div className='container py-4'>
-          <div className='row'>
-            <div className='col-12 col-md-10 mx-auto'>
-              <div className='card shadow-sm border-0'>
-                <h1 className='card-title'>Sign Message</h1>
-                <div className='card-body p-1 d-flex flex-column'>
-                  <textarea
-                    className='form-control my-3'
-                    onChange={(event) => setMessage(event.currentTarget.value)}
-                  />
-                  <button className='btn btn-primary' onClick={handleSubmit}>
-                    Sign
-                  </button>
-                </div>
-              </div>
-            </div>
+      <SignMessageWrapper>
+        <div className='sign-message'>
+          <h1 className='card-title'>Sign Message</h1>
+          <div className='card-body p-1 d-flex flex-column'>
+            <textarea
+              className='form-control my-3'
+              onChange={(event) => setMessage(event.currentTarget.value)}
+            />
+            <button className='btn btn-primary' onClick={handleSubmit}>
+              Sign
+            </button>
           </div>
         </div>
-      </div>
+      </SignMessageWrapper>
     );
   }
 
@@ -61,11 +56,19 @@ export const SignMessage = () => {
     signedMessageInfo.status === SignedMessageStatusesEnum.signed;
 
   if (isError) {
-    return <SignFailure />;
+    return (
+      <SignMessageWrapper>
+        <SignFailure />;
+      </SignMessageWrapper>
+    );
   }
 
   if (isSuccess) {
-    return <SignSuccess />;
+    return (
+      <SignMessageWrapper>
+        <SignSuccess />;
+      </SignMessageWrapper>
+    );
   }
 
   return null;

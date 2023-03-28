@@ -1,11 +1,9 @@
 import React from 'react';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import {
-  useSignMessage,
-  useGetSignMessageInfoStatus
-} from '@multiversx/sdk-dapp/hooks/signMessage';
-import { PageState } from '@multiversx/sdk-dapp/UI';
+
 import { Link } from 'react-router-dom';
+import { PageState } from 'components';
+import { useGetSignMessageInfoStatus, useSignMessage } from 'hooks';
 
 export const SignFailure = () => {
   const { onAbort } = useSignMessage();

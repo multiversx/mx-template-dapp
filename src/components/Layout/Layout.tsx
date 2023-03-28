@@ -1,6 +1,6 @@
 import React from 'react';
-import { AuthenticatedRoutesWrapper } from '@multiversx/sdk-dapp/wrappers';
 import { useLocation } from 'react-router-dom';
+import { AuthenticatedRoutesWrapper } from 'components';
 import { routes, routeNames } from 'routes';
 import { Footer } from './Footer';
 import { Navbar } from './Navbar';
