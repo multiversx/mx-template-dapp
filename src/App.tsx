@@ -1,6 +1,10 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import { AxiosInterceptorContext, DappProvider, Layout } from 'components';
+import {
+  AxiosInterceptorContext, // using this is optional
+  DappProvider,
+  Layout
+} from 'components';
 import {
   TransactionsToastList,
   NotificationModal,

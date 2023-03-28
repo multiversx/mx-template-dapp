@@ -16,5 +16,5 @@ export { TransactionsToastList } from '@multiversx/sdk-dapp/UI/TransactionsToast
 export { WalletConnectLoginButton } from '@multiversx/sdk-dapp/UI/walletConnect/WalletConnectLoginButton/index';
 export { WebWalletLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton/index';
 export { AuthenticatedRoutesWrapper } from '@multiversx/sdk-dapp/wrappers/AuthenticatedRoutesWrapper/index';
-export { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext/index'; // using this is optional
+export { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext/AxiosInterceptorContext';
 export { DappProvider } from '@multiversx/sdk-dapp/wrappers/DappProvider/index';
