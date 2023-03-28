@@ -5,11 +5,13 @@ import { AxiosError } from 'axios';
 import { Loader, PageState, TransactionsTable } from 'components';
 
 import { apiTimeout, contractAddress, transactionSize } from 'config';
+import { getTransactions } from 'helpers';
 import {
   useGetAccount,
   useGetActiveTransactionsStatus,
   useGetNetworkConfig
 } from 'hooks';
+import { ServerTransactionType } from 'types';
 import { DashboardLayout } from './components';
 
 const DashboardPage = () => {
