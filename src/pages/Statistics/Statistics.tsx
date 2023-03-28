@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { Loader, PageState } from '@multiversx/sdk-dapp/UI';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Loader, PageState } from 'components';
 import { TOOLS_API_URL } from 'config';
 import { routeNames } from 'routes';
 import { StatisticsLayout } from './components';

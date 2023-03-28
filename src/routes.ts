@@ -1,5 +1,5 @@
-import { RouteType } from '@multiversx/sdk-dapp/types';
 import { dAppName } from 'config';
+import { RouteType } from 'types';
 import { withPageTitle } from './components/PageTitle';
 
 import { Dashboard, Home, SignMessage, Statistics } from './pages';

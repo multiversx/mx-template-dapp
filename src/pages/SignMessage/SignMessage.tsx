@@ -1,11 +1,12 @@
 import React from 'react';
+
+import { Loader } from 'components';
 import {
-  useSignMessage,
+  useGetLastSignedMessageSession,
   useGetSignMessageInfoStatus,
-  useGetLastSignedMessageSession
-} from '@multiversx/sdk-dapp/hooks/signMessage';
-import { SignedMessageStatusesEnum } from '@multiversx/sdk-dapp/types';
-import { Loader } from '@multiversx/sdk-dapp/UI';
+  useSignMessage
+} from 'hooks';
+import { SignedMessageStatusesEnum } from 'types';
 import { SignFailure, SignMessageWrapper, SignSuccess } from './components';
 
 export const SignMessage = () => {
