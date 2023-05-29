@@ -6,19 +6,38 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { contractAddress } from 'config';
 import { refreshAccount, sendTransactions } from 'helpers';
-import { useGetPendingTransactions } from 'hooks';
+import {
+  useGetPendingTransactions,
+  useGetSignedTransactions,
+  useGetFailedTransactions
+} from 'hooks';
 import { useGetTimeToPong, useGetPingAmount } from './helpers';
 
 export const Actions = () => {
   const { hasPendingTransactions } = useGetPendingTransactions();
+  const { signedTransactions } = useGetSignedTransactions();
+  const { failedTransactions } = useGetFailedTransactions();
   const getTimeToPong = useGetTimeToPong();
   const pingAmount = useGetPingAmount();
 
   const [secondsLeft, setSecondsLeft] = useState<number>();
   const [hasPing, setHasPing] = useState<boolean>();
-  const /*transactionSessionId*/ [, setTransactionSessionId] = useState<
-      string | null
-    >(null);
+  const /*transactionSessionId*/ [
+      transactionSessionId,
+      setTransactionSessionId
+    ] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (transactionSessionId && signedTransactions[transactionSessionId]) {
+      console.log('tx signed!!!!!!!!');
+      console.log(signedTransactions[transactionSessionId]);
+    }
+
+    if (transactionSessionId && failedTransactions[transactionSessionId]) {
+      console.log('tx signing failed!!!!!!!!');
+      console.log(failedTransactions[transactionSessionId]);
+    }
+  }, [signedTransactions, failedTransactions]);
 
   const mount = () => {
     if (secondsLeft) {
@@ -103,6 +122,7 @@ export const Actions = () => {
         errorMessage: 'An error has occured during Pong',
         successMessage: 'Pong transaction successful'
       },
+      signWithoutSending: true,
       redirectAfterSign: false
     });
     if (sessionId != null) {
