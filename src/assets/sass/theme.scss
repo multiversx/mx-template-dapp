@@ -24,6 +24,23 @@ Override Bootstrap variables only above.
 .custom-classname.btn-primary {
   background-color: green;
 }
+
+/* Personalized
+-------------------------------------------------- */
+
+.nft-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  gap: 20px;
+  place-content: flex-start space-evenly;
+
+  .card-nft {
+    width: 225px; //TODO mettere max-width
+  }
+}
+
 /* Base
 -------------------------------------------------- */
 html {
@@ -95,7 +112,6 @@ html {
 /* Sign Message
 -------------------------------------------------- */
 .sign-message {
-
   & h1 {
     font-size: 24px;
   }

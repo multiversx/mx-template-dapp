@@ -1,10 +1,10 @@
 {
-  "name": "@multiversx/template-dapp",
-  "description": "MultiversX Dapp Template",
+  "name": "@defralcoding/nft-staking-dapp-template",
+  "description": "DefralCoding NFT Staking dApp Template",
   "version": "1.0.0",
-  "author": "MultiversX",
+  "author": "DefralCoding",
   "license": "GPL-3.0-or-later",
-  "repository": "@multiversx/mx-template-dapp",
+  "repository": "@defralcoding/nft-staking-dapp-template",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.1.0",
     "@fortawesome/free-solid-svg-icons": "6.1.0",
@@ -22,7 +22,7 @@
     "web-vitals": "1.0.1"
   },
   "scripts": {
-    "start": "HTTPS=true PORT=3001 react-app-rewired start",
+    "start": "HTTPS=true PORT=3000 react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",

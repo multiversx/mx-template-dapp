@@ -42,14 +42,6 @@ export const Navbar = () => {
                 </Link>
               </NavItem>
               <NavItem>
-                <Link to={routeNames.signMessage} className='nav-link'>
-                  <FontAwesomeIcon
-                    icon={faFileSignature}
-                    className='text-muted'
-                  />
-                </Link>
-              </NavItem>
-              <NavItem>
                 <button className='btn btn-link' onClick={handleLogout}>
                   Close
                 </button>
