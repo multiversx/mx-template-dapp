@@ -4,9 +4,12 @@ import { faBan, faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
 import { AxiosError } from 'axios';
 import { Loader, PageState, TransactionsTable } from 'components';
 
-import { apiTimeout, contractAddress, transactionSize } from 'config';
+import { apiTimeout, contractAddress, collectionIdentifier } from 'config';
 import { getTransactions } from 'helpers';
-import { MyApiNetworkProvider } from 'helpers/MyApiNetworkProvider';
+import {
+  MyApiNetworkProvider,
+  NonFungibleTokenOfAccountOnNetwork
+} from 'helpers/MyApiNetworkProvider';
 import {
   useGetAccount,
   useGetActiveTransactionsStatus,
@@ -30,39 +33,12 @@ export const Dashboard = () => {
   const { success, fail } = useGetActiveTransactionsStatus();
 
   const [section, setSection] = useState<Section>(Section.staked);
-  const [stakedNfts, setStakedNfts] = useState<any[]>([
-    {
-      name: 'ciao 1',
-      identifier: 'CIAO-ABC123-01',
-      url: '/nftex.jpg'
-    },
-    {
-      name: 'ciao 1',
-      identifier: 'CIAO-ABC123-02',
-      url: '/nftex.jpg'
-    },
-    {
-      name: 'ciao 1',
-      identifier: 'CIAO-ABC123-03',
-      url: '/nftex.jpg'
-    },
-    {
-      name: 'ciao 1',
-      identifier: 'CIAO-ABC123-04',
-      url: '/nftex.jpg'
-    },
-    {
-      name: 'ciao 1',
-      identifier: 'CIAO-ABC123-05',
-      url: '/nftex.jpg'
-    },
-    {
-      name: 'ciao 1',
-      identifier: 'CIAO-ABC123-06',
-      url: '/nftex.jpg'
-    }
-  ]); //TODO creare tipo
-  const [walletNfts, setWalletNfts] = useState<any[]>([]);
+  const [stakedNfts, setStakedNfts] = useState<
+    NonFungibleTokenOfAccountOnNetwork[]
+  >([]); //TODO creare tipo
+  const [walletNfts, setWalletNfts] = useState<
+    NonFungibleTokenOfAccountOnNetwork[]
+  >([]);
 
   const [transactions, setTransactions] = useState<ServerTransactionType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -72,17 +48,19 @@ export const Dashboard = () => {
     try {
       setIsLoading(true);
 
-      //TODO retrieve NFTs
-      const { data } = await getTransactions({
-        apiAddress,
-        sender: address,
-        receiver: contractAddress,
-        condition: 'must',
-        transactionSize,
-        apiTimeout
-      });
-      setTransactions(data);
+      const stakedPositions = await apiNetworkProvider.getAccountStakedNfts(
+        address,
+        contractAddress
+      );
+      console.log(stakedPositions);
+
+      const _walletNfts = await apiNetworkProvider.getAccountNftsFromCollection(
+        address,
+        collectionIdentifier
+      );
+      setWalletNfts(_walletNfts);
     } catch (err) {
+      console.log(err);
       const { message } = err as AxiosError;
       setError(message);
     }
@@ -102,7 +80,7 @@ export const Dashboard = () => {
   if (isLoading) {
     return <Loader />;
   }
-  /*
+
   if (error) {
     return (
       <div className='my-5'>
@@ -114,7 +92,6 @@ export const Dashboard = () => {
       </div>
     );
   }
-  */
 
   return (
     <div>

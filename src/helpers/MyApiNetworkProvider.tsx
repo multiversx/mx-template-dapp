@@ -1,5 +1,30 @@
-import { Address } from '@multiversx/sdk-core';
-import { ApiNetworkProvider } from '@multiversx/sdk-network-providers';
+import {
+  Address,
+  SmartContract,
+  SmartContractAbi,
+  AbiRegistry,
+  ResultsParser,
+  VariadicValue,
+  Struct
+} from '@multiversx/sdk-core';
+import {
+  ApiNetworkProvider,
+  NonFungibleTokenOfAccountOnNetwork as mx_NonFungibleTokenOfAccountOnNetwork
+} from '@multiversx/sdk-network-providers';
+import stakingAbi from 'staking.abi.json';
+
+export type NonFungibleTokenOfAccountOnNetwork =
+  mx_NonFungibleTokenOfAccountOnNetwork & {
+    media: [
+      {
+        originalUrl: string;
+        thumbnailUrl: string;
+        url: string;
+        fileType: string;
+        fileSize: number;
+      }
+    ];
+  };
 
 export class MyApiNetworkProvider extends ApiNetworkProvider {
   async getAccountFromHerotag(herotag: string): Promise<string> {
@@ -27,6 +52,50 @@ export class MyApiNetworkProvider extends ApiNetworkProvider {
       `accounts/${address}/nfts?size=10000&excludeMetaESDT=true`
     );
     return response;
+  }
+
+  async getAccountNftsFromCollection(
+    address: string,
+    collection: string
+  ): Promise<[NonFungibleTokenOfAccountOnNetwork]> {
+    const response = await this.doGetGeneric(
+      `accounts/${address}/nfts?size=10000&collections=${collection}`
+    );
+    return response;
+  }
+
+  async getAccountStakedNfts(
+    address: string,
+    contractAddress: string
+  ): Promise<any[]> {
+    const smartContract = new SmartContract({
+      address: new Address(contractAddress),
+      abi: new SmartContractAbi(AbiRegistry.create(stakingAbi))
+    });
+
+    const interaction = smartContract.methods.getUserStaking([address]);
+    const query = interaction.check().buildQuery();
+    const queryResponse = await this.queryContract(query);
+    const firstValue = new ResultsParser().parseQueryResponse(
+      queryResponse,
+      interaction.getEndpoint()
+    ).firstValue;
+    if (firstValue) {
+      return (firstValue as VariadicValue).getItems().map((stakedPos) => {
+        return {
+          nonce: (stakedPos as Struct).getFieldValue('nonce').toNumber(),
+          staked_epoch: (stakedPos as Struct)
+            .getFieldValue('staked_epoch')
+            .toNumber(),
+          last_claimed_timestamp: (stakedPos as Struct)
+            .getFieldValue('last_claimed_timestamp')
+            .toNumber()
+        };
+      });
+
+      return [...(firstValue as VariadicValue).getItems()];
+    }
+    return [];
   }
 }
 

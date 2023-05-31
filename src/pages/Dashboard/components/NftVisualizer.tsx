@@ -1,5 +1,7 @@
+import { NonFungibleTokenOfAccountOnNetwork } from 'helpers/MyApiNetworkProvider';
+
 type NftVisualizerProps = {
-  nft: any; //TODO cambiare tipo
+  nft: NonFungibleTokenOfAccountOnNetwork; //TODO cambiare tipo
 };
 
 export const NftVisualizer = ({ nft }: NftVisualizerProps) => {
@@ -8,7 +10,7 @@ export const NftVisualizer = ({ nft }: NftVisualizerProps) => {
       <div className='card-header p-0 mx-3 mt-3 position-relative z-index-1'>
         <div className='hover-img border-radius-lg'>
           <img
-            src={nft.url}
+            src={nft.media[0].url}
             className='img-fluid border-radius-lg'
             alt={nft.name}
           />
