@@ -7,7 +7,6 @@ import {
   WalletConnectLoginButton,
   WebWalletLoginButton
 } from 'components';
-import { walletConnectV2ProjectId } from 'config';
 import { routeNames } from 'routes';
 
 const UnlockPage = () => {
@@ -47,11 +46,6 @@ const UnlockPage = () => {
             <WalletConnectLoginButton
               loginButtonText='xPortal App'
               {...commonProps}
-              {...(walletConnectV2ProjectId
-                ? {
-                    isWalletConnectV2: true
-                  }
-                : {})}
             />
           </div>
         </div>
