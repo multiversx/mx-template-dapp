@@ -36,6 +36,7 @@ const UnlockPage = () => {
 
             <WebWalletLoginButton
               loginButtonText='MultiversX Web Wallet'
+              data-testid='webWalletLoginBtn'
               {...commonProps}
             />
             <LedgerLoginButton
