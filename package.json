@@ -27,7 +27,9 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext js,ts,tsx src"
+    "lint": "eslint --ext js,ts,tsx src",
+    "run-cypress" : "npx cypress run"
+
   },
   "browserslist": [
     ">0.2%",
