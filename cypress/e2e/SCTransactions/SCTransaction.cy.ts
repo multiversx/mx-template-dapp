@@ -18,7 +18,7 @@ describe('Smart Contract Transactions', () => {
         cy.wait(180010);
         scTransaction(SCTransactionData.pong);
       } else {
-        // In this case will finish the existing flow with the pong transaction , and after will proceed with the complete new flow ping- pong 
+        // In this case will finish the existing flow with the pong transaction ,and after will proceed with a new ping-pong flow
         scTransaction(SCTransactionData.pong);
         scTransaction(SCTransactionData.ping);
         // Wait 3 minutes for the pong
