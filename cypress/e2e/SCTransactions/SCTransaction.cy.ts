@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 import { scTransaction } from './SCActions';
-import { SCTransactionData,scSelectors } from '../TemplateDapp/SCTransactionData';
+import { SCTransactionData,scSelectors } from './SCTransactionData';
 
 describe('Smart Contract Transactions', () => {
   before(() => {
@@ -10,19 +10,18 @@ describe('Smart Contract Transactions', () => {
     cy.login();
   });
   it('Ping & Pong actions', () => {
-    //The condtionals will check the actual status of the tranzaction and proceed with the properly actions.
+    // The condtionals will check the actual status of the transaction
     cy.get('.action-btn').then(($btn) => {
-      // synchronously ask for the button's text
-      // and do something based on whether it includes
+      // Synchronously ask for the button's text
       if ($btn.text().includes(SCTransactionData.ping)) {
         scTransaction(SCTransactionData.ping);
         cy.wait(180010);
         scTransaction(SCTransactionData.pong);
       } else {
-        // in this case will finish the existing flow with the pong transcation , and after will proceed with the complete new flow ping- pong 
+        // In this case will finish the existing flow with the pong transaction , and after will proceed with the complete new flow ping- pong 
         scTransaction(SCTransactionData.pong);
         scTransaction(SCTransactionData.ping);
-        //wainting 3 minutes for the pong 
+        // Wait 3 minutes for the pong
         cy.wait(180010);
         scTransaction(SCTransactionData.pong);
       }
