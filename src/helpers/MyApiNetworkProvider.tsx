@@ -54,6 +54,18 @@ export class MyApiNetworkProvider extends ApiNetworkProvider {
     return response;
   }
 
+  async getNftsFromCollection(
+    collection: string,
+    nonces: string[]
+  ): Promise<[any]> {
+    const response = await this.doGetGeneric(
+      `collections/${collection}/nfts?size=10000&identifiers=${nonces.join(
+        ','
+      )}`
+    );
+    return response;
+  }
+
   async getAccountNftsFromCollection(
     address: string,
     collection: string
