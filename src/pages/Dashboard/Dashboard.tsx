@@ -8,7 +8,7 @@ import { apiTimeout, contractAddress, collectionIdentifier } from "config";
 import { getTransactions } from "helpers";
 import {
 	MyApiNetworkProvider,
-	NonFungibleTokenOfAccountOnNetwork,
+	NonFungibleToken,
 } from "helpers/MyApiNetworkProvider";
 import {
 	useGetAccount,
@@ -33,12 +33,8 @@ export const Dashboard = () => {
 	const { success, fail } = useGetActiveTransactionsStatus();
 
 	const [section, setSection] = useState<Section>(Section.staked);
-	const [stakedNfts, setStakedNfts] = useState<
-		NonFungibleTokenOfAccountOnNetwork[]
-	>([]); //TODO creare tipo
-	const [walletNfts, setWalletNfts] = useState<
-		NonFungibleTokenOfAccountOnNetwork[]
-	>([]);
+	const [stakedNfts, setStakedNfts] = useState<NonFungibleToken[]>([]); //TODO creare tipo
+	const [walletNfts, setWalletNfts] = useState<NonFungibleToken[]>([]);
 
 	const [transactions, setTransactions] = useState<ServerTransactionType[]>(
 		[]
@@ -46,31 +42,50 @@ export const Dashboard = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<string>();
 
+	const changeCheckedStaked = (index: number, checked: boolean) => {
+		const _stakedNfts = [...stakedNfts];
+		_stakedNfts[index]._checked = checked;
+		setStakedNfts(_stakedNfts);
+	};
+	const changeCheckedWallet = (index: number, checked: boolean) => {
+		const _walletNfts = [...walletNfts];
+		_walletNfts[index]._checked = checked;
+		setWalletNfts(_walletNfts);
+	};
+
 	const fetchNfts = async () => {
 		try {
 			setIsLoading(true);
 
-			//TODO handle errors
+			//Get Staked NFTs
 			apiNetworkProvider
 				.getAccountStakedNfts(address, contractAddress)
-				.then((res) => {
-					console.log("staked", res);
-					console.log(
-						"aa",
-						res.map((nft) => nft.nonce)
-					);
-
+				.then((_stakedPositions) => {
 					apiNetworkProvider
 						.getNftsFromCollection(
 							collectionIdentifier,
-							res.map((nft) => nft.nonce.toString(16))
+							_stakedPositions.map((sp) => sp.nonce.toString(16))
 						)
-						.then((res) => {
-							console.log("staked nfts returned", res);
-							setStakedNfts(res);
+						.then((_stakedNfts) => {
+							_stakedNfts.forEach((nft) => {
+								const stakedPosition = _stakedPositions.find(
+									(sp) => sp.nonce === nft.nonce
+								);
+								if (stakedPosition) {
+									nft._stakingPosition = stakedPosition;
+								}
+							});
 						});
+				})
+				.catch((err) => {
+					const { message } = err as AxiosError;
+					//setError(message);
+				})
+				.finally(() => {
+					setIsLoading(false);
 				});
 
+			//Get Wallet NFTs
 			apiNetworkProvider
 				.getAccountNftsFromCollection(address, collectionIdentifier)
 				.then((res) => {
@@ -104,7 +119,7 @@ export const Dashboard = () => {
 				<PageState
 					icon={faBan}
 					className="text-muted"
-					title="Error fetching transactions."
+					title="Error fetching Staked NFTs."
 				/>
 			</div>
 		);
@@ -117,16 +132,27 @@ export const Dashboard = () => {
 					<div className="bg-dark p-4">
 						<SectionSelector
 							section={section}
+							sections={[...Object.values(Section)]}
 							setSection={setSection}
 						/>
 						<div className="nft-container">
 							{section === Section.staked &&
-								stakedNfts.map((nft) => (
-									<NftVisualizer nft={nft} />
+								stakedNfts.map((nft, i) => (
+									<NftVisualizer
+										nft={nft}
+										changeCallback={(checked) =>
+											changeCheckedStaked(i, checked)
+										}
+									/>
 								))}
 							{section === Section.wallet &&
-								walletNfts.map((nft) => (
-									<NftVisualizer nft={nft} />
+								walletNfts.map((nft, i) => (
+									<NftVisualizer
+										nft={nft}
+										changeCallback={(checked) =>
+											changeCheckedWallet(i, checked)
+										}
+									/>
 								))}
 						</div>
 					</div>
@@ -138,31 +164,29 @@ export const Dashboard = () => {
 
 type SectionSelectorProps = {
 	section: string;
+	sections: string[];
 	setSection: any; //TODO cercare di mettere Dispatch<SetStateAction<Section>>
 };
 
-const SectionSelector = ({ section, setSection }: SectionSelectorProps) => {
+const SectionSelector = ({
+	section,
+	sections,
+	setSection,
+}: SectionSelectorProps) => {
 	//TODO migliorare grafica
 	return (
 		<div className="mb-2">
-			<button
-				className={
-					"btn btn-lg btn-" +
-					(section == Section.staked ? "primary" : "outline-primary")
-				}
-				onClick={() => setSection(Section.staked)}
-			>
-				Staked
-			</button>
-			<button
-				className={
-					"btn btn-lg btn-" +
-					(section == Section.wallet ? "primary" : "outline-primary")
-				}
-				onClick={() => setSection(Section.wallet)}
-			>
-				Wallet
-			</button>
+			{sections.map((s: string) => (
+				<button
+					className={
+						"btn btn-lg btn-" +
+						(section == s ? "primary" : "outline-primary")
+					}
+					onClick={() => setSection(s)}
+				>
+					Staked
+				</button>
+			))}
 		</div>
 	);
 };
