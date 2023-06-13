@@ -7,6 +7,7 @@ on:
       - development
   repository_dispatch:
     types: e2e-tests
+  workflow_dispatch:
 
 jobs:
   build:
