@@ -23,8 +23,10 @@ import {
 	useGetNetworkConfig,
 } from "hooks";
 import { ServerTransactionType } from "types";
+import CountUp from "react-countup";
 import { NftVisualizer } from "./components/NftVisualizer";
 import { string2hex } from "helpers";
+import BigNumber from "bignumber.js";
 
 enum Section {
 	staked = "Staked",
@@ -43,6 +45,8 @@ export const Dashboard = () => {
 	const [section, setSection] = useState<Section>(Section.staked);
 	const [stakedNfts, setStakedNfts] = useState<NonFungibleToken[]>([]); //TODO creare tipo
 	const [walletNfts, setWalletNfts] = useState<NonFungibleToken[]>([]);
+
+	const [rewards, setRewards] = useState<BigNumber>(new BigNumber(0));
 
 	const [transactions, setTransactions] = useState<ServerTransactionType[]>(
 		[]
@@ -112,6 +116,12 @@ export const Dashboard = () => {
 		setIsLoading(false);
 	};
 
+	const fetchRewards = async () => {
+		apiNetworkProvider
+			.getAccountRewards(address, contractAddress)
+			.then((res) => setRewards(res));
+	};
+
 	const stakeNfts = async () => {
 		const nftsToStake = walletNfts.filter((nft) => nft._checked);
 
@@ -125,7 +135,7 @@ export const Dashboard = () => {
 				.build()
 				.toString() +
 			"@" +
-			string2hex("stake"); //TODO stake multiple
+			string2hex("stake_multiple");
 
 		await refreshAccount();
 
@@ -163,8 +173,26 @@ export const Dashboard = () => {
 			},
 			transactionsDisplayInfo: {
 				processingMessage: "Unstaking NFTs...",
-				errorMessage: "An error has occured during staking",
+				errorMessage: "An error has occured during unstaking",
 				successMessage: "NFTs unstaked successfully!",
+			},
+		});
+	};
+
+	const claimRewards = async () => {
+		await refreshAccount();
+
+		const { sessionId } = await sendTransactions({
+			transactions: {
+				value: 0,
+				data: "claim_rewards",
+				receiver: contractAddress,
+				gasLimit: "20000000",
+			},
+			transactionsDisplayInfo: {
+				processingMessage: "Claiming rewards...",
+				errorMessage: "An error has occured during claiming",
+				successMessage: "Rewards claimed successfully!",
 			},
 		});
 	};
@@ -172,11 +200,16 @@ export const Dashboard = () => {
 	useEffect(() => {
 		if (success || fail) {
 			fetchNfts();
+			fetchRewards();
 		}
 	}, [success, fail]);
 
 	useEffect(() => {
 		fetchNfts();
+		fetchRewards();
+		setInterval(function () {
+			fetchRewards();
+		}, 6000);
 	}, []);
 
 	if (isLoading) {
@@ -198,54 +231,72 @@ export const Dashboard = () => {
 	return (
 		<div>
 			<div className="container">
-				<div className="bg-white p-4">
-					<div className="bg-secondary p-4">
-						<div className="mb-4 d-md-flex justify-content-md-end">
-							<SectionSelector
-								section={section}
-								sections={[...Object.values(Section)]}
-								setSection={setSection}
-								className="mr-5"
-							/>
-
-							{section === Section.staked && (
-								<button
-									className="btn btn-lg px-4 btn-outline-info"
-									onClick={() => unstakeNfts()}
-								>
-									Unstake
-								</button>
-							)}
-
-							{section === Section.wallet && (
-								<button
-									className="btn btn-lg px-4 btn-outline-info"
-									onClick={() => stakeNfts()}
-								>
-									Stake
-								</button>
-							)}
+				<div className="bg-secondary p-4 mt-4">
+					<div className="text-center display-3 mb-4">
+						<CountUp
+							end={rewards.dividedBy(10 ** 12).toNumber()} //TODO numero decimali
+							decimals={4}
+							duration={5}
+							useEasing={true}
+							preserveValue={true}
+							prefix="Rewards: "
+							suffix=" CUMB"
+						/>
+						<div>
+							<button
+								className="btn btn-lg btn-info ml-4"
+								onClick={() => claimRewards()}
+							>
+								Claim Rewards
+							</button>
 						</div>
-						<div className="nft-container">
-							{section === Section.staked &&
-								stakedNfts.map((nft, i) => (
-									<NftVisualizer
-										nft={nft}
-										changeCallback={(checked) =>
-											changeCheckedStaked(i, checked)
-										}
-									/>
-								))}
-							{section === Section.wallet &&
-								walletNfts.map((nft, i) => (
-									<NftVisualizer
-										nft={nft}
-										changeCallback={(checked) =>
-											changeCheckedWallet(i, checked)
-										}
-									/>
-								))}
-						</div>
+					</div>
+
+					<div className="mb-4 d-md-flex justify-content-md-end">
+						<SectionSelector
+							section={section}
+							sections={[...Object.values(Section)]}
+							setSection={setSection}
+							className="mr-5"
+						/>
+
+						{section === Section.staked && (
+							<button
+								className="btn btn-lg px-4 btn-outline-info"
+								onClick={() => unstakeNfts()}
+							>
+								Unstake
+							</button>
+						)}
+
+						{section === Section.wallet && (
+							<button
+								className="btn btn-lg px-4 btn-outline-info"
+								onClick={() => stakeNfts()}
+							>
+								Stake
+							</button>
+						)}
+					</div>
+					<div className="nft-container">
+						{section === Section.staked &&
+							stakedNfts.map((nft, i) => (
+								<NftVisualizer
+									nft={nft}
+									changeCallback={(checked) =>
+										changeCheckedStaked(i, checked)
+									}
+								/>
+							))}
+						{section === Section.wallet &&
+							walletNfts.map((nft, i) => (
+								<NftVisualizer
+									nft={nft}
+									changeCallback={(checked) =>
+										changeCheckedWallet(i, checked)
+									}
+								/>
+							))}
 					</div>
 				</div>
 			</div>

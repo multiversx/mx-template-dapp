@@ -5,8 +5,10 @@ import {
 	AbiRegistry,
 	ResultsParser,
 	VariadicValue,
+	NumericalValue,
 	Struct,
 } from "@multiversx/sdk-core";
+import BigNumber from "bignumber.js";
 import {
 	ApiNetworkProvider,
 	NonFungibleTokenOfAccountOnNetwork as mx_NonFungibleTokenOfAccountOnNetwork,
@@ -116,6 +118,30 @@ export class MyApiNetworkProvider extends ApiNetworkProvider {
 			return [...(firstValue as VariadicValue).getItems()];
 		}
 		return [];
+	}
+
+	async getAccountRewards(
+		address: string,
+		contractAddress: string
+	): Promise<BigNumber> {
+		const smartContract = new SmartContract({
+			address: new Address(contractAddress),
+			abi: new SmartContractAbi(AbiRegistry.create(stakingAbi)),
+		});
+
+		const interaction = smartContract.methods.calculateRewardsForUser([
+			address,
+		]);
+		const query = interaction.check().buildQuery();
+		const queryResponse = await this.queryContract(query);
+		const firstValue = new ResultsParser().parseQueryResponse(
+			queryResponse,
+			interaction.getEndpoint()
+		).firstValue;
+		if (firstValue) {
+			return (firstValue as NumericalValue).value;
+		}
+		return new BigNumber(0);
 	}
 }
 
