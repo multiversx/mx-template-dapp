@@ -5,14 +5,17 @@ import { AxiosError } from "axios";
 import { Loader, PageState, TransactionsTable } from "components";
 
 import { apiTimeout, contractAddress, collectionIdentifier } from "config";
+import { sendTransactions } from "@multiversx/sdk-dapp/services/transactions/sendTransactions";
+import { refreshAccount } from "@multiversx/sdk-dapp/utils/account/refreshAccount";
 import { getTransactions } from "helpers";
 import {
 	MyApiNetworkProvider,
 	NonFungibleToken,
 } from "helpers/MyApiNetworkProvider";
 import {
-	TokenTransfer,
+	TokenPayment,
 	MultiESDTNFTTransferPayloadBuilder,
+	Address,
 } from "@multiversx/sdk-core";
 import {
 	useGetAccount,
@@ -21,6 +24,7 @@ import {
 } from "hooks";
 import { ServerTransactionType } from "types";
 import { NftVisualizer } from "./components/NftVisualizer";
+import { string2hex } from "helpers";
 
 enum Section {
 	staked = "Staked",
@@ -65,6 +69,10 @@ export const Dashboard = () => {
 			apiNetworkProvider
 				.getAccountStakedNfts(address, contractAddress)
 				.then((_stakedPositions) => {
+					if (_stakedPositions.length === 0) {
+						setStakedNfts([]);
+						return;
+					}
 					apiNetworkProvider
 						.getNftsFromCollection(
 							collectionIdentifier,
@@ -106,6 +114,59 @@ export const Dashboard = () => {
 
 	const stakeNfts = async () => {
 		const nftsToStake = walletNfts.filter((nft) => nft._checked);
+
+		const tokenPayments: TokenPayment[] = nftsToStake.map((nft) =>
+			TokenPayment.nonFungible(nft.ticker, nft.nonce)
+		);
+		const payload =
+			new MultiESDTNFTTransferPayloadBuilder()
+				.setPayments(tokenPayments)
+				.setDestination(new Address(contractAddress))
+				.build()
+				.toString() +
+			"@" +
+			string2hex("stake"); //TODO stake multiple
+
+		await refreshAccount();
+
+		const { sessionId } = await sendTransactions({
+			transactions: {
+				value: 0,
+				data: payload,
+				receiver: address,
+				gasLimit: "20000000",
+			},
+			transactionsDisplayInfo: {
+				processingMessage: "Staking NFTs...",
+				errorMessage: "An error has occured during staking",
+				successMessage: "NFTs staked successfully!",
+			},
+		});
+	};
+
+	const unstakeNfts = async () => {
+		const nftsToUnstake = stakedNfts.filter((nft) => nft._checked);
+		const noncesToUnstake = nftsToUnstake.map(
+			(nft) => nft.identifier.split("-")[2]
+		);
+
+		const payload = "unstake_multiple@" + noncesToUnstake.join("@");
+
+		await refreshAccount();
+
+		const { sessionId } = await sendTransactions({
+			transactions: {
+				value: 0,
+				data: payload,
+				receiver: contractAddress,
+				gasLimit: "20000000",
+			},
+			transactionsDisplayInfo: {
+				processingMessage: "Unstaking NFTs...",
+				errorMessage: "An error has occured during staking",
+				successMessage: "NFTs unstaked successfully!",
+			},
+		});
 	};
 
 	useEffect(() => {
@@ -150,9 +211,7 @@ export const Dashboard = () => {
 							{section === Section.staked && (
 								<button
 									className="btn btn-lg px-4 btn-outline-info"
-									onClick={() => {
-										//TODO
-									}}
+									onClick={() => unstakeNfts()}
 								>
 									Unstake
 								</button>
@@ -161,9 +220,7 @@ export const Dashboard = () => {
 							{section === Section.wallet && (
 								<button
 									className="btn btn-lg px-4 btn-outline-info"
-									onClick={() => {
-										//TODO
-									}}
+									onClick={() => stakeNfts()}
 								>
 									Stake
 								</button>

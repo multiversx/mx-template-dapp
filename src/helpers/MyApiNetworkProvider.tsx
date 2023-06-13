@@ -23,6 +23,7 @@ export type NonFungibleToken = mx_NonFungibleTokenOfAccountOnNetwork & {
 			fileSize: number;
 		}
 	];
+	ticker: string;
 	_checked: boolean;
 	_stakingPosition: {
 		nonce: number;
