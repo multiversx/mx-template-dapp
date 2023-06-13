@@ -29,7 +29,8 @@ import {
 } from "hooks";
 import { ServerTransactionType } from "types";
 import CountUp from "react-countup";
-import { NftVisualizer } from "./components/NftVisualizer";
+import { NftVisualizer } from "components/NftVisualizer";
+import { SectionSelector } from "components/SectionSelector";
 import { string2hex } from "helpers";
 import BigNumber from "bignumber.js";
 
@@ -37,6 +38,13 @@ enum Section {
 	staked = "Staked",
 	wallet = "Wallet",
 }
+
+type errorsType = {
+	staked: string | undefined;
+	wallet: string | undefined;
+	rewards: string | undefined;
+	generic: string | undefined;
+};
 
 export const Dashboard = () => {
 	const {
@@ -51,13 +59,18 @@ export const Dashboard = () => {
 	const [stakedNfts, setStakedNfts] = useState<NonFungibleToken[]>([]); //TODO creare tipo
 	const [walletNfts, setWalletNfts] = useState<NonFungibleToken[]>([]);
 
-	const [rewards, setRewards] = useState<BigNumber>(new BigNumber(0));
+	const [rewards, setRewards] = useState<BigNumber | undefined>();
 
 	const [transactions, setTransactions] = useState<ServerTransactionType[]>(
 		[]
 	);
 	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState<string>();
+	const [error, setError] = useState<errorsType>({
+		staked: undefined,
+		wallet: undefined,
+		rewards: undefined,
+		generic: undefined,
+	});
 
 	const changeCheckedStaked = (index: number, checked: boolean) => {
 		const _stakedNfts = [...stakedNfts];
@@ -97,11 +110,15 @@ export const Dashboard = () => {
 								}
 							});
 							setStakedNfts(_stakedNfts);
+						})
+						.catch((err) => {
+							const { message } = err as AxiosError;
+							setError((prev) => ({ ...prev, staked: message }));
 						});
 				})
 				.catch((err) => {
 					const { message } = err as AxiosError;
-					//setError(message);
+					setError((prev) => ({ ...prev, staked: message }));
 				})
 				.finally(() => {
 					setIsLoading(false);
@@ -112,11 +129,14 @@ export const Dashboard = () => {
 				.getAccountNftsFromCollection(address, collectionIdentifier)
 				.then((res) => {
 					setWalletNfts(res);
+				})
+				.catch((err) => {
+					const { message } = err as AxiosError;
+					setError((prev) => ({ ...prev, wallet: message }));
 				});
 		} catch (err) {
-			console.log(err);
 			const { message } = err as AxiosError;
-			setError(message);
+			setError((prev) => ({ ...prev, generic: message }));
 		}
 		setIsLoading(false);
 	};
@@ -124,7 +144,11 @@ export const Dashboard = () => {
 	const fetchRewards = async () => {
 		apiNetworkProvider
 			.getAccountRewards(address, contractAddress)
-			.then((res) => setRewards(res));
+			.then((res) => setRewards(res))
+			.catch((err) => {
+				const { message } = err as AxiosError;
+				setError((prev) => ({ ...prev, rewards: message }));
+			});
 	};
 
 	const stakeNfts = async (stakeAll: boolean = false) => {
@@ -225,13 +249,13 @@ export const Dashboard = () => {
 		return <Loader />;
 	}
 
-	if (error) {
+	if (error.generic) {
 		return (
 			<div className="my-5">
 				<PageState
 					icon={faBan}
 					className="text-muted"
-					title="Error fetching Staked NFTs."
+					title="Error fetching Data"
 				/>
 			</div>
 		);
@@ -242,17 +266,22 @@ export const Dashboard = () => {
 			<div className="container">
 				<div className="bg-secondary p-4 mt-4">
 					<div className="text-center display-3 mb-4">
-						<CountUp
-							end={rewards
-								.dividedBy(10 ** rewardToken.decimals)
-								.toNumber()} //TODO numero decimali
-							decimals={rewardToken.decimalsToDisplay}
-							duration={5}
-							useEasing={true}
-							preserveValue={true}
-							prefix="Rewards: "
-							suffix=" CUMB"
-						/>
+						{error.rewards && !rewards && (
+							<PageState title="Sorry, we can't calculate your rewards. Please try again later." />
+						)}
+						{rewards && (
+							<CountUp
+								end={rewards
+									.dividedBy(10 ** rewardToken.decimals)
+									.toNumber()}
+								decimals={rewardToken.decimalsToDisplay}
+								duration={6}
+								useEasing={true}
+								preserveValue={true}
+								prefix="Rewards: "
+								suffix={" " + rewardToken.symbol}
+							/>
+						)}
 						<div>
 							<button
 								className="btn btn-lg btn-info ml-4"
@@ -313,7 +342,16 @@ export const Dashboard = () => {
 							</>
 						)}
 					</div>
+
 					<div className="nft-container">
+						{section === Section.staked &&
+							stakedNfts.length === 0 &&
+							error.staked && (
+								<PageState
+									icon={faBan}
+									title="Can't load your staked NFTs... Please try again later"
+								/>
+							)}
 						{section === Section.staked &&
 							stakedNfts.map((nft, i) => (
 								<NftVisualizer
@@ -323,6 +361,15 @@ export const Dashboard = () => {
 									}
 								/>
 							))}
+
+						{section === Section.wallet &&
+							walletNfts.length === 0 &&
+							error.wallet && (
+								<PageState
+									icon={faBan}
+									title="Can't load your wallet NFTs... Please try again later"
+								/>
+							)}
 						{section === Section.wallet &&
 							walletNfts.map((nft, i) => (
 								<NftVisualizer
@@ -335,37 +382,6 @@ export const Dashboard = () => {
 					</div>
 				</div>
 			</div>
-		</div>
-	);
-};
-
-type SectionSelectorProps = {
-	section: string;
-	sections: string[];
-	setSection: any; //TODO cercare di mettere Dispatch<SetStateAction<Section>>
-	className?: string;
-};
-
-const SectionSelector = ({
-	section,
-	sections,
-	setSection,
-	className,
-}: SectionSelectorProps) => {
-	//TODO migliorare grafica
-	return (
-		<div className={className}>
-			{sections.map((s: string, i: number) => (
-				<button
-					className={
-						"btn btn-lg px-4 mx-1 btn-" +
-						(section == s ? "info" : "outline-info")
-					}
-					onClick={() => setSection(s)}
-				>
-					{s}
-				</button>
-			))}
 		</div>
 	);
 };
