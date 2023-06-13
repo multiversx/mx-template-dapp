@@ -4,7 +4,12 @@ import { faBan, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
 import { AxiosError } from "axios";
 import { Loader, PageState, TransactionsTable } from "components";
 
-import { apiTimeout, contractAddress, collectionIdentifier } from "config";
+import {
+	apiTimeout,
+	contractAddress,
+	collectionIdentifier,
+	rewardToken,
+} from "config";
 import { sendTransactions } from "@multiversx/sdk-dapp/services/transactions/sendTransactions";
 import { refreshAccount } from "@multiversx/sdk-dapp/utils/account/refreshAccount";
 import { getTransactions } from "helpers";
@@ -122,8 +127,10 @@ export const Dashboard = () => {
 			.then((res) => setRewards(res));
 	};
 
-	const stakeNfts = async () => {
-		const nftsToStake = walletNfts.filter((nft) => nft._checked);
+	const stakeNfts = async (stakeAll: boolean = false) => {
+		const nftsToStake = walletNfts.filter(
+			(nft) => nft._checked || stakeAll
+		);
 
 		const tokenPayments: TokenPayment[] = nftsToStake.map((nft) =>
 			TokenPayment.nonFungible(nft.ticker, nft.nonce)
@@ -144,7 +151,7 @@ export const Dashboard = () => {
 				value: 0,
 				data: payload,
 				receiver: address,
-				gasLimit: "20000000",
+				gasLimit: 3_000_000 + 1_500_000 * nftsToStake.length,
 			},
 			transactionsDisplayInfo: {
 				processingMessage: "Staking NFTs...",
@@ -154,8 +161,10 @@ export const Dashboard = () => {
 		});
 	};
 
-	const unstakeNfts = async () => {
-		const nftsToUnstake = stakedNfts.filter((nft) => nft._checked);
+	const unstakeNfts = async (unstakeAll: boolean = false) => {
+		const nftsToUnstake = stakedNfts.filter(
+			(nft) => nft._checked || unstakeAll
+		);
 		const noncesToUnstake = nftsToUnstake.map(
 			(nft) => nft.identifier.split("-")[2]
 		);
@@ -169,7 +178,7 @@ export const Dashboard = () => {
 				value: 0,
 				data: payload,
 				receiver: contractAddress,
-				gasLimit: "20000000",
+				gasLimit: 4_000_000 + 2_000_000 * nftsToUnstake.length,
 			},
 			transactionsDisplayInfo: {
 				processingMessage: "Unstaking NFTs...",
@@ -234,8 +243,10 @@ export const Dashboard = () => {
 				<div className="bg-secondary p-4 mt-4">
 					<div className="text-center display-3 mb-4">
 						<CountUp
-							end={rewards.dividedBy(10 ** 12).toNumber()} //TODO numero decimali
-							decimals={4}
+							end={rewards
+								.dividedBy(10 ** rewardToken.decimals)
+								.toNumber()} //TODO numero decimali
+							decimals={rewardToken.decimalsToDisplay}
 							duration={5}
 							useEasing={true}
 							preserveValue={true}
@@ -261,21 +272,45 @@ export const Dashboard = () => {
 						/>
 
 						{section === Section.staked && (
-							<button
-								className="btn btn-lg px-4 btn-outline-info"
-								onClick={() => unstakeNfts()}
-							>
-								Unstake
-							</button>
+							<>
+								<button
+									className="btn btn-lg px-4 btn-outline-info"
+									onClick={() => unstakeNfts()}
+									disabled={
+										stakedNfts.filter((nft) => nft._checked)
+											.length === 0
+									}
+								>
+									Unstake
+								</button>
+								<button
+									className="btn btn-lg px-4 ml-1 btn-outline-info"
+									onClick={() => unstakeNfts(true)}
+								>
+									Unstake All
+								</button>
+							</>
 						)}
 
 						{section === Section.wallet && (
-							<button
-								className="btn btn-lg px-4 btn-outline-info"
-								onClick={() => stakeNfts()}
-							>
-								Stake
-							</button>
+							<>
+								<button
+									className="btn btn-lg px-4 btn-outline-info"
+									onClick={() => stakeNfts()}
+									disabled={
+										walletNfts.filter((nft) => nft._checked)
+											.length === 0
+									}
+								>
+									Stake
+								</button>
+								<button
+									className="btn btn-lg px-4 ml-1 btn-outline-info"
+									onClick={() => stakeNfts(true)}
+								>
+									Stake All
+								</button>
+							</>
 						)}
 					</div>
 					<div className="nft-container">
