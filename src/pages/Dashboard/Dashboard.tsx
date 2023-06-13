@@ -11,6 +11,10 @@ import {
 	NonFungibleToken,
 } from "helpers/MyApiNetworkProvider";
 import {
+	TokenTransfer,
+	MultiESDTNFTTransferPayloadBuilder,
+} from "@multiversx/sdk-core";
+import {
 	useGetAccount,
 	useGetActiveTransactionsStatus,
 	useGetNetworkConfig,
@@ -75,6 +79,7 @@ export const Dashboard = () => {
 									nft._stakingPosition = stakedPosition;
 								}
 							});
+							setStakedNfts(_stakedNfts);
 						});
 				})
 				.catch((err) => {
@@ -97,6 +102,10 @@ export const Dashboard = () => {
 			setError(message);
 		}
 		setIsLoading(false);
+	};
+
+	const stakeNfts = async () => {
+		const nftsToStake = walletNfts.filter((nft) => nft._checked);
 	};
 
 	useEffect(() => {
@@ -129,12 +138,37 @@ export const Dashboard = () => {
 		<div>
 			<div className="container">
 				<div className="bg-white p-4">
-					<div className="bg-dark p-4">
-						<SectionSelector
-							section={section}
-							sections={[...Object.values(Section)]}
-							setSection={setSection}
-						/>
+					<div className="bg-secondary p-4">
+						<div className="mb-4 d-md-flex justify-content-md-end">
+							<SectionSelector
+								section={section}
+								sections={[...Object.values(Section)]}
+								setSection={setSection}
+								className="mr-5"
+							/>
+
+							{section === Section.staked && (
+								<button
+									className="btn btn-lg px-4 btn-outline-info"
+									onClick={() => {
+										//TODO
+									}}
+								>
+									Unstake
+								</button>
+							)}
+
+							{section === Section.wallet && (
+								<button
+									className="btn btn-lg px-4 btn-outline-info"
+									onClick={() => {
+										//TODO
+									}}
+								>
+									Stake
+								</button>
+							)}
+						</div>
 						<div className="nft-container">
 							{section === Section.staked &&
 								stakedNfts.map((nft, i) => (
@@ -166,25 +200,27 @@ type SectionSelectorProps = {
 	section: string;
 	sections: string[];
 	setSection: any; //TODO cercare di mettere Dispatch<SetStateAction<Section>>
+	className?: string;
 };
 
 const SectionSelector = ({
 	section,
 	sections,
 	setSection,
+	className,
 }: SectionSelectorProps) => {
 	//TODO migliorare grafica
 	return (
-		<div className="mb-2">
-			{sections.map((s: string) => (
+		<div className={className}>
+			{sections.map((s: string, i: number) => (
 				<button
 					className={
-						"btn btn-lg btn-" +
-						(section == s ? "primary" : "outline-primary")
+						"btn btn-lg px-4 mx-1 btn-" +
+						(section == s ? "info" : "outline-info")
 					}
 					onClick={() => setSection(s)}
 				>
-					Staked
+					{s}
 				</button>
 			))}
 		</div>
