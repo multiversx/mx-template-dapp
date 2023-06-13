@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - development
+  repository_dispatch:
+    types: e2e-tests
 
 jobs:
   build:
