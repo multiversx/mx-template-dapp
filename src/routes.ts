@@ -2,11 +2,12 @@ import { dAppName } from "config";
 import { RouteType } from "types";
 import { withPageTitle } from "./components/PageTitle";
 
-import { Dashboard, Home } from "./pages";
+import { Dashboard, Home, AdminSettings } from "./pages";
 
 export const routeNames = {
 	home: "/",
 	dashboard: "/dashboard",
+	adminSettings: "/admin-settings",
 	unlock: "/unlock",
 };
 
@@ -24,6 +25,12 @@ export const routes: RouteWithTitleType[] = [
 		path: routeNames.dashboard,
 		title: "Dashboard",
 		component: Dashboard,
+		authenticatedRoute: true,
+	},
+	{
+		path: routeNames.adminSettings,
+		title: "Admin Settings",
+		component: AdminSettings,
 		authenticatedRoute: true,
 	},
 ];

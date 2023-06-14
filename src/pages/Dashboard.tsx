@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { faBan, faGrip } from "@fortawesome/free-solid-svg-icons";
-
 import { AxiosError } from "axios";
-import { Loader, PageState, TransactionsTable } from "components";
-
-import {
-	apiTimeout,
-	contractAddress,
-	collectionIdentifier,
-	rewardToken,
-} from "config";
+import { Loader, PageState } from "components";
+import { contractAddress, collectionIdentifier, rewardToken } from "config";
 import { sendTransactions } from "@multiversx/sdk-dapp/services/transactions/sendTransactions";
 import { refreshAccount } from "@multiversx/sdk-dapp/utils/account/refreshAccount";
-import { getTransactions } from "helpers";
 import { MyApiNetworkProvider } from "helpers/MyApiNetworkProvider";
 import {
 	TokenPayment,

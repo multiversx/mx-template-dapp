@@ -41,6 +41,15 @@
             "outputs": []
         },
         {
+            "name": "stake_multiple",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [],
+            "outputs": []
+        },
+        {
             "name": "calculateRewardsForUser",
             "mutability": "readonly",
             "inputs": [
