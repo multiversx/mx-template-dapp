@@ -77,7 +77,7 @@ Override Bootstrap variables only above.
 	place-content: flex-start space-evenly;
 
 	.card-nft {
-		width: 225px; //TODO mettere max-width
+		max-width: 225px; //TODO mettere max-width
 		position: relative;
 	}
 }
@@ -86,7 +86,7 @@ Override Bootstrap variables only above.
 	position: absolute;
 	top: 10px;
 	right: 25px;
-	z-index: 1000;
+	z-index: 10;
 
 	.nft-checkbox {
 		width: 30px;

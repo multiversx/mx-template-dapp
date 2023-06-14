@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { faBan, faExchangeAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBan, faGrip } from "@fortawesome/free-solid-svg-icons";
 
 import { AxiosError } from "axios";
 import { Loader, PageState, TransactionsTable } from "components";
@@ -107,6 +107,10 @@ export const Dashboard = () => {
 								}
 							});
 							setStakedNfts(_stakedNfts);
+							setError((prev) => ({
+								...prev,
+								staked: undefined,
+							}));
 						})
 						.catch((err) => {
 							const { message } = err as AxiosError;
@@ -126,6 +130,7 @@ export const Dashboard = () => {
 				.getAccountNftsFromCollection(address, collectionIdentifier)
 				.then((res) => {
 					setWalletNfts(res);
+					setError((prev) => ({ ...prev, wallet: undefined }));
 				})
 				.catch((err) => {
 					const { message } = err as AxiosError;
@@ -141,7 +146,10 @@ export const Dashboard = () => {
 	const fetchRewards = async () => {
 		apiNetworkProvider
 			.getAccountRewards(address, contractAddress)
-			.then((res) => setRewards(res))
+			.then((res) => {
+				setRewards(res);
+				setError((prev) => ({ ...prev, rewards: undefined }));
+			})
 			.catch((err) => {
 				const { message } = err as AxiosError;
 				setError((prev) => ({ ...prev, rewards: message }));
@@ -297,47 +305,51 @@ export const Dashboard = () => {
 							className="mr-5"
 						/>
 
-						{section === Section.staked && (
-							<>
-								<button
-									className="btn btn-lg px-4 btn-outline-info"
-									onClick={() => unstakeNfts()}
-									disabled={
-										stakedNfts.filter((nft) => nft._checked)
-											.length === 0
-									}
-								>
-									Unstake
-								</button>
-								<button
-									className="btn btn-lg px-4 ml-1 btn-outline-info"
-									onClick={() => unstakeNfts(true)}
-								>
-									Unstake All
-								</button>
-							</>
-						)}
+						<div className="mt-md-0 mt-2">
+							{section === Section.staked && (
+								<>
+									<button
+										className="btn btn-lg px-4 btn-outline-info"
+										onClick={() => unstakeNfts()}
+										disabled={
+											stakedNfts.filter(
+												(nft) => nft._checked
+											).length === 0
+										}
+									>
+										Unstake
+									</button>
+									<button
+										className="btn btn-lg px-4 ml-md-1 btn-outline-info"
+										onClick={() => unstakeNfts(true)}
+									>
+										Unstake All
+									</button>
+								</>
+							)}
 
-						{section === Section.wallet && (
-							<>
-								<button
-									className="btn btn-lg px-4 btn-outline-info"
-									onClick={() => stakeNfts()}
-									disabled={
-										walletNfts.filter((nft) => nft._checked)
-											.length === 0
-									}
-								>
-									Stake
-								</button>
-								<button
-									className="btn btn-lg px-4 ml-1 btn-outline-info"
-									onClick={() => stakeNfts(true)}
-								>
-									Stake All
-								</button>
-							</>
-						)}
+							{section === Section.wallet && (
+								<>
+									<button
+										className="btn btn-lg px-4 btn-outline-info"
+										onClick={() => stakeNfts()}
+										disabled={
+											walletNfts.filter(
+												(nft) => nft._checked
+											).length === 0
+										}
+									>
+										Stake
+									</button>
+									<button
+										className="btn btn-lg px-4 ml-1 btn-outline-info"
+										onClick={() => stakeNfts(true)}
+									>
+										Stake All
+									</button>
+								</>
+							)}
+						</div>
 					</div>
 
 					<div className="nft-container">
@@ -347,6 +359,14 @@ export const Dashboard = () => {
 								<PageState
 									icon={faBan}
 									title="Can't load your staked NFTs... Please try again later"
+								/>
+							)}
+						{section === Section.staked &&
+							stakedNfts.length === 0 &&
+							!error.staked && (
+								<PageState
+									icon={faGrip}
+									title="You don't have any staked NFT. Stake some from your wallet!"
 								/>
 							)}
 						{section === Section.staked &&
@@ -365,6 +385,14 @@ export const Dashboard = () => {
 								<PageState
 									icon={faBan}
 									title="Can't load your wallet NFTs... Please try again later"
+								/>
+							)}
+						{section === Section.wallet &&
+							walletNfts.length === 0 &&
+							!error.wallet && (
+								<PageState
+									icon={faGrip}
+									title="You don't have any NFT in your wallet"
 								/>
 							)}
 						{section === Section.wallet &&

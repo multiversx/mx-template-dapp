@@ -13,13 +13,12 @@ export const SectionSelector = ({
 	setSection,
 	className,
 }: SectionSelectorProps) => {
-	//TODO migliorare grafica
 	return (
 		<div className={className}>
 			{sections.map((s: string, i: number) => (
 				<button
 					className={
-						"btn btn-lg px-4 mx-1 btn-" +
+						"btn btn-lg px-4 btn-" +
 						(section == s ? "info" : "outline-info")
 					}
 					onClick={() => setSection(s)}
