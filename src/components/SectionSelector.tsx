@@ -14,17 +14,26 @@ export const SectionSelector = ({
 	className,
 }: SectionSelectorProps) => {
 	return (
-		<div className={className}>
+		<div
+			className={className + " btn-group btn-group-toggle"}
+			data-toggle="buttons"
+		>
 			{sections.map((s: string, i: number) => (
-				<button
+				<label
 					className={
-						"btn btn-lg px-4 btn-" +
-						(section == s ? "primary" : "outline-primary")
+						"btn btn-outline-primary btn-lg " +
+						(section == s ? "active" : "")
 					}
-					onClick={() => setSection(s)}
+					key={i}
 				>
+					<input
+						type="radio"
+						name="section"
+						{...(section == s ? { checked: true } : {})}
+						onClick={() => setSection(s)}
+					/>
 					{s}
-				</button>
+				</label>
 			))}
 		</div>
 	);
