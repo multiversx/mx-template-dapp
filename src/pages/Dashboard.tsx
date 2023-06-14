@@ -291,7 +291,7 @@ export const Dashboard = () => {
 						)}
 						<div>
 							<button
-								className="btn btn-lg btn-primary ml-4"
+								className="btn btn-lg btn-primary"
 								onClick={() => claimRewards()}
 								disabled={!rewards || rewards.isZero()}
 							>
