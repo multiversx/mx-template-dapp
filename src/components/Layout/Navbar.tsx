@@ -45,7 +45,7 @@ export const Navbar = () => {
 							*/}
 							<NavItem>
 								<button
-									className="btn btn-link"
+									className="btn btn-primary"
 									onClick={handleLogout}
 								>
 									Logout
