@@ -13,12 +13,16 @@ export const collectionIdentifier = "GIANT-1ed993";
 export const rewardToken = {
 	name: "CucumberX",
 	symbol: "CUMB",
-	identifier: "CUMB-1234",
+	identifier: "DEFRA-3961e1",
 	decimals: 12,
-	decimalsToDisplay: 5,
+	decimalsToDisplay: 2,
 };
 
 /**
  * Calls to these domains will use `nativeAuth` Baerer token
  */
 export const sampleAuthenticatedDomains = [TOOLS_API_URL];
+
+export const adminAddresses = [
+	"erd19hcnc2djsjay3prvhuzr0phveducv93khj435pqjza73tcyu4jwsuqywdh",
+];
