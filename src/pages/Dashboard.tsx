@@ -324,6 +324,7 @@ export const Dashboard = () => {
 									<button
 										className="btn btn-lg px-4 ml-md-1 btn-outline-primary"
 										onClick={() => unstakeNfts(true)}
+										disabled={stakedNfts.length === 0}
 									>
 										Unstake All
 									</button>
@@ -346,6 +347,7 @@ export const Dashboard = () => {
 									<button
 										className="btn btn-lg px-4 ml-1 btn-outline-primary"
 										onClick={() => stakeNfts(true)}
+										disabled={walletNfts.length === 0}
 									>
 										Stake All
 									</button>
