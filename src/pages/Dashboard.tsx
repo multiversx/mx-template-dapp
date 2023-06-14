@@ -291,7 +291,7 @@ export const Dashboard = () => {
 						)}
 						<div>
 							<button
-								className="btn btn-lg btn-info ml-4"
+								className="btn btn-lg btn-primary ml-4"
 								onClick={() => claimRewards()}
 							>
 								Claim Rewards
@@ -311,7 +311,7 @@ export const Dashboard = () => {
 							{section === Section.staked && (
 								<>
 									<button
-										className="btn btn-lg px-4 btn-outline-info"
+										className="btn btn-lg px-4 btn-outline-primary"
 										onClick={() => unstakeNfts()}
 										disabled={
 											stakedNfts.filter(
@@ -322,7 +322,7 @@ export const Dashboard = () => {
 										Unstake
 									</button>
 									<button
-										className="btn btn-lg px-4 ml-md-1 btn-outline-info"
+										className="btn btn-lg px-4 ml-md-1 btn-outline-primary"
 										onClick={() => unstakeNfts(true)}
 									>
 										Unstake All
@@ -333,7 +333,7 @@ export const Dashboard = () => {
 							{section === Section.wallet && (
 								<>
 									<button
-										className="btn btn-lg px-4 btn-outline-info"
+										className="btn btn-lg px-4 btn-outline-primary"
 										onClick={() => stakeNfts()}
 										disabled={
 											walletNfts.filter(
@@ -344,7 +344,7 @@ export const Dashboard = () => {
 										Stake
 									</button>
 									<button
-										className="btn btn-lg px-4 ml-1 btn-outline-info"
+										className="btn btn-lg px-4 ml-1 btn-outline-primary"
 										onClick={() => stakeNfts(true)}
 									>
 										Stake All

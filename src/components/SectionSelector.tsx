@@ -19,7 +19,7 @@ export const SectionSelector = ({
 				<button
 					className={
 						"btn btn-lg px-4 btn-" +
-						(section == s ? "info" : "outline-info")
+						(section == s ? "info" : "outline-primary")
 					}
 					onClick={() => setSection(s)}
 				>
