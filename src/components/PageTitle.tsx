@@ -1,11 +1,11 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo } from "react";
 
 export const withPageTitle =
-  (title: string, Component: React.ComponentType) => () => {
-    const Memoized = memo(Component);
+	(title: string, Component: React.ComponentType) => () => {
+		const Memoized = memo(Component);
 
-    useEffect(() => {
-      document.title = title;
-    }, []);
-    return <Memoized />;
-  };
+		useEffect(() => {
+			document.title = title;
+		}, []);
+		return <Memoized />;
+	};

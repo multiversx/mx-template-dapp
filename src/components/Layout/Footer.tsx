@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as HeartIcon } from "../../../assets/img/heart.svg";
+import { ReactComponent as HeartIcon } from "../../assets/img/heart.svg";
 
 export const Footer = () => {
 	return (

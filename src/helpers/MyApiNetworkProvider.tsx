@@ -9,30 +9,9 @@ import {
 	Struct,
 } from "@multiversx/sdk-core";
 import BigNumber from "bignumber.js";
-import {
-	ApiNetworkProvider,
-	NonFungibleTokenOfAccountOnNetwork as mx_NonFungibleTokenOfAccountOnNetwork,
-} from "@multiversx/sdk-network-providers";
+import { ApiNetworkProvider } from "@multiversx/sdk-network-providers";
+import { NonFungibleToken } from "types";
 import stakingAbi from "staking.abi.json";
-
-export type NonFungibleToken = mx_NonFungibleTokenOfAccountOnNetwork & {
-	media: [
-		{
-			originalUrl: string;
-			thumbnailUrl: string;
-			url: string;
-			fileType: string;
-			fileSize: number;
-		}
-	];
-	ticker: string;
-	_checked: boolean;
-	_stakingPosition: {
-		nonce: number;
-		staked_epoch: number;
-		last_claimed_timestamp: number;
-	};
-};
 
 export class MyApiNetworkProvider extends ApiNetworkProvider {
 	async getAccountFromHerotag(herotag: string): Promise<string> {

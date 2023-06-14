@@ -1,7 +1,7 @@
-import { NonFungibleToken } from "helpers/MyApiNetworkProvider";
+import { NonFungibleToken } from "types";
 
 type NftVisualizerProps = {
-	nft: NonFungibleToken; //TODO cambiare tipo
+	nft: NonFungibleToken;
 	changeCallback: (checked: boolean) => void;
 };
 

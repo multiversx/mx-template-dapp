@@ -13,10 +13,7 @@ import {
 import { sendTransactions } from "@multiversx/sdk-dapp/services/transactions/sendTransactions";
 import { refreshAccount } from "@multiversx/sdk-dapp/utils/account/refreshAccount";
 import { getTransactions } from "helpers";
-import {
-	MyApiNetworkProvider,
-	NonFungibleToken,
-} from "helpers/MyApiNetworkProvider";
+import { MyApiNetworkProvider } from "helpers/MyApiNetworkProvider";
 import {
 	TokenPayment,
 	MultiESDTNFTTransferPayloadBuilder,
@@ -27,7 +24,7 @@ import {
 	useGetActiveTransactionsStatus,
 	useGetNetworkConfig,
 } from "hooks";
-import { ServerTransactionType } from "types";
+import { ServerTransactionType, NonFungibleToken } from "types";
 import CountUp from "react-countup";
 import { NftVisualizer } from "components/NftVisualizer";
 import { SectionSelector } from "components/SectionSelector";

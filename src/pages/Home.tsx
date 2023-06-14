@@ -16,8 +16,9 @@ const HomePage = () => {
 							</h2>
 
 							<p className="mb-3">
-								This is an MultiversX dapp sample.
-								<br /> Login using your MultiversX wallet.
+								NFT Staking dApp
+								<br />
+								Login using your MultiversX wallet.
 							</p>
 
 							<Link
