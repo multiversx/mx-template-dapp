@@ -80,67 +80,59 @@ export const Dashboard = () => {
 		setWalletNfts(_walletNfts);
 	};
 
-	const fetchNfts = async () => {
-		try {
-			setIsLoading(true);
-
-			//Get Staked NFTs
-			apiNetworkProvider
-				.getAccountStakedNfts(address, contractAddress)
-				.then((_stakedPositions) => {
-					if (_stakedPositions.length === 0) {
-						setStakedNfts([]);
-						return;
-					}
-					apiNetworkProvider
-						.getNftsFromCollection(
-							collectionIdentifier,
-							_stakedPositions.map((sp) => sp.nonce.toString(16))
-						)
-						.then((_stakedNfts) => {
-							_stakedNfts.forEach((nft) => {
-								const stakedPosition = _stakedPositions.find(
-									(sp) => sp.nonce === nft.nonce
-								);
-								if (stakedPosition) {
-									nft._stakingPosition = stakedPosition;
-								}
-							});
-							setStakedNfts(_stakedNfts);
-							setError((prev) => ({
-								...prev,
-								staked: undefined,
-							}));
-						})
-						.catch((err) => {
-							const { message } = err as AxiosError;
-							setError((prev) => ({ ...prev, staked: message }));
+	const fetchStakedNfts = async () => {
+		apiNetworkProvider
+			.getAccountStakedNfts(address, contractAddress)
+			.then((_stakedPositions) => {
+				if (_stakedPositions.length === 0) {
+					setStakedNfts([]);
+					return;
+				}
+				apiNetworkProvider
+					.getNftsFromCollection(
+						collectionIdentifier,
+						_stakedPositions.map((sp) => sp.nonce.toString(16))
+					)
+					.then((_stakedNfts) => {
+						_stakedNfts.forEach((nft) => {
+							const stakedPosition = _stakedPositions.find(
+								(sp) => sp.nonce === nft.nonce
+							);
+							if (stakedPosition) {
+								nft._stakingPosition = stakedPosition;
+							}
 						});
-				})
-				.catch((err) => {
-					const { message } = err as AxiosError;
-					setError((prev) => ({ ...prev, staked: message }));
-				})
-				.finally(() => {
-					setIsLoading(false);
-				});
+						setStakedNfts(_stakedNfts);
+						setError((prev) => ({
+							...prev,
+							staked: undefined,
+						}));
+					})
+					.catch((err) => {
+						const { message } = err as AxiosError;
+						setError((prev) => ({ ...prev, staked: message }));
+					});
+			})
+			.catch((err) => {
+				const { message } = err as AxiosError;
+				setError((prev) => ({ ...prev, staked: message }));
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+	};
 
-			//Get Wallet NFTs
-			apiNetworkProvider
-				.getAccountNftsFromCollection(address, collectionIdentifier)
-				.then((res) => {
-					setWalletNfts(res);
-					setError((prev) => ({ ...prev, wallet: undefined }));
-				})
-				.catch((err) => {
-					const { message } = err as AxiosError;
-					setError((prev) => ({ ...prev, wallet: message }));
-				});
-		} catch (err) {
-			const { message } = err as AxiosError;
-			setError((prev) => ({ ...prev, generic: message }));
-		}
-		setIsLoading(false);
+	const fetchWalletNfts = () => {
+		apiNetworkProvider
+			.getAccountNftsFromCollection(address, collectionIdentifier)
+			.then((res) => {
+				setWalletNfts(res);
+				setError((prev) => ({ ...prev, wallet: undefined }));
+			})
+			.catch((err) => {
+				const { message } = err as AxiosError;
+				setError((prev) => ({ ...prev, wallet: message }));
+			});
 	};
 
 	const fetchRewards = async () => {
@@ -237,18 +229,28 @@ export const Dashboard = () => {
 
 	useEffect(() => {
 		if (success || fail) {
-			fetchNfts();
+			fetchStakedNfts();
+			fetchWalletNfts();
 			fetchRewards();
 		}
 	}, [success, fail]);
 
 	useEffect(() => {
-		fetchNfts();
+		fetchStakedNfts();
+		fetchWalletNfts();
 		fetchRewards();
 		setInterval(function () {
 			fetchRewards();
 		}, 6000);
 	}, []);
+
+	useEffect(() => {
+		if (section === Section.staked) {
+			fetchStakedNfts();
+		} else {
+			fetchWalletNfts();
+		}
+	}, [section]);
 
 	if (isLoading) {
 		return <Loader />;
