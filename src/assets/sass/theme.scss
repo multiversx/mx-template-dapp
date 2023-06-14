@@ -11,6 +11,46 @@ $card-inner-border-radius: subtract($card-border-radius, 1px);
 $headings-font-weight: 300 !important;
 $a: #1392ff;
 
+/** MULTIVERSX DAPP CORE COMPONENTS
+-------------------------------------------------- */
+
+/*
+.dapp-core-component__transactionsToastList-styles__toastWrapper,
+.dapp-core-component__dappModalStyles__dappModalBody,
+.dapp-core-component__dappModalStyles__dappModalContent {
+	background-color: $mxbackground !important;
+	border-color: rgba(255, 255, 255, 0.201267) !important;
+}
+
+.dapp-core-component__transactionsToastList-styles__toastWrapper {
+	border-style: solid;
+	border-width: 1px;
+}
+
+.dapp-core-component__transactionToast-styles__close,
+.dapp-core-component__addressTableStyles__ledger-address-table-navigation-button {
+	color: $light !important;
+}
+
+.dapp-core-component__main__btn-primary {
+	background-color: $primary !important;
+	border-color: $primary !important;
+	color: #000 !important;
+}
+
+.dapp-core-component__dappModalStyles__dappModalCloseButton {
+	background-color: $mxbackground !important;
+	color: $light !important;
+}
+
+.dapp-core-component__addressTableStyles__ledger-address-table-header,
+.dapp-core-component__confirmAddressStyles__ledger-confirm-address-data,
+.dapp-core-component__main__textarea {
+	background-color: $secondary !important;
+	color: $light !important;
+}
+*/
+
 /* Do not move the imports from here.
 Override Bootstrap variables only above.
 -------------------------------------------------- */
