@@ -1,12 +1,12 @@
 /// <reference types="cypress" />
 import { userData } from '../assets/globalData';
 import { AssertionEnum } from '../constants/enums';
+import { DEVNET_API } from '../constants/globalLinks';
 
 // Check the url global function
 Cypress.Commands.add('checkUrl', (url) => {
   cy.url().should(AssertionEnum.include, url);
 });
-
 
 //Login with keystore global function
 Cypress.Commands.add('login', () => {
@@ -28,4 +28,9 @@ Cypress.Commands.add('login', () => {
 
 Cypress.Commands.add('getSelector', (selector, ...cypressAction) => {
   return cy.get(`[data-testid=${selector}]`, ...cypressAction);
+});
+
+// Add the custom command for api intercepts
+Cypress.Commands.add('apiIntercept', (method, param) => {
+  cy.intercept(method, `${DEVNET_API}${param}`).as(param);
 });
