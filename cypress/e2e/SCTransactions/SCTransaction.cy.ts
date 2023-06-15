@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 import { scTransaction } from './SCActions';
-import { SCTransactionData,scSelectors } from './SCTransactionData';
+import { SCTransactionData, scSelectors } from './SCTransactionData';
 
 describe('Smart Contract Transactions', () => {
   before(() => {
@@ -10,7 +10,7 @@ describe('Smart Contract Transactions', () => {
     cy.login();
   });
   it('Ping & Pong actions', () => {
-    // The condtionals will check the actual status of the transaction
+    // The condtionals will check the actual status of the transactions
     // cy.get('.action-btn').then(($btn) => {
     //   // Synchronously ask for the button's text
     //   if ($btn.text().includes(SCTransactionData.ping)) {
