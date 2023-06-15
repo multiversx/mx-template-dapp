@@ -10,7 +10,7 @@ describe('Smart Contract Transactions', () => {
     cy.login();
   });
   it('Ping & Pong actions', () => {
-    // The condtionals will check the actual status of the transactions
+    // The condtionals will check the actual status of the transaction
     // cy.get('.action-btn').then(($btn) => {
     //   // Synchronously ask for the button's text
     //   if ($btn.text().includes(SCTransactionData.ping)) {
