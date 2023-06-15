@@ -127,6 +127,7 @@ export const Actions = () => {
               className='action-btn'
               onClick={sendPingTransaction}
               data-testid='btnPing'
+              data-cy='transactionBtn'
             >
               <button className='btn'>
                 <FontAwesomeIcon icon={faArrowUp} className='text-primary' />
@@ -144,6 +145,7 @@ export const Actions = () => {
                     ...(pongAllowed ? { onClick: sendPongTransaction } : {})
                   }}
                   data-testid='btnPong'
+                  data-cy='transactionBtn'
                 >
                   <button className={`btn ${notAllowedClass}`}>
                     <FontAwesomeIcon

@@ -11,5 +11,8 @@ export const scSelectors = {
   submitButton: 'submitButton',
   signButton: 'signBtn',
   loginBtn: 'loginBtn',
-  webWalletLogin: 'webWalletLoginBtn'
+  webWalletLogin: 'webWalletLoginBtn',
+  btnPing: 'btnPing',
+  btnPong: 'btnPong',
+  transactionBtn: '[data-cy="transactionBtn"]'
 };

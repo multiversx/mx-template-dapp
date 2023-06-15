@@ -13,9 +13,10 @@ describe('Smart Contract Transactions', () => {
   it('Ping & Pong actions', () => {
     cy.wait(3000);
     // The condtionals will check the actual status of the transaction
-    cy.get('.action-btn').then(($btn) => {
+    cy.get(scSelectors.transactionBtn).then(($btn) => {
+      const dataTestId = $btn.attr('data-testid');
       // Synchronously ask for the button's text
-      if ($btn.text().includes(SCTransactionData.ping)) {
+      if (dataTestId == scSelectors.btnPing) {
         scTransaction(SCTransactionData.ping);
       } else {
         scTransaction(SCTransactionData.pong);
