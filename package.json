@@ -26,7 +26,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
-    "lint": "eslint --ext js,ts,tsx src"
+    "lint": "eslint --ext js,ts,tsx src",
+    "run-cypress": "npx cypress run"
   },
   "browserslist": [
     ">0.2%",
@@ -48,6 +49,7 @@
     "@types/react-dom": "18.0.8",
     "@types/react-router-dom": "5.1.7",
     "crypto-browserify": "3.12.0",
+    "cypress": "^12.14.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-config-react": "1.1.7",
     "eslint-config-react-app": "7.0.1",

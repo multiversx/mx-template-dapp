@@ -1,0 +1,25 @@
+name: pre-merge-e2e-tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - development
+  repository_dispatch:
+    types: e2e-tests
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm install --only=dev
+      - run: npm run run-cypress
+        env:
+          CI: false
