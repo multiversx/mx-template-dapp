@@ -10,8 +10,14 @@ import {
 } from "@multiversx/sdk-core";
 import BigNumber from "bignumber.js";
 import { ApiNetworkProvider } from "@multiversx/sdk-network-providers";
-import { NonFungibleToken } from "types";
-import stakingAbi from "staking.abi.json";
+import {
+	NonFungibleToken,
+	NftStakingPosition,
+	TokenStakingPosition,
+	defaultTokenStakingPosition,
+} from "types";
+import stakingNftAbi from "staking-nft.abi.json";
+import stakingTokenAbi from "staking-token.abi.json";
 
 export class MyApiNetworkProvider extends ApiNetworkProvider {
 	async getAccountFromHerotag(herotag: string): Promise<string> {
@@ -66,10 +72,10 @@ export class MyApiNetworkProvider extends ApiNetworkProvider {
 	async getAccountStakedNfts(
 		address: string,
 		contractAddress: string
-	): Promise<any[]> {
+	): Promise<NftStakingPosition[]> {
 		const smartContract = new SmartContract({
 			address: new Address(contractAddress),
-			abi: new SmartContractAbi(AbiRegistry.create(stakingAbi)),
+			abi: new SmartContractAbi(AbiRegistry.create(stakingNftAbi)),
 		});
 
 		const interaction = smartContract.methods.getUserStaking([address]);
@@ -93,10 +99,39 @@ export class MyApiNetworkProvider extends ApiNetworkProvider {
 						.toNumber(),
 				};
 			});
-
-			return [...(firstValue as VariadicValue).getItems()];
 		}
 		return [];
+	}
+
+	async getAccountStakedTokens(
+		address: string,
+		contractAddress: string
+	): Promise<TokenStakingPosition> {
+		//TODO change type
+		const smartContract = new SmartContract({
+			address: new Address(contractAddress),
+			abi: new SmartContractAbi(AbiRegistry.create(stakingTokenAbi)),
+		});
+
+		const interaction = smartContract.methods.getUserStaking([address]);
+		const query = interaction.check().buildQuery();
+		const queryResponse = await this.queryContract(query);
+		const firstValue = new ResultsParser().parseQueryResponse(
+			queryResponse,
+			interaction.getEndpoint()
+		).firstValue as Struct;
+		if (firstValue) {
+			return {
+				staked_amount: firstValue.getFieldValue("staked_amount"),
+				staked_epoch: firstValue
+					.getFieldValue("staked_epoch")
+					.toNumber(),
+				last_claimed_timestamp: firstValue
+					.getFieldValue("last_claimed_timestamp")
+					.toNumber(),
+			};
+		}
+		return defaultTokenStakingPosition;
 	}
 
 	async getAccountRewards(
@@ -105,7 +140,7 @@ export class MyApiNetworkProvider extends ApiNetworkProvider {
 	): Promise<BigNumber> {
 		const smartContract = new SmartContract({
 			address: new Address(contractAddress),
-			abi: new SmartContractAbi(AbiRegistry.create(stakingAbi)),
+			abi: new SmartContractAbi(AbiRegistry.create(stakingNftAbi)),
 		});
 
 		const interaction = smartContract.methods.calculateRewardsForUser([

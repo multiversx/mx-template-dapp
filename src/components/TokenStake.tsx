@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { faBan, faGrip } from "@fortawesome/free-solid-svg-icons";
 import { AxiosError } from "axios";
 import { Loader, PageState } from "components";
+import { FormatAmount } from "@multiversx/sdk-dapp/UI";
 import {
 	nftStakingContractAddress,
+	tokenStakingContractAddress,
+	stakingToken,
 	collectionIdentifier,
 	rewardToken,
 } from "config";
@@ -20,7 +23,12 @@ import {
 	useGetActiveTransactionsStatus,
 	useGetNetworkConfig,
 } from "hooks";
-import { ServerTransactionType, NonFungibleToken } from "types";
+import {
+	ServerTransactionType,
+	NonFungibleToken,
+	TokenStakingPosition,
+	defaultTokenStakingPosition,
+} from "types";
 import CountUp from "react-countup";
 import { NftVisualizer } from "components/NftVisualizer";
 import { SectionSelector } from "components/SectionSelector";
@@ -34,12 +42,11 @@ enum Section {
 
 type errorsType = {
 	staked: string | undefined;
-	wallet: string | undefined;
 	rewards: string | undefined;
 	generic: string | undefined;
 };
 
-export const NftStake = () => {
+export const TokenStake = () => {
 	const {
 		network: { apiAddress },
 	} = useGetNetworkConfig();
@@ -49,22 +56,71 @@ export const NftStake = () => {
 	const { success, fail } = useGetActiveTransactionsStatus();
 
 	const [section, setSection] = useState<Section>(Section.staked);
-	const [stakedNfts, setStakedNfts] = useState<NonFungibleToken[]>([]); //TODO creare tipo
-	const [walletNfts, setWalletNfts] = useState<NonFungibleToken[]>([]);
 
+	const [stakingPosition, setStakingPosition] =
+		useState<TokenStakingPosition>(defaultTokenStakingPosition);
 	const [rewards, setRewards] = useState<BigNumber | undefined>();
 
 	const [transactions, setTransactions] = useState<ServerTransactionType[]>(
 		[]
 	);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false); //TODO
 	const [error, setError] = useState<errorsType>({
 		staked: undefined,
-		wallet: undefined,
 		rewards: undefined,
 		generic: undefined,
 	});
 
+	const fetchStakedTokens = async () => {
+		apiNetworkProvider
+			.getAccountStakedTokens(address, tokenStakingContractAddress)
+			.then((_stakedPosition) => {
+				setStakingPosition(_stakedPosition);
+				setError((prev) => ({
+					...prev,
+					staked: undefined,
+				}));
+			})
+			.catch((err) => {
+				const { message } = err as AxiosError;
+				setError((prev) => ({ ...prev, staked: message }));
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+	};
+
+	const fetchRewards = async () => {
+		apiNetworkProvider
+			.getAccountRewards(address, tokenStakingContractAddress)
+			.then((res) => {
+				setRewards(res);
+				setError((prev) => ({ ...prev, rewards: undefined }));
+			})
+			.catch((err) => {
+				const { message } = err as AxiosError;
+				setError((prev) => ({ ...prev, rewards: message }));
+			});
+	};
+
+	const claimRewards = async () => {
+		await refreshAccount();
+
+		const { sessionId } = await sendTransactions({
+			transactions: {
+				value: 0,
+				data: "claim_rewards",
+				receiver: tokenStakingContractAddress,
+				gasLimit: "20000000",
+			},
+			transactionsDisplayInfo: {
+				processingMessage: "Claiming rewards...",
+				errorMessage: "An error has occured during claiming",
+				successMessage: "Rewards claimed successfully!",
+			},
+		});
+	};
+	/*
 	const changeCheckedStaked = (index: number, checked: boolean) => {
 		const _stakedNfts = [...stakedNfts];
 		_stakedNfts[index]._checked = checked;
@@ -131,19 +187,6 @@ export const NftStake = () => {
 			});
 	};
 
-	const fetchRewards = async () => {
-		apiNetworkProvider
-			.getAccountRewards(address, nftStakingContractAddress)
-			.then((res) => {
-				setRewards(res);
-				setError((prev) => ({ ...prev, rewards: undefined }));
-			})
-			.catch((err) => {
-				const { message } = err as AxiosError;
-				setError((prev) => ({ ...prev, rewards: message }));
-			});
-	};
-
 	const stakeNfts = async (stakeAll: boolean = false) => {
 		const nftsToStake = walletNfts.filter(
 			(nft) => nft._checked || stakeAll
@@ -205,48 +248,30 @@ export const NftStake = () => {
 		});
 	};
 
-	const claimRewards = async () => {
-		await refreshAccount();
-
-		const { sessionId } = await sendTransactions({
-			transactions: {
-				value: 0,
-				data: "claim_rewards",
-				receiver: nftStakingContractAddress,
-				gasLimit: "20000000",
-			},
-			transactionsDisplayInfo: {
-				processingMessage: "Claiming rewards...",
-				errorMessage: "An error has occured during claiming",
-				successMessage: "Rewards claimed successfully!",
-			},
-		});
-	};
+    */
 
 	useEffect(() => {
 		if (success || fail) {
+			fetchStakedTokens();
+			fetchRewards();
+			/*
 			fetchStakedNfts();
 			fetchWalletNfts();
-			fetchRewards();
+            */
 		}
 	}, [success, fail]);
 
 	useEffect(() => {
-		fetchStakedNfts();
-		fetchWalletNfts();
+		fetchStakedTokens();
 		fetchRewards();
 		setInterval(function () {
 			fetchRewards();
 		}, 6000);
+		/*
+		fetchStakedNfts();
+		fetchWalletNfts();
+        */
 	}, []);
-
-	useEffect(() => {
-		if (section === Section.staked) {
-			fetchStakedNfts();
-		} else {
-			fetchWalletNfts();
-		}
-	}, [section]);
 
 	if (isLoading) {
 		return <Loader />;
@@ -273,14 +298,14 @@ export const NftStake = () => {
 				{rewards && (
 					<CountUp
 						end={rewards
-							.dividedBy(10 ** rewardToken.decimals)
+							.dividedBy(10 ** stakingToken.decimals)
 							.toNumber()}
-						decimals={rewardToken.decimalsToDisplay}
+						decimals={stakingToken.decimalsToDisplay}
 						duration={6}
 						useEasing={true}
 						preserveValue={true}
 						prefix="Rewards: "
-						suffix={" " + rewardToken.symbol}
+						suffix={" " + stakingToken.symbol}
 					/>
 				)}
 				<div>
@@ -292,115 +317,19 @@ export const NftStake = () => {
 						Claim Rewards
 					</button>
 				</div>
-			</div>
 
-			<div className="mb-4 d-md-flex justify-content-md-end">
-				<SectionSelector
-					section={section}
-					sections={[...Object.values(Section)]}
-					setSection={setSection}
-					className="mr-5"
-				/>
-
-				<div className="mt-md-0 mt-2">
-					{section === Section.staked && (
-						<>
-							<button
-								className="btn btn-lg px-4 btn-outline-primary"
-								onClick={() => unstakeNfts()}
-								disabled={
-									stakedNfts.filter((nft) => nft._checked)
-										.length === 0
-								}
-							>
-								Unstake
-							</button>
-							<button
-								className="btn btn-lg px-4 ml-md-1 btn-outline-primary"
-								onClick={() => unstakeNfts(true)}
-								disabled={stakedNfts.length === 0}
-							>
-								Unstake All
-							</button>
-						</>
-					)}
-
-					{section === Section.wallet && (
-						<>
-							<button
-								className="btn btn-lg px-4 btn-outline-primary"
-								onClick={() => stakeNfts()}
-								disabled={
-									walletNfts.filter((nft) => nft._checked)
-										.length === 0
-								}
-							>
-								Stake
-							</button>
-							<button
-								className="btn btn-lg px-4 ml-1 btn-outline-primary"
-								onClick={() => stakeNfts(true)}
-								disabled={walletNfts.length === 0}
-							>
-								Stake All
-							</button>
-						</>
-					)}
+				<div className="mt-4 w-100">
+					<h2>
+						Your staked tokens:&nbsp;
+						<FormatAmount
+							value={stakingPosition.staked_amount.toString(10)}
+							token={stakingToken.symbol}
+							showLastNonZeroDecimal={true}
+							digits={stakingToken.decimalsToDisplay}
+							decimals={stakingToken.decimals}
+						/>
+					</h2>
 				</div>
-			</div>
-
-			<div className="nft-container">
-				{section === Section.staked &&
-					stakedNfts.length === 0 &&
-					error.staked && (
-						<PageState
-							icon={faBan}
-							title="Can't load your staked NFTs... Please try again later"
-						/>
-					)}
-				{section === Section.staked &&
-					stakedNfts.length === 0 &&
-					!error.staked && (
-						<PageState
-							icon={faGrip}
-							title="You don't have any staked NFT. Stake some from your wallet!"
-						/>
-					)}
-				{section === Section.staked &&
-					stakedNfts.map((nft, i) => (
-						<NftVisualizer
-							nft={nft}
-							changeCallback={(checked) =>
-								changeCheckedStaked(i, checked)
-							}
-						/>
-					))}
-
-				{section === Section.wallet &&
-					walletNfts.length === 0 &&
-					error.wallet && (
-						<PageState
-							icon={faBan}
-							title="Can't load your wallet NFTs... Please try again later"
-						/>
-					)}
-				{section === Section.wallet &&
-					walletNfts.length === 0 &&
-					!error.wallet && (
-						<PageState
-							icon={faGrip}
-							title="You don't have any NFT in your wallet"
-						/>
-					)}
-				{section === Section.wallet &&
-					walletNfts.map((nft, i) => (
-						<NftVisualizer
-							nft={nft}
-							changeCallback={(checked) =>
-								changeCheckedWallet(i, checked)
-							}
-						/>
-					))}
 			</div>
 		</div>
 	);
