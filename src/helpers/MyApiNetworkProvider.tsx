@@ -107,7 +107,6 @@ export class MyApiNetworkProvider extends ApiNetworkProvider {
 		address: string,
 		contractAddress: string
 	): Promise<TokenStakingPosition> {
-		//TODO change type
 		const smartContract = new SmartContract({
 			address: new Address(contractAddress),
 			abi: new SmartContractAbi(AbiRegistry.create(stakingTokenAbi)),
@@ -146,6 +145,25 @@ export class MyApiNetworkProvider extends ApiNetworkProvider {
 		const interaction = smartContract.methods.calculateRewardsForUser([
 			address,
 		]);
+		const query = interaction.check().buildQuery();
+		const queryResponse = await this.queryContract(query);
+		const firstValue = new ResultsParser().parseQueryResponse(
+			queryResponse,
+			interaction.getEndpoint()
+		).firstValue;
+		if (firstValue) {
+			return (firstValue as NumericalValue).value;
+		}
+		return new BigNumber(0);
+	}
+
+	async getContractApr(contractAddress: string): Promise<BigNumber> {
+		const smartContract = new SmartContract({
+			address: new Address(contractAddress),
+			abi: new SmartContractAbi(AbiRegistry.create(stakingTokenAbi)),
+		});
+
+		const interaction = smartContract.methods.getApr([]);
 		const query = interaction.check().buildQuery();
 		const queryResponse = await this.queryContract(query);
 		const firstValue = new ResultsParser().parseQueryResponse(

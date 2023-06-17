@@ -43,6 +43,7 @@ enum Section {
 type errorsType = {
 	staked: string | undefined;
 	rewards: string | undefined;
+	apr: string | undefined;
 	generic: string | undefined;
 };
 
@@ -60,6 +61,7 @@ export const TokenStake = () => {
 	const [stakingPosition, setStakingPosition] =
 		useState<TokenStakingPosition>(defaultTokenStakingPosition);
 	const [rewards, setRewards] = useState<BigNumber | undefined>();
+	const [apr, setApr] = useState<BigNumber>(new BigNumber(0));
 
 	const [transactions, setTransactions] = useState<ServerTransactionType[]>(
 		[]
@@ -68,6 +70,7 @@ export const TokenStake = () => {
 	const [error, setError] = useState<errorsType>({
 		staked: undefined,
 		rewards: undefined,
+		apr: undefined,
 		generic: undefined,
 	});
 
@@ -103,6 +106,25 @@ export const TokenStake = () => {
 			});
 	};
 
+	const fetchApr = async () => {
+		apiNetworkProvider
+			.getContractApr(tokenStakingContractAddress)
+			.then((_apr) => {
+				setApr(_apr);
+				setError((prev) => ({
+					...prev,
+					apr: undefined,
+				}));
+			})
+			.catch((err) => {
+				const { message } = err as AxiosError;
+				setError((prev) => ({ ...prev, apr: message }));
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+	};
+
 	const claimRewards = async () => {
 		await refreshAccount();
 
@@ -111,7 +133,7 @@ export const TokenStake = () => {
 				value: 0,
 				data: "claim_rewards",
 				receiver: tokenStakingContractAddress,
-				gasLimit: "20000000",
+				gasLimit: 20_000_000,
 			},
 			transactionsDisplayInfo: {
 				processingMessage: "Claiming rewards...",
@@ -254,23 +276,16 @@ export const TokenStake = () => {
 		if (success || fail) {
 			fetchStakedTokens();
 			fetchRewards();
-			/*
-			fetchStakedNfts();
-			fetchWalletNfts();
-            */
 		}
 	}, [success, fail]);
 
 	useEffect(() => {
 		fetchStakedTokens();
 		fetchRewards();
+		fetchApr();
 		setInterval(function () {
 			fetchRewards();
 		}, 6000);
-		/*
-		fetchStakedNfts();
-		fetchWalletNfts();
-        */
 	}, []);
 
 	if (isLoading) {
@@ -301,7 +316,7 @@ export const TokenStake = () => {
 							.dividedBy(10 ** stakingToken.decimals)
 							.toNumber()}
 						decimals={stakingToken.decimalsToDisplay}
-						duration={6}
+						duration={2}
 						useEasing={true}
 						preserveValue={true}
 						prefix="Rewards: "
@@ -318,17 +333,43 @@ export const TokenStake = () => {
 					</button>
 				</div>
 
-				<div className="mt-4 w-100">
-					<h2>
-						Your staked tokens:&nbsp;
-						<FormatAmount
-							value={stakingPosition.staked_amount.toString(10)}
-							token={stakingToken.symbol}
-							showLastNonZeroDecimal={true}
-							digits={stakingToken.decimalsToDisplay}
-							decimals={stakingToken.decimals}
-						/>
-					</h2>
+				<div className="mt-4 text-left">
+					<p>
+						<span className="display-3">APR:&nbsp;</span>
+						<span className="display-4">{apr.toString()} %</span>
+					</p>
+					<p>
+						<span className="display-3">
+							Your staked tokens:&nbsp;
+						</span>
+						<span className="display-4">
+							<FormatAmount
+								value={stakingPosition.staked_amount.toString(
+									10
+								)}
+								token={stakingToken.symbol}
+								digits={stakingToken.decimalsToDisplay}
+								decimals={stakingToken.decimals}
+							/>
+						</span>
+					</p>
+				</div>
+
+				<div>
+					<button
+						className="btn btn-lg btn-primary mr-4"
+						onClick={() => claimRewards()}
+						disabled={!rewards || rewards.isZero()}
+					>
+						Stake
+					</button>
+					<button
+						className="btn btn-lg btn-primary"
+						onClick={() => claimRewards()}
+						disabled={!rewards || rewards.isZero()}
+					>
+						Unstake
+					</button>
 				</div>
 			</div>
 		</div>

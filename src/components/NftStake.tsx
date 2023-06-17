@@ -276,7 +276,7 @@ export const NftStake = () => {
 							.dividedBy(10 ** rewardToken.decimals)
 							.toNumber()}
 						decimals={rewardToken.decimalsToDisplay}
-						duration={6}
+						duration={2}
 						useEasing={true}
 						preserveValue={true}
 						prefix="Rewards: "
