@@ -32,6 +32,8 @@ import {
 import CountUp from "react-countup";
 import { NftVisualizer } from "components/NftVisualizer";
 import { SectionSelector } from "components/SectionSelector";
+import { ModalStake } from "components/ModalStake";
+import { ModalUnstake } from "components/ModalUnstake";
 import { string2hex } from "helpers";
 import BigNumber from "bignumber.js";
 
@@ -62,6 +64,9 @@ export const TokenStake = () => {
 		useState<TokenStakingPosition>(defaultTokenStakingPosition);
 	const [rewards, setRewards] = useState<BigNumber | undefined>();
 	const [apr, setApr] = useState<BigNumber>(new BigNumber(0));
+
+	const [modalStakeShow, setModalStakeShow] = useState(false);
+	const [modalUnstakeShow, setModalUnstakeShow] = useState(false);
 
 	const [transactions, setTransactions] = useState<ServerTransactionType[]>(
 		[]
@@ -142,135 +147,6 @@ export const TokenStake = () => {
 			},
 		});
 	};
-	/*
-	const changeCheckedStaked = (index: number, checked: boolean) => {
-		const _stakedNfts = [...stakedNfts];
-		_stakedNfts[index]._checked = checked;
-		setStakedNfts(_stakedNfts);
-	};
-	const changeCheckedWallet = (index: number, checked: boolean) => {
-		const _walletNfts = [...walletNfts];
-		_walletNfts[index]._checked = checked;
-		setWalletNfts(_walletNfts);
-	};
-
-	const fetchStakedNfts = async () => {
-		apiNetworkProvider
-			.getAccountStakedNfts(address, nftStakingContractAddress)
-			.then((_stakedPositions) => {
-				if (_stakedPositions.length === 0) {
-					setStakedNfts([]);
-					return;
-				}
-				apiNetworkProvider
-					.getNftsFromCollection(
-						collectionIdentifier,
-						_stakedPositions.map((sp) => sp.nonce.toString(16))
-					)
-					.then((_stakedNfts) => {
-						_stakedNfts.forEach((nft) => {
-							const stakedPosition = _stakedPositions.find(
-								(sp) => sp.nonce === nft.nonce
-							);
-							if (stakedPosition) {
-								nft._stakingPosition = stakedPosition;
-							}
-						});
-						setStakedNfts(_stakedNfts);
-						setError((prev) => ({
-							...prev,
-							staked: undefined,
-						}));
-					})
-					.catch((err) => {
-						const { message } = err as AxiosError;
-						setError((prev) => ({ ...prev, staked: message }));
-					});
-			})
-			.catch((err) => {
-				const { message } = err as AxiosError;
-				setError((prev) => ({ ...prev, staked: message }));
-			})
-			.finally(() => {
-				setIsLoading(false);
-			});
-	};
-
-	const fetchWalletNfts = () => {
-		apiNetworkProvider
-			.getAccountNftsFromCollection(address, collectionIdentifier)
-			.then((res) => {
-				setWalletNfts(res);
-				setError((prev) => ({ ...prev, wallet: undefined }));
-			})
-			.catch((err) => {
-				const { message } = err as AxiosError;
-				setError((prev) => ({ ...prev, wallet: message }));
-			});
-	};
-
-	const stakeNfts = async (stakeAll: boolean = false) => {
-		const nftsToStake = walletNfts.filter(
-			(nft) => nft._checked || stakeAll
-		);
-
-		const tokenPayments: TokenPayment[] = nftsToStake.map((nft) =>
-			TokenPayment.nonFungible(nft.ticker, nft.nonce)
-		);
-		const payload =
-			new MultiESDTNFTTransferPayloadBuilder()
-				.setPayments(tokenPayments)
-				.setDestination(new Address(nftStakingContractAddress))
-				.build()
-				.toString() +
-			"@" +
-			string2hex("stake_multiple");
-
-		await refreshAccount();
-
-		const { sessionId } = await sendTransactions({
-			transactions: {
-				value: 0,
-				data: payload,
-				receiver: address,
-				gasLimit: 3_000_000 + 1_500_000 * nftsToStake.length,
-			},
-			transactionsDisplayInfo: {
-				processingMessage: "Staking NFTs...",
-				errorMessage: "An error has occured during staking",
-				successMessage: "NFTs staked successfully!",
-			},
-		});
-	};
-
-	const unstakeNfts = async (unstakeAll: boolean = false) => {
-		const nftsToUnstake = stakedNfts.filter(
-			(nft) => nft._checked || unstakeAll
-		);
-		const noncesToUnstake = nftsToUnstake.map(
-			(nft) => nft.identifier.split("-")[2]
-		);
-
-		const payload = "unstake_multiple@" + noncesToUnstake.join("@");
-
-		await refreshAccount();
-
-		const { sessionId } = await sendTransactions({
-			transactions: {
-				value: 0,
-				data: payload,
-				receiver: nftStakingContractAddress,
-				gasLimit: 4_000_000 + 2_000_000 * nftsToUnstake.length,
-			},
-			transactionsDisplayInfo: {
-				processingMessage: "Unstaking NFTs...",
-				errorMessage: "An error has occured during unstaking",
-				successMessage: "NFTs unstaked successfully!",
-			},
-		});
-	};
-
-    */
 
 	useEffect(() => {
 		if (success || fail) {
@@ -304,74 +180,95 @@ export const TokenStake = () => {
 		);
 	}
 
+	//TODO in rewards countup, change stakingToken to rewardToken after changing the contract
 	return (
-		<div className="bg-secondary p-4 mt-4">
-			<div className="text-center display-3 mb-4">
-				{error.rewards && !rewards && (
-					<PageState title="Sorry, we can't calculate your rewards. Please try again later." />
-				)}
-				{rewards && (
-					<CountUp
-						end={rewards
-							.dividedBy(10 ** stakingToken.decimals)
-							.toNumber()}
-						decimals={stakingToken.decimalsToDisplay}
-						duration={2}
-						useEasing={true}
-						preserveValue={true}
-						prefix="Rewards: "
-						suffix={" " + stakingToken.symbol}
-					/>
-				)}
-				<div>
-					<button
-						className="btn btn-lg btn-primary"
-						onClick={() => claimRewards()}
-						disabled={!rewards || rewards.isZero()}
-					>
-						Claim Rewards
-					</button>
-				</div>
+		<>
+			<div className="bg-secondary p-4 mt-4">
+				<div className="text-center display-3 mb-4">
+					{!stakingPosition.staked_amount.isZero() ? (
+						<>
+							{error.rewards && !rewards && (
+								<PageState title="Sorry, we can't calculate your rewards. Please try again later." />
+							)}
+							{rewards && (
+								<CountUp
+									end={rewards
+										.dividedBy(10 ** stakingToken.decimals)
+										.toNumber()}
+									decimals={stakingToken.decimalsToDisplay}
+									duration={2}
+									useEasing={true}
+									preserveValue={true}
+									prefix="Rewards: "
+									suffix={" " + stakingToken.symbol}
+								/>
+							)}
+							<div>
+								<button
+									className="btn btn-lg btn-primary"
+									onClick={() => claimRewards()}
+									disabled={!rewards || rewards.isZero()}
+								>
+									Claim Rewards
+								</button>
+							</div>
+						</>
+					) : (
+						<p>Stake now and earn rewards!</p>
+					)}
 
-				<div className="mt-4 text-left">
-					<p>
-						<span className="display-3">APR:&nbsp;</span>
-						<span className="display-4">{apr.toString()} %</span>
-					</p>
-					<p>
-						<span className="display-3">
-							Your staked tokens:&nbsp;
-						</span>
-						<span className="display-4">
-							<FormatAmount
-								value={stakingPosition.staked_amount.toString(
-									10
-								)}
-								token={stakingToken.symbol}
-								digits={stakingToken.decimalsToDisplay}
-								decimals={stakingToken.decimals}
-							/>
-						</span>
-					</p>
-				</div>
+					<div className="mt-4 text-left">
+						<p>
+							<span className="display-3">APR:&nbsp;</span>
+							<span className="display-4">
+								{apr.toString()} %
+							</span>
+						</p>
+						<p>
+							<span className="display-3">Staked:&nbsp;</span>
+							<span className="display-4">
+								<FormatAmount
+									value={stakingPosition.staked_amount.toString(
+										10
+									)}
+									token={stakingToken.symbol}
+									digits={stakingToken.decimalsToDisplay}
+									decimals={stakingToken.decimals}
+								/>
+							</span>
+						</p>
+					</div>
 
-				<div>
-					<button
-						className="btn btn-lg btn-primary mr-4"
-						onClick={() => claimRewards()}
-						disabled={!rewards || rewards.isZero()}
-					>
-						Stake
-					</button>
-					<button
-						className="btn btn-lg btn-primary"
-						onClick={() => claimRewards()}
-						disabled={!rewards || rewards.isZero()}
-					>
-						Unstake
-					</button>
+					<div>
+						<button
+							className="btn btn-lg btn-primary mr-4"
+							onClick={() => setModalStakeShow(true)}
+						>
+							Stake
+						</button>
+						<button
+							className="btn btn-lg btn-primary"
+							onClick={() => setModalUnstakeShow(true)}
+							disabled={stakingPosition.staked_amount.isZero()}
+						>
+							Unstake
+						</button>
+					</div>
 				</div>
 			</div>
-		</div>
+
+			<ModalStake
+				token={stakingToken}
+				show={modalStakeShow}
+				setShow={setModalStakeShow}
+				alreadyStaked={stakingPosition.staked_amount}
+			/>
+			<ModalUnstake
+				token={stakingToken}
+				show={modalUnstakeShow}
+				setShow={setModalUnstakeShow}
+				alreadyStaked={stakingPosition.staked_amount}
+			/>
+		</>
 	);
 };

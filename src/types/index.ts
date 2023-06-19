@@ -35,3 +35,11 @@ export const defaultTokenStakingPosition: TokenStakingPosition = {
 	staked_epoch: 0,
 	last_claimed_timestamp: 0,
 };
+
+export type InternalToken = {
+	name: string;
+	symbol: string;
+	identifier: string;
+	decimals: number;
+	decimalsToDisplay: number;
+};
