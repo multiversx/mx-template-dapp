@@ -30,7 +30,7 @@ Go to `App.tsx` and edit the `environment` variable according to the environment
 Valid values are `testnet`, `devnet` or `mainnet`
 
 If you need to edit the network configuration, you can pass in a `customNetworkConfig` object.
-More info about this can be found in [sdk-dapp documentation](https://github.com/multiversx/sdk-dapp)
+More info about this can be found in [sdk-dapp documentation](https://github.com/multiversx/mx-sdk-dapp)
 
 ### Step 3. Running in development mode
 
