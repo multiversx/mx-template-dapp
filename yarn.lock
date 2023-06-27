@@ -1849,10 +1849,10 @@
     keccak "3.0.2"
     protobufjs "6.11.3"
 
-"@multiversx/sdk-dapp@2.15.2-alpha.0":
-  version "2.15.2-alpha.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.15.2-alpha.0.tgz#acc5caeded36c5ce38d07350d5a7c21833791b61"
-  integrity sha512-pNV4ga+L1TYhMgYgfNHuAEB9zOTu8dZ+jVH4Eoc9XYcy/R/lJObEaRn8hE1oq7uqoVEnWr0tfNp1V+5JEwnyew==
+"@multiversx/sdk-dapp@2.15.2-alpha.1":
+  version "2.15.2-alpha.1"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.15.2-alpha.1.tgz#f78c6846fd4717686fe305da8fc7f5ef99162b54"
+  integrity sha512-4n5FhgGIml608a84nrBgia0Pz+1yv2WlCw5eUKyykuTFCVbdkhfA3O43zjh0btxF0hXdLP088eVWo0KBvFNpCw==
   dependencies:
     "@multiversx/sdk-core" "12.4.2"
     "@multiversx/sdk-extension-provider" "3.0.0-alpha.1"
