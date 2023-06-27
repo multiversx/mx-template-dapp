@@ -1,5 +1,8 @@
 import React from 'react';
+import packageJSON from '../../../../package.json';
 import { ReactComponent as HeartIcon } from '../../../assets/img/heart.svg';
+
+const dappVersion = process.env.REACT_APP_CACHE_BUST;
 
 export const Footer = () => {
   return (
@@ -15,6 +18,12 @@ export const Footer = () => {
           Made with <HeartIcon className='mx-1' /> by the MultiversX team
         </a>
       </div>
+      <br />
+      {dappVersion && (
+        <small className='text-muted version mt-1'>
+          Build {packageJSON.version}-{dappVersion}
+        </small>
+      )}
     </footer>
   );
 };

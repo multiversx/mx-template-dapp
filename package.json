@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "HTTPS=true PORT=3001 react-app-rewired start",
-    "build": "react-app-rewired build",
+    "build": "REACT_APP_CACHE_BUST=$(git rev-parse --short HEAD) react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "lint": "eslint --ext js,ts,tsx src",
