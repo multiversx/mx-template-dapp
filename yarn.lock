@@ -1867,9 +1867,9 @@
     protobufjs "6.11.3"
 
 "@multiversx/sdk-dapp@^2.19.0":
-  version "2.19.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.19.0.tgz#a33cbbf7829ff035fc658133f155dc36f783a950"
-  integrity sha512-YWYIXr//F2NG7HCQGTxOmVT/6QG4RfSEnkLdPkSivWgCeaNOh1FrKtrEiR0ZLIIFCz5/bLjF5Spiy5jlCiZGVw==
+  version "2.19.1"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.19.1.tgz#df3e73c842ecda3d35d6b8c1258f371ad4398a27"
+  integrity sha512-JE5clKKrKlRTjvquDLxrir4ttaHVcHRvDMGPOmmDpoChCEp2Sv0Aw9kbRwhkJsJSW7os4j/Q8S3JHBiwI/fPtA==
   dependencies:
     "@multiversx/sdk-core" "12.4.2"
     "@multiversx/sdk-extension-provider" "3.0.0"
@@ -1904,7 +1904,7 @@
     classnames "2.3.1"
     platform "1.3.6"
     qrcode "1.5.0"
-    swr "1.1.2"
+    swr "2.2.0"
 
 "@multiversx/sdk-extension-provider@3.0.0":
   version "3.0.0"
@@ -11231,10 +11231,12 @@ svgo@^2.7.0:
     picocolors "^1.0.0"
     stable "^0.1.8"
 
-swr@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/swr/-/swr-1.1.2.tgz#9f3de2541931fccf03c48f322f1fc935a7551612"
-  integrity sha512-UsM0eo5T+kRPyWFZtWRx2XR5qzohs/LS4lDC0GCyLpCYFmsfTk28UCVDbOE9+KtoXY4FnwHYiF+ZYEU3hnJ1lQ==
+swr@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/swr/-/swr-2.2.0.tgz#575c6ac1bec087847f4c86a39ccbc0043c834d6a"
+  integrity sha512-AjqHOv2lAhkuUdIiBu9xbuettzAzWXmCEcLONNKJRba87WAefz8Ca9d6ds/SzrPc235n1IxWYdhJ2zF3MNUaoQ==
+  dependencies:
+    use-sync-external-store "^1.2.0"
 
 symbol-tree@^3.2.4:
   version "3.2.4"
@@ -11712,7 +11714,7 @@ url-parse@^1.5.3:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
 
-use-sync-external-store@^1.0.0:
+use-sync-external-store@^1.0.0, use-sync-external-store@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
