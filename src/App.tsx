@@ -32,7 +32,8 @@ export const App = () => {
             customNetworkConfig={{
               name: 'customConfig',
               apiTimeout,
-              walletConnectV2ProjectId
+              walletConnectV2ProjectId,
+              walletAddress: 'https://localhost:3002'
             }}
           >
             <Layout>
