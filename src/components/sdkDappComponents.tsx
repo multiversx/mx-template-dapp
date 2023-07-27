@@ -9,7 +9,7 @@ export { LedgerLoginButton } from '@multiversx/sdk-dapp/UI/ledger/LedgerLoginBut
 export { Loader } from '@multiversx/sdk-dapp/UI/Loader/Loader';
 export { NotificationModal } from '@multiversx/sdk-dapp/UI/NotificationModal/NotificationModal';
 export { OperaWalletLoginButton } from '@multiversx/sdk-dapp/UI/operaWallet/OperaWalletLoginButton/OperaWalletLoginButton';
-// export { WalletV2LoginButton } from '@multiversx/sdk-dapp/UI/walletV2/WalletV2LoginButton/WalletV2LoginButton';
+export { WalletV2LoginButton } from '@multiversx/sdk-dapp/UI/walletV2/WalletV2LoginButton/WalletV2LoginButton';
 export { PageState } from '@multiversx/sdk-dapp/UI/PageState/PageState';
 export { SignTransactionsModals } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignTransactionsModals';
 export { TransactionsTable } from '@multiversx/sdk-dapp/UI/TransactionsTable/TransactionsTable';

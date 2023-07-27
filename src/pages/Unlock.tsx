@@ -6,7 +6,7 @@ import {
   LedgerLoginButton,
   OperaWalletLoginButton,
   WalletConnectLoginButton,
-  // WalletV2LoginButton,
+  WalletV2LoginButton,
   WebWalletLoginButton
 } from 'components';
 import { routeNames } from 'routes';
@@ -39,7 +39,7 @@ const UnlockPage = () => {
               {...commonProps}
             />
 
-            {/* <WalletV2LoginButton loginButtonText='WalletV2' {...commonProps} /> */}
+            <WalletV2LoginButton loginButtonText='WalletV2' {...commonProps} />
 
             <WebWalletLoginButton
               loginButtonText='MultiversX Web Wallet'
