@@ -9,11 +9,16 @@ import {
   WebWalletLoginButton
 } from 'components';
 import { routeNames } from 'routes';
+import { useNavigate } from 'react-router-dom';
 
 const UnlockPage = () => {
+  const navigate = useNavigate();
   const commonProps = {
     callbackRoute: routeNames.dashboard,
-    nativeAuth: true // optional
+    nativeAuth: true, // optional,
+    onLoginRedirect: () => {
+      navigate(routeNames.dashboard);
+    }
   };
 
   return (
