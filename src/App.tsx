@@ -1,4 +1,5 @@
 import React from 'react';
+import { getWebviewToken } from '@multiversx/sdk-dapp/utils/account/getWebviewToken';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
 import {
   AxiosInterceptorContext, // using this is optional
@@ -21,6 +22,8 @@ import { routes } from 'routes';
 import { EnvironmentsEnum } from 'types';
 
 export const App = () => {
+  const isWebview = getWebviewToken();
+
   return (
     <AxiosInterceptorContext.Provider>
       <AxiosInterceptorContext.Interceptor
@@ -29,6 +32,7 @@ export const App = () => {
         <Router>
           <DappProvider
             environment={EnvironmentsEnum.devnet}
+            dappConfig={{ shouldUseWebViewProvider: isWebview }}
             customNetworkConfig={{
               name: 'customConfig',
               apiTimeout,
