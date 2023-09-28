@@ -21,7 +21,6 @@
   },
   "scripts": {
     "start": "vite dev",
-    "build": "vite build",
     "lint": "eslint --ext js,ts,tsx src",
     "run-cypress": "npx cypress run",
     "start-devnet": "yarn run copy-devnet-config & yarn start",
