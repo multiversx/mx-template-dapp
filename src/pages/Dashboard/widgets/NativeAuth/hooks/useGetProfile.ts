@@ -1,0 +1,35 @@
+import { useState } from 'react';
+import axios from 'axios';
+import { API_URL } from 'config';
+
+type ProfileType = {
+  address: string;
+  username: string;
+  balance: string;
+  nonce: number;
+  shard: number;
+};
+
+export const useGetProfile = () => {
+  const [profile, setProfile] = useState<ProfileType | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getProfile = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get('/account', {
+        baseURL: API_URL
+      });
+
+      if (data) {
+        setProfile(data);
+      }
+    } catch (err) {
+      console.error('Unable to fetch profile');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return { profile, getProfile, isLoading };
+};

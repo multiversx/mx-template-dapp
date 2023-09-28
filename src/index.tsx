@@ -1,6 +1,4 @@
-import './index.css';
-import './assets/sass/theme.scss';
-import React from 'react';
+import './styles/globals.css';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 
