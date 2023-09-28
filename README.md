@@ -29,9 +29,9 @@ yarn install
 In the project folder run:
 
 ```bash
-yarn start-devnet - DEVNET environment
-yarn start-testnet - TESTNET environmnet
-yarn start-mainnet - MAINNET environmnet
+yarn start-devnet
+yarn start-testnet
+yarn start-mainnet
 ```
 
 This will start the React app in development mode, using the configs found in the `vite.config.ts` file.
