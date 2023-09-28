@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .group:hover .group-hover\:block {
+    display: block;
+    text-decoration: underline;
+  }
+}
+
+.mx-transactions > td {
+  @apply p-2;
+}
+
+.mx-transactions td > span,
+.mx-transactions td > div {
+  @apply flex w-max;
+}
+
+.mx-transactions td > div > a {
+  @apply text-blue-600;
+}
