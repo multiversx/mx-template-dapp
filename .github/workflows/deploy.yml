@@ -22,7 +22,7 @@ jobs:
       - name: Setup yarn
         run: npm install -g yarn
       - run: yarn install
-      - run: yarn build
+      - run: yarn build-devnet
         env:
           CI: false
       - name: Configure AWS Credentials

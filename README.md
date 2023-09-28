@@ -7,8 +7,8 @@ See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
 
 ## Requirements
 
-- Node.js version 12.16.2+
-- Npm version 6.14.4+
+- Node.js version 16.20.0+
+- Npm version 8.19.4+
 
 ## Getting Started
 
@@ -24,35 +24,31 @@ From a terminal, navigate to the project folder and run:
 yarn install
 ```
 
-### Step 2. Update environment
-
-Go to `App.tsx` and edit the `environment` variable according to the environment you want the app to run on.
-Valid values are `testnet`, `devnet` or `mainnet`
-
-If you need to edit the network configuration, you can pass in a `customNetworkConfig` object.
-More info about this can be found in [sdk-dapp documentation](https://github.com/multiversx/mx-sdk-dapp)
-
-### Step 3. Running in development mode
+### Step 2. Running in development mode
 
 In the project folder run:
 
 ```bash
-yarn start
+yarn start-devnet
+yarn start-testnet
+yarn start-mainnet
 ```
 
-This will start the React app in development mode, using the configs found in the `config.tsx` file.
+This will start the React app in development mode, using the configs found in the `vite.config.ts` file.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### Step 4. Build for testing and production use
+### Step 3. Build for testing and production use
 
 A build of the app is necessary to deploy for testing purposes or for production use.
 To build the project run:
 
 ```bash
-yarn build
+yarn build-devnet
+yarn build-testnet
+yarn build-mainnet
 ```
 
 ## Roadmap
