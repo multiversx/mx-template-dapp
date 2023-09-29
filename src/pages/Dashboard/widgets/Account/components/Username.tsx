@@ -1,8 +1,11 @@
 import type { AccountType } from '@multiversx/sdk-dapp/types';
 import { Label } from 'components/Label';
 import { trimUsernameDomain } from 'helpers/sdkDappHelpers';
+import { ProfileType } from 'types';
 
-export const Username = (props: { account: AccountType }) => {
+export const Username = (props: {
+  account: AccountType | ProfileType | null;
+}) => {
   const { account } = props;
 
   if (!account) {

@@ -60,14 +60,14 @@ const WIDGETS: WidgetsType[] = [
     title: 'Native auth',
     widget: NativeAuth,
     description:
-      'A secure authentication token is used to interact with the backend',
+      'A secure authentication token can be used to interact with the backend',
     reference: 'https://github.com/multiversx/mx-sdk-js-native-auth-server'
   },
   {
     title: 'Batch Transactions',
     widget: BatchTransactions,
     description:
-      'For complex scenarios transactions cand be sent in the desired group/sequence',
+      'For complex scenarios transactions can be sent in the desired group/sequence',
     reference:
       'https://github.com/multiversx/mx-sdk-dapp#sending-transactions-synchronously-in-batches'
   },
@@ -82,7 +82,7 @@ const WIDGETS: WidgetsType[] = [
     title: 'Transactions (Ping & Pong)',
     widget: Transactions,
     props: { receiver: contractAddress },
-    description: 'Filtered transactions for a given Smart Contract',
+    description: 'List transactions filtered for a given Smart Contract',
     reference:
       'https://api.elrond.com/#/accounts/AccountController_getAccountTransactions'
   }
