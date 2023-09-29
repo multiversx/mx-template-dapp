@@ -1,5 +1,3 @@
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TRANSACTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 import { Label } from 'components/Label';
 import { ExplorerLink } from 'components/sdkDappComponents';
@@ -17,9 +15,8 @@ export const Transaction = () => {
     <div className='flex flex-col gap-2 text-sm'>
       <a
         href={transactionUrl}
-        className='inline-block self-start rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
+        className='self-start inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-transparent hover:bg-blue-600 text-blue-600 hover:text-white mr-0 border-solid border-blue-600 border-[1px]'
       >
-        <FontAwesomeIcon icon={faPaperPlane} className='mr-1' />
         Send transaction
       </a>
 
