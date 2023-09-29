@@ -10,7 +10,7 @@ export const Disclaimer = () => {
           of merchantability or fitness for a particular purpose. No oral advice
           or written or electronically delivered information given by MultiversX
           or its affiliates, or any of its staff, providers, merchants, sponsors
-          or licensors, or the like, shall create any warranty. Use of this
+          or licensors, or the like, shall create any warranty. Use this
           template is at your sole risk.
         </p>
         <p>
