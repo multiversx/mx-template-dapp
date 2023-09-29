@@ -36,11 +36,18 @@ export const Unlock = () => {
           className='flex flex-col p-6 items-center justify-center gap-4 rounded-xl bg-[#f6f8fa]'
           data-testid='unlockPage'
         >
-          <h2 className='text-2xl'>Login</h2>
+          <div className='flex flex-col items-center gap-1'>
+            <h2 className='text-2xl'>Login</h2>
 
-          <p className='text-center text-lg'>Pick a login method</p>
+            <p className='text-center text-gray-400'>Choose a login method</p>
+          </div>
 
           <div className='flex flex-col md:flex-row'>
+            <WalletConnectLoginButton
+              loginButtonText='xPortal App'
+              {...commonProps}
+            />
+            <LedgerLoginButton loginButtonText='Ledger' {...commonProps} />
             <ExtensionLoginButton
               loginButtonText='DeFi Wallet'
               {...commonProps}
@@ -52,11 +59,6 @@ export const Unlock = () => {
             <WebWalletLoginButton
               loginButtonText='Web Wallet'
               data-testid='webWalletLoginBtn'
-              {...commonProps}
-            />
-            <LedgerLoginButton loginButtonText='Ledger' {...commonProps} />
-            <WalletConnectLoginButton
-              loginButtonText='xPortal App'
               {...commonProps}
             />
           </div>
