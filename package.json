@@ -1,10 +1,10 @@
 {
-  "name": "@multiversx/next-template-dapp",
+  "name": "@multiversx/mx-template-dapp",
   "description": "MultiversX Dapp Template",
   "version": "1.0.0",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
-  "repository": "@multiversx/mx-next-template-dapp",
+  "repository": "@multiversx/mx-template-dapp",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "6.4.0",
     "@fortawesome/free-solid-svg-icons": "6.4.0",
