@@ -7,7 +7,6 @@ export const Footer = () => {
         <a
           className='text-gray-400 text-sm hover:cursor-pointer hover:underline'
           href='/disclaimer'
-          target='_blank'
         >
           Disclaimer
         </a>

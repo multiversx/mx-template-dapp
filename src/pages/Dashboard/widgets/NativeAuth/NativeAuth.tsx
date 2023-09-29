@@ -3,9 +3,9 @@ import { Label } from 'components/Label';
 import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { OutputContainer } from 'components/OutputContainer';
 import { FormatAmount } from 'components/sdkDappComponents';
-import { trimUsernameDomain } from 'helpers/sdkDappHelpers';
 import { useGetLoginInfo, useGetNetworkConfig } from 'hooks';
 import { useGetProfile } from './hooks';
+import { Username } from '../Account/components';
 
 export const NativeAuth = () => {
   const { tokenLogin, isLoggedIn } = useGetLoginInfo();
@@ -35,27 +35,24 @@ export const NativeAuth = () => {
 
   return (
     <OutputContainer isLoading={isLoading}>
-      {profile?.username && (
-        <p>
-          <Label>Herotag:</Label> {trimUsernameDomain(profile.username)}
-        </p>
-      )}
-      {profile?.address && (
-        <p>
-          <Label>Address:</Label> {profile.address}
-        </p>
-      )}
-      {profile?.balance && (
-        <div className='flex gap-1'>
-          <Label>Balance:</Label>
-          <FormatAmount
-            value={profile.balance}
-            showLabel={profile.balance !== '0'}
-            egldLabel={network.egldLabel}
-            data-testid='balance'
-          />
-        </div>
-      )}
+      <p>
+        <Label>Address:</Label> {profile?.address ?? 'N/A'}
+      </p>
+
+      <Username account={profile} />
+      <p>
+        <Label>Shard: </Label> {profile?.shard ?? 'N/A'}
+      </p>
+
+      <div className='flex gap-1'>
+        <Label>Balance:</Label>
+        <FormatAmount
+          value={profile?.balance ?? '0'}
+          showLabel={profile?.balance !== '0'}
+          egldLabel={network.egldLabel}
+          data-testid='balance'
+        />
+      </div>
     </OutputContainer>
   );
 };

@@ -1,6 +1,7 @@
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TRANSACTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
+import { Label } from 'components/Label';
 import { ExplorerLink } from 'components/sdkDappComponents';
 import { useGetNetworkConfig } from 'hooks';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
@@ -16,17 +17,25 @@ export const Transaction = () => {
     <div className='flex flex-col gap-2 text-sm'>
       <a
         href={transactionUrl}
-        className='self-start inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0'
+        className='inline-block self-start rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
       >
         <FontAwesomeIcon icon={faPaperPlane} className='mr-1' />
         Send transaction
       </a>
 
-      {txData.status && <p>Transaction status: {txData.status}</p>}
-      {txData.address && <p>Sender: {txData.address}</p>}
+      {txData.status && (
+        <p>
+          <Label>Transaction status:</Label> {txData.status}
+        </p>
+      )}
+      {txData.address && (
+        <p>
+          <Label>Sender:</Label> {txData.address}
+        </p>
+      )}
       {txData.txHash && (
         <p>
-          Hash:{' '}
+          <Label>Hash:</Label>
           <ExplorerLink
             page={`/${TRANSACTIONS_ENDPOINT}/${txData.txHash}`}
             className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'

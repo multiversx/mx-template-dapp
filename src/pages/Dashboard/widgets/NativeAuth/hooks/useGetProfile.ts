@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from 'config';
-
-type ProfileType = {
-  address: string;
-  username: string;
-  balance: string;
-  nonce: number;
-  shard: number;
-};
+import { ProfileType } from 'types';
 
 export const useGetProfile = () => {
   const [profile, setProfile] = useState<ProfileType | null>(null);
