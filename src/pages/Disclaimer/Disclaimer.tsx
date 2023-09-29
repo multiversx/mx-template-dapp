@@ -17,7 +17,7 @@ export const Disclaimer = () => {
           In no event shall MultiversX be liable for any injury, expenses, lost
           profits, loss or damage, weather direct, indirect, incidental, or
           consequential, or any other pecuniary loss or expense arising out of
-          your access, use or inability to use this website, even if e are
+          your access, use or inability to use this template, even if e are
           expressly advised of the possibility of such damages.
         </p>
       </div>
