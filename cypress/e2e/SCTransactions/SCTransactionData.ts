@@ -12,7 +12,9 @@ export const scSelectors = {
   signButton: 'signBtn',
   loginBtn: 'loginBtn',
   webWalletLogin: 'webWalletLoginBtn',
-  btnPing: 'btnPing',
-  btnPong: 'btnPong',
+  btnPingAbi: 'btnPingAbi',
+  btnPongAbi: 'btnPongAbi',
+  btnPingRaw: 'btnPingRaw',
+  btnPongRaw: 'btnPongRaw',
   transactionBtn: '[data-cy="transactionBtn"]'
 };

@@ -1,30 +1,39 @@
 /// <reference types="cypress" />
-import { scTransaction } from './SCActions';
-import { SCTransactionData, scSelectors } from './SCTransactionData';
+import { pingPongHandler } from './SCActions';
+import { scSelectors } from './SCTransactionData';
+import { userData } from '../../assets/globalData';
+import { RoutesEnum, walletIDEnum } from '../../constants/enums';
 
 describe('Smart Contract Transactions', () => {
-  before(() => {
-    cy.visit('/');
-    cy.getSelector(scSelectors.loginBtn).click();
-    cy.getSelector(scSelectors.webWalletLogin).click();
-    cy.login();
-    cy.apiIntercept('POST', SCTransactionData.transactions);
+  afterEach(() => {
+    cy.clearCookies();
   });
-  it('Ping & Pong actions', () => {
-    cy.wait(3000);
-    // The condtionals will check the actual status of the transaction
-    cy.get(scSelectors.transactionBtn).then(($btn) => {
-      const dataTestId = $btn.attr('data-testid');
-      // Synchronously ask for the button's text
-      if (dataTestId == scSelectors.btnPing) {
-        scTransaction(SCTransactionData.ping);
-      } else {
-        scTransaction(SCTransactionData.pong);
-      }
-      cy.wait('@/transactions').then((xhr) => {
-        expect(xhr?.response?.statusCode).to.eq(201);
-        expect(xhr?.response?.statusMessage).to.eq('Created');
-      });
-    });
+
+  it('should successfully execute the Ping & Pong ABI', () => {
+    cy.login(walletIDEnum.unguardedWallet1, 'Connect');
+    cy.wait(5000);
+    pingPongHandler('Abi');
+  });
+
+  it('should successfully execute the Ping & Pong RAW ', () => {
+    cy.login(walletIDEnum.unguardedWallet2, 'Connect');
+    cy.wait(5000);
+    pingPongHandler('Raw');
+  });
+
+  it('should successfully execute the Ping & Pong Service', () => {
+    cy.login(walletIDEnum.unguardedWallet3, 'Connect');
+    cy.wait(5000);
+    pingPongHandler('Raw');
+  });
+
+  it('should not execute ping&pong aciton', () => {
+    cy.login(walletIDEnum.unguardedWallet4, 'Connect');
+    cy.wait(5000);
+    cy.getSelector('btnPongAbi').click();
+    cy.getSelector(scSelectors.accesPass).type(userData.passsword);
+    cy.getSelector(scSelectors.submitButton).click();
+    cy.getSelector('closeButton').click();
+    cy.contains('Transaction canceled');
   });
 });
