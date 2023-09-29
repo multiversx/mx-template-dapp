@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { Button } from 'components/Button';
 import { ContractAddress } from 'components/ContractAddress';
-import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { Label } from 'components/Label';
+import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
@@ -103,7 +103,7 @@ export const PingPongService = () => {
           <Button
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
-            data-testid='btnPing'
+            data-testid='btnPingService'
             data-cy='transactionBtn'
           >
             <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
@@ -112,7 +112,7 @@ export const PingPongService = () => {
 
           <Button
             disabled={!pongAllowed || hasPing || hasPendingTransactions}
-            data-testid='btnPong'
+            data-testid='btnPongService'
             data-cy='transactionBtn'
             onClick={onSendPongTransaction}
           >
