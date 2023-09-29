@@ -9,7 +9,7 @@ module.exports = {
     },
     backgroundImage: {
       // eslint-disable-next-line quotes
-      'mvx-white': "url('../multiversx-white.png')"
+      'mvx-white': "url('../multiversx-white.svg')"
     }
   },
   plugins: []
