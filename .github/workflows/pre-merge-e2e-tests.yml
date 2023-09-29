@@ -1,25 +1,18 @@
-name: pre-merge-e2e-tests
-
+name: Cypress Tests
 on:
   pull_request:
-    branches:
-      - main
-      - development
-  repository_dispatch:
-    types: e2e-tests
-  workflow_dispatch:
-
+    branches: [main]
 jobs:
-  build:
+  cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
+      matrix:
+        containers: [1] 
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-      - run: npm install --only=dev
-      - run: npm run run-cypress
-        env:
-          CI: false
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress run
+        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v4
+       

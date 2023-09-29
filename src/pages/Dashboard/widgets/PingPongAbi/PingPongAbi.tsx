@@ -75,7 +75,7 @@ export const PingPongAbi = () => {
           <Button
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
-            data-testid='btnPing'
+            data-testid='btnPingAbi'
             data-cy='transactionBtn'
             className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
           >
@@ -85,7 +85,7 @@ export const PingPongAbi = () => {
 
           <Button
             disabled={!pongAllowed || hasPing || hasPendingTransactions}
-            data-testid='btnPong'
+            data-testid='btnPongAbi'
             data-cy='transactionBtn'
             onClick={onSendPongTransaction}
             className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed'
