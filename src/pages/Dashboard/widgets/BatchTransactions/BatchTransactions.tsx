@@ -131,7 +131,7 @@ export const BatchTransactions = () => {
 
   return (
     <div className='flex flex-col gap-6'>
-      <div className='flex gap-2 items-center'>
+      <div className='flex flex-col md:flex-row gap-2 items-start'>
         <Button
           data-testid='sign-auto-send'
           onClick={signAndAutoSendBatchTransactions}
