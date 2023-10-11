@@ -25,7 +25,6 @@ export const signTransactions = (selector) => {
 };
 
 export const cancelTransactions = (selector) => {
-  //   cy.visit('/dasboard#batchTransactions');
   cy.getSelector(selector).click();
   cy.getSelector(scSelectors.accesPass).type(userData.passsword);
   cy.getSelector(scSelectors.submitButton).click();

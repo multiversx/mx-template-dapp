@@ -2,7 +2,7 @@
 import { pingPongHandler } from './SCActions';
 import { scSelectors } from './SCTransactionData';
 import { userData } from '../../assets/globalData';
-import { RoutesEnum, walletIDEnum } from '../../constants/enums';
+import { RoutesEnum, WalletIDEnum } from '../../constants/enums';
 
 describe('Smart Contract Transactions', () => {
   afterEach(() => {
@@ -10,25 +10,25 @@ describe('Smart Contract Transactions', () => {
   });
 
   it('should successfully execute the Ping & Pong ABI', () => {
-    cy.login(walletIDEnum.unguardedWallet1, 'Connect');
+    cy.login(WalletIDEnum.unguardedWallet1, 'Connect');
     cy.wait(5000);
     pingPongHandler('Abi');
   });
 
   it('should successfully execute the Ping & Pong RAW ', () => {
-    cy.login(walletIDEnum.unguardedWallet2, 'Connect');
+    cy.login(WalletIDEnum.unguardedWallet2, 'Connect');
     cy.wait(5000);
     pingPongHandler('Raw');
   });
 
   it('should successfully execute the Ping & Pong Service', () => {
-    cy.login(walletIDEnum.unguardedWallet3, 'Connect');
+    cy.login(WalletIDEnum.unguardedWallet3, 'Connect');
     cy.wait(5000);
     pingPongHandler('Raw');
   });
 
   it('should not execute ping&pong aciton', () => {
-    cy.login(walletIDEnum.unguardedWallet4, 'Connect');
+    cy.login(WalletIDEnum.unguardedWallet4, 'Connect');
     cy.wait(5000);
     cy.getSelector('btnPongAbi').click();
     cy.getSelector(scSelectors.accesPass).type(userData.passsword);

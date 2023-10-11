@@ -1,8 +1,8 @@
 import { userData } from '../../assets/globalData';
-import { AssertionEnum, RoutesEnum, walletIDEnum } from '../../constants/enums';
+import { AssertionEnum, RoutesEnum, WalletIDEnum } from '../../constants/enums';
 describe('Send', () => {
   beforeEach(() => {
-    cy.login(walletIDEnum.unguardedWallet1, 'Send transaction');
+    cy.login(WalletIDEnum.unguardedWallet1, 'Send transaction');
   });
   it('should successfully send a demo transaction', () => {
     cy.checkUrl(RoutesEnum.send);
