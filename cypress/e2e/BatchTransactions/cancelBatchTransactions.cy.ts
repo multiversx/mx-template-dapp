@@ -1,9 +1,9 @@
 import { cancelTransactions } from './helpers';
-import { walletIDEnum } from '../../constants/enums';
+import { WalletIDEnum } from '../../constants/enums';
 
 describe('cancelTransactions', () => {
   beforeEach(() => {
-    cy.login(walletIDEnum.unguardedWallet1, 'Connect');
+    cy.login(WalletIDEnum.unguardedWallet1, 'Connect');
     cy.wait(5000);
   });
   it('should return transaction canceled for auto-send batch ', () => {
