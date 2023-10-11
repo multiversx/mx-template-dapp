@@ -2,8 +2,9 @@
 declare namespace Cypress {
   interface Chainable {
     checkUrl: (url: string) => void;
-    login: () => void;
+    login: (walletID: string, selector: string) => void;
     apiIntercept: (method: string, param: string) => void;
+    checkWidgetMsg: (msgArr: string[]) => void;
     getSelector: (
       selector: string,
       ...cypressAction: []
