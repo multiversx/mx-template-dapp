@@ -1,11 +1,11 @@
 import { Routes } from 'react-router-dom';
 import { userData } from '../../assets/globalData';
-import { AssertionEnum, RoutesEnum, walletIDEnum } from '../../constants/enums';
+import { AssertionEnum, RoutesEnum, WalletIDEnum } from '../../constants/enums';
 import { scSelectors } from '../SCTransactions/SCTransactionData';
 
 describe('Sign Message', () => {
   beforeEach(() => {
-    cy.login(walletIDEnum.unguardedWallet1, 'Connect');
+    cy.login(WalletIDEnum.unguardedWallet1, 'Connect');
     cy.wait(5000);
   });
   it('should sign', () => {
