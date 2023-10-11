@@ -15,6 +15,7 @@ describe('Batch Transaction', () => {
   });
 
   it('should successfully sign 4 transactions for swap-lock', () => {
+    cy.wait(3000);
     signTransactions('swap-lock');
   });
 });
