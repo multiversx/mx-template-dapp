@@ -30,6 +30,7 @@ export default defineConfig({
   ],
   build: {
     outDir: 'build',
+    // This fixes the issue with the build not working using Yalc linked packages
     rollupOptions: {
       external: /^@multiversx.*/
     }
