@@ -31,7 +31,17 @@ export default defineConfig({
   build: {
     outDir: 'build',
     rollupOptions: {
-      external: '@multiversx/sdk-extension-provider'
+      external: [
+        '@multiversx/sdk-core',
+        '@multiversx/sdk-extension-provider',
+        '@multiversx/sdk-hw-provider',
+        '@multiversx/sdk-native-auth-client',
+        '@multiversx/sdk-network-providers',
+        '@multiversx/sdk-opera-provider',
+        '@multiversx/sdk-wallet',
+        '@multiversx/sdk-wallet-connect-provider',
+        '@multiversx/sdk-web-wallet-provider'
+      ]
     }
   },
   preview: {
