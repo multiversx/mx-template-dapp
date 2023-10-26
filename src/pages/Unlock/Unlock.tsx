@@ -10,7 +10,8 @@ import {
   LedgerLoginButton,
   OperaWalletLoginButton,
   WalletConnectLoginButton,
-  WebWalletLoginButton
+  WebWalletLoginButton,
+  XaliasLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
@@ -59,6 +60,11 @@ export const Unlock = () => {
             <WebWalletLoginButton
               loginButtonText='Web Wallet'
               data-testid='webWalletLoginBtn'
+              {...commonProps}
+            />
+            <XaliasLoginButton
+              loginButtonText='xAlias'
+              data-testid='xAliasLoginBtn'
               {...commonProps}
             />
           </div>
