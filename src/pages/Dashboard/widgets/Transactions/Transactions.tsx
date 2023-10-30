@@ -22,10 +22,10 @@ export const Transactions = (payload: TransactionsPropsType) => {
     getTransactions();
   }, []);
 
-  if (!isLoading && !transactions) {
+  if (!isLoading && transactions.length === 0) {
     return (
       <OutputContainer>
-        <p>No transactions found</p>
+        <p className='text-gray-400'>No transactions found</p>
       </OutputContainer>
     );
   }
@@ -33,7 +33,7 @@ export const Transactions = (payload: TransactionsPropsType) => {
   return (
     <div className='flex flex-col'>
       <OutputContainer isLoading={isLoading} className='p-0'>
-        <div className='w-full h-full bg-gray-100 overflow-x-auto bg-white shadow rounded-lg'>
+        <div className='w-full h-full overflow-x-auto bg-white shadow rounded-lg'>
           <table className='w-full divide-y divide-gray-200 overflow-auto table-auto'>
             <thead className='bg-gray-50'>
               <tr>
