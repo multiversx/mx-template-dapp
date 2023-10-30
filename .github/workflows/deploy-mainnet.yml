@@ -1,10 +1,10 @@
-name: deploy
+name: deploy-mainnet
 
 on:
   push:
     branches: [main]
   repository_dispatch:
-    types: deploy
+    types: deploy-mainnet
   workflow_dispatch:
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
       - name: Setup yarn
         run: npm install -g yarn
       - run: yarn install
-      - run: yarn build:devnet
+      - run: yarn build:mainnet
         env:
           CI: false
       - name: Configure AWS Credentials
@@ -32,13 +32,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: 'us-east-1'
       - name: Deploy to S3 bucket
-        run: aws s3 sync ./build/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
+        run: aws s3 sync ./build/ s3://${{ secrets.AWS_S3_BUCKET_MAINNET }} --delete
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
         env:
           SLACK_ICON_EMOJI: ':nerd_face:'
-          SLACK_USERNAME: ${{ secrets.AWS_S3_BUCKET }}
-          SLACK_MESSAGE: ${{ secrets.AWS_S3_BUCKET }}
+          SLACK_USERNAME: ${{ secrets.AWS_S3_BUCKET_MAINNET }}
+          SLACK_MESSAGE: ${{ secrets.AWS_S3_BUCKET_MAINNET }}
           SLACK_FOOTER: ''
           MSG_MINIMAL: true
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
