@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 import { userData } from '../assets/globalData';
-import { AssertionEnum } from '../constants/enums';
+import { AssertionEnum, GlobalSelectorsEnum } from '../constants/enums';
 import { DEVNET_API } from '../constants/globalLinks';
 
 // Check the url global function
@@ -13,7 +13,7 @@ Cypress.Commands.add('login', (walletID, selector) => {
   cy.session(walletID, () => {
     cy.visit('/');
     cy.contains(selector).click();
-    if (selector === 'Connect') {
+    if (selector === GlobalSelectorsEnum.connect) {
       cy.getSelector('webWalletLoginBtn').click();
     }
     cy.getSelector('keystoreBtn').click();
