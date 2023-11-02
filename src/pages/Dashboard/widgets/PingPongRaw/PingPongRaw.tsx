@@ -6,8 +6,16 @@ import { Button } from 'components/Button';
 import { ContractAddress } from 'components/ContractAddress';
 import { Label } from 'components/Label';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
-import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
+import {
+  getCountdownSeconds,
+  sendTransactions,
+  setTimeRemaining
+} from 'helpers';
+import {
+  useGetAccount,
+  useGetPendingTransactions,
+  useSendPingPongTransaction
+} from 'hooks';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
@@ -19,6 +27,7 @@ export const PingPongRaw = () => {
   const { sendPingTransaction, sendPongTransaction, transactionStatus } =
     useSendPingPongTransaction(SessionEnum.rawPingPongSessionId);
   const pingAmount = useGetPingAmount();
+  const { address } = useGetAccount();
 
   const [stateTransactions, setStateTransactions] = useState<
     SignedTransactionType[] | null
@@ -51,6 +60,24 @@ export const PingPongRaw = () => {
 
   const pongAllowed = secondsLeft === 0;
 
+  const sendToSelf = async () => {
+    const pingTransaction = {
+      value: '0',
+      receiver: address
+    };
+
+    const { sessionId } = await sendTransactions({
+      transactions: pingTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing Ping transaction',
+        errorMessage: 'An error has occured during Ping',
+        successMessage: 'Ping transaction successful'
+      }
+    });
+
+    console.log(sessionId);
+  };
+
   useEffect(() => {
     getCountdownSeconds({ secondsLeft, setSecondsLeft });
   }, [hasPing]);
@@ -69,6 +96,10 @@ export const PingPongRaw = () => {
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
         <div className='flex justify-start gap-2'>
+          <Button onClick={sendToSelf}>
+            <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
+            Send to self
+          </Button>
           <Button
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
