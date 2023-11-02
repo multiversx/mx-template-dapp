@@ -15,6 +15,7 @@ export { TransactionsTable } from '@multiversx/sdk-dapp/UI/TransactionsTable/Tra
 export { TransactionsToastList } from '@multiversx/sdk-dapp/UI/TransactionsToastList/TransactionsToastList';
 export { WalletConnectLoginButton } from '@multiversx/sdk-dapp/UI/walletConnect/WalletConnectLoginButton/WalletConnectLoginButton';
 export { WebWalletLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton/WebWalletLoginButton';
+export { CrossWindowLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/CrossWindowLoginButton/CrossWindowLoginButton';
 export { XaliasLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/XaliasLoginButton/XaliasLoginButton';
 export { AuthenticatedRoutesWrapper } from '@multiversx/sdk-dapp/wrappers/AuthenticatedRoutesWrapper/AuthenticatedRoutesWrapper';
 export { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext/AxiosInterceptorContext';

@@ -11,10 +11,12 @@ import {
   OperaWalletLoginButton,
   WalletConnectLoginButton,
   WebWalletLoginButton,
-  XaliasLoginButton
+  XaliasLoginButton,
+  CrossWindowLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
+import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
 
 type CommonPropsType =
@@ -24,12 +26,16 @@ type CommonPropsType =
   | LedgerLoginButtonPropsType
   | WalletConnectLoginButtonPropsType;
 
-const commonProps: CommonPropsType = {
-  callbackRoute: RouteNamesEnum.dashboard,
-  nativeAuth
-};
-
 export const Unlock = () => {
+  const navigate = useNavigate();
+  const commonProps: CommonPropsType = {
+    callbackRoute: RouteNamesEnum.dashboard,
+    nativeAuth,
+    onLoginRedirect: () => {
+      navigate(RouteNamesEnum.dashboard);
+    }
+  };
+
   return (
     <AuthRedirectWrapper requireAuth={false}>
       <div className='flex justify-center items-center'>
@@ -65,6 +71,11 @@ export const Unlock = () => {
             <XaliasLoginButton
               loginButtonText='xAlias'
               data-testid='xAliasLoginBtn'
+              {...commonProps}
+            />
+            <CrossWindowLoginButton
+              loginButtonText='Wallet'
+              data-testid='crossWindowLoginBtn'
               {...commonProps}
             />
           </div>
