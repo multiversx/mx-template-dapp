@@ -1,7 +1,7 @@
 name: deploy-integration
 
 on:
-  push:
+  pull_request:
     branches: [tm/feature/post-message-provider]
   repository_dispatch:
     types: deploy-integration
