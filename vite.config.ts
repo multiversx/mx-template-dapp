@@ -10,7 +10,7 @@ export default defineConfig({
     port: Number(process.env.PORT) || 3000,
     strictPort: true,
     host: true,
-    https: true,
+    https: false,
     watch: {
       usePolling: false,
       useFsEvents: false
@@ -21,7 +21,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    basicSsl(),
+    // basicSsl(),
     tsconfigPaths(),
     svgrPlugin(),
     nodePolyfills({
