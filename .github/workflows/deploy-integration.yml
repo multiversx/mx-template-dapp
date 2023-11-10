@@ -2,14 +2,13 @@ name: deploy-integration
 
 on:
   pull_request:
-    branches: [tm/feature/post-message-provider]
+    branches: [tm/feature/post-message-provider-deploy-integration]
   repository_dispatch:
     types: deploy-integration
   workflow_dispatch:
 
 jobs:
   build:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
