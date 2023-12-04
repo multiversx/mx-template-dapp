@@ -10,7 +10,7 @@
     "@fortawesome/free-solid-svg-icons": "6.4.0",
     "@fortawesome/react-fontawesome": "0.2.0",
     "@multiversx/sdk-core": "12.13.0",
-    "@multiversx/sdk-dapp": "2.24.2-alpha.0",
+    "@multiversx/sdk-dapp": "2.24.2-alpha.2",
     "@multiversx/sdk-network-providers": "2.0.0",
     "axios": "0.24.0",
     "classnames": "2.3.2",
@@ -22,7 +22,7 @@
   "scripts": {
     "lint": "eslint --ext js,ts,tsx src",
     "run-cypress": "npx cypress run",
-    "start:devnet": "yarn run copy:devnet-config & vite dev",
+    "start:devnet": "yarn run copy:devnet-config & vite dev --force",
     "start:testnet": "yarn run copy:testnet-config & vite dev",
     "start:mainnet": "yarn run copy:mainnet-config & vite dev",
     "build:devnet": "yarn run copy:devnet-config & vite build",

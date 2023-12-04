@@ -2,7 +2,7 @@ name: deploy-integration
 
 on:
   pull_request:
-    branches: [tm/feature/post-message-provider]
+    branches: [tm/feature/post-message-provider-deploy-integration]
   repository_dispatch:
     types: deploy-integration
   workflow_dispatch:
@@ -10,7 +10,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
         with:

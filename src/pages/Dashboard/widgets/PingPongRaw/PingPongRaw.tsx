@@ -63,7 +63,8 @@ export const PingPongRaw = () => {
   const sendToSelf = async () => {
     const pingTransaction = {
       value: '0',
-      receiver: address
+      receiver: address,
+      data: 'self'
     };
 
     const { sessionId } = await sendTransactions({
