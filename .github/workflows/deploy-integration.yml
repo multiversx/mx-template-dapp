@@ -2,7 +2,7 @@ name: deploy-integration
 
 on:
   pull_request:
-    branches: [tm/feature/post-message-provider-deploy-integration]
+    branches: [tm/feature/post-message-provider-deploy-integration-build]
   repository_dispatch:
     types: deploy-integration
   workflow_dispatch:
@@ -18,12 +18,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      - name: Setup yarn
-        run: npm install -g yarn
-      - run: yarn install
-      - run: yarn build:devnet
-        env:
-          CI: false
+      # - name: Setup yarn
+      #   run: npm install -g yarn
+      # - run: yarn install
+      # - run: yarn build:devnet
+      #   env:
+      #     CI: false
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
