@@ -16,7 +16,7 @@ export const Footer = () => {
           href='https://multiversx.com/'
         >
           Made with <HeartIcon className='mx-1 fill-gray-400' /> by the
-          MultiversX team
+          MultiversX team alpha 4
         </a>
       </div>
     </footer>
