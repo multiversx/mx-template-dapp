@@ -29,7 +29,7 @@ const AppContent = () => {
       customNetworkConfig={{
         name: 'customConfig',
         apiTimeout,
-        walletAddress: 'http://localhost:3003',
+        walletAddress: 'http://localhost:3002',
         walletConnectV2ProjectId
       }}
       dappConfig={{
