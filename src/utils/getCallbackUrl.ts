@@ -1,19 +1,21 @@
 import { getIsProviderEqualTo } from 'utils/sdkDappUtils';
 import { LoginMethodsEnum } from 'types/sdkDappTypes';
 
-type GetCallbackProps = {
+// relative is the relative path for the callbackUrl
+// for signMessage it is necessary to send the full url Ex: https:localhost:3002/dashboard#sign-message
+type GetCallbackUrlProps = {
   anchor?: string;
   relative?: boolean;
 };
 
-export const getCallbackProps = ({
+export const getCallbackUrl = ({
   anchor,
   relative = true
-}: GetCallbackProps) => {
+}: GetCallbackUrlProps) => {
   const isWebWallet = getIsProviderEqualTo(LoginMethodsEnum.wallet);
 
   if (!isWebWallet) {
-    return {};
+    return '';
   }
 
   const basePath = relative
@@ -21,8 +23,8 @@ export const getCallbackProps = ({
     : `${window.location.origin}${window.location.pathname}`;
 
   if (anchor) {
-    return { callbackRoute: `${basePath}#${anchor}` };
+    return `${basePath}#${anchor}`;
   }
 
-  return { callbackRoute: basePath };
+  return basePath;
 };

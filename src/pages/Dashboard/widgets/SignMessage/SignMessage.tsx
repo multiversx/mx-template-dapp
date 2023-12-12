@@ -12,9 +12,8 @@ import { OutputContainer } from 'components/OutputContainer';
 import { useGetLastSignedMessageSession, useSignMessage } from 'hooks';
 import { SignedMessageStatusesEnum, WidgetProps } from 'types';
 import { SignFailure, SignSuccess } from './components';
-import { getCallbackProps } from 'utils/getCallbackProps';
 
-export const SignMessage = ({ anchor }: WidgetProps) => {
+export const SignMessage = ({ callbackUrl }: WidgetProps) => {
   const { sessionId, signMessage, onAbort } = useSignMessage();
   const signedMessageInfo = useGetLastSignedMessageSession();
   const messageSession = useGetSignMessageSession(sessionId);
@@ -32,10 +31,9 @@ export const SignMessage = ({ anchor }: WidgetProps) => {
       return;
     }
 
-    const callbackProps = getCallbackProps({ anchor, relative: false });
     signMessage({
       message,
-      ...callbackProps
+      callbackRoute: callbackUrl
     });
 
     setMessage('');

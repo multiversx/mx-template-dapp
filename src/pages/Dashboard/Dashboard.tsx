@@ -12,6 +12,7 @@ import {
   Transactions
 } from './widgets';
 import { useScrollToElement } from 'hooks';
+import { getCallbackUrl } from 'utils';
 
 type WidgetsType = {
   title: string;
@@ -20,6 +21,7 @@ type WidgetsType = {
   props?: { receiver?: string };
   reference: string;
   anchor?: string;
+  callbackUrlRelativePath?: boolean;
 };
 
 const WIDGETS: WidgetsType[] = [
@@ -60,7 +62,8 @@ const WIDGETS: WidgetsType[] = [
     widget: SignMessage,
     description: 'Message signing using the connected account',
     reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account-1',
-    anchor: 'sign-message'
+    anchor: 'sign-message',
+    callbackUrlRelativePath: false
   },
   {
     title: 'Native auth',
@@ -108,9 +111,16 @@ export const Dashboard = () => {
             description,
             props = {},
             reference,
-            anchor
+            anchor,
+            callbackUrlRelativePath
           } = element;
 
+          const callbackurl = getCallbackUrl({
+            anchor,
+            relative: callbackUrlRelativePath
+          });
+
+          console.log({ callbackurl });
           return (
             <Card
               key={title}
@@ -119,7 +129,7 @@ export const Dashboard = () => {
               reference={reference}
               anchor={anchor}
             >
-              <MxWidget anchor={anchor} {...props} />
+              <MxWidget callbackUrl={callbackurl} {...props} />
             </Card>
           );
         })}

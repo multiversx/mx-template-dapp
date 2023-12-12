@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import {
   deleteTransactionToast,
   removeAllSignedTransactions,
@@ -11,16 +11,15 @@ import { SessionEnum } from 'localConstants';
 import { IPlainTransactionObject } from 'types/sdkCoreTypes';
 import { getChainId } from 'utils/getChainId';
 import { smartContract } from 'utils/smartContract';
-import { getCallbackProps } from 'utils/getCallbackProps';
 
 type PingPongTransactionProps = {
   type: SessionEnum;
-  anchor?: string;
+  callbackUrl?: string;
 };
 
 export const useSendPingPongTransaction = ({
   type,
-  anchor
+  callbackUrl
 }: PingPongTransactionProps) => {
   // Needed in order to differentiate widgets between each other
   // By default sdk-dapp takes the last sessionId available which will display on every widget the same transaction
@@ -32,8 +31,6 @@ export const useSendPingPongTransaction = ({
   const transactionStatus = useTrackTransactionStatus({
     transactionId: pingPongSessionId ?? '0'
   });
-
-  const callbackProps = useMemo(() => getCallbackProps({ anchor }), [anchor]);
 
   const clearAllTransactions = () => {
     removeAllSignedTransactions();
@@ -60,7 +57,7 @@ export const useSendPingPongTransaction = ({
         successMessage: 'Ping transaction successful'
       },
       redirectAfterSign: false,
-      ...callbackProps
+      callbackRoute: callbackUrl
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -87,7 +84,7 @@ export const useSendPingPongTransaction = ({
         successMessage: 'Ping transaction successful'
       },
       redirectAfterSign: false,
-      ...callbackProps
+      callbackRoute: callbackUrl
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -108,7 +105,7 @@ export const useSendPingPongTransaction = ({
         successMessage: 'Ping transaction successful'
       },
       redirectAfterSign: false,
-      ...callbackProps
+      callbackRoute: callbackUrl
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -134,7 +131,7 @@ export const useSendPingPongTransaction = ({
         successMessage: 'Pong transaction successful'
       },
       redirectAfterSign: false,
-      ...callbackProps
+      callbackRoute: callbackUrl
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -161,7 +158,7 @@ export const useSendPingPongTransaction = ({
         successMessage: 'Pong transaction successful'
       },
       redirectAfterSign: false,
-      ...callbackProps
+      callbackRoute: callbackUrl
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -182,7 +179,7 @@ export const useSendPingPongTransaction = ({
         successMessage: 'Pong transaction successful'
       },
       redirectAfterSign: false,
-      ...callbackProps
+      callbackRoute: callbackUrl
     });
 
     sessionStorage.setItem(type, sessionId);

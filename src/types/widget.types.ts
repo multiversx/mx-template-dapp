@@ -1,3 +1,3 @@
 export type WidgetProps = {
-  anchor?: string;
+  callbackUrl?: string;
 };

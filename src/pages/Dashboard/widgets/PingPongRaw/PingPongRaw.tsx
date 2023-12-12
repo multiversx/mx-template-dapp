@@ -13,13 +13,13 @@ import { SignedTransactionType, WidgetProps } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
-export const PingPongRaw = ({ anchor }: WidgetProps) => {
+export const PingPongRaw = ({ callbackUrl }: WidgetProps) => {
   const getTimeToPong = useGetTimeToPong();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendPingTransaction, sendPongTransaction, transactionStatus } =
     useSendPingPongTransaction({
       type: SessionEnum.rawPingPongSessionId,
-      anchor
+      callbackUrl
     });
   const pingAmount = useGetPingAmount();
 

@@ -19,9 +19,8 @@ import { useBatchTransactionContext } from 'wrappers';
 import { getBatchTransactions, getSwapAndLockTransactions } from './helpers';
 import { useSendSignedTransactions } from './hooks';
 import { BatchTransactionsType } from './types';
-import { getCallbackProps } from 'utils';
 
-export const BatchTransactions = ({ anchor }: WidgetProps) => {
+export const BatchTransactions = ({ callbackUrl }: WidgetProps) => {
   const { setSendBatchTransactionsOnDemand } = useBatchTransactionContext();
   const { address } = useGetAccountInfo();
   const { batches } = useGetBatches();
@@ -42,8 +41,6 @@ export const BatchTransactions = ({ anchor }: WidgetProps) => {
     signedSessionId: currentSessionId,
     transactionsOrder
   });
-
-  const callbackProps = useMemo(() => getCallbackProps({ anchor }), [anchor]);
 
   // this process will not go through useSendSignedTransactions
   // it will automatically sign and send transactions
@@ -67,7 +64,7 @@ export const BatchTransactions = ({ anchor }: WidgetProps) => {
         errorMessage: 'An error has occurred during transaction execution',
         successMessage: 'Batch transactions successful'
       },
-      ...callbackProps
+      callbackRoute: callbackUrl
     });
 
     if (error) {
@@ -97,7 +94,7 @@ export const BatchTransactions = ({ anchor }: WidgetProps) => {
       transactions,
       signWithoutSending: true,
       customTransactionInformation: { redirectAfterSign: true },
-      ...callbackProps
+      callbackRoute: callbackUrl
     });
 
     if (error) {

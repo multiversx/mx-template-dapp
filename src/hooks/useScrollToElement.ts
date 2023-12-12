@@ -7,12 +7,16 @@ export const useScrollToElement = () => {
   useEffect(() => {
     const [, anchor] = location.hash.split('#');
 
-    if (anchor) {
-      const element = document.getElementById(anchor);
-
-      if (element) {
-        element.scrollIntoView();
-      }
+    if (!anchor) {
+      return;
     }
+
+    const element = document.getElementById(anchor);
+
+    if (!element) {
+      return;
+    }
+
+    element.scrollIntoView();
   }, [location.hash]);
 };
