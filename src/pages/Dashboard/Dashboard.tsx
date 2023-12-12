@@ -120,7 +120,6 @@ export const Dashboard = () => {
             relative: callbackUrlRelativePath
           });
 
-          console.log({ callbackurl });
           return (
             <Card
               key={title}
