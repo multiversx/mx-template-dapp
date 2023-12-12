@@ -11,7 +11,7 @@ import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
 import { useGetLoginInfo } from 'hooks/sdkDappHooks';
 import { SessionEnum } from 'localConstants';
-import { SignedTransactionType } from 'types';
+import { SignedTransactionType, WidgetProps } from 'types';
 import {
   useGetTimeToPong,
   useGetPingTransaction,
@@ -19,7 +19,7 @@ import {
 } from './hooks';
 
 // The transactions are being done by directly requesting to template-dapp service
-export const PingPongService = () => {
+export const PingPongService = ({ anchor }: WidgetProps) => {
   const [stateTransactions, setStateTransactions] = useState<
     SignedTransactionType[] | null
   >(null);
@@ -30,7 +30,10 @@ export const PingPongService = () => {
     sendPingTransactionFromService,
     sendPongTransactionFromService,
     transactionStatus
-  } = useSendPingPongTransaction(SessionEnum.abiPingPongServiceSessionId);
+  } = useSendPingPongTransaction({
+    type: SessionEnum.abiPingPongServiceSessionId,
+    anchor
+  });
   const getTimeToPong = useGetTimeToPong();
   const getPingTransaction = useGetPingTransaction();
   const getPongTransaction = useGetPongTransaction();

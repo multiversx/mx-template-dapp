@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   deleteTransactionToast,
   removeAllSignedTransactions,
@@ -11,8 +11,17 @@ import { SessionEnum } from 'localConstants';
 import { IPlainTransactionObject } from 'types/sdkCoreTypes';
 import { getChainId } from 'utils/getChainId';
 import { smartContract } from 'utils/smartContract';
+import { getCallbackProps } from 'utils/getCallbackProps';
 
-export const useSendPingPongTransaction = (type: SessionEnum) => {
+type PingPongTransactionProps = {
+  type: SessionEnum;
+  anchor?: string;
+};
+
+export const useSendPingPongTransaction = ({
+  type,
+  anchor
+}: PingPongTransactionProps) => {
   // Needed in order to differentiate widgets between each other
   // By default sdk-dapp takes the last sessionId available which will display on every widget the same transaction
   // this usually appears on page refreshes
@@ -23,6 +32,8 @@ export const useSendPingPongTransaction = (type: SessionEnum) => {
   const transactionStatus = useTrackTransactionStatus({
     transactionId: pingPongSessionId ?? '0'
   });
+
+  const callbackProps = useMemo(() => getCallbackProps({ anchor }), [anchor]);
 
   const clearAllTransactions = () => {
     removeAllSignedTransactions();
@@ -48,7 +59,8 @@ export const useSendPingPongTransaction = (type: SessionEnum) => {
         errorMessage: 'An error has occured during Ping',
         successMessage: 'Ping transaction successful'
       },
-      redirectAfterSign: false
+      redirectAfterSign: false,
+      ...callbackProps
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -74,7 +86,8 @@ export const useSendPingPongTransaction = (type: SessionEnum) => {
         errorMessage: 'An error has occured during Ping',
         successMessage: 'Ping transaction successful'
       },
-      redirectAfterSign: false
+      redirectAfterSign: false,
+      ...callbackProps
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -94,7 +107,8 @@ export const useSendPingPongTransaction = (type: SessionEnum) => {
         errorMessage: 'An error has occured during Ping',
         successMessage: 'Ping transaction successful'
       },
-      redirectAfterSign: false
+      redirectAfterSign: false,
+      ...callbackProps
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -119,7 +133,8 @@ export const useSendPingPongTransaction = (type: SessionEnum) => {
         errorMessage: 'An error has occured during Pong',
         successMessage: 'Pong transaction successful'
       },
-      redirectAfterSign: false
+      redirectAfterSign: false,
+      ...callbackProps
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -145,7 +160,8 @@ export const useSendPingPongTransaction = (type: SessionEnum) => {
         errorMessage: 'An error has occured during Pong',
         successMessage: 'Pong transaction successful'
       },
-      redirectAfterSign: false
+      redirectAfterSign: false,
+      ...callbackProps
     });
 
     sessionStorage.setItem(type, sessionId);
@@ -165,7 +181,8 @@ export const useSendPingPongTransaction = (type: SessionEnum) => {
         errorMessage: 'An error has occured during Pong',
         successMessage: 'Pong transaction successful'
       },
-      redirectAfterSign: false
+      redirectAfterSign: false,
+      ...callbackProps
     });
 
     sessionStorage.setItem(type, sessionId);

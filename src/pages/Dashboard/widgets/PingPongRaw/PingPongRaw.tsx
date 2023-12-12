@@ -9,15 +9,18 @@ import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
 import { SessionEnum } from 'localConstants';
-import { SignedTransactionType } from 'types';
+import { SignedTransactionType, WidgetProps } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
-export const PingPongRaw = () => {
+export const PingPongRaw = ({ anchor }: WidgetProps) => {
   const getTimeToPong = useGetTimeToPong();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendPingTransaction, sendPongTransaction, transactionStatus } =
-    useSendPingPongTransaction(SessionEnum.rawPingPongSessionId);
+    useSendPingPongTransaction({
+      type: SessionEnum.rawPingPongSessionId,
+      anchor
+    });
   const pingAmount = useGetPingAmount();
 
   const [stateTransactions, setStateTransactions] = useState<

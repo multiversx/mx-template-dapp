@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {
   faPaperPlane,
   faArrowsRotate
@@ -14,13 +14,14 @@ import {
 import { sendTransactions } from 'helpers';
 import { useGetAccountInfo, useGetPendingTransactions } from 'hooks';
 import { SessionEnum } from 'localConstants';
-import { SignedTransactionType } from 'types';
+import { SignedTransactionType, WidgetProps } from 'types';
 import { useBatchTransactionContext } from 'wrappers';
 import { getBatchTransactions, getSwapAndLockTransactions } from './helpers';
 import { useSendSignedTransactions } from './hooks';
 import { BatchTransactionsType } from './types';
+import { getCallbackProps } from 'utils';
 
-export const BatchTransactions = () => {
+export const BatchTransactions = ({ anchor }: WidgetProps) => {
   const { setSendBatchTransactionsOnDemand } = useBatchTransactionContext();
   const { address } = useGetAccountInfo();
   const { batches } = useGetBatches();
@@ -42,6 +43,8 @@ export const BatchTransactions = () => {
     transactionsOrder
   });
 
+  const callbackProps = useMemo(() => getCallbackProps({ anchor }), [anchor]);
+
   // this process will not go through useSendSignedTransactions
   // it will automatically sign and send transactions
   const signAndAutoSendBatchTransactions = async () => {
@@ -58,13 +61,13 @@ export const BatchTransactions = () => {
 
     const { batchId: currentBatchId, error } = await sendBatchTransactions({
       transactions: groupedTransactions,
-      callbackRoute: window.location.pathname,
       customTransactionInformation: { redirectAfterSign: true },
       transactionsDisplayInfo: {
         processingMessage: 'Processing transactions',
         errorMessage: 'An error has occurred during transaction execution',
         successMessage: 'Batch transactions successful'
-      }
+      },
+      ...callbackProps
     });
 
     if (error) {
@@ -93,8 +96,8 @@ export const BatchTransactions = () => {
     const { sessionId, error } = await sendTransactions({
       transactions,
       signWithoutSending: true,
-      callbackRoute: window.location.pathname,
-      customTransactionInformation: { redirectAfterSign: true }
+      customTransactionInformation: { redirectAfterSign: true },
+      ...callbackProps
     });
 
     if (error) {

@@ -10,10 +10,11 @@ import { useGetSignMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage
 import { Button } from 'components/Button';
 import { OutputContainer } from 'components/OutputContainer';
 import { useGetLastSignedMessageSession, useSignMessage } from 'hooks';
-import { SignedMessageStatusesEnum } from 'types';
+import { SignedMessageStatusesEnum, WidgetProps } from 'types';
 import { SignFailure, SignSuccess } from './components';
+import { getCallbackProps } from 'utils/getCallbackProps';
 
-export const SignMessage = () => {
+export const SignMessage = ({ anchor }: WidgetProps) => {
   const { sessionId, signMessage, onAbort } = useSignMessage();
   const signedMessageInfo = useGetLastSignedMessageSession();
   const messageSession = useGetSignMessageSession(sessionId);
@@ -31,9 +32,10 @@ export const SignMessage = () => {
       return;
     }
 
+    const callbackProps = getCallbackProps({ anchor, relative: false });
     signMessage({
       message,
-      callbackRoute: window.location.href
+      ...callbackProps
     });
 
     setMessage('');
@@ -57,7 +59,7 @@ export const SignMessage = () => {
 
   return (
     <div className='flex flex-col gap-6'>
-      <div className='flex flex gap-2 items-start'>
+      <div className='flex gap-2 items-start'>
         <Button
           data-testid='signMsgBtn'
           onClick={handleSubmit}
@@ -85,7 +87,7 @@ export const SignMessage = () => {
         {!isSuccess && !isError && (
           <textarea
             placeholder='Write message here'
-            className='resize-none rounded-md w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
+            className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
             onChange={(event) => setMessage(event.currentTarget.value)}
           />
         )}
