@@ -21,7 +21,7 @@ type WidgetsType = {
   props?: { receiver?: string };
   reference: string;
   anchor?: string;
-  callbackUrlRelativePath?: boolean;
+  isCallbackUrlRelative?: boolean;
 };
 
 const WIDGETS: WidgetsType[] = [
@@ -63,7 +63,7 @@ const WIDGETS: WidgetsType[] = [
     description: 'Message signing using the connected account',
     reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account-1',
     anchor: 'sign-message',
-    callbackUrlRelativePath: false
+    isCallbackUrlRelative: false
   },
   {
     title: 'Native auth',
@@ -112,12 +112,12 @@ export const Dashboard = () => {
             props = {},
             reference,
             anchor,
-            callbackUrlRelativePath
+            isCallbackUrlRelative
           } = element;
 
           const callbackurl = getCallbackUrl({
             anchor,
-            relative: callbackUrlRelativePath
+            relative: isCallbackUrlRelative
           });
 
           return (
