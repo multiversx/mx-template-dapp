@@ -924,10 +924,10 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.24.2-alpha.5":
-  version "2.24.2-alpha.5"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.24.2-alpha.5.tgz#102d325caeebf938209276cb16b353d1442f1b7c"
-  integrity sha512-xcpHzb+ELzc+bidZKrPXbEQuA/O7DU3UM05clj1DQZjGEBdcrNH/2XQOoV6CU6FPkXvu5HQPA2sqy9RDAxTHFA==
+"@multiversx/sdk-dapp@2.24.2-alpha.6":
+  version "2.24.2-alpha.6"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.24.2-alpha.6.tgz#8ef748ce48bdc84375c4f9415a5a83f3177f8b72"
+  integrity sha512-Btns3Ns1SNUhDlHxGmrfGD1V5jDFofwvVBmLWSCzUl+lc/vEsvdlASWcq2wkGb1kz2XL2tXW+uBm8RHj14itJQ==
   dependencies:
     "@multiversx/sdk-core" "12.13.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
@@ -937,7 +937,7 @@
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.0.4"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.4"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.5"
     "@multiversx/sdk-web-wallet-provider" "3.1.0"
     "@reduxjs/toolkit" "1.8.2"
     axios "0.24.0"
@@ -1052,10 +1052,10 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.4.tgz#73ad0d2108f6ce384d0c31471841a92f78b80f71"
-  integrity sha512-/uXCq7kv/uyKAUtxtaev1pr6MpZLK7pzFwqp8in+ytzQARv2BdY5ZepwoOtZMf0kpVdEdshZl5BOkzrD7ki91w==
+"@multiversx/sdk-web-wallet-cross-window-provider@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.5.tgz#03c995b2494a11fd2631cc5b3d348e34a2926165"
+  integrity sha512-nIRux1YnOnJNnxAyRFsa1H75cOcKPQUm7dh4MykSH53TQ0jPTT5YQB9qLZfGFJX3SPjZPr7SwyYsEgDDz3Mbmw==
   dependencies:
     "@types/qs" "^6.9.10"
     qs "^6.11.2"
@@ -1767,22 +1767,22 @@
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@types/node@*", "@types/node@>=13.7.0":
-  version "20.10.3"
-  resolved "https://registry.npmjs.org/@types/node/-/node-20.10.3.tgz"
-  integrity sha512-XJavIpZqiXID5Yxnxv3RUDKTN5b81ddNC3ecsA0SoFXz/QU8OGBwZGMomiq0zw+uuqbL/krztv/DINAQ/EV4gg==
-  dependencies:
-    undici-types "~5.26.4"
+"@types/node@*", "@types/node@20.7.1":
+  version "20.7.1"
+  resolved "https://registry.npmjs.org/@types/node/-/node-20.7.1.tgz"
+  integrity sha512-LT+OIXpp2kj4E2S/p91BMe+VgGX2+lfO+XTpfXhh+bCk2LkQtHZSub8ewFBMGP5ClysPjTDFa4sMI8Q3n4T0wg==
 
 "@types/node@11.11.6":
   version "11.11.6"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.6.tgz#df929d1bb2eee5afdda598a41930fe50b43eaa6a"
   integrity sha512-Exw4yUWMBXM3X+8oqzJNRqZSwUAaS4+7NdvHqQuFi/d+synz++xmX3QIf+BFqneW8N31R8Ky+sikfZUXq07ggQ==
 
-"@types/node@20.7.1":
-  version "20.7.1"
-  resolved "https://registry.npmjs.org/@types/node/-/node-20.7.1.tgz"
-  integrity sha512-LT+OIXpp2kj4E2S/p91BMe+VgGX2+lfO+XTpfXhh+bCk2LkQtHZSub8ewFBMGP5ClysPjTDFa4sMI8Q3n4T0wg==
+"@types/node@>=13.7.0":
+  version "20.10.3"
+  resolved "https://registry.npmjs.org/@types/node/-/node-20.10.3.tgz"
+  integrity sha512-XJavIpZqiXID5Yxnxv3RUDKTN5b81ddNC3ecsA0SoFXz/QU8OGBwZGMomiq0zw+uuqbL/krztv/DINAQ/EV4gg==
+  dependencies:
+    undici-types "~5.26.4"
 
 "@types/node@^16.18.39":
   version "16.18.67"
@@ -1831,9 +1831,9 @@
     "@types/react" "*"
 
 "@types/react@*":
-  version "18.2.41"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.41.tgz"
-  integrity sha512-CwOGr/PiLiNBxEBqpJ7fO3kocP/2SSuC9fpH5K7tusrg4xPSRT/193rzolYwQnTN02We/ATXKnb6GqA5w4fRxw==
+  version "18.2.42"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.2.42.tgz"
+  integrity sha512-c1zEr96MjakLYus/wPnuWDo1/zErfdU9rNsIGmE+NV71nx88FG9Ttgo5dqorXTu/LImX2f63WBP986gJkMPNbA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2135,9 +2135,9 @@ acorn-jsx@^5.3.2:
   integrity sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==
 
 acorn-walk@^8.0.2:
-  version "8.3.0"
-  resolved "https://registry.npmjs.org/acorn-walk/-/acorn-walk-8.3.0.tgz"
-  integrity sha512-FS7hV565M5l1R08MXqo8odwMTB02C2UqzB17RVgu9EyuYFBqJZ3/ZY97sQD5FewVu1UyDFc1yztUDrAwT0EypA==
+  version "8.3.1"
+  resolved "https://registry.npmjs.org/acorn-walk/-/acorn-walk-8.3.1.tgz"
+  integrity sha512-TgUZgYvqZprrl7YldZNoa9OciCAyZR+Ejm9eXzKCmjsF5IKp/wgQ7Z/ZpjpGTIUPwrHQIcYeI8qDh4PsEwxMbw==
 
 acorn@^8.1.0, acorn@^8.10.0, acorn@^8.8.1, acorn@^8.9.0:
   version "8.11.2"
@@ -2543,7 +2543,7 @@ bignumber.js@9.0.1:
 
 bignumber.js@9.x, bignumber.js@^9.0.0:
   version "9.1.2"
-  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.2.tgz#b7c4242259c008903b13707983b5f4bbd31eda0c"
+  resolved "https://registry.npmjs.org/bignumber.js/-/bignumber.js-9.1.2.tgz"
   integrity sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==
 
 binary-extensions@^2.0.0:
@@ -3506,9 +3506,9 @@ ed2curve@0.3.0:
     tweetnacl "1.x.x"
 
 electron-to-chromium@^1.4.601:
-  version "1.4.601"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.601.tgz"
-  integrity sha512-SpwUMDWe9tQu8JX5QCO1+p/hChAi9AE9UpoC3rcHVc+gdCGlbT3SGb5I1klgb952HRIyvt9wZhSz9bNBYz9swA==
+  version "1.4.605"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.605.tgz"
+  integrity sha512-V52j+P5z6cdRqTjPR/bYNxx7ETCHIkm5VIGuyCy3CMrfSnbEpIlLnk5oHmZo7gYvDfh2TfHeanB6rawyQ23ktg==
 
 elliptic@^6.5.3, elliptic@^6.5.4:
   version "6.5.4"
