@@ -3,7 +3,7 @@ import {
   SimpleTransactionType,
   TransactionsDisplayInfoType
 } from '@multiversx/sdk-dapp/types';
-import { refreshAccount, sendTransactions } from 'helpers';
+import { refreshAccount, sendTransactions } from './sdkDappHelpers';
 
 type SignAndSendTransactionsProps = {
   transactions:
