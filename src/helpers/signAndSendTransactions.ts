@@ -5,7 +5,7 @@ import {
 } from '@multiversx/sdk-dapp/types';
 import { refreshAccount, sendTransactions } from 'helpers';
 
-type SendTransctionProps = {
+type SignAndSendTransactionsProps = {
   transactions:
     | Transaction
     | SimpleTransactionType
@@ -18,7 +18,7 @@ export const signAndSendTransactions = async ({
   transactions,
   callbackRoute,
   transactionsDisplayInfo
-}: SendTransctionProps) => {
+}: SignAndSendTransactionsProps) => {
   await refreshAccount();
 
   const { sessionId } = await sendTransactions({
