@@ -70,7 +70,6 @@ export const useSendPingPongTransaction = ({
         transactionsDisplayInfo: PING_TRANSACTION_INFO
       });
 
-      console.log({ sessionId });
       sessionStorage.setItem(type, sessionId);
       setPingPongSessionId(sessionId);
     },
