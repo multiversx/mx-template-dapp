@@ -39,7 +39,7 @@ export const PingPongRaw = ({ callbackUrl }: WidgetProps) => {
   };
 
   const onSendPingTransaction = async () => {
-    await sendPingTransaction({ amount: pingAmount });
+    await sendPingTransaction({ amount: pingAmount, callbackUrl });
   };
 
   const onSendPongTransaction = async () => {
