@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import {
   deleteTransactionToast,
   removeAllSignedTransactions,
@@ -36,191 +36,181 @@ export const useSendPingPongTransaction = ({
     deleteTransactionToast(pingPongSessionId ?? '');
   };
 
-  const sendPingTransaction = useCallback(
-    async ({
-      amount,
-      callbackUrl
-    }: {
-      amount?: string;
-      callbackUrl?: string;
-    }) => {
-      clearAllTransactions();
+  const sendPingTransaction = async ({
+    amount,
+    callbackUrl
+  }: {
+    amount?: string;
+    callbackUrl?: string;
+  }) => {
+    clearAllTransactions();
 
-      const pingTransaction = {
-        value: amount,
-        data: 'ping',
-        receiver: contractAddress,
-        gasLimit: '60000000'
-      };
+    const pingTransaction = {
+      value: amount,
+      data: 'ping',
+      receiver: contractAddress,
+      gasLimit: '60000000'
+    };
 
-      await refreshAccount();
-      const { sessionId } = await sendTransactions({
-        transactions: pingTransaction,
-        transactionsDisplayInfo: {
-          processingMessage: 'Processing Ping transaction',
-          errorMessage: 'An error has occured during Ping',
-          successMessage: 'Ping transaction successful'
-        },
-        redirectAfterSign: false,
-        callbackRoute: callbackUrl
-      });
+    await refreshAccount();
+    const { sessionId } = await sendTransactions({
+      transactions: pingTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing Ping transaction',
+        errorMessage: 'An error has occured during Ping',
+        successMessage: 'Ping transaction successful'
+      },
+      redirectAfterSign: false,
+      callbackRoute: callbackUrl
+    });
 
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+    sessionStorage.setItem(type, sessionId);
+    setPingPongSessionId(sessionId);
+  };
 
-  const sendPingTransactionFromAbi = useCallback(
-    async ({
-      amount,
-      callbackUrl
-    }: {
-      amount?: string;
-      callbackUrl?: string;
-    }) => {
-      clearAllTransactions();
+  const sendPingTransactionFromAbi = async ({
+    amount,
+    callbackUrl
+  }: {
+    amount?: string;
+    callbackUrl?: string;
+  }) => {
+    clearAllTransactions();
 
-      const pingTransaction = smartContract.methodsExplicit
-        .ping()
-        .withValue(amount ?? '0')
-        .withGasLimit(60000000)
-        .withChainID(getChainId())
-        .buildTransaction()
-        .toPlainObject();
+    const pingTransaction = smartContract.methodsExplicit
+      .ping()
+      .withValue(amount ?? '0')
+      .withGasLimit(60000000)
+      .withChainID(getChainId())
+      .buildTransaction()
+      .toPlainObject();
 
-      await refreshAccount();
-      const { sessionId } = await sendTransactions({
-        transactions: pingTransaction,
-        transactionsDisplayInfo: {
-          processingMessage: 'Processing Ping transaction',
-          errorMessage: 'An error has occured during Ping',
-          successMessage: 'Ping transaction successful'
-        },
-        redirectAfterSign: false,
-        callbackRoute: callbackUrl
-      });
+    await refreshAccount();
+    const { sessionId } = await sendTransactions({
+      transactions: pingTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing Ping transaction',
+        errorMessage: 'An error has occured during Ping',
+        successMessage: 'Ping transaction successful'
+      },
+      redirectAfterSign: false,
+      callbackRoute: callbackUrl
+    });
 
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+    sessionStorage.setItem(type, sessionId);
+    setPingPongSessionId(sessionId);
+  };
 
-  const sendPingTransactionFromService = useCallback(
-    async ({
-      transaction,
-      callbackUrl
-    }: {
-      transaction: IPlainTransactionObject;
-      callbackUrl?: string;
-    }) => {
-      clearAllTransactions();
+  const sendPingTransactionFromService = async ({
+    transaction,
+    callbackUrl
+  }: {
+    transaction: IPlainTransactionObject;
+    callbackUrl?: string;
+  }) => {
+    clearAllTransactions();
 
-      await refreshAccount();
-      const { sessionId } = await sendTransactions({
-        transactions: [transaction],
-        transactionsDisplayInfo: {
-          processingMessage: 'Processing Ping transaction',
-          errorMessage: 'An error has occured during Ping',
-          successMessage: 'Ping transaction successful'
-        },
-        redirectAfterSign: false,
-        callbackRoute: callbackUrl
-      });
+    await refreshAccount();
+    const { sessionId } = await sendTransactions({
+      transactions: [transaction],
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing Ping transaction',
+        errorMessage: 'An error has occured during Ping',
+        successMessage: 'Ping transaction successful'
+      },
+      redirectAfterSign: false,
+      callbackRoute: callbackUrl
+    });
 
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+    sessionStorage.setItem(type, sessionId);
+    setPingPongSessionId(sessionId);
+  };
 
-  const sendPongTransaction = useCallback(
-    async ({ callbackUrl }: { callbackUrl?: string }) => {
-      clearAllTransactions();
+  const sendPongTransaction = async ({
+    callbackUrl
+  }: {
+    callbackUrl?: string;
+  }) => {
+    clearAllTransactions();
 
-      const pongTransaction = {
-        value: '0',
-        data: 'pong',
-        receiver: contractAddress,
-        gasLimit: '60000000'
-      };
+    const pongTransaction = {
+      value: '0',
+      data: 'pong',
+      receiver: contractAddress,
+      gasLimit: '60000000'
+    };
 
-      await refreshAccount();
-      const { sessionId } = await sendTransactions({
-        transactions: pongTransaction,
-        transactionsDisplayInfo: {
-          processingMessage: 'Processing Pong transaction',
-          errorMessage: 'An error has occured during Pong',
-          successMessage: 'Pong transaction successful'
-        },
-        redirectAfterSign: false,
-        callbackRoute: callbackUrl
-      });
+    await refreshAccount();
+    const { sessionId } = await sendTransactions({
+      transactions: pongTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing Pong transaction',
+        errorMessage: 'An error has occured during Pong',
+        successMessage: 'Pong transaction successful'
+      },
+      redirectAfterSign: false,
+      callbackRoute: callbackUrl
+    });
 
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+    sessionStorage.setItem(type, sessionId);
+    setPingPongSessionId(sessionId);
+  };
 
-  const sendPongTransactionFromAbi = useCallback(
-    async ({ callbackUrl }: { callbackUrl?: string }) => {
-      clearAllTransactions();
+  const sendPongTransactionFromAbi = async ({
+    callbackUrl
+  }: {
+    callbackUrl?: string;
+  }) => {
+    clearAllTransactions();
 
-      const pongTransaction = smartContract.methodsExplicit
-        .pong()
-        .withValue('0')
-        .withGasLimit(60000000)
-        .withChainID(getChainId())
-        .buildTransaction()
-        .toPlainObject();
+    const pongTransaction = smartContract.methodsExplicit
+      .pong()
+      .withValue('0')
+      .withGasLimit(60000000)
+      .withChainID(getChainId())
+      .buildTransaction()
+      .toPlainObject();
 
-      await refreshAccount();
-      const { sessionId } = await sendTransactions({
-        transactions: pongTransaction,
-        transactionsDisplayInfo: {
-          processingMessage: 'Processing Pong transaction',
-          errorMessage: 'An error has occured during Pong',
-          successMessage: 'Pong transaction successful'
-        },
-        redirectAfterSign: false,
-        callbackRoute: callbackUrl
-      });
+    await refreshAccount();
+    const { sessionId } = await sendTransactions({
+      transactions: pongTransaction,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing Pong transaction',
+        errorMessage: 'An error has occured during Pong',
+        successMessage: 'Pong transaction successful'
+      },
+      redirectAfterSign: false,
+      callbackRoute: callbackUrl
+    });
 
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+    sessionStorage.setItem(type, sessionId);
+    setPingPongSessionId(sessionId);
+  };
 
-  const sendPongTransactionFromService = useCallback(
-    async ({
-      transaction,
-      callbackUrl
-    }: {
-      transaction: IPlainTransactionObject;
-      callbackUrl?: string;
-    }) => {
-      clearAllTransactions();
+  const sendPongTransactionFromService = async ({
+    transaction,
+    callbackUrl
+  }: {
+    transaction: IPlainTransactionObject;
+    callbackUrl?: string;
+  }) => {
+    clearAllTransactions();
 
-      await refreshAccount();
-      const { sessionId } = await sendTransactions({
-        transactions: [transaction],
-        transactionsDisplayInfo: {
-          processingMessage: 'Processing Pong transaction',
-          errorMessage: 'An error has occured during Pong',
-          successMessage: 'Pong transaction successful'
-        },
-        redirectAfterSign: false,
-        callbackRoute: callbackUrl
-      });
+    await refreshAccount();
+    const { sessionId } = await sendTransactions({
+      transactions: [transaction],
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing Pong transaction',
+        errorMessage: 'An error has occured during Pong',
+        successMessage: 'Pong transaction successful'
+      },
+      redirectAfterSign: false,
+      callbackRoute: callbackUrl
+    });
 
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+    sessionStorage.setItem(type, sessionId);
+    setPingPongSessionId(sessionId);
+  };
 
   return {
     sendPingTransaction,
