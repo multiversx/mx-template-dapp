@@ -1,8 +1,9 @@
-import { Transaction } from '@multiversx/sdk-core/out';
 import {
+  Transaction,
   SimpleTransactionType,
   TransactionsDisplayInfoType
-} from '@multiversx/sdk-dapp/types';
+} from 'types';
+
 import { refreshAccount, sendTransactions } from './sdkDappHelpers';
 
 type SignAndSendTransactionsProps = {
