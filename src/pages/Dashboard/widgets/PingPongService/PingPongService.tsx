@@ -19,7 +19,7 @@ import {
 } from './hooks';
 
 // The transactions are being done by directly requesting to template-dapp service
-export const PingPongService = ({ callbackUrl }: WidgetProps) => {
+export const PingPongService = ({ callbackRoute }: WidgetProps) => {
   const [stateTransactions, setStateTransactions] = useState<
     SignedTransactionType[] | null
   >(null);
@@ -62,7 +62,7 @@ export const PingPongService = ({ callbackUrl }: WidgetProps) => {
 
     await sendPingTransactionFromService({
       transaction: pingTransaction,
-      callbackUrl
+      callbackRoute
     });
   };
 
@@ -75,7 +75,7 @@ export const PingPongService = ({ callbackUrl }: WidgetProps) => {
 
     await sendPongTransactionFromService({
       transaction: pongTransaction,
-      callbackUrl
+      callbackRoute
     });
   };
 
