@@ -1,7 +1,7 @@
 import { IPlainTransactionObject } from 'types/sdkCoreTypes';
 
 export type PingRawProps = {
-  amount?: string;
+  amount: string;
   callbackRoute: string;
 };
 
