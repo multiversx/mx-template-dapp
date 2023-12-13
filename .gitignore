@@ -11,7 +11,7 @@ screenshots
 videos
 
 # production
-/build
+# /build
 
 # misc
 /src/config/index.ts
