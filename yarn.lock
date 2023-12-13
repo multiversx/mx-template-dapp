@@ -924,10 +924,10 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.23.0-alpha.2":
-  version "2.23.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.23.0-alpha.2.tgz#840f71b45a310e5e953c1d391c700d9df0783b75"
-  integrity sha512-WJNPmf7Kk+M6p1UudmH/3x+euctEACkYW7hPxIBsO/v/KThWzRxceDCKmzd4uW2B2k6ATpFd0BfKrOAvaIltIQ==
+"@multiversx/sdk-dapp@2.24.2-alpha.2":
+  version "2.24.2-alpha.2"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.24.2-alpha.2.tgz#d4842a8f41dd37b8b558bd6e8b5ede778d7102ec"
+  integrity sha512-FFv50AsXYo1OonS4ksWijRdmsyyXVlfkAA5vQZw1EJ53L3wqQ/TQoDqvCQtV0ozePIhZM7Obu/Ep4lvpw4LbCw==
   dependencies:
     "@multiversx/sdk-core" "12.13.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
@@ -937,6 +937,7 @@
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.0.4"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.1"
     "@multiversx/sdk-web-wallet-provider" "3.1.0"
     "@reduxjs/toolkit" "1.8.2"
     axios "0.24.0"
@@ -1050,6 +1051,14 @@
     scryptsy "2.1.0"
     tweetnacl "1.0.3"
     uuid "8.3.2"
+
+"@multiversx/sdk-web-wallet-cross-window-provider@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.1.tgz#ea16d904396e73d46bd12228ceb0329e4524147b"
+  integrity sha512-onVXVFC8ndLClWvSRebDNuookgDjGfKnDTX1HIIl9KsRlOx3HbdW/ySXG6S3V9xfctxCR5xkjLURT/xpvu+5pg==
+  dependencies:
+    "@types/qs" "^6.9.10"
+    qs "^6.11.2"
 
 "@multiversx/sdk-web-wallet-provider@3.1.0":
   version "3.1.0"
@@ -1784,6 +1793,11 @@
   version "15.7.10"
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.10.tgz"
   integrity sha512-mxSnDQxPqsZxmeShFH+uwQ4kO4gcJcGahjjMFeLbKE95IAZiiZyiEepGZjtXJ7hN/yfu0bu9xN2ajcU0JcxX6A==
+
+"@types/qs@^6.9.10":
+  version "6.9.10"
+  resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.10.tgz#0af26845b5067e1c9a622658a51f60a3934d51e8"
+  integrity sha512-3Gnx08Ns1sEoCrWssEgTSJs/rsT2vhGP+Ja9cnnk9k4ALxinORlQneLXFeFKOTJMOeZUFD1s7w+w2AphTpvzZw==
 
 "@types/react-dom@18.2.8":
   version "18.2.8"
