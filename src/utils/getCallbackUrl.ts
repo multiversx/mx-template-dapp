@@ -1,8 +1,10 @@
 import { getIsProviderEqualTo } from 'utils/sdkDappUtils';
 import { LoginMethodsEnum } from 'types/sdkDappTypes';
 
-// relative is the relative path for the callbackUrl
-// for signMessage it is necessary to send the full url Ex: https:localhost:3002/dashboard#sign-message
+/**
+ * the relative path for the callbackUrl
+ * signMessage it is necessary to send the full url Ex: https:localhost:3002/dashboard#sign-message
+ */
 type GetCallbackUrlProps = {
   anchor?: string;
   relative?: boolean;

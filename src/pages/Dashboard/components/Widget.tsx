@@ -3,21 +3,15 @@ import { Card } from 'components/Card';
 import { getCallbackUrl } from 'utils';
 import { WidgetType } from 'types/widget.types';
 
-type WidgetProps = {
-  widgetProps: WidgetType;
-};
-
-export const Widget = ({ widgetProps }: WidgetProps) => {
-  const {
-    title,
-    description,
-    reference,
-    anchor,
-    widget: MxWidget,
-    props = {},
-    isCallbackUrlRelative
-  } = widgetProps;
-
+export const Widget = ({
+  title,
+  description,
+  reference,
+  anchor,
+  widget: MxWidget,
+  props = {},
+  isCallbackUrlRelative
+}: WidgetType) => {
   const callbackUrl = useMemo(() => {
     if (!anchor) {
       return '';

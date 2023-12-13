@@ -95,7 +95,7 @@ export const Dashboard = () => {
     <AuthRedirectWrapper>
       <div className='flex flex-col gap-6 max-w-3xl w-full'>
         {WIDGETS.map((element) => (
-          <Widget key={element.title} widgetProps={element} />
+          <Widget key={element.title} {...element} />
         ))}
       </div>
     </AuthRedirectWrapper>

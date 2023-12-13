@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGetSignMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage/useGetSignMessageSession';
 import { Button } from 'components/Button';
 import { OutputContainer } from 'components/OutputContainer';
-import { useGetLastSignedMessageSession, useSignMessage } from 'hooks';
+import { useSignMessage } from 'hooks';
 import { SignedMessageStatusesEnum, WidgetProps } from 'types';
 import { SignFailure, SignSuccess } from './components';
 
@@ -44,17 +44,11 @@ export const SignMessage = ({ callbackUrl }: WidgetProps) => {
     onAbort();
   };
 
-  const isError = useMemo(() => {
-    if (!messageSession) {
-      return false;
-    }
-
-    return (
-      [
+  const isError = messageSession
+    ? [
         (SignedMessageStatusesEnum.cancelled, SignedMessageStatusesEnum.failed)
       ].includes(messageSession.status) && messageSession?.message
-    );
-  }, [messageSession]);
+    : false;
 
   const isSuccess =
     messageSession?.message &&
