@@ -41,7 +41,7 @@ export const useSendPingPongTransaction = ({
   };
 
   const sendPingTransaction = useCallback(
-    async ({ amount, callbackUrl }: PingRawProps) => {
+    async ({ amount, callbackRoute }: PingRawProps) => {
       clearAllTransactions();
 
       const pingTransaction = {
@@ -60,7 +60,7 @@ export const useSendPingPongTransaction = ({
           successMessage: 'Ping transaction successful'
         },
         redirectAfterSign: false,
-        callbackRoute: callbackUrl
+        callbackRoute
       });
 
       sessionStorage.setItem(type, sessionId);
@@ -70,7 +70,7 @@ export const useSendPingPongTransaction = ({
   );
 
   const sendPingTransactionFromAbi = useCallback(
-    async ({ amount, callbackUrl }: PingRawProps) => {
+    async ({ amount, callbackRoute }: PingRawProps) => {
       clearAllTransactions();
 
       const pingTransaction = smartContract.methodsExplicit
@@ -90,7 +90,7 @@ export const useSendPingPongTransaction = ({
           successMessage: 'Ping transaction successful'
         },
         redirectAfterSign: false,
-        callbackRoute: callbackUrl
+        callbackRoute
       });
 
       sessionStorage.setItem(type, sessionId);
@@ -100,7 +100,7 @@ export const useSendPingPongTransaction = ({
   );
 
   const sendPingTransactionFromService = useCallback(
-    async ({ transaction, callbackUrl }: PingPongServiceProps) => {
+    async ({ transaction, callbackRoute }: PingPongServiceProps) => {
       clearAllTransactions();
 
       await refreshAccount();
@@ -112,7 +112,7 @@ export const useSendPingPongTransaction = ({
           successMessage: 'Ping transaction successful'
         },
         redirectAfterSign: false,
-        callbackRoute: callbackUrl
+        callbackRoute
       });
 
       sessionStorage.setItem(type, sessionId);
@@ -122,7 +122,7 @@ export const useSendPingPongTransaction = ({
   );
 
   const sendPongTransaction = useCallback(
-    async ({ callbackUrl }: PongRawProps) => {
+    async ({ callbackRoute }: PongRawProps) => {
       clearAllTransactions();
 
       const pongTransaction = {
@@ -141,7 +141,7 @@ export const useSendPingPongTransaction = ({
           successMessage: 'Pong transaction successful'
         },
         redirectAfterSign: false,
-        callbackRoute: callbackUrl
+        callbackRoute
       });
 
       sessionStorage.setItem(type, sessionId);
@@ -151,7 +151,7 @@ export const useSendPingPongTransaction = ({
   );
 
   const sendPongTransactionFromAbi = useCallback(
-    async ({ callbackUrl }: PongRawProps) => {
+    async ({ callbackRoute }: PongRawProps) => {
       clearAllTransactions();
 
       const pongTransaction = smartContract.methodsExplicit
@@ -171,7 +171,7 @@ export const useSendPingPongTransaction = ({
           successMessage: 'Pong transaction successful'
         },
         redirectAfterSign: false,
-        callbackRoute: callbackUrl
+        callbackRoute
       });
 
       sessionStorage.setItem(type, sessionId);
@@ -181,7 +181,7 @@ export const useSendPingPongTransaction = ({
   );
 
   const sendPongTransactionFromService = useCallback(
-    async ({ transaction, callbackUrl }: PingPongServiceProps) => {
+    async ({ transaction, callbackRoute }: PingPongServiceProps) => {
       clearAllTransactions();
 
       await refreshAccount();
@@ -193,7 +193,7 @@ export const useSendPingPongTransaction = ({
           successMessage: 'Pong transaction successful'
         },
         redirectAfterSign: false,
-        callbackRoute: callbackUrl
+        callbackRoute
       });
 
       sessionStorage.setItem(type, sessionId);

@@ -1,5 +1,5 @@
 import { Card } from 'components/Card';
-import { getCallbackUrl } from 'utils';
+import { getCallbackRoute } from 'utils';
 import { WidgetType } from 'types/widget.types';
 
 export const Widget = ({
@@ -11,8 +11,8 @@ export const Widget = ({
   props = {},
   isCallbackUrlRelative
 }: WidgetType) => {
-  const callbackUrl = anchor
-    ? getCallbackUrl({ anchor, relative: isCallbackUrlRelative })
+  const callbackRoute = anchor
+    ? getCallbackRoute({ anchor, relative: isCallbackUrlRelative })
     : '';
 
   return (
@@ -22,7 +22,7 @@ export const Widget = ({
       reference={reference}
       anchor={anchor}
     >
-      <MxWidget callbackUrl={callbackUrl} {...props} />
+      <MxWidget callbackRoute={callbackRoute} {...props} />
     </Card>
   );
 };

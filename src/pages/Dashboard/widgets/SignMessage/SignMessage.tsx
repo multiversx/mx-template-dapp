@@ -13,7 +13,7 @@ import { useSignMessage } from 'hooks';
 import { SignedMessageStatusesEnum, WidgetProps } from 'types';
 import { SignFailure, SignSuccess } from './components';
 
-export const SignMessage = ({ callbackUrl }: WidgetProps) => {
+export const SignMessage = ({ callbackRoute }: WidgetProps) => {
   const { sessionId, signMessage, onAbort } = useSignMessage();
   const messageSession = useGetSignMessageSession(sessionId);
 
@@ -32,7 +32,7 @@ export const SignMessage = ({ callbackUrl }: WidgetProps) => {
 
     signMessage({
       message,
-      callbackRoute: callbackUrl
+      callbackRoute
     });
 
     setMessage('');

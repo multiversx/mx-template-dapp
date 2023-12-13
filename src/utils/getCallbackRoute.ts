@@ -10,7 +10,7 @@ type GetCallbackUrlProps = {
   relative?: boolean;
 };
 
-export const getCallbackUrl = ({
+export const getCallbackRoute = ({
   anchor,
   relative = true
 }: GetCallbackUrlProps) => {

@@ -2,14 +2,14 @@ import { IPlainTransactionObject } from 'types/sdkCoreTypes';
 
 export type PingRawProps = {
   amount?: string;
-  callbackUrl: string;
+  callbackRoute: string;
 };
 
 export type PongRawProps = {
-  callbackUrl: string;
+  callbackRoute: string;
 };
 
 export type PingPongServiceProps = {
   transaction: IPlainTransactionObject;
-  callbackUrl: string;
+  callbackRoute: string;
 };

@@ -1,5 +1,5 @@
 export type WidgetProps = {
-  callbackUrl: string;
+  callbackRoute: string;
 };
 
 export type WidgetType = {

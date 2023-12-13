@@ -13,7 +13,7 @@ import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
-export const PingPongAbi = ({ callbackUrl }: WidgetProps) => {
+export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
   const { hasPendingTransactions } = useGetPendingTransactions();
   const getTimeToPong = useGetTimeToPong();
   const {
@@ -42,11 +42,11 @@ export const PingPongAbi = ({ callbackUrl }: WidgetProps) => {
   };
 
   const onSendPingTransaction = async () => {
-    await sendPingTransactionFromAbi({ amount: pingAmount, callbackUrl });
+    await sendPingTransactionFromAbi({ amount: pingAmount, callbackRoute });
   };
 
   const onSendPongTransaction = async () => {
-    await sendPongTransactionFromAbi({ callbackUrl });
+    await sendPongTransactionFromAbi({ callbackRoute });
   };
 
   const timeRemaining = moment()

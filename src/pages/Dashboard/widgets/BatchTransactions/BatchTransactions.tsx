@@ -20,7 +20,7 @@ import { getBatchTransactions, getSwapAndLockTransactions } from './helpers';
 import { useSendSignedTransactions } from './hooks';
 import { BatchTransactionsType } from './types';
 
-export const BatchTransactions = ({ callbackUrl }: WidgetProps) => {
+export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
   const { setSendBatchTransactionsOnDemand } = useBatchTransactionContext();
   const { address } = useGetAccountInfo();
   const { batches } = useGetBatches();
@@ -64,7 +64,7 @@ export const BatchTransactions = ({ callbackUrl }: WidgetProps) => {
         errorMessage: 'An error has occurred during transaction execution',
         successMessage: 'Batch transactions successful'
       },
-      callbackRoute: callbackUrl
+      callbackRoute
     });
 
     if (error) {
@@ -94,7 +94,7 @@ export const BatchTransactions = ({ callbackUrl }: WidgetProps) => {
       transactions,
       signWithoutSending: true,
       customTransactionInformation: { redirectAfterSign: true },
-      callbackRoute: callbackUrl
+      callbackRoute
     });
 
     if (error) {
