@@ -29,7 +29,7 @@ const AppContent = () => {
       customNetworkConfig={{
         name: 'customConfig',
         apiTimeout,
-        walletAddress: 'http://next-wallet.multiversx.com',
+        walletAddress: 'http://192.168.5.185:3000',
         walletConnectV2ProjectId
       }}
       dappConfig={{
