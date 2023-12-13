@@ -18,8 +18,7 @@ export const PingPongRaw = ({ callbackUrl }: WidgetProps) => {
   const { hasPendingTransactions } = useGetPendingTransactions();
   const { sendPingTransaction, sendPongTransaction, transactionStatus } =
     useSendPingPongTransaction({
-      type: SessionEnum.rawPingPongSessionId,
-      callbackUrl
+      type: SessionEnum.rawPingPongSessionId
     });
   const pingAmount = useGetPingAmount();
 
@@ -40,11 +39,11 @@ export const PingPongRaw = ({ callbackUrl }: WidgetProps) => {
   };
 
   const onSendPingTransaction = async () => {
-    await sendPingTransaction(pingAmount);
+    await sendPingTransaction({ amount: pingAmount });
   };
 
   const onSendPongTransaction = async () => {
-    await sendPongTransaction();
+    await sendPongTransaction({ callbackUrl });
   };
 
   const timeRemaining = moment()

@@ -1,4 +1,3 @@
-import { Card } from 'components/Card';
 import { contractAddress } from 'config';
 import { AuthRedirectWrapper } from 'wrappers';
 import {
@@ -12,19 +11,10 @@ import {
   Transactions
 } from './widgets';
 import { useScrollToElement } from 'hooks';
-import { getCallbackUrl } from 'utils';
+import { Widget } from './components';
+import { WidgetType } from 'types/widget.types';
 
-type WidgetsType = {
-  title: string;
-  widget: (props: any) => JSX.Element;
-  description?: string;
-  props?: { receiver?: string };
-  reference: string;
-  anchor?: string;
-  isCallbackUrlRelative?: boolean;
-};
-
-const WIDGETS: WidgetsType[] = [
+const WIDGETS: WidgetType[] = [
   {
     title: 'Account',
     widget: Account,
@@ -104,34 +94,9 @@ export const Dashboard = () => {
   return (
     <AuthRedirectWrapper>
       <div className='flex flex-col gap-6 max-w-3xl w-full'>
-        {WIDGETS.map((element) => {
-          const {
-            title,
-            widget: MxWidget,
-            description,
-            props = {},
-            reference,
-            anchor,
-            isCallbackUrlRelative
-          } = element;
-
-          const callbackurl = getCallbackUrl({
-            anchor,
-            relative: isCallbackUrlRelative
-          });
-
-          return (
-            <Card
-              key={title}
-              title={title}
-              description={description}
-              reference={reference}
-              anchor={anchor}
-            >
-              <MxWidget callbackUrl={callbackurl} {...props} />
-            </Card>
-          );
-        })}
+        {WIDGETS.map((element) => (
+          <Widget key={element.title} widgetProps={element} />
+        ))}
       </div>
     </AuthRedirectWrapper>
   );

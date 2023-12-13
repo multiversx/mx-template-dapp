@@ -31,8 +31,7 @@ export const PingPongService = ({ callbackUrl }: WidgetProps) => {
     sendPongTransactionFromService,
     transactionStatus
   } = useSendPingPongTransaction({
-    type: SessionEnum.abiPingPongServiceSessionId,
-    callbackUrl
+    type: SessionEnum.abiPingPongServiceSessionId
   });
   const getTimeToPong = useGetTimeToPong();
   const getPingTransaction = useGetPingTransaction();
@@ -61,7 +60,10 @@ export const PingPongService = ({ callbackUrl }: WidgetProps) => {
       return;
     }
 
-    await sendPingTransactionFromService(pingTransaction);
+    await sendPingTransactionFromService({
+      transaction: pingTransaction,
+      callbackUrl
+    });
   };
 
   const onSendPongTransaction = async () => {
@@ -71,7 +73,10 @@ export const PingPongService = ({ callbackUrl }: WidgetProps) => {
       return;
     }
 
-    await sendPongTransactionFromService(pongTransaction);
+    await sendPongTransactionFromService({
+      transaction: pongTransaction,
+      callbackUrl
+    });
   };
 
   const timeRemaining = moment()

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { MouseEvent } from 'react';
 import {
   faFileSignature,
@@ -15,7 +15,6 @@ import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = ({ callbackUrl }: WidgetProps) => {
   const { sessionId, signMessage, onAbort } = useSignMessage();
-  const signedMessageInfo = useGetLastSignedMessageSession();
   const messageSession = useGetSignMessageSession(sessionId);
 
   const [message, setMessage] = useState('');
@@ -23,7 +22,7 @@ export const SignMessage = ({ callbackUrl }: WidgetProps) => {
   const handleSubmit = (e: MouseEvent) => {
     e.preventDefault();
 
-    if (signedMessageInfo) {
+    if (messageSession) {
       onAbort();
     }
 
@@ -45,15 +44,21 @@ export const SignMessage = ({ callbackUrl }: WidgetProps) => {
     onAbort();
   };
 
-  const isError =
-    [
-      SignedMessageStatusesEnum.cancelled,
-      SignedMessageStatusesEnum.failed
-    ].includes(signedMessageInfo?.status) && messageSession?.message;
+  const isError = useMemo(() => {
+    if (!messageSession) {
+      return false;
+    }
+
+    return (
+      [
+        (SignedMessageStatusesEnum.cancelled, SignedMessageStatusesEnum.failed)
+      ].includes(messageSession.status) && messageSession?.message
+    );
+  }, [messageSession]);
 
   const isSuccess =
     messageSession?.message &&
-    signedMessageInfo?.status === SignedMessageStatusesEnum.signed;
+    messageSession?.status === SignedMessageStatusesEnum.signed;
 
   return (
     <div className='flex flex-col gap-6'>
