@@ -26,9 +26,11 @@ jobs:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
         env:
-            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_USERNAME: cypress-report
-            SLACK_TITLE: E2E TESTS
-            SLACK_MESSAGE: "Cypress report test"
-      
+          SLACK_ICON_EMOJI: ':nerd_face:'
+          SLACK_USERNAME: E2E TESTS COMPLETED
+          SLACK_MESSAGE: CHECK E2E REPORT
+          SLACK_FOOTER: ''
+          MSG_MINIMAL: true
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
        
