@@ -20,9 +20,9 @@ jobs:
         with:
             name: cypress-execution-report
             path: |
-               /home/runner/work/mx-template-dapp-nextjs/mx-template-dapp-nextjs/mochawesome-report/mochawesome.html
-               /home/runner/work/mx-template-dapp-nextjs/mx-template-dapp-nextjs/cypress/screenshots
-               /home/runner/work/mx-template-dapp-nextjs/mx-template-dapp-nextjs/cypress/videos 
+               /home/runner/work/mx-template-dapp/mx-template-dapp/mochawesome-report/mochawesome.html
+               /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/screenshots
+               /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/videos 
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
         env:
