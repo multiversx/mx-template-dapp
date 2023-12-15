@@ -2,7 +2,7 @@ import { userData } from '../../assets/globalData';
 import { RoutesEnum } from '../../constants/enums';
 import { scSelectors } from '../SCTransactions/SCTransactionData';
 
-export const signTransactions = (selector) => {
+export const signTransactions = (selector: string) => {
   let i = selector === 'swap-lock' ? 1 : 0;
 
   const widgetInfo = [
@@ -24,8 +24,7 @@ export const signTransactions = (selector) => {
   cy.checkWidgetMsg(widgetInfo);
 };
 
-export const cancelTransactions = (selector) => {
-  //   cy.visit('/dasboard#batchTransactions');
+export const cancelTransactions = (selector: string) => {
   cy.getSelector(selector).click();
   cy.getSelector(scSelectors.accesPass).type(userData.passsword);
   cy.getSelector(scSelectors.submitButton).click();
