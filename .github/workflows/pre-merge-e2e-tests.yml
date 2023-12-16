@@ -11,11 +11,10 @@ jobs:
         uses: rtCamp/action-slack-notify@master
         env:
           if: always()
-          SLACK_ICON_EMOJI: ':shield:'
+          SLACK_ICON_EMOJI: ':robot_face:'
           SLACK_USERNAME: Cypress Bot
           SLACK_MESSAGE: E2E tests are now running. Stay tuned for updates!
           SLACK TITLE : E2E Template Tests
-          SLACK_FOOTER: ''
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
   Cypress-Run:
