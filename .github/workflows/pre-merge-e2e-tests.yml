@@ -2,36 +2,42 @@ name: Cypress Tests
 on: push
   # pull_request:
   #   branches: [main]
+
 jobs:
-  cypress-run:
+  Slack-Notification:
     runs-on: ubuntu-latest
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          if: always()
+          SLACK_ICON_EMOJI: ':nerd_face:'
+          SLACK_USERNAME: E2E TESTS COMPLETED
+          SLACK_MESSAGE: CHECK E2E REPORT
+          SLACK_FOOTER: ''
+          MSG_MINIMAL: true
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  Cypress-Run:
+    runs-on: ubuntu-latest
+    needs: Slack-Notification
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Cypress run
         uses: cypress-io/github-action@v4
         with:
           # start: yarn start-devnet
           # wait-on: "http://localhost:3002"
           command: npm run cy:run
+
       - name: Uploading artifact
         uses: actions/upload-artifact@v2
         if: always()
         with:
-            name: cypress-execution-report
-            path: |
-               /home/runner/work/mx-template-dapp/mx-template-dapp/mochawesome-report/mochawesome.html
-               /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/screenshots
-               /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/videos 
-      -     name: Slack Notification
-            uses: rtCamp/action-slack-notify@master
-            env:
-             if: always()
-             SLACK_ICON_EMOJI: ':nerd_face:'
-             SLACK_USERNAME: E2E TESTS COMPLETED
-             SLACK_MESSAGE: CHECK E2E REPORT
-             SLACK_FOOTER: ''
-             MSG_MINIMAL: true
-             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
-       
+          name: cypress-execution-report
+          path: |
+            /home/runner/work/mx-template-dapp/mx-template-dapp/mochawesome-report/mochawesome.html
+            /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/screenshots
+            /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/videos
