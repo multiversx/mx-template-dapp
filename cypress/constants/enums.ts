@@ -19,7 +19,8 @@ export enum WalletIDEnum {
   unguardedWallet1 = 'check_0',
   unguardedWallet2 = 'check_1',
   unguardedWallet3 = 'check_2',
-  unguardedWallet4 = 'check_3'
+  unguardedWallet4 = 'check_3',
+  guardedWallet = 'check_9'
 }
 
 export const enum GlobalSelectorsEnum {
@@ -27,10 +28,11 @@ export const enum GlobalSelectorsEnum {
   signAutoSend = 'sign-auto-send',
   sendTransactions = 'send-transactions',
   swapLock = 'swap-lock',
-  transactionToastTitle = 'transactionToastTitle'
+  transactionToastTitle = 'transactionToastTitle',
+  ledgerLoginButton = 'ledgerLoginButton'
 }
 
 export const enum GlobalDataEnum {
-  pendingToast = 'Processing transactions',
+  pendingToast = 'Processing',
   confirmedToast = 'transactions successful'
 }

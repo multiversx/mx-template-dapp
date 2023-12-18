@@ -40,3 +40,9 @@ export const pingPongHandler = (type: string) => {
     }
   });
 };
+
+export const initTransaction = () => {
+  cy.getSelector('btnPongAbi').click();
+  cy.getSelector(scSelectors.accesPass).type(userData.passsword);
+  cy.getSelector(scSelectors.submitButton).click();
+};

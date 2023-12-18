@@ -1,5 +1,4 @@
 import { userData } from '../../assets/globalData';
-import { RoutesEnum } from '../../constants/enums';
 import { scSelectors } from '../SCTransactions/SCTransactionData';
 
 export const signTransactions = (selector: string) => {

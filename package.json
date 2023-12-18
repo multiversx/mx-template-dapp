@@ -78,9 +78,9 @@
     "vite-plugin-node-polyfills": "0.14.1",
     "vite-plugin-svgr": "4.0.0",
     "vite-tsconfig-paths": "4.2.1",
-    "cypress-mochawesome-reporter": "^3.7.0",
-    "mochawesome-merge": "^4.3.0",
-    "mochawesome-report-generator": "^6.2.0"
+    "cypress-mochawesome-reporter": "3.7.0",
+    "mochawesome-merge": "4.3.0",
+    "mochawesome-report-generator": "6.2.0"
   },
   "resolutions": {
     "**/*/nth-check": "2.0.1"
