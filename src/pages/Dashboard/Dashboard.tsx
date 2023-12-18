@@ -52,8 +52,7 @@ const WIDGETS: WidgetType[] = [
     widget: SignMessage,
     description: 'Message signing using the connected account',
     reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account-1',
-    anchor: 'sign-message',
-    isCallbackUrlRelative: false
+    anchor: 'sign-message'
   },
   {
     title: 'Native auth',

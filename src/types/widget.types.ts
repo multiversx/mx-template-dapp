@@ -9,5 +9,4 @@ export type WidgetType = {
   props?: { receiver?: string };
   reference: string;
   anchor?: string;
-  isCallbackUrlRelative?: boolean;
 };

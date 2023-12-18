@@ -8,12 +8,9 @@ export const Widget = ({
   reference,
   anchor,
   widget: MxWidget,
-  props = {},
-  isCallbackUrlRelative
+  props = {}
 }: WidgetType) => {
-  const callbackRoute = anchor
-    ? getCallbackRoute({ anchor, relative: isCallbackUrlRelative })
-    : '';
+  const callbackRoute = anchor ? getCallbackRoute({ anchor }) : '';
 
   return (
     <Card
