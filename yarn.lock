@@ -924,10 +924,10 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.24.2-alpha.4":
-  version "2.24.2-alpha.4"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.24.2-alpha.4.tgz#1663fd3e4061468324442854499c4570978f2300"
-  integrity sha512-8ZGjKYz8Jf2WaXnpz0JGNa9dDw7TyrJelMH/o3rRUVm411DBakJ++gRBrItwz/RXJvRfcLHY7HT9Jyfrvocz/w==
+"@multiversx/sdk-dapp@2.24.2-alpha.6":
+  version "2.24.2-alpha.6"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.24.2-alpha.6.tgz#8ef748ce48bdc84375c4f9415a5a83f3177f8b72"
+  integrity sha512-Btns3Ns1SNUhDlHxGmrfGD1V5jDFofwvVBmLWSCzUl+lc/vEsvdlASWcq2wkGb1kz2XL2tXW+uBm8RHj14itJQ==
   dependencies:
     "@multiversx/sdk-core" "12.13.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
@@ -937,7 +937,7 @@
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.0.4"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.3"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.5"
     "@multiversx/sdk-web-wallet-provider" "3.1.0"
     "@reduxjs/toolkit" "1.8.2"
     axios "0.24.0"
@@ -1052,10 +1052,10 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.3.tgz#9593cf9778216d073e84e6530695271808a5a6cf"
-  integrity sha512-YJxKASLKrEYcxBcM37CqdW55F3BnuoJrd3irWu/1S5fUQSBLekDxoX54O1d09trtL4rr4xNVQA+l9X9KVxEWzw==
+"@multiversx/sdk-web-wallet-cross-window-provider@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.5.tgz#03c995b2494a11fd2631cc5b3d348e34a2926165"
+  integrity sha512-nIRux1YnOnJNnxAyRFsa1H75cOcKPQUm7dh4MykSH53TQ0jPTT5YQB9qLZfGFJX3SPjZPr7SwyYsEgDDz3Mbmw==
   dependencies:
     "@types/qs" "^6.9.10"
     qs "^6.11.2"
