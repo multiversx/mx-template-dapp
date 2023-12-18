@@ -4,6 +4,9 @@ describe('Send', () => {
   beforeEach(() => {
     cy.login(WalletIDEnum.unguardedWallet1, 'Send transaction');
   });
+  afterEach(() => {
+    cy.contains('Button', 'Close').click();
+  });
   it('should successfully send a demo transaction', () => {
     cy.checkUrl(RoutesEnum.send);
     cy.getSelector('confirmData').should(AssertionEnum.contain, 'Hello_world');

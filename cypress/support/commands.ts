@@ -1,6 +1,14 @@
 /// <reference types="cypress" />
 import { userData } from '../assets/globalData';
+<<<<<<< HEAD
+import {
+  AssertionEnum,
+  GlobalSelectorsEnum,
+  GlobalDataEnum
+} from '../constants/enums';
+=======
 import { AssertionEnum, GlobalSelectorsEnum } from '../constants/enums';
+>>>>>>> origin/development
 import { DEVNET_API } from '../constants/globalLinks';
 
 // Check the url global function
@@ -10,30 +18,27 @@ Cypress.Commands.add('checkUrl', (url) => {
 
 //Login with keystore global function
 Cypress.Commands.add('login', (walletID, selector) => {
-  cy.session(walletID, () => {
-    cy.visit('/');
-    cy.contains(selector).click();
-    if (selector === GlobalSelectorsEnum.connect) {
-      cy.getSelector('webWalletLoginBtn').click();
-    }
-    cy.getSelector('keystoreBtn').click();
-    cy.checkUrl('/unlock/keystore');
-    cy.getSelector('submitButton').click();
-    cy.checkUrl('/unlock/keystore');
+  // cy.session(walletID, () => {
+  cy.visit('/');
+  cy.contains(selector).click();
+  if (selector === GlobalSelectorsEnum.connect) {
+    cy.getSelector('webWalletLoginBtn').click();
+  }
+  cy.getSelector('keystoreBtn').click();
+  cy.checkUrl('/unlock/keystore');
+  cy.getSelector('submitButton').click();
+  cy.checkUrl('/unlock/keystore');
 
-    cy.get('input[type=file]').selectFile(
-      './cypress/assets/testKeystore.json',
-      {
-        force: true
-      }
-    );
-    cy.getSelector('accessPass').type(userData.passsword);
-    cy.getSelector('submitButton').click();
-
-    cy.getSelector(walletID).click();
-    cy.getSelector('confirmBtn').click();
+  cy.get('input[type=file]').selectFile('./cypress/assets/testKeystore.json', {
+    force: true
   });
+  cy.getSelector('accessPass').type(userData.passsword);
+  cy.getSelector('submitButton').click();
+
+  cy.getSelector(walletID).click();
+  cy.getSelector('confirmBtn').click();
 });
+// });
 
 Cypress.Commands.add('getSelector', (selector, ...cypressAction) => {
   return cy.get(`[data-testid=${selector}]`, ...cypressAction);
@@ -54,4 +59,16 @@ Cypress.Commands.add('checkWidgetMsg', (msgArr) => {
   msgArr.forEach((element) => {
     cy.get('p').should(AssertionEnum.contain, element);
   });
+});
+
+Cypress.Commands.add('checkToast', () => {
+  cy.getSelector(GlobalSelectorsEnum.transactionToastTitle).should(
+    AssertionEnum.contain,
+    GlobalDataEnum.pendingToast
+  );
+  cy.wait(5000);
+  cy.getSelector(GlobalSelectorsEnum.transactionToastTitle).should(
+    AssertionEnum.contain,
+    GlobalDataEnum.confirmedToast
+  );
 });

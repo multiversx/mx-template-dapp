@@ -6,6 +6,10 @@ describe('Batch Transaction', () => {
     cy.login(WalletIDEnum.unguardedWallet1, 'Connect');
     cy.wait(5000);
   });
+  afterEach(() => {
+    cy.checkToast();
+    cy.contains('Button', 'Close').click();
+  });
   it('should successfully sign 5 transactions for auto-send batch', () => {
     signTransactions(GlobalSelectorsEnum.signAutoSend);
   });

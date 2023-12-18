@@ -6,6 +6,9 @@ describe('cancelTransactions', () => {
     cy.login(WalletIDEnum.unguardedWallet1, 'Connect');
     cy.wait(5000);
   });
+  afterEach(() => {
+    cy.contains('Button', 'Close').click();
+  });
   it('should return transaction canceled for auto-send batch ', () => {
     cancelTransactions('sign-auto-send');
   });
