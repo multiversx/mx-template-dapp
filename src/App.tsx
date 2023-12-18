@@ -76,7 +76,7 @@ export const App = () => {
   return (
     <AxiosInterceptorContext.Provider>
       <AxiosInterceptorContext.Interceptor
-        authenticatedDomanis={sampleAuthenticatedDomains}
+        authenticatedDomains={sampleAuthenticatedDomains}
       >
         <Router>
           <BatchTransactionsContextProvider>
