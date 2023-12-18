@@ -1,14 +1,11 @@
 /// <reference types="cypress" />
 import { userData } from '../assets/globalData';
-<<<<<<< HEAD
 import {
   AssertionEnum,
   GlobalSelectorsEnum,
-  GlobalDataEnum
+  GlobalDataEnum,
+  RoutesEnum
 } from '../constants/enums';
-=======
-import { AssertionEnum, GlobalSelectorsEnum } from '../constants/enums';
->>>>>>> origin/development
 import { DEVNET_API } from '../constants/globalLinks';
 
 // Check the url global function
@@ -22,21 +19,20 @@ Cypress.Commands.add('login', (walletID, selector) => {
   cy.visit('/');
   cy.contains(selector).click();
   if (selector === GlobalSelectorsEnum.connect) {
-    cy.getSelector('webWalletLoginBtn').click();
+    cy.getSelector(GlobalSelectorsEnum.webWalletLoginBtn).click();
   }
-  cy.getSelector('keystoreBtn').click();
-  cy.checkUrl('/unlock/keystore');
-  cy.getSelector('submitButton').click();
-  cy.checkUrl('/unlock/keystore');
+  cy.getSelector(GlobalSelectorsEnum.keystoreBtn).click();
+  cy.checkUrl(RoutesEnum.keystoreRoute);
+  cy.getSelector(GlobalSelectorsEnum.submitButton)).click();
 
   cy.get('input[type=file]').selectFile('./cypress/assets/testKeystore.json', {
     force: true
   });
-  cy.getSelector('accessPass').type(userData.passsword);
-  cy.getSelector('submitButton').click();
+  cy.getSelector(GlobalSelectorsEnum.accessPass).type(userData.passsword);
+  cy.getSelector(GlobalSelectorsEnum.submitButton).click();
 
   cy.getSelector(walletID).click();
-  cy.getSelector('confirmBtn').click();
+  cy.getSelector(GlobalSelectorsEnum.confirmBtn).click();
 });
 // });
 

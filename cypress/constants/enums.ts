@@ -12,7 +12,8 @@ export enum ErrorMessagesEnum {
 export enum RoutesEnum {
   unlock = '/unlock',
   send = '/send',
-  dashboard = '/dashboard'
+  dashboard = '/dashboard',
+  keystoreRoute = '/unlock/keystore'
 }
 
 export enum WalletIDEnum {
@@ -29,12 +30,20 @@ export const enum GlobalSelectorsEnum {
   sendTransactions = 'send-transactions',
   swapLock = 'swap-lock',
   transactionToastTitle = 'transactionToastTitle',
-  ledgerLoginButton = 'ledgerLoginButton'
+  ledgerLoginButton = 'ledgerLoginButton',
+  webWalletLoginBtn = 'webWalletLoginBtn',
+  keystoreBtn = 'keystoreBtn',
+  submitButton = 'submitButton',
+  accessPass = 'accessPass',
+  confirmBtn = 'confirmBtn',
+  signBtn = 'signBtn',
+  closeButton = 'closeButton'
 }
 
 export const enum GlobalDataEnum {
   pendingToast = 'Processing',
-  confirmedToast = 'transactions successful'
+  confirmedToast = 'transactions successful',
+  cancelToast = 'Transaction canceled'
 }
 
 export const enum GlobalSelectorsEnum {
