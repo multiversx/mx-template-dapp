@@ -1,10 +1,14 @@
 /// <reference types="cypress" />
 import { userData } from '../assets/globalData';
+<<<<<<< HEAD
 import {
   AssertionEnum,
   GlobalSelectorsEnum,
   GlobalDataEnum
 } from '../constants/enums';
+=======
+import { AssertionEnum, GlobalSelectorsEnum } from '../constants/enums';
+>>>>>>> origin/development
 import { DEVNET_API } from '../constants/globalLinks';
 
 // Check the url global function

@@ -36,3 +36,10 @@ export const enum GlobalDataEnum {
   pendingToast = 'Processing',
   confirmedToast = 'transactions successful'
 }
+
+export const enum GlobalSelectorsEnum {
+  connect = 'Connect',
+  signAutoSend = 'sign-auto-send',
+  sendTransactions = 'send-transactions',
+  swapLock = 'swap-lock'
+}
