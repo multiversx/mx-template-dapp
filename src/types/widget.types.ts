@@ -2,9 +2,9 @@ export type WidgetProps = {
   callbackRoute: string;
 };
 
-export type WidgetType = {
+export type WidgetType<T = any> = {
   title: string;
-  widget: (props: any) => JSX.Element;
+  widget: (props: T) => JSX.Element;
   description?: string;
   props?: { receiver?: string };
   reference: string;
