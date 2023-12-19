@@ -47,7 +47,6 @@ export const useSendSignedTransactions = ({
       return;
     }
 
-    console.log({ signedSession, signedTransactions });
     // Cancel flow
     if (signedSession?.status !== TransactionBatchStatusesEnum.signed) {
       clearTransactionsInformation();
