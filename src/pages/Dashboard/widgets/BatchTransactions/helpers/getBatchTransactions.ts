@@ -16,8 +16,10 @@ export const getBatchTransactions = ({
   nonce,
   chainID
 }: TransactionProps): Transaction[] => {
-  return Array.from(Array(NUMBER_OF_TRANSACTIONS).keys()).map((id) => {
-    return newTransaction({
+  const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
+
+  return transactions.map((id) =>
+    newTransaction({
       sender: address,
       receiver: address,
       data: `batch-tx-${id + 1}`,
@@ -27,6 +29,6 @@ export const getBatchTransactions = ({
       gasPrice: GAS_PRICE,
       nonce,
       version: VERSION
-    });
-  });
+    })
+  );
 };

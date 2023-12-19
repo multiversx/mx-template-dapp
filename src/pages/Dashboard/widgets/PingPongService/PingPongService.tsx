@@ -61,7 +61,7 @@ export const PingPongService = ({ callbackRoute }: WidgetProps) => {
     }
 
     await sendPingTransactionFromService({
-      transaction: pingTransaction,
+      transactions: [pingTransaction],
       callbackRoute
     });
   };
@@ -74,7 +74,7 @@ export const PingPongService = ({ callbackRoute }: WidgetProps) => {
     }
 
     await sendPongTransactionFromService({
-      transaction: pongTransaction,
+      transactions: [pongTransaction],
       callbackRoute
     });
   };

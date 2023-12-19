@@ -1,13 +1,12 @@
-import { getIsProviderEqualTo } from 'utils/sdkDappUtils';
-import { LoginMethodsEnum } from 'types/sdkDappTypes';
-
 type GetCallbackRouteProps = {
   anchor?: string;
+  isWebWallet?: boolean;
 };
 
-export const getCallbackRoute = ({ anchor }: GetCallbackRouteProps) => {
-  const isWebWallet = getIsProviderEqualTo(LoginMethodsEnum.wallet);
-
+export const getCallbackRoute = ({
+  anchor,
+  isWebWallet
+}: GetCallbackRouteProps) => {
   if (!isWebWallet) {
     return '';
   }

@@ -7,10 +7,10 @@ import { TransactionsPropsType } from './types';
 
 const COLUMNS = ['TxHash', 'Age', 'Shard', 'From', 'To', 'Method', 'Value'];
 
-export const Transactions = (payload: TransactionsPropsType) => {
+export const Transactions = (props: TransactionsPropsType) => {
   const { success } = useGetActiveTransactionsStatus();
   const { isLoading, getTransactions, transactions } =
-    useGetTransactions(payload);
+    useGetTransactions(props);
 
   useEffect(() => {
     if (success) {

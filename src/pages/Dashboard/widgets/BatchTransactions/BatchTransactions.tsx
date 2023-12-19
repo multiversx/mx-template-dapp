@@ -20,10 +20,10 @@ import { SignedTransactionType, WidgetProps } from 'types';
 import { useBatchTransactionContext } from 'wrappers';
 import { useSendSignedTransactions } from './hooks';
 import {
-  useSignAndAutoSendBatchTransactions,
-  useSendBatchTransactions,
-  useSwapAndLockTokens
-} from './hooks';
+  sendBatchTransactions,
+  signAndAutoSendBatchTransactions,
+  swapAndLockTokens
+} from './helpers';
 
 export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
   const { setSendBatchTransactionsOnDemand } = useBatchTransactionContext();
@@ -45,14 +45,6 @@ export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
   const { batchId, setBatchSessionId } = useSendSignedTransactions({
     signedSessionId: currentSessionId
   });
-
-  // this process will not go through useSendSignedTransactions
-  // it will automatically sign and send transactions
-  const { signAndAutoSendBatchTransactions } =
-    useSignAndAutoSendBatchTransactions();
-
-  const { sendBatchTransactions } = useSendBatchTransactions();
-  const { swapAndLockTokens } = useSwapAndLockTokens();
 
   // If manual batch transactions are executed, track the batchId
   useEffect(() => {

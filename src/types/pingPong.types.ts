@@ -1,15 +1,14 @@
-import { IPlainTransactionObject } from 'types/sdkCoreTypes';
+import { Transaction } from 'types/sdkCoreTypes';
 
-export type PingRawProps = {
+export interface PongRawProps {
+  callbackRoute: string;
+}
+
+export type PingRawProps = PongRawProps & {
   amount: string;
-  callbackRoute: string;
-};
-
-export type PongRawProps = {
-  callbackRoute: string;
 };
 
 export type PingPongServiceProps = {
-  transaction: IPlainTransactionObject;
+  transactions: Transaction[];
   callbackRoute: string;
 };

@@ -1,16 +1,9 @@
-import {
-  Transaction,
-  SimpleTransactionType,
-  TransactionsDisplayInfoType
-} from 'types';
+import { Transaction, TransactionsDisplayInfoType } from 'types';
 
 import { refreshAccount, sendTransactions } from './sdkDappHelpers';
 
 type SignAndSendTransactionsProps = {
-  transactions:
-    | Transaction
-    | SimpleTransactionType
-    | (Transaction | SimpleTransactionType)[];
+  transactions: Transaction[];
   callbackRoute: string;
   transactionsDisplayInfo: TransactionsDisplayInfoType;
 };
