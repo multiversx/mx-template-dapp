@@ -29,7 +29,7 @@ const AppContent = () => {
       customNetworkConfig={{
         name: 'customConfig',
         apiTimeout,
-        walletAddress: 'http://localhost:3002',
+        walletAddress: 'https://localhost:3002',
         walletConnectV2ProjectId
       }}
       dappConfig={{
@@ -77,7 +77,7 @@ export const App = () => {
   return (
     <AxiosInterceptorContext.Provider>
       <AxiosInterceptorContext.Interceptor
-        authenticatedDomanis={sampleAuthenticatedDomains}
+        authenticatedDomains={sampleAuthenticatedDomains}
       >
         <Router>
           <BatchTransactionsContextProvider>
