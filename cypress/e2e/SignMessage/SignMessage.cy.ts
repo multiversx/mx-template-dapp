@@ -1,4 +1,3 @@
-import { Routes } from 'react-router-dom';
 import { userData } from '../../assets/globalData';
 import { AssertionEnum, RoutesEnum, WalletIDEnum } from '../../constants/enums';
 import { scSelectors } from '../SCTransactions/SCTransactionData';
@@ -7,6 +6,9 @@ describe('Sign Message', () => {
   beforeEach(() => {
     cy.login(WalletIDEnum.unguardedWallet1, 'Connect');
     cy.wait(5000);
+  });
+  afterEach(() => {
+    cy.contains('Button', 'Close').click();
   });
   it('should sign', () => {
     const widgetInfo = ['Signature', 'Encoded message', 'Decoded message'];
@@ -32,5 +34,6 @@ describe('Sign Message', () => {
     cy.getSelector(scSelectors.submitButton).click();
     cy.getSelector('closeBtn').click();
     cy.checkUrl(RoutesEnum.dashboard);
+    cy.contains('Transaction canceled');
   });
 });

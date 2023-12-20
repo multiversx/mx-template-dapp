@@ -1,39 +1,45 @@
 /// <reference types="cypress" />
-import { pingPongHandler } from './SCActions';
-import { scSelectors } from './SCTransactionData';
-import { userData } from '../../assets/globalData';
-import { RoutesEnum, WalletIDEnum } from '../../constants/enums';
+import { initTransaction, pingPongHandler } from './SCActions';
+import { WalletIDEnum } from '../../constants/enums';
 
 describe('Smart Contract Transactions', () => {
   afterEach(() => {
-    cy.clearCookies();
+    cy.contains('Button', 'Close').click();
   });
 
   it('should successfully execute the Ping & Pong ABI', () => {
     cy.login(WalletIDEnum.unguardedWallet1, 'Connect');
     cy.wait(5000);
     pingPongHandler('Abi');
+    cy.checkToast();
   });
 
   it('should successfully execute the Ping & Pong RAW ', () => {
     cy.login(WalletIDEnum.unguardedWallet2, 'Connect');
     cy.wait(5000);
     pingPongHandler('Raw');
+    cy.checkToast();
   });
 
   it('should successfully execute the Ping & Pong Service', () => {
     cy.login(WalletIDEnum.unguardedWallet3, 'Connect');
     cy.wait(5000);
-    pingPongHandler('Raw');
+    pingPongHandler('Service');
+    cy.checkToast();
   });
 
   it('should not execute ping&pong aciton', () => {
     cy.login(WalletIDEnum.unguardedWallet4, 'Connect');
     cy.wait(5000);
-    cy.getSelector('btnPongAbi').click();
-    cy.getSelector(scSelectors.accesPass).type(userData.passsword);
-    cy.getSelector(scSelectors.submitButton).click();
+    initTransaction();
     cy.getSelector('closeButton').click();
     cy.contains('Transaction canceled');
+  });
+
+  it('should display the guardian modal', () => {
+    cy.login(WalletIDEnum.guardedWallet, 'Connect');
+    cy.wait(2000);
+    initTransaction();
+    cy.contains('Verify Guardian');
   });
 });
