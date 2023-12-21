@@ -952,16 +952,15 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.26.0-alpha.1":
-  version "2.26.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.26.0-alpha.1.tgz#6a669882519d7413d1e8a74c5f325a7d4454e7b7"
-  integrity sha512-ny3s+cxsuOxsw+tOYgxh2mN3iax3/nGIv0cdubZ9vB8lY2swwpPNuDrHXSL/uWSxV0zHu1dXPnIe/PHSrWCL9w==
+"@multiversx/sdk-dapp@2.26.0-alpha.2":
+  version "2.26.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.26.0-alpha.2.tgz#1761fd2c24da213ddd199d2eedda7b526020e226"
+  integrity sha512-MVSud7PyQKYwT29YabhYlFSghJt1EM0Ze1n+vMBhEFmLlYQYpx1Gax7GalYyHdsUedyh5hWnd5Q0Wkg2Fa1gTw==
   dependencies:
     "@multiversx/sdk-core" "12.16.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
     "@multiversx/sdk-hw-provider" "6.4.0"
     "@multiversx/sdk-native-auth-client" "1.0.6"
-    "@multiversx/sdk-network-providers" "2.2.0"
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.0.4"
@@ -1025,17 +1024,6 @@
   integrity sha512-87QlwC2kaNtywDv2IVX/cavRfR4D5N7XgqOvsZTyMXRVbfWOUlDocrRr5BdvmC1gDdSOQH++nFEDHiMfnKmRng==
   dependencies:
     axios "0.24.0"
-    bech32 "1.1.4"
-    bignumber.js "9.0.1"
-    buffer "6.0.3"
-    json-bigint "1.0.0"
-
-"@multiversx/sdk-network-providers@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-network-providers/-/sdk-network-providers-2.2.0.tgz#2b8d5fbbc848dbeba38950db2f02340908dfcfd3"
-  integrity sha512-2n/+7Ap6S9rJGTiX38GCZ2TmY9zQ1U7o1DwnWpHNRJRxArSN/xzLrbcSKy8InMyc+4A+VHf5pV0Pk8NdPV6++w==
-  dependencies:
-    axios "1.6.1"
     bech32 "1.1.4"
     bignumber.js "9.0.1"
     buffer "6.0.3"
@@ -2476,15 +2464,6 @@ axios@0.24.0:
   integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
   dependencies:
     follow-redirects "^1.14.4"
-
-axios@1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.1.tgz#76550d644bf0a2d469a01f9244db6753208397d7"
-  integrity sha512-vfBmhDpKafglh0EldBEbVuoe7DyAavGSLWhuSm5ZSEKQnHhBf0xAAwybbNH1IkrJNGnS/VG4I5yxig1pCEXE4g==
-  dependencies:
-    follow-redirects "^1.15.0"
-    form-data "^4.0.0"
-    proxy-from-env "^1.1.0"
 
 axios@1.6.2, axios@^1.6.2:
   version "1.6.2"
