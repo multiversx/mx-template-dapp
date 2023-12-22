@@ -13,17 +13,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: ${{ github.ref }}
+          ref: main
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-      # - name: Setup yarn
-      #   run: npm install -g yarn
-      # - run: yarn install
-      # - run: yarn build:devnet
-      #   env:
-      #     CI: false
+      - name: Setup yarn
+        run: npm install -g yarn
+      - run: yarn install
+      - run: yarn build:devnet
+        env:
+          CI: false
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
