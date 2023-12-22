@@ -3,16 +3,36 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  cypress-run:
+  Slack-Notification:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
-      matrix:
-        containers: [1] 
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          if: always()
+          SLACK_ICON_EMOJI: ':robot_face:'
+          SLACK_USERNAME: Cypress Bot
+          SLACK_MESSAGE: E2E tests are now running. Stay tuned for updates!
+          SLACK_TITLE : 'Cypress'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  Cypress-Run:
+    runs-on: ubuntu-latest
+    needs: Slack-Notification
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Cypress run
-        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v4
-       
+        with:
+          command: npm run cy:run
+
+      - name: Uploading artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-execution-report
+          path: |
+            /home/runner/work/mx-template-dapp/mx-template-dapp/mochawesome-report/mochawesome.html
+            /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/screenshots
+            /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/videos

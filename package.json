@@ -9,10 +9,10 @@
     "@fortawesome/fontawesome-svg-core": "6.4.0",
     "@fortawesome/free-solid-svg-icons": "6.4.0",
     "@fortawesome/react-fontawesome": "0.2.0",
-    "@multiversx/sdk-core": "12.13.0",
+    "@multiversx/sdk-core": "12.16.0",
     "@multiversx/sdk-dapp": "2.26.0-alpha.2",
-    "@multiversx/sdk-network-providers": "2.0.0",
-    "axios": "0.24.0",
+    "@multiversx/sdk-network-providers": "2.2.0",
+    "axios": "1.6.2",
     "classnames": "2.3.2",
     "moment": "2.29.4",
     "react": "18.2.0",
@@ -22,7 +22,7 @@
   "scripts": {
     "lint": "eslint --ext js,ts,tsx src",
     "run-cypress": "npx cypress run",
-    "start:devnet": "yarn run copy:devnet-config & vite dev --force",
+    "start:devnet": "yarn run copy:devnet-config & vite dev",
     "start:testnet": "yarn run copy:testnet-config & vite dev",
     "start:mainnet": "yarn run copy:mainnet-config & vite dev",
     "build:devnet": "yarn run copy:devnet-config & vite build",
@@ -31,7 +31,8 @@
     "copy:devnet-config": "cp ./src/config/config.devnet.ts ./src/config/index.ts",
     "copy:testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "copy:mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "cy:run": "node scripts/cypress.ts"
   },
   "browserslist": [
     ">0.2%",
@@ -76,7 +77,10 @@
     "vite": "4.4.9",
     "vite-plugin-node-polyfills": "0.14.1",
     "vite-plugin-svgr": "4.0.0",
-    "vite-tsconfig-paths": "4.2.1"
+    "vite-tsconfig-paths": "4.2.1",
+    "cypress-mochawesome-reporter": "3.7.0",
+    "mochawesome-merge": "4.3.0",
+    "mochawesome-report-generator": "6.2.0"
   },
   "resolutions": {
     "**/*/nth-check": "2.0.1"
