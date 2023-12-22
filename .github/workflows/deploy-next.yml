@@ -1,8 +1,6 @@
 name: deploy-next
 
 on:
-  push:
-    branches: [tm/feature/post-message-provider-deploy-integration-build]
   repository_dispatch:
     types: deploy-next
   workflow_dispatch:
