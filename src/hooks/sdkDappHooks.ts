@@ -15,3 +15,4 @@ export { useCheckBatch } from '@multiversx/sdk-dapp/hooks/transactions/batch/tra
 export { useSignTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useSignTransactions';
 export { useBatchTransactionsTracker } from '@multiversx/sdk-dapp/hooks/transactions/batch/tracker/useBatchTransactionsTracker';
 export { useGetSignedTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetSignedTransactions';
+export { useGetAccountProvider } from '@multiversx/sdk-dapp/hooks/account/useGetAccountProvider';

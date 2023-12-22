@@ -10,17 +10,19 @@ import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
 import { SessionEnum } from 'localConstants';
-import { SignedTransactionType } from 'types';
+import { SignedTransactionType, WidgetProps } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
-export const PingPongAbi = () => {
+export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
   const { hasPendingTransactions } = useGetPendingTransactions();
   const getTimeToPong = useGetTimeToPong();
   const {
     sendPingTransactionFromAbi,
     sendPongTransactionFromAbi,
     transactionStatus
-  } = useSendPingPongTransaction(SessionEnum.abiPingPongSessionId);
+  } = useSendPingPongTransaction({
+    type: SessionEnum.abiPingPongSessionId
+  });
   const pingAmount = useGetPingAmount();
 
   const [stateTransactions, setStateTransactions] = useState<
@@ -40,11 +42,11 @@ export const PingPongAbi = () => {
   };
 
   const onSendPingTransaction = async () => {
-    await sendPingTransactionFromAbi(pingAmount);
+    await sendPingTransactionFromAbi({ amount: pingAmount, callbackRoute });
   };
 
   const onSendPongTransaction = async () => {
-    await sendPongTransactionFromAbi();
+    await sendPongTransactionFromAbi({ callbackRoute });
   };
 
   const timeRemaining = moment()

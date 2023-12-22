@@ -8,7 +8,7 @@ const resultsParser = new ResultsParser();
 
 export const useGetPingAmount = () => {
   const { network } = useGetNetworkConfig();
-  const [pingAmount, setPingAmount] = useState<string>();
+  const [pingAmount, setPingAmount] = useState<string>('0');
 
   const proxy = new ProxyNetworkProvider(network.apiAddress);
 
