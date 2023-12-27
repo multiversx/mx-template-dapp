@@ -924,16 +924,15 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.25.2":
-  version "2.25.2"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.25.2.tgz#64ce52b9c9c7adeff0ec24aa2d2bfeca0d188eb8"
-  integrity sha512-mWd25A/mznIXkJn6LmSMX8IotpJHCGixLjWO+4Lxok0cztnQ3pQWzimJ5Mfiu/k0eYJxv53X3C1YO11DnWvjWA==
+"@multiversx/sdk-dapp@2.26.2":
+  version "2.26.2"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.26.2.tgz#eec7be64e735485dfa6fe9dfd5504055fae90d6b"
+  integrity sha512-vzHoIy9Sg+ptvcqH0S8amO9rmF8vB1K3tqBzhAk75ekHo4Nnrw/mmhqJClH7IwqTpp6/CFSXM/RBVaPVh1wiqA==
   dependencies:
     "@multiversx/sdk-core" "12.16.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
     "@multiversx/sdk-hw-provider" "6.4.0"
     "@multiversx/sdk-native-auth-client" "1.0.6"
-    "@multiversx/sdk-network-providers" "2.2.0"
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.0.4"
