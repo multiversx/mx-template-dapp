@@ -1,13 +1,13 @@
 type GetCallbackRouteProps = {
   anchor?: string;
-  isWebWallet?: boolean;
+  isWebProvider?: boolean;
 };
 
 export const getCallbackRoute = ({
   anchor,
-  isWebWallet
+  isWebProvider
 }: GetCallbackRouteProps) => {
-  if (!isWebWallet) {
+  if (!isWebProvider) {
     return '';
   }
 
