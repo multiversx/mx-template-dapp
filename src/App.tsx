@@ -21,6 +21,7 @@ import { RouteNamesEnum } from 'localConstants';
 import { PageNotFound, Unlock } from 'pages';
 import { routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
+console.log('\x1b[42m%s\x1b[0m', 'App.tsx: DappProvider');
 
 const AppContent = () => {
   return (
