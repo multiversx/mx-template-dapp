@@ -1,7 +1,7 @@
 name: deploy-next
 
 on:
-  push:
+  pull-request:
     branches: [cross-window-hub]
   repository_dispatch:
     types: deploy-next
