@@ -1,8 +1,6 @@
 name: deploy-next
 
 on:
-  pull-request:
-    branches: [cross-window-hub]
   repository_dispatch:
     types: deploy-next
   workflow_dispatch:
