@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useGetAccountProvider } from '@multiversx/sdk-dapp/hooks/account/useGetAccountProvider';
+import { newTransaction } from '@multiversx/sdk-dapp/models/newTransaction';
+import { transformTransactionsToSign } from './transformTransactionsToSign';
+import axios from 'axios';
 import moment from 'moment';
 import { Button } from 'components/Button';
 import { ContractAddress } from 'components/ContractAddress';
@@ -19,6 +23,13 @@ import {
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
+import { SimpleTransactionType } from '@multiversx/sdk-dapp/types';
+
+//@ts-ignore
+const adapter = require('axios/lib/adapters/http.js');
+const axiosInstance = axios.create({
+  adapter
+});
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {
@@ -34,6 +45,8 @@ export const PingPongRaw = () => {
   >(null);
   const [hasPing, setHasPing] = useState<boolean>(true);
   const [secondsLeft, setSecondsLeft] = useState<number>(0);
+  const { provider } = useGetAccountProvider();
+  const [triggerCall, setTriggerCall] = useState(0);
 
   const setSecondsRemaining = async () => {
     const secondsRemaining = await getTimeToPong();
@@ -76,9 +89,66 @@ export const PingPongRaw = () => {
         successMessage: 'Ping transaction successful'
       }
     });
-
-    console.log(sessionId);
   };
+
+  const sendToMySelfOK = async () => {
+    const pingTransaction = {
+      value: '0',
+      nonce: 0,
+      gasLimit: 1000000,
+      gasPrice: 1000000000000,
+      chainID: 'D',
+      receiver: address,
+      data: 'self',
+      gas: 1000000
+    };
+
+    const tx = newTransaction(pingTransaction);
+
+    const signed = await provider.signTransactions([tx]);
+
+    console.log(signed);
+  };
+
+  const sendToMySelfNotOK = async () => {
+    const pingTransaction = {
+      value: '0',
+      receiver: address,
+      data: 'self',
+      gas: 1000000
+    };
+
+    const transactionsPayload = Array.isArray(pingTransaction)
+      ? pingTransaction
+      : [pingTransaction];
+
+    const transactionsToSign: any = await transformTransactionsToSign({
+      transactions: transactionsPayload as SimpleTransactionType[],
+      minGasLimit: undefined
+    });
+
+    console.log(transactionsToSign);
+
+    const signed = await provider.signTransactions(transactionsToSign);
+
+    console.log(signed);
+  };
+
+  const makeCall = async () => {
+    const url =
+      'https://devnet-api.multiversx.com/accounts/erd1c26jzneqwlfcddqre05jh53lnmyj5n8925k0r7gcqkaphr23nnpss0j540?withGuardianInfo=true';
+
+    const account: any = (await axiosInstance.get(url)).data;
+    setTriggerCall(Date.now());
+  };
+
+  useEffect(() => {
+    if (triggerCall !== 0) {
+      setTimeout(() => {
+        sendToMySelfNotOK();
+      }, 1000);
+    }
+  }, [triggerCall]);
 
   useEffect(() => {
     getCountdownSeconds({ secondsLeft, setSecondsLeft });
@@ -101,6 +171,14 @@ export const PingPongRaw = () => {
           <Button onClick={sendToSelf}>
             <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
             Send to self
+          </Button>
+          <Button onClick={sendToMySelfOK}>
+            <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
+            Send to myself ✅
+          </Button>
+          <Button onClick={makeCall}>
+            <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
+            Send to myself 🚫
           </Button>
           <Button
             disabled={!hasPing || hasPendingTransactions}

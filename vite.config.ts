@@ -4,13 +4,14 @@ import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import svgrPlugin from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import vitePluginRequire from 'vite-plugin-require';
 
 export default defineConfig({
   server: {
     port: Number(process.env.PORT) || 3003,
     strictPort: true,
     host: true,
-    https: false,
+    https: true,
     watch: {
       usePolling: false,
       useFsEvents: false
@@ -21,7 +22,8 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    // basicSsl(),
+    basicSsl(),
+    vitePluginRequire(),
     tsconfigPaths(),
     svgrPlugin(),
     nodePolyfills({
