@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { API_URL } from 'config';
-import { IPlainTransactionObject } from 'types/sdkCoreTypes';
+import { Transaction } from 'types/sdkCoreTypes';
 
 export const useGetPongTransaction = () => {
   return async () => {
     try {
-      const { data } = await axios.post<IPlainTransactionObject>(
+      const { data } = await axios.post<Transaction>(
         '/ping-pong/abi/pong',
         {},
         {

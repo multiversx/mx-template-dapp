@@ -16,11 +16,9 @@ import {
 import { useBatchTransactionContext } from 'wrappers';
 
 export const useSendSignedTransactions = ({
-  signedSessionId = null,
-  transactionsOrder
+  signedSessionId = null
 }: {
   signedSessionId: string | null;
-  transactionsOrder?: number[][];
 }) => {
   const [batchSessionId, setBatchSessionId] = useState<string | null>(
     sessionStorage.getItem(SessionEnum.batchSessionId)
@@ -50,23 +48,9 @@ export const useSendSignedTransactions = ({
     }
 
     // Cancel flow
-    if (signedSession?.status !== 'signed') {
+    if (signedSession?.status !== TransactionBatchStatusesEnum.signed) {
       clearTransactionsInformation();
       return;
-    }
-
-    const transactions = [];
-
-    if (transactionsOrder && transactionsOrder.length > 0) {
-      transactionsOrder.forEach((txOrders) => {
-        const batch = txOrders.map(
-          (txIndex) => signedSessionTransactions[txIndex]
-        );
-
-        transactions.push(batch);
-      });
-    } else {
-      transactions.push(signedSessionTransactions);
     }
 
     setTransactionsToSignedState({
@@ -88,7 +72,7 @@ export const useSendSignedTransactions = ({
     });
 
     const { error } = await sendBatchToBlockchain({
-      transactions,
+      transactions: [signedSessionTransactions],
       sessionId: batchSessionId
     });
 
@@ -110,14 +94,12 @@ export const useSendSignedTransactions = ({
       return;
     }
 
-    // Let the app enough time to reload when coming back from the web allet
-    const timeoutId = setTimeout(() => {
+    if (
+      signedTransactions[signedSessionId]?.status ===
+      TransactionBatchStatusesEnum.signed
+    ) {
       sendTransactions();
-    }, 500);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    }
   }, [batchSessionId, signedTransactions[signedSessionId]?.status]);
 
   return {
