@@ -31,6 +31,11 @@ import { buildAxiosFetch }  from "axios-fetch";
 const axiosInstance = axios.create();
 axiosInstance.defaults.headers.common['BASIC'] = 'AUTH_TOKEN';
 
+axiosInstance.interceptors.request.use((config) => {
+  console.log('Request was sent', config.url);
+  return config;
+});
+
 
 const fetch = buildAxiosFetch(axiosInstance);
 
@@ -140,8 +145,6 @@ export const PingPongRaw = () => {
   const makeCall = async () => {
     const url =
       'https://devnet-api.multiversx.com/accounts/erd1c26jzneqwlfcddqre05jh53lnmyj5n8925k0r7gcqkaphr23nnpss0j540?withGuardianInfo=true';
-
-
 
     const account: any = (await fetch(url));
     const asd = await account.json();
