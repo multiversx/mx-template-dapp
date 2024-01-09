@@ -24,12 +24,15 @@ import { SessionEnum } from 'localConstants';
 import { SignedTransactionType } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 import { SimpleTransactionType } from '@multiversx/sdk-dapp/types';
+//@ts-ignore
+import { buildAxiosFetch }  from "axios-fetch";
 
 //@ts-ignore
-const adapter = require('axios/lib/adapters/http.js');
-const axiosInstance = axios.create({
-  adapter
-});
+const axiosInstance = axios.create();
+axiosInstance.defaults.headers.common['BASIC'] = 'AUTH_TOKEN';
+
+
+const fetch = buildAxiosFetch(axiosInstance);
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {
@@ -138,7 +141,12 @@ export const PingPongRaw = () => {
     const url =
       'https://devnet-api.multiversx.com/accounts/erd1c26jzneqwlfcddqre05jh53lnmyj5n8925k0r7gcqkaphr23nnpss0j540?withGuardianInfo=true';
 
-    const account: any = (await axiosInstance.get(url)).data;
+
+
+    const account: any = (await fetch(url));
+    const asd = await account.json();
+    console.log(asd);
+    
     setTriggerCall(Date.now());
   };
 
