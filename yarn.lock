@@ -917,6 +917,13 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/logs/-/logs-6.12.0.tgz#ad903528bf3687a44da435d7b2479d724d374f5d"
   integrity sha512-ExDoj1QV5eC6TEbMdLUMMk9cfvNKhhv5gXol4SmULRVCx/3iyCPhJ74nsb3S0Vb+/f+XujBEj3vQn5+cwS0fNA==
 
+"@lifeomic/axios-fetch@3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@lifeomic/axios-fetch/-/axios-fetch-3.0.1.tgz#a0f135470d7bb54d0ce82b0a2f3b19daa7bf77e2"
+  integrity sha512-bwEgYXtGrn/F+yYqoUIAWBRzyqQ7yB1VL84gCq0uAk36GRoyoWyOzbE35VWeXlmkkoby91FnAwh4UhgayMM/og==
+  dependencies:
+    "@types/node-fetch" "^2.5.10"
+
 "@multiversx/sdk-bls-wasm@0.3.5":
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-bls-wasm/-/sdk-bls-wasm-0.3.5.tgz#2e83308fdc7a0928c6d5a7f910d796fd8eb2d90b"
@@ -950,11 +957,12 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.27.0-alpha.1":
-  version "2.27.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.27.0-alpha.1.tgz#d21dc679b2108e2e0474c328ed5e17f7b3d10d05"
-  integrity sha512-0YKwnyQL+0VDB3DpD02cx8tlPeNPq/c87hrxIwDenyvbap0217vCMTShPuqPgWlHxMQvO0rJEb/RjvtDihua6g==
+"@multiversx/sdk-dapp@2.27.0-alpha.2":
+  version "2.27.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.27.0-alpha.2.tgz#7a36e02a3a07895c392252d3016c78b5f3cbc040"
+  integrity sha512-bCGPBASax5AJbhI5qG0XnTym77tq5SXUlLf49kM37LdZ6OGbvCCj9iUFS/UJP2NutGgaO2pgrCdanYxElZ5vRg==
   dependencies:
+    "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "12.17.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
     "@multiversx/sdk-hw-provider" "6.4.0"
@@ -1788,6 +1796,14 @@
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
+
+"@types/node-fetch@^2.5.10":
+  version "2.6.10"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.10.tgz#ff5c1ceacab782f2b7ce69957d38c1c27b0dc469"
+  integrity sha512-PPpPK6F9ALFTn59Ka3BaL+qGuipRfxNE8qVgkp0bVixeiR2c2/L+IVOiBdu9JhhT22sWnQEp6YyHGI2b2+CMcA==
+  dependencies:
+    "@types/node" "*"
+    form-data "^4.0.0"
 
 "@types/node@*", "@types/node@>=13.7.0":
   version "20.10.7"
