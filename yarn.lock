@@ -976,15 +976,6 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-<<<<<<< HEAD
-"@multiversx/sdk-dapp@2.27.0-alpha.2":
-  version "2.27.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.27.0-alpha.2.tgz#7a36e02a3a07895c392252d3016c78b5f3cbc040"
-  integrity sha512-bCGPBASax5AJbhI5qG0XnTym77tq5SXUlLf49kM37LdZ6OGbvCCj9iUFS/UJP2NutGgaO2pgrCdanYxElZ5vRg==
-  dependencies:
-    "@lifeomic/axios-fetch" "3.0.1"
-    "@multiversx/sdk-core" "12.17.0"
-=======
 "@multiversx/sdk-dapp@2.28.0-alpha.3":
   version "2.28.0-alpha.3"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.28.0-alpha.3.tgz#6860875c6fcbeba2bb4530c3cc83e2169ba09738"
@@ -992,7 +983,6 @@
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "12.18.0"
->>>>>>> cross-window-hub
     "@multiversx/sdk-extension-provider" "3.0.0"
     "@multiversx/sdk-hw-provider" "6.4.0"
     "@multiversx/sdk-native-auth-client" "1.0.7"
