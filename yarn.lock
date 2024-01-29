@@ -976,10 +976,10 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.28.0-alpha.3":
-  version "2.28.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.28.0-alpha.3.tgz#6860875c6fcbeba2bb4530c3cc83e2169ba09738"
-  integrity sha512-QW0whoswo53Noxme6RCpwr1Ncg5lCzJ7CaV6c0ER3+xvj9sqSTmsHGaaXLc+ThEArtouEcKUQibIbS+b/2FyFw==
+"@multiversx/sdk-dapp@2.28.0-alpha.7":
+  version "2.28.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.28.0-alpha.7.tgz#9911edaab80e36a61f9acb1d0e5a4e392481048c"
+  integrity sha512-36ABCZJHm9WX5+Y1pnVB76MUAUgXzNiyr29VtFAaE1BOnEn3WND1Mz4Doi93wa2GHe/xyiN7lMvORTlUzlFpWg==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "12.18.0"
@@ -989,7 +989,7 @@
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.1.0"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.15"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.19"
     "@multiversx/sdk-web-wallet-provider" "3.1.0"
     "@reduxjs/toolkit" "1.8.2"
     axios "1.6.5"
@@ -1093,10 +1093,10 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@0.0.15":
-  version "0.0.15"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.15.tgz#322e9057f5b6f2277cf7b60cf557545db2db4ae3"
-  integrity sha512-SpeUwl3Oyx/8AU/C+jfDpf5AgA2nKXzmA0f33E78JLNbXxvRtM5LWWQzGIfD3AxUjp61e85uA5CyPVtfpXFnjw==
+"@multiversx/sdk-web-wallet-cross-window-provider@0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.19.tgz#9cb0ea103990874565b0a8b9e4623bfb718ac53a"
+  integrity sha512-UJdFX7kYf0blWOaIZWbgI/rJhqry3fAAIJQ4/aC8zllxJHhzXBYn3XvbygPFbReypt8fLyZiIYaOPYGLpZksPA==
   dependencies:
     "@multiversx/sdk-core" "12.18.0"
     "@types/jest" "^29.5.11"
