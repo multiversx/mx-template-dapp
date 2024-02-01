@@ -45,10 +45,3 @@ export const enum GlobalDataEnum {
   confirmedToast = 'transactions successful',
   cancelToast = 'Transaction canceled'
 }
-
-export const enum GlobalSelectorsEnum {
-  connect = 'Connect',
-  signAutoSend = 'sign-auto-send',
-  sendTransactions = 'send-transactions',
-  swapLock = 'swap-lock'
-}
