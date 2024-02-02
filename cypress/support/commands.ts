@@ -13,6 +13,21 @@ Cypress.Commands.add('checkUrl', (url) => {
   cy.url().should(AssertionEnum.include, url);
 });
 
+Cypress.Commands.add('connectKeystore', (walletID) => {
+  cy.getSelector(GlobalSelectorsEnum.keystoreBtn).click();
+  cy.checkUrl(RoutesEnum.keystoreRoute);
+  cy.getSelector(GlobalSelectorsEnum.submitButton).click();
+
+  cy.get('input[type=file]').selectFile('./cypress/assets/testKeystore.json', {
+    force: true
+  });
+  cy.getSelector(GlobalSelectorsEnum.accessPass).type(userData.passsword);
+  cy.getSelector(GlobalSelectorsEnum.submitButton).click();
+
+  cy.getSelector(walletID).click();
+  cy.getSelector(GlobalSelectorsEnum.confirmBtn).click();
+});
+
 //Login with keystore global function
 Cypress.Commands.add('login', (walletID, selector) => {
   // cy.session(walletID, () => {
@@ -27,18 +42,7 @@ Cypress.Commands.add('login', (walletID, selector) => {
   if (selector === GlobalSelectorsEnum.connect) {
     cy.getSelector(GlobalSelectorsEnum.webWalletLoginBtn).click();
   }
-  cy.getSelector(GlobalSelectorsEnum.keystoreBtn).click();
-  cy.checkUrl(RoutesEnum.keystoreRoute);
-  cy.getSelector(GlobalSelectorsEnum.submitButton).click();
-
-  cy.get('input[type=file]').selectFile('./cypress/assets/testKeystore.json', {
-    force: true
-  });
-  cy.getSelector(GlobalSelectorsEnum.accessPass).type(userData.passsword);
-  cy.getSelector(GlobalSelectorsEnum.submitButton).click();
-
-  cy.getSelector(walletID).click();
-  cy.getSelector(GlobalSelectorsEnum.confirmBtn).click();
+  cy.connectKeystore(walletID);
 });
 // });
 

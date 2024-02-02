@@ -2,7 +2,7 @@ import { GlobalSelectorsEnum } from '../../constants/enums';
 
 describe('Unlock', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('/unlock');
   });
 
   it('should open the xPortal modal', () => {
@@ -12,6 +12,6 @@ describe('Unlock', () => {
 
   it('should open the ledger modal', () => {
     cy.getSelector(GlobalSelectorsEnum.ledgerLoginButton);
-    cy.contains('Connect Ledger');
+    cy.contains('Ledger');
   });
 });

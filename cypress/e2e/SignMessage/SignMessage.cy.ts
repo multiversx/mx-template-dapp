@@ -3,12 +3,12 @@ import { AssertionEnum, RoutesEnum, WalletIDEnum } from '../../constants/enums';
 import { scSelectors } from '../SCTransactions/SCTransactionData';
 
 describe('Sign Message', () => {
-  beforeEach(() => {
+  before(() => {
     cy.login(WalletIDEnum.unguardedWallet1, 'Connect');
     cy.wait(5000);
   });
-  afterEach(() => {
-    cy.contains('Button', 'Close').click();
+  after(() => {
+    cy.logout();
   });
   it('should sign', () => {
     const widgetInfo = ['Signature', 'Encoded message', 'Decoded message'];
