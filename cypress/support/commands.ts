@@ -34,8 +34,8 @@ Cypress.Commands.add('login', (walletID, selector) => {
   cy.visit('/', {
     //FIXME: Logout issue
     onBeforeLoad(win) {
-      // win.localStorage.clear();
-      // win.sessionStorage.clear();
+      win.localStorage.clear();
+      win.sessionStorage.clear();
     }
   });
   cy.contains(selector).click();
