@@ -43,5 +43,6 @@ export const enum GlobalSelectorsEnum {
 export const enum GlobalDataEnum {
   pendingToast = 'Processing',
   confirmedToast = 'transactions successful',
+  confirmedTransaction = 'transaction successful',
   cancelToast = 'Transaction canceled'
 }

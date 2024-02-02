@@ -936,10 +936,10 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.28.0":
-  version "2.28.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.28.0.tgz#dfc7d22f09dcb4e9d4a7782ed532ae61f70f74f5"
-  integrity sha512-gShHhdTgAgEOCAPZOnZ61zKLzeH5P4Cbpe9/D3836bQ4DIaFUUb0sf752c0JEFM0h4LMqm0c/UVivNwtZw+YPQ==
+"@multiversx/sdk-dapp@2.28.5":
+  version "2.28.5"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.28.5.tgz#66e2f2cb878fa4cc4def14c5fccec83e595b67c1"
+  integrity sha512-t59BdfH9mluG5IOPLxQIAbaKZR/8O9kukS6P1x5+JkEbD8TW4PjPFQA5+vKPnye3zM3h05I6OXLcx+WOwGwwDA==
   dependencies:
     "@multiversx/sdk-core" "12.18.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
@@ -1793,9 +1793,9 @@
   integrity sha512-LT+OIXpp2kj4E2S/p91BMe+VgGX2+lfO+XTpfXhh+bCk2LkQtHZSub8ewFBMGP5ClysPjTDFa4sMI8Q3n4T0wg==
 
 "@types/node@^16.18.39":
-  version "16.18.70"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.70.tgz#d4c819be1e9f8b69a794d6f2fd929d9ff76f6d4b"
-  integrity sha512-8eIk20G5VVVQNZNouHjLA2b8utE2NvGybLjMaF4lyhA9uhGwnmXF8o+icdXKGSQSNANJewXva/sFUoZLwAaYAg==
+  version "16.18.78"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.78.tgz#3d97264128712f2eb59f1f8456bcfc5d56d8105c"
+  integrity sha512-2poPMDdsGfvhcLmgJZ85QrIfN6z3PijYRMiV0FWIEUiQW/t/lzH7BEm4vN+HMhjZXbtIKssMcAxTcgu4Rm83YA==
 
 "@types/prop-types@*":
   version "15.7.11"

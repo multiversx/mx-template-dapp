@@ -5,7 +5,8 @@ declare namespace Cypress {
     login: (walletID: string, selector: string) => void;
     apiIntercept: (method: string, param: string) => void;
     checkWidgetMsg: (msgArr: string[]) => void;
-    checkToast: () => void;
+    checkToast: (message?: string) => void;
+    logout: () => void;
 
     getSelector: (
       selector: string,

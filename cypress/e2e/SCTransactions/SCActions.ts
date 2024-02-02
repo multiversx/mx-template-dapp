@@ -30,10 +30,12 @@ export const checkPingDetails = () => {
 };
 
 export const pingPongHandler = (type: string) => {
+  // Wait 2000 in order to update the button state from React
+  cy.wait(2000);
   cy.getSelector(`btnPing${type}`).then((btn) => {
     cy.wait(1500);
     if (btn.prop('disabled')) {
-      console.log('btn prop', btn.prop('disabled'));
+      cy.wait(3.1 * 60 * 1000); // 186000ms => 3.1min for PONG button to unlock
       scTransaction(`btnPong${type}`);
     } else {
       scTransaction(`btnPing${type}`);
@@ -42,7 +44,18 @@ export const pingPongHandler = (type: string) => {
 };
 
 export const initTransaction = () => {
-  cy.getSelector('btnPongAbi').click();
-  cy.getSelector(scSelectors.accesPass).type(userData.passsword);
-  cy.getSelector(scSelectors.submitButton).click();
+  cy.wait(2000);
+  cy.getSelector(`btnPingAbi`).then((btn) => {
+    cy.wait(1500);
+
+    if (btn.prop('disabled')) {
+      cy.wait(186000);
+      cy.getSelector('btnPongAbi').click();
+    } else {
+      cy.getSelector('btnPingAbi').click();
+    }
+
+    cy.getSelector(scSelectors.accesPass).type(userData.passsword);
+    cy.getSelector(scSelectors.submitButton).click();
+  });
 };

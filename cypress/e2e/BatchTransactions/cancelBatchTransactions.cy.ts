@@ -2,12 +2,12 @@ import { cancelTransactions } from './helpers';
 import { GlobalSelectorsEnum, WalletIDEnum } from '../../constants/enums';
 
 describe('cancelTransactions', () => {
-  beforeEach(() => {
+  before(() => {
     cy.login(WalletIDEnum.unguardedWallet1, 'Connect');
     cy.wait(5000);
   });
-  afterEach(() => {
-    cy.contains('Button', 'Close').click();
+  after(() => {
+    cy.logout();
   });
   it('should return transaction canceled for auto-send batch ', () => {
     cancelTransactions(GlobalSelectorsEnum.signAutoSend);

@@ -34,6 +34,6 @@ describe('Sign Message', () => {
     cy.getSelector(scSelectors.submitButton).click();
     cy.getSelector('closeBtn').click();
     cy.checkUrl(RoutesEnum.dashboard);
-    cy.contains('Transaction canceled');
+    cy.contains('cancelled');
   });
 });

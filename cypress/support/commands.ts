@@ -16,7 +16,13 @@ Cypress.Commands.add('checkUrl', (url) => {
 //Login with keystore global function
 Cypress.Commands.add('login', (walletID, selector) => {
   // cy.session(walletID, () => {
-  cy.visit('/');
+  cy.visit('/', {
+    //FIXME: Logout issue
+    onBeforeLoad(win) {
+      // win.localStorage.clear();
+      // win.sessionStorage.clear();
+    }
+  });
   cy.contains(selector).click();
   if (selector === GlobalSelectorsEnum.connect) {
     cy.getSelector(GlobalSelectorsEnum.webWalletLoginBtn).click();
@@ -57,7 +63,7 @@ Cypress.Commands.add('checkWidgetMsg', (msgArr) => {
   });
 });
 
-Cypress.Commands.add('checkToast', () => {
+Cypress.Commands.add('checkToast', (message = GlobalDataEnum.pendingToast) => {
   cy.getSelector(GlobalSelectorsEnum.transactionToastTitle).should(
     AssertionEnum.contain,
     GlobalDataEnum.pendingToast
@@ -65,6 +71,11 @@ Cypress.Commands.add('checkToast', () => {
   cy.wait(5000);
   cy.getSelector(GlobalSelectorsEnum.transactionToastTitle).should(
     AssertionEnum.contain,
-    GlobalDataEnum.confirmedToast
+    message
   );
+});
+
+Cypress.Commands.add('logout', () => {
+  cy.contains('Button', 'Close').click();
+  cy.wait(100);
 });

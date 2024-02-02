@@ -15,7 +15,7 @@ export default defineConfig({
   },
   e2e: {
     baseUrl: 'https://integration.template-dapp.multiversx.com/',
-    defaultCommandTimeout: 30000,
+    defaultCommandTimeout: 200000, // Increase timeout for swap & lock requests
     responseTimeout: 70000,
     requestTimeout: 70000,
     chromeWebSecurity: false,
