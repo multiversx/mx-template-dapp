@@ -30,7 +30,7 @@ export const Unlock = () => {
   const navigate = useNavigate();
   const commonProps: CommonPropsType = {
     callbackRoute: RouteNamesEnum.dashboard,
-    nativeAuth,
+    // nativeAuth,
     onLoginRedirect: () => {
       navigate(RouteNamesEnum.dashboard);
     }
@@ -74,7 +74,7 @@ export const Unlock = () => {
               {...commonProps}
             />
             <CrossWindowLoginButton
-              loginButtonText='Wallet'
+              loginButtonText='Wallet Cross-window'
               data-testid='crossWindowLoginBtn'
               {...commonProps}
             />
