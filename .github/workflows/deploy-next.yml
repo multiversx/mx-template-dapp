@@ -1,8 +1,6 @@
 name: deploy-next
 
 on:
-  push:
-    branches: [cross-window-hub]
   repository_dispatch:
     types: deploy-next
   workflow_dispatch:
@@ -13,11 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: cross-window-hub
+          ref: main
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '18.x'
+          node-version: '16.x'
       - name: Setup yarn
         run: npm install -g yarn
       - run: yarn install
