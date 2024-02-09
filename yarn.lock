@@ -948,20 +948,6 @@
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-bls-wasm/-/sdk-bls-wasm-0.3.5.tgz#2e83308fdc7a0928c6d5a7f910d796fd8eb2d90b"
   integrity sha512-c0tIdQUnbBLSt6NYU+OpeGPYdL0+GV547HeHT8Xc0BKQ7Cj0v82QUoA2QRtWrR1G4MNZmLsIacZSsf6DrIS2Bw==
 
-"@multiversx/sdk-core@12.16.0":
-  version "12.16.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-core/-/sdk-core-12.16.0.tgz#100077580302d50868479fb0db3516f9f3802513"
-  integrity sha512-b2htlSeXVkZwrnEVAxoUgNe0oiiOheEjibEbxwNXqtWnsSI31fAtVXxXMersVgcliMJGjmtHkpFAItAucG3OSg==
-  dependencies:
-    "@multiversx/sdk-transaction-decoder" "1.0.2"
-    bech32 "1.1.4"
-    bignumber.js "9.0.1"
-    blake2b "2.1.3"
-    buffer "6.0.3"
-    json-duplicate-key-handle "1.0.0"
-    keccak "3.0.2"
-    protobufjs "7.2.4"
-
 "@multiversx/sdk-core@12.18.0":
   version "12.18.0"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-core/-/sdk-core-12.18.0.tgz#ae99665f9afb2bd4f1e325cb7daabb1dbcc55ca6"
@@ -990,10 +976,10 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.28.5-alpha.4":
-  version "2.28.5-alpha.4"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.28.5-alpha.4.tgz#96939d2b63f30b48d280ff96dd657a99e0957e52"
-  integrity sha512-Clj0ul4+Vcu34Jju7BACH6/A6793NDqqJ/ItAAJAVRv24fOeA9AwTYbqV3T26AmZ44nM6fcRvmXJaunR0NoPUw==
+"@multiversx/sdk-dapp@2.28.6-alpha.2":
+  version "2.28.6-alpha.2"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.28.6-alpha.2.tgz#232a1cf9866bbf226bbacee67e4b918e8be030ba"
+  integrity sha512-na+mUvYmQ/wrd5KGS6/p5+jKBaxLX9JIEcxmgesyS3ghLg/rXgRPbNfCZEjkp4Ly1y+XfTXdOH7ko1Z1HE1vQQ==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "13.0.0-alpha.2"
