@@ -30,7 +30,7 @@ export const Unlock = () => {
   const navigate = useNavigate();
   const commonProps: CommonPropsType = {
     callbackRoute: RouteNamesEnum.dashboard,
-    nativeAuth,
+    // nativeAuth,
     onLoginRedirect: () => {
       navigate(RouteNamesEnum.dashboard);
     }
