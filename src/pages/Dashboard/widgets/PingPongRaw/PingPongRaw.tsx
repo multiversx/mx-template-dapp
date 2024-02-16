@@ -67,7 +67,7 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
       value: '0',
       receiver: address,
       data: 'self',
-      gas: 1000000
+      gasLimit: 100000000
     };
 
     const { sessionId } = await sendTransactions({

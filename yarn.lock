@@ -976,10 +976,10 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.28.6-alpha.2":
-  version "2.28.6-alpha.2"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.28.6-alpha.2.tgz#232a1cf9866bbf226bbacee67e4b918e8be030ba"
-  integrity sha512-na+mUvYmQ/wrd5KGS6/p5+jKBaxLX9JIEcxmgesyS3ghLg/rXgRPbNfCZEjkp4Ly1y+XfTXdOH7ko1Z1HE1vQQ==
+"@multiversx/sdk-dapp@2.28.7-alpha.7":
+  version "2.28.7-alpha.7"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.28.7-alpha.7.tgz#7fc6d7858b66756233693297aac62a194eb62cc4"
+  integrity sha512-SgIKeyBIjG1YHU0KvJBw8V20i0GPgEIvV8xMUCmd6vRH3Z0OK0hWND5fdSOWtt2ZilKZCAc44YWZ70TZMGZ9QA==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "13.0.0-alpha.2"
@@ -989,8 +989,8 @@
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.1.0"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.21"
-    "@multiversx/sdk-web-wallet-provider" "3.1.0"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.22"
+    "@multiversx/sdk-web-wallet-provider" "3.2.1"
     "@reduxjs/toolkit" "1.8.2"
     axios "1.6.5"
     bignumber.js "9.x"
@@ -1093,20 +1093,20 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.21.tgz#f9d1dafea40c94c3db7aac8cb4c5b6b86f82efb4"
-  integrity sha512-4nmueZwk/WRwvXW59ygUOHlah/xGZpb5LWdssHf8LUO3dG10zZptZmutFqgyeU65ayD/jnWK+HRxkKmMN5uqvg==
+"@multiversx/sdk-web-wallet-cross-window-provider@0.0.22":
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.22.tgz#cea751c6b1846fbfbc7e17eba0031a56979b1c19"
+  integrity sha512-cD9ePvb+Kju4lYh7QCn7vrINEinDTRZAQhIeNe3Dt3HTd07Af48AUU01EjdEKnivROiKnXj5DKKmR8GZlSH7Tg==
   dependencies:
     "@multiversx/sdk-core" "12.18.0"
     "@types/jest" "^29.5.11"
     "@types/qs" "6.9.10"
     qs "6.11.2"
 
-"@multiversx/sdk-web-wallet-provider@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-provider/-/sdk-web-wallet-provider-3.1.0.tgz#af6f7e56ff05cd429c677654638dddbcaed1473b"
-  integrity sha512-gIE7AudJl5Ax64AMAD0o6m0cVi+dI5LW2TSM5M9K7zKMWWCflhv27a2A61JkCIQ6CK5OTIkMXaFb61OzUqhplQ==
+"@multiversx/sdk-web-wallet-provider@3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-provider/-/sdk-web-wallet-provider-3.2.1.tgz#94ba12140f4f9f35f30b8e13186baa78db4ddaae"
+  integrity sha512-f0CHVsBephFhoQtCAx9y2WhiIZEaNgn0oVa+sZNkgILcXU53Gm8Rj8wMfM0SDimHBYcXCcBDedyLCU3MioOjoQ==
   dependencies:
     qs "6.10.3"
 
