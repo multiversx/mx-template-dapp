@@ -957,6 +957,20 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
+"@multiversx/sdk-core@13.0.0-beta.4":
+  version "13.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-core/-/sdk-core-13.0.0-beta.4.tgz#a6a8121cd53f7ac05882647cb756f9276f106c8c"
+  integrity sha512-JCpuBgWqB1aMxYz9se+YYNXq2Z7IGLbZjV63Bq6Ba68AbSpgAZtSe4GBQcRIzNeHTWUCbKZb8NCRtyAXcveqFA==
+  dependencies:
+    "@multiversx/sdk-transaction-decoder" "1.0.2"
+    bech32 "1.1.4"
+    blake2b "2.1.3"
+    buffer "6.0.3"
+    json-bigint "1.0.0"
+    json-duplicate-key-handle "1.0.0"
+    keccak "3.0.2"
+    protobufjs "7.2.4"
+
 "@multiversx/sdk-dapp@2.29.0-beta.0":
   version "2.29.0-beta.0"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.29.0-beta.0.tgz#51c2eb3b7aae547b4378303088bce2c67850c910"
