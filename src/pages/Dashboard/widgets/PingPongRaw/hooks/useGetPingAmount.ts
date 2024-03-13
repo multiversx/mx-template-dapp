@@ -13,7 +13,7 @@ const decodeAmount = (data: PingPongResponseType) => {
 };
 
 export const useGetPingAmount = () => {
-  const [pingAmount, setPingAmount] = useState<string>();
+  const [pingAmount, setPingAmount] = useState<string>('0');
   const { network } = useGetNetworkConfig();
 
   const getPingAmount = async () => {
