@@ -20,6 +20,7 @@ import {
   PongRawProps
 } from 'types/pingPong.types';
 import { newTransaction } from 'helpers/sdkDappHelpers';
+import { Address } from 'utils/sdkDappCore';
 
 type PingPongTransactionProps = {
   type: SessionEnum;
@@ -94,6 +95,7 @@ export const useSendPingPongTransaction = ({
 
       const pingTransaction = smartContract.methodsExplicit
         .ping()
+        .withSender(new Address(address))
         .withValue(amount ?? '0')
         .withGasLimit(60000000)
         .withChainID(getChainId())
@@ -161,6 +163,7 @@ export const useSendPingPongTransaction = ({
 
       const pongTransaction = smartContract.methodsExplicit
         .pong()
+        .withSender(new Address(address))
         .withValue('0')
         .withGasLimit(60000000)
         .withChainID(getChainId())

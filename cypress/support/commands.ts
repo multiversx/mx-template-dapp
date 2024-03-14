@@ -23,7 +23,7 @@ Cypress.Commands.add('login', (walletID, selector) => {
   }
   cy.getSelector(GlobalSelectorsEnum.keystoreBtn).click();
   cy.checkUrl(RoutesEnum.keystoreRoute);
-  cy.getSelector(GlobalSelectorsEnum.submitButton)).click();
+  cy.getSelector(GlobalSelectorsEnum.submitButton).click();
 
   cy.get('input[type=file]').selectFile('./cypress/assets/testKeystore.json', {
     force: true
