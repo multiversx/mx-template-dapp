@@ -976,10 +976,10 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.29.0-beta.3":
-  version "2.29.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.29.0-beta.3.tgz#f3c4a08a13b8932e14b0de5e128ada80e18b10f0"
-  integrity sha512-IYULTx5MYvF2ZzalI4X9PFAO4g2YCrN5zQBErO41nyV5Y0LXNxgIYeqjgP7GNOmuSbiJ0flVQEOcsuuYYGXcTg==
+"@multiversx/sdk-dapp@2.29.0-beta.5":
+  version "2.29.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.29.0-beta.5.tgz#dd264ea353c83b1162308ccab4eb1a84ec5fa79c"
+  integrity sha512-c8d8pLn335npcfOTHzdMlc7/J2GiKIhJ8XUs0fLPSowHGQ7Wm4N22IE2vp8bfVkUCuxcFDXgnWhAG9X2e57L3Q==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "13.0.0-beta.4"
@@ -989,7 +989,7 @@
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.1.1"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.25"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.26"
     "@multiversx/sdk-web-wallet-provider" "3.2.1"
     "@reduxjs/toolkit" "1.8.2"
     bignumber.js "9.x"
@@ -1092,10 +1092,10 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@0.0.25":
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.25.tgz#5b469b4b719957621f38c03b4379296c2fdd15ef"
-  integrity sha512-ARAvQwMONb5035WnJsxiLepIwI8IVkbShFyQMtz0ghPt4aYnX9qaW6nBr+srxs9682yEj6cog/HySzTC+h6XJg==
+"@multiversx/sdk-web-wallet-cross-window-provider@0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.26.tgz#957ec9153154243e8f3e936ebc8e4c43e4a8f84b"
+  integrity sha512-ihmarUFc3ujjnAEqbThDM+Obft9u8tUEVuoua2LXiUqkkV7eTceY2nnSbEWrJaUQklfR6e2ZjGYIO0pm7EqV9Q==
   dependencies:
     "@multiversx/sdk-core" "12.18.0"
     "@types/jest" "^29.5.11"
