@@ -10,11 +10,13 @@ import {
   LedgerLoginButton,
   OperaWalletLoginButton,
   WalletConnectLoginButton,
-  WebWalletLoginButton,
-  XaliasLoginButton
+  WebWalletLoginButton as WebWalletUrlLoginButton,
+  XaliasLoginButton,
+  CrossWindowLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
+import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
 
 type CommonPropsType =
@@ -24,12 +26,23 @@ type CommonPropsType =
   | LedgerLoginButtonPropsType
   | WalletConnectLoginButtonPropsType;
 
-const commonProps: CommonPropsType = {
-  callbackRoute: RouteNamesEnum.dashboard,
-  nativeAuth
-};
+// choose how you want to configure connecting to the web wallet
+const USE_WEB_WALLET_CROSS_WINDOW = true;
+
+const WebWalletLoginButton = USE_WEB_WALLET_CROSS_WINDOW
+  ? CrossWindowLoginButton
+  : WebWalletUrlLoginButton;
 
 export const Unlock = () => {
+  const navigate = useNavigate();
+  const commonProps: CommonPropsType = {
+    callbackRoute: RouteNamesEnum.dashboard,
+    nativeAuth,
+    onLoginRedirect: () => {
+      navigate(RouteNamesEnum.dashboard);
+    }
+  };
+
   return (
     <AuthRedirectWrapper requireAuth={false}>
       <div className='flex justify-center items-center'>
