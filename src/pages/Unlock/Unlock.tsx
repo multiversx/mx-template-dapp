@@ -10,7 +10,7 @@ import {
   LedgerLoginButton,
   OperaWalletLoginButton,
   WalletConnectLoginButton,
-  WebWalletLoginButton,
+  WebWalletLoginButton as WebWalletUrlLoginButton,
   XaliasLoginButton,
   CrossWindowLoginButton
 } from 'components/sdkDappComponents';
@@ -25,6 +25,13 @@ type CommonPropsType =
   | WebWalletLoginButtonPropsType
   | LedgerLoginButtonPropsType
   | WalletConnectLoginButtonPropsType;
+
+// choose how you want to configure connecting to the web wallet
+const USE_WEB_WALLET_CROSS_WINDOW = true;
+
+const WebWalletLoginButton = USE_WEB_WALLET_CROSS_WINDOW
+  ? CrossWindowLoginButton
+  : WebWalletUrlLoginButton;
 
 export const Unlock = () => {
   const navigate = useNavigate();
@@ -71,11 +78,6 @@ export const Unlock = () => {
             <XaliasLoginButton
               loginButtonText='xAlias'
               data-testid='xAliasLoginBtn'
-              {...commonProps}
-            />
-            <CrossWindowLoginButton
-              loginButtonText='Wallet Cross-window'
-              data-testid='crossWindowLoginBtn'
               {...commonProps}
             />
           </div>
