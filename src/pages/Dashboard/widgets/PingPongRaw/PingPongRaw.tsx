@@ -6,16 +6,8 @@ import { Button } from 'components/Button';
 import { ContractAddress } from 'components/ContractAddress';
 import { Label } from 'components/Label';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
-import {
-  getCountdownSeconds,
-  sendTransactions,
-  setTimeRemaining
-} from 'helpers';
-import {
-  useGetAccount,
-  useGetPendingTransactions,
-  useSendPingPongTransaction
-} from 'hooks';
+import { getCountdownSeconds, setTimeRemaining } from 'helpers';
+import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
@@ -29,7 +21,6 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
       type: SessionEnum.rawPingPongSessionId
     });
   const pingAmount = useGetPingAmount();
-  const { address } = useGetAccount();
 
   const [stateTransactions, setStateTransactions] = useState<
     SignedTransactionType[] | null
