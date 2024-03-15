@@ -5,9 +5,15 @@ import { logout } from 'helpers';
 import { useGetIsLoggedIn } from 'hooks';
 import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
+import { useMatch } from 'react-router-dom';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
+  const isUnlockRoute = Boolean(useMatch(RouteNamesEnum.unlock));
+
+  const ConnectButton = isUnlockRoute ? null : (
+    <MxLink to={RouteNamesEnum.unlock}>Connect</MxLink>
+  );
 
   const handleLogout = () => {
     sessionStorage.clear();
@@ -38,7 +44,7 @@ export const Header = () => {
               Close
             </Button>
           ) : (
-            <MxLink to={RouteNamesEnum.unlock}>Connect</MxLink>
+            ConnectButton
           )}
         </div>
       </nav>
