@@ -62,26 +62,6 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
 
   const pongAllowed = secondsLeft === 0;
 
-  const sendToSelf = async () => {
-    const pingTransaction = {
-      value: '0',
-      receiver: address,
-      data: 'self',
-      gasLimit: 100000000
-    };
-
-    const { sessionId } = await sendTransactions({
-      transactions: pingTransaction,
-      transactionsDisplayInfo: {
-        processingMessage: 'Processing Ping transaction',
-        errorMessage: 'An error has occured during Ping',
-        successMessage: 'Ping transaction successful'
-      }
-    });
-
-    console.log(sessionId);
-  };
-
   useEffect(() => {
     getCountdownSeconds({ secondsLeft, setSecondsLeft });
   }, [hasPing]);
@@ -100,10 +80,6 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
         <div className='flex justify-start gap-2'>
-          <Button onClick={sendToSelf}>
-            <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
-            Send to self
-          </Button>
           <Button
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
