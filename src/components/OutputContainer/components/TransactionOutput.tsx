@@ -34,7 +34,7 @@ export const TransactionOutput = ({
           page={`/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
-          {transaction.hash}
+          {transaction.receiver}
         </ExplorerLink>
       </p>
 
