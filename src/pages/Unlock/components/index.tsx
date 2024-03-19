@@ -1,1 +1,1 @@
-export * from './LegacyWebWalletLoginWrapper';
+export * from './WebWalletLoginWrapper';
