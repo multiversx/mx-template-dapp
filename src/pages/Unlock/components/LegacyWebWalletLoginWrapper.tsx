@@ -6,7 +6,8 @@ export const LegacyWebWalletLoginWrapper = ({
   children,
   ...rest
 }: WebWalletLoginButtonPropsType & PropsWithChildren) => {
-  const ref = useRef<HTMLButtonElement>(null);
+  const dropdownRef = useRef<HTMLButtonElement>(null);
+  const anchorRef = useRef<HTMLAnchorElement>(null);
 
   const [onInitiateLogin] = useWebWalletLogin({
     ...rest
@@ -16,7 +17,10 @@ export const LegacyWebWalletLoginWrapper = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      const isOutside = [dropdownRef, anchorRef].every((ref) => {
+        return ref.current && !ref.current.contains(event.target as Node);
+      });
+      if (isOutside) {
         setShowOptions(false);
       }
     };
@@ -24,7 +28,7 @@ export const LegacyWebWalletLoginWrapper = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [ref]);
+  }, [dropdownRef, anchorRef]);
 
   const onDropdownClick = () => {
     setShowOptions((current) => !current);
@@ -49,7 +53,7 @@ export const LegacyWebWalletLoginWrapper = ({
           data-testid='legacyWebWalletLoginDropdownButton'
           className='flex-shrink-0 z-10 inline-flex items-center py-3.5 px-2 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-e-0 border-gray-300 dark:border-gray-700 dark:text-white hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800'
           type='button'
-          ref={ref}
+          ref={dropdownRef}
           onClick={onDropdownClick}
         >
           <svg
@@ -88,6 +92,7 @@ export const LegacyWebWalletLoginWrapper = ({
                 onClick={handleLegacyUrlLogin}
                 data-testid='legacyWebWalletLoginButton'
                 href='#'
+                ref={anchorRef}
                 className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
               >
                 Web Wallet URL login
