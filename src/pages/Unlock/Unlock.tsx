@@ -18,6 +18,7 @@ import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
+import { LegacyWebWalletLoginWrapper } from './components';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -70,16 +71,19 @@ export const Unlock = () => {
               loginButtonText='Opera Crypto Wallet - Beta'
               {...commonProps}
             />
-            <WebWalletLoginButton
-              loginButtonText='Web Wallet'
-              data-testid='webWalletLoginBtn'
-              {...commonProps}
-            />
+
             <XaliasLoginButton
               loginButtonText='xAlias'
               data-testid='xAliasLoginBtn'
               {...commonProps}
             />
+            <LegacyWebWalletLoginWrapper {...commonProps}>
+              <WebWalletLoginButton
+                loginButtonText='Web Wallet'
+                data-testid='webWalletLoginBtn'
+                {...commonProps}
+              />
+            </LegacyWebWalletLoginWrapper>
           </div>
         </div>
       </div>
