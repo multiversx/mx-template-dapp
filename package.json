@@ -34,7 +34,7 @@
     "test": "jest",
     "cy:run": "node scripts/cypress.ts",
     "wdio": "wdio run ./wdio.conf.ts",
-    "wdio-smoke": "wdio run wdio/wdio.conf.ts"
+    "wdio-smoke": "wdio run ./wdio/wdio.conf.ts"
   },
   "browserslist": [
     ">0.2%",
