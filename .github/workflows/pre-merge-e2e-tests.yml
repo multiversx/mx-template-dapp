@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: WDIO Tests
 on: push
   # pull_request:
   #   branches: [main]
@@ -22,7 +22,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Start WDIO
-        run: npm run wdio
+        run: npm run wdio-smoke
       - name: Uploading artifact
         uses: actions/upload-artifact@v2
         if: always()
