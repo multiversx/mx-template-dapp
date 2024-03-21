@@ -21,14 +21,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+            cmd: install   
       - name: Start WDIO
         run: npm run wdio-smoke
-      - name: Uploading artifact
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: cypress-execution-report
-          path: |
-            /home/runner/work/mx-template-dapp/mx-template-dapp/mochawesome-report/mochawesome.html
-            /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/screenshots
-            /home/runner/work/mx-template-dapp/mx-template-dapp/cypress/videos
+     
