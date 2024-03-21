@@ -10,7 +10,7 @@ import {
   TransactionIndexEnum,
   WalletAdressEnum
 } from '../../utils/enums.ts';
-import { pingPongHandler } from './actions.ts';
+import { pingPongHandler } from '../../utils/actions.ts';
 
 describe('Sign with Keystore', () => {
   beforeEach(async () => {
@@ -51,7 +51,7 @@ describe('Sign with Keystore', () => {
     await pingPongHandler(GlobalSelectorEnum.serviceType);
   });
 
-  it('should sign swap & lock tnsactions', async () => {
+  it('should sign swap & lock transactions', async () => {
     const loginData = {
       selector: GlobalSelectorEnum.keystoreBtn,
       file: GlobalDataEnum.keystoreFile,

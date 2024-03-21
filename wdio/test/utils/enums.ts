@@ -88,7 +88,8 @@ export enum GlobalSelectorEnum {
   serviceType = 'Service',
   signAndBatchType = 'sign-auto-send',
   controlledSendingType = 'send-transactions',
-  swapLockType = 'swap-lock'
+  swapLockType = 'swap-lock',
+  clearBtn = '[data-testid="closeTransactionSuccessBtn"]'
 }
 
 export enum WalletAdressEnum {

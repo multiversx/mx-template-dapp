@@ -15,8 +15,7 @@ export const config: Options.Testrunner = {
 
   specs: ['./test/specs/**/*.ts'],
   suites: {
-    smoke: ['./test/specs/PemScreen/PemSpec.e2e.ts'],
-    smoke1: []
+    smoke: ['']
   },
   // Patterns to exclude.
   exclude: [],
@@ -33,8 +32,8 @@ export const config: Options.Testrunner = {
         args: [
           '--disable-infobars',
           '--start-maximized',
-          '--no-sandbox'
-          // '--headless=new'
+          '--no-sandbox',
+          '--headless=new'
         ]
       },
       acceptInsecureCerts: true
@@ -44,8 +43,8 @@ export const config: Options.Testrunner = {
   logLevel: 'info',
   bail: 0,
   waitforTimeout: 10000,
-  // connectionRetryTimeout: 120000,
-  // connectionRetryCount: 5,
+  connectionRetryTimeout: 120000,
+  connectionRetryCount: 2,
   framework: 'mocha',
 
   reporters: ['spec'],

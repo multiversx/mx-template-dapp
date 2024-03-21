@@ -1,5 +1,14 @@
-import { GlobalDataEnum, GlobalSelectorEnum } from './enums.ts';
+import {
+  GlobalDataEnum,
+  GlobalSelectorEnum,
+  TransactionIndexEnum
+} from './enums.ts';
 import { Selector } from 'webdriverio';
+
+export async function confimPem(pemFile: string) {
+  await uploadFile(pemFile);
+  await $(GlobalSelectorEnum.accesWalletBtn).click();
+}
 
 export async function getSelector(selector: string) {
   const element = await $(`[data-testid="${selector}"]`);
@@ -30,11 +39,11 @@ export async function login(payload: {
   await browser.pause(1500);
   await browser.switchWindow(GlobalDataEnum.walletWindow);
   await $(payload.selector).click();
+  await browser.pause(1500);
   await uploadFile(payload.file);
   if (payload.selector === GlobalSelectorEnum.keystoreBtn) {
     await confirmPass();
     await wallet.click();
-
     await $(GlobalSelectorEnum.confirmBtn).click();
   } else {
     await $(GlobalSelectorEnum.accesWalletBtn).click();
@@ -104,6 +113,7 @@ export async function doubleProviderClick() {
 
 export async function validateTransaction(svgIndex: number) {
   const svgElement = await $$('svg[data-icon="arrow-up-right-from-square"]');
+  await browser.pause(8000);
   await svgElement[svgIndex].click();
   await browser.switchWindow(GlobalDataEnum.explorerWindow);
   const succesMsg = await $('span*=Succes');
@@ -126,8 +136,41 @@ export async function batchTransactions(transactionType: string) {
   await confirmPass();
   for (i; i < 5; i++) {
     await $(GlobalSelectorEnum.signBtn).click();
-    await browser.pause(500);
+    await browser.pause(1000);
   }
   await browser.pause(1500);
   await browser.switchWindow(GlobalDataEnum.daapWindow);
 }
+
+export const scTransaction = async (type: string) => {
+  const btn = await $(`[data-testid="${type}"]`);
+  await browser.pause(1500);
+  if (await btn.getAttribute('disabled')) {
+    return;
+  } else {
+    await browser.pause(1500);
+    await $(btn).click();
+    await browser.pause(3000);
+    await browser.switchWindow(GlobalDataEnum.walletWindow);
+    if (!(await $(GlobalSelectorEnum.accesPass).isDisplayed())) {
+      await confimPem(GlobalDataEnum.pemFile);
+      await $(GlobalSelectorEnum.accesWalletBtn).click();
+    }
+    await confirmPass();
+    await $(GlobalSelectorEnum.signBtn).click();
+    await browser.pause(1500);
+    await browser.switchWindow(GlobalDataEnum.daapWindow);
+    await validateToast(GlobalSelectorEnum.toastSelector);
+    await validateTransaction(TransactionIndexEnum.ping);
+  }
+};
+
+export const pingPongHandler = async (type: string) => {
+  const btn = await $(`[data-testid="btnPing${type}"]`);
+  await browser.pause(1500);
+  if (await btn.getAttribute('disabled')) {
+    await scTransaction(`btnPong${type}`);
+  } else {
+    await scTransaction(`btnPing${type}`);
+  }
+};

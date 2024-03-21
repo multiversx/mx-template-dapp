@@ -1,7 +1,7 @@
 name: Cypress Tests
-on:
-  pull_request:
-    branches: [main]
+on: push
+  # pull_request:
+  #   branches: [main]
 jobs:
   Slack-Notification:
     runs-on: ubuntu-latest
@@ -11,9 +11,9 @@ jobs:
         env:
           if: always()
           SLACK_ICON_EMOJI: ':robot_face:'
-          SLACK_USERNAME: Cypress Bot
+          SLACK_USERNAME: WDIO Bot
           SLACK_MESSAGE: E2E tests are now running. Stay tuned for updates!
-          SLACK_TITLE : 'Cypress'
+          SLACK_TITLE : 'WDIO Template RUN'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
   Cypress-Run:
     runs-on: ubuntu-latest
@@ -21,12 +21,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
-        with:
-          command: npm run cy:run
-
+      - name: Start WDIO
+        run: npm run wdio
       - name: Uploading artifact
         uses: actions/upload-artifact@v2
         if: always()
