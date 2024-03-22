@@ -30,4 +30,9 @@ jobs:
             cmd: install   
       - name: Start WDIO
         run: npm run wdio-smoke
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: logs
+          path: logs  
      
