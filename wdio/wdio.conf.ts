@@ -20,7 +20,7 @@ export const config: Options.Testrunner = {
   exclude: [],
 
   maxInstances: 5,
-  // specFileRetries: 1,
+  specFileRetries: 1,
   specFileRetriesDeferred: true,
 
   capabilities: [
