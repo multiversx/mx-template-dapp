@@ -33,7 +33,6 @@
     "copy:mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "test": "jest",
     "cy:run": "node scripts/cypress.ts",
-    "wdio": "wdio run ./wdio.conf.ts",
     "wdio-smoke": "wdio run ./wdio/wdio.conf.ts"
   },
   "browserslist": [
@@ -86,6 +85,7 @@
     "@wdio/local-runner": "^8.32.4",
     "@wdio/mocha-framework": "^8.32.4",
     "@wdio/spec-reporter": "^8.32.4",
+    "@wdio/cli": "^8.33.1",
     "ts-node": "10.9.2"
   },
   "resolutions": {
