@@ -39,14 +39,18 @@ export const config: Options.Testrunner = {
     }
   ],
 
-  logLevel: 'info',
+  logLevel: 'error',
   bail: 0,
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 2,
   framework: 'mocha',
+  groupLogsByTestSpec:true,
 
-  reporters: ['spec','concise'],
+  reporters: ['spec','concise', ['junit', {
+    outputDir: `./reports`
+}]],
+  
   mochaOpts: {
     ui: 'bdd',
     timeout: 120000
