@@ -1,5 +1,4 @@
 import type { Options } from '@wdio/types';
-import fetch from 'node-fetch';
 
 export const config: Options.Testrunner = {
   runner: 'local',
