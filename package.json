@@ -32,7 +32,6 @@
     "copy:testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "copy:mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "test": "jest",
-    "cy:run": "node scripts/cypress.ts",
     "wdio-smoke": "wdio run wdio/wdio.conf.ts",
     "smoke": "wdio run wdio/wdio.conf.ts --suite smoke"
 
@@ -56,8 +55,6 @@
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-react": "4.1.0",
     "autoprefixer": "10.4.16",
-    "cypress": "12.17.4",
-    "cypress-mochawesome-reporter": "3.7.0",
     "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-config-react": "1.1.7",
