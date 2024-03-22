@@ -32,7 +32,7 @@ export const config: Options.Testrunner = {
           '--disable-infobars',
           '--start-maximized',
           '--no-sandbox',
-          // '--headless=new'
+          '--headless=new'
         ]
       },
       acceptInsecureCerts: true

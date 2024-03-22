@@ -15,7 +15,7 @@ jobs:
           SLACK_MESSAGE: E2E tests are now running. Stay tuned for updates!
           SLACK_TITLE : 'WDIO Template RUN'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-  Cypress-Run:
+  E2E-RUN:
     runs-on: ubuntu-latest
     needs: Slack-Notification
     steps:
@@ -29,10 +29,11 @@ jobs:
         with:
             cmd: install   
       - name: Start WDIO
-        run: npm run wdio-smoke
-      - uses: actions/upload-artifact@v1
-        if: failure()
+        run: npm run smoke
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()    # run this step even if previous step failed
         with:
-          name: logs
-          path: logs  
-     
+          name: JEST Tests            # Name of the check run which will be created
+          path: reports/jest-*.xml    # Path to test results
+          reporter: concise 
