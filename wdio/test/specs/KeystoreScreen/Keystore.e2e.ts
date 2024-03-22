@@ -1,5 +1,7 @@
 import {
   batchTransactions,
+  checkOpenTabs,
+  initTransaction,
   login,
   validateToast,
   validateTransaction
@@ -88,5 +90,23 @@ describe('Sign with Keystore', () => {
     await validateToast(GlobalSelectorEnum.toastSelector);
     await browser.pause(4500);
     await validateTransaction(TransactionIndexEnum.signBatch);
+  });
+
+  it('should close the wallet',async () => {
+    const loginData = {
+      selector: GlobalSelectorEnum.keystoreBtn,
+      file: GlobalDataEnum.keystoreFile,
+      adress: WalletAdressEnum.adress3
+    };
+    await login(loginData);
+    await $(GlobalSelectorEnum.batchBtn).click();
+    await browser.pause(500)
+    await browser.switchWindow(GlobalDataEnum.walletWindow);
+    for(let i=0; i<3;i++) {
+      await $(GlobalSelectorEnum.accesPass).setValue(`invalid+${i}`);
+      await $(GlobalSelectorEnum.accesWalletBtn).click();
+      await browser.pause(2000)
+    }
+    await checkOpenTabs()
   });
 });

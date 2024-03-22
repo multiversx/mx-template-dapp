@@ -89,7 +89,8 @@ export enum GlobalSelectorEnum {
   signAndBatchType = 'sign-auto-send',
   controlledSendingType = 'send-transactions',
   swapLockType = 'swap-lock',
-  clearBtn = '[data-testid="closeTransactionSuccessBtn"]'
+  clearBtn = '[data-testid="closeTransactionSuccessBtn"]',
+  batchBtn ='[data-testid="sign-auto-send"]'
 }
 
 export enum WalletAdressEnum {

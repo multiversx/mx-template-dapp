@@ -15,13 +15,13 @@ export const config: Options.Testrunner = {
 
   specs: ['./test/specs/**/*.ts'],
   suites: {
-    smoke: ['./test/specs/KeystoreScreen/Keystore.e2e.ts']
+    smoke: ['./test/specs/PemScreen/PemSpec.e2e.ts']
   },
   // Patterns to exclude.
   exclude: [],
 
-  maxInstances: 1,
-  specFileRetries: 2,
+  maxInstances: 5,
+  // specFileRetries: 1,
   specFileRetriesDeferred: true,
 
   capabilities: [
@@ -32,7 +32,7 @@ export const config: Options.Testrunner = {
           '--disable-infobars',
           '--start-maximized',
           '--no-sandbox',
-          '--headless=new'
+          // '--headless=new'
         ]
       },
       acceptInsecureCerts: true
@@ -46,7 +46,7 @@ export const config: Options.Testrunner = {
   connectionRetryCount: 2,
   framework: 'mocha',
 
-  reporters: ['spec'],
+  reporters: ['spec','concise'],
   mochaOpts: {
     ui: 'bdd',
     timeout: 120000

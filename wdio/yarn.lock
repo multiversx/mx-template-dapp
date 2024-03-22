@@ -242,6 +242,16 @@
     pathe "^1.1.1"
     pretty-format "^29.7.0"
 
+"@wdio/concise-reporter@^8.32.4":
+  version "8.32.4"
+  resolved "https://registry.yarnpkg.com/@wdio/concise-reporter/-/concise-reporter-8.32.4.tgz#9c109427e932fc61b7215a39666a51e12d0f2dfd"
+  integrity sha512-u7PNyTkoEwwQPK5JQqQd9ghkV5DWmvAZhf6xZ+2in6eq7BqnDRU0k85CMOkM/FrDwxJ4cxJrr+lBsl1EhGMgxw==
+  dependencies:
+    "@wdio/reporter" "8.32.4"
+    "@wdio/types" "8.32.4"
+    chalk "^5.0.1"
+    pretty-ms "^7.0.1"
+
 "@wdio/config@8.34.0":
   version "8.34.0"
   resolved "https://registry.yarnpkg.com/@wdio/config/-/config-8.34.0.tgz#e4ee475ebed95a4d262b27204e2b854d6a508825"
@@ -687,7 +697,7 @@ chalk@^4.0.0, chalk@^4.1.0, chalk@^4.1.2:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^5.1.2:
+chalk@^5.0.1, chalk@^5.1.2:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.3.0.tgz#67c20a7ebef70e7f3970a01f90fa210cb6860385"
   integrity sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==
@@ -1920,7 +1930,7 @@ pretty-format@^29.7.0:
     ansi-styles "^5.0.0"
     react-is "^18.0.0"
 
-pretty-ms@^7.0.0:
+pretty-ms@^7.0.0, pretty-ms@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/pretty-ms/-/pretty-ms-7.0.1.tgz#7d903eaab281f7d8e03c66f867e239dc32fb73e8"
   integrity sha512-973driJZvxiGOQ5ONsFhOF/DtzPMOMtgC11kCpUrPGMTgqp2q/1gwzCquocrN33is0VZ5GFHXZYMM9l6h67v2Q==
@@ -2244,6 +2254,7 @@ string_decoder@~1.1.1:
     safe-buffer "~5.1.0"
 
 "strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+  name strip-ansi-cjs
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -2523,6 +2534,7 @@ workerpool@6.2.1:
   integrity sha512-ILEIE97kDZvF9Wb9f6h5aXK4swSlKGUcOEGiIYb2OOu/IrDU9iwj0fD//SsA6E5ibwJxpEvhullJY4Sl4GcpAw==
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
