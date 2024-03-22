@@ -30,10 +30,4 @@ jobs:
             cmd: install   
       - name: Start WDIO
         run: npm run smoke
-      - name: Test Report
-        uses: dorny/test-reporter@v1
-        if: success() || failure()    # run this step even if previous step failed
-        with:
-          name: JEST Tests            # Name of the check run which will be created
-          path: reports   
-          reporter: jest-junit 
+    
