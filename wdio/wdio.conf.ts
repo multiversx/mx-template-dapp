@@ -47,9 +47,7 @@ export const config: Options.Testrunner = {
   framework: 'mocha',
   groupLogsByTestSpec:true,
 
-  reporters: ['spec','concise', ['junit', {
-    outputDir: `./reports`
-}]],
+  reporters: ['spec','concise'],
   
   mochaOpts: {
     ui: 'bdd',
