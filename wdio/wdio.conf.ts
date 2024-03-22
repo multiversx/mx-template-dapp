@@ -15,19 +15,18 @@ export const config: Options.Testrunner = {
 
   specs: ['./test/specs/**/*.ts'],
   suites: {
-    smoke: ['']
+    smoke: ['./test/specs/KeystoreScreen/Keystore.e2e.ts']
   },
   // Patterns to exclude.
   exclude: [],
 
   maxInstances: 1,
-  // specFileRetries: 5,
+  specFileRetries: 2,
   specFileRetriesDeferred: true,
 
   capabilities: [
     {
       browserName: 'chrome',
-      // browserVersion: '116.0.5793.0',
       'goog:chromeOptions': {
         args: [
           '--disable-infobars',

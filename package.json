@@ -33,7 +33,9 @@
     "copy:mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "test": "jest",
     "cy:run": "node scripts/cypress.ts",
-    "wdio-smoke": "wdio run wdio/wdio.conf.ts"
+    "wdio-smoke": "wdio run wdio/wdio.conf.ts",
+    "smoke": "wdio run wdio/wdio.conf.ts --suite smoke"
+
   },
   "browserslist": [
     ">0.2%",

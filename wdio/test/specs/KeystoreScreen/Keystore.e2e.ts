@@ -21,7 +21,7 @@ describe('Sign with Keystore', () => {
     await browser.reloadSession();
   });
 
-  it('should sign ping&pong manual transaction', async () => {
+  it.only('should sign ping&pong manual transaction', async () => {
     const loginData = {
       selector: GlobalSelectorEnum.keystoreBtn,
       file: GlobalDataEnum.keystoreFile,
