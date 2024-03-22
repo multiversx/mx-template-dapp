@@ -20,7 +20,7 @@ export async function getSelector(selector: string) {
 
 export async function uploadFile(fileName: string) {
   const file = await $('input[type="file"]');
-  const filePath = `./test/utils/${fileName}`;
+  const filePath = `./wdio/test/utils/${fileName}`;
   const remoteFilePath = await browser.uploadFile(filePath);
 
   await browser.execute((el) => ((el as any).style.display = 'block'), file);
