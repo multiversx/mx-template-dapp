@@ -32,7 +32,9 @@
     "copy:testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "copy:mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "test": "jest",
-    "cy:run": "node scripts/cypress.ts"
+    "wdio-smoke": "wdio run wdio/wdio.conf.ts",
+    "smoke": "wdio run wdio/wdio.conf.ts --suite smoke"
+
   },
   "browserslist": [
     ">0.2%",
@@ -53,7 +55,6 @@
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-react": "4.1.0",
     "autoprefixer": "10.4.16",
-    "cypress": "12.17.4",
     "eslint": "8.50.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-config-react": "1.1.7",
@@ -69,6 +70,8 @@
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "jest-watch-typeahead": "2.2.2",
+    "mochawesome-merge": "4.3.0",
+    "mochawesome-report-generator": "6.2.0",
     "postcss": "8.4.30",
     "prettier": "3.0.3",
     "tailwindcss": "3.3.3",
@@ -78,9 +81,13 @@
     "vite-plugin-node-polyfills": "0.14.1",
     "vite-plugin-svgr": "4.0.0",
     "vite-tsconfig-paths": "4.2.1",
-    "cypress-mochawesome-reporter": "3.7.0",
-    "mochawesome-merge": "4.3.0",
-    "mochawesome-report-generator": "6.2.0"
+    "@wdio/local-runner": "^8.32.4",
+    "@wdio/mocha-framework": "^8.32.4",
+    "@wdio/spec-reporter": "^8.32.4",
+    "@wdio/cli": "^8.33.1",
+    "ts-node": "10.9.2",
+    "@wdio/concise-reporter": "8.32.4"
+
   },
   "resolutions": {
     "**/*/nth-check": "2.0.1"
