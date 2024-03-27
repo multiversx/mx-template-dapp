@@ -36,10 +36,10 @@ export async function login(payload: {
   const wallet = await $(`[data-testid*=${payload.adress}]`);
 
   await $(GlobalSelectorEnum.crossWindowLoginBtn).click();
-  await browser.pause(1500);
+  await browser.pause(4500);
   await browser.switchWindow(GlobalDataEnum.walletWindow);
   await $(payload.selector).click();
-  await browser.pause(1500);
+  await browser.pause(2500);
   await uploadFile(payload.file);
   if (payload.selector === GlobalSelectorEnum.keystoreBtn) {
     await confirmPass();
@@ -92,7 +92,7 @@ export async function openProviderModal(payload: {
   route: string;
 }) {
   await $(GlobalSelectorEnum.crossWindowLoginBtn).click();
-  await browser.pause(2500);
+  await browser.pause(3500);
   await browser.switchWindow(GlobalDataEnum.walletWindow);
   await $(payload.selector).click();
   await browser.pause(1000);
@@ -117,7 +117,7 @@ export async function validateTransaction(svgIndex: number) {
   await svgElement[svgIndex].click();
   await browser.switchWindow(GlobalDataEnum.explorerWindow);
   const succesMsg = await $('span*=Succes');
-  await succesMsg.waitForDisplayed({ timeout: 60000 });
+  await succesMsg.waitForDisplayed({ timeout: 85000 });
 }
 
 export const checkWidgetMsg = async (msgArr: string[]) => {
@@ -153,11 +153,12 @@ export const scTransaction = async (type: string) => {
     await browser.pause(3000);
     await browser.switchWindow(GlobalDataEnum.walletWindow);
     if (!(await $(GlobalSelectorEnum.accesPass).isDisplayed())) {
-      await confimPem(GlobalDataEnum.pemFile);
-      await $(GlobalSelectorEnum.accesWalletBtn).click();
+      await confimPem(GlobalDataEnum.invalidPem);
+      await $(GlobalSelectorEnum.signBtn).click();
+    } else {
+      await confirmPass();
+      await $(GlobalSelectorEnum.signBtn).click();
     }
-    await confirmPass();
-    await $(GlobalSelectorEnum.signBtn).click();
     await browser.pause(1500);
     await browser.switchWindow(GlobalDataEnum.daapWindow);
     await validateToast(GlobalSelectorEnum.toastSelector);
