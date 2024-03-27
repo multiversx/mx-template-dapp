@@ -23,7 +23,7 @@ export const config: Options.Testrunner = {
   exclude: [],
 
   maxInstances: 1,
-  // specFileRetries: 1,
+  specFileRetries: 1,
   specFileRetriesDeferred: true,
 
   capabilities: [
@@ -33,8 +33,8 @@ export const config: Options.Testrunner = {
         args: [
           '--disable-infobars',
           '--start-maximized',
-          '--no-sandbox'
-          // '--headless=new'
+          '--no-sandbox',
+          '--headless=new'
         ]
       },
       acceptInsecureCerts: true
