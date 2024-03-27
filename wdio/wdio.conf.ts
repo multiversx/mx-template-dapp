@@ -35,6 +35,9 @@ export const config: Options.Testrunner = {
         ]
       },
       acceptInsecureCerts: true
+    },
+    {
+      browserName: 'safari'
     }
   ],
 
@@ -44,10 +47,8 @@ export const config: Options.Testrunner = {
   connectionRetryTimeout: 120000,
   connectionRetryCount: 2,
   framework: 'mocha',
-  groupLogsByTestSpec:true,
-
-  reporters: ['spec','concise'],
-  
+  groupLogsByTestSpec: true,
+  reporters: ['spec', 'concise'],
   mochaOpts: {
     ui: 'bdd',
     timeout: 120000

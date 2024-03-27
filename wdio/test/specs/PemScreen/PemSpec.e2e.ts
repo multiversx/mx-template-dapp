@@ -51,7 +51,7 @@ describe('Sign transactions with PEM', () => {
     await cancelTrasaction();
   });
 
-  it.only('should return error for invalid confirmation PEM', async () => {
+  it('should return error for invalid confirmation PEM', async () => {
     await notConfirmPem();
   });
 
