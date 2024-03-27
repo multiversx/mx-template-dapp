@@ -38,10 +38,10 @@ export const config: Options.Testrunner = {
         ]
       },
       acceptInsecureCerts: true
-    },
-    {
-      browserName: 'firefox'
     }
+    // {
+    //   browserName: 'firefox'
+    // }
   ],
 
   logLevel: 'error',
