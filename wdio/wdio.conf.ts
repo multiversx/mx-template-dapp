@@ -34,20 +34,12 @@ export const config: Options.Testrunner = {
           '--headless=new'
         ]
       },
-
       acceptInsecureCerts: true
     },
     {
-      browserName: 'safari',
-      args: [
-        '--disable-infobars',
-        '--start-maximized',
-        '--no-sandbox',
-        '--headless=new'
-      ]
+      browserName: 'safari'
     }
   ],
-
   logLevel: 'error',
   bail: 0,
   waitforTimeout: 10000,
@@ -55,9 +47,7 @@ export const config: Options.Testrunner = {
   connectionRetryCount: 2,
   framework: 'mocha',
   groupLogsByTestSpec: true,
-
   reporters: ['spec', 'concise'],
-
   mochaOpts: {
     ui: 'bdd',
     timeout: 120000
