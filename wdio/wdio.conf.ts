@@ -14,12 +14,15 @@ export const config: Options.Testrunner = {
 
   specs: ['./test/specs/**/*.ts'],
   suites: {
-    smoke: ['./test/specs/PemScreen/PemSpec.e2e.ts']
+    smoke: [
+      './test/specs/PemScreen/PemSpec.e2e.ts',
+      './test/specs/KeystoreScreen/Keystore.e2e.ts'
+    ]
   },
   // Patterns to exclude.
   exclude: [],
 
-  maxInstances: 5,
+  maxInstances: 1,
   specFileRetries: 1,
   specFileRetriesDeferred: true,
 
@@ -37,7 +40,7 @@ export const config: Options.Testrunner = {
       acceptInsecureCerts: true
     },
     {
-      browserName: 'safari'
+      browserName: 'firefox'
     }
   ],
 

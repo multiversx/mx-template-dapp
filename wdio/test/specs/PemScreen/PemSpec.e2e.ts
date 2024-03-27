@@ -40,7 +40,6 @@ describe('Sign transactions with PEM', () => {
 
   it('should close the wallet window', async () => {
     await closeWalletTab();
-    await browser.pause(60000);
   });
 
   it('should close the wallet window after refresh', async () => {

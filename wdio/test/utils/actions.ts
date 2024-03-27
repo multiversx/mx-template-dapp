@@ -154,10 +154,11 @@ export const scTransaction = async (type: string) => {
     await browser.switchWindow(GlobalDataEnum.walletWindow);
     if (!(await $(GlobalSelectorEnum.accesPass).isDisplayed())) {
       await confimPem(GlobalDataEnum.pemFile);
-      await $(GlobalSelectorEnum.accesWalletBtn).click();
+      await $(GlobalSelectorEnum.signBtn).click();
+    } else {
+      await confirmPass();
+      await $(GlobalSelectorEnum.signBtn).click();
     }
-    await confirmPass();
-    await $(GlobalSelectorEnum.signBtn).click();
     await browser.pause(1500);
     await browser.switchWindow(GlobalDataEnum.daapWindow);
     await validateToast(GlobalSelectorEnum.toastSelector);
