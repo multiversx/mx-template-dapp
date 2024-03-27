@@ -40,6 +40,7 @@ export const config: Options.Testrunner = {
       browserName: 'safari'
     }
   ],
+
   logLevel: 'error',
   bail: 0,
   waitforTimeout: 10000,
