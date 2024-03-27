@@ -22,7 +22,7 @@ export const config: Options.Testrunner = {
   // Patterns to exclude.
   exclude: [],
 
-  maxInstances: 1,
+  maxInstances: 4,
   specFileRetries: 1,
   specFileRetriesDeferred: true,
 
