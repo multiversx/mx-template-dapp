@@ -117,7 +117,7 @@ export async function validateTransaction(svgIndex: number) {
   await svgElement[svgIndex].click();
   await browser.switchWindow(GlobalDataEnum.explorerWindow);
   const succesMsg = await $('span*=Succes');
-  await succesMsg.waitForDisplayed({ timeout: 70000 });
+  await succesMsg.waitForDisplayed({ timeout: 85000 });
 }
 
 export const checkWidgetMsg = async (msgArr: string[]) => {

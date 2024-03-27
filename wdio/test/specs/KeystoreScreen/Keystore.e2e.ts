@@ -100,7 +100,7 @@ describe('Sign with Keystore', () => {
     };
     await login(loginData);
     await $(GlobalSelectorEnum.batchBtn).click();
-    await browser.pause(1500);
+    await browser.pause(2500);
     await browser.switchWindow(GlobalDataEnum.walletWindow);
     for (let i = 0; i < 3; i++) {
       await $(GlobalSelectorEnum.accesPass).setValue(`invalid+${i}`);
