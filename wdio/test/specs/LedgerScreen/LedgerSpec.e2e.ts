@@ -17,7 +17,6 @@ describe('Check Ledger Modal', () => {
       route: RoutesEnum.ledger
     };
     await openProviderModal(providerData);
-    await browser.pause(5000);
   });
   it('should properly open the ledger modal from dApp tab', async () => {
     await $(GlobalSelectorEnum.ledgerBtn).click();

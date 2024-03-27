@@ -66,7 +66,7 @@ export async function checkUrl(path: string) {
 export async function initTransaction() {
   const element = await $(`[data-testid*=${GlobalSelectorEnum.abiType}]`);
   await element.click();
-  await browser.pause(4000);
+  await browser.pause(6000);
   await browser.switchWindow(GlobalDataEnum.walletWindow);
   await browser.pause(1500);
 }
@@ -92,7 +92,7 @@ export async function openProviderModal(payload: {
   route: string;
 }) {
   await $(GlobalSelectorEnum.crossWindowLoginBtn).click();
-  await browser.pause(2500);
+  await browser.pause(3500);
   await browser.switchWindow(GlobalDataEnum.walletWindow);
   await $(payload.selector).click();
   await browser.pause(1000);
