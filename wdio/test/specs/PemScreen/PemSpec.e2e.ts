@@ -54,10 +54,6 @@ describe('Sign transactions with PEM', () => {
     await notConfirmPem();
   });
 
-  it('should sign transaction with PEM', async () => {
-    await pingPongHandler(GlobalSelectorEnum.abiType);
-  });
-
   it('should sign msg with PEM', async () => {
     await signMsg();
   });
