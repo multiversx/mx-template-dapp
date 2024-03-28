@@ -1,14 +1,13 @@
 import { Transaction, TransactionsDisplayInfoType } from 'types';
 
 import { refreshAccount, sendTransactions } from './sdkDappHelpers';
+import { isSafari } from 'localConstants';
 
 type SignAndSendTransactionsProps = {
   transactions: Transaction[];
   callbackRoute: string;
   transactionsDisplayInfo: TransactionsDisplayInfoType;
 };
-
-const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 export const signAndSendTransactions = async ({
   transactions,
