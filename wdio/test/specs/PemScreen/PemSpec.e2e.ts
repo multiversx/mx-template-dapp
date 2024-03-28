@@ -40,7 +40,6 @@ describe('Sign transactions with PEM', () => {
 
   it('should close the wallet window', async () => {
     await closeWalletTab();
-    await browser.pause(60000);
   });
 
   it('should close the wallet window after refresh', async () => {
@@ -53,10 +52,6 @@ describe('Sign transactions with PEM', () => {
 
   it('should return error for invalid confirmation PEM', async () => {
     await notConfirmPem();
-  });
-
-  it('should sign transaction with PEM', async () => {
-    await pingPongHandler(GlobalSelectorEnum.abiType);
   });
 
   it('should sign msg with PEM', async () => {

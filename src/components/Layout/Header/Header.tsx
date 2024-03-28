@@ -7,6 +7,24 @@ import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
 import { useMatch } from 'react-router-dom';
 
+const callbackUrl = `${window.location.origin}/unlock`;
+const onRedirect = undefined; // use this to redirect with useNavigate to a specific page after logout
+const shouldAttemptReLogin = false; // use for special cases where you want to re-login after logout
+const options = {
+  /*
+   * @param {boolean} [shouldBroadcastLogoutAcrossTabs=true]
+   * @description If your dApp supports multiple accounts on multiple tabs,
+   * this param will broadcast the logout event across all tabs.
+   */
+  shouldBroadcastLogoutAcrossTabs: true,
+  /*
+   * @param {boolean} [hasConsentPopup=false]
+   * @description Set it to true if you want to perform async calls before logging out on Safari.
+   * It will open a consent popup for the user to confirm the action before leaving the page.
+   */
+  hasConsentPopup: false
+};
+
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
   const isUnlockRoute = Boolean(useMatch(RouteNamesEnum.unlock));
@@ -17,7 +35,15 @@ export const Header = () => {
 
   const handleLogout = () => {
     sessionStorage.clear();
-    logout(`${window.location.origin}/unlock`, undefined, false);
+    logout(
+      callbackUrl,
+      /*
+       * following are optional params. Feel free to remove them in your implementation
+       */
+      onRedirect,
+      shouldAttemptReLogin,
+      options
+    );
   };
 
   return (

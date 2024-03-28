@@ -92,7 +92,7 @@ describe('Sign with Keystore', () => {
     await validateTransaction(TransactionIndexEnum.signBatch);
   });
 
-  it('should close the wallet',async () => {
+  it('should close the wallet', async () => {
     const loginData = {
       selector: GlobalSelectorEnum.keystoreBtn,
       file: GlobalDataEnum.keystoreFile,
@@ -100,13 +100,23 @@ describe('Sign with Keystore', () => {
     };
     await login(loginData);
     await $(GlobalSelectorEnum.batchBtn).click();
-    await browser.pause(500)
+    await browser.pause(2500);
     await browser.switchWindow(GlobalDataEnum.walletWindow);
-    for(let i=0; i<3;i++) {
+    for (let i = 0; i < 3; i++) {
       await $(GlobalSelectorEnum.accesPass).setValue(`invalid+${i}`);
       await $(GlobalSelectorEnum.accesWalletBtn).click();
-      await browser.pause(2000)
+      await browser.pause(2000);
     }
-    await checkOpenTabs()
+    await checkOpenTabs();
+  });
+
+  it('should sign transaction with PEM', async () => {
+    const loginData = {
+      selector: GlobalSelectorEnum.pemBtn,
+      file: GlobalDataEnum.invalidPem,
+      adress: WalletAdressEnum.adress3
+    };
+    await login(loginData);
+    await pingPongHandler(GlobalSelectorEnum.abiType);
   });
 });
