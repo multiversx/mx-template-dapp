@@ -15,7 +15,7 @@ export const config: Options.Testrunner = {
   specs: ['./test/specs/**/*.ts'],
   suites: {
     smoke: [
-      // './test/specs/PemScreen/PemSpec.e2e.ts'
+      './test/specs/PemScreen/PemSpec.e2e.ts',
       './test/specs/KeystoreScreen/Keystore.e2e.ts'
     ]
   },
@@ -33,15 +33,12 @@ export const config: Options.Testrunner = {
         args: [
           '--disable-infobars',
           '--start-maximized',
-          '--no-sandbox'
-          // '--headless=new'
+          '--no-sandbox',
+          '--headless=new'
         ]
       },
       acceptInsecureCerts: true
     }
-    // {
-    //   browserName: 'firefox'
-    // }
   ],
 
   logLevel: 'error',
