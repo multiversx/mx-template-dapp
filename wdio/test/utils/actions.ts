@@ -22,7 +22,7 @@ export async function uploadFile(fileName: string) {
   const file = await $('input[type="file"]');
   const filePath = `./wdio/test/utils/${fileName}`;
   const remoteFilePath = await browser.uploadFile(filePath);
-
+  await browser.pause(1500);
   await browser.execute((el) => ((el as any).style.display = 'block'), file);
   file.waitForDisplayed();
   await file.setValue(remoteFilePath);
