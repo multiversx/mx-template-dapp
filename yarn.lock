@@ -1058,14 +1058,13 @@
     json-bigint "1.0.0"
     keccak "3.0.2"
 
-"@multiversx/sdk-dapp@2.29.0-beta.23":
-  version "2.29.0-beta.23"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.29.0-beta.23.tgz#f9be4890562abb356387e94ec0c177955ed6dd44"
-  integrity sha512-C6EEX27MCGYUrSXZBGWvDAKJ8sTYzhXjDi2PcwQSUJ2IGbVSzgwE6jqzXpHTT1LcYq22CIC2Uc4woJ3l5dcdBQ==
+"@multiversx/sdk-dapp@2.29.2":
+  version "2.29.2"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.29.2.tgz#617bc681b7e7b719ab03440a4f451fe258f47c7a"
+  integrity sha512-unZ1Q5uJ9tXWeTf51E5rxXbgEb9tQQSyk93W4z8H5dMwDO7v5Tmilux24tNtPYL9HeW8hCNJebIeAl7a8pK0BA==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@metamask/providers" "16.0.0"
-    "@multiversx/sdk-core" "13.0.0-beta.9"
     "@multiversx/sdk-extension-provider" "3.0.0"
     "@multiversx/sdk-hw-provider" "6.4.0"
     "@multiversx/sdk-metamask-provider" "0.0.5"
@@ -1073,7 +1072,7 @@
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.1.1"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.31"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "0.0.33"
     "@multiversx/sdk-web-wallet-provider" "3.2.1"
     "@reduxjs/toolkit" "1.8.2"
     bignumber.js "9.x"
@@ -1185,12 +1184,11 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@0.0.31":
-  version "0.0.31"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.31.tgz#653a90f8f6f3b25fa05c2ab96ed3d34880b1f1f7"
-  integrity sha512-Bxyp9yxd6BWnl6uaJ/kd60T0tWT22X9PfWydhSX6fbkFN8RRGVcnG0QU6RPENp6oi1jqIjd8hOSS5UAvE5oXlA==
+"@multiversx/sdk-web-wallet-cross-window-provider@0.0.33":
+  version "0.0.33"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.0.33.tgz#798fd76050b24fd1ec4c4788da83667420e9f114"
+  integrity sha512-l2rMzcYji8abySdrrIFkTOPsOYw2UvmlHnJfbU+PpKcwmF0vkwSUIS+XP8FqF00kwDyH2oGHGqZ7aoZRX6wSVw==
   dependencies:
-    "@multiversx/sdk-core" "13.0.0-beta.9"
     "@types/jest" "^29.5.11"
     "@types/qs" "6.9.10"
     qs "6.11.2"
