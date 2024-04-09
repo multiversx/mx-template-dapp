@@ -19,6 +19,7 @@ export async function getSelector(selector: string) {
 }
 
 export async function uploadFile(fileName: string) {
+  await browser.pause(1000);
   const file = await $('input[type="file"]');
   const filePath = `./wdio/test/utils/${fileName}`;
   const remoteFilePath = await browser.uploadFile(filePath);
@@ -39,7 +40,7 @@ export async function login(payload: {
   await browser.pause(4500);
   await browser.switchWindow(GlobalDataEnum.walletWindow);
   await $(payload.selector).click();
-  await browser.pause(2500);
+  await browser.pause(3500);
   await uploadFile(payload.file);
   if (payload.selector === GlobalSelectorEnum.keystoreBtn) {
     await confirmPass();
