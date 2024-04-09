@@ -53,19 +53,6 @@ describe('Sign with Keystore', () => {
     await pingPongHandler(GlobalSelectorEnum.serviceType);
   });
 
-  it('should sign swap & lock transactions', async () => {
-    const loginData = {
-      selector: GlobalSelectorEnum.keystoreBtn,
-      file: GlobalDataEnum.keystoreFile,
-      adress: WalletAdressEnum.adress3
-    };
-    await login(loginData);
-    await batchTransactions(GlobalSelectorEnum.swapLockType);
-    await validateToast(GlobalSelectorEnum.toastSelector);
-    await browser.pause(4500);
-    await validateTransaction(TransactionIndexEnum.swapLock);
-  });
-
   it('should sign sign & batch ', async () => {
     const loginData = {
       selector: GlobalSelectorEnum.keystoreBtn,
@@ -118,5 +105,25 @@ describe('Sign with Keystore', () => {
     };
     await login(loginData);
     await pingPongHandler(GlobalSelectorEnum.abiType);
+  });
+});
+
+describe('batch transactions', () => {
+  beforeEach(async () => {
+    await browser.url('https://integration.template-dapp.multiversx.com/');
+    await $(GlobalSelectorEnum.connectBtn).click();
+  });
+
+  it('should sign swap & lock transactions', async () => {
+    const loginData = {
+      selector: GlobalSelectorEnum.keystoreBtn,
+      file: GlobalDataEnum.keystoreFile,
+      adress: WalletAdressEnum.adress3
+    };
+    await login(loginData);
+    await batchTransactions(GlobalSelectorEnum.swapLockType);
+    await validateToast(GlobalSelectorEnum.toastSelector);
+    await browser.pause(4500);
+    await validateTransaction(TransactionIndexEnum.swapLock);
   });
 });
