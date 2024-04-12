@@ -1041,10 +1041,10 @@
     json-bigint "1.0.0"
     keccak "3.0.2"
 
-"@multiversx/sdk-dapp@2.30.0":
-  version "2.30.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.30.0.tgz#2ee65bd49e758aa7c9f55bb8825dc742301dcc8a"
-  integrity sha512-53DXfTArRV/ypt2LUHg22cn6tun8HUBjCXi54eVKQq/zvd1I8m5YcaNs4CICq71RSO4M+NhfwewPaMhiy0xQrw==
+"@multiversx/sdk-dapp@2.30.2":
+  version "2.30.2"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.30.2.tgz#0cf820cc2ad844ff21d06a74ba1918c447d41b6e"
+  integrity sha512-8REogBAt7YPnEzkCFo3Z7SkG4MhVCmJMdGUBje2uKGoZjZDMfIbf7IC7rz5a2OhoKSsV11ePD3R16hFhLfdgZA==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@metamask/providers" "16.0.0"
