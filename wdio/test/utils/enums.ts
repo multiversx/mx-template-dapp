@@ -16,7 +16,7 @@ export enum GlobalDataEnum {
   errorExplainerMsg = 'Could not download git repository.',
   invalidGitUrl = 'https://github.com/multiversx/mx-template-dapp',
   abiFile = 'abi.json',
-  pemFile = 'pem.pem',
+  pemFile = 'wdioPem.pem',
   invalidPem = 'invalidPem.pem',
   keystoreFile = 'keystore.json',
   scAdress = 'erd1qqqqqqqqqqqqqpgqk4tchxyrzt5pzunl6qhcnl705yrnplms0n4sa52jkw',
@@ -90,7 +90,7 @@ export enum GlobalSelectorEnum {
   controlledSendingType = 'send-transactions',
   swapLockType = 'swap-lock',
   clearBtn = '[data-testid="closeTransactionSuccessBtn"]',
-  batchBtn ='[data-testid="sign-auto-send"]'
+  batchBtn = '[data-testid="sign-auto-send"]'
 }
 
 export enum WalletAdressEnum {
