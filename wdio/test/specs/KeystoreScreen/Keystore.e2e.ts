@@ -100,7 +100,7 @@ describe('Sign with Keystore', () => {
   it('should sign transaction with PEM', async () => {
     const loginData = {
       selector: GlobalSelectorEnum.pemBtn,
-      file: GlobalDataEnum.invalidPem,
+      file: GlobalDataEnum.pemFile,
       adress: WalletAdressEnum.adress3
     };
     await login(loginData);

@@ -154,7 +154,7 @@ export const scTransaction = async (type: string) => {
     await browser.pause(3000);
     await browser.switchWindow(GlobalDataEnum.walletWindow);
     if (!(await $(GlobalSelectorEnum.accesPass).isDisplayed())) {
-      await confimPem(GlobalDataEnum.invalidPem);
+      await confimPem(GlobalDataEnum.pemFile);
       await $(GlobalSelectorEnum.signBtn).click();
     } else {
       await confirmPass();
