@@ -176,3 +176,9 @@ export const pingPongHandler = async (type: string) => {
     await scTransaction(`btnPing${type}`);
   }
 };
+
+export const accesDaap = async () => {
+  await browser.reloadSession();
+  await browser.url('https://integration.template-dapp.multiversx.com/');
+  await $(GlobalSelectorEnum.connectBtn).click();
+};
