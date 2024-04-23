@@ -40,7 +40,7 @@ export async function login(payload: {
   await browser.pause(4500);
   await browser.switchWindow(GlobalDataEnum.walletWindow);
   await $(payload.selector).click();
-  await browser.pause(3500);
+  await browser.pause(3600);
   await uploadFile(payload.file);
   if (payload.selector === GlobalSelectorEnum.keystoreBtn) {
     await confirmPass();
