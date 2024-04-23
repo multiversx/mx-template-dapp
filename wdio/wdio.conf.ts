@@ -38,6 +38,9 @@ export const config: Options.Testrunner = {
         ]
       },
       acceptInsecureCerts: true
+    },
+    {
+      browserName: 'safari'
     }
   ],
 
