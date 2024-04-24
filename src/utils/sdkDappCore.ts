@@ -6,4 +6,4 @@ export { SmartContract } from '@multiversx/sdk-core/out/smartcontracts/smartCont
 export { AbiRegistry } from '@multiversx/sdk-core/out/smartcontracts/typesystem/abiRegistry';
 export { SignableMessage } from '@multiversx/sdk-core/out/signableMessage';
 export { AddressValue } from '@multiversx/sdk-core/out/smartcontracts/typesystem/address';
-export { TokenTransfer } from '@multiversx/sdk-core/out/tokenTransfer';
+export { TokenTransfer } from '@multiversx/sdk-core/out/tokens';
