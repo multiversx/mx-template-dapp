@@ -1,7 +1,6 @@
 import {
   batchTransactions,
   checkOpenTabs,
-  initTransaction,
   login,
   validateToast,
   validateTransaction
