@@ -3,26 +3,25 @@ import {
   GlobalSelectorEnum,
   WalletAdressEnum
 } from '../../utils/enums.ts';
-import { login, pingPongHandler } from '../../utils/actions.ts';
+import { accesDaap, login } from '../../utils/actions.ts';
 import {
   closeTransaction,
   closeTemplateModal,
   closeWalletTab,
   reloadWalletWindow,
   cancelTrasaction,
-  notConfirmPem,
-  signMsg
+  signMsg,
+  notConfirmPass
 } from './actions.ts';
 
-describe('Sign transactions with PEM', () => {
+describe('Negative tests', () => {
   beforeEach(async () => {
     const loginData = {
-      selector: GlobalSelectorEnum.pemBtn,
-      file: GlobalDataEnum.pemFile,
-      adress: WalletAdressEnum.adress1
+      selector: GlobalSelectorEnum.keystoreBtn,
+      file: GlobalDataEnum.keystoreFile,
+      adress: WalletAdressEnum.adress4
     };
-    await browser.url('https://integration.template-dapp.multiversx.com/');
-    await $(GlobalSelectorEnum.connectBtn).click();
+    await accesDaap();
     await login(loginData);
   });
 
@@ -50,11 +49,11 @@ describe('Sign transactions with PEM', () => {
     await cancelTrasaction();
   });
 
-  it('should return error for invalid confirmation PEM', async () => {
-    await notConfirmPem();
+  it('should close window for 3 wrong passwords', async () => {
+    await notConfirmPass();
   });
 
-  it('should sign msg with PEM', async () => {
+  it('should sign msg', async () => {
     await signMsg();
   });
 });

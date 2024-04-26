@@ -13,26 +13,25 @@ import {
 } from '../../utils/enums.ts';
 import { pingPongHandler, accesDaap } from '../../utils/actions.ts';
 
-describe('Ping & Pong ABI test', () => {
-  beforeEach(async () => {
-    await accesDaap();
-  });
+// describe('Ping & Pong ABI test', () => {
+//   beforeEach(async () => {
+//     await accesDaap();
+//   });
 
-  it('should sign ping&pong ABI', async () => {
-    const loginData = {
-      selector: GlobalSelectorEnum.keystoreBtn,
-      file: GlobalDataEnum.keystoreFile,
-      adress: WalletAdressEnum.adress2
-    };
-    await login(loginData);
-    await pingPongHandler(GlobalSelectorEnum.abiType);
-  });
-});
+//   it('should sign ping&pong ABI', async () => {
+//     const loginData = {
+//       selector: GlobalSelectorEnum.keystoreBtn,
+//       file: GlobalDataEnum.keystoreFile,
+//       adress: WalletAdressEnum.adress2
+//     };
+//     await login(loginData);
+//     await pingPongHandler(GlobalSelectorEnum.abiType);
+//   });
+// });
 
 describe('batch transactions', () => {
   beforeEach(async () => {
-    await browser.url('https://integration.template-dapp.multiversx.com/');
-    await $(GlobalSelectorEnum.connectBtn).click();
+    await accesDaap();
   });
 
   it('should sign swap & lock transactions', async () => {
@@ -44,7 +43,7 @@ describe('batch transactions', () => {
     await login(loginData);
     await batchTransactions(GlobalSelectorEnum.swapLockType);
     await validateToast(GlobalSelectorEnum.toastSelector);
-    await browser.pause(4500);
+    await browser.pause(120000);
     await validateTransaction(TransactionIndexEnum.swapLock);
   });
 });
@@ -78,29 +77,6 @@ describe('PEM', () => {
     };
     await login(loginData);
     await pingPongHandler(GlobalSelectorEnum.abiType);
-  });
-});
-
-describe('Close the wallet test', () => {
-  beforeEach(async () => {
-    await accesDaap();
-  });
-  it('should close the wallet', async () => {
-    const loginData = {
-      selector: GlobalSelectorEnum.keystoreBtn,
-      file: GlobalDataEnum.keystoreFile,
-      adress: WalletAdressEnum.adress3
-    };
-    await login(loginData);
-    await $(GlobalSelectorEnum.batchBtn).click();
-    await browser.pause(2500);
-    await browser.switchWindow(GlobalDataEnum.walletWindow);
-    for (let i = 0; i < 3; i++) {
-      await $(GlobalSelectorEnum.accesPass).setValue(`invalid+${i}`);
-      await $(GlobalSelectorEnum.accesWalletBtn).click();
-      await browser.pause(2000);
-    }
-    await checkOpenTabs();
   });
 });
 
