@@ -13,21 +13,21 @@ import {
 } from '../../utils/enums.ts';
 import { pingPongHandler, accesDaap } from '../../utils/actions.ts';
 
-// describe('Ping & Pong ABI test', () => {
-//   beforeEach(async () => {
-//     await accesDaap();
-//   });
+describe('Ping & Pong ABI test', () => {
+  beforeEach(async () => {
+    await accesDaap();
+  });
 
-//   it('should sign ping&pong ABI', async () => {
-//     const loginData = {
-//       selector: GlobalSelectorEnum.keystoreBtn,
-//       file: GlobalDataEnum.keystoreFile,
-//       adress: WalletAdressEnum.adress2
-//     };
-//     await login(loginData);
-//     await pingPongHandler(GlobalSelectorEnum.abiType);
-//   });
-// });
+  it('should sign ping&pong ABI', async () => {
+    const loginData = {
+      selector: GlobalSelectorEnum.keystoreBtn,
+      file: GlobalDataEnum.keystoreFile,
+      adress: WalletAdressEnum.adress2
+    };
+    await login(loginData);
+    await pingPongHandler(GlobalSelectorEnum.abiType);
+  });
+});
 
 describe('batch transactions', () => {
   beforeEach(async () => {
