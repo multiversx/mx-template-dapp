@@ -3,22 +3,23 @@ import {
   checkUrl,
   initTransaction,
   uploadFile,
-  confimPem
+  confimPem,
+  confirmPass
 } from '../../utils/actions.ts';
 import { GlobalDataEnum, GlobalSelectorEnum } from '../../utils/enums.ts';
 
 export async function closeTransaction() {
   const transactionCanceledModal = 'body*=Transaction canceled';
   await initTransaction();
-  const closeSelectors = await $$(GlobalSelectorEnum.modalCloseBtn);
-  await $(closeSelectors[1]).click();
+  await browser.pause(3000);
+  const closeSelectors = await $(GlobalSelectorEnum.keystoreCloseModalBtn);
+  await $(closeSelectors).click();
   const allHandles = await browser.getWindowHandles();
   expect(allHandles.length).toEqual(1);
   await browser.switchWindow(GlobalDataEnum.daapWindow);
   await expect($(transactionCanceledModal)).toBeDisplayed();
   await initTransaction();
-  await uploadFile(GlobalDataEnum.pemFile);
-  await $(GlobalSelectorEnum.accesWalletBtn).click();
+  await confirmPass();
   await expect($(GlobalSelectorEnum.signBtn)).toBeDisplayed();
 }
 
@@ -58,16 +59,19 @@ export async function reloadWalletWindow() {
 
 export async function cancelTrasaction() {
   await initTransaction();
-  await uploadFile(GlobalDataEnum.pemFile);
-  await $(GlobalSelectorEnum.accesWalletBtn).click();
+  await confirmPass();
   await $(GlobalSelectorEnum.closeBtn).click();
   await checkOpenTabs();
 }
 
-export async function notConfirmPem() {
+export async function notConfirmPass() {
   await initTransaction();
-  await uploadFile(GlobalDataEnum.invalidPem);
-  await expect($(GlobalSelectorEnum.errorMsg)).toBeDisplayed();
+  for (let i = 0; i < 3; i++) {
+    await $(GlobalSelectorEnum.accesPass).setValue('test');
+    await $(GlobalSelectorEnum.accesWalletBtn).click();
+  }
+  await browser.pause(1000);
+  await checkOpenTabs();
 }
 
 export async function signMsg() {
@@ -75,7 +79,7 @@ export async function signMsg() {
   await $(GlobalSelectorEnum.signMsgBtn).click();
   await browser.pause(1000);
   await browser.switchWindow(GlobalDataEnum.walletWindow);
-  await confimPem(GlobalDataEnum.pemFile);
+  await confirmPass();
   await $(GlobalSelectorEnum.signMsgWalletBtn).click();
   await browser.pause(1000);
   await browser.switchWindow(GlobalDataEnum.daapWindow);

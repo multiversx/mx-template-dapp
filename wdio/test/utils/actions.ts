@@ -33,10 +33,16 @@ export async function login(payload: {
   selector: string;
   file: string;
   adress: string;
+  urlConnect?: boolean;
 }) {
   const wallet = await $(`[data-testid*=${payload.adress}]`);
+  if (payload.urlConnect) {
+    await $(GlobalSelectorEnum.legacyWebWalletLoginDropdownButton).click();
+    await $(GlobalSelectorEnum.legacyDropdownValue).click();
+  } else {
+    await $(GlobalSelectorEnum.crossWindowLoginBtn).click();
+  }
 
-  await $(GlobalSelectorEnum.crossWindowLoginBtn).click();
   await browser.pause(4500);
   await browser.switchWindow(GlobalDataEnum.walletWindow);
   await $(payload.selector).click();
@@ -49,7 +55,7 @@ export async function login(payload: {
   } else {
     await $(GlobalSelectorEnum.accesWalletBtn).click();
   }
-  await browser.pause(1000);
+  await browser.pause(3000);
   await browser.switchWindow(GlobalDataEnum.daapWindow);
 }
 
@@ -74,6 +80,7 @@ export async function initTransaction() {
 
 export async function confirmPass() {
   await $(GlobalSelectorEnum.accesPass).setValue(GlobalDataEnum.globalPassword);
+  await browser.pause(500);
   await $(GlobalSelectorEnum.accesWalletBtn).click();
 }
 
@@ -153,6 +160,7 @@ export const scTransaction = async (type: string) => {
     await $(btn).click();
     await browser.pause(3000);
     await browser.switchWindow(GlobalDataEnum.walletWindow);
+    await browser.pause(1500);
     if (!(await $(GlobalSelectorEnum.accesPass).isDisplayed())) {
       await confimPem(GlobalDataEnum.pemFile);
       await $(GlobalSelectorEnum.signBtn).click();
@@ -164,6 +172,7 @@ export const scTransaction = async (type: string) => {
     await browser.switchWindow(GlobalDataEnum.daapWindow);
     await validateToast(GlobalSelectorEnum.toastSelector);
     await validateTransaction(TransactionIndexEnum.ping);
+    await browser.pause(5000);
   }
 };
 
