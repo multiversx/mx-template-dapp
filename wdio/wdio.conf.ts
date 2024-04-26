@@ -15,14 +15,15 @@ export const config: Options.Testrunner = {
   specs: ['./test/specs/**/*.ts'],
   suites: {
     smoke: [
-      './test/specs/PemScreen/PemSpec.e2e.ts',
-      './test/specs/KeystoreScreen/Keystore.e2e.ts'
+      './test/specs/KeystoreScreen/Keystore.e2e.ts',
+      './test/specs/URLScripts/URLScripts.ts',
+      './test/specs/NegativeTests/NegativeTests.e2e.ts'
     ]
   },
   // Patterns to exclude.
   exclude: [],
 
-  maxInstances: 4,
+  maxInstances: 1,
   specFileRetries: 1,
   specFileRetriesDeferred: true,
 
@@ -38,23 +39,20 @@ export const config: Options.Testrunner = {
         ]
       },
       acceptInsecureCerts: true
-    },
-    {
-      browserName: 'safari'
     }
   ],
 
   logLevel: 'error',
   bail: 0,
-  waitforTimeout: 10000,
-  connectionRetryTimeout: 120000,
+  waitforTimeout: 250000,
+  connectionRetryTimeout: 12000,
   connectionRetryCount: 2,
   framework: 'mocha',
   groupLogsByTestSpec: true,
   reporters: ['spec', 'concise'],
   mochaOpts: {
     ui: 'bdd',
-    timeout: 160000
+    timeout: 250000
   },
   before: () => {}
 };

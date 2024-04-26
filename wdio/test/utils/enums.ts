@@ -62,6 +62,8 @@ export enum GlobalSelectorEnum {
   deployContract = 'Deploy Contract',
   walletConnectBtn = 'Connect Your Wallet',
   crossWindowLoginBtn = '[data-testid="webWalletLoginBtn"]',
+  legacyWebWalletLoginDropdownButton = '[data-testid="legacyWebWalletLoginDropdownButton"]',
+  legacyDropdownValue = '//*[@aria-labelledby="dropdown-button"]',
   sendToSelfBtn = 'button*=Send to self',
   accesWalletBtn = '[data-testid="submitButton"]',
   signBtn = '[data-testid="signBtn"]',
@@ -90,13 +92,15 @@ export enum GlobalSelectorEnum {
   controlledSendingType = 'send-transactions',
   swapLockType = 'swap-lock',
   clearBtn = '[data-testid="closeTransactionSuccessBtn"]',
-  batchBtn = '[data-testid="sign-auto-send"]'
+  batchBtn = '[data-testid="sign-auto-send"]',
+  keystoreCloseModalBtn = '[data-testid="keystoreCloseModalBtn"]'
 }
 
 export enum WalletAdressEnum {
   adress1 = 'erd1qtknph0q5hsm4hmjpvzusj8vgy8m48lpvclnv6jlkw4uu7sacj6smz8uhg',
   adress2 = 'erd16fq70uf7mdkkkv3fylawk7269ef63kv2vh5s4lrtm58aufve8dtqjlhjjn',
-  adress3 = 'erd1hrv7xl5xyu536cdkz2mu92jm6w93sxecrsjxe2t8y9tv4er24a2qhfqkkr'
+  adress3 = 'erd1hrv7xl5xyu536cdkz2mu92jm6w93sxecrsjxe2t8y9tv4er24a2qhfqkkr',
+  adress4 = 'erd1ljyvg76hnt0wnj3asmte3nfxhcl8cxsukmz94kc56emhwvvm8lgsptux0y'
 }
 
 export enum TransactionIndexEnum {
