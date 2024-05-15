@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
 import { WebWalletLoginButtonPropsType } from '@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton/WebWalletLoginButton';
 import { useWebWalletLogin } from '@multiversx/sdk-dapp/hooks/login/useWebWalletLogin';
 import {
   CrossWindowLoginButton,
   WebWalletLoginButton as WebWalletUrlLoginButton
 } from 'components/sdkDappComponents';
+import React, { useEffect, useRef, useState } from 'react';
+import { CrossWindowConfirm } from './CrossWindowConfirm';
 
 export const WebWalletLoginConfigEnum = {
   crossWindow: 'crossWindow',
@@ -62,7 +63,9 @@ export const WebWalletLoginWrapper = ({
           data-testid='webWalletLoginBtn'
           className='!mr-0 !rounded-none !rounded-l-md'
           {...commonProps}
+          hasConsentPopup
         />
+        <CrossWindowConfirm />
         <div
           style={{
             position: 'relative'
@@ -139,6 +142,7 @@ export const WebWalletLoginWrapper = ({
       loginButtonText='Web Wallet'
       data-testid='webWalletLoginBtn'
       {...commonProps}
+      hasConsentPopup
     />
   );
 };

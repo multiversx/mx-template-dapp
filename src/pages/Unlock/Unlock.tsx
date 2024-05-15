@@ -1,24 +1,25 @@
 import type {
   ExtensionLoginButtonPropsType,
-  WebWalletLoginButtonPropsType,
-  OperaWalletLoginButtonPropsType,
   LedgerLoginButtonPropsType,
-  WalletConnectLoginButtonPropsType
+  OperaWalletLoginButtonPropsType,
+  WalletConnectLoginButtonPropsType,
+  WebWalletLoginButtonPropsType
 } from '@multiversx/sdk-dapp/UI';
 import {
+  CrossWindowLoginButton,
   ExtensionLoginButton,
   LedgerLoginButton,
   OperaWalletLoginButton,
   WalletConnectLoginButton,
   WebWalletLoginButton as WebWalletUrlLoginButton,
-  XaliasLoginButton,
-  CrossWindowLoginButton
+  XaliasLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
-import { WebWalletLoginWrapper, WebWalletLoginConfigEnum } from './components';
+import { WebWalletLoginWrapper } from './components';
+import { ReplyWithPostMessageObjectType } from './types';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -33,6 +34,10 @@ const USE_WEB_WALLET_CROSS_WINDOW = true;
 const WebWalletLoginButton = USE_WEB_WALLET_CROSS_WINDOW
   ? CrossWindowLoginButton
   : WebWalletUrlLoginButton;
+
+const a: ReplyWithPostMessageObjectType['HANDSHAKE_RESPONSE'] = true;
+
+console.log(a);
 
 export const Unlock = () => {
   const navigate = useNavigate();
