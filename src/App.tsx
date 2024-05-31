@@ -29,7 +29,8 @@ const AppContent = () => {
       customNetworkConfig={{
         name: 'customConfig',
         apiTimeout,
-        walletConnectV2ProjectId
+        walletConnectV2ProjectId,
+        walletAddress: 'https://127.0.0.1:3000'
       }}
       dappConfig={{
         shouldUseWebViewProvider: true,

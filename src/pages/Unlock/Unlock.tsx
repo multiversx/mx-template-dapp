@@ -12,6 +12,7 @@ import {
   WalletConnectLoginButton,
   WebWalletLoginButton as WebWalletUrlLoginButton,
   XaliasLoginButton,
+  XaliasCrossWindowLoginButton,
   CrossWindowLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
@@ -72,9 +73,10 @@ export const Unlock = () => {
               {...commonProps}
             />
 
-            <XaliasLoginButton
+            <XaliasCrossWindowLoginButton
               loginButtonText='xAlias'
               data-testid='xAliasLoginBtn'
+              customWalletAddress='https://127.0.0.1:3000'
               {...commonProps}
             />
             <WebWalletLoginWrapper
