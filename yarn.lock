@@ -943,18 +943,6 @@
   dependencies:
     "@types/node-fetch" "^2.5.10"
 
-"@lit-labs/ssr-dom-shim@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@lit-labs/ssr-dom-shim/-/ssr-dom-shim-1.2.0.tgz#353ce4a76c83fadec272ea5674ede767650762fd"
-  integrity sha512-yWJKmpGE6lUURKAaIltoPIE/wrbY3TEkqQt+X0m+7fQNnAv0keydnYvbiJFP1PnMhizmIWRWOG5KLhYyc/xl+g==
-
-"@lit/reactive-element@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@lit/reactive-element/-/reactive-element-2.0.4.tgz#8f2ed950a848016383894a26180ff06c56ae001b"
-  integrity sha512-GFn91inaUa2oHLak8awSIigYz0cU0Payr1rcFsrkf5OJ5eSPxElyZfKh0f2p9FsTiZWXQdWGJeXZICEfXXYSXQ==
-  dependencies:
-    "@lit-labs/ssr-dom-shim" "^1.2.0"
-
 "@ljharb/through@^2.3.11":
   version "2.3.13"
   resolved "https://registry.yarnpkg.com/@ljharb/through/-/through-2.3.13.tgz#b7e4766e0b65aa82e529be945ab078de79874edc"
@@ -1071,10 +1059,10 @@
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-0.0.1.tgz#ba8bd9319649d45dea9a76beca1e03d957dea2cb"
   integrity sha512-fl3TdES93Jc4T559BI+QxNRGRUTabb7TiAXHKL9g6mbLD+silK+5euAoDpPBkbZpVFnfsXQssUVuyKBV4Ine6w==
 
-"@multiversx/sdk-dapp@2.32.0":
-  version "2.32.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.32.0.tgz#791be117cffb6f23eca39b0069464924f379be2a"
-  integrity sha512-hyYRtewsAu9IRKYhJcdbG2LUtNP4bkVY1eVrg1nrGAGmba7xmvgUxyVWQFqsvD2VxGX6/RnLSIadUJEYobn1KA==
+"@multiversx/sdk-dapp@2.33.0":
+  version "2.33.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.33.0.tgz#bd69e7a1673a2d93639a5e2be0bd14202da9ca1e"
+  integrity sha512-pSWEqsv+XAPK65sb4xQrWybrTx12ZOK/zvgLYPB/cnGcJjQ0/nwmIgm6TSHdBVf1wXFBA5c5VFAgaYHGEIJrJA==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@metamask/providers" "16.0.0"
@@ -1086,14 +1074,13 @@
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.1.2"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "0.1.1"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "0.2.0"
     "@multiversx/sdk-web-wallet-provider" "3.2.1"
-    "@multiversx/sdk-webview-provider" "0.0.9"
+    "@multiversx/sdk-webview-provider" "0.0.10"
     "@reduxjs/toolkit" "1.8.2"
     bignumber.js "9.x"
     linkify-react "4.0.2"
     linkifyjs "4.0.2"
-    lit "3.1.2"
     lodash.debounce "4.0.8"
     lodash.isequal "4.5.0"
     lodash.omit "4.5.0"
@@ -1200,10 +1187,10 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.1.1.tgz#9a992f3bfbc2efbecb39e9718aff9dccaa2e461b"
-  integrity sha512-9bWl9R92a6DGA5tF68IjXpI1nN9QyZjWEK0/YFNwV6nfswhtIrA2F+VsQIIXeb/HzMXbcVEtkyk9jMGkHSR5vw==
+"@multiversx/sdk-web-wallet-cross-window-provider@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.2.0.tgz#0fab56632b77556349ed04d97bffdee02bc0d3d3"
+  integrity sha512-HyHKir96e8i3DnwtR1TOwINs9dOJH5kDjMOMjJvpqUlZm/07+O/KrWDxVRCAF7Qxhg0Lm09w6kfkBIoHfdux0w==
   dependencies:
     "@types/jest" "^29.5.11"
     "@types/qs" "6.9.10"
@@ -1216,10 +1203,10 @@
   dependencies:
     qs "6.10.3"
 
-"@multiversx/sdk-webview-provider@0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-webview-provider/-/sdk-webview-provider-0.0.9.tgz#074f707ee9b84f9108087a62cc83da2c4e46f585"
-  integrity sha512-IVdrMVncvnH61NQ6QsPWkfLfEoT274St2qrWyG1hv9gBg2t78hat4pL+QB/c+gA6TbxVMj9DBbcb3CDsI6dDUg==
+"@multiversx/sdk-webview-provider@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-webview-provider/-/sdk-webview-provider-0.0.10.tgz#6699dfd564ec020c67736d35077fb8a79e015dda"
+  integrity sha512-wyNPl6mq8pYXWdpviPqQfxGoCaEkQlkELAf0rzQ3USbIkV/LlYuXEjIX3JCl3NxbE6wlk4jwp2xIGykX20HeZw==
 
 "@noble/curves@1.3.0", "@noble/curves@~1.3.0":
   version "1.3.0"
@@ -2185,11 +2172,6 @@
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/@types/tough-cookie/-/tough-cookie-4.0.5.tgz#cb6e2a691b70cb177c6e3ae9c1d2e8b2ea8cd304"
   integrity sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==
-
-"@types/trusted-types@^2.0.2":
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/@types/trusted-types/-/trusted-types-2.0.7.tgz#baccb07a970b91707df3a3e8ba6896c57ead2d11"
-  integrity sha512-ScaPdn1dQczgbl0QFTeTOmVHFULt394XJgOQNoyVhZ6r2vLnMLJfBPd53SB52T/3G36VI1/g2MZaX0cwDuXsfw==
 
 "@types/use-sync-external-store@^0.0.3":
   version "0.0.3"
@@ -7017,31 +6999,6 @@ listhen@^1.7.2:
     ufo "^1.4.0"
     untun "^0.1.3"
     uqr "^0.1.2"
-
-lit-element@^4.0.4:
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-4.0.5.tgz#f20cd8a6231eaf5358f7a6877ca6ea7628fa2015"
-  integrity sha512-iTWskWZEtn9SyEf4aBG6rKT8GABZMrTWop1+jopsEOgEcugcXJGKuX5bEbkq9qfzY+XB4MAgCaSPwnNpdsNQ3Q==
-  dependencies:
-    "@lit-labs/ssr-dom-shim" "^1.2.0"
-    "@lit/reactive-element" "^2.0.4"
-    lit-html "^3.1.2"
-
-lit-html@^3.1.2:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-3.1.3.tgz#ae2e9fee0258d0a1b5d7b86c87da51117e4f911b"
-  integrity sha512-FwIbqDD8O/8lM4vUZ4KvQZjPPNx7V1VhT7vmRB8RBAO0AU6wuTVdoXiu2CivVjEGdugvcbPNBLtPE1y0ifplHA==
-  dependencies:
-    "@types/trusted-types" "^2.0.2"
-
-lit@3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/lit/-/lit-3.1.2.tgz#f276258e8a56593f1d834a5fd00a7eb5e891ae73"
-  integrity sha512-VZx5iAyMtX7CV4K8iTLdCkMaYZ7ipjJZ0JcSdJ0zIdGxxyurjIn7yuuSxNBD7QmjvcNJwr0JS4cAdAtsy7gZ6w==
-  dependencies:
-    "@lit/reactive-element" "^2.0.4"
-    lit-element "^4.0.4"
-    lit-html "^3.1.2"
 
 loader-runner@^4.2.0:
   version "4.3.0"
