@@ -37,8 +37,8 @@ export async function login(payload: {
 }) {
   const wallet = await $(`[data-testid*=${payload.adress}]`);
   if (payload.urlConnect) {
-    await $(GlobalSelectorEnum.legacyWebWalletLoginDropdownButton).click();
-    await $(GlobalSelectorEnum.legacyDropdownValue).click();
+    await $$(GlobalSelectorEnum.legacyWebWalletLoginDropdownButton)[1].click();
+    await $$(GlobalSelectorEnum.legacyDropdownValue)[1].click();
   } else {
     await $(GlobalSelectorEnum.crossWindowLoginBtn).click();
   }
