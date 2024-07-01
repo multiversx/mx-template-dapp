@@ -11,14 +11,14 @@ import {
   OperaWalletLoginButton,
   WalletConnectLoginButton,
   WebWalletLoginButton as WebWalletUrlLoginButton,
-  XaliasLoginButton,
+  XaliasCrossWindowLoginButton,
   CrossWindowLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
-import { WebWalletLoginWrapper, WebWalletLoginConfigEnum } from './components';
+import { WebWalletLoginWrapper, XaliasLoginWrapper } from './components';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -72,15 +72,14 @@ export const Unlock = () => {
               {...commonProps}
             />
 
-            <XaliasLoginButton
+            <XaliasCrossWindowLoginButton
               loginButtonText='xAlias'
               data-testid='xAliasLoginBtn'
+              customWalletAddress='https://127.0.0.1:3000'
               {...commonProps}
             />
-            <WebWalletLoginWrapper
-              {...commonProps}
-              config={['crossWindow', 'url']}
-            />
+            <XaliasLoginWrapper {...commonProps} />
+            <WebWalletLoginWrapper {...commonProps} />
           </div>
         </div>
       </div>
