@@ -48,7 +48,7 @@ export const useSendPingPongTransaction = ({
     sessionStorage.getItem(type)
   );
 
-  const network = useGetNetworkConfig();
+  const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
 
   const transactionStatus = useTrackTransactionStatus({
@@ -139,7 +139,7 @@ export const useSendPingPongTransaction = ({
         receiver: contractAddress,
         gasLimit: 60000000,
         gasPrice: GAS_PRICE,
-        chainID: network.chainID,
+        chainID: network.chainId,
         nonce: account.nonce,
         sender: address,
         version: VERSION
