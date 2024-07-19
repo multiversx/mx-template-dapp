@@ -28,7 +28,7 @@ import {
 export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
   const { setSendBatchTransactionsOnDemand } = useBatchTransactionContext();
   const { address, account } = useGetAccountInfo();
-  const network = useGetNetworkConfig();
+  const { network } = useGetNetworkConfig();
   const { batches } = useGetBatches();
   const { hasPendingTransactions } = useGetPendingTransactions();
   const [trackBatchId, setTrackBatchId] = useState(
@@ -65,7 +65,7 @@ export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
     const { batchId } = await signAndAutoSendBatchTransactions({
       address,
       nonce: account.nonce,
-      chainID: network.chainID,
+      chainID: network.chainId,
       callbackRoute
     });
 
@@ -81,7 +81,7 @@ export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
     const { newBatchSessionId, sessionId } = await sendBatchTransactions({
       address,
       nonce: account.nonce,
-      chainID: network.chainID,
+      chainID: network.chainId,
       callbackRoute
     });
 
@@ -98,7 +98,7 @@ export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
     const { batchId: currentBatchId } = await swapAndLockTokens({
       address,
       nonce: account.nonce,
-      chainID: network.chainID,
+      chainID: network.chainId,
       callbackRoute
     });
 
