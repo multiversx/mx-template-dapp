@@ -59,10 +59,6 @@ export const Unlock = () => {
           </div>
 
           <div className='flex flex-col md:flex-row'>
-            <IFrameLoginButton
-              loginButtonText='IFrame Login'
-              {...commonProps}
-            />
             <WalletConnectLoginButton
               loginButtonText='xPortal App'
               {...commonProps}
@@ -76,7 +72,6 @@ export const Unlock = () => {
               loginButtonText='Opera Crypto Wallet - Beta'
               {...commonProps}
             />
-
             <XaliasCrossWindowLoginButton
               loginButtonText='xAlias'
               data-testid='xAliasLoginBtn'
@@ -85,6 +80,10 @@ export const Unlock = () => {
             />
             <XaliasLoginWrapper {...commonProps} />
             <WebWalletLoginWrapper {...commonProps} />
+            <IFrameLoginButton
+              loginButtonText='IFrame Login'
+              {...commonProps}
+            />
           </div>
         </div>
       </div>
