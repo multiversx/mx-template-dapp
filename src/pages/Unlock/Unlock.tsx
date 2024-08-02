@@ -12,7 +12,8 @@ import {
   WalletConnectLoginButton,
   WebWalletLoginButton as WebWalletUrlLoginButton,
   XaliasCrossWindowLoginButton,
-  CrossWindowLoginButton
+  CrossWindowLoginButton,
+  IFrameLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
@@ -71,7 +72,6 @@ export const Unlock = () => {
               loginButtonText='Opera Crypto Wallet - Beta'
               {...commonProps}
             />
-
             <XaliasCrossWindowLoginButton
               loginButtonText='xAlias'
               data-testid='xAliasLoginBtn'
@@ -80,6 +80,10 @@ export const Unlock = () => {
             />
             <XaliasLoginWrapper {...commonProps} />
             <WebWalletLoginWrapper {...commonProps} />
+            <IFrameLoginButton
+              loginButtonText='IFrame Login'
+              {...commonProps}
+            />
           </div>
         </div>
       </div>
