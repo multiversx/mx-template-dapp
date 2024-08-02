@@ -12,7 +12,8 @@ import {
   WalletConnectLoginButton,
   WebWalletLoginButton as WebWalletUrlLoginButton,
   XaliasCrossWindowLoginButton,
-  CrossWindowLoginButton
+  CrossWindowLoginButton,
+  IFrameLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
@@ -58,6 +59,10 @@ export const Unlock = () => {
           </div>
 
           <div className='flex flex-col md:flex-row'>
+            <IFrameLoginButton
+              loginButtonText='IFrame Login'
+              {...commonProps}
+            />
             <WalletConnectLoginButton
               loginButtonText='xPortal App'
               {...commonProps}
