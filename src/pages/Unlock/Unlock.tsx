@@ -13,7 +13,7 @@ import {
   WebWalletLoginButton as WebWalletUrlLoginButton,
   XaliasCrossWindowLoginButton,
   CrossWindowLoginButton,
-  IFrameLoginButton
+  MetamaskProxyButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
@@ -80,8 +80,8 @@ export const Unlock = () => {
             />
             <XaliasLoginWrapper {...commonProps} />
             <WebWalletLoginWrapper {...commonProps} />
-            <IFrameLoginButton
-              loginButtonText='IFrame Login'
+            <MetamaskProxyButton
+              loginButtonText='Metamask Proxy'
               {...commonProps}
             />
           </div>
