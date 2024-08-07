@@ -1033,10 +1033,10 @@
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-0.0.1.tgz#ba8bd9319649d45dea9a76beca1e03d957dea2cb"
   integrity sha512-fl3TdES93Jc4T559BI+QxNRGRUTabb7TiAXHKL9g6mbLD+silK+5euAoDpPBkbZpVFnfsXQssUVuyKBV4Ine6w==
 
-"@multiversx/sdk-dapp@2.36.1":
-  version "2.36.1"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.36.1.tgz#e70fd9e2df092f65882f32d5a7515ed41b1f63b7"
-  integrity sha512-hzLRGt1/gAw7I/yc5cjrH3hoWo9LRA+UvpgcokP4PAP9SBZnbqIcJKWOoqS56xQTxN8I2OlSwOZfBML6hps5lA==
+"@multiversx/sdk-dapp@2.38.0":
+  version "2.38.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.38.0.tgz#abbbb12d1226049426bb030c534946130121356b"
+  integrity sha512-e7cIHXuVRe7O7oflHs6KnC54mxIVq+La7r1AOGiub3u+rBGf8hOOdeslBcEyi+m614fRfNR9SZ2UMjawszvakg==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@metamask/providers" "16.0.0"
@@ -1044,11 +1044,12 @@
     "@multiversx/sdk-extension-provider" "3.0.0"
     "@multiversx/sdk-hw-provider" "6.4.0"
     "@multiversx/sdk-metamask-provider" "0.0.5"
+    "@multiversx/sdk-metamask-proxy-provider" "0.2.0"
     "@multiversx/sdk-native-auth-client" "1.0.7"
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.1.3"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "0.3.0"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "0.4.0"
     "@multiversx/sdk-web-wallet-provider" "3.2.1"
     "@multiversx/sdk-webview-provider" "0.0.11"
     "@reduxjs/toolkit" "1.8.2"
@@ -1103,6 +1104,15 @@
   dependencies:
     "@metamask/providers" "16.0.0"
     "@multiversx/sdk-core" "12.18.0"
+
+"@multiversx/sdk-metamask-proxy-provider@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-metamask-proxy-provider/-/sdk-metamask-proxy-provider-0.2.0.tgz#8dda49fa4da54f3758d5f48c0c62c1c015af1028"
+  integrity sha512-fgYfMslqEX0gnm+eLwdRI2GYsbbUqEjBS1/YN7dta6ROXhPG9hz0srKcmlaqKtn6zqgiI7KKlWkZ0MJgy7GGuA==
+  dependencies:
+    "@types/jest" "^29.5.11"
+    "@types/qs" "6.9.10"
+    qs "6.11.2"
 
 "@multiversx/sdk-native-auth-client@1.0.7":
   version "1.0.7"
@@ -1161,10 +1171,10 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.3.0.tgz#2f44ac2b384d823d474c63397124bf4639a5803e"
-  integrity sha512-DbFB0VuKWWXWcaKNOf9068vPVb5zWHNpDCVSKXLN5fKlNRPQ2zI7LNvhh53PMyR8X+s0aewn5gKNdYlDLTuzvQ==
+"@multiversx/sdk-web-wallet-cross-window-provider@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.4.0.tgz#3e9ca646859c4a67591240fbe8bc6d0fa61d198c"
+  integrity sha512-GIfHTRHtRLGm+aJ/EXFzFUgAGhA3vkJoceuNgNeifct+dyPRS7dpTvC9DBogVGHDTmBDes+sEq/iK1qqMVhxYg==
   dependencies:
     "@types/jest" "^29.5.11"
     "@types/qs" "6.9.10"
