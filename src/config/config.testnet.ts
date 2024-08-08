@@ -7,3 +7,5 @@ export const contractAddress =
 export const API_URL = 'https://testnet-template-api.multiversx.com';
 export const sampleAuthenticatedDomains = [API_URL];
 export const environment = EnvironmentsEnum.testnet;
+export const metamaskSnapWalletAddress =
+  'https://testnet-snap-wallet.multiversx.com';
