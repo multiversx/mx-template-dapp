@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react';
-import basicSsl from '@vitejs/plugin-basic-ssl';
+// import basicSsl from '@vitejs/plugin-basic-ssl';
 import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import svgrPlugin from 'vite-plugin-svgr';
@@ -10,7 +10,7 @@ export default defineConfig({
     port: Number(process.env.PORT) || 3000,
     strictPort: true,
     host: true,
-    https: true,
+    // https: true,
     watch: {
       usePolling: false,
       useFsEvents: false
@@ -21,7 +21,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    basicSsl(),
+    // basicSsl(),
     tsconfigPaths(),
     svgrPlugin(),
     nodePolyfills({
@@ -33,7 +33,7 @@ export default defineConfig({
   },
   preview: {
     port: 3002,
-    https: true,
+    // https: true,
     host: 'localhost',
     strictPort: true
   }

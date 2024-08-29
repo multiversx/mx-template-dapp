@@ -1049,30 +1049,30 @@
     json-bigint "1.0.0"
     keccak "3.0.2"
 
-"@multiversx/sdk-dapp-utils@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-0.0.1.tgz#ba8bd9319649d45dea9a76beca1e03d957dea2cb"
-  integrity sha512-fl3TdES93Jc4T559BI+QxNRGRUTabb7TiAXHKL9g6mbLD+silK+5euAoDpPBkbZpVFnfsXQssUVuyKBV4Ine6w==
+"@multiversx/sdk-dapp-utils@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-0.1.0.tgz#3103c2ffc648703e75f96acd229af299cb0840ab"
+  integrity sha512-EFvktZ/S1WQ1ie02nnKZHARC4r23JZWwoTFd5py1qi/Z/UoLHIzJ394HLjXFb6gBTsp4wnvNwIXBA/DNrd2Yeg==
 
-"@multiversx/sdk-dapp@2.38.4":
-  version "2.38.4"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.38.4.tgz#10fea9f22c170addb12ff250a340fb813e6cdffb"
-  integrity sha512-GRfsq6d9wofhzAHm1gxuRhhU3oogadWI6/iK9vEC0oTu60DZV2gLyn+9bEd+1uGKlcNo6NOCkQiELX9/kN8Nqw==
+"@multiversx/sdk-dapp@2.39.0":
+  version "2.39.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.39.0.tgz#373f9b7a9c6d3f4a7e7fb0f636b002adb421a681"
+  integrity sha512-DtiuGnz34uHrVpzHYJtfRP2qMUB8TMvijgHht7qn8OhzkcgCnBR3hyt2FApAVGyM743TlziyiBVtauBtjLDZUw==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@metamask/providers" "16.0.0"
-    "@multiversx/sdk-dapp-utils" "^0.0.1"
+    "@multiversx/sdk-dapp-utils" "0.1.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
     "@multiversx/sdk-hw-provider" "6.4.0"
     "@multiversx/sdk-metamask-provider" "0.0.5"
-    "@multiversx/sdk-metamask-proxy-provider" "0.3.2"
+    "@multiversx/sdk-metamask-proxy-provider" "1.0.0"
     "@multiversx/sdk-native-auth-client" "1.0.7"
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.1.3"
-    "@multiversx/sdk-web-wallet-cross-window-provider" "0.4.1"
+    "@multiversx/sdk-web-wallet-cross-window-provider" "1.0.0"
     "@multiversx/sdk-web-wallet-provider" "3.2.1"
-    "@multiversx/sdk-webview-provider" "0.0.11"
+    "@multiversx/sdk-webview-provider" "1.0.0"
     "@reduxjs/toolkit" "1.8.2"
     bignumber.js "9.x"
     linkify-react "4.0.2"
@@ -1126,10 +1126,10 @@
     "@metamask/providers" "16.0.0"
     "@multiversx/sdk-core" "12.18.0"
 
-"@multiversx/sdk-metamask-proxy-provider@0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-metamask-proxy-provider/-/sdk-metamask-proxy-provider-0.3.2.tgz#907813f0695b8dbda5fbd2068e222d7516aefe11"
-  integrity sha512-U7i5bpJgAaF0qe21Conu5/fO1i7h6zMsaCdptr4on/r2VGFgWln7pg0nMdhTo6U89nKOADsQVVVxvRla7sg5vw==
+"@multiversx/sdk-metamask-proxy-provider@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-metamask-proxy-provider/-/sdk-metamask-proxy-provider-1.0.0.tgz#ea7d32ee43e756f73f2d661d7ce854b23c3b9e68"
+  integrity sha512-fdfUKfWLSHvdEPdvT/CZE56VbpreOgOYzn/QneuT/n1xMGuB++o3TFB4eGF06wEyDLmbtMMG4FEOvi9HFuFVbA==
   dependencies:
     "@types/jest" "^29.5.11"
     "@types/qs" "6.9.10"
@@ -1192,10 +1192,10 @@
     tweetnacl "1.0.3"
     uuid "8.3.2"
 
-"@multiversx/sdk-web-wallet-cross-window-provider@0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-0.4.1.tgz#1b68a6e65acea2a7adf5696edb10c17c43f19b18"
-  integrity sha512-GgO3CUE679I0A1p+RVSwCXxcXfskbJA/gHKF0eviezN9yTJof7XtZmaOzFoH0ekKX97YIDQ8QQy5+/FPYm9ERA==
+"@multiversx/sdk-web-wallet-cross-window-provider@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-web-wallet-cross-window-provider/-/sdk-web-wallet-cross-window-provider-1.0.0.tgz#14ea0eb110de78a7e5dfbb1cb237cc8f86006b40"
+  integrity sha512-xqdKCFpBCxNcp4aSwC2FLbks2Ii2uy5YpHnqR8qnqCnjH6TqdGZ1xKzQauZsiYqseVueVTmynK28w9pTOZ0Oqg==
   dependencies:
     "@types/jest" "^29.5.11"
     "@types/qs" "6.9.10"
@@ -1208,10 +1208,10 @@
   dependencies:
     qs "6.10.3"
 
-"@multiversx/sdk-webview-provider@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-webview-provider/-/sdk-webview-provider-0.0.11.tgz#3723add76248a2f2f24937f6ed967f2a00b955c3"
-  integrity sha512-+0t2UZq8KlOebFTg/wbtmGnwMMyaBlSFprsKgFTgWigszdQR9XYhHVWtgEPgT7cuCR1xd3NmkDXQzmF2GfqSkQ==
+"@multiversx/sdk-webview-provider@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-webview-provider/-/sdk-webview-provider-1.0.0.tgz#23fcdc68b8f2ebd9dd9d23b4159315fa8ae9ac61"
+  integrity sha512-nxC1BaP319ApbJb51QNi7W9BwUrS7V311H7lVwIUgOgVFrCwdttc/rlvVDrmieQIupqSSCWWKf1/cvbzt621aw==
 
 "@noble/curves@1.4.2", "@noble/curves@~1.4.0":
   version "1.4.2"
