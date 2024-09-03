@@ -7,4 +7,5 @@ export const contractAddress =
 export const API_URL = 'https://devnet-template-api.multiversx.com';
 export const sampleAuthenticatedDomains = [API_URL];
 export const environment = EnvironmentsEnum.devnet;
-export const metamaskSnapWalletAddress = 'https://localhost:3002';
+export const metamaskSnapWalletAddress =
+  'https://devnet-snap-wallet.multiversx.com';
