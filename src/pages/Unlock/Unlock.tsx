@@ -1,9 +1,10 @@
-import type {
-  ExtensionLoginButtonPropsType,
-  WebWalletLoginButtonPropsType,
-  OperaWalletLoginButtonPropsType,
-  LedgerLoginButtonPropsType,
-  WalletConnectLoginButtonPropsType
+import {
+  type ExtensionLoginButtonPropsType,
+  type WebWalletLoginButtonPropsType,
+  type OperaWalletLoginButtonPropsType,
+  type LedgerLoginButtonPropsType,
+  type WalletConnectLoginButtonPropsType,
+  IframeButton
 } from '@multiversx/sdk-dapp/UI';
 import {
   ExtensionLoginButton,
@@ -12,8 +13,7 @@ import {
   WalletConnectLoginButton,
   WebWalletLoginButton as WebWalletUrlLoginButton,
   XaliasCrossWindowLoginButton,
-  CrossWindowLoginButton,
-  MetamaskProxyButton
+  CrossWindowLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
@@ -80,8 +80,15 @@ export const Unlock = () => {
             />
             <XaliasLoginWrapper {...commonProps} />
             <WebWalletLoginWrapper {...commonProps} />
-            <MetamaskProxyButton
+            <IframeButton
+              loginButtonText='Passkey Proxy'
+              loginType='passkey'
+              {...commonProps}
+            />
+
+            <IframeButton
               loginButtonText='Metamask Proxy'
+              loginType='metamask'
               {...commonProps}
             />
           </div>
