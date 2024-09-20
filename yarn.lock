@@ -1054,7 +1054,7 @@
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-0.1.0.tgz#3103c2ffc648703e75f96acd229af299cb0840ab"
   integrity sha512-EFvktZ/S1WQ1ie02nnKZHARC4r23JZWwoTFd5py1qi/Z/UoLHIzJ394HLjXFb6gBTsp4wnvNwIXBA/DNrd2Yeg==
 
-"@multiversx/sdk-dapp@^2.40.0":
+"@multiversx/sdk-dapp@2.40.0":
   version "2.40.0"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.40.0.tgz#6bec086f4555e0280d9be1d5290dbeac20da146a"
   integrity sha512-SRoDbecp/Z7RTePs6GG8KC+X8VguS4nKSwGc681XQaxV7TEVWKUw+tNWfFmfT4iUg5/NwwTf+pnoh9pYibg1yw==
