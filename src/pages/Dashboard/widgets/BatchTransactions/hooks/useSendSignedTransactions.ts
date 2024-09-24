@@ -16,9 +16,9 @@ import {
 import { useBatchTransactionContext } from 'wrappers';
 
 export const useSendSignedTransactions = ({
-  signedSessionId = null
+  signedSessionId = ''
 }: {
-  signedSessionId: string | null;
+  signedSessionId: string;
 }) => {
   const [batchSessionId, setBatchSessionId] = useState<string | null>(
     sessionStorage.getItem(SessionEnum.batchSessionId)
@@ -85,6 +85,8 @@ export const useSendSignedTransactions = ({
     }
   };
 
+  const status = signedTransactions[signedSessionId]?.status;
+
   useEffect(() => {
     if (!sendBatchTransactionsOnDemand) {
       return;
@@ -94,13 +96,10 @@ export const useSendSignedTransactions = ({
       return;
     }
 
-    if (
-      signedTransactions[signedSessionId]?.status ===
-      TransactionBatchStatusesEnum.signed
-    ) {
+    if (status === TransactionBatchStatusesEnum.signed) {
       sendTransactions();
     }
-  }, [batchSessionId, signedTransactions[signedSessionId]?.status]);
+  }, [batchSessionId, status]);
 
   return {
     batchId,
