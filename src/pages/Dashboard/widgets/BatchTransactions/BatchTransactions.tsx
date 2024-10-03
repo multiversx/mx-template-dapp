@@ -39,7 +39,7 @@ export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
     SignedTransactionType[] | null
   >(null);
   const [currentSessionId, setCurrentSessionId] = useState(
-    sessionStorage.getItem(SessionEnum.signedSessionId)
+    sessionStorage.getItem(SessionEnum.signedSessionId) || ''
   );
 
   const { batchId, setBatchSessionId } = useSendSignedTransactions({
