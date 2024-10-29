@@ -40,6 +40,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
+> **Note:** While in development, to test the passkeys provider use the following command: 
+`open -a Google\ Chrome --args --ignore-certificate-errors --ignore-urlfetcher-cert-requests`
+
 ### Step 3. Build for testing and production use
 
 A build of the app is necessary to deploy for testing purposes or for production use.
