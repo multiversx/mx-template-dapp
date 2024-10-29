@@ -1,6 +1,11 @@
-import { ProxyNetworkProvider } from '@multiversx/sdk-network-providers';
 import { useGetAccount, useGetNetworkConfig } from 'hooks';
-import { Address, AddressValue, ContractFunction, ResultsParser } from 'utils';
+import {
+  Address,
+  AddressValue,
+  ContractFunction,
+  ResultsParser,
+  ProxyNetworkProvider
+} from 'utils';
 import { smartContract } from 'utils/smartContract';
 
 const resultsParser = new ResultsParser();
