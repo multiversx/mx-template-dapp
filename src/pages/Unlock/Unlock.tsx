@@ -3,8 +3,7 @@ import {
   type WebWalletLoginButtonPropsType,
   type OperaWalletLoginButtonPropsType,
   type LedgerLoginButtonPropsType,
-  type WalletConnectLoginButtonPropsType,
-  IframeButton
+  type WalletConnectLoginButtonPropsType
 } from '@multiversx/sdk-dapp/UI';
 import {
   ExtensionLoginButton,
@@ -12,14 +11,20 @@ import {
   OperaWalletLoginButton,
   WalletConnectLoginButton,
   WebWalletLoginButton as WebWalletUrlLoginButton,
-  XaliasCrossWindowLoginButton,
   CrossWindowLoginButton
 } from 'components/sdkDappComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
-import { WebWalletLoginWrapper, XaliasLoginWrapper } from './components';
+import {
+  IframeButton,
+  WebWalletLoginWrapper,
+  XaliasLoginWrapper
+} from './components';
+import { IframeLoginTypes } from '@multiversx/sdk-web-wallet-iframe-provider/out/constants';
+import { useIframeLogin } from '@multiversx/sdk-dapp/hooks/login/useIframeLogin';
+import { useWindowSize } from 'hooks';
 
 type CommonPropsType =
   | OperaWalletLoginButtonPropsType
@@ -37,12 +42,24 @@ const WebWalletLoginButton = USE_WEB_WALLET_CROSS_WINDOW
 
 export const Unlock = () => {
   const navigate = useNavigate();
-  const commonProps: CommonPropsType = {
+  const { width } = useWindowSize();
+
+  const [onInitiateLogin, { isLoading }] = useIframeLogin({
     callbackRoute: RouteNamesEnum.dashboard,
     nativeAuth,
     onLoginRedirect: () => {
       navigate(RouteNamesEnum.dashboard);
     }
+  });
+
+  const isMobile = width < 768;
+  const commonProps: CommonPropsType = {
+    callbackRoute: RouteNamesEnum.dashboard,
+    nativeAuth,
+    onLoginRedirect: () => {
+      navigate(RouteNamesEnum.dashboard);
+    },
+    disabled: isLoading
   };
 
   return (
@@ -74,16 +91,18 @@ export const Unlock = () => {
             />
             <XaliasLoginWrapper {...commonProps} />
             <WebWalletLoginWrapper {...commonProps} />
-            <IframeButton
-              loginButtonText='Passkey Proxy'
-              loginType='passkey'
-              {...commonProps}
-            />
+            {isMobile && (
+              <IframeButton
+                loginButtonText='Passkey Proxy'
+                {...commonProps}
+                onClick={() => onInitiateLogin(IframeLoginTypes.passkey)}
+              />
+            )}
 
             <IframeButton
               loginButtonText='Metamask Proxy'
-              loginType='metamask'
               {...commonProps}
+              onClick={() => onInitiateLogin(IframeLoginTypes.metamask)}
             />
           </div>
         </div>
