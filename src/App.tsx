@@ -15,8 +15,7 @@ import {
   apiTimeout,
   walletConnectV2ProjectId,
   environment,
-  sampleAuthenticatedDomains,
-  metamaskSnapWalletAddress
+  sampleAuthenticatedDomains
 } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { PageNotFound, Unlock } from 'pages';
@@ -30,8 +29,7 @@ const AppContent = () => {
       customNetworkConfig={{
         name: 'customConfig',
         apiTimeout,
-        walletConnectV2ProjectId,
-        metamaskSnapWalletAddress
+        walletConnectV2ProjectId
       }}
       dappConfig={{
         shouldUseWebViewProvider: true,
