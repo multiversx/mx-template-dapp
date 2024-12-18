@@ -1,8 +1,4 @@
-import { useGetSignMessageInfoStatus } from 'hooks';
-
-export const SignFailure = () => {
-  const { errorMessage } = useGetSignMessageInfoStatus();
-
+export const SignFailure = ({ errorMessage }: { errorMessage: string }) => {
   return (
     <div className='flex flex-col'>
       <p>Message could not be signed</p>

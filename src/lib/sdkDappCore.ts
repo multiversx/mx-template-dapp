@@ -8,3 +8,4 @@ export { networkSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/n
 export { tokenLoginSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/loginInfoSelectors';
 export { refreshAccount } from '@multiversx/sdk-dapp-core/out/utils/account/refreshAccount';
 export { getAccount } from '@multiversx/sdk-dapp-core/out/core/methods/account/getAccount';
+export { ProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory';

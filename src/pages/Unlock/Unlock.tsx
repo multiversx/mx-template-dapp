@@ -1,65 +1,24 @@
-import {
-  type ExtensionLoginButtonPropsType,
-  type WebWalletLoginButtonPropsType,
-  type OperaWalletLoginButtonPropsType,
-  type LedgerLoginButtonPropsType,
-  type WalletConnectLoginButtonPropsType
-} from '@multiversx/sdk-dapp/UI';
-import {
-  ExtensionLoginButton,
-  LedgerLoginButton,
-  OperaWalletLoginButton,
-  WalletConnectLoginButton,
-  WebWalletLoginButton as WebWalletUrlLoginButton,
-  CrossWindowLoginButton
-} from 'components/sdkDappCoreUIComponents';
-import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useNavigate } from 'react-router-dom';
 import { AuthRedirectWrapper } from 'wrappers';
-import {
-  IframeButton,
-  WebWalletLoginWrapper,
-  XaliasLoginWrapper
-} from './components';
-import { IframeLoginTypes } from '@multiversx/sdk-web-wallet-iframe-provider/out/constants';
-import { useIframeLogin } from '@multiversx/sdk-dapp/hooks/login/useIframeLogin';
 import { useWindowSize } from 'hooks';
-
-type CommonPropsType =
-  | OperaWalletLoginButtonPropsType
-  | ExtensionLoginButtonPropsType
-  | WebWalletLoginButtonPropsType
-  | LedgerLoginButtonPropsType
-  | WalletConnectLoginButtonPropsType;
-
-// choose how you want to configure connecting to the web wallet
-const USE_WEB_WALLET_CROSS_WINDOW = true;
-
-const WebWalletLoginButton = USE_WEB_WALLET_CROSS_WINDOW
-  ? CrossWindowLoginButton
-  : WebWalletUrlLoginButton;
+import { ProviderTypeEnum } from 'types';
+import { ProviderFactory } from 'lib/sdkDappCore';
+import { Button } from '../../components';
 
 export const Unlock = () => {
   const navigate = useNavigate();
   const { width } = useWindowSize();
-
-  const [onInitiateLogin, { isLoading }] = useIframeLogin({
-    callbackRoute: RouteNamesEnum.dashboard,
-    nativeAuth,
-    onLoginRedirect: () => {
-      navigate(RouteNamesEnum.dashboard);
-    }
-  });
-
   const isMobile = width < 768;
-  const commonProps: CommonPropsType = {
-    callbackRoute: RouteNamesEnum.dashboard,
-    nativeAuth,
-    onLoginRedirect: () => {
-      navigate(RouteNamesEnum.dashboard);
-    },
-    disabled: isLoading
+
+  const handleLogin = (type: ProviderTypeEnum) => async () => {
+    const config = {
+      type
+    };
+
+    const provider = await ProviderFactory.create(config);
+    await provider?.login();
+    navigate(RouteNamesEnum.dashboard);
   };
 
   return (
@@ -76,34 +35,34 @@ export const Unlock = () => {
           </div>
 
           <div className='flex flex-col md:flex-row'>
-            <WalletConnectLoginButton
-              loginButtonText='xPortal App'
-              {...commonProps}
-            />
-            <LedgerLoginButton loginButtonText='Ledger' {...commonProps} />
-            <ExtensionLoginButton
-              loginButtonText='DeFi Wallet'
-              {...commonProps}
-            />
-            <OperaWalletLoginButton
-              loginButtonText='Opera Crypto Wallet - Beta'
-              {...commonProps}
-            />
-            <XaliasLoginWrapper {...commonProps} />
-            <WebWalletLoginWrapper {...commonProps} />
-            {isMobile && (
-              <IframeButton
-                loginButtonText='Passkey Proxy'
-                {...commonProps}
-                onClick={() => onInitiateLogin(IframeLoginTypes.passkey)}
-              />
-            )}
-
-            <IframeButton
-              loginButtonText='Metamask Proxy'
-              {...commonProps}
-              onClick={() => onInitiateLogin(IframeLoginTypes.metamask)}
-            />
+            <Button onClick={handleLogin(ProviderTypeEnum.crossWindow)}>
+              Web Wallet
+            </Button>
+            <div className='ml-2'>
+              <Button onClick={handleLogin(ProviderTypeEnum.ledger)}>
+                Ledger
+              </Button>
+            </div>
+            <div className='ml-2'>
+              <Button onClick={handleLogin(ProviderTypeEnum.extension)}>
+                Extension
+              </Button>
+            </div>
+            <div className='ml-2'>
+              <Button onClick={handleLogin(ProviderTypeEnum.metamask)}>
+                Metamask
+              </Button>
+            </div>
+            <div className='ml-2'>
+              <Button onClick={handleLogin(ProviderTypeEnum.passkey)}>
+                Passkey
+              </Button>
+            </div>
+            <div className='ml-2'>
+              <Button onClick={handleLogin(ProviderTypeEnum.walletConnect)}>
+                Walletconnect
+              </Button>
+            </div>
           </div>
         </div>
       </div>

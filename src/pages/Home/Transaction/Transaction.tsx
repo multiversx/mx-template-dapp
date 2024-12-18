@@ -1,13 +1,12 @@
 import { TRANSACTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 import { Label } from 'components/Label';
-import { ExplorerLink } from 'components/sdkDappCoreUIComponents';
-import { useGetNetworkConfig } from 'hooks';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
+import { getState, networkSelector } from 'lib/sdkDappCore';
+import { ExplorerLink } from 'components/ExplorerLink';
 
 export const Transaction = () => {
-  const { network } = useGetNetworkConfig();
-
-  const transactionUrl = getTransactionUrl(network.walletAddress);
+  const { walletAddress } = networkSelector(getState());
+  const transactionUrl = getTransactionUrl(walletAddress);
 
   const txData = useTransactionOutcome();
 

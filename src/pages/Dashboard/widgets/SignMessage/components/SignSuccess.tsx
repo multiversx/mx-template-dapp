@@ -1,23 +1,22 @@
 import { Label } from 'components/Label';
-import { CopyButton } from 'components/sdkDappCoreUIComponents';
-import { useGetAccountInfo, useGetLastSignedMessageSession } from 'hooks';
 import { decodeMessage } from '../helpers';
+import { getAccount } from 'lib/sdkDappCore';
+import { Message } from '@multiversx/sdk-core/out';
 
-export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {
-  const { address } = useGetAccountInfo();
+export const SignSuccess = (props: {
+  signedMessage: Message | null;
+  signature: string;
+}) => {
+  const { address } = getAccount();
 
-  const signedMessageInfo = useGetLastSignedMessageSession();
-
-  if (!signedMessageInfo?.signature) {
+  if (props.signedMessage == null) {
     return null;
   }
 
-  const { signature } = signedMessageInfo;
-
   const { encodedMessage, decodedMessage } = decodeMessage({
     address,
-    message: messageToSign,
-    signature
+    message: props.signedMessage,
+    signature: props.signature
   });
 
   return (
@@ -30,9 +29,8 @@ export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {
             readOnly
             className='w-full resize-none outline-none bg-transparent'
             rows={2}
-            defaultValue={signature}
+            value={props.signature}
           />
-          <CopyButton text={signature} />
         </div>
 
         <div className='flex flex-row w-full gap-2'>
