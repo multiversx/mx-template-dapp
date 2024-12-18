@@ -1,5 +1,5 @@
 import { Label } from 'components/Label';
-import { CopyButton } from 'components/sdkDappComponents';
+import { CopyButton } from 'components/sdkDappCoreUIComponents';
 import { useGetAccountInfo, useGetLastSignedMessageSession } from 'hooks';
 import { decodeMessage } from '../helpers';
 

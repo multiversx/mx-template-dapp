@@ -2,15 +2,20 @@ import { useEffect } from 'react';
 import { Label } from 'components/Label';
 import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { OutputContainer } from 'components/OutputContainer';
-import { FormatAmount } from 'components/sdkDappComponents';
-import { useGetLoginInfo, useGetNetworkConfig } from 'hooks';
 import { useGetProfile } from './hooks';
 import { Username } from '../Account/components';
+import {
+  getIsLoggedIn,
+  getState,
+  // networkSelector,
+  tokenLoginSelector
+} from 'lib/sdkDappCore';
 
 export const NativeAuth = () => {
-  const { tokenLogin, isLoggedIn } = useGetLoginInfo();
+  const isLoggedIn = getIsLoggedIn();
   const { isLoading, profile, getProfile } = useGetProfile();
-  const { network } = useGetNetworkConfig();
+  // const network = networkSelector(getState());
+  const tokenLogin = tokenLoginSelector(getState());
 
   useEffect(() => {
     // On page refresh, tokenInfo is null which implies that we do not have access to loginInfo data
@@ -46,12 +51,12 @@ export const NativeAuth = () => {
 
       <div className='flex gap-1'>
         <Label>Balance:</Label>
-        <FormatAmount
-          value={profile?.balance ?? '0'}
-          showLabel={profile?.balance !== '0'}
-          egldLabel={network.egldLabel}
-          data-testid='balance'
-        />
+        {/*<FormatAmount*/}
+        {/*  value={profile?.balance ?? '0'}*/}
+        {/*  showLabel={profile?.balance !== '0'}*/}
+        {/*  egldLabel={network.egldLabel}*/}
+        {/*  data-testid='balance'*/}
+        {/*/>*/}
       </div>
     </OutputContainer>
   );

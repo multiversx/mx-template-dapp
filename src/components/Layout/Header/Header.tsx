@@ -1,49 +1,25 @@
 import { Button } from 'components/Button';
 import { MxLink } from 'components/MxLink';
 import { environment } from 'config';
-import { logout } from 'helpers';
-import { useGetIsLoggedIn } from 'hooks';
 import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
-import { useMatch } from 'react-router-dom';
-
-const callbackUrl = `${window.location.origin}/unlock`;
-const onRedirect = undefined; // use this to redirect with useNavigate to a specific page after logout
-const shouldAttemptReLogin = false; // use for special cases where you want to re-login after logout
-const options = {
-  /*
-   * @param {boolean} [shouldBroadcastLogoutAcrossTabs=true]
-   * @description If your dApp supports multiple accounts on multiple tabs,
-   * this param will broadcast the logout event across all tabs.
-   */
-  shouldBroadcastLogoutAcrossTabs: true,
-  /*
-   * @param {boolean} [hasConsentPopup=false]
-   * @description Set it to true if you want to perform async calls before logging out on Safari.
-   * It will open a consent popup for the user to confirm the action before leaving the page.
-   */
-  hasConsentPopup: false
-};
+import { useMatch, useNavigate } from 'react-router-dom';
+import { getAccountProvider, getIsLoggedIn } from 'lib/sdkDappCore';
 
 export const Header = () => {
-  const isLoggedIn = useGetIsLoggedIn();
+  const isLoggedIn = getIsLoggedIn();
   const isUnlockRoute = Boolean(useMatch(RouteNamesEnum.unlock));
+  const navigate = useNavigate();
+  const provider = getAccountProvider();
 
   const ConnectButton = isUnlockRoute ? null : (
     <MxLink to={RouteNamesEnum.unlock}>Connect</MxLink>
   );
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     sessionStorage.clear();
-    logout(
-      callbackUrl,
-      /*
-       * following are optional params. Feel free to remove them in your implementation
-       */
-      onRedirect,
-      shouldAttemptReLogin,
-      options
-    );
+    await provider.logout();
+    navigate(RouteNamesEnum.unlock);
   };
 
   return (

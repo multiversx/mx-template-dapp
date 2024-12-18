@@ -12,7 +12,7 @@ import {
   removeAllTransactionsToSign,
   setTransactionsDisplayInfoState,
   setTransactionsToSignedState
-} from 'services/sdkDappServices';
+} from 'services/sdkDappCoreServices';
 import { useBatchTransactionContext } from 'wrappers';
 
 export const useSendSignedTransactions = ({

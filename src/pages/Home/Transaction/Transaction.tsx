@@ -1,6 +1,6 @@
 import { TRANSACTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 import { Label } from 'components/Label';
-import { ExplorerLink } from 'components/sdkDappComponents';
+import { ExplorerLink } from 'components/sdkDappCoreUIComponents';
 import { useGetNetworkConfig } from 'hooks';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
 

@@ -12,7 +12,7 @@ import {
   WalletConnectLoginButton,
   WebWalletLoginButton as WebWalletUrlLoginButton,
   CrossWindowLoginButton
-} from 'components/sdkDappComponents';
+} from 'components/sdkDappCoreUIComponents';
 import { nativeAuth } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { useNavigate } from 'react-router-dom';

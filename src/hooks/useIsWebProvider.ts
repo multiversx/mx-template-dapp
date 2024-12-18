@@ -1,4 +1,4 @@
-import { LoginMethodsEnum } from 'types/sdkDappTypes';
+import { LoginMethodsEnum } from 'types/sdkDappCoreTypes';
 import { useGetAccountProvider } from './sdkDappHooks';
 
 export const useIsWebProvider = () => {

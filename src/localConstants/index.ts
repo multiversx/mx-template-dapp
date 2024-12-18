@@ -1,4 +1,5 @@
 export * from './routes';
-export * from './sdkDapConstants';
-export * from './signMessage';
+export * from './sdkDappCoreConstants';
+export * from './sdkDappUtilsConstants';
 export * from './session';
+export * from './signMessage';

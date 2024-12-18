@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { OutputContainer } from 'components/OutputContainer';
-import { TransactionRow } from 'components/sdkDappComponents';
+import { TransactionRow } from 'components/sdkDappCoreUIComponents';
 import { useGetActiveTransactionsStatus } from 'hooks';
 import { useGetTransactions } from './hooks';
 import { TransactionsPropsType } from './types';

@@ -3,9 +3,8 @@ import {
   DECIMALS,
   EXTRA_GAS_LIMIT_GUARDED_TX,
   GAS_LIMIT,
-  GAS_PRICE,
-  VERSION
-} from 'localConstants/sdkDapConstants';
+  GAS_PRICE
+} from 'localConstants/sdkDappCoreConstants';
 import { TransactionProps } from 'types/transaction.types';
 import { Transaction } from 'types/sdkCoreTypes';
 import { TokenTransfer } from 'utils/sdkDappCore';
@@ -26,7 +25,7 @@ export const getBatchTransactions = ({
       DECIMALS
     ).toString();
 
-    return newTransaction({
+    return new Transaction({
       sender: address,
       receiver: address,
       data: `batch-tx-${id + 1}`,

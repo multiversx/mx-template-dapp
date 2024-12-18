@@ -1,4 +1,4 @@
-import { GAS_PRICE, VERSION } from 'localConstants/sdkDapConstants';
+import { GAS_PRICE, VERSION } from 'localConstants/sdkDappUtilsConstants';
 import { newTransaction } from 'helpers/sdkDappHelpers';
 import { TransactionProps } from 'types/transaction.types';
 import { Transaction } from 'types/sdkCoreTypes';

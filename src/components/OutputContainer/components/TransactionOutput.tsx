@@ -5,7 +5,6 @@ import {
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
 import { Label } from 'components/Label';
-import { FormatAmount } from 'components/sdkDappComponents';
 import { SignedTransactionType } from 'types';
 
 export const TransactionOutput = ({
@@ -40,12 +39,12 @@ export const TransactionOutput = ({
 
       <p>
         <Label>Amount: </Label>
-        <FormatAmount
-          value={transaction.value}
-          showLabel={transaction.value !== '0'}
-          egldLabel={network.egldLabel}
-          data-testid='balance'
-        />
+        {/*<FormatAmount*/}
+        {/*  value={transaction.value}*/}
+        {/*  showLabel={transaction.value !== '0'}*/}
+        {/*  egldLabel={network.egldLabel}*/}
+        {/*  data-testid='balance'*/}
+        {/*/>*/}
       </p>
       <p>
         <Label>Gas price: </Label>
