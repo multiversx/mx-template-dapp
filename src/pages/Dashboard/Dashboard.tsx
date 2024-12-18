@@ -2,12 +2,10 @@ import { contractAddress } from 'config';
 import { AuthRedirectWrapper } from 'wrappers';
 import {
   Account,
-  PingPongAbi,
   SignMessage,
   NativeAuth,
   BatchTransactions,
   PingPongRaw,
-  PingPongService,
   Transactions
 } from './widgets';
 import { useScrollToElement } from 'hooks';
@@ -29,23 +27,6 @@ const WIDGETS: WidgetType[] = [
     reference:
       'https://docs.multiversx.com/sdk-and-tools/indices/es-index-transactions/',
     anchor: 'ping-pong-manual'
-  },
-  {
-    title: 'Ping & Pong (ABI)',
-    widget: PingPongAbi,
-    description:
-      'Smart Contract interactions using the ABI generated transactions',
-    reference:
-      'https://docs.multiversx.com/sdk-and-tools/sdk-js/sdk-js-cookbook/#using-interaction-when-the-abi-is-available',
-    anchor: 'ping-pong-abi'
-  },
-  {
-    title: 'Ping & Pong (Backend)',
-    widget: PingPongService,
-    description:
-      'Smart Contract interactions using the backend generated transactions',
-    reference: 'https://github.com/multiversx/mx-ping-pong-service',
-    anchor: 'ping-pong-backend'
   },
   {
     title: 'Sign message',
