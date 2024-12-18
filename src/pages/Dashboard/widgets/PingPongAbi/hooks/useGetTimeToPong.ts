@@ -1,4 +1,3 @@
-import { useGetAccount, useGetNetworkConfig } from 'hooks';
 import {
   Address,
   AddressValue,
@@ -7,12 +6,13 @@ import {
   ProxyNetworkProvider
 } from 'utils';
 import { smartContract } from 'utils/smartContract';
+import { getAccount, getState, networkSelector } from 'lib/sdkDappCore';
 
 const resultsParser = new ResultsParser();
 
 export const useGetTimeToPong = () => {
-  const { network } = useGetNetworkConfig();
-  const { address } = useGetAccount();
+  const network = networkSelector(getState());
+  const { address } = getAccount();
 
   const getTimeToPong = async () => {
     try {

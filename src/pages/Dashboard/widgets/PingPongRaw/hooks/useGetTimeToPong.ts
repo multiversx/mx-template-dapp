@@ -1,9 +1,9 @@
 import axios from 'axios';
 import BigNumber from 'bignumber.js';
 import { contractAddress } from 'config';
-import { useGetNetworkConfig, useGetAccount } from 'hooks';
 import { Address, AddressValue } from 'utils';
 import { PingPongResponseType } from '../types';
+import { getAccount, getState, networkSelector } from 'lib/sdkDappCore';
 
 const decodeTime = (data: PingPongResponseType) => {
   const returnValue = data.data.data.returnData[0];
@@ -20,8 +20,8 @@ const decodeTime = (data: PingPongResponseType) => {
 };
 
 export const useGetTimeToPong = () => {
-  const { network } = useGetNetworkConfig();
-  const { address } = useGetAccount();
+  const network = networkSelector(getState());
+  const { address } = getAccount();
 
   const getTimeToPong = async () => {
     try {

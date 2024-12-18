@@ -1,33 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import moment from 'moment';
 import { Button } from 'components/Button';
-import { ContractAddress } from 'components/ContractAddress';
-import { Label } from 'components/Label';
+
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
-import { SessionEnum } from 'localConstants';
-import { SignedTransactionType, WidgetProps } from 'types';
+import { useSendPingPongTransaction } from 'hooks';
+
+import { WidgetProps } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
-  const { hasPendingTransactions } = useGetPendingTransactions();
   const getTimeToPong = useGetTimeToPong();
-  const {
-    sendPingTransactionFromAbi,
-    sendPongTransactionFromAbi,
-    transactionStatus
-  } = useSendPingPongTransaction({
-    type: SessionEnum.abiPingPongSessionId
-  });
-  const pingAmount = useGetPingAmount();
+  const hasPendingTransactions = false; // TODO: Implement this somewhere
+  const { sendPingTransaction, sendPongTransaction } =
+    useSendPingPongTransaction(); // TODO: Add ABI functions
 
-  const [stateTransactions, setStateTransactions] = useState<
-    SignedTransactionType[] | null
-  >(null);
+  const pingAmount = useGetPingAmount();
   const [hasPing, setHasPing] = useState<boolean>(true);
   const [secondsLeft, setSecondsLeft] = useState<number>(0);
 
@@ -36,17 +27,18 @@ export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
     const { canPing, timeRemaining } = setTimeRemaining(secondsRemaining);
 
     setHasPing(canPing);
+
     if (timeRemaining && timeRemaining >= 0) {
       setSecondsLeft(timeRemaining);
     }
   };
 
   const onSendPingTransaction = async () => {
-    await sendPingTransactionFromAbi({ amount: pingAmount, callbackRoute });
+    await sendPingTransaction(pingAmount);
   };
 
   const onSendPongTransaction = async () => {
-    await sendPongTransactionFromAbi({ callbackRoute });
+    await sendPongTransaction();
   };
 
   const timeRemaining = moment()
@@ -56,19 +48,8 @@ export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
 
   const pongAllowed = secondsLeft === 0;
 
-  useEffect(() => {
-    getCountdownSeconds({ secondsLeft, setSecondsLeft });
-  }, [hasPing]);
-
-  useEffect(() => {
-    if (transactionStatus.transactions) {
-      setStateTransactions(transactionStatus.transactions);
-    }
-  }, [transactionStatus]);
-
-  useEffect(() => {
-    setSecondsRemaining();
-  }, [hasPendingTransactions]);
+  getCountdownSeconds({ secondsLeft: secondsLeft, setSecondsLeft });
+  setSecondsRemaining();
 
   return (
     <div className='flex flex-col gap-6'>
@@ -99,21 +80,8 @@ export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
       </div>
 
       <OutputContainer>
-        {!stateTransactions && (
-          <>
-            <ContractAddress />
-            {!pongAllowed && (
-              <p>
-                <Label>Time remaining: </Label>
-                <span className='text-red-600'>{timeRemaining}</span> until able
-                to pong
-              </p>
-            )}
-          </>
-        )}
-
         <PingPongOutput
-          transactions={stateTransactions}
+          transactions={[]}
           pongAllowed={pongAllowed}
           timeRemaining={timeRemaining}
         />

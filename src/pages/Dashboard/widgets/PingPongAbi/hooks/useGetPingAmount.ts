@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-import { useGetNetworkConfig } from 'hooks';
 import { ContractFunction, ResultsParser, ProxyNetworkProvider } from 'utils';
 import { smartContract } from 'utils/smartContract';
+import { getState, networkSelector } from 'lib/sdkDappCore';
 
 const resultsParser = new ResultsParser();
 
 export const useGetPingAmount = () => {
-  const { network } = useGetNetworkConfig();
+  const network = networkSelector(getState());
   const [pingAmount, setPingAmount] = useState<string>('0');
 
   const proxy = new ProxyNetworkProvider(network.apiAddress);

@@ -10,11 +10,6 @@ import {
   OutputContainer,
   TransactionsOutput
 } from 'components/OutputContainer';
-import {
-  useGetAccountInfo,
-  useGetNetworkConfig,
-  useGetPendingTransactions
-} from 'hooks';
 import { SessionEnum } from 'localConstants/session';
 import { SignedTransactionType, WidgetProps } from 'types';
 import { useBatchTransactionContext } from 'wrappers';
@@ -24,13 +19,14 @@ import {
   signAndAutoSendBatchTransactions,
   swapAndLockTokens
 } from './helpers';
+import { getAccount, getState, networkSelector } from 'lib/sdkDappCore';
 
 export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
   const { setSendBatchTransactionsOnDemand } = useBatchTransactionContext();
-  const { address, account } = useGetAccountInfo();
-  const { network } = useGetNetworkConfig();
+  const account = getAccount();
+  const network = networkSelector(getState());
   const { batches } = useGetBatches();
-  const { hasPendingTransactions } = useGetPendingTransactions();
+  const hasPendingTransactions = false; // useGetPendingTransactions();
   const [trackBatchId, setTrackBatchId] = useState(
     sessionStorage.getItem(SessionEnum.batchId)
   );

@@ -1,30 +1,22 @@
-import { useEffect, useState } from 'react';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { Button } from 'components/Button';
-import { ContractAddress } from 'components/ContractAddress';
-import { Label } from 'components/Label';
-import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
-import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
-import { SessionEnum } from 'localConstants';
-import { SignedTransactionType, WidgetProps } from 'types';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
+import { getCountdownSeconds, setTimeRemaining } from 'helpers';
+import { OutputContainer } from 'components/OutputContainer/OutputContainer';
+import { PingPongOutput } from 'components/OutputContainer/components';
+import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTransaction';
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
-export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
+export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
-  const { hasPendingTransactions } = useGetPendingTransactions();
-  const { sendPingTransaction, sendPongTransaction, transactionStatus } =
-    useSendPingPongTransaction({
-      type: SessionEnum.rawPingPongSessionId
-    });
+  const hasPendingTransactions = false; // TODO: Implement this somewhere
+  const { sendPingTransaction, sendPongTransaction } =
+    useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
 
-  const [stateTransactions, setStateTransactions] = useState<
-    SignedTransactionType[] | null
-  >(null);
   const [hasPing, setHasPing] = useState<boolean>(true);
   const [secondsLeft, setSecondsLeft] = useState<number>(0);
 
@@ -39,11 +31,11 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
   };
 
   const onSendPingTransaction = async () => {
-    await sendPingTransaction({ amount: pingAmount, callbackRoute });
+    await sendPingTransaction(pingAmount);
   };
 
   const onSendPongTransaction = async () => {
-    await sendPongTransaction({ callbackRoute });
+    await sendPongTransaction();
   };
 
   const timeRemaining = moment()
@@ -53,19 +45,8 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
 
   const pongAllowed = secondsLeft === 0;
 
-  useEffect(() => {
-    getCountdownSeconds({ secondsLeft, setSecondsLeft });
-  }, [hasPing]);
-
-  useEffect(() => {
-    if (transactionStatus.transactions) {
-      setStateTransactions(transactionStatus.transactions);
-    }
-  }, [transactionStatus]);
-
-  useEffect(() => {
-    setSecondsRemaining();
-  }, [hasPendingTransactions]);
+  getCountdownSeconds({ secondsLeft: secondsLeft, setSecondsLeft });
+  setSecondsRemaining();
 
   return (
     <div className='flex flex-col gap-6'>
@@ -94,20 +75,8 @@ export const PingPongRaw = ({ callbackRoute }: WidgetProps) => {
       </div>
 
       <OutputContainer>
-        {!stateTransactions && (
-          <>
-            <ContractAddress />
-            {!pongAllowed && (
-              <p>
-                <Label>Time remaining: </Label>
-                <span className='text-red-600'>{timeRemaining}</span> until able
-                to pong
-              </p>
-            )}
-          </>
-        )}
         <PingPongOutput
-          transactions={stateTransactions}
+          transactions={[]}
           pongAllowed={pongAllowed}
           timeRemaining={timeRemaining}
         />
