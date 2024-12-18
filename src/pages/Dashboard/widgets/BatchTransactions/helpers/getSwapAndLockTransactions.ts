@@ -1,7 +1,6 @@
-import { GAS_PRICE, VERSION } from 'localConstants/sdkDappUtilsConstants';
-import { newTransaction } from 'helpers/sdkDappHelpers';
+import { GAS_PRICE, VERSION } from 'localConstants';
 import { TransactionProps } from 'types/transaction.types';
-import { Transaction } from 'types/sdkCoreTypes';
+import { Transaction, TransactionPayload } from 'types/sdkCoreTypes';
 import { BATCH_TRANSACTIONS_SC } from 'config';
 
 export const getSwapAndLockTransactions = ({
@@ -10,7 +9,7 @@ export const getSwapAndLockTransactions = ({
   nonce
 }: TransactionProps): Transaction[] => {
   return [
-    newTransaction({
+    new Transaction({
       chainID,
       gasLimit: 4200000,
       gasPrice: GAS_PRICE,
@@ -19,9 +18,9 @@ export const getSwapAndLockTransactions = ({
       sender: address,
       value: '1000000000000000000',
       version: VERSION,
-      data: BATCH_TRANSACTIONS_SC.egld_wEGLD.data
+      data: new TransactionPayload(BATCH_TRANSACTIONS_SC.egld_wEGLD.data)
     }),
-    newTransaction({
+    new Transaction({
       chainID,
       gasLimit: 25500000,
       gasPrice: GAS_PRICE,
@@ -30,9 +29,9 @@ export const getSwapAndLockTransactions = ({
       sender: address,
       value: '0',
       version: VERSION,
-      data: BATCH_TRANSACTIONS_SC.wEGLD_USDC.data
+      data: new TransactionPayload(BATCH_TRANSACTIONS_SC.wEGLD_USDC.data)
     }),
-    newTransaction({
+    new Transaction({
       chainID,
       gasLimit: 25500000,
       gasPrice: GAS_PRICE,
@@ -41,9 +40,9 @@ export const getSwapAndLockTransactions = ({
       sender: address,
       value: '0',
       version: VERSION,
-      data: BATCH_TRANSACTIONS_SC.wEGLD_MEX.data
+      data: new TransactionPayload(BATCH_TRANSACTIONS_SC.wEGLD_MEX.data)
     }),
-    newTransaction({
+    new Transaction({
       chainID,
       gasLimit: 10000000,
       gasPrice: GAS_PRICE,
@@ -52,7 +51,7 @@ export const getSwapAndLockTransactions = ({
       sender: address,
       value: '0',
       version: VERSION,
-      data: BATCH_TRANSACTIONS_SC.lock_MEX.data
+      data: new TransactionPayload(BATCH_TRANSACTIONS_SC.lock_MEX.data)
     })
   ];
 };

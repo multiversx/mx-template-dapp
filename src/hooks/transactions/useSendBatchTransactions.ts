@@ -7,7 +7,9 @@ import {
   networkSelector
 } from 'lib/sdkDappCore';
 import { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';
-import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
+import { GAS_LIMIT, GAS_PRICE, isSafari, SessionEnum } from 'localConstants';
+import { getSwapAndLockTransactions } from '../../pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
+import { refreshAccount } from '../../utils/sdkDappUtils';
 
 export const useSendBatchTransaction = () => {
   const network = networkSelector(getState());
@@ -50,7 +52,35 @@ export const useSendBatchTransaction = () => {
     console.log('Batch transactions hashes', hashes);
   };
 
+  const sendSwapAndLockBatchTransactions = async () => {
+    const { address, nonce } = getAccount(store);
+    const txManager = TransactionManager.getInstance();
+    const transactions = getSwapAndLockTransactions({
+      address,
+      chainID: network.chainId,
+      nonce
+    });
+
+    const signedTransactions = await provider.signTransactions(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      transactions as any
+    );
+
+    const groupedTransactions = [
+      [signedTransactions[0]],
+      [signedTransactions[1], signedTransactions[2]],
+      [signedTransactions[3]]
+    ];
+
+    await refreshAccount();
+
+    const hashes = await txManager.send(groupedTransactions);
+
+    console.log('Batch transactions hashes', hashes);
+  };
+
   return {
-    sendBatchTransaction
+    sendBatchTransaction,
+    sendSwapAndLockBatchTransactions
   };
 };
