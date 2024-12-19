@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { OutputContainer } from 'components/OutputContainer';
-import { TransactionRow } from 'components/sdkDappCoreUIComponents';
-import { useGetActiveTransactionsStatus } from 'hooks';
 import { useGetTransactions } from './hooks';
+import { getActiveTransactionsStatus } from 'lib/sdkDappCore';
 import { TransactionsPropsType } from './types';
 
 const COLUMNS = ['TxHash', 'Age', 'Shard', 'From', 'To', 'Method', 'Value'];
 
 export const Transactions = (props: TransactionsPropsType) => {
-  const { success } = useGetActiveTransactionsStatus();
   const { isLoading, getTransactions, transactions } =
     useGetTransactions(props);
+
+  const { success } = getActiveTransactionsStatus();
 
   useEffect(() => {
     if (success) {
@@ -50,11 +50,11 @@ export const Transactions = (props: TransactionsPropsType) => {
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
               {transactions.map((transaction) => (
-                <TransactionRow
-                  key={transaction.txHash}
-                  className='mx-transactions text-gray-500'
-                  transaction={transaction}
-                />
+                // <TransactionRow
+                //   key={transaction.txHash}
+                //   className='mx-transactions text-gray-500'
+                //   transaction={transaction}
+                // />
               ))}
             </tbody>
           </table>

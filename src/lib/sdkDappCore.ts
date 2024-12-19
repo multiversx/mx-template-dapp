@@ -9,3 +9,5 @@ export { tokenLoginSelector } from '@multiversx/sdk-dapp-core/out/store/selector
 export { refreshAccount } from '@multiversx/sdk-dapp-core/out/utils/account/refreshAccount';
 export { getAccount } from '@multiversx/sdk-dapp-core/out/core/methods/account/getAccount';
 export { ProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory';
+export { getTransactions } from '@multiversx/sdk-dapp-core/out/apiCalls/transactions/getTrnsactions';
+export { getActiveTransactionsStatus } from '@multiversx/sdk-dapp-core/out/utils/transactions/getActiveTransactionsStatus';
