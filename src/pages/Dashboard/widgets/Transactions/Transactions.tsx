@@ -40,7 +40,8 @@ export const Transactions = (props: TransactionsPropsType) => {
                 {COLUMNS.map((column) => (
                   <th
                     key={column}
-                    scope='col'
+                    scope='
+                    col'
                     className='px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6'
                   >
                     {column}
@@ -50,11 +51,11 @@ export const Transactions = (props: TransactionsPropsType) => {
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
               {transactions.map((transaction) => (
-                // <TransactionRow
-                //   key={transaction.txHash}
-                //   className='mx-transactions text-gray-500'
-                //   transaction={transaction}
-                // />
+                <TransactionRow
+                  key={transaction.txHash}
+                  className='mx-transactions text-gray-500'
+                  transaction={transaction}
+                />
               ))}
             </tbody>
           </table>
