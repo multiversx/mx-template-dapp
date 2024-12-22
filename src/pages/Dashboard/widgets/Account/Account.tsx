@@ -2,11 +2,10 @@ import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { Username } from './components';
 import { getAccount } from 'lib/sdkDappCore';
-import { DataTestIdsEnum } from '../../../../localConstants';
-import { formatAmount } from '../../../../lib/sdkDappUtils';
+import { DataTestIdsEnum } from 'localConstants';
+import { formatAmount } from 'lib/sdkDappUtils';
 
 export const Account = () => {
-  // const { egldLabel } = networkSelector(getState());
   const account = getAccount();
 
   return (

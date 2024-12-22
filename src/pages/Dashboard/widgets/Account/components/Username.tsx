@@ -1,7 +1,8 @@
 import { AccountType } from 'types/sdkDappCoreTypes';
 import { Label } from 'components/Label';
-import { DataTestIdsEnum, ProfileType } from 'types';
+import { ProfileType } from 'types';
 import { trimUsernameDomain } from 'lib/sdkDappCore';
+import { DataTestIdsEnum } from 'localConstants';
 
 export const Username = (props: {
   account: AccountType | ProfileType | null;

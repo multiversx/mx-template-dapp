@@ -2,12 +2,13 @@ import classNames from 'classnames';
 import { ShardSpan } from './ShardSpan';
 import { WithTransactionPropsType } from '../types';
 import { TransactionDirectionEnum } from 'types/sdkDappCoreTypes';
-import { DataTestIdsEnum, WithClassnamePropsType } from 'types';
+import { WithClassnamePropsType } from 'types';
 import { addressIsValid } from 'lib/sdkDappCore';
 import { ExplorerLink } from 'components/ExplorerLink';
 import { LockedTokenAddressIcon } from './LockedTokenAddressIcon';
 import { ScAddressIcon } from './ScAddressIcon';
 import { AccountName } from './AccountName';
+import { DataTestIdsEnum } from '../../../../../localConstants';
 
 export interface TransactionSenderPropsType
   extends WithTransactionPropsType,

@@ -12,9 +12,7 @@ import {
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
   const { address } = getAccount();
-  const {
-    network: { apiAddress, explorerAddress }
-  } = networkSelector(getState());
+  const { apiAddress, explorerAddress } = networkSelector(getState());
 
   const [isLoading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState<ServerTransactionType[]>([]);

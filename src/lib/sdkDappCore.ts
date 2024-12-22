@@ -8,7 +8,7 @@ export { getHumanReadableTimeFormat } from '@multiversx/sdk-dapp-core/out/utils/
 export { getTransactionMethod } from '@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionMethod';
 export { getIsLoggedIn } from '@multiversx/sdk-dapp-core/out/core/methods/account/getIsLoggedIn';
 export { getShardText } from '@multiversx/sdk-dapp-core/out/utils/transactions/getShardText';
-export { getState } from '@multiversx/sdk-dapp-core/out/store/store';
+export { getState, getStore } from '@multiversx/sdk-dapp-core/out/store/store';
 export { getTransactionMessages } from '@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionMessages';
 export { getTransactionStatus } from '@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionStatus';
 export { getInterpretedTransaction } from '@multiversx/sdk-dapp-core/out/utils/transactions/getInterpretedTransaction';

@@ -2,8 +2,9 @@ import { AccountName } from './AccountName';
 import { LockedTokenAddressIcon } from './LockedTokenAddressIcon';
 import { ScAddressIcon } from './ScAddressIcon';
 import { WithTransactionPropsType } from '../types';
-import { DataTestIdsEnum, TransactionDirectionEnum } from 'types';
+import { TransactionDirectionEnum } from 'types';
 import { ExplorerLink } from 'components/ExplorerLink';
+import { DataTestIdsEnum } from '../../../../../localConstants';
 
 export interface TransactionReceiverPropsType extends WithTransactionPropsType {
   showLockedAccounts?: boolean;

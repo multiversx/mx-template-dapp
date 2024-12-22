@@ -22,7 +22,7 @@ export const LockedTokenAddressIcon = ({
     getTokenDetailsFromApi();
   }, []);
 
-  const lockedAccounts = tokenDetails.assets?.lockedAccounts;
+  const lockedAccounts = tokenDetails?.assets?.lockedAccounts;
   if (lockedAccounts) {
     const validLockedAccounts = Object.keys(lockedAccounts).filter(
       (account) => {
@@ -36,7 +36,7 @@ export const LockedTokenAddressIcon = ({
       }
     );
     const lockedAccountName =
-      tokenDetails.assets?.lockedAccounts?.[validLockedAccounts[0]];
+      tokenDetails?.assets?.lockedAccounts?.[validLockedAccounts[0]];
 
     return lockedAccountName ? (
       <FontAwesomeIcon

@@ -1,7 +1,11 @@
 import { Label } from 'components/Label';
-import { DataTestIdsEnum, SignedTransactionType } from 'types';
+import { SignedTransactionType } from 'types';
 import { ExplorerLink } from '../../ExplorerLink';
-import { ACCOUNTS_ENDPOINT, TRANSACTIONS_ENDPOINT } from 'localConstants';
+import {
+  ACCOUNTS_ENDPOINT,
+  DataTestIdsEnum,
+  TRANSACTIONS_ENDPOINT
+} from 'localConstants';
 import { formatAmount } from 'lib/sdkDappUtils';
 
 export const TransactionOutput = ({
