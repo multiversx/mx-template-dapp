@@ -5,10 +5,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { getState, networkSelector } from 'lib/sdkDappCore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { WithClassnameType } from '../../types';
+import { WithClassnamePropsType } from '../../types';
 
 export interface ExplorerLinkPropsType
-  extends WithClassnameType,
+  extends WithClassnamePropsType,
     PropsWithChildren {
   page: string;
   text?: any;

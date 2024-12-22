@@ -1,11 +1,17 @@
-import { WithClassnameType } from 'types';
+import { WithClassnamePropsType } from 'types';
 import { WithTransactionPropsType } from '../types';
 import classNames from 'classnames';
 import { TransactionHash } from './TransactionHash';
+import { TimeAgo } from './TimeAgo';
+import { TransactionShardsTransition } from './TransactionShardsTransition';
+import { TransactionSender } from './TransactionSender';
+import { TransactionDirectionBadge } from './TransactionDirectionBadge';
+import { TransactionReceiver } from './TransactionReceiver';
+import { TransactionMethod } from './TransactionMethod';
 
 export interface TransactionRowPropsType
   extends WithTransactionPropsType,
-    WithClassnameType {
+    WithClassnamePropsType {
   showDirectionCol?: boolean;
   showLockedAccounts?: boolean;
 }

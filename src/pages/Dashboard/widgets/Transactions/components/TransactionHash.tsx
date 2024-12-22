@@ -1,14 +1,9 @@
 import { WithTransactionPropsType } from '../types';
-import { WithClassnameType } from 'types';
-import classNames from 'classnames';
 import { DataTestIdsEnum } from 'localConstants';
 import { ExplorerLink } from 'components/ExplorerLink';
 import { TransactionIcon } from './TransactionIcon';
 
-export const TransactionHash = ({
-  className,
-  transaction
-}: WithTransactionPropsType & WithClassnameType) => {
+export const TransactionHash = ({ transaction }: WithTransactionPropsType) => {
   const transactionHashLink = `/transactions/${
     transaction.originalTxHash
       ? `${transaction.originalTxHash}#${transaction.txHash}`
@@ -16,10 +11,11 @@ export const TransactionHash = ({
   }`;
 
   return (
-    <div className={classNames(className)}>
+    <div className='transactionCell d-flex align-items-center'>
       <TransactionIcon transaction={transaction} />
 
       <ExplorerLink
+        className='transactionCellMargin transactionCellLink'
         page={transactionHashLink}
         data-testid={DataTestIdsEnum.transactionLink}
       >

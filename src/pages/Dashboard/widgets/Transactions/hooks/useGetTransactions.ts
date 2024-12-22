@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { apiTimeout, transactionSize } from 'config';
 import { ServerTransactionType } from 'types';
-import { getInterpretedTransaction } from 'utils';
+import { getInterpretedTransaction } from 'lib/sdkDappCore';
 import { TransactionsPropsType } from '../types';
 import {
   getAccount,

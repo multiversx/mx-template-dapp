@@ -7,9 +7,9 @@ import {
   networkSelector
 } from 'lib/sdkDappCore';
 import { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';
-import { GAS_LIMIT, GAS_PRICE, isSafari, SessionEnum } from 'localConstants';
+import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 import { getSwapAndLockTransactions } from '../../pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
-import { refreshAccount } from '../../utils/sdkDappUtils';
+import { refreshAccount } from 'lib/sdkDappCore';
 
 export const useSendBatchTransaction = () => {
   const network = networkSelector(getState());

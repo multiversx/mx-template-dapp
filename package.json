@@ -12,7 +12,6 @@
     "@multiversx/sdk-core": "13.16.0",
     "@multiversx/sdk-dapp-core": "0.0.0-alpha.11",
     "@multiversx/sdk-dapp-utils": "1.0.2",
-    "@multiversx/sdk-dapp": "3.1.5",
     "axios": "1.7.4",
     "classnames": "2.3.2",
     "moment": "2.29.4",

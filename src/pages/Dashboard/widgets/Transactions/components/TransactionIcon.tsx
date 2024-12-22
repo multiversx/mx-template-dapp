@@ -1,4 +1,3 @@
-import React from 'react';
 import { faBan } from '@fortawesome/free-solid-svg-icons/faBan';
 import { faHourglass } from '@fortawesome/free-solid-svg-icons/faHourglass';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';

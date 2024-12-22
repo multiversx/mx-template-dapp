@@ -28,5 +28,5 @@ export const TimeAgo = ({
     <span data-testid={`timeAgo-${value}`}>{result}</span>
   );
 
-  return <span className={styles?.transactionCell}>{component}</span>;
+  return <span className='transactionCell'>{component}</span>;
 };
