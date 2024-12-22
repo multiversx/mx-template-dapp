@@ -10,6 +10,8 @@ import {
   // networkSelector,
   tokenLoginSelector
 } from 'lib/sdkDappCore';
+import { DataTestIdsEnum } from '../../../../localConstants';
+import { formatAmount } from '../../../../lib/sdkDappUtils';
 
 export const NativeAuth = () => {
   const isLoggedIn = getIsLoggedIn();
@@ -51,12 +53,11 @@ export const NativeAuth = () => {
 
       <div className='flex gap-1'>
         <Label>Balance:</Label>
-        {/*<FormatAmount*/}
-        {/*  value={profile?.balance ?? '0'}*/}
-        {/*  showLabel={profile?.balance !== '0'}*/}
-        {/*  egldLabel={network.egldLabel}*/}
-        {/*  data-testid='balance'*/}
-        {/*/>*/}
+        <span data-testid={DataTestIdsEnum.balance}>
+          {formatAmount({
+            input: profile?.balance ?? '0'
+          })}
+        </span>
       </div>
     </OutputContainer>
   );

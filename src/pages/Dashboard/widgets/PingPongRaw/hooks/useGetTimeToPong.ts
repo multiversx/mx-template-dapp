@@ -1,7 +1,7 @@
 import axios from 'axios';
 import BigNumber from 'bignumber.js';
 import { contractAddress } from 'config';
-import { Address, AddressValue } from 'utils';
+import { Address, AddressValue } from 'lib/sdkCore';
 import { PingPongResponseType } from '../types';
 import { getAccount, getState, networkSelector } from 'lib/sdkDappCore';
 

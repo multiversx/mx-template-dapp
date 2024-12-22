@@ -1,7 +1,7 @@
-import type { AccountType } from '@multiversx/sdk-dapp/types';
+import { AccountType } from 'types/sdkDappCoreTypes';
 import { Label } from 'components/Label';
-import { trimUsernameDomain } from 'helpers/sdkDappHelpers';
-import { ProfileType } from 'types';
+import { DataTestIdsEnum, ProfileType } from 'types';
+import { trimUsernameDomain } from 'lib/sdkDappCore';
 
 export const Username = (props: {
   account: AccountType | ProfileType | null;
@@ -15,7 +15,7 @@ export const Username = (props: {
   return (
     <p>
       <Label>Herotag: </Label>
-      <span daata-testid='heroTag'>
+      <span data-testid={DataTestIdsEnum.heroTag}>
         {account.username ? trimUsernameDomain(account.username) : 'N/A'}
       </span>
     </p>

@@ -1,4 +1,4 @@
-import { TRANSACTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
+import { TRANSACTIONS_ENDPOINT } from 'localConstants/sdkDappCoreConstants';
 import { Label } from 'components/Label';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
 import { getState, networkSelector } from 'lib/sdkDappCore';

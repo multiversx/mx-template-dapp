@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getStore } from 'lib/sdkDappCore';
+import { getState } from 'lib/sdkDappCore';
 
 export function useStore() {
-  const store = getStore();
-  const [state, setState] = useState(store.getState());
+  const [state, setState] = useState(getState());
 
   const unsubscribe = store.subscribe((newState) => {
     setState(newState);

@@ -1,99 +1,102 @@
-import { useState } from 'react';
-import type { MouseEvent } from 'react';
 import {
   faFileSignature,
   faBroom,
   faArrowsRotate
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useGetSignMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage/useGetSignMessageSession';
 import { Button } from 'components/Button';
-import { OutputContainer } from 'components/OutputContainer';
-import { useSignMessage } from 'hooks';
-import { SignedMessageStatusesEnum, WidgetProps } from 'types';
 import { SignFailure, SignSuccess } from './components';
+import { getAccount, getAccountProvider } from 'lib/sdkDappCore';
+import { OutputContainer } from 'components/OutputContainer';
+import { Address, Message } from 'lib/sdkCore';
+import { useState, MouseEvent } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const SignMessage = ({ callbackRoute }: WidgetProps) => {
-  const { sessionId, signMessage, onAbort } = useSignMessage();
-  const messageSession = useGetSignMessageSession(sessionId);
-
+export const SignMessage = () => {
   const [message, setMessage] = useState('');
+  const [signedMessage, setSignedMessage] = useState<Message | null>(null);
+  const [state, setState] = useState<'pending' | 'success' | 'error'>(
+    'pending'
+  );
 
-  const handleSubmit = (e: MouseEvent) => {
-    e.preventDefault();
+  const [signatrue, setSignatrue] = useState('');
+  const address = getAccount()?.address;
+  const provider = getAccountProvider();
 
-    if (messageSession) {
-      onAbort();
+  const handleSubmit = async () => {
+    try {
+      const messageToSign = new Message({
+        address: new Address(address),
+        data: Buffer.from(message)
+      });
+      const signedMessage = await provider.signMessage(messageToSign);
+
+      if (!signedMessage?.signature) {
+        setState('error');
+        return;
+      }
+
+      setState('success');
+      setSignatrue(Buffer.from(signedMessage?.signature).toString('hex'));
+      setSignedMessage(signedMessage);
+      setMessage('');
+    } catch (error) {
+      console.error(error);
+      setState('error');
     }
-
-    if (!message.trim()) {
-      return;
-    }
-
-    signMessage({
-      message,
-      callbackRoute
-    });
-
-    setMessage('');
   };
 
   const handleClear = (e: MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    onAbort();
+    setSignatrue('');
+    setState('pending');
   };
-
-  const isError = messageSession
-    ? [
-        (SignedMessageStatusesEnum.cancelled, SignedMessageStatusesEnum.failed)
-      ].includes(messageSession.status) && messageSession?.message
-    : false;
-
-  const isSuccess =
-    messageSession?.message &&
-    messageSession?.status === SignedMessageStatusesEnum.signed;
 
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex gap-2 items-start'>
-        <Button
-          data-testid='signMsgBtn'
-          onClick={handleSubmit}
-          disabled={!message}
-        >
-          <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
-          Sign
-        </Button>
-
-        {(isSuccess || isError) && (
+        {['success', 'error'].includes(state) ? (
           <Button
             data-testid='closeTransactionSuccessBtn'
             id='closeButton'
             onClick={handleClear}
           >
-            <FontAwesomeIcon
-              icon={isSuccess ? faBroom : faArrowsRotate}
-              className='mr-1'
-            />
-            {isError ? 'Try again' : 'Clear'}
+            <>
+              <FontAwesomeIcon
+                icon={state === 'success' ? faBroom : faArrowsRotate}
+                className='mr-1'
+              />
+              {state === 'error' ? 'Try again' : 'Clear'}
+            </>
+          </Button>
+        ) : (
+          <Button data-testid='signMsgBtn' onClick={handleSubmit}>
+            <>
+              <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
+              Sign
+            </>
           </Button>
         )}
       </div>
       <OutputContainer>
-        {!isSuccess && !isError && (
+        {!['success', 'error'].includes(state) && (
           <textarea
-            placeholder='Write message here'
+            placeholder='Write message here1'
             className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
-            onChange={(event) => setMessage(event.currentTarget.value)}
+            onChange={(event) => {
+              setMessage(event.currentTarget.value);
+            }}
+            onKeyUp={(event) => {
+              setMessage(event.currentTarget.value);
+            }}
           />
         )}
 
-        {isSuccess && (
-          <SignSuccess messageToSign={messageSession?.message ?? ''} />
+        {state === 'success' && signedMessage != null && (
+          <SignSuccess signedMessage={signedMessage} signature={signatrue} />
         )}
 
-        {isError && <SignFailure />}
+        {state === 'error' && <SignFailure />}
       </OutputContainer>
     </div>
   );

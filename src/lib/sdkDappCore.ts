@@ -22,3 +22,4 @@ export { refreshAccount } from '@multiversx/sdk-dapp-core/out/utils/account/refr
 export { isContract } from '@multiversx/sdk-dapp-core/out/utils/validation/isContract';
 export { timeAgo } from '@multiversx/sdk-dapp-core/out/utils/operations/timeRemaining';
 export { tokenLoginSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/loginInfoSelectors';
+export { trimUsernameDomain } from '@multiversx/sdk-dapp-core/out/utils/account/trimUsernameDomain';
