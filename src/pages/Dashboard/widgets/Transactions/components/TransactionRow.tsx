@@ -8,6 +8,7 @@ import { TransactionSender } from './TransactionSender';
 import { TransactionDirectionBadge } from './TransactionDirectionBadge';
 import { TransactionReceiver } from './TransactionReceiver';
 import { TransactionMethod } from './TransactionMethod';
+import { TransactionValue } from "./TransactionValue";
 
 export interface TransactionRowPropsType
   extends WithTransactionPropsType,

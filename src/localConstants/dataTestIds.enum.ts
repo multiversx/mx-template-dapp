@@ -9,5 +9,10 @@ export enum DataTestIdsEnum {
   senderLink = 'senderLink',
   transactionReceiver = 'transactionReceiver',
   receiverLink = 'receiverLink',
-  transactionMethod = 'transactionMethod'
+  transactionMethod = 'transactionMethod',
+  transactionValue = 'transactionValue',
+  nftFormattedAmount = 'nftFormattedAmount',
+  nftExplorerLink = 'nftExplorerLink',
+  tokenExplorerLink = 'tokenExplorerLink',
+  tokenFormattedAmount = 'tokenFormattedAmount'
 }
