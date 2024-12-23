@@ -16,10 +16,13 @@ export { explorerUrlBuilder } from '@multiversx/sdk-dapp-core/out/utils/transact
 export { getTransactionValue } from '@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionValue';
 export { getTransactionActionNftText } from '@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionActionNftText';
 export { getTransactions } from '@multiversx/sdk-dapp-core/out/apiCalls/transactions/getTransactions';
+export { getTransactionsByHashes } from '@multiversx/sdk-dapp-core/out/apiCalls/transactions/getTransactionsByHashes';
 export { getTokenDetails } from '@multiversx/sdk-dapp-core/out/apiCalls/tokens/getTokenDetails';
 export { networkSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/networkSelectors';
+export { pendingTransactionsSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/transactionsSelector';
 export { refreshAccount } from '@multiversx/sdk-dapp-core/out/utils/account/refreshAccount';
 export { isContract } from '@multiversx/sdk-dapp-core/out/utils/validation/isContract';
 export { timeAgo } from '@multiversx/sdk-dapp-core/out/utils/operations/timeRemaining';
 export { tokenLoginSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/loginInfoSelectors';
 export { trimUsernameDomain } from '@multiversx/sdk-dapp-core/out/utils/account/trimUsernameDomain';
+export { initApp } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp';

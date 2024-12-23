@@ -4,19 +4,13 @@ import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { OutputContainer } from 'components/OutputContainer';
 import { useGetProfile } from './hooks';
 import { Username } from '../Account/components';
-import {
-  getIsLoggedIn,
-  getState,
-  // networkSelector,
-  tokenLoginSelector
-} from 'lib/sdkDappCore';
-import { DataTestIdsEnum } from '../../../../localConstants';
-import { formatAmount } from '../../../../lib/sdkDappUtils';
+import { getIsLoggedIn, getState, tokenLoginSelector } from 'lib/sdkDappCore';
+import { DataTestIdsEnum } from 'localConstants';
+import { formatAmount } from 'lib/sdkDappUtils';
 
 export const NativeAuth = () => {
   const isLoggedIn = getIsLoggedIn();
   const { isLoading, profile, getProfile } = useGetProfile();
-  // const network = networkSelector(getState());
   const tokenLogin = tokenLoginSelector(getState());
 
   useEffect(() => {

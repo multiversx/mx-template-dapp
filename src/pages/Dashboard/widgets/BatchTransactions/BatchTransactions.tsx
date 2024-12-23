@@ -7,12 +7,14 @@ import { Button } from 'components/Button';
 import { TransactionsOutput } from 'components/OutputContainer/components';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { useSendBatchTransaction } from 'hooks';
+import { getState, pendingTransactionsSelector } from 'lib/sdkDappCore';
 
 export const BatchTransactions = () => {
   const { sendBatchTransaction, sendSwapAndLockBatchTransactions } =
     useSendBatchTransaction();
 
-  const hasPendingTransactions = false;
+  const transactions = pendingTransactionsSelector(getState());
+  const hasPendingTransactions = transactions.length > 0;
 
   return (
     <div className='flex flex-col gap-6'>
@@ -36,7 +38,7 @@ export const BatchTransactions = () => {
       </div>
 
       <OutputContainer>
-        <TransactionsOutput transactions={[]} />
+        <TransactionsOutput transactions={transactions} />
       </OutputContainer>
     </div>
   );

@@ -1,4 +1,7 @@
-export { EnvironmentsEnum } from '@multiversx/sdk-dapp-core/out/types/enums.types';
+export {
+  EnvironmentsEnum,
+  TransactionBatchStatusesEnum
+} from '@multiversx/sdk-dapp-core/out/types/enums.types';
 export type {
   ServerTransactionType,
   TokenArgumentType

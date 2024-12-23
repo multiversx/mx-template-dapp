@@ -4,7 +4,7 @@ import { AuthRedirectWrapper } from 'wrappers';
 import { useWindowSize } from 'hooks';
 import { ProviderTypeEnum } from 'types';
 import { ProviderFactory } from 'lib/sdkDappCore';
-import { Button } from '../../components';
+import { Button } from 'components';
 
 export const Unlock = () => {
   const navigate = useNavigate();

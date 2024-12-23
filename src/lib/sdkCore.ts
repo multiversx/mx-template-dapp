@@ -8,5 +8,7 @@ export { AddressValue } from '@multiversx/sdk-core/out/smartcontracts/typesystem
 export {
   TokenTransfer,
   ProxyNetworkProvider,
-  Message
+  Message,
+  Transaction,
+  TransactionPayload
 } from '@multiversx/sdk-core/out';

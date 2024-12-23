@@ -1,15 +1,17 @@
-import { Transaction, TransactionPayload } from '@multiversx/sdk-core/out';
+import { Transaction, TransactionPayload } from 'lib/sdkCore';
 import { useStore } from 'hooks/useStore';
 import {
   getAccount,
   getAccountProvider,
   getState,
-  networkSelector
+  networkSelector,
+  TransactionManager,
+  refreshAccount
 } from 'lib/sdkDappCore';
-import { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { getSwapAndLockTransactions } from '../../pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
-import { refreshAccount } from 'lib/sdkDappCore';
+import { getSwapAndLockTransactions } from 'pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
+
+const NUMBER_OF_TRANSACTIONS = 5;
 
 export const useSendBatchTransaction = () => {
   const network = networkSelector(getState());
@@ -19,7 +21,6 @@ export const useSendBatchTransaction = () => {
   const sendBatchTransaction = async () => {
     const { address, nonce } = getAccount(store);
     const txManager = TransactionManager.getInstance();
-    const NUMBER_OF_TRANSACTIONS = 5;
     const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
     const transactionsToSend = transactions.map((id) => {
@@ -36,10 +37,8 @@ export const useSendBatchTransaction = () => {
       });
     });
 
-    const signedTransactions = await provider.signTransactions(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      transactionsToSend as any
-    );
+    const signedTransactions =
+      await provider.signTransactions(transactionsToSend);
 
     const groupedTransactions = [
       [signedTransactions[0]],
@@ -47,9 +46,7 @@ export const useSendBatchTransaction = () => {
       [signedTransactions[3], signedTransactions[4]]
     ];
 
-    const hashes = await txManager.send(groupedTransactions);
-
-    console.log('Batch transactions hashes', hashes);
+    return txManager.send(groupedTransactions);
   };
 
   const sendSwapAndLockBatchTransactions = async () => {
@@ -61,10 +58,7 @@ export const useSendBatchTransaction = () => {
       nonce
     });
 
-    const signedTransactions = await provider.signTransactions(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      transactions as any
-    );
+    const signedTransactions = await provider.signTransactions(transactions);
 
     const groupedTransactions = [
       [signedTransactions[0]],
@@ -73,10 +67,7 @@ export const useSendBatchTransaction = () => {
     ];
 
     await refreshAccount();
-
-    const hashes = await txManager.send(groupedTransactions);
-
-    console.log('Batch transactions hashes', hashes);
+    return txManager.send(groupedTransactions);
   };
 
   return {

@@ -4,7 +4,7 @@ import { ScAddressIcon } from './ScAddressIcon';
 import { WithTransactionPropsType } from '../types';
 import { TransactionDirectionEnum } from 'types';
 import { ExplorerLink } from 'components/ExplorerLink';
-import { DataTestIdsEnum } from '../../../../../localConstants';
+import { DataTestIdsEnum } from 'localConstants';
 
 export interface TransactionReceiverPropsType extends WithTransactionPropsType {
   showLockedAccounts?: boolean;

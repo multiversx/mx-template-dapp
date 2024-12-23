@@ -8,7 +8,7 @@ import { ExplorerLink } from 'components/ExplorerLink';
 import { LockedTokenAddressIcon } from './LockedTokenAddressIcon';
 import { ScAddressIcon } from './ScAddressIcon';
 import { AccountName } from './AccountName';
-import { DataTestIdsEnum } from '../../../../../localConstants';
+import { DataTestIdsEnum } from 'localConstants';
 
 export interface TransactionSenderPropsType
   extends WithTransactionPropsType,
