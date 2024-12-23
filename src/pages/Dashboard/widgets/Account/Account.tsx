@@ -1,12 +1,18 @@
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { Username } from './components';
-import { getAccount } from 'lib/sdkDappCore';
 import { DataTestIdsEnum } from 'localConstants';
 import { formatAmount } from 'lib/sdkDappUtils';
+import { accountSelector } from 'lib/sdkDappCore';
+import { useStore } from 'hooks/useStore';
 
 export const Account = () => {
-  const account = getAccount();
+  const state = useStore();
+  const account = accountSelector(state);
+
+  if (!account.address) {
+    return <></>;
+  }
 
   return (
     <OutputContainer>

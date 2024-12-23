@@ -23,7 +23,7 @@ export const useSendPingPongTransaction = () => {
       value: amount,
       data: new TransactionPayload('ping'),
       receiver: address,
-      gasLimit: GAS_LIMIT,
+      gasLimit: 10 * GAS_LIMIT,
       gasPrice: GAS_PRICE,
       chainID: network.chainId,
       nonce,

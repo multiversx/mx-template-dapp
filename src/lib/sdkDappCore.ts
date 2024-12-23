@@ -9,6 +9,7 @@ export { getTransactionMethod } from '@multiversx/sdk-dapp-core/out/utils/transa
 export { getIsLoggedIn } from '@multiversx/sdk-dapp-core/out/core/methods/account/getIsLoggedIn';
 export { getShardText } from '@multiversx/sdk-dapp-core/out/utils/transactions/getShardText';
 export { getState, getStore } from '@multiversx/sdk-dapp-core/out/store/store';
+export { getReactStore } from '@multiversx/sdk-dapp-core/out/store/reactStore';
 export { getTransactionMessages } from '@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionMessages';
 export { getTransactionStatus } from '@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionStatus';
 export { getInterpretedTransaction } from '@multiversx/sdk-dapp-core/out/utils/transactions/getInterpretedTransaction';
@@ -18,6 +19,10 @@ export { getTransactionActionNftText } from '@multiversx/sdk-dapp-core/out/utils
 export { getTransactions } from '@multiversx/sdk-dapp-core/out/apiCalls/transactions/getTransactions';
 export { getTransactionsByHashes } from '@multiversx/sdk-dapp-core/out/apiCalls/transactions/getTransactionsByHashes';
 export { getTokenDetails } from '@multiversx/sdk-dapp-core/out/apiCalls/tokens/getTokenDetails';
+export {
+  accountSelector,
+  isLoggedInSelector
+} from '@multiversx/sdk-dapp-core/out/store/selectors/accountSelectors';
 export { networkSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/networkSelectors';
 export { pendingTransactionsSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/transactionsSelector';
 export { refreshAccount } from '@multiversx/sdk-dapp-core/out/utils/account/refreshAccount';

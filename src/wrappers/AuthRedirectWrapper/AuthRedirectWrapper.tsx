@@ -1,7 +1,8 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RouteNamesEnum } from 'localConstants';
-import { getIsLoggedIn } from 'lib/sdkDappCore';
+import { useStore } from 'hooks/useStore';
+import { isLoggedInSelector } from 'lib/sdkDappCore';
 
 interface AuthRedirectWrapperPropsType extends PropsWithChildren {
   requireAuth?: boolean;
@@ -11,7 +12,8 @@ export const AuthRedirectWrapper = ({
   children,
   requireAuth = true
 }: AuthRedirectWrapperPropsType) => {
-  const isLoggedIn = getIsLoggedIn();
+  const state = useStore();
+  const isLoggedIn = isLoggedInSelector(state);
   const navigate = useNavigate();
 
   useEffect(() => {

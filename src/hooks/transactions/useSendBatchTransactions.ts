@@ -3,7 +3,6 @@ import { useStore } from 'hooks/useStore';
 import {
   getAccount,
   getAccountProvider,
-  getState,
   networkSelector,
   TransactionManager,
   refreshAccount
@@ -14,12 +13,12 @@ import { getSwapAndLockTransactions } from 'pages/Dashboard/widgets/BatchTransac
 const NUMBER_OF_TRANSACTIONS = 5;
 
 export const useSendBatchTransaction = () => {
-  const network = networkSelector(getState());
-  const store = useStore();
+  const state = useStore();
+  const network = networkSelector(state);
   const provider = getAccountProvider();
 
   const sendBatchTransaction = async () => {
-    const { address, nonce } = getAccount(store);
+    const { address, nonce } = getAccount(state);
     const txManager = TransactionManager.getInstance();
     const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
@@ -50,7 +49,7 @@ export const useSendBatchTransaction = () => {
   };
 
   const sendSwapAndLockBatchTransactions = async () => {
-    const { address, nonce } = getAccount(store);
+    const { address, nonce } = getAccount(state);
     const txManager = TransactionManager.getInstance();
     const transactions = getSwapAndLockTransactions({
       address,
