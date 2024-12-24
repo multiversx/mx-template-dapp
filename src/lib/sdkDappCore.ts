@@ -24,6 +24,7 @@ export {
   isLoggedInSelector
 } from '@multiversx/sdk-dapp-core/out/store/selectors/accountSelectors';
 export { networkSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/networkSelectors';
+export { setCustomWalletAddress } from '@multiversx/sdk-dapp-core/out/store/actions/network';
 export { pendingTransactionsSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/transactionsSelector';
 export { refreshAccount } from '@multiversx/sdk-dapp-core/out/utils/account/refreshAccount';
 export { isContract } from '@multiversx/sdk-dapp-core/out/utils/validation/isContract';
