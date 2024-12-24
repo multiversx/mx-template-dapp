@@ -5,11 +5,10 @@ import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
 import { useMatch, useNavigate } from 'react-router-dom';
 import { getAccountProvider, isLoggedInSelector } from 'lib/sdkDappCore';
-import { useStore } from 'hooks/useStore';
+import { useSelector } from 'hooks/useSelector';
 
 export const Header = () => {
-  const state = useStore();
-  const isLoggedIn = isLoggedInSelector(state);
+  const isLoggedIn = useSelector(isLoggedInSelector);
   const isUnlockRoute = Boolean(useMatch(RouteNamesEnum.unlock));
   const navigate = useNavigate();
   const provider = getAccountProvider();

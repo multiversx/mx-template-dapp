@@ -17,7 +17,9 @@ export const Unlock = () => {
     };
 
     const provider = await ProviderFactory.create(config);
-    await provider?.login();
+    const data = await provider?.login();
+    console.log('data', data);
+    debugger;
     navigate(RouteNamesEnum.dashboard);
   };
 

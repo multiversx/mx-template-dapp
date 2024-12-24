@@ -9,17 +9,16 @@ import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTr
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { pendingTransactionsSelector } from 'lib/sdkDappCore';
-import { useStore } from 'hooks/useStore';
+import { useSelector } from 'hooks/useSelector';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
-  const state = useStore();
 
   const { sendPingTransaction, sendPongTransaction } =
     useSendPingPongTransaction();
 
-  const transactions = pendingTransactionsSelector(state);
+  const transactions = useSelector(pendingTransactionsSelector);
   const hasPendingTransactions = transactions.length > 0;
   const pingAmount = useGetPingAmount();
 

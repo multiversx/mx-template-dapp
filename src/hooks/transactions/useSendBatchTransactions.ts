@@ -1,24 +1,23 @@
 import { Transaction, TransactionPayload } from 'lib/sdkCore';
-import { useStore } from 'hooks/useStore';
 import {
-  getAccount,
   getAccountProvider,
   networkSelector,
   TransactionManager,
-  refreshAccount
+  refreshAccount,
+  accountSelector
 } from 'lib/sdkDappCore';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 import { getSwapAndLockTransactions } from 'pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
+import { useSelector } from 'hooks/useSelector';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 
 export const useSendBatchTransaction = () => {
-  const state = useStore();
-  const network = networkSelector(state);
+  const network = useSelector(networkSelector);
   const provider = getAccountProvider();
 
   const sendBatchTransaction = async () => {
-    const { address, nonce } = getAccount(state);
+    const { address, nonce } = useSelector(accountSelector);
     const txManager = TransactionManager.getInstance();
     const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
@@ -49,7 +48,7 @@ export const useSendBatchTransaction = () => {
   };
 
   const sendSwapAndLockBatchTransactions = async () => {
-    const { address, nonce } = getAccount(state);
+    const { address, nonce } = useSelector(accountSelector);
     const txManager = TransactionManager.getInstance();
     const transactions = getSwapAndLockTransactions({
       address,

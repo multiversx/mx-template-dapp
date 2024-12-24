@@ -4,11 +4,10 @@ import { Username } from './components';
 import { DataTestIdsEnum } from 'localConstants';
 import { formatAmount } from 'lib/sdkDappUtils';
 import { accountSelector } from 'lib/sdkDappCore';
-import { useStore } from 'hooks/useStore';
+import { useSelector } from 'hooks/useSelector';
 
 export const Account = () => {
-  const state = useStore();
-  const account = accountSelector(state);
+  const account = useSelector(accountSelector);
 
   if (!account.address) {
     return <></>;

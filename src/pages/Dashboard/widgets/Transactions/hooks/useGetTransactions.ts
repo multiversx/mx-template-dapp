@@ -3,18 +3,13 @@ import { apiTimeout, transactionSize } from 'config';
 import { ServerTransactionType } from 'types';
 import { accountSelector, getInterpretedTransaction } from 'lib/sdkDappCore';
 import { TransactionsPropsType } from '../types';
-import {
-  getAccount,
-  getState,
-  networkSelector,
-  getTransactions
-} from 'lib/sdkDappCore';
+import { networkSelector, getTransactions } from 'lib/sdkDappCore';
 import { useStore } from 'hooks/useStore';
+import { useSelector } from 'hooks/useSelector';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
-  const state = useStore();
-  const { address } = accountSelector(state);
-  const { apiAddress, explorerAddress } = networkSelector(state);
+  const { address } = useSelector(accountSelector);
+  const { apiAddress, explorerAddress } = useSelector(networkSelector);
 
   const [isLoading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState<ServerTransactionType[]>([]);

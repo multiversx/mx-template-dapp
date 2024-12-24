@@ -1,8 +1,8 @@
 import { Transaction, TransactionPayload } from '@multiversx/sdk-core/out';
 import { contractAddress } from 'config';
-import { useStore } from 'hooks/useStore';
+import { useSelector } from 'hooks/useSelector';
 import {
-  getAccount,
+  accountSelector,
   getAccountProvider,
   getState,
   networkSelector,
@@ -12,11 +12,10 @@ import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 
 export const useSendPingPongTransaction = () => {
   const network = networkSelector(getState());
-  const store = useStore();
   const provider = getAccountProvider();
 
   const sendPingTransaction = async (amount: string) => {
-    const { address, nonce } = getAccount(store);
+    const { address, nonce } = useSelector(accountSelector);
     const txManager = TransactionManager.getInstance();
 
     const pingTransaction = new Transaction({
@@ -42,7 +41,7 @@ export const useSendPingPongTransaction = () => {
   };
 
   const sendPongTransaction = async () => {
-    const { address, nonce } = getAccount(store);
+    const { address, nonce } = useSelector(accountSelector);
     const txManager = TransactionManager.getInstance();
     const pongTransaction = new Transaction({
       value: '0',
