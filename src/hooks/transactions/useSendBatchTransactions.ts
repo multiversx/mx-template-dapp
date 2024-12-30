@@ -3,7 +3,6 @@ import {
   getAccountProvider,
   networkSelector,
   TransactionManager,
-  refreshAccount,
   accountSelector
 } from 'lib/sdkDappCore';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
@@ -14,10 +13,10 @@ const NUMBER_OF_TRANSACTIONS = 5;
 
 export const useSendBatchTransaction = () => {
   const network = useSelector(networkSelector);
+  const { address, nonce } = useSelector(accountSelector);
   const provider = getAccountProvider();
 
   const sendBatchTransaction = async () => {
-    const { address, nonce } = useSelector(accountSelector);
     const txManager = TransactionManager.getInstance();
     const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
@@ -44,11 +43,11 @@ export const useSendBatchTransaction = () => {
       [signedTransactions[3], signedTransactions[4]]
     ];
 
-    return txManager.send(groupedTransactions);
+    await txManager.send(groupedTransactions);
+    await txManager.track(signedTransactions);
   };
 
   const sendSwapAndLockBatchTransactions = async () => {
-    const { address, nonce } = useSelector(accountSelector);
     const txManager = TransactionManager.getInstance();
     const transactions = getSwapAndLockTransactions({
       address,
@@ -64,8 +63,8 @@ export const useSendBatchTransaction = () => {
       [signedTransactions[3]]
     ];
 
-    await refreshAccount();
-    return txManager.send(groupedTransactions);
+    await txManager.send(groupedTransactions);
+    await txManager.track(signedTransactions);
   };
 
   return {

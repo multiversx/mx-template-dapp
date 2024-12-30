@@ -1,21 +1,20 @@
-import { Transaction, TransactionPayload } from '@multiversx/sdk-core/out';
+import { Transaction, TransactionPayload } from 'lib/sdkCore';
 import { contractAddress } from 'config';
 import { useSelector } from 'hooks/useSelector';
 import {
   accountSelector,
   getAccountProvider,
-  getState,
   networkSelector,
   TransactionManager
 } from 'lib/sdkDappCore';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 
 export const useSendPingPongTransaction = () => {
-  const network = networkSelector(getState());
+  const network = useSelector(networkSelector);
+  const { address, nonce } = useSelector(accountSelector);
   const provider = getAccountProvider();
 
   const sendPingTransaction = async (amount: string) => {
-    const { address, nonce } = useSelector(accountSelector);
     const txManager = TransactionManager.getInstance();
 
     const pingTransaction = new Transaction({
@@ -31,17 +30,14 @@ export const useSendPingPongTransaction = () => {
     });
 
     const signedTransactions = await provider.signTransactions([
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      pingTransaction as any
+      pingTransaction
     ]);
 
-    const hash = await txManager.send(signedTransactions);
-
-    console.log('Ping hash:', hash);
+    await txManager.send(signedTransactions);
+    await txManager.track(signedTransactions);
   };
 
   const sendPongTransaction = async () => {
-    const { address, nonce } = useSelector(accountSelector);
     const txManager = TransactionManager.getInstance();
     const pongTransaction = new Transaction({
       value: '0',
@@ -56,12 +52,11 @@ export const useSendPingPongTransaction = () => {
     });
 
     const signedTransactions = await provider.signTransactions([
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      pongTransaction as any
+      pongTransaction
     ]);
 
-    const hash = await txManager.send(signedTransactions);
-    console.log('Pong transaction hash: ', hash);
+    await txManager.send(signedTransactions);
+    await txManager.track(signedTransactions);
   };
 
   return {

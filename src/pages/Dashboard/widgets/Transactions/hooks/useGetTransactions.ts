@@ -4,7 +4,6 @@ import { ServerTransactionType } from 'types';
 import { accountSelector, getInterpretedTransaction } from 'lib/sdkDappCore';
 import { TransactionsPropsType } from '../types';
 import { networkSelector, getTransactions } from 'lib/sdkDappCore';
-import { useStore } from 'hooks/useStore';
 import { useSelector } from 'hooks/useSelector';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
