@@ -1,6 +1,6 @@
 {
-  "name": "@multiversx/mx-template-dapp",
-  "description": "MultiversX Dapp Template",
+  "name": "multiversx-nft-ai-agent",
+  "description": "AI Agent for NFT Analysis on MultiversX",
   "version": "1.0.0",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
@@ -11,12 +11,15 @@
     "@fortawesome/react-fontawesome": "0.2.0",
     "@multiversx/sdk-core": "13.16.0",
     "@multiversx/sdk-dapp": "3.1.5",
+    "@tensorflow/tfjs": "4.17.0",
     "axios": "1.7.4",
     "classnames": "2.3.2",
+    "ml-regression": "5.0.0",
     "moment": "2.29.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.16.0"
+    "react-router-dom": "6.16.0",
+    "recharts": "2.10.4"
   },
   "scripts": {
     "lint": "eslint --ext js,ts,tsx src",
@@ -85,8 +88,5 @@
     "vite-plugin-node-polyfills": "0.14.1",
     "vite-plugin-svgr": "4.0.0",
     "vite-tsconfig-paths": "4.2.1"
-  },
-  "resolutions": {
-    "**/*/nth-check": "2.0.1"
   }
 }

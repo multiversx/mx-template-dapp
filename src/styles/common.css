@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Base */
+:root {
+  --primary-gradient: linear-gradient(to right, #00c6fb, #005bea);
+  --secondary-gradient: linear-gradient(to right, #4facfe, #00f2fe);
+}
+
+/* Typography */
+.mx-gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  font-weight: bold;
+}
+
+/* Cards */
+.mx-card {
+  @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-all duration-300;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .mx-card {
+  background: rgba(17, 24, 39, 0.8);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.mx-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Buttons */
+.mx-button {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-300;
+  background: var(--primary-gradient);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.mx-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 198, 251, 0.3);
+}
+
+.dark .mx-button {
+  box-shadow: 0 4px 12px rgba(0, 198, 251, 0.15);
+}
+
+.mx-button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* Inputs */
+.mx-input {
+  @apply px-4 py-2 rounded-lg border bg-white dark:bg-gray-800 text-gray-900 dark:text-white transition-all duration-300;
+  border-color: rgba(156, 163, 175, 0.2);
+}
+
+.dark .mx-input {
+  border-color: rgba(156, 163, 175, 0.1);
+}
+
+.mx-input:focus {
+  @apply outline-none ring-2 ring-blue-500/50;
+  border-color: transparent;
+}
+
+/* Stats */
+.mx-stat-card {
+  @apply flex flex-col items-center justify-center p-4 rounded-lg bg-gray-50 dark:bg-gray-800/50;
+  border: 1px solid rgba(156, 163, 175, 0.1);
+}
+
+.mx-stat-value {
+  @apply text-2xl font-bold text-gray-900 dark:text-white mb-1;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.mx-stat-label {
+  @apply text-sm text-gray-600 dark:text-gray-400;
+}
+
+/* Progress */
+.mx-progress-bar {
+  @apply w-full h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden;
+}
+
+.mx-progress-value {
+  @apply h-full rounded-full transition-all duration-300;
+  background: var(--primary-gradient);
+}
+
+/* Grid */
+.mx-grid {
+  @apply grid gap-6;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Animations */
+@keyframes blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, -20px) scale(1.1); }
+  50% { transform: translate(-20px, 20px) scale(0.9); }
+  75% { transform: translate(20px, 20px) scale(1.05); }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+/* Dark mode overrides */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background: #111827;
+  color: #fff;
+}
+
+/* Text colors */
+.text-primary {
+  @apply text-gray-900 dark:text-white;
+}
+
+.text-secondary {
+  @apply text-gray-600 dark:text-gray-300;
+}
+
+.text-tertiary {
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+/* Links */
+.link-hover {
+  @apply transition-colors duration-200;
+}
+
+.link-hover:hover {
+  @apply text-blue-500;
+}
+
+/* Gradients */
+.bg-gradient-primary {
+  background: var(--primary-gradient);
+}
+
+.bg-gradient-secondary {
+  background: var(--secondary-gradient);
+}

@@ -1,18 +1,12 @@
-import { contractAddress } from 'config';
+import React from 'react';
 import { AuthRedirectWrapper } from 'wrappers';
-import {
-  Account,
-  PingPongAbi,
-  SignMessage,
-  NativeAuth,
-  BatchTransactions,
-  PingPongRaw,
-  PingPongService,
-  Transactions
-} from './widgets';
+import { Account } from './widgets';
 import { useScrollToElement } from 'hooks';
 import { Widget } from './components';
 import { WidgetType } from 'types/widget.types';
+import { NftRarityAnalyzer } from 'components/NftAnalytics/NftRarityAnalyzer';
+import { NftPricePredictor } from 'components/NftAnalytics/NftPricePredictor';
+import '../../styles/common.css';
 
 const WIDGETS: WidgetType[] = [
   {
@@ -22,80 +16,75 @@ const WIDGETS: WidgetType[] = [
     reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account'
   },
   {
-    title: 'Ping & Pong (Manual)',
-    widget: PingPongRaw,
-    description:
-      'Smart Contract interactions using manually formulated transactions',
-    reference:
-      'https://docs.multiversx.com/sdk-and-tools/indices/es-index-transactions/',
-    anchor: 'ping-pong-manual'
+    title: 'NFT Rarity Analyzer',
+    widget: NftRarityAnalyzer,
+    description: 'Analyze NFT rarity based on attributes and collection data',
+    reference: 'https://docs.xoxno.com'
   },
   {
-    title: 'Ping & Pong (ABI)',
-    widget: PingPongAbi,
-    description:
-      'Smart Contract interactions using the ABI generated transactions',
-    reference:
-      'https://docs.multiversx.com/sdk-and-tools/sdk-js/sdk-js-cookbook/#using-interaction-when-the-abi-is-available',
-    anchor: 'ping-pong-abi'
-  },
-  {
-    title: 'Ping & Pong (Backend)',
-    widget: PingPongService,
-    description:
-      'Smart Contract interactions using the backend generated transactions',
-    reference: 'https://github.com/multiversx/mx-ping-pong-service',
-    anchor: 'ping-pong-backend'
-  },
-  {
-    title: 'Sign message',
-    widget: SignMessage,
-    description: 'Message signing using the connected account',
-    reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account-1',
-    anchor: 'sign-message'
-  },
-  {
-    title: 'Native auth',
-    widget: NativeAuth,
-    description:
-      'A secure authentication token can be used to interact with the backend',
-    reference: 'https://github.com/multiversx/mx-sdk-js-native-auth-server'
-  },
-  {
-    title: 'Batch Transactions',
-    widget: BatchTransactions,
-    description:
-      'For complex scenarios transactions can be sent in the desired group/sequence',
-    reference:
-      'https://github.com/multiversx/mx-sdk-dapp#sending-transactions-synchronously-in-batches',
-    anchor: 'batch-transactions'
-  },
-  {
-    title: 'Transactions (All)',
-    widget: Transactions,
-    description: 'List transactions for the connected account',
-    reference:
-      'https://api.elrond.com/#/accounts/AccountController_getAccountTransactions'
-  },
-  {
-    title: 'Transactions (Ping & Pong)',
-    widget: Transactions,
-    props: { receiver: contractAddress },
-    description: 'List transactions filtered for a given Smart Contract',
-    reference:
-      'https://api.elrond.com/#/accounts/AccountController_getAccountTransactions'
+    title: 'NFT Price Predictor',
+    widget: NftPricePredictor,
+    description: 'Predict NFT prices using machine learning',
+    reference: 'https://docs.xoxno.com'
   }
 ];
 
 export const Dashboard = () => {
-  useScrollToElement();
+  const { hash } = window.location;
+  const ref = useScrollToElement(hash);
 
   return (
     <AuthRedirectWrapper>
-      <div className='flex flex-col gap-6 max-w-3xl w-full'>
-        {WIDGETS.map((element) => (
-          <Widget key={element.title} {...element} />
-        ))}
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6">
+        <div className="max-w-7xl mx-auto">
+          <h1 className="mx-gradient-text text-4xl mb-8">NFT Analytics Dashboard</h1>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div className="mx-stat-card">
+              <span className="mx-stat-value">247</span>
+              <span className="mx-stat-label">Total NFTs Analyzed</span>
+            </div>
+            <div className="mx-stat-card">
+              <span className="mx-stat-value">89.4%</span>
+              <span className="mx-stat-label">Average Prediction Accuracy</span>
+            </div>
+            <div className="mx-stat-card">
+              <span className="mx-stat-value">1.28K</span>
+              <span className="mx-stat-label">Active Users</span>
+            </div>
+          </div>
+
+          <div className="space-y-6" ref={ref}>
+            {WIDGETS.map((element) => {
+              const WidgetComponent = element.widget;
+              return (
+                <div key={element.title} className="mx-card hover:scale-[1.01]">
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="mx-gradient-text text-2xl">{element.title}</h2>
+                    {element.reference && (
+                      <a
+                        href={element.reference}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:text-blue-600 text-sm"
+                      >
+                        View Docs
+                      </a>
+                    )}
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400 mb-6">{element.description}</p>
+                  <Widget
+                    title={element.title}
+                    description={element.description}
+                    reference={element.reference}
+                    anchor={element.anchor}
+                    widget={WidgetComponent}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </AuthRedirectWrapper>
   );
