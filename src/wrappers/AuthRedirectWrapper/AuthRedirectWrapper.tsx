@@ -1,30 +1,17 @@
-import { PropsWithChildren, useEffect } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
+import { useGetIsLoggedIn } from '@multiversx/sdk-dapp/hooks';
 import { useNavigate } from 'react-router-dom';
-import { RouteNamesEnum } from 'localConstants';
-import { useGetIsLoggedIn } from '../../hooks';
+import { RouteNamesEnum } from 'localConstants/routes/routeNames.enums';
 
-interface AuthRedirectWrapperPropsType extends PropsWithChildren {
-  requireAuth?: boolean;
-}
-
-export const AuthRedirectWrapper = ({
-  children,
-  requireAuth = true
-}: AuthRedirectWrapperPropsType) => {
-  const isLoggedIn = useGetIsLoggedIn();
+export const AuthRedirectWrapper = ({ children }: PropsWithChildren) => {
   const navigate = useNavigate();
+  const isLoggedIn = useGetIsLoggedIn();
 
   useEffect(() => {
-    if (isLoggedIn && !requireAuth) {
-      navigate(RouteNamesEnum.dashboard);
-
-      return;
+    if (isLoggedIn) {
+      navigate(RouteNamesEnum.dashboard, { replace: true });
     }
-
-    if (!isLoggedIn && requireAuth) {
-      navigate(RouteNamesEnum.unlock);
-    }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, navigate]);
 
   return <>{children}</>;
 };

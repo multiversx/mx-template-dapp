@@ -1,0 +1,72 @@
+.footer-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #6B7280;
+}
+
+.lion-container {
+  display: inline-flex;
+  align-items: center;
+  transform-origin: center;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.lion {
+  font-size: 1.25rem;
+  transform-origin: center;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.company-name {
+  background: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+  position: relative;
+  animation: shimmer 2s linear infinite;
+}
+
+.company-name::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Dark mode */
+.dark .footer-content {
+  color: #9CA3AF;
+}
+
+.dark .company-name {
+  background: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

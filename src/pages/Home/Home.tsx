@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { routeNames } from '../../constants/routeNames';
 import { ThemeToggle } from '../../components/ThemeToggle/ThemeToggle';
+import { AnimatedLogo } from '../../components/Logo/AnimatedLogo';
 import '../../styles/common.css';
 
 export const Home = () => {
@@ -19,7 +20,7 @@ export const Home = () => {
         <nav className="relative z-10 mx-auto max-w-7xl px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-8">
-              <div className="mx-gradient-text text-3xl font-bold">Tikaw</div>
+              <AnimatedLogo />
               <div className="hidden md:flex space-x-6">
                 <a href="#features" className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">Features</a>
                 <a href="#analytics" className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">Analytics</a>
