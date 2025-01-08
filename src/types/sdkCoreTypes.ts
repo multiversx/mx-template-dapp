@@ -1,2 +1,2 @@
 export type { IPlainTransactionObject } from '@multiversx/sdk-core';
-export type { Transaction } from '@multiversx/sdk-core/out';
+export { Transaction, TransactionPayload } from '@multiversx/sdk-core/out';

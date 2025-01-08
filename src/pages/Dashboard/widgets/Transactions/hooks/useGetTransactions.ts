@@ -1,16 +1,13 @@
 import { useState } from 'react';
 import { apiTimeout, transactionSize } from 'config';
-import { getTransactions } from 'helpers';
-import { useGetAccount, useGetNetworkConfig } from 'hooks';
 import { ServerTransactionType } from 'types';
-import { getInterpretedTransaction } from 'utils';
+import { accountSelector, getInterpretedTransaction } from 'lib/sdkDappCore';
 import { TransactionsPropsType } from '../types';
+import { networkSelector, getTransactions, useSelector } from 'lib/sdkDappCore';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
-  const { address } = useGetAccount();
-  const {
-    network: { apiAddress, explorerAddress }
-  } = useGetNetworkConfig();
+  const { address } = useSelector(accountSelector);
+  const { apiAddress, explorerAddress } = useSelector(networkSelector);
 
   const [isLoading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState<ServerTransactionType[]>([]);
@@ -28,9 +25,11 @@ export const useGetTransactions = (payload?: TransactionsPropsType) => {
         ...(payload ?? {})
       });
 
-      const interpretedTransactions = data.map((transaction) =>
-        getInterpretedTransaction({ transaction, address, explorerAddress })
+      const interpretedTransactions = data.map(
+        (transaction: ServerTransactionType) =>
+          getInterpretedTransaction({ transaction, address, explorerAddress })
       );
+
       setTransactions(interpretedTransactions);
     } catch (error) {
       console.error('Failed to fetch transactions', error);

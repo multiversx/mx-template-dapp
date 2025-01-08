@@ -1,16 +1,36 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { OutputContainer } from 'components/OutputContainer';
-import { TransactionRow } from 'components/sdkDappComponents';
-import { useGetActiveTransactionsStatus } from 'hooks';
 import { useGetTransactions } from './hooks';
+import {
+  getAccount,
+  getActiveTransactionsStatus,
+  getInterpretedTransaction,
+  getState,
+  networkSelector
+} from 'lib/sdkDappCore';
 import { TransactionsPropsType } from './types';
+import { TransactionRow } from './components/TransactionRow';
 
 const COLUMNS = ['TxHash', 'Age', 'Shard', 'From', 'To', 'Method', 'Value'];
 
 export const Transactions = (props: TransactionsPropsType) => {
-  const { success } = useGetActiveTransactionsStatus();
   const { isLoading, getTransactions, transactions } =
     useGetTransactions(props);
+
+  const { address } = getAccount();
+  const { explorerAddress } = networkSelector(getState());
+
+  const interpretedTransactions = useMemo(() => {
+    if (!address) {
+      return [];
+    }
+
+    return transactions.map((transaction) =>
+      getInterpretedTransaction({ transaction, address, explorerAddress })
+    );
+  }, [transactions, explorerAddress, address]);
+
+  const { success } = getActiveTransactionsStatus();
 
   useEffect(() => {
     if (success) {
@@ -40,7 +60,8 @@ export const Transactions = (props: TransactionsPropsType) => {
                 {COLUMNS.map((column) => (
                   <th
                     key={column}
-                    scope='col'
+                    scope='
+                    col'
                     className='px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-1/6'
                   >
                     {column}
@@ -49,7 +70,7 @@ export const Transactions = (props: TransactionsPropsType) => {
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {transactions.map((transaction) => (
+              {interpretedTransactions.map((transaction) => (
                 <TransactionRow
                   key={transaction.txHash}
                   className='mx-transactions text-gray-500'

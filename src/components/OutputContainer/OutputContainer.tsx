@@ -1,11 +1,11 @@
 import type { PropsWithChildren } from 'react';
 import classNames from 'classnames';
-import { Loader } from 'components/sdkDappComponents';
-import { WithClassnameType } from 'types';
+import { Loader } from 'components/Loader';
+import { WithClassnamePropsType } from 'types';
 
 interface OutputContainerPropsType
   extends PropsWithChildren,
-    WithClassnameType {
+    WithClassnamePropsType {
   isLoading?: boolean;
 }
 

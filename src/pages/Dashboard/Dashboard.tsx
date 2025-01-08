@@ -2,12 +2,9 @@ import { contractAddress } from 'config';
 import { AuthRedirectWrapper } from 'wrappers';
 import {
   Account,
-  PingPongAbi,
   SignMessage,
-  NativeAuth,
   BatchTransactions,
   PingPongRaw,
-  PingPongService,
   Transactions
 } from './widgets';
 import { useScrollToElement } from 'hooks';
@@ -31,35 +28,11 @@ const WIDGETS: WidgetType[] = [
     anchor: 'ping-pong-manual'
   },
   {
-    title: 'Ping & Pong (ABI)',
-    widget: PingPongAbi,
-    description:
-      'Smart Contract interactions using the ABI generated transactions',
-    reference:
-      'https://docs.multiversx.com/sdk-and-tools/sdk-js/sdk-js-cookbook/#using-interaction-when-the-abi-is-available',
-    anchor: 'ping-pong-abi'
-  },
-  {
-    title: 'Ping & Pong (Backend)',
-    widget: PingPongService,
-    description:
-      'Smart Contract interactions using the backend generated transactions',
-    reference: 'https://github.com/multiversx/mx-ping-pong-service',
-    anchor: 'ping-pong-backend'
-  },
-  {
     title: 'Sign message',
     widget: SignMessage,
     description: 'Message signing using the connected account',
     reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account-1',
     anchor: 'sign-message'
-  },
-  {
-    title: 'Native auth',
-    widget: NativeAuth,
-    description:
-      'A secure authentication token can be used to interact with the backend',
-    reference: 'https://github.com/multiversx/mx-sdk-js-native-auth-server'
   },
   {
     title: 'Batch Transactions',

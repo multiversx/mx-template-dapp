@@ -1,7 +1,7 @@
 import type { PropsWithChildren, MouseEvent } from 'react';
-import { WithClassnameType } from 'types';
+import { WithClassnamePropsType } from 'types';
 
-interface ButtonType extends WithClassnameType, PropsWithChildren {
+interface ButtonType extends WithClassnamePropsType, PropsWithChildren {
   onClick: (e: MouseEvent) => void;
   disabled?: boolean;
   dataTestId?: string;
