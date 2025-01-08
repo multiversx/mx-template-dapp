@@ -33,3 +33,4 @@ export { tokenLoginSelector } from '@multiversx/sdk-dapp-core/out/store/selector
 export { trimUsernameDomain } from '@multiversx/sdk-dapp-core/out/utils/account/trimUsernameDomain';
 export { initApp } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp';
 export type { StoreType } from '@multiversx/sdk-dapp-core/out/store/store.types';
+export { useSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/useSelector';

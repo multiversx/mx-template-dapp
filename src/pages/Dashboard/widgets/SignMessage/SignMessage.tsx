@@ -5,12 +5,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components/Button';
 import { SignFailure, SignSuccess } from './components';
-import { accountSelector, getAccountProvider } from 'lib/sdkDappCore';
+import {
+  accountSelector,
+  getAccountProvider,
+  useSelector
+} from 'lib/sdkDappCore';
 import { OutputContainer } from 'components/OutputContainer';
 import { Address, Message } from 'lib/sdkCore';
 import { useState, MouseEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'hooks/useSelector';
 
 export const SignMessage = () => {
   const [message, setMessage] = useState('');

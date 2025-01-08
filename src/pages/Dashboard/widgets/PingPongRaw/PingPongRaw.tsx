@@ -8,8 +8,7 @@ import { PingPongOutput } from 'components/OutputContainer/components';
 import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTransaction';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { pendingTransactionsSelector } from 'lib/sdkDappCore';
-import { useSelector } from 'hooks/useSelector';
+import { pendingTransactionsSelector, useSelector } from 'lib/sdkDappCore';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {

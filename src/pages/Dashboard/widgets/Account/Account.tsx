@@ -3,8 +3,7 @@ import { OutputContainer } from 'components/OutputContainer';
 import { Username } from './components';
 import { DataTestIdsEnum } from 'localConstants';
 import { formatAmount } from 'lib/sdkDappUtils';
-import { accountSelector } from 'lib/sdkDappCore';
-import { useSelector } from 'hooks/useSelector';
+import { accountSelector, useSelector } from 'lib/sdkDappCore';
 
 export const Account = () => {
   const account = useSelector(accountSelector);

@@ -7,8 +7,7 @@ import { Button } from 'components/Button';
 import { TransactionsOutput } from 'components/OutputContainer/components';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { useSendBatchTransaction } from 'hooks';
-import { pendingTransactionsSelector } from 'lib/sdkDappCore';
-import { useSelector } from 'hooks/useSelector';
+import { pendingTransactionsSelector, useSelector } from 'lib/sdkDappCore';
 
 export const BatchTransactions = () => {
   const { sendBatchTransaction, sendSwapAndLockBatchTransactions } =

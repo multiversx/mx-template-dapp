@@ -1,11 +1,11 @@
 import { Transaction, TransactionPayload } from 'lib/sdkCore';
 import { contractAddress } from 'config';
-import { useSelector } from 'hooks/useSelector';
 import {
   accountSelector,
   getAccountProvider,
   networkSelector,
-  TransactionManager
+  TransactionManager,
+  useSelector
 } from 'lib/sdkDappCore';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 

@@ -3,11 +3,11 @@ import {
   getAccountProvider,
   networkSelector,
   TransactionManager,
-  accountSelector
+  accountSelector,
+  useSelector
 } from 'lib/sdkDappCore';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 import { getSwapAndLockTransactions } from 'pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
-import { useSelector } from 'hooks/useSelector';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 

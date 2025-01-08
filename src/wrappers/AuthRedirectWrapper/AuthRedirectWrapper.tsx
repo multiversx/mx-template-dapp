@@ -1,8 +1,8 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RouteNamesEnum } from 'localConstants';
-import { isLoggedInSelector } from 'lib/sdkDappCore';
-import { useSelector } from 'hooks/useSelector';
+import { isLoggedInSelector, useSelector } from 'lib/sdkDappCore';
+import { addressSelector } from '@multiversx/sdk-dapp-core/out/store/selectors/accountSelectors';
 
 interface AuthRedirectWrapperPropsType extends PropsWithChildren {
   requireAuth?: boolean;
