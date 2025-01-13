@@ -40,6 +40,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@playwright/test": "1.49.1",
     "@swc/core": "1.3.90",
     "@swc/jest": "0.2.29",
     "@testing-library/jest-dom": "6.1.3",
