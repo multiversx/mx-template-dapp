@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { accessDaap, initTransaction, login } from '../utils/actions';
+import { accessDapp, initTransaction, login } from '../utils/actions';
 import {
   GlobalSelectorEnum,
   GlobalDataEnum,
@@ -8,7 +8,7 @@ import {
 
 test.describe('test refresh window', () => {
   test.beforeEach(async ({ page }) => {
-    await accessDaap(page);
+    await accessDapp(page);
   });
 
   test('reload and wallet window and close it', async ({

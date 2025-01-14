@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import {
-  accessDaap,
+  accessDapp,
   batchTransactions,
   handlePopup,
   login
@@ -13,10 +13,10 @@ import {
 
 test.describe('sign and batch', () => {
   test.beforeEach(async ({ page }) => {
-    await accessDaap(page);
+    await accessDapp(page);
   });
 
-  test('should sign sign & batch ', async ({ page }) => {
+  test('should sign & batch ', async ({ page }) => {
     const loginData = {
       selector: GlobalSelectorEnum.keystoreBtn,
       file: GlobalDataEnum.keystoreFile,

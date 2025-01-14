@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import {
-  accessDaap,
+  accessDapp,
   batchTransactions,
   handlePopup,
   login,
@@ -14,7 +14,7 @@ import {
 
 test.describe('Batch transaction test', () => {
   test.beforeEach(async ({ page }) => {
-    await accessDaap(page);
+    await accessDapp(page);
   });
 
   test('should sign swap & lock transactions', async ({ page }) => {

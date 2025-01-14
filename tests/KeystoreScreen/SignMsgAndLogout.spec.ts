@@ -1,19 +1,14 @@
 import { test, expect } from '@playwright/test';
-import {
-  accessDaap,
-  confirmPass,
-  login,
-  pingPongHandler
-} from '../utils/actions';
+import { accessDapp, confirmPass, login } from '../utils/actions';
 import {
   GlobalSelectorEnum,
   GlobalDataEnum,
   WalletAdressEnum
 } from '../utils/enums';
 
-test.describe('sign msg test ', () => {
+test.describe('should sign message', () => {
   test.beforeEach(async ({ page }) => {
-    await accessDaap(page);
+    await accessDapp(page);
   });
 
   test('should sign msg and logout', async ({ page }) => {

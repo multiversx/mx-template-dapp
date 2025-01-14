@@ -1,11 +1,5 @@
 import { test } from '@playwright/test';
-import {
-  accessDaap,
-  batchTransactions,
-  confirmPass,
-  handlePopup,
-  login
-} from '../utils/actions';
+import { accessDapp, confirmPass, handlePopup, login } from '../utils/actions';
 import {
   GlobalSelectorEnum,
   GlobalDataEnum,
@@ -14,7 +8,7 @@ import {
 
 test.describe('Batch controlled sending via url', () => {
   test.beforeEach(async ({ page }) => {
-    await accessDaap(page);
+    await accessDapp(page);
   });
 
   test('should sign sign & batch controlled sending via url ', async ({

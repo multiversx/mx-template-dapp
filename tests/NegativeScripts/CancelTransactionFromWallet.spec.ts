@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { accessDaap, login, pingPongHandler } from '../utils/actions';
+import { accessDapp, login, pingPongHandler } from '../utils/actions';
 import {
   GlobalSelectorEnum,
   GlobalDataEnum,
@@ -9,7 +9,7 @@ import { closeTransaction } from './actions';
 
 test.describe('cancel transaction from wallet window', () => {
   test.beforeEach(async ({ page }) => {
-    await accessDaap(page);
+    await accessDapp(page);
   });
 
   test('should cancel transaction', async ({ page }) => {

@@ -13,7 +13,7 @@ export const handlePopup = async (page: Page, triggerPopupAction) => {
     triggerPopupAction()
   ]);
   await newPage.waitForLoadState();
-  await expect(newPage.getByText('Succes')).toBeVisible({ timeout: 90000 });
+  await expect(newPage.getByText('Success')).toBeVisible({ timeout: 90000 });
   await newPage.close();
 };
 
@@ -157,7 +157,7 @@ export const pingPongHandler = async (
 };
 
 // Access Daap
-export const accessDaap = async (page: Page) => {
+export const accessDapp = async (page: Page) => {
   await page.goto('/');
   await page.getByRole('link', { name: 'Connect' }).click();
 };
@@ -184,7 +184,6 @@ export const scTransaction = async ({
     page.waitForEvent('popup'),
     btn.click()
   ]);
-  console.log(provider, 'prov---');
   if (provider === 'pem') {
     await confirmPem(walletPage, GlobalDataEnum.pemFile);
   } else {

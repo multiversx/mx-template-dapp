@@ -1,6 +1,6 @@
 import { test } from '@playwright/test';
 import {
-  accessDaap,
+  accessDapp,
   confirmPem,
   handlePopup,
   login,
@@ -14,7 +14,7 @@ import {
 
 test.describe('Ping & Pong service test with pem via url', () => {
   test.beforeEach(async ({ page }) => {
-    await accessDaap(page);
+    await accessDapp(page);
   });
 
   test('sign with pem', async ({ page }) => {
