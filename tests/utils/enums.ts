@@ -16,9 +16,9 @@ export enum GlobalDataEnum {
   errorExplainerMsg = 'Could not download git repository.',
   invalidGitUrl = 'https://github.com/multiversx/mx-template-dapp',
   abiFile = 'abi.json',
-  pemFile = 'wdioPem.pem',
-  invalidPem = 'invalidPem.pem',
-  keystoreFile = 'keystore.json',
+  pemFile = 'tests/utils/wdioPem.pem',
+  invalidPem = 'tests/utils/invalidPem.pem',
+  keystoreFile = 'tests/utils/keystore.json',
   scAdress = 'erd1qqqqqqqqqqqqqpgqk4tchxyrzt5pzunl6qhcnl705yrnplms0n4sa52jkw',
   abiPrevieText = 'ABI Preview',
   buildInfoLink = 'Build Info',
@@ -30,7 +30,8 @@ export enum GlobalDataEnum {
   daapWindow = 'integration.template',
   explorerWindow = 'devnet-explorer',
   confrimTransactionMsg = 'Processing Ping transaction',
-  globalPassword = 'Develop13#'
+  globalPassword = 'Develop13#',
+  transactionCanceled = 'Transaction canceled'
 }
 
 export enum RoutesEnum {
@@ -69,8 +70,8 @@ export enum GlobalSelectorEnum {
   signBtn = '[data-testid="signBtn"]',
   toastSelector = 'transactionToastTitle',
   keystoreBtn = '[data-testid="keystoreBtn"]',
-  accesPass = '[data-testid="accessPass"]',
-  confirmBtn = '[data-testid="confirmBtn"]',
+  accesPass = 'accessPass',
+  confirmBtn = 'confirmBtn',
   logoutBtn = 'button*=Close',
   unlockPage = '[data-testid="unlockPage"]',
   xportalBtn = '[data-testid="walletConnectBtn"]',
@@ -93,14 +94,22 @@ export enum GlobalSelectorEnum {
   swapLockType = 'swap-lock',
   clearBtn = '[data-testid="closeTransactionSuccessBtn"]',
   batchBtn = '[data-testid="sign-auto-send"]',
-  keystoreCloseModalBtn = '[data-testid="keystoreCloseModalBtn"]'
+  keystoreCloseModalBtn = 'keystoreCloseModalBtn',
+  inputFile = 'input[type=file]',
+  lastBatchTransaction = 'div:nth-child(5) > .dapp-core-component__explorerLinkStyles__link',
+  lastBatchControlledTransaction = 'div:nth-child(6) > .dapp-core-component__explorerLinkStyles__link',
+  closeButton = 'closeButton',
+  signButton = 'signButton'
 }
 
 export enum WalletAdressEnum {
   adress1 = 'erd1qtknph0q5hsm4hmjpvzusj8vgy8m48lpvclnv6jlkw4uu7sacj6smz8uhg',
   adress2 = 'erd16fq70uf7mdkkkv3fylawk7269ef63kv2vh5s4lrtm58aufve8dtqjlhjjn',
   adress3 = 'erd1hrv7xl5xyu536cdkz2mu92jm6w93sxecrsjxe2t8y9tv4er24a2qhfqkkr',
-  adress4 = 'erd1ljyvg76hnt0wnj3asmte3nfxhcl8cxsukmz94kc56emhwvvm8lgsptux0y'
+  adress4 = 'erd1ljyvg76hnt0wnj3asmte3nfxhcl8cxsukmz94kc56emhwvvm8lgsptux0y',
+  adress5 = 'erd130zl7gmh3dzz5ed5xhypxrxmzd4ev9940zcwaz8vgpxkx6xg0s7q07jpej',
+  adress6 = 'erd1p7a4q6qz9pns8mytcw62n2anuhd8nh6qkh4w5mzf9s7urdlkud5q94d630',
+  adress7 = 'erd1tqtxnneypvga204w3e26096kpyxmtfk660yq7fh3jswtwagpwuds2a8wr3'
 }
 
 export enum TransactionIndexEnum {
