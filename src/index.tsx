@@ -5,17 +5,14 @@ import { initApp } from 'lib/sdkDappCore';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { EnvironmentsEnum } from './types';
-import { defineCustomElements } from './lib/sdkDappCoreUi';
 
 Promise.all([
-  defineCustomElements(window),
   initApp({
     storage: { getStorageCallback: () => sessionStorage },
     dAppConfig: {
       nativeAuth: true,
       environment: EnvironmentsEnum.devnet,
       network: {
-        // walletAddress: "https://localhost:3002",
         walletAddress: 'https://devnet-wallet.multiversx.com'
       }
     }
