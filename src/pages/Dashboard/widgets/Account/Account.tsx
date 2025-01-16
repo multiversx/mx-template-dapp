@@ -2,11 +2,11 @@ import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { Username } from './components';
 import { DataTestIdsEnum } from 'localConstants';
-import { formatAmount } from 'lib/sdkDappUtils';
-import { accountSelector, useSelector } from 'lib/sdkDappCore';
+import { accountSelector, networkSelector, useSelector } from 'lib/sdkDappCore';
 
 export const Account = () => {
   const account = useSelector(accountSelector);
+  const { egldLabel } = useSelector(networkSelector);
 
   if (!account.address) {
     return <></>;
@@ -28,9 +28,9 @@ export const Account = () => {
         <p>
           <Label>Balance: </Label>
           <span data-testid={DataTestIdsEnum.balance}>
-            {formatAmount({
-              input: account.balance
-            })}
+            {/* TODO: Define component types */}
+            {/* @ts-ignore */}
+            <format-amount value={account.balance} egld-label={egldLabel} />
           </span>
         </p>
       </div>
