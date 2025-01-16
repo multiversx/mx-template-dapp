@@ -30,7 +30,7 @@ export const SignMessage = () => {
     try {
       const messageToSign = new Message({
         address: new Address(address),
-        data: Buffer.from(message)
+        data: new Uint8Array(Buffer.from(message))
       });
       const signedMessage = await provider.signMessage(messageToSign);
 
@@ -85,7 +85,7 @@ export const SignMessage = () => {
       <OutputContainer>
         {!['success', 'error'].includes(state) && (
           <textarea
-            placeholder='Write message here1'
+            placeholder='Write message here'
             className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
             onChange={(event) => {
               setMessage(event.currentTarget.value);

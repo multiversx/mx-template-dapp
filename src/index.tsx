@@ -1,4 +1,3 @@
-/* @refresh reload */
 import './styles/globals.css';
 
 import { App } from './App';
@@ -7,10 +6,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { EnvironmentsEnum } from './types';
 import { defineCustomElements } from './lib/sdkDappCoreUi';
-
-// TODO: Doesn't work
-// Error: Constructor for "pending-transactions-modal#undefined" was not found
-// Error: Constructor for "transaction-toast-list#undefined" was not found
 
 Promise.all([
   defineCustomElements(window),

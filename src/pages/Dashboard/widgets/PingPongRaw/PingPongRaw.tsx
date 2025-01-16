@@ -6,7 +6,7 @@ import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { PingPongOutput } from 'components/OutputContainer/components';
 import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTransaction';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { pendingTransactionsSelector, useSelector } from 'lib/sdkDappCore';
 
@@ -49,8 +49,13 @@ export const PingPongRaw = () => {
 
   const pongAllowed = secondsLeft === 0;
 
-  getCountdownSeconds({ secondsLeft: secondsLeft, setSecondsLeft });
-  setSecondsRemaining();
+  useEffect(() => {
+    getCountdownSeconds({ secondsLeft, setSecondsLeft });
+  }, [hasPing]);
+
+  useEffect(() => {
+    setSecondsRemaining();
+  }, [hasPendingTransactions]);
 
   return (
     <div className='flex flex-col gap-6'>
