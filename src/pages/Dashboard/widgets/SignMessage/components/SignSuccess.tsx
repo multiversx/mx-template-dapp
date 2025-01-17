@@ -1,13 +1,13 @@
 import { Label } from 'components/Label';
 import { decodeMessage } from '../helpers';
-import { getAccount } from 'lib/sdkDappCore';
+import { useGetAccount } from 'lib/sdkDappCore';
 import { Message } from '@multiversx/sdk-core/out';
 
 export const SignSuccess = (props: {
   signedMessage: Message | null;
   signature: string;
 }) => {
-  const { address } = getAccount();
+  const { address } = useGetAccount();
 
   if (props.signedMessage == null) {
     return null;

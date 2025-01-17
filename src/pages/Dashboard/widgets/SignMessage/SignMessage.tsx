@@ -5,11 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components/Button';
 import { SignFailure, SignSuccess } from './components';
-import {
-  accountSelector,
-  getAccountProvider,
-  useSelector
-} from 'lib/sdkDappCore';
+import { getAccountProvider, useGetAccount } from 'lib/sdkDappCore';
 import { OutputContainer } from 'components/OutputContainer';
 import { Address, Message } from 'lib/sdkCore';
 import { useState, MouseEvent } from 'react';
@@ -23,7 +19,7 @@ export const SignMessage = () => {
   );
 
   const [signatrue, setSignatrue] = useState('');
-  const { address } = useSelector(accountSelector);
+  const { address } = useGetAccount();
   const provider = getAccountProvider();
 
   const handleSubmit = async () => {
