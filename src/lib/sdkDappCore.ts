@@ -25,5 +25,6 @@ export { initApp } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/init
 export type { StoreType } from '@multiversx/sdk-dapp-core/out/store/store.types';
 export { useGetAccount } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/account/useGetAccount';
 export { useGetIsLoggedIn } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/account/useGetIsLoggedIn';
+export { useGetLoginInfo } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/loginInfo/useGetLoginInfo';
 export { useGetNetworkConfig } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/network/useGetNetworkConfig';
 export { useGetPendingTransactions } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/transactions/useGetPendingTransactions';
