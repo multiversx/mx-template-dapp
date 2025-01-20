@@ -1,3 +1,4 @@
+// TODO: is it still used?
 export enum SessionEnum {
   batchSessionId = 'batchSessionId',
   signedSessionId = 'signedSessionId',
