@@ -1059,10 +1059,10 @@
     classnames ">= 2.5.1"
     qrcode ">= 1.5.4"
 
-"@multiversx/sdk-dapp-core@0.0.0-alpha.10":
-  version "0.0.0-alpha.10"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-core/-/sdk-dapp-core-0.0.0-alpha.10.tgz#b811a10bff0c8a7b9510ef261a95622a47094d58"
-  integrity sha512-P1nvNxy4bLWAajID6y/Emp5kEV2DGaKFhigGBKcwAVfdVg+EOKKh+lUwB31mggUMC0w5i5ED8Gfj1J6sroYvxQ==
+"@multiversx/sdk-dapp-core@0.0.0-alpha.11":
+  version "0.0.0-alpha.11"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-core/-/sdk-dapp-core-0.0.0-alpha.11.tgz#0f2e2675f9477f2965a195082fb40ea4d8d7f640"
+  integrity sha512-xqcViBcJTl2TmHyxf+d6C+Vh7kp8DVQaVNZBNg5txYbYWvJYvwmR9x6eShZeOh2rPLr1eYVxbcuESPfaigCX4Q==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" ">= 13.5.0"

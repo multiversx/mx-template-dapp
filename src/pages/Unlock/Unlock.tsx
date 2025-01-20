@@ -15,6 +15,7 @@ export const Unlock = () => {
 
     const provider = await ProviderFactory.create(config);
     await provider?.login();
+
     navigate(RouteNamesEnum.dashboard);
   };
 

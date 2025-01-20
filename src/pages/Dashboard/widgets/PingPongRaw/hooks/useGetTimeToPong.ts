@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 import { contractAddress } from 'config';
 import { Address, AddressValue } from 'lib/sdkCore';
 import { PingPongResponseType } from '../types';
-import { getAccount, getState, networkSelector } from 'lib/sdkDappCore';
+import { getState, useGetAccount, useGetNetworkConfig } from 'lib/sdkDappCore';
 
 const decodeTime = (data: PingPongResponseType) => {
   const returnValue = data.data.data.returnData[0];
@@ -20,8 +20,8 @@ const decodeTime = (data: PingPongResponseType) => {
 };
 
 export const useGetTimeToPong = () => {
-  const network = networkSelector(getState());
-  const { address } = getAccount();
+  const { network } = useGetNetworkConfig();
+  const { address } = useGetAccount();
 
   const getTimeToPong = async () => {
     try {

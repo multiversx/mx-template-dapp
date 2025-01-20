@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import { apiTimeout, transactionSize } from 'config';
 import { ServerTransactionType } from 'types';
-import { accountSelector, getInterpretedTransaction } from 'lib/sdkDappCore';
 import { TransactionsPropsType } from '../types';
-import { networkSelector, getTransactions, useSelector } from 'lib/sdkDappCore';
+import {
+  useGetNetworkConfig,
+  useGetAccount,
+  getTransactions,
+  getInterpretedTransaction
+} from 'lib/sdkDappCore';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
-  const { address } = useSelector(accountSelector);
-  const { apiAddress, explorerAddress } = useSelector(networkSelector);
+  const { address } = useGetAccount();
+  const {
+    network: { apiAddress, explorerAddress }
+  } = useGetNetworkConfig();
 
   const [isLoading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState<ServerTransactionType[]>([]);

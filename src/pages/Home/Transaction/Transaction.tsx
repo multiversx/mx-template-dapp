@@ -1,11 +1,11 @@
 import { TRANSACTIONS_ENDPOINT } from 'localConstants/sdkDappCoreConstants';
 import { Label } from 'components/Label';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
-import { getState, networkSelector } from 'lib/sdkDappCore';
+import { getState, useGetNetworkConfig } from 'lib/sdkDappCore';
 import { ExplorerLink } from 'components/ExplorerLink';
 
 export const Transaction = () => {
-  const { walletAddress } = networkSelector(getState());
+  const { walletAddress } = useGetNetworkConfig();
   const transactionUrl = getTransactionUrl(walletAddress);
 
   const txData = useTransactionOutcome();

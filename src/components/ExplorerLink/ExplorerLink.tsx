@@ -3,7 +3,7 @@ import {
   faArrowUpRightFromSquare,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
-import { getState, networkSelector } from 'lib/sdkDappCore';
+import { getState, useGetNetworkConfig } from 'lib/sdkDappCore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnamePropsType } from 'types';
 
@@ -25,7 +25,7 @@ export const ExplorerLink = ({
   customExplorerIcon,
   ...rest
 }: ExplorerLinkPropsType) => {
-  const network = networkSelector(getState());
+  const { network } = useGetNetworkConfig();
 
   const defaultContent = text ?? (
     <FontAwesomeIcon icon={customExplorerIcon ?? faArrowUpRightFromSquare} />

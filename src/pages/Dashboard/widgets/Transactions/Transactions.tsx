@@ -2,11 +2,11 @@ import { useEffect, useMemo } from 'react';
 import { OutputContainer } from 'components/OutputContainer';
 import { useGetTransactions } from './hooks';
 import {
-  getAccount,
   getActiveTransactionsStatus,
   getInterpretedTransaction,
   getState,
-  networkSelector
+  useGetAccount,
+  useGetNetworkConfig
 } from 'lib/sdkDappCore';
 import { TransactionsPropsType } from './types';
 import { TransactionRow } from './components/TransactionRow';
@@ -17,8 +17,10 @@ export const Transactions = (props: TransactionsPropsType) => {
   const { isLoading, getTransactions, transactions } =
     useGetTransactions(props);
 
-  const { address } = getAccount();
-  const { explorerAddress } = networkSelector(getState());
+  const { address } = useGetAccount();
+  const {
+    network: { explorerAddress }
+  } = useGetNetworkConfig();
 
   const interpretedTransactions = useMemo(() => {
     if (!address) {

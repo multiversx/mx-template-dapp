@@ -3,7 +3,7 @@ import axios from 'axios';
 import BigNumber from 'bignumber.js';
 import { contractAddress } from 'config';
 import { PingPongResponseType } from '../types';
-import { getState, networkSelector } from 'lib/sdkDappCore';
+import { useGetNetworkConfig } from 'lib/sdkDappCore';
 
 const decodeAmount = (data: PingPongResponseType) => {
   const returnValue = data.data.data.returnData[0];
@@ -14,7 +14,7 @@ const decodeAmount = (data: PingPongResponseType) => {
 
 export const useGetPingAmount = () => {
   const [pingAmount, setPingAmount] = useState<string>('0');
-  const network = networkSelector(getState());
+  const { network } = useGetNetworkConfig();
 
   const getPingAmount = async () => {
     try {

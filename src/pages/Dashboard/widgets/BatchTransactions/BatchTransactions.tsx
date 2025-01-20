@@ -7,13 +7,13 @@ import { Button } from 'components/Button';
 import { TransactionsOutput } from 'components/OutputContainer/components';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { useSendBatchTransaction } from 'hooks';
-import { pendingTransactionsSelector, useSelector } from 'lib/sdkDappCore';
+import { useGetPendingTransactions } from 'lib/sdkDappCore';
 
 export const BatchTransactions = () => {
   const { sendBatchTransaction, sendSwapAndLockBatchTransactions } =
     useSendBatchTransaction();
 
-  const transactions = useSelector(pendingTransactionsSelector);
+  const transactions = useGetPendingTransactions();
   const hasPendingTransactions = transactions.length > 0;
 
   return (

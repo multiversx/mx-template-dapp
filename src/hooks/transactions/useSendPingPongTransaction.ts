@@ -1,17 +1,16 @@
 import { Transaction, TransactionPayload } from 'lib/sdkCore';
 import { contractAddress } from 'config';
 import {
-  accountSelector,
   getAccountProvider,
-  networkSelector,
   TransactionManager,
-  useSelector
+  useGetAccount,
+  useGetNetworkConfig
 } from 'lib/sdkDappCore';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 
 export const useSendPingPongTransaction = () => {
-  const network = useSelector(networkSelector);
-  const { address, nonce } = useSelector(accountSelector);
+  const { network } = useGetNetworkConfig();
+  const { address, nonce } = useGetAccount();
   const provider = getAccountProvider();
 
   const sendPingTransaction = async (amount: string) => {

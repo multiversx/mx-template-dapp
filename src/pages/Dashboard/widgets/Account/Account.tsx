@@ -2,11 +2,12 @@ import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
 import { Username } from './components';
 import { DataTestIdsEnum } from 'localConstants';
-import { accountSelector, networkSelector, useSelector } from 'lib/sdkDappCore';
+import { formatAmount } from 'lib/sdkDappUtils';
+import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDappCore';
 
 export const Account = () => {
-  const account = useSelector(accountSelector);
-  const { egldLabel } = useSelector(networkSelector);
+  const account = useGetAccount();
+  const { network: { egldLabel } } = useGetNetworkConfig();
 
   if (!account.address) {
     return <></>;
