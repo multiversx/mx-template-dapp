@@ -6,14 +6,16 @@ import {
   DataTestIdsEnum,
   TRANSACTIONS_ENDPOINT
 } from 'localConstants';
-import { networkSelector, useSelector } from 'lib/sdkDappCore';
+import { useGetNetworkConfig } from 'lib/sdkDappCore';
 
 export const TransactionOutput = ({
   transaction
 }: {
   transaction: SignedTransactionType;
 }) => {
-  const { egldLabel } = useSelector(networkSelector);
+  const {
+    network: { egldLabel }
+  } = useGetNetworkConfig();
   const decodedData = transaction.data
     ? Buffer.from(transaction.data, 'base64').toString('ascii')
     : 'N/A';
