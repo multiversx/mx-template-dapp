@@ -3,7 +3,7 @@ import {
   faArrowUpRightFromSquare,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
-import { getState, useGetNetworkConfig } from 'lib/sdkDappCore';
+import { useGetNetworkConfig } from 'lib/sdkDappCore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnamePropsType } from 'types';
 
