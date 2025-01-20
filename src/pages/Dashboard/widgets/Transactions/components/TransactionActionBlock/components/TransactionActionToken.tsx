@@ -2,7 +2,6 @@ import React from 'react';
 import { DataTestIdsEnum, DECIMALS } from 'localConstants';
 import { ExplorerLink } from 'components/ExplorerLink';
 import { TransactionActionTokenReturnType } from 'types/sdkDappCoreTypes';
-import { formatAmount } from 'lib/sdkDappUtils';
 
 export const TransactionActionToken = ({
   tokenExplorerLink,
@@ -22,12 +21,14 @@ export const TransactionActionToken = ({
           className='text-truncate'
           data-testid={DataTestIdsEnum.tokenFormattedAmount}
         >
-          {formatAmount({
-            input: token.value,
-            digits: 2,
-            showLastNonZeroDecimal: showLastNonZeroDecimal,
-            decimals: token.decimals ?? DECIMALS
-          })}
+          {/* TODO: Define component types */}
+          {/* @ts-ignore */}
+          <format-amount
+            value={token.value}
+            digits={2}
+            showLastNonZeroDecimal={showLastNonZeroDecimal}
+            decimals={token.decimals ?? DECIMALS}
+          />
         </div>
       )}
 

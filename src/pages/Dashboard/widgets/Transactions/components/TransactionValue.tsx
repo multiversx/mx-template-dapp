@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DataTestIdsEnum } from 'localConstants';
 import { WithTransactionPropsType } from '../types';
 import { getTransactionValue } from 'lib/sdkDappCore';
-import { formatAmount } from 'lib/sdkDappUtils';
 import { TransactionActionBlock } from './TransactionActionBlock';
 import { NftEnumType } from 'types/sdkDappCoreTypes';
 
@@ -71,10 +70,9 @@ export const TransactionValue = ({
     return (
       <div className='transactionCell'>
         <span data-testid={DataTestIdsEnum.transactionValue}>
-          {formatAmount({
-            input: egldValueData.value,
-            digits: 2
-          })}
+          {/* TODO: Define component types */}
+          {/* @ts-ignore */}
+          <format-amount value={transaction.value} digits={2} />
         </span>
       </div>
     );

@@ -6,16 +6,18 @@ import {
   DataTestIdsEnum,
   TRANSACTIONS_ENDPOINT
 } from 'localConstants';
-import { formatAmount } from 'lib/sdkDappUtils';
+import { networkSelector, useSelector } from 'lib/sdkDappCore';
 
 export const TransactionOutput = ({
   transaction
 }: {
   transaction: SignedTransactionType;
 }) => {
+  const { egldLabel } = useSelector(networkSelector);
   const decodedData = transaction.data
     ? Buffer.from(transaction.data, 'base64').toString('ascii')
     : 'N/A';
+
   return (
     <div className='flex flex-col'>
       <p>
@@ -40,9 +42,13 @@ export const TransactionOutput = ({
       <p>
         <Label>Amount: </Label>
         <span data-testid={DataTestIdsEnum.balance}>
-          {formatAmount({
-            input: transaction.value
-          })}
+          {/* TODO: Define component types */}
+          {/* @ts-ignore */}
+          <format-amount
+            value={transaction.value}
+            egld-label={egldLabel}
+            show-label={transaction.value != '0'}
+          />
         </span>
       </p>
       <p>
