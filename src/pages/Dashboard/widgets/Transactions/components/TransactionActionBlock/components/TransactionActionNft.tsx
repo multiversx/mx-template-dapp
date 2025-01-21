@@ -3,6 +3,7 @@ import { NftBadge } from './NftBadge';
 import { DataTestIdsEnum } from 'localConstants';
 import { ExplorerLink } from 'components/ExplorerLink';
 import { TransactionActionNftReturnType } from 'types/sdkDappCoreTypes';
+import { FormatAmount } from 'components/FormatAmount';
 
 export const TransactionActionNft = ({
   badgeText,
@@ -23,19 +24,14 @@ export const TransactionActionNft = ({
       )}
 
       {tokenFormattedAmount != null && (
-        <div
+        <FormatAmount
           className={`mr-1 ${token.svgUrl ? 'text-truncate' : ''}`}
           data-testid={DataTestIdsEnum.nftFormattedAmount}
-        >
-          {/* TODO: Define component types */}
-          {/* @ts-ignore */}
-          <format-amount
-            value={token.value}
-            digits={2}
-            showLastNonZeroDecimal={showLastNonZeroDecimal}
-            decimals={token.decimals}
-          />
-        </div>
+          input={token.value}
+          digits={2}
+          showLastNonZeroDecimal={showLastNonZeroDecimal}
+          decimals={token.decimals}
+        />
       )}
 
       <ExplorerLink

@@ -2,10 +2,13 @@ import { Label } from 'components/Label';
 import { OutputContainer, FormatAmount } from 'components';
 import { Username } from './components';
 import { DataTestIdsEnum } from 'localConstants';
-import { useGetAccount } from 'lib/sdkDappCore';
+import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDappCore';
 
 export const Account = () => {
   const account = useGetAccount();
+  const {
+    network: { egldLabel }
+  } = useGetNetworkConfig();
 
   if (!account.address) {
     return <></>;
@@ -26,9 +29,11 @@ export const Account = () => {
 
         <p>
           <Label>Balance: </Label>
-          <span data-testid={DataTestIdsEnum.balance}>
-            <FormatAmount input={account.balance} />
-          </span>
+          <FormatAmount
+            input={account.balance}
+            egldLabel={egldLabel}
+            data-testid={DataTestIdsEnum.balance}
+          />
         </p>
       </div>
     </OutputContainer>

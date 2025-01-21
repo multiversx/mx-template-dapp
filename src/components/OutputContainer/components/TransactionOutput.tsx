@@ -7,6 +7,8 @@ import {
   TRANSACTIONS_ENDPOINT
 } from 'localConstants';
 import { useGetNetworkConfig } from 'lib/sdkDappCore';
+import { FormatAmount } from '../../FormatAmount';
+import React from 'react';
 
 export const TransactionOutput = ({
   transaction
@@ -43,15 +45,12 @@ export const TransactionOutput = ({
 
       <p>
         <Label>Amount: </Label>
-        <span data-testid={DataTestIdsEnum.balance}>
-          {/* TODO: Define component types */}
-          {/* @ts-ignore */}
-          <format-amount
-            value={transaction.value}
-            egld-label={egldLabel}
-            show-label={transaction.value != '0'}
-          />
-        </span>
+        <FormatAmount
+          input={transaction.value}
+          showLabel={transaction.value !== '0'}
+          egldLabel={egldLabel}
+          data-testid={DataTestIdsEnum.balance}
+        />
       </p>
       <p>
         <Label>Gas price: </Label>

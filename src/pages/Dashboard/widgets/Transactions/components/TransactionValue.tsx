@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DataTestIdsEnum } from 'localConstants';
@@ -6,6 +6,7 @@ import { WithTransactionPropsType } from '../types';
 import { getTransactionValue } from 'lib/sdkDappCore';
 import { TransactionActionBlock } from './TransactionActionBlock';
 import { NftEnumType } from 'types/sdkDappCoreTypes';
+import { FormatAmount } from '../../../../../components';
 
 interface TokenWrapperPropsType {
   children: ReactNode;
@@ -69,11 +70,11 @@ export const TransactionValue = ({
   if (egldValueData) {
     return (
       <div className='transactionCell'>
-        <span data-testid={DataTestIdsEnum.transactionValue}>
-          {/* TODO: Define component types */}
-          {/* @ts-ignore */}
-          <format-amount value={transaction.value} digits={2} />
-        </span>
+        <FormatAmount
+          data-testid={DataTestIdsEnum.transactionValue}
+          input={transaction.value}
+          digits={2}
+        />
       </div>
     );
   }
