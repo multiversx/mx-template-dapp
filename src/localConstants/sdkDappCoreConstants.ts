@@ -5,8 +5,6 @@ export {
 export {
   GAS_PRICE,
   GAS_LIMIT,
-  DECIMALS,
-  DIGITS,
   VERSION
 } from '@multiversx/sdk-dapp-core/out/constants/mvx.constants';
 export { WALLET_PROVIDER_SEND_TRANSACTION_URL } from '@multiversx/sdk-dapp-core/out/constants/webWalletProvider.constants';

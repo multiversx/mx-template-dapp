@@ -1,5 +1,6 @@
 export { ProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory';
 export { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';
+export { FormatAmountController } from '@multiversx/sdk-dapp-core/out/controllers/FormatAmountController';
 export { addressIsValid } from '@multiversx/sdk-dapp-core/out/utils/validation/addressIsValid';
 export { getAccountProvider } from '@multiversx/sdk-dapp-core/out/core/providers/helpers/accountProvider';
 export { getActiveTransactionsStatus } from '@multiversx/sdk-dapp-core/out/utils/transactions/getActiveTransactionsStatus';
@@ -22,7 +23,6 @@ export { isContract } from '@multiversx/sdk-dapp-core/out/utils/validation/isCon
 export { timeAgo } from '@multiversx/sdk-dapp-core/out/utils/operations/timeRemaining';
 export { trimUsernameDomain } from '@multiversx/sdk-dapp-core/out/utils/account/trimUsernameDomain';
 export { initApp } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp';
-export type { StoreType } from '@multiversx/sdk-dapp-core/out/store/store.types';
 export { useGetAccount } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/account/useGetAccount';
 export { useGetIsLoggedIn } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/account/useGetIsLoggedIn';
 export { useGetLoginInfo } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/loginInfo/useGetLoginInfo';

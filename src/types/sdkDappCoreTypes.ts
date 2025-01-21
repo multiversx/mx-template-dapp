@@ -15,4 +15,8 @@ export type { TokenOptionType } from '@multiversx/sdk-dapp-core/out/types/tokens
 export { NftEnumType } from '@multiversx/sdk-dapp-core/out/types/tokens.types';
 export type { AssetType } from '@multiversx/sdk-dapp-core/out/types/account.types';
 export type { TransactionActionNftReturnType } from '@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionActionNftText';
-export type { TransactionActionTokenReturnType } from '@multiversx/sdk-dapp-core/out/utils/transactions/getTransactionActionTokenText';
+export type {
+  FormatedAmountType,
+  FormatAmountControllerPropsType
+} from '@multiversx/sdk-dapp-core/out/controllers/FormatAmountController/types';
+export type { StoreType } from '@multiversx/sdk-dapp-core/out/store/store.types';

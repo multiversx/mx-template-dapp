@@ -1,13 +1,10 @@
 import { Label } from 'components/Label';
-import { OutputContainer } from 'components/OutputContainer';
+import { OutputContainer, FormatAmount } from 'components';
 import { Username } from './components';
 import { DataTestIdsEnum } from 'localConstants';
-import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDappCore';
+import { useGetAccount } from 'lib/sdkDappCore';
 
 export const Account = () => {
-  const {
-    network: { egldLabel }
-  } = useGetNetworkConfig();
   const account = useGetAccount();
 
   if (!account.address) {
@@ -30,9 +27,7 @@ export const Account = () => {
         <p>
           <Label>Balance: </Label>
           <span data-testid={DataTestIdsEnum.balance}>
-            {/* TODO: Define component types */}
-            {/* @ts-ignore */}
-            <format-amount value={account.balance} egld-label={egldLabel} />
+            <FormatAmount input={account.balance} />
           </span>
         </p>
       </div>
