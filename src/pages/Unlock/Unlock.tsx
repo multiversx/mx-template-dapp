@@ -4,11 +4,12 @@ import { Button } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { ProviderFactory } from 'lib/sdkDappCore';
 import { RouteNamesEnum } from 'localConstants/routes';
+import { ExtendedProviders } from '../../config';
 
 export const Unlock = () => {
   const navigate = useNavigate();
 
-  const handleLogin = (type: ProviderTypeEnum) => async () => {
+  const handleLogin = (type: keyof typeof ExtendedProviders) => async () => {
     const config = {
       type
     };
@@ -59,6 +60,11 @@ export const Unlock = () => {
             <div className='ml-2'>
               <Button onClick={handleLogin(ProviderTypeEnum.walletConnect)}>
                 Walletconnect
+              </Button>
+            </div>
+            <div className='ml-2'>
+              <Button onClick={handleLogin(ExtendedProviders.customWallet)}>
+                Custom Wallet
               </Button>
             </div>
           </div>
