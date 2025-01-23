@@ -4,7 +4,7 @@ import { App } from './App';
 import { initApp } from 'lib/sdkDappCore';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { config } from './config';
+import { config } from './initConfig';
 
 Promise.all([initApp(config)]).then(() => {
   ReactDOM.createRoot(document.getElementById('root')!).render(

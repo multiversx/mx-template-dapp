@@ -2,9 +2,11 @@ import './styles/globals.css';
 
 import { CrossWindowProviderStrategy, InitAppType } from 'lib/sdkDappCore';
 import { EnvironmentsEnum, ProviderTypeEnum } from './types';
+import { InMemoryProviderStrategy } from 'provider/InMemoryProviderStrategy';
 
 const ADDITIONAL_PROVIDERS = {
-  customWallet: 'customWallet'
+  customWallet: 'customWallet',
+  inMemoryProvider: 'inMemoryProvider'
 } as const;
 
 export const ExtendedProviders = {
@@ -20,6 +22,16 @@ export const ExtendedProviders = {
     icon: '',
     constructor: async (_address?: string) => {
       const providerInstance = new CrossWindowProviderStrategy();
+      const provider = await providerInstance.createProvider();
+      return provider;
+    }
+  },
+  {
+    name: ADDITIONAL_PROVIDERS.inMemoryProvider,
+    type: ExtendedProviders.inMemoryProvider,
+    icon: '',
+    constructor: async (_address?: string) => {
+      const providerInstance = new InMemoryProviderStrategy();
       const provider = await providerInstance.createProvider();
       return provider;
     }
