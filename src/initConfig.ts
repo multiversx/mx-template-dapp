@@ -1,7 +1,12 @@
 import './styles/globals.css';
 
-import { CrossWindowProviderStrategy, InitAppType } from 'lib/sdkDappCore';
-import { EnvironmentsEnum, ProviderTypeEnum } from './types';
+import { CrossWindowProviderStrategy } from 'lib/sdkDappCore';
+import {
+  EnvironmentsEnum,
+  ICustomProvider,
+  InitAppType,
+  ProviderTypeEnum
+} from './types';
 import { InMemoryProvider } from 'provider/InMemoryProvider';
 
 const ADDITIONAL_PROVIDERS = {
@@ -14,8 +19,7 @@ export const ExtendedProviders = {
   ...ADDITIONAL_PROVIDERS
 } as const;
 
-(window as any).multiversx = {};
-(window as any).multiversx.providers = [
+const providers: ICustomProvider<ProviderTypeEnum>[] = [
   {
     name: ADDITIONAL_PROVIDERS.customWallet,
     type: ExtendedProviders.customWallet,
@@ -34,6 +38,12 @@ export const ExtendedProviders = {
   }
 ];
 
+const [customWalletProvider, inMemoryProvider] = providers;
+
+(window as any).multiversx = {};
+// Option 1: Add providers using the `window.providers` array
+(window as any).multiversx.providers = [inMemoryProvider];
+
 export const config: InitAppType = {
   storage: { getStorageCallback: () => sessionStorage },
   dAppConfig: {
@@ -42,5 +52,7 @@ export const config: InitAppType = {
     network: {
       walletAddress: 'https://devnet-wallet.multiversx.com'
     }
-  }
+  },
+  // Option 2: Add providers using the config `customProviders` array
+  customProviders: [customWalletProvider]
 };
