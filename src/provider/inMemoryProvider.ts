@@ -9,8 +9,7 @@ import {
 import { IDAppProviderAccount } from '@multiversx/sdk-dapp-utils/out';
 import { IProvider } from 'types/sdkCoreTypes';
 import { signTransactions } from '@multiversx/sdk-dapp-core/out/core/providers/strategies/helpers/signTransactions/signTransactions';
-// TODO: fix import ?
-// import { PendingTransactionsEventsEnum } from '@multiversx/sdk-dapp-core-ui/src/components/pending-transactions-modal/pending-transactions-modal.types';
+import { LoginModal } from './LoginModal';
 
 const ADDRESS_KEY = 'address';
 
@@ -21,6 +20,7 @@ const notInitializedError = (caller: string) => () => {
 let privateKey = '';
 
 export class InMemoryProvider implements IProvider {
+  private modal = LoginModal.getInstance();
   private _account: IDAppProviderAccount = {
     address: sessionStorage.getItem(ADDRESS_KEY) || ''
   };
@@ -53,9 +53,8 @@ export class InMemoryProvider implements IProvider {
   getType = () => 'inMemoryProvider';
 
   signTransaction = async (transaction: Transaction) => {
-    const signer = new UserSigner(
-      UserSecretKey.fromString(this._getPrivateKey('signTransaction'))
-    );
+    const _privateKey = await this._getPrivateKey('signTransaction');
+    const signer = new UserSigner(UserSecretKey.fromString(_privateKey));
     const signature = await signer.sign(transaction.serializeForSigning());
     transaction.applySignature(new Uint8Array(signature));
     return transaction;
@@ -76,10 +75,17 @@ export class InMemoryProvider implements IProvider {
     address: string;
     signature: string;
   }> => {
-    return new Promise(async (resolve) => {
-      const address = window.prompt('Enter the address:') || '';
-      this._getPrivateKey('login');
+    return new Promise(async (resolve, reject) => {
+      const { address, privateKey: userPrivateKey } =
+        await this.modal.showModal({
+          needsAddress: true
+        });
 
+      if (!address || !userPrivateKey) {
+        return reject('User cancelled login');
+      }
+
+      privateKey = userPrivateKey;
       this.setAccount({
         address
       });
@@ -125,9 +131,9 @@ export class InMemoryProvider implements IProvider {
   };
 
   signMessage = async (message: Message) => {
-    const signer = new UserSigner(
-      UserSecretKey.fromString(this._getPrivateKey('signMessage'))
-    );
+    const _privateKey = await this._getPrivateKey('signTransaction');
+
+    const signer = new UserSigner(UserSecretKey.fromString(_privateKey));
     const messageComputer = new MessageComputer();
 
     const messageToSign = new Uint8Array(
@@ -140,16 +146,17 @@ export class InMemoryProvider implements IProvider {
     return message;
   };
 
-  private _getPrivateKey = (action: string) => {
+  private _getPrivateKey = async (action: string) => {
     if (!privateKey) {
-      const userPrivateKey = window.prompt('Enter the private key:') || '';
-      if (userPrivateKey == null) {
-        this.logout();
+      const { privateKey: userPrivateKey } = await this.modal.showModal();
+
+      if (!userPrivateKey) {
+        await this.logout();
         const throwError = notInitializedError(action);
         return throwError();
-      } else {
-        privateKey = userPrivateKey;
       }
+
+      privateKey = userPrivateKey;
     }
     return privateKey;
   };
