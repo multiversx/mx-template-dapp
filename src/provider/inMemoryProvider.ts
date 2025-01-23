@@ -70,6 +70,12 @@ export class InMemoryProvider implements IProvider {
   };
 
   signTransactions = async (transactions: Transaction[]) => {
+    const hasPrivateKey = await this._getPrivateKey('signTransactions');
+
+    if (!hasPrivateKey) {
+      throw Error('Unable to sign transactions.');
+    }
+
     const signedTransactions = await signTransactions({
       transactions,
       handleSign: this._signTransactions
