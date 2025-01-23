@@ -2,7 +2,7 @@ import './styles/globals.css';
 
 import { CrossWindowProviderStrategy, InitAppType } from 'lib/sdkDappCore';
 import { EnvironmentsEnum, ProviderTypeEnum } from './types';
-import { InMemoryProviderStrategy } from 'provider/InMemoryProviderStrategy';
+import { InMemoryProvider } from 'provider/InMemoryProvider';
 
 const ADDITIONAL_PROVIDERS = {
   customWallet: 'customWallet',
@@ -30,11 +30,7 @@ export const ExtendedProviders = {
     name: ADDITIONAL_PROVIDERS.inMemoryProvider,
     type: ExtendedProviders.inMemoryProvider,
     icon: '',
-    constructor: async (_address?: string) => {
-      const providerInstance = new InMemoryProviderStrategy();
-      const provider = await providerInstance.createProvider();
-      return provider;
-    }
+    constructor: async (_address?: string) => new InMemoryProvider()
   }
 ];
 
