@@ -60,10 +60,19 @@ export class InMemoryProvider implements IProvider {
     return transaction;
   };
 
+  private _signTransactions = async (transactions: Transaction[]) => {
+    const signedTransactions: Transaction[] = [];
+    for (const transaction of transactions) {
+      const signedTransaction = await this.signTransaction(transaction);
+      signedTransactions.push(signedTransaction);
+    }
+    return signedTransactions;
+  };
+
   signTransactions = async (transactions: Transaction[]) => {
     const signedTransactions = await signTransactions({
       transactions,
-      handleSign: this.signTransactions
+      handleSign: this._signTransactions
     });
 
     return signedTransactions;
