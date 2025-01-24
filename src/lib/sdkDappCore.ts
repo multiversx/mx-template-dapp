@@ -28,4 +28,3 @@ export { useGetIsLoggedIn } from '@multiversx/sdk-dapp-core/out/store/selectors/
 export { useGetLoginInfo } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/loginInfo/useGetLoginInfo';
 export { useGetNetworkConfig } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/network/useGetNetworkConfig';
 export { useGetPendingTransactions } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/transactions/useGetPendingTransactions';
-export { CrossWindowProviderStrategy } from '@multiversx/sdk-dapp-core/out/core/providers/strategies/CrossWindowProviderStrategy';
