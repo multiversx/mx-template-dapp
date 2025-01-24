@@ -2,9 +2,7 @@ import { Transaction } from 'types';
 import {
   getAccountProvider,
   refreshAccount,
-  TransactionManager,
-  useGetAccount,
-  useGetNetworkConfig
+  TransactionManager
 } from 'lib/sdkDappCore';
 
 type TransactionsDisplayInfoType = any; // TODO: fill in @DanutIlie
@@ -17,8 +15,6 @@ type SignAndSendTransactionsProps = {
 export const signAndSendTransactions = async ({
   transactions
 }: SignAndSendTransactionsProps) => {
-  const { network } = useGetNetworkConfig();
-  const { address, nonce } = useGetAccount();
   const provider = getAccountProvider();
   const txManager = TransactionManager.getInstance();
 
