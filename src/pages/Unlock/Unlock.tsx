@@ -4,18 +4,14 @@ import { Button } from 'components';
 import { useNavigate } from 'react-router-dom';
 import { ProviderFactory } from 'lib/sdkDappCore';
 import { RouteNamesEnum } from 'localConstants/routes';
+import { ExtendedProviders } from 'initConfig';
 
 export const Unlock = () => {
   const navigate = useNavigate();
 
   const handleLogin = (type: ProviderTypeEnum) => async () => {
-    const config = {
-      type
-    };
-
-    const provider = await ProviderFactory.create(config);
+    const provider = await ProviderFactory.create({ type });
     await provider?.login();
-
     navigate(RouteNamesEnum.dashboard);
   };
 
@@ -59,6 +55,19 @@ export const Unlock = () => {
             <div className='ml-2'>
               <Button onClick={handleLogin(ProviderTypeEnum.walletConnect)}>
                 Walletconnect
+              </Button>
+            </div>
+            <div className='ml-2 hidden'>
+              <Button
+                onClick={async () => {
+                  const provider = await ProviderFactory.create({
+                    type: ExtendedProviders.inMemoryProvider
+                  });
+                  await provider?.login();
+                  navigate(RouteNamesEnum.dashboard);
+                }}
+              >
+                In Memory Provider
               </Button>
             </div>
           </div>
