@@ -33,43 +33,57 @@ export class InMemoryProvider implements IProvider {
     }
   }
 
-  isInitialized = () => Boolean(this._account.address);
+  isInitialized() {
+    return Boolean(this._account.address);
+  }
 
-  isConnected = () => Boolean(privateKey);
+  isConnected(): boolean {
+    return Boolean(privateKey);
+  }
 
-  getTokenLoginSignature = () => this._account.signature;
+  getTokenLoginSignature(): string | undefined {
+    return this._account.signature;
+  }
 
-  setAccount = (value: IDAppProviderAccount) => {
+  setAccount(value: IDAppProviderAccount) {
     sessionStorage.setItem(ADDRESS_KEY, value.address);
     this._account = value;
-  };
+  }
 
-  getAccount = () => this._account;
+  getAccount(): IDAppProviderAccount | null {
+    return this._account;
+  }
 
-  getAddress = async () => this._account.address;
+  async getAddress(): Promise<string | undefined> {
+    return this._account.address;
+  }
 
-  init = async () => true;
+  async init() {
+    return true;
+  }
 
-  getType = () => 'inMemoryProvider';
+  getType() {
+    return 'inMemoryProvider';
+  }
 
-  signTransaction = async (transaction: Transaction) => {
+  async signTransaction(transaction: Transaction) {
     const _privateKey = await this._getPrivateKey('signTransaction');
     const signer = new UserSigner(UserSecretKey.fromString(_privateKey));
     const signature = await signer.sign(transaction.serializeForSigning());
     transaction.applySignature(new Uint8Array(signature));
     return transaction;
-  };
+  }
 
-  private _signTransactions = async (transactions: Transaction[]) => {
+  private async _signTransactions(transactions: Transaction[]) {
     const signedTransactions: Transaction[] = [];
     for (const transaction of transactions) {
       const signedTransaction = await this.signTransaction(transaction);
       signedTransactions.push(signedTransaction);
     }
     return signedTransactions;
-  };
+  }
 
-  signTransactions = async (transactions: Transaction[]) => {
+  async signTransactions(transactions: Transaction[]) {
     const hasPrivateKey = await this._getPrivateKey('signTransactions');
 
     if (!hasPrivateKey) {
@@ -78,18 +92,16 @@ export class InMemoryProvider implements IProvider {
 
     const signedTransactions = await signTransactions({
       transactions,
-      handleSign: this._signTransactions
+      handleSign: this._signTransactions.bind(this)
     });
 
     return signedTransactions;
-  };
+  }
 
-  login = async (options?: {
-    token?: string;
-  }): Promise<{
+  async login(options?: { token?: string }): Promise<{
     address: string;
     signature: string;
-  }> => {
+  }> {
     return new Promise(async (resolve, reject) => {
       const { address, privateKey: userPrivateKey } =
         await this.modal.showModal({
@@ -134,18 +146,18 @@ export class InMemoryProvider implements IProvider {
         signature
       });
     });
-  };
+  }
 
-  logout = async () => {
+  async logout() {
     sessionStorage.removeItem(ADDRESS_KEY);
     privateKey = '';
     this._account = {
       address: ''
     };
     return true;
-  };
+  }
 
-  signMessage = async (message: Message) => {
+  async signMessage(message: Message) {
     const _privateKey = await this._getPrivateKey('signTransaction');
 
     const signer = new UserSigner(UserSecretKey.fromString(_privateKey));
@@ -159,9 +171,9 @@ export class InMemoryProvider implements IProvider {
     message.signature = new Uint8Array(signature);
 
     return message;
-  };
+  }
 
-  private _getPrivateKey = async (action: string) => {
+  private async _getPrivateKey(action: string) {
     if (!privateKey) {
       const { privateKey: userPrivateKey } = await this.modal.showModal();
 
@@ -174,5 +186,5 @@ export class InMemoryProvider implements IProvider {
       privateKey = userPrivateKey;
     }
     return privateKey;
-  };
+  }
 }
