@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { createRoot } from 'react-dom/client';
 import { Button } from 'components';
@@ -67,18 +67,27 @@ export class LoginModal {
   }> {
     return new Promise((resolve) => {
       const ModalComponent = () => {
-        const [privateKey, setPrivateLey] = useState('');
-        const [address, setAddress] = useState('');
+        const privateKeyRef = useRef<HTMLInputElement>(null);
+        const addressRef = useRef<HTMLInputElement>(null);
         const [isOpen, setIsOpen] = useState(true);
 
-        const handleSubmit = useCallback(
-          (e: React.FormEvent) => {
-            e.preventDefault();
-            setIsOpen(false);
-            resolve({ privateKey, address });
-          },
-          [privateKey]
-        );
+        const handleSubmit = useCallback((e: React.FormEvent) => {
+          e.preventDefault();
+          const privateKey = privateKeyRef.current?.value || '';
+          const address = addressRef.current?.value || '';
+
+          if ((options?.needsAddress && !address) || !privateKey) {
+            alert(
+              `Please enter ${
+                options?.needsAddress ? 'address and' : ''
+              } private key`
+            );
+            return;
+          }
+
+          setIsOpen(false);
+          resolve({ privateKey, address });
+        }, []);
 
         const handleClose = useCallback(() => {
           setIsOpen(false);
@@ -101,9 +110,9 @@ export class LoginModal {
                       <input
                         style={modalStyles.input}
                         type='text'
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
+                        ref={addressRef}
                         autoFocus
+                        required
                       />
                     </label>
                   </div>
@@ -114,9 +123,9 @@ export class LoginModal {
                     <input
                       style={modalStyles.input}
                       type='text'
-                      value={privateKey}
-                      onChange={(e) => setPrivateLey(e.target.value)}
+                      ref={privateKeyRef}
                       autoFocus={!options?.needsAddress}
+                      required
                     />
                   </label>
                 </div>
