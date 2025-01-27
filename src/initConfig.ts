@@ -17,6 +17,8 @@ export const ExtendedProviders = {
   ...ADDITIONAL_PROVIDERS
 } as const;
 
+const DEFAULT_TOAST_LIEFTIME = 5000;
+
 const providers: ICustomProvider<ProviderTypeEnum>[] = [
   {
     name: ADDITIONAL_PROVIDERS.inMemoryProvider,
@@ -37,8 +39,10 @@ export const config: InitAppType = {
     environment: EnvironmentsEnum.devnet,
     network: {
       walletAddress: 'https://devnet-wallet.multiversx.com'
-    }
+    },
+    successfulToastLifetime: DEFAULT_TOAST_LIEFTIME
   }
+
   // Option 2: Add providers using the config `customProviders` array
   // customProviders: [customWalletProvider]
 };
