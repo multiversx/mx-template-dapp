@@ -57,7 +57,7 @@ export const Unlock = () => {
                 Walletconnect
               </Button>
             </div>
-            <div className='ml-2 hidden'>
+            <div className='ml-2'>
               <Button
                 onClick={async () => {
                   const provider = await ProviderFactory.create({
