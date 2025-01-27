@@ -11,8 +11,6 @@ import { IProvider } from 'types/sdkCoreTypes';
 import { signTransactions } from '@multiversx/sdk-dapp-core/out/core/providers/strategies/helpers/signTransactions/signTransactions';
 import { LoginModal } from './LoginModal';
 
-const ADDRESS_KEY = 'address';
-
 const notInitializedError = (caller: string) => () => {
   throw new Error(`Unable to perform ${caller}, Provider not initialized`);
 };
@@ -22,7 +20,7 @@ let privateKey = '';
 export class InMemoryProvider implements IProvider {
   private modal = LoginModal.getInstance();
   private _account: IDAppProviderAccount = {
-    address: sessionStorage.getItem(ADDRESS_KEY) || ''
+    address: ''
   };
 
   constructor(address?: string) {
@@ -46,7 +44,6 @@ export class InMemoryProvider implements IProvider {
   }
 
   setAccount(value: IDAppProviderAccount) {
-    sessionStorage.setItem(ADDRESS_KEY, value.address);
     this._account = value;
   }
 
@@ -149,7 +146,6 @@ export class InMemoryProvider implements IProvider {
   }
 
   async logout() {
-    sessionStorage.removeItem(ADDRESS_KEY);
     privateKey = '';
     this._account = {
       address: ''
