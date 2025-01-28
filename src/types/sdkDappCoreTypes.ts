@@ -2,13 +2,13 @@ export {
   EnvironmentsEnum,
   TransactionBatchStatusesEnum
 } from '@multiversx/sdk-dapp-core/out/types/enums.types';
+export type { AccountType } from '@multiversx/sdk-dapp-core/out/types/account.types';
+export { TransactionDirectionEnum } from '@multiversx/sdk-dapp-core/out/types/serverTransactions.types';
 export type {
+  InterpretedTransactionType,
   ServerTransactionType,
   TokenArgumentType
 } from '@multiversx/sdk-dapp-core/out/types/serverTransactions.types';
-export type { AccountType } from '@multiversx/sdk-dapp-core/out/types/account.types';
-export { TransactionDirectionEnum } from '@multiversx/sdk-dapp-core/out/types/serverTransactions.types';
-export type { InterpretedTransactionType } from '@multiversx/sdk-dapp-core/out/types/serverTransactions.types';
 export type { SignedTransactionType } from '@multiversx/sdk-dapp-core/out/types/transactions.types';
 export { ProviderTypeEnum } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export type { TokenOptionType } from '@multiversx/sdk-dapp-core/out/types/tokens.types';

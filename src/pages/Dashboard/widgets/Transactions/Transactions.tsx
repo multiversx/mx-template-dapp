@@ -1,19 +1,12 @@
 import { useEffect } from 'react';
-import { OutputContainer } from 'components/OutputContainer';
+import { OutputContainer, TransactionsTable } from 'components';
 import { useGetTransactions } from './hooks';
-import {
-  getActiveTransactionsStatus,
-  TransactionsTableController
-} from 'lib/sdkDappCore';
+import { getActiveTransactionsStatus } from 'lib/sdkDappCore';
 import { TransactionsPropsType } from './types';
 
 export const Transactions = (props: TransactionsPropsType) => {
   const { isLoading, getTransactions, transactions } =
     useGetTransactions(props);
-
-  const processedTransactions = TransactionsTableController.processTransactions(
-    transactions || []
-  );
 
   const { success } = getActiveTransactionsStatus();
 
@@ -39,9 +32,7 @@ export const Transactions = (props: TransactionsPropsType) => {
     <div className='flex flex-col'>
       <OutputContainer isLoading={isLoading} className='p-0'>
         <div className='w-full h-full overflow-x-auto bg-white shadow rounded-lg'>
-          <transactions-table
-            transactions={processedTransactions}
-          ></transactions-table>
+          <TransactionsTable transactions={transactions} />
         </div>
       </OutputContainer>
     </div>
