@@ -7,3 +7,4 @@ export * from './Layout';
 export * from './MissingNativeAuthError';
 export * from './MxLink';
 export * from './OutputContainer';
+export * from './TransactionsTable';

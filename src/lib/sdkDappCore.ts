@@ -1,6 +1,7 @@
 export { ProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory';
 export { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';
 export { FormatAmountController } from '@multiversx/sdk-dapp-core/out/controllers/FormatAmountController';
+export { TransactionsTableController } from '@multiversx/sdk-dapp-core/out/controllers/TransactionsTableController';
 export { addressIsValid } from '@multiversx/sdk-dapp-core/out/utils/validation/addressIsValid';
 export { getAccountProvider } from '@multiversx/sdk-dapp-core/out/core/providers/helpers/accountProvider';
 export { getActiveTransactionsStatus } from '@multiversx/sdk-dapp-core/out/utils/transactions/getActiveTransactionsStatus';
