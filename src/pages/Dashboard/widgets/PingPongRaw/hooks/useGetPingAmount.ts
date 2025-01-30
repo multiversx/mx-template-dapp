@@ -35,6 +35,8 @@ export const useGetPingAmount = () => {
   };
 
   useEffect(() => {
+    console.log('\x1b[42m%s\x1b[0m', 'useGetPingAmount in effect');
+
     getPingAmount();
   }, []);
 

@@ -4,6 +4,7 @@ import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDappCore';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 import { smartContract } from 'utils/smartContract';
 import { signAndSendTransactions } from 'helpers';
+import { IPlainTransactionObject } from 'types/sdkCoreTypes';
 
 const PING_TRANSACTION_INFO = {
   processingMessage: 'Processing Ping transaction',
@@ -21,6 +22,58 @@ export const useSendPingPongTransaction = () => {
   const { network } = useGetNetworkConfig();
   const { address, nonce } = useGetAccount();
 
+  const signRelayedTransaction = async () => {
+    const initialTransaction = new Transaction({
+      value: '1',
+      data: new TransactionPayload('ping'),
+      receiver:
+        'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+      sender: address,
+      relayer: new Address(address),
+      gasLimit: 10 * GAS_LIMIT,
+      gasPrice: GAS_PRICE,
+      chainID: network.chainId,
+      nonce,
+      version: 1
+    });
+
+    const tx = await signAndSendTransactions({
+      transactions: [initialTransaction],
+      skipSend: true,
+      transactionsDisplayInfo: PING_TRANSACTION_INFO
+    });
+
+    const signedTx = tx?.[0].toPlainObject();
+
+    if (!signedTx) {
+      return;
+    }
+
+    const { signature: relayerSignature, ...rest } = signedTx;
+
+    sessionStorage.setItem(
+      'relayerTx',
+      JSON.stringify({
+        ...rest,
+        relayerSignature
+      })
+    );
+
+    const ownTransaction = Transaction.fromPlainObject({
+      ...rest,
+      relayerSignature
+    });
+
+    await signAndSendTransactions({
+      transactions: [ownTransaction],
+      transactionsDisplayInfo: PING_TRANSACTION_INFO
+    });
+
+    // secondTxSigned = secondTx?.[0].toPlainObject();
+    // console.log('secondTxSigned', secondTxSigned);
+    // TODO: use CrossWindowProvider to sign tx
+  };
+
   const sendPingTransaction = async (amount: string) => {
     const pingTransaction = new Transaction({
       value: amount,
@@ -34,8 +87,18 @@ export const useSendPingPongTransaction = () => {
       version: 1
     });
 
+    const obj = sessionStorage.getItem('relayerTx');
+
+    const relayed = obj
+      ? Transaction.fromPlainObject(JSON.parse(obj))
+      : pingTransaction;
+
+    sessionStorage.removeItem('relayerTx');
+
+    console.log('relayed', relayed);
+
     await signAndSendTransactions({
-      transactions: [pingTransaction],
+      transactions: [relayed],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
   };
@@ -113,6 +176,7 @@ export const useSendPingPongTransaction = () => {
     sendPongTransaction,
     sendPongTransactionFromAbi,
     sendPingTransactionFromService,
-    sendPongTransactionFromService
+    sendPongTransactionFromService,
+    signRelayedTransaction
   };
 };

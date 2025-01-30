@@ -55,7 +55,8 @@ export const PingPongAbi = () => {
   }, [hasPing]);
 
   useEffect(() => {
-    setSecondsRemaining();
+    console.log('\x1b[42m%s\x1b[0m', 'PingPongAbi in effect', transactions);
+    // setSecondsRemaining();
   }, [transactions]);
 
   return (

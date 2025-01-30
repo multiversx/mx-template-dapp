@@ -10,10 +10,12 @@ type TransactionsDisplayInfoType = any; // TODO: fill in @DanutIlie
 type SignAndSendTransactionsProps = {
   transactions: Transaction[];
   transactionsDisplayInfo?: TransactionsDisplayInfoType;
+  skipSend?: boolean;
 };
 
 export const signAndSendTransactions = async ({
-  transactions
+  transactions,
+  skipSend
 }: SignAndSendTransactionsProps) => {
   const provider = getAccountProvider();
   const txManager = TransactionManager.getInstance();
@@ -21,6 +23,10 @@ export const signAndSendTransactions = async ({
   await refreshAccount();
 
   const signedTransactions = await provider.signTransactions(transactions);
+
+  if (skipSend) {
+    return signedTransactions;
+  }
 
   await txManager.send(signedTransactions);
   await txManager.track(signedTransactions);

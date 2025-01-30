@@ -14,7 +14,7 @@ import { useGetPendingTransactions } from 'lib/sdkDappCore';
 export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
 
-  const { sendPingTransaction, sendPongTransaction } =
+  const { sendPingTransaction, sendPongTransaction, signRelayedTransaction } =
     useSendPingPongTransaction();
 
   const transactions = useGetPendingTransactions();
@@ -32,6 +32,10 @@ export const PingPongRaw = () => {
     if (timeRemaining && timeRemaining >= 0) {
       setSecondsLeft(timeRemaining);
     }
+  };
+
+  const onSignRelayedTransaction = async () => {
+    await signRelayedTransaction();
   };
 
   const onSendPingTransaction = async () => {
@@ -61,6 +65,14 @@ export const PingPongRaw = () => {
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
         <div className='flex justify-start gap-2'>
+          <Button
+            onClick={onSignRelayedTransaction}
+            data-testid='btnPingRaw'
+            data-cy='transactionBtn'
+          >
+            <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
+            Relayer
+          </Button>
           <Button
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
