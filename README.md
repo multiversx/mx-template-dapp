@@ -8,23 +8,6 @@ See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
 ### Tests
 [![E2E tests](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml)
 
-### Deployment Status Badges
-
-#### Deploy - Devnet
-[![Deploy - Devnet](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-devnet.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-devnet.yml)
-
-#### Deploy - Testnet
-[![Deploy - Testnet](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-testnet.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-testnet.yml)
-
-#### Deploy - Integration
-[![Deploy - Integration](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-integration.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-integration.yml)
-
-#### Deploy - Next
-[![Deploy - Next](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-next.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-next.yml)
-
-#### Deploy - Mainnet
-[![Deploy - Mainnet](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-mainnet.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/deploy-mainnet.yml)
-
 
 ## Requirements
 
