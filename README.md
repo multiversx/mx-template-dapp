@@ -73,4 +73,4 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 5. Open a Pull Request
 
 ### Tests
-[![E2E tests]](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml)
+[![E2E tests](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml)
