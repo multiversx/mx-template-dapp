@@ -2,6 +2,7 @@ import { FormatAmountControllerPropsType } from 'types/sdkDappCoreTypes';
 import { FormatAmountController } from 'lib/sdkDappCore';
 import { DECIMALS, DIGITS } from 'localConstants';
 import { WithClassnamePropsType } from 'types';
+import { FormatAmountSDK } from 'lib/sdkDappCoreUI';
 
 export const FormatAmount = (
   props: FormatAmountControllerPropsType & WithClassnamePropsType
@@ -14,13 +15,13 @@ export const FormatAmount = (
     });
 
   return (
-    <format-amount
+    <FormatAmountSDK
       class={props.className}
-      data-testid={props['data-testid']}
-      is-valid={isValid}
+      dataTestId={props['data-testid']}
+      isValid={isValid}
       label={label}
-      value-decimal={valueDecimal}
-      value-integer={valueInteger}
-    ></format-amount>
+      valueDecimal={valueDecimal}
+      valueInteger={valueInteger}
+    />
   );
 };
