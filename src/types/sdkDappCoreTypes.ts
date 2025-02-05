@@ -23,3 +23,4 @@ export type {
 export type { StoreType } from '@multiversx/sdk-dapp-core/out/store/store.types';
 export type { InitAppType } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp.types';
 export type { ICustomProvider } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
+export type { TransactionsTableRowType } from '@multiversx/sdk-dapp-core/out/controllers/TransactionsTableController/transactionsTableController.types';
