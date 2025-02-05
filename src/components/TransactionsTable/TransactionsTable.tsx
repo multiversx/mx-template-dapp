@@ -36,8 +36,6 @@ export const TransactionsTable = ({
         transactions
       });
 
-    console.log(transactionsData);
-
     setProcessedTransactions(transactionsData);
   };
 
