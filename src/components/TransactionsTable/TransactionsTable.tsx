@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
-import { TransactionsTableSDK } from 'lib/sdkDappCoreUI';
-import {
-  ServerTransactionType,
-  TransactionsTableRowType
-} from 'types/sdkDappCoreTypes';
+import { TransactionsTableSDK, ITransactionsTableRow } from 'lib/sdkDappCoreUI';
+import { ServerTransactionType } from 'types/sdkDappCoreTypes';
 import {
   TransactionsTableController,
   useGetAccount,
@@ -20,7 +17,7 @@ export const TransactionsTable = ({
   const { address } = useGetAccount();
   const { network } = useGetNetworkConfig();
   const [processedTransaction, setProcessedTransactions] = useState<
-    TransactionsTableRowType[]
+    ITransactionsTableRow[]
   >([]);
 
   useEffect(() => {
@@ -36,7 +33,9 @@ export const TransactionsTable = ({
         transactions
       });
 
-    setProcessedTransactions(transactionsData);
+    setProcessedTransactions(
+      transactionsData as unknown as ITransactionsTableRow[]
+    );
   };
 
   return <TransactionsTableSDK transactions={processedTransaction} />;
