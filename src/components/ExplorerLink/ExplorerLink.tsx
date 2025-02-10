@@ -1,45 +1,25 @@
 import { PropsWithChildren } from 'react';
-import {
-  faArrowUpRightFromSquare,
-  IconDefinition
-} from '@fortawesome/free-solid-svg-icons';
 import { useGetNetworkConfig } from 'lib/sdkDappCore';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { WithClassnamePropsType } from 'types';
+import { ExplorerLinkSDK } from 'lib/sdkDappCoreUI';
 
-export interface ExplorerLinkPropsType
-  extends WithClassnamePropsType,
-    PropsWithChildren {
-  page: string;
+export interface ExplorerLinkPropsType extends PropsWithChildren {
+  className?: string;
+  dataTestId?: string;
+  icon?: any;
+  pathname: string;
   text?: any;
-  customExplorerIcon?: IconDefinition;
-  title?: string;
-  onClick?: () => void;
 }
 
 export const ExplorerLink = ({
-  page,
-  text,
-  className = 'dapp-explorer-link',
   children,
-  customExplorerIcon,
+  pathname,
   ...rest
 }: ExplorerLinkPropsType) => {
   const { network } = useGetNetworkConfig();
 
-  const defaultContent = text ?? (
-    <FontAwesomeIcon icon={customExplorerIcon ?? faArrowUpRightFromSquare} />
-  );
-
   return (
-    <a
-      href={`${network.explorerAddress}${page}`}
-      target='_blank'
-      className={className}
-      rel='noreferrer'
-      {...rest}
-    >
-      {children ?? defaultContent}
-    </a>
+    <ExplorerLinkSDK link={`${network.explorerAddress}${pathname}`} {...rest}>
+      {children ? <div slot='content'>{children}</div> : null}
+    </ExplorerLinkSDK>
   );
 };

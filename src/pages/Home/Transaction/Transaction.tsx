@@ -1,12 +1,12 @@
 import { TRANSACTIONS_ENDPOINT } from 'localConstants/sdkDappCoreConstants';
 import { Label } from 'components/Label';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
-import { getState, useGetNetworkConfig } from 'lib/sdkDappCore';
+import { useGetNetworkConfig } from 'lib/sdkDappCore';
 import { ExplorerLink } from 'components/ExplorerLink';
 
 export const Transaction = () => {
-  const { walletAddress } = useGetNetworkConfig();
-  const transactionUrl = getTransactionUrl(walletAddress);
+  const { network } = useGetNetworkConfig();
+  const transactionUrl = getTransactionUrl(network.walletAddress);
 
   const txData = useTransactionOutcome();
 
@@ -33,7 +33,7 @@ export const Transaction = () => {
         <p>
           <Label>Hash:</Label>
           <ExplorerLink
-            page={`/${TRANSACTIONS_ENDPOINT}/${txData.txHash}`}
+            pathname={`/${TRANSACTIONS_ENDPOINT}/${txData.txHash}`}
             className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
           >
             {txData.txHash}

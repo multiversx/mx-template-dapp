@@ -6,7 +6,7 @@ import {
   InitAppType,
   ProviderTypeEnum
 } from './types';
-import { InMemoryProvider } from 'provider/InMemoryProvider';
+import { InMemoryProvider } from './provider/inMemoryProvider';
 
 const ADDITIONAL_PROVIDERS = {
   inMemoryProvider: 'inMemoryProvider'

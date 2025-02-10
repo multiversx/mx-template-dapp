@@ -2,6 +2,7 @@ import { Label } from 'components/Label';
 import { decodeMessage } from '../helpers';
 import { useGetAccount } from 'lib/sdkDappCore';
 import { Message } from '@multiversx/sdk-core/out';
+import { CopyButton } from '../../../../../components';
 
 export const SignSuccess = (props: {
   signedMessage: Message | null;
@@ -31,6 +32,7 @@ export const SignSuccess = (props: {
             rows={2}
             value={props.signature}
           />
+          <CopyButton text={props.signature} />
         </div>
 
         <div className='flex flex-row w-full gap-2'>
