@@ -1,4 +1,4 @@
-import { Transaction } from 'types';
+import { Transaction, SignedTransactionType } from 'types';
 import {
   getAccountProvider,
   refreshAccount,
@@ -21,7 +21,6 @@ export const signAndSendTransactions = async ({
   await refreshAccount();
 
   const signedTransactions = await provider.signTransactions(transactions);
-
-  await txManager.send(signedTransactions);
-  await txManager.track(signedTransactions);
+  const sentTransactions = await txManager.send(signedTransactions);
+  await txManager.track(sentTransactions as SignedTransactionType[]);
 };

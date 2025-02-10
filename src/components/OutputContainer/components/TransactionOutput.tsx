@@ -27,7 +27,7 @@ export const TransactionOutput = ({
       <p>
         <Label>Hash:</Label>
         <ExplorerLink
-          pathname={`/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`}
+          page={`/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.hash}
@@ -36,7 +36,7 @@ export const TransactionOutput = ({
       <p>
         <Label>Receiver:</Label>
         <ExplorerLink
-          pathname={`/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`}
+          page={`/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.receiver}
@@ -46,6 +46,7 @@ export const TransactionOutput = ({
       <p>
         <Label>Amount: </Label>
         <FormatAmount
+          value={transaction.value}
           input={transaction.value}
           egldLabel={egldLabel}
           data-testid={DataTestIdsEnum.balance}

@@ -9,7 +9,6 @@ import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
-import { SignedTransactionType } from 'types';
 import {
   useGetTimeToPong,
   useGetPingTransaction,

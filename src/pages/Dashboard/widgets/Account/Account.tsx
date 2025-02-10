@@ -30,6 +30,7 @@ export const Account = () => {
         <p>
           <Label>Balance: </Label>
           <FormatAmount
+            value={account.balance}
             input={account.balance}
             egldLabel={egldLabel}
             data-testid={DataTestIdsEnum.balance}

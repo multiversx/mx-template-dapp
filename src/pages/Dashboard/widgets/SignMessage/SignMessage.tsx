@@ -93,7 +93,11 @@ export const SignMessage = () => {
         )}
 
         {state === 'success' && signedMessage != null && (
-          <SignSuccess signedMessage={signedMessage} signature={signatrue} />
+          <SignSuccess
+            message={signedMessage}
+            signature={signatrue}
+            address={address}
+          />
         )}
 
         {state === 'error' && <SignFailure />}

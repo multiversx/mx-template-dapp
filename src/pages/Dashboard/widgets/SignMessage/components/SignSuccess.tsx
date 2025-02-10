@@ -1,22 +1,21 @@
 import { Label } from 'components/Label';
 import { decodeMessage } from '../helpers';
-import { useGetAccount } from 'lib/sdkDappCore';
 import { Message } from '@multiversx/sdk-core/out';
-import { CopyButton } from '../../../../../components';
+import { CopyButton } from 'components';
 
-export const SignSuccess = (props: {
-  signedMessage: Message | null;
+interface VerifyMessagePropsType {
+  message: Message;
   signature: string;
-}) => {
-  const { address } = useGetAccount();
+  address: string;
+}
 
-  if (props.signedMessage == null) {
+export const SignSuccess = (props: VerifyMessagePropsType) => {
+  if (props.message == null) {
     return null;
   }
 
   const { encodedMessage, decodedMessage } = decodeMessage({
-    address,
-    message: props.signedMessage,
+    message: props.message,
     signature: props.signature
   });
 

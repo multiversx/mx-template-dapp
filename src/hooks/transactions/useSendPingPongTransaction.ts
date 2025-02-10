@@ -53,6 +53,8 @@ export const useSendPingPongTransaction = () => {
       transactions: [pingTransaction],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPingTransactionFromService = async (
@@ -96,6 +98,8 @@ export const useSendPingPongTransaction = () => {
       transactions: [pongTransaction],
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPongTransactionFromService = async (
@@ -105,6 +109,8 @@ export const useSendPingPongTransaction = () => {
       transactions,
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   return {

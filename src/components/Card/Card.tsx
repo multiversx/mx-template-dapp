@@ -24,6 +24,7 @@ export const Card = (props: CardType) => {
         <a
           href={reference}
           target='_blank'
+          rel='noopener noreferrer'
           className='hidden group-hover:block ml-2 text-blue-600'
         >
           <FontAwesomeIcon icon={faInfoCircle} size='sm' />
