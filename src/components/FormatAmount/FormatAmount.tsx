@@ -4,9 +4,8 @@ import { DECIMALS, DIGITS } from 'localConstants';
 import { WithClassnamePropsType } from 'types';
 import { FormatAmountSDK } from 'lib/sdkDappCoreUI';
 
-interface FormatAmountPropsType
-  extends FormatAmountControllerPropsType,
-    WithClassnamePropsType {
+interface FormatAmountPropsType extends WithClassnamePropsType {
+  egldLabel?: string;
   value: string;
 }
 

@@ -47,7 +47,6 @@ export const TransactionOutput = ({
         <Label>Amount: </Label>
         <FormatAmount
           value={transaction.value}
-          input={transaction.value}
           egldLabel={egldLabel}
           data-testid={DataTestIdsEnum.balance}
         />
