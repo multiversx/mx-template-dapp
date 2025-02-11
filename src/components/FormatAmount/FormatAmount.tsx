@@ -1,5 +1,6 @@
 import { FormatAmountController } from 'lib/sdkDappCore';
 import { FormatAmountSDK } from 'lib/sdkDappCoreUI';
+import { FormatAmountSDK } from 'lib/sdkDappCoreUI';
 import { DECIMALS, DIGITS } from 'localConstants';
 import { WithClassnamePropsType } from 'types';
 
