@@ -1,7 +1,7 @@
 import { SessionEnum, isSafari } from 'localConstants/session';
-import { getSwapAndLockTransactions } from '../helpers';
 import { sendBatchTransactions } from 'services/sdkDappServices';
 import { refreshAccount } from 'utils/sdkDappUtils';
+import { getSwapAndLockTransactions } from '../helpers';
 import { SendTransactionProps } from '../types';
 
 export const swapAndLockTokens = async ({

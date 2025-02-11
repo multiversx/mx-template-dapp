@@ -18,12 +18,12 @@ import {
 import { SessionEnum } from 'localConstants/session';
 import { SignedTransactionType, WidgetProps } from 'types';
 import { useBatchTransactionContext } from 'wrappers';
-import { useSendSignedTransactions } from './hooks';
 import {
   sendBatchTransactions,
   signAndAutoSendBatchTransactions,
   swapAndLockTokens
 } from './helpers';
+import { useSendSignedTransactions } from './hooks';
 
 export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
   const { setSendBatchTransactionsOnDemand } = useBatchTransactionContext();
@@ -62,18 +62,18 @@ export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
   const executeSignAndAutoSendBatchTransactions = async () => {
     setSendBatchTransactionsOnDemand(false);
 
-    const { batchId } = await signAndAutoSendBatchTransactions({
+    const { batchId: batchIdResult } = await signAndAutoSendBatchTransactions({
       address,
       nonce: account.nonce,
       chainID: network.chainId,
       callbackRoute
     });
 
-    if (!batchId) {
+    if (!batchIdResult) {
       return;
     }
 
-    setTrackBatchId(batchId);
+    setTrackBatchId(batchIdResult);
   };
 
   const executeBatchTransactions = async () => {
