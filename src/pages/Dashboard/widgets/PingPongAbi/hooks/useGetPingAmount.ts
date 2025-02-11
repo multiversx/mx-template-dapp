@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react';
 import {
   ContractFunction,
   ProxyNetworkProvider,
   ResultsParser
 } from 'lib/sdkCore';
 import { useGetNetworkConfig } from 'lib/sdkDappCore';
-import { useEffect, useState } from 'react';
 
 import { smartContract } from 'utils/smartContract';
 

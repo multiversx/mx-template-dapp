@@ -21,7 +21,7 @@
     "react-router-dom": "6.16.0"
   },
   "scripts": {
-    "lint": "eslint --ext js,ts,tsx src",
+    "lint": "eslint --ext js,ts,tsx src --fix",
     "run-cypress": "npx cypress run",
     "start:devnet": "yarn run copy:devnet-config & vite dev",
     "start:testnet": "yarn run copy:testnet-config & vite dev",

@@ -1,15 +1,15 @@
+import { useState, MouseEvent } from 'react';
 import {
   faFileSignature,
   faBroom,
   faArrowsRotate
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'components/Button';
-import { SignFailure, SignSuccess } from './components';
-import { getAccountProvider, useGetAccount } from 'lib/sdkDappCore';
 import { OutputContainer } from 'components/OutputContainer';
 import { Address, Message } from 'lib/sdkCore';
-import { useState, MouseEvent } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getAccountProvider, useGetAccount } from 'lib/sdkDappCore';
+import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = () => {
   const [message, setMessage] = useState('');
@@ -28,16 +28,17 @@ export const SignMessage = () => {
         address: new Address(address),
         data: new Uint8Array(Buffer.from(message))
       });
-      const signedMessage = await provider.signMessage(messageToSign);
 
-      if (!signedMessage?.signature) {
+      const signedMessageResult = await provider.signMessage(messageToSign);
+
+      if (!signedMessageResult?.signature) {
         setState('error');
         return;
       }
 
       setState('success');
-      setSignatrue(Buffer.from(signedMessage?.signature).toString('hex'));
-      setSignedMessage(signedMessage);
+      setSignatrue(Buffer.from(signedMessageResult?.signature).toString('hex'));
+      setSignedMessage(signedMessageResult);
       setMessage('');
     } catch (error) {
       console.error(error);

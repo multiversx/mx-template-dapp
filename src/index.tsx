@@ -1,9 +1,9 @@
 import './styles/globals.css';
 
-import { App } from './App';
-import { initApp } from 'lib/sdkDappCore';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { initApp } from 'lib/sdkDappCore';
+import { App } from './App';
 import { config } from './initConfig';
 
 initApp(config).then(() => {

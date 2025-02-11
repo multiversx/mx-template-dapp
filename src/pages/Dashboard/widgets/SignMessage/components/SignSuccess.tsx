@@ -1,7 +1,7 @@
-import { Label } from 'components/Label';
-import { decodeMessage } from '../helpers';
 import { Message } from '@multiversx/sdk-core/out';
 import { CopyButton } from 'components';
+import { Label } from 'components/Label';
+import { decodeMessage } from '../helpers';
 
 interface VerifyMessagePropsType {
   message: Message;

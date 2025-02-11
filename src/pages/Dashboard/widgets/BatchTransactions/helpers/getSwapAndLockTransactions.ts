@@ -1,7 +1,7 @@
-import { GAS_PRICE, VERSION } from 'localConstants';
-import { TransactionProps } from 'types/transaction.types';
-import { Transaction, TransactionPayload } from 'types/sdkCoreTypes';
 import { BATCH_TRANSACTIONS_SC } from 'config';
+import { GAS_PRICE, VERSION } from 'localConstants';
+import { Transaction, TransactionPayload } from 'types/sdkCoreTypes';
+import { TransactionProps } from 'types/transaction.types';
 
 export const getSwapAndLockTransactions = ({
   address,

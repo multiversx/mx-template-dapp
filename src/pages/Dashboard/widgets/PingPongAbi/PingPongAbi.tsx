@@ -9,8 +9,8 @@ import { Label } from 'components/Label';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
-import { useGetTimeToPong, useGetPingAmount } from './hooks';
 import { useGetPendingTransactions } from 'lib/sdkDappCore';
+import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 export const PingPongAbi = () => {
   const transactions = useGetPendingTransactions();

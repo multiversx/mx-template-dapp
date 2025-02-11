@@ -7,7 +7,6 @@ import {
 } from 'lib/sdkDappCore';
 import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
 import { getSwapAndLockTransactions } from 'pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
-import { SignedTransactionType } from 'types';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 
@@ -44,7 +43,7 @@ export const useSendBatchTransaction = () => {
     ];
 
     const sentTransactions = await txManager.send(groupedTransactions);
-    await txManager.track(sentTransactions as SignedTransactionType[]);
+    await txManager.track(sentTransactions);
   };
 
   const sendSwapAndLockBatchTransactions = async () => {
@@ -64,7 +63,7 @@ export const useSendBatchTransaction = () => {
     ];
 
     const sentTransactions = await txManager.send(groupedTransactions);
-    await txManager.track(sentTransactions as SignedTransactionType[]);
+    await txManager.track(sentTransactions);
   };
 
   return {

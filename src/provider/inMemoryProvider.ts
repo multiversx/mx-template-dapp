@@ -6,10 +6,10 @@ import {
   UserSecretKey,
   UserSigner
 } from 'lib/sdkCore';
-import { IDAppProviderAccount } from 'types/sdkDappUtilsTypes';
 import { signTransactions } from 'lib/sdkDappCore';
-import { LoginModal } from './LoginModal';
 import { IProvider } from 'types';
+import { IDAppProviderAccount } from 'types/sdkDappUtilsTypes';
+import { LoginModal } from './LoginModal';
 
 const notInitializedError = (caller: string) => () => {
   throw new Error(`Unable to perform ${caller}, Provider not initialized`);

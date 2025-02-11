@@ -1,13 +1,12 @@
 import './styles/globals.css';
 
+import { InMemoryProvider } from './provider/inMemoryProvider';
 import {
   EnvironmentsEnum,
   ICustomProvider,
   InitAppType,
   ProviderTypeEnum
 } from './types';
-import { InMemoryProvider } from './provider/inMemoryProvider';
-import { IProvider } from 'types/sdkDappCoreTypes';
 
 const ADDITIONAL_PROVIDERS = {
   inMemoryProvider: 'inMemoryProvider'
@@ -25,7 +24,7 @@ const providers: ICustomProvider<ProviderTypeEnum>[] = [
     name: ADDITIONAL_PROVIDERS.inMemoryProvider,
     type: ExtendedProviders.inMemoryProvider,
     icon: '',
-    constructor: async () => new InMemoryProvider()
+    constructor: async (_address?: string) => new InMemoryProvider()
   }
 ];
 

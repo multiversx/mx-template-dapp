@@ -66,7 +66,7 @@ export class LoginModal {
     address: string;
   }> {
     return new Promise((resolve) => {
-      const modalPortal = () => {
+      const ModalPortal = () => {
         const privateKeyRef = useRef<HTMLInputElement>(null);
         const addressRef = useRef<HTMLInputElement>(null);
         const [isOpen, setIsOpen] = useState(true);
@@ -141,7 +141,7 @@ export class LoginModal {
         return createPortal(modalContent, document.body);
       };
 
-      this.root.render(modalPortal());
+      this.root.render(ModalPortal());
     });
   }
 }

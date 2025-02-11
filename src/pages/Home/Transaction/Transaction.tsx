@@ -1,8 +1,8 @@
-import { TRANSACTIONS_ENDPOINT } from 'localConstants/sdkDappCoreConstants';
-import { Label } from 'components/Label';
-import { getTransactionUrl, useTransactionOutcome } from './helpers';
-import { useGetNetworkConfig } from 'lib/sdkDappCore';
 import { ExplorerLink } from 'components/ExplorerLink';
+import { Label } from 'components/Label';
+import { useGetNetworkConfig } from 'lib/sdkDappCore';
+import { TRANSACTIONS_ENDPOINT } from 'localConstants/sdkDappCoreConstants';
+import { getTransactionUrl, useTransactionOutcome } from './helpers';
 
 export const Transaction = () => {
   const { network } = useGetNetworkConfig();

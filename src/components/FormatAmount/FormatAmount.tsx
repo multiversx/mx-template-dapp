@@ -1,8 +1,7 @@
-import { FormatAmountControllerPropsType } from 'types/sdkDappCoreTypes';
 import { FormatAmountController } from 'lib/sdkDappCore';
+import { FormatAmountSDK } from 'lib/sdkDappCoreUI';
 import { DECIMALS, DIGITS } from 'localConstants';
 import { WithClassnamePropsType } from 'types';
-import { FormatAmountSDK } from 'lib/sdkDappCoreUI';
 
 interface FormatAmountPropsType extends WithClassnamePropsType {
   egldLabel?: string;

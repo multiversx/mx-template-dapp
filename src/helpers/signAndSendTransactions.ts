@@ -1,9 +1,9 @@
-import { Transaction, SignedTransactionType } from 'types';
 import {
   getAccountProvider,
   refreshAccount,
   TransactionManager
 } from 'lib/sdkDappCore';
+import { Transaction } from 'types';
 
 type TransactionsDisplayInfoType = any; // TODO: fill in @DanutIlie
 
@@ -22,5 +22,5 @@ export const signAndSendTransactions = async ({
 
   const signedTransactions = await provider.signTransactions(transactions);
   const sentTransactions = await txManager.send(signedTransactions);
-  await txManager.track(sentTransactions as SignedTransactionType[]);
+  await txManager.track(sentTransactions);
 };
