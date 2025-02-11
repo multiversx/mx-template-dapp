@@ -1,6 +1,6 @@
-import { getBatchTransactions } from '../helpers';
 import { sendTransactions } from 'helpers/sdkDappHelpers';
 import { SessionEnum, isSafari } from 'localConstants/session';
+import { getBatchTransactions } from '../helpers';
 import { SendTransactionProps } from '../types';
 
 export const sendBatchTransactions = async ({

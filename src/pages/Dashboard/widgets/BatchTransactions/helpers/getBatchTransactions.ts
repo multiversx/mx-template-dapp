@@ -6,8 +6,8 @@ import {
   GAS_PRICE,
   VERSION
 } from 'localConstants/sdkDapConstants';
-import { TransactionProps } from 'types/transaction.types';
 import { Transaction } from 'types/sdkCoreTypes';
+import { TransactionProps } from 'types/transaction.types';
 import { TokenTransfer } from 'utils/sdkDappCore';
 
 const NUMBER_OF_TRANSACTIONS = 5;

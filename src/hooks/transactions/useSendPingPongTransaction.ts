@@ -5,6 +5,7 @@ import {
   removeAllTransactionsToSign
 } from '@multiversx/sdk-dapp/services/transactions/clearTransactions';
 import { contractAddress } from 'config';
+import { newTransaction } from 'helpers/sdkDappHelpers';
 import { signAndSendTransactions } from 'helpers/signAndSendTransactions';
 import {
   useGetAccountInfo,
@@ -12,15 +13,14 @@ import {
   useTrackTransactionStatus
 } from 'hooks/sdkDappHooks';
 import { GAS_PRICE, SessionEnum, VERSION } from 'localConstants';
-import { getChainId } from 'utils/getChainId';
-import { smartContract } from 'utils/smartContract';
 import {
   PingRawProps,
   PingPongServiceProps,
   PongRawProps
 } from 'types/pingPong.types';
-import { newTransaction } from 'helpers/sdkDappHelpers';
+import { getChainId } from 'utils/getChainId';
 import { Address } from 'utils/sdkDappCore';
+import { smartContract } from 'utils/smartContract';
 
 type PingPongTransactionProps = {
   type: SessionEnum;

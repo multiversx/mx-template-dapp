@@ -1,7 +1,7 @@
 import { SessionEnum, isSafari } from 'localConstants/session';
-import { getBatchTransactions } from '../helpers';
-import { refreshAccount } from 'utils/sdkDappUtils';
 import { sendBatchTransactions } from 'services/sdkDappServices';
+import { refreshAccount } from 'utils/sdkDappUtils';
+import { getBatchTransactions } from '../helpers';
 import { SendTransactionProps } from '../types';
 
 // this process will not go through useSendSignedTransactions
