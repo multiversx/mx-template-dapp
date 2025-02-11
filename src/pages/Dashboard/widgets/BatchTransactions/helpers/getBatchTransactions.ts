@@ -1,41 +1,43 @@
-import { newTransaction } from 'helpers/sdkDappHelpers';
-import {
-  DECIMALS,
-  EXTRA_GAS_LIMIT_GUARDED_TX,
-  GAS_LIMIT,
-  GAS_PRICE,
-  VERSION
-} from 'localConstants/sdkDapConstants';
-import { TokenTransfer } from 'utils/sdkDappCore';
-import { Transaction } from 'types/sdkCoreTypes';
-import { TransactionProps } from 'types/transaction.types';
+// TODO: Implement this
 
-const NUMBER_OF_TRANSACTIONS = 5;
+// import { newTransaction } from 'helpers/sdkDappHelpers';
+// import {
+//   DECIMALS,
+//   EXTRA_GAS_LIMIT_GUARDED_TX,
+//   GAS_LIMIT,
+//   GAS_PRICE,
+//   VERSION
+// } from 'localConstants/sdkDapConstants';
+// import { TokenTransfer } from 'utils/sdkDappCore';
+// import { Transaction } from 'types/sdkCoreTypes';
+// import { TransactionProps } from 'types/transaction.types';
 
-export const getBatchTransactions = ({
-  address,
-  nonce,
-  chainID
-}: TransactionProps): Transaction[] => {
-  const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
+// const NUMBER_OF_TRANSACTIONS = 5;
 
-  return transactions.map((id) => {
-    const amount = TokenTransfer.fungibleFromAmount(
-      '',
-      id + 1,
-      DECIMALS
-    ).toString();
+// export const getBatchTransactions = ({
+//   address,
+//   nonce,
+//   chainID
+// }: TransactionProps): Transaction[] => {
+//   const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
-    return newTransaction({
-      sender: address,
-      receiver: address,
-      data: `batch-tx-${id + 1}`,
-      value: amount,
-      chainID,
-      gasLimit: GAS_LIMIT + EXTRA_GAS_LIMIT_GUARDED_TX,
-      gasPrice: GAS_PRICE,
-      nonce,
-      version: VERSION
-    });
-  });
-};
+//   return transactions.map((id) => {
+//     const amount = TokenTransfer.fungibleFromAmount(
+//       '',
+//       id + 1,
+//       DECIMALS
+//     ).toString();
+
+//     return newTransaction({
+//       sender: address,
+//       receiver: address,
+//       data: `batch-tx-${id + 1}`,
+//       value: amount,
+//       chainID,
+//       gasLimit: GAS_LIMIT + EXTRA_GAS_LIMIT_GUARDED_TX,
+//       gasPrice: GAS_PRICE,
+//       nonce,
+//       version: VERSION
+//     });
+//   });
+// };

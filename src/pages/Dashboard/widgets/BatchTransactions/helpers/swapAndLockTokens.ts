@@ -1,47 +1,49 @@
-import { sendBatchTransactions } from 'services/sdkDappServices';
-import { refreshAccount } from 'utils/sdkDappUtils';
-import { SessionEnum, isSafari } from 'localConstants/session';
-import { getSwapAndLockTransactions } from '../helpers';
-import { SendTransactionProps } from '../types';
+// TODO: Implement this
 
-export const swapAndLockTokens = async ({
-  address,
-  nonce,
-  chainID,
-  callbackRoute
-}: SendTransactionProps) => {
-  const transactions = getSwapAndLockTransactions({
-    address,
-    chainID,
-    nonce
-  });
+// import { sendBatchTransactions } from 'services/sdkDappServices';
+// import { refreshAccount } from 'utils/sdkDappUtils';
+// import { SessionEnum, isSafari } from 'localConstants/session';
+// import { getSwapAndLockTransactions } from '../helpers';
+// import { SendTransactionProps } from '../types';
 
-  const groupedTransactions = [
-    [transactions[0]],
-    [transactions[1], transactions[2]],
-    [transactions[3]]
-  ];
+// export const swapAndLockTokens = async ({
+//   address,
+//   nonce,
+//   chainID,
+//   callbackRoute
+// }: SendTransactionProps) => {
+//   const transactions = getSwapAndLockTransactions({
+//     address,
+//     chainID,
+//     nonce
+//   });
 
-  await refreshAccount();
+//   const groupedTransactions = [
+//     [transactions[0]],
+//     [transactions[1], transactions[2]],
+//     [transactions[3]]
+//   ];
 
-  const { batchId, error } = await sendBatchTransactions({
-    transactions: groupedTransactions,
-    customTransactionInformation: { redirectAfterSign: true },
-    transactionsDisplayInfo: {
-      processingMessage: 'Processing transactions',
-      errorMessage: 'An error has occurred during transaction execution',
-      successMessage: 'Batch transactions successful'
-    },
-    callbackRoute,
-    hasConsentPopup: isSafari
-  });
+//   await refreshAccount();
 
-  if (error) {
-    console.error('Could not execute transactions', error);
-    return {};
-  }
+//   const { batchId, error } = await sendBatchTransactions({
+//     transactions: groupedTransactions,
+//     customTransactionInformation: { redirectAfterSign: true },
+//     transactionsDisplayInfo: {
+//       processingMessage: 'Processing transactions',
+//       errorMessage: 'An error has occurred during transaction execution',
+//       successMessage: 'Batch transactions successful'
+//     },
+//     callbackRoute,
+//     hasConsentPopup: isSafari
+//   });
 
-  sessionStorage.setItem(SessionEnum.batchId, batchId);
+//   if (error) {
+//     console.error('Could not execute transactions', error);
+//     return {};
+//   }
 
-  return { batchId };
-};
+//   sessionStorage.setItem(SessionEnum.batchId, batchId);
+
+//   return { batchId };
+// };

@@ -1,38 +1,40 @@
-import { sendTransactions } from 'helpers/sdkDappHelpers';
-import { SessionEnum, isSafari } from 'localConstants/session';
-import { getBatchTransactions } from '../helpers';
-import { SendTransactionProps } from '../types';
+// TODO: Implement this
 
-export const sendBatchTransactions = async ({
-  address,
-  chainID,
-  nonce,
-  callbackRoute
-}: SendTransactionProps) => {
-  const transactions = getBatchTransactions({
-    address,
-    chainID,
-    nonce
-  });
+// import { sendTransactions } from 'helpers/sdkDappHelpers';
+// import { SessionEnum, isSafari } from 'localConstants/session';
+// import { getBatchTransactions } from '../helpers';
+// import { SendTransactionProps } from '../types';
 
-  const { sessionId, error } = await sendTransactions({
-    transactions,
-    signWithoutSending: true,
-    customTransactionInformation: { redirectAfterSign: true },
-    callbackRoute,
-    hasConsentPopup: isSafari
-  });
+// export const sendBatchTransactions = async ({
+//   address,
+//   chainID,
+//   nonce,
+//   callbackRoute
+// }: SendTransactionProps) => {
+//   const transactions = getBatchTransactions({
+//     address,
+//     chainID,
+//     nonce
+//   });
 
-  if (error) {
-    console.error('Could not execute transactions', error);
-    return {};
-  }
+//   const { sessionId, error } = await sendTransactions({
+//     transactions,
+//     signWithoutSending: true,
+//     customTransactionInformation: { redirectAfterSign: true },
+//     callbackRoute,
+//     hasConsentPopup: isSafari
+//   });
 
-  const newBatchSessionId = Date.now().toString();
-  // sdk-dapp by default takes the last session id from sdk-dapp’s redux store on page refresh
-  // in order to differentiate the transactions between widgets, a persistence of sessionId is needed
-  sessionStorage.setItem(SessionEnum.batchSessionId, newBatchSessionId);
-  sessionStorage.setItem(SessionEnum.signedSessionId, sessionId);
+//   if (error) {
+//     console.error('Could not execute transactions', error);
+//     return {};
+//   }
 
-  return { newBatchSessionId, sessionId };
-};
+//   const newBatchSessionId = Date.now().toString();
+//   // sdk-dapp by default takes the last session id from sdk-dapp’s redux store on page refresh
+//   // in order to differentiate the transactions between widgets, a persistence of sessionId is needed
+//   sessionStorage.setItem(SessionEnum.batchSessionId, newBatchSessionId);
+//   sessionStorage.setItem(SessionEnum.signedSessionId, sessionId);
+
+//   return { newBatchSessionId, sessionId };
+// };
