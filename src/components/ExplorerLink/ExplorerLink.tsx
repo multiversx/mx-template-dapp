@@ -6,19 +6,19 @@ export interface ExplorerLinkPropsType extends PropsWithChildren {
   className?: string;
   dataTestId?: string;
   icon?: any;
-  pathname: string;
+  page: string;
   text?: any;
 }
 
 export const ExplorerLink = ({
   children,
-  pathname,
+  page,
   ...rest
 }: ExplorerLinkPropsType) => {
   const { network } = useGetNetworkConfig();
 
   return (
-    <ExplorerLinkSDK link={`${network.explorerAddress}${pathname}`} {...rest}>
+    <ExplorerLinkSDK link={`${network.explorerAddress}${page}`} {...rest}>
       {children ? <div slot='content'>{children}</div> : null}
     </ExplorerLinkSDK>
   );

@@ -9,13 +9,12 @@ import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
-import { SignedTransactionType } from 'types';
+import { useGetLoginInfo, useGetPendingTransactions } from 'lib/sdkDappCore';
 import {
   useGetTimeToPong,
   useGetPingTransaction,
   useGetPongTransaction
 } from './hooks';
-import { useGetLoginInfo, useGetPendingTransactions } from 'lib/sdkDappCore';
 
 // The transactions are being done by directly requesting to template-dapp service
 export const PingPongService = () => {

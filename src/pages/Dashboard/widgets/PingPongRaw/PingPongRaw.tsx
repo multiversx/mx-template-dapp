@@ -1,14 +1,14 @@
+import { useEffect, useState } from 'react';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { Button } from 'components/Button';
-import { useGetTimeToPong, useGetPingAmount } from './hooks';
-import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { PingPongOutput } from 'components/OutputContainer/components';
+import { OutputContainer } from 'components/OutputContainer/OutputContainer';
+import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks/transactions/useSendPingPongTransaction';
-import { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGetPendingTransactions } from 'lib/sdkDappCore';
+import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract
 export const PingPongRaw = () => {

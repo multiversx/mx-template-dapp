@@ -42,8 +42,8 @@ export const useSendBatchTransaction = () => {
       [signedTransactions[3], signedTransactions[4]]
     ];
 
-    await txManager.send(groupedTransactions);
-    await txManager.track(signedTransactions);
+    const sentTransactions = await txManager.send(groupedTransactions);
+    await txManager.track(sentTransactions);
   };
 
   const sendSwapAndLockBatchTransactions = async () => {
@@ -62,8 +62,8 @@ export const useSendBatchTransaction = () => {
       [signedTransactions[3]]
     ];
 
-    await txManager.send(groupedTransactions);
-    await txManager.track(signedTransactions);
+    const sentTransactions = await txManager.send(groupedTransactions);
+    await txManager.track(sentTransactions);
   };
 
   return {

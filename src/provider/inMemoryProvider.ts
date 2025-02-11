@@ -5,10 +5,10 @@ import {
   Transaction,
   UserSecretKey,
   UserSigner
-} from '@multiversx/sdk-core/out';
-import { IDAppProviderAccount } from '@multiversx/sdk-dapp-utils/out';
-import { IProvider } from 'types/sdkCoreTypes';
-import { signTransactions } from '@multiversx/sdk-dapp-core/out/core/providers/strategies/helpers/signTransactions/signTransactions';
+} from 'lib/sdkCore';
+import { signTransactions } from 'lib/sdkDappCore';
+import { IProvider } from 'types';
+import { IDAppProviderAccount } from 'types/sdkDappUtilsTypes';
 import { LoginModal } from './LoginModal';
 
 const notInitializedError = (caller: string) => () => {
@@ -82,17 +82,13 @@ export class InMemoryProvider implements IProvider {
 
   async signTransactions(transactions: Transaction[]) {
     const hasPrivateKey = await this._getPrivateKey('signTransactions');
-
     if (!hasPrivateKey) {
       throw Error('Unable to sign transactions.');
     }
-
-    const signedTransactions = await signTransactions({
+    return signTransactions({
       transactions,
       handleSign: this._signTransactions.bind(this)
     });
-
-    return signedTransactions;
   }
 
   async login(options?: { token?: string }): Promise<{

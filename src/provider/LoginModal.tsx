@@ -66,7 +66,7 @@ export class LoginModal {
     address: string;
   }> {
     return new Promise((resolve) => {
-      const ModalComponent = () => {
+      const ModalPortal = () => {
         const privateKeyRef = useRef<HTMLInputElement>(null);
         const addressRef = useRef<HTMLInputElement>(null);
         const [isOpen, setIsOpen] = useState(true);
@@ -98,7 +98,7 @@ export class LoginModal {
           return null;
         }
 
-        return createPortal(
+        const modalContent = (
           <div style={modalStyles.overlay}>
             <div style={modalStyles.modal}>
               <h2>Authenticate</h2>
@@ -135,12 +135,13 @@ export class LoginModal {
                 </div>
               </form>
             </div>
-          </div>,
-          document.body
+          </div>
         );
+
+        return createPortal(modalContent, document.body);
       };
 
-      this.root.render(<ModalComponent />);
+      this.root.render(ModalPortal());
     });
   }
 }

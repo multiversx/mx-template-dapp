@@ -1,5 +1,8 @@
 import { contractAddress } from 'config';
+import { useScrollToElement } from 'hooks';
+import { WidgetType } from 'types/widget.types';
 import { AuthRedirectWrapper } from 'wrappers';
+import { Widget } from './components';
 import {
   Account,
   SignMessage,
@@ -9,9 +12,6 @@ import {
   PingPongAbi,
   PingPongService
 } from './widgets';
-import { useScrollToElement } from 'hooks';
-import { Widget } from './components';
-import { WidgetType } from 'types/widget.types';
 
 const WIDGETS: WidgetType[] = [
   {
