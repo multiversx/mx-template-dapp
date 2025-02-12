@@ -1,11 +1,6 @@
+import { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp-core/out/types/transactions.types';
 import { Transaction } from 'types';
-import {
-  getAccountProvider,
-  refreshAccount,
-  TransactionManager
-} from 'lib/sdkDappCore';
-
-type TransactionsDisplayInfoType = any; // TODO: fill in @DanutIlie
+import { getAccountProvider, TransactionManager } from 'utils/sdkDappCore';
 
 type SignAndSendTransactionsProps = {
   transactions: Transaction[];
@@ -18,10 +13,7 @@ export const signAndSendTransactions = async ({
   const provider = getAccountProvider();
   const txManager = TransactionManager.getInstance();
 
-  await refreshAccount();
-
   const signedTransactions = await provider.signTransactions(transactions);
-
-  await txManager.send(signedTransactions);
-  await txManager.track(signedTransactions);
+  const sentTransactions = await txManager.send(signedTransactions);
+  await txManager.track(sentTransactions);
 };

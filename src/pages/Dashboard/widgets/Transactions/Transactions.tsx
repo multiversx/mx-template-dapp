@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { OutputContainer, TransactionsTable } from 'components';
+import { getActiveTransactionsStatus } from 'utils/sdkDappCore';
 import { useGetTransactions } from './hooks';
-import { getActiveTransactionsStatus } from 'lib/sdkDappCore';
 import { TransactionsPropsType } from './types';
 
 export const Transactions = (props: TransactionsPropsType) => {

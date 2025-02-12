@@ -8,10 +8,8 @@ import { ContractAddress } from 'components/ContractAddress';
 import { Label } from 'components/Label';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useSendPingPongTransaction } from 'hooks';
-import { SignedTransactionType } from 'types';
+import { useSendPingPongTransaction, useGetPendingTransactions } from 'hooks';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
-import { useGetPendingTransactions } from 'lib/sdkDappCore';
 
 export const PingPongAbi = () => {
   const transactions = useGetPendingTransactions();
@@ -56,7 +54,7 @@ export const PingPongAbi = () => {
 
   useEffect(() => {
     setSecondsRemaining();
-  }, [transactions]);
+  }, [hasPendingTransactions]);
 
   return (
     <div className='flex flex-col gap-6'>

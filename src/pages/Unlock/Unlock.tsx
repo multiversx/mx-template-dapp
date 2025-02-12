@@ -1,10 +1,10 @@
-import { AuthRedirectWrapper } from 'wrappers';
-import { ProviderTypeEnum } from 'types';
-import { Button } from 'components';
 import { useNavigate } from 'react-router-dom';
-import { ProviderFactory } from 'lib/sdkDappCore';
-import { RouteNamesEnum } from 'localConstants/routes';
+import { Button } from 'components';
 import { ExtendedProviders } from 'initConfig';
+import { RouteNamesEnum } from 'localConstants/routes';
+import { ProviderTypeEnum } from 'types';
+import { ProviderFactory } from 'utils/sdkDappCore';
+import { AuthRedirectWrapper } from 'wrappers';
 
 export const Unlock = () => {
   const navigate = useNavigate();

@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import BigNumber from 'bignumber.js';
 import { contractAddress } from 'config';
+import { useGetNetworkConfig } from 'hooks';
 import { PingPongResponseType } from '../types';
-import { useGetNetworkConfig } from 'lib/sdkDappCore';
 
 const decodeAmount = (data: PingPongResponseType) => {
   const returnValue = data.data.data.returnData[0];

@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import { apiTimeout, transactionSize } from 'config';
+import { useGetNetworkConfig, useGetAccount } from 'hooks';
 import { ServerTransactionType } from 'types';
+import { getTransactions, getInterpretedTransaction } from 'utils';
 import { TransactionsPropsType } from '../types';
-import {
-  useGetNetworkConfig,
-  useGetAccount,
-  getTransactions,
-  getInterpretedTransaction
-} from 'lib/sdkDappCore';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
   const { address } = useGetAccount();
@@ -31,9 +27,8 @@ export const useGetTransactions = (payload?: TransactionsPropsType) => {
         ...(payload ?? {})
       });
 
-      const interpretedTransactions = data.map(
-        (transaction: ServerTransactionType) =>
-          getInterpretedTransaction({ transaction, address, explorerAddress })
+      const interpretedTransactions = data.map((transaction) =>
+        getInterpretedTransaction({ transaction, address, explorerAddress })
       );
 
       setTransactions(interpretedTransactions);

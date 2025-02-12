@@ -1,14 +1,11 @@
-import { Label } from 'components/Label';
-import { SignedTransactionType } from 'types';
-import { ExplorerLink } from '../../ExplorerLink';
-import {
-  ACCOUNTS_ENDPOINT,
-  DataTestIdsEnum,
-  TRANSACTIONS_ENDPOINT
-} from 'localConstants';
-import { useGetNetworkConfig } from 'lib/sdkDappCore';
-import { FormatAmount } from '../../FormatAmount';
 import React from 'react';
+import { Label } from 'components/Label';
+import { useGetNetworkConfig } from 'hooks';
+import { DataTestIdsEnum } from 'localConstants';
+import { SignedTransactionType } from 'types';
+import { ACCOUNTS_ENDPOINT, TRANSACTIONS_ENDPOINT } from 'utils';
+import { ExplorerLink } from '../../ExplorerLink';
+import { FormatAmount } from '../../FormatAmount';
 
 export const TransactionOutput = ({
   transaction
@@ -27,7 +24,7 @@ export const TransactionOutput = ({
       <p>
         <Label>Hash:</Label>
         <ExplorerLink
-          pathname={`/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`}
+          page={`/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.hash}
@@ -36,7 +33,7 @@ export const TransactionOutput = ({
       <p>
         <Label>Receiver:</Label>
         <ExplorerLink
-          pathname={`/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`}
+          page={`/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.receiver}
@@ -46,7 +43,7 @@ export const TransactionOutput = ({
       <p>
         <Label>Amount: </Label>
         <FormatAmount
-          input={transaction.value}
+          value={transaction.value}
           egldLabel={egldLabel}
           data-testid={DataTestIdsEnum.balance}
         />

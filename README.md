@@ -5,6 +5,10 @@ It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/pack
 
 See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
 
+### Tests
+[![E2E tests](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml)
+
+
 ## Requirements
 
 - Node.js version 16.20.0+
@@ -71,3 +75,4 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
+

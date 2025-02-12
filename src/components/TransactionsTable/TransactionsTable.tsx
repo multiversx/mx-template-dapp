@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { TransactionsTableSDK, ITransactionsTableRow } from 'lib/sdkDappCoreUI';
+import { useGetAccount, useGetNetworkConfig } from 'hooks';
 import { ServerTransactionType } from 'types/sdkDappCoreTypes';
 import {
-  TransactionsTableController,
-  useGetAccount,
-  useGetNetworkConfig
-} from 'lib/sdkDappCore';
+  TransactionsTableSDK,
+  ITransactionsTableRow,
+  TransactionsTableController
+} from 'utils';
 
 interface TransactionsTablePropsType {
   transactions?: ServerTransactionType[];

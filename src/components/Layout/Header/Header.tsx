@@ -1,10 +1,11 @@
+import { useMatch, useNavigate } from 'react-router-dom';
 import { Button } from 'components/Button';
 import { MxLink } from 'components/MxLink';
 import { environment } from 'config';
+import { useGetIsLoggedIn } from 'hooks';
 import { RouteNamesEnum } from 'localConstants';
+import { getAccountProvider } from 'utils';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
-import { useMatch, useNavigate } from 'react-router-dom';
-import { getAccountProvider, useGetIsLoggedIn } from 'lib/sdkDappCore';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();

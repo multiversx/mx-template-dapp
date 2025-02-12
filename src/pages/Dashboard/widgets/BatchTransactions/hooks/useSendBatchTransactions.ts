@@ -1,12 +1,13 @@
-import { Transaction, TransactionPayload } from 'lib/sdkCore';
+import { useGetAccount, useGetNetworkConfig } from 'hooks';
+import { getSwapAndLockTransactions } from 'pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
 import {
+  Transaction,
+  TransactionPayload,
   getAccountProvider,
   TransactionManager,
-  useGetAccount,
-  useGetNetworkConfig
-} from 'lib/sdkDappCore';
-import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { getSwapAndLockTransactions } from '../helpers/getSwapAndLockTransactions';
+  GAS_LIMIT,
+  GAS_PRICE
+} from 'utils';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 
@@ -24,10 +25,9 @@ export const useSendBatchTransaction = () => {
         value: '0',
         data: new TransactionPayload(`batch-tx-${id + 1}`),
         receiver: address,
-        gasLimit: GAS_LIMIT,
+        gasLimit: 10 * GAS_LIMIT,
         gasPrice: GAS_PRICE,
         chainID: network.chainId,
-        nonce: nonce + id,
         sender: address,
         version: 1
       });
@@ -42,8 +42,8 @@ export const useSendBatchTransaction = () => {
       [signedTransactions[3], signedTransactions[4]]
     ];
 
-    await txManager.send(groupedTransactions);
-    await txManager.track(signedTransactions);
+    const sentTransactions = await txManager.send(groupedTransactions);
+    await txManager.track(sentTransactions);
   };
 
   const sendSwapAndLockBatchTransactions = async () => {
@@ -62,8 +62,8 @@ export const useSendBatchTransaction = () => {
       [signedTransactions[3]]
     ];
 
-    await txManager.send(groupedTransactions);
-    await txManager.track(signedTransactions);
+    const sentTransactions = await txManager.send(groupedTransactions);
+    await txManager.track(sentTransactions);
   };
 
   return {

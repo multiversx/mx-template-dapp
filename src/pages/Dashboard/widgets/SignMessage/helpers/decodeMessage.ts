@@ -1,11 +1,9 @@
-import { Message } from 'lib/sdkCore';
+import { Message } from 'utils/sdkCore';
 
 export const decodeMessage = ({
-  address,
   message,
   signature
 }: {
-  address: string;
   message: Message;
   signature: string;
 }): { encodedMessage: string; decodedMessage: string } => {

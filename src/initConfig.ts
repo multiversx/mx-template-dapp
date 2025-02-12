@@ -1,12 +1,12 @@
 import './styles/globals.css';
 
+import { InMemoryProvider } from './provider/inMemoryProvider';
 import {
   EnvironmentsEnum,
   ICustomProvider,
   InitAppType,
   ProviderTypeEnum
 } from './types';
-import { InMemoryProvider } from './provider/inMemoryProvider';
 
 const ADDITIONAL_PROVIDERS = {
   inMemoryProvider: 'inMemoryProvider'

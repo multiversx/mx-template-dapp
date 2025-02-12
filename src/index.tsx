@@ -1,12 +1,12 @@
 import './styles/globals.css';
 
-import { App } from './App';
-import { initApp } from 'lib/sdkDappCore';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { initApp } from 'utils/sdkDappCore';
+import { App } from './App';
 import { config } from './initConfig';
 
-Promise.all([initApp(config)]).then(() => {
+initApp(config).then(() => {
   ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <App />

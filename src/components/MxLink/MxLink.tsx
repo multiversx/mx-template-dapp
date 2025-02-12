@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
-import { WithClassnamePropsType } from 'types';
+import { WithClassnameType } from 'types';
 
-interface MxLinkPropsType extends PropsWithChildren, WithClassnamePropsType {
+interface MxLinkPropsType extends PropsWithChildren, WithClassnameType {
   to: string;
 }
 

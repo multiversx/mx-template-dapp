@@ -1,9 +1,14 @@
-import { Address, Transaction, TransactionPayload } from 'lib/sdkCore';
 import { contractAddress } from 'config';
-import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDappCore';
-import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { smartContract } from 'utils/smartContract';
 import { signAndSendTransactions } from 'helpers';
+import { useGetAccount, useGetNetworkConfig } from 'hooks';
+import {
+  GAS_LIMIT,
+  GAS_PRICE,
+  Address,
+  Transaction,
+  TransactionPayload,
+  smartContract
+} from 'utils';
 
 const PING_TRANSACTION_INFO = {
   processingMessage: 'Processing Ping transaction',
@@ -19,7 +24,7 @@ const PONG_TRANSACTION_INFO = {
 
 export const useSendPingPongTransaction = () => {
   const { network } = useGetNetworkConfig();
-  const { address, nonce } = useGetAccount();
+  const { address } = useGetAccount();
 
   const sendPingTransaction = async (amount: string) => {
     const pingTransaction = new Transaction({
@@ -29,7 +34,6 @@ export const useSendPingPongTransaction = () => {
       gasLimit: 10 * GAS_LIMIT,
       gasPrice: GAS_PRICE,
       chainID: network.chainId,
-      nonce,
       sender: address,
       version: 1
     });
@@ -53,6 +57,8 @@ export const useSendPingPongTransaction = () => {
       transactions: [pingTransaction],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPingTransactionFromService = async (
@@ -72,7 +78,6 @@ export const useSendPingPongTransaction = () => {
       gasLimit: GAS_LIMIT,
       gasPrice: GAS_PRICE,
       chainID: network.chainId,
-      nonce: nonce,
       sender: address,
       version: 1
     });
@@ -96,6 +101,8 @@ export const useSendPingPongTransaction = () => {
       transactions: [pongTransaction],
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPongTransactionFromService = async (
@@ -105,6 +112,8 @@ export const useSendPingPongTransaction = () => {
       transactions,
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   return {
