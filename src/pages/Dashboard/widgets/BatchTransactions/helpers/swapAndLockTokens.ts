@@ -1,7 +1,6 @@
 // TODO: Implement this
 
 // import { sendBatchTransactions } from 'services/sdkDappServices';
-// import { refreshAccount } from 'utils/sdkDappUtils';
 // import { SessionEnum, isSafari } from 'localConstants/session';
 // import { getSwapAndLockTransactions } from '../helpers';
 // import { SendTransactionProps } from '../types';
@@ -23,8 +22,6 @@
 //     [transactions[1], transactions[2]],
 //     [transactions[3]]
 //   ];
-
-//   await refreshAccount();
 
 //   const { batchId, error } = await sendBatchTransactions({
 //     transactions: groupedTransactions,
