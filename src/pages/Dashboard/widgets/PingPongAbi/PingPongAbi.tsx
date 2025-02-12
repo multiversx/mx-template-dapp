@@ -55,7 +55,7 @@ export const PingPongAbi = () => {
 
   useEffect(() => {
     setSecondsRemaining();
-  }, [transactions]);
+  }, [hasPendingTransactions]);
 
   return (
     <div className='flex flex-col gap-6'>

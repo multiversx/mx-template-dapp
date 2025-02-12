@@ -24,10 +24,9 @@ export const useSendBatchTransaction = () => {
         value: '0',
         data: new TransactionPayload(`batch-tx-${id + 1}`),
         receiver: address,
-        gasLimit: GAS_LIMIT,
+        gasLimit: 10 * GAS_LIMIT,
         gasPrice: GAS_PRICE,
         chainID: network.chainId,
-        nonce: nonce + id,
         sender: address,
         version: 1
       });

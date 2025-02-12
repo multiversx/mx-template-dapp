@@ -19,7 +19,7 @@ const PONG_TRANSACTION_INFO = {
 
 export const useSendPingPongTransaction = () => {
   const { network } = useGetNetworkConfig();
-  const { address, nonce } = useGetAccount();
+  const { address } = useGetAccount();
 
   const sendPingTransaction = async (amount: string) => {
     const pingTransaction = new Transaction({
@@ -29,7 +29,6 @@ export const useSendPingPongTransaction = () => {
       gasLimit: 10 * GAS_LIMIT,
       gasPrice: GAS_PRICE,
       chainID: network.chainId,
-      nonce,
       sender: address,
       version: 1
     });
@@ -74,7 +73,6 @@ export const useSendPingPongTransaction = () => {
       gasLimit: GAS_LIMIT,
       gasPrice: GAS_PRICE,
       chainID: network.chainId,
-      nonce: nonce,
       sender: address,
       version: 1
     });
