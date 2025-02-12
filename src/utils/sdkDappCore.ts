@@ -23,6 +23,7 @@ export {
 export {
   GAS_PRICE,
   GAS_LIMIT,
-  VERSION
+  VERSION,
+  EXTRA_GAS_LIMIT_GUARDED_TX
 } from '@multiversx/sdk-dapp-core/out/constants/mvx.constants';
 export { WALLET_PROVIDER_SEND_TRANSACTION_URL } from '@multiversx/sdk-dapp-core/out/constants/webWalletProvider.constants';

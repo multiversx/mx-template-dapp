@@ -1,5 +1,13 @@
 import { TransactionProps } from 'types/transaction.types';
-import { Transaction, TransactionPayload, GAS_LIMIT, GAS_PRICE } from 'utils';
+import {
+  Transaction,
+  TransactionPayload,
+  GAS_LIMIT,
+  GAS_PRICE,
+  EXTRA_GAS_LIMIT_GUARDED_TX,
+  TokenTransfer,
+  DECIMALS
+} from 'utils';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 
@@ -11,11 +19,17 @@ export const getBatchTransactions = ({
   const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
   return transactions.map((id) => {
+    const amount = TokenTransfer.fungibleFromAmount(
+      '',
+      id + 1,
+      DECIMALS
+    ).toString();
+
     return new Transaction({
-      value: '0',
+      value: amount,
       data: new TransactionPayload(`batch-tx-${id + 1}`),
       receiver: address,
-      gasLimit: 10 * GAS_LIMIT,
+      gasLimit: GAS_LIMIT + EXTRA_GAS_LIMIT_GUARDED_TX,
       gasPrice: GAS_PRICE,
       chainID,
       sender: address,
