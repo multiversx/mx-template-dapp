@@ -1,10 +1,5 @@
-import { WithClassnameType } from 'types';
-import { CopyButtonSDK } from 'utils';
+import { CopyButtonSDK, CopyButtonSDKPropsType } from 'utils';
 
-export interface CopyButtonPropsType extends WithClassnameType {
-  text: string;
-}
-
-export const CopyButton = (props: CopyButtonPropsType) => {
+export const CopyButton = (props: CopyButtonSDKPropsType) => {
   return <CopyButtonSDK {...props} />;
 };
