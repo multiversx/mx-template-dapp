@@ -1,40 +1,31 @@
-// TODO: Implement this
+import { TransactionProps } from 'types/transaction.types';
+import { getAccountProvider, TransactionManager } from 'utils';
+import { getBatchTransactions } from './getBatchTransactions';
 
-// import { sendTransactions } from 'helpers/sdkDappHelpers';
-// import { SessionEnum, isSafari } from 'localConstants/session';
-// import { getBatchTransactions } from '../helpers';
-// import { SendTransactionProps } from '../types';
+export const sendBatchTransactions = async ({
+  address,
+  chainID,
+  nonce
+}: TransactionProps) => {
+  const provider = getAccountProvider();
+  const txManager = TransactionManager.getInstance();
 
-// export const sendBatchTransactions = async ({
-//   address,
-//   chainID,
-//   nonce,
-//   callbackRoute
-// }: SendTransactionProps) => {
-//   const transactions = getBatchTransactions({
-//     address,
-//     chainID,
-//     nonce
-//   });
+  const transactions = getBatchTransactions({
+    address,
+    chainID,
+    nonce
+  });
 
-//   const { sessionId, error } = await sendTransactions({
-//     transactions,
-//     signWithoutSending: true,
-//     customTransactionInformation: { redirectAfterSign: true },
-//     callbackRoute,
-//     hasConsentPopup: isSafari
-//   });
+  const signedTransactions = await provider.signTransactions(transactions);
 
-//   if (error) {
-//     console.error('Could not execute transactions', error);
-//     return {};
-//   }
+  const groupedTransactions = [
+    [signedTransactions[0]],
+    [signedTransactions[1], signedTransactions[2]],
+    [signedTransactions[3], signedTransactions[4]]
+  ];
 
-//   const newBatchSessionId = Date.now().toString();
-//   // sdk-dapp by default takes the last session id from sdk-dapp’s redux store on page refresh
-//   // in order to differentiate the transactions between widgets, a persistence of sessionId is needed
-//   sessionStorage.setItem(SessionEnum.batchSessionId, newBatchSessionId);
-//   sessionStorage.setItem(SessionEnum.signedSessionId, sessionId);
+  const sentTransactions = await txManager.send(groupedTransactions);
+  await txManager.track(sentTransactions);
 
-//   return { newBatchSessionId, sessionId };
-// };
+  return { sentTransactions };
+};

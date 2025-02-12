@@ -1,46 +1,41 @@
-// TODO: Implement this
+import { TransactionsDisplayInfoType } from 'types/sdkDappCoreTypes';
+import { TransactionProps } from 'types/transaction.types';
+import { getAccountProvider, TransactionManager } from 'utils';
+import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';
 
-// import { sendBatchTransactions } from 'services/sdkDappServices';
-// import { SessionEnum, isSafari } from 'localConstants/session';
-// import { getSwapAndLockTransactions } from '../helpers';
-// import { SendTransactionProps } from '../types';
+type SwapAndLockTokensProps = TransactionProps & {
+  transactionsDisplayInfo?: TransactionsDisplayInfoType;
+};
 
-// export const swapAndLockTokens = async ({
-//   address,
-//   nonce,
-//   chainID,
-//   callbackRoute
-// }: SendTransactionProps) => {
-//   const transactions = getSwapAndLockTransactions({
-//     address,
-//     chainID,
-//     nonce
-//   });
+export const swapAndLockTokens = async ({
+  address,
+  nonce,
+  chainID,
+  transactionsDisplayInfo = {
+    processingMessage: 'Processing transactions',
+    errorMessage: 'An error has occurred during transaction execution',
+    successMessage: 'Swap and lock transactions successful'
+  }
+}: SwapAndLockTokensProps) => {
+  const provider = getAccountProvider();
+  const txManager = TransactionManager.getInstance();
 
-//   const groupedTransactions = [
-//     [transactions[0]],
-//     [transactions[1], transactions[2]],
-//     [transactions[3]]
-//   ];
+  const transactions = getSwapAndLockTransactions({
+    address,
+    nonce,
+    chainID
+  });
 
-//   const { batchId, error } = await sendBatchTransactions({
-//     transactions: groupedTransactions,
-//     customTransactionInformation: { redirectAfterSign: true },
-//     transactionsDisplayInfo: {
-//       processingMessage: 'Processing transactions',
-//       errorMessage: 'An error has occurred during transaction execution',
-//       successMessage: 'Batch transactions successful'
-//     },
-//     callbackRoute,
-//     hasConsentPopup: isSafari
-//   });
+  const signedTransactions = await provider.signTransactions(transactions);
 
-//   if (error) {
-//     console.error('Could not execute transactions', error);
-//     return {};
-//   }
+  const groupedTransactions = [
+    [signedTransactions[0]],
+    [signedTransactions[1], signedTransactions[2]],
+    [signedTransactions[3]]
+  ];
 
-//   sessionStorage.setItem(SessionEnum.batchId, batchId);
+  const sentTransactions = await txManager.send(groupedTransactions);
+  await txManager.track(sentTransactions, { transactionsDisplayInfo });
 
-//   return { batchId };
-// };
+  return { sentTransactions };
+};

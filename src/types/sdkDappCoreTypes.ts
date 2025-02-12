@@ -25,3 +25,4 @@ export type { InitAppType } from '@multiversx/sdk-dapp-core/out/core/methods/ini
 export type { ICustomProvider } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export type { TransactionsTableRowType } from '@multiversx/sdk-dapp-core/out/controllers/TransactionsTableController/transactionsTableController.types';
 export type { IProvider } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
+export type { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp-core/out/types/transactions.types';
