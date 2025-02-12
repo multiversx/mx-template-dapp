@@ -9,7 +9,7 @@ import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
-import { useGetLoginInfo, useGetPendingTransactions } from 'lib/sdkDappCore';
+import { useGetLoginInfo, useGetPendingTransactions } from 'hooks';
 import {
   useGetTimeToPong,
   useGetPingTransaction,

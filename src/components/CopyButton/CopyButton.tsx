@@ -1,5 +1,10 @@
-import { CopyButtonSDK, CopyButtonSDKPropsType } from 'lib/sdkDappCoreUI';
+import { WithClassnameType } from 'types';
+import { CopyButtonSDK } from 'utils';
 
-export const CopyButton = (props: CopyButtonSDKPropsType) => {
+export interface CopyButtonPropsType extends WithClassnameType {
+  text: string;
+}
+
+export const CopyButton = (props: CopyButtonPropsType) => {
   return <CopyButtonSDK {...props} />;
 };

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
-import { useGetNetworkConfig } from 'lib/sdkDappCore';
-import { ExplorerLinkSDK } from 'lib/sdkDappCoreUI';
+import { useGetNetworkConfig } from 'hooks';
 import { WithClassnameType } from 'types';
+import { ExplorerLinkSDK } from 'utils';
 
 export interface ExplorerLinkPropsType
   extends PropsWithChildren,

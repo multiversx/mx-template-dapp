@@ -1,9 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components';
 import { ExtendedProviders } from 'initConfig';
-import { ProviderFactory } from 'lib/sdkDappCore';
 import { RouteNamesEnum } from 'localConstants/routes';
 import { ProviderTypeEnum } from 'types';
+import { ProviderFactory } from 'utils/sdkDappCore';
 import { AuthRedirectWrapper } from 'wrappers';
 
 export const Unlock = () => {

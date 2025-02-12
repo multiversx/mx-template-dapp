@@ -1,12 +1,13 @@
-import { Transaction, TransactionPayload } from 'lib/sdkCore';
+import { useGetAccount, useGetNetworkConfig } from 'hooks';
+import { getSwapAndLockTransactions } from 'pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
 import {
+  Transaction,
+  TransactionPayload,
   getAccountProvider,
   TransactionManager,
-  useGetAccount,
-  useGetNetworkConfig
-} from 'lib/sdkDappCore';
-import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { getSwapAndLockTransactions } from 'pages/Dashboard/widgets/BatchTransactions/helpers/getSwapAndLockTransactions';
+  GAS_LIMIT,
+  GAS_PRICE
+} from 'utils';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 

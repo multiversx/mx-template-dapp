@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'components/Button';
 import { TransactionsOutput } from 'components/OutputContainer/components';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
-import { useGetPendingTransactions } from 'lib/sdkDappCore';
+import { useGetPendingTransactions } from 'hooks';
 import { useSendBatchTransaction } from './hooks';
 
 export const BatchTransactions = () => {

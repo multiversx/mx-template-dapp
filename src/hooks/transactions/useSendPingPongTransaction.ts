@@ -1,9 +1,14 @@
 import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers';
-import { Address, Transaction, TransactionPayload } from 'lib/sdkCore';
-import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDappCore';
-import { GAS_LIMIT, GAS_PRICE } from 'localConstants';
-import { smartContract } from 'utils/smartContract';
+import { useGetAccount, useGetNetworkConfig } from 'hooks';
+import {
+  GAS_LIMIT,
+  GAS_PRICE,
+  Address,
+  Transaction,
+  TransactionPayload,
+  smartContract
+} from 'utils';
 
 const PING_TRANSACTION_INFO = {
   processingMessage: 'Processing Ping transaction',

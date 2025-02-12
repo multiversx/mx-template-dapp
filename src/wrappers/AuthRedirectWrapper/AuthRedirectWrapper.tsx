@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useGetIsLoggedIn } from 'lib/sdkDappCore';
+import { useGetIsLoggedIn } from 'hooks';
 import { RouteNamesEnum } from 'localConstants';
 
 interface AuthRedirectWrapperPropsType extends PropsWithChildren {

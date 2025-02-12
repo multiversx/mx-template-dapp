@@ -7,8 +7,9 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'components/Button';
 import { OutputContainer } from 'components/OutputContainer';
-import { Address, Message } from 'lib/sdkCore';
-import { getAccountProvider, useGetAccount } from 'lib/sdkDappCore';
+import { useGetAccount } from 'hooks';
+import { Address, Message } from 'utils/sdkCore';
+import { getAccountProvider } from 'utils/sdkDappCore';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = () => {

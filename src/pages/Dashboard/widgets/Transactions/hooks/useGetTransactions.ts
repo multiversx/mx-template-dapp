@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { apiTimeout, transactionSize } from 'config';
-import {
-  useGetNetworkConfig,
-  useGetAccount,
-  getTransactions,
-  getInterpretedTransaction
-} from 'lib/sdkDappCore';
+import { useGetNetworkConfig, useGetAccount } from 'hooks';
 import { ServerTransactionType } from 'types';
+import { getTransactions, getInterpretedTransaction } from 'utils';
 import { TransactionsPropsType } from '../types';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
