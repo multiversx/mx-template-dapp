@@ -1,7 +1,6 @@
 import {
   faPaperPlane,
-  faArrowsRotate,
-  faSignature
+  faArrowsRotate
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'components/Button';
@@ -24,7 +23,7 @@ export const BatchTransactions = () => {
   const transactions = useGetPendingTransactions();
   const hasPendingTransactions = transactions.length > 0;
 
-  const handleSignAndAutoSend = async () => {
+  const executeSignAndAutoSendBatchTransactions = async () => {
     await signAndAutoSendBatchTransactions({
       address,
       nonce,
@@ -38,7 +37,7 @@ export const BatchTransactions = () => {
     });
   };
 
-  const handleSendBatchTransactions = async () => {
+  const executeBatchTransactions = async () => {
     await sendBatchTransactions({
       address,
       nonce,
@@ -46,7 +45,7 @@ export const BatchTransactions = () => {
     });
   };
 
-  const handleSwapAndLock = async () => {
+  const executeSwapAndLockTokens = async () => {
     await swapAndLockTokens({
       address,
       nonce,
@@ -64,7 +63,7 @@ export const BatchTransactions = () => {
       <div className='flex flex-col md:flex-row gap-2 items-start'>
         <Button
           data-testid='sign-auto-send'
-          onClick={handleSignAndAutoSend}
+          onClick={executeSignAndAutoSendBatchTransactions}
           disabled={hasPendingTransactions}
         >
           <FontAwesomeIcon icon={faPaperPlane} className='mr-1' />
@@ -72,15 +71,15 @@ export const BatchTransactions = () => {
         </Button>
         <Button
           data-testid='send-transactions'
-          onClick={handleSendBatchTransactions}
+          onClick={executeBatchTransactions}
           disabled={hasPendingTransactions}
         >
-          <FontAwesomeIcon icon={faSignature} className='mr-1' />
-          Sign & send controlled
+          <FontAwesomeIcon icon={faPaperPlane} className='mr-1' />
+          Sign batch & controlled sending
         </Button>
         <Button
           data-testid='swap-lock'
-          onClick={handleSwapAndLock}
+          onClick={executeSwapAndLockTokens}
           disabled={hasPendingTransactions}
         >
           <FontAwesomeIcon icon={faArrowsRotate} className='mr-1' />
