@@ -1,18 +1,23 @@
-import { FormatAmountController } from 'lib/sdkDappCore';
+import { FormatAmountController, useGetNetworkConfig } from 'lib/sdkDappCore';
 import { FormatAmountSDK } from 'lib/sdkDappCoreUI';
 import { DECIMALS, DIGITS } from 'localConstants';
-import { WithClassnamePropsType } from 'types';
+import { WithClassnameType } from 'types';
 
-interface FormatAmountPropsType extends WithClassnamePropsType {
+interface FormatAmountPropsType extends WithClassnameType {
   egldLabel?: string;
   value: string;
 }
 
 export const FormatAmount = (props: FormatAmountPropsType) => {
+  const {
+    network: { egldLabel }
+  } = useGetNetworkConfig();
+
   const { isValid, valueDecimal, valueInteger, label } =
     FormatAmountController.getData({
       digits: DIGITS,
       decimals: DECIMALS,
+      egldLabel,
       ...props,
       input: props.value
     });

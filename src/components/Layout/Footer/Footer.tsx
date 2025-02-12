@@ -14,7 +14,6 @@ export const Footer = () => {
           target='_blank'
           className='flex items-center text-sm hover:underline'
           href='https://multiversx.com/'
-          rel='noopener noreferrer'
         >
           Made with <HeartIcon className='mx-1 fill-gray-400' /> by the
           MultiversX team

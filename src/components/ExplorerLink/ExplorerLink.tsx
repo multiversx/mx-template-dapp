@@ -1,9 +1,11 @@
 import { PropsWithChildren } from 'react';
 import { useGetNetworkConfig } from 'lib/sdkDappCore';
 import { ExplorerLinkSDK } from 'lib/sdkDappCoreUI';
+import { WithClassnameType } from 'types';
 
-export interface ExplorerLinkPropsType extends PropsWithChildren {
-  className?: string;
+export interface ExplorerLinkPropsType
+  extends PropsWithChildren,
+    WithClassnameType {
   dataTestId?: string;
   icon?: any;
   page: string;

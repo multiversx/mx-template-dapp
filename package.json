@@ -12,7 +12,7 @@
     "@multiversx/sdk-core": "13.17.0",
     "@multiversx/sdk-dapp-core": "0.0.0-alpha.12",
     "@multiversx/sdk-dapp-core-ui": "0.0.0-alpha.2",
-    "@multiversx/sdk-dapp-utils": "1.0.4",
+    "@multiversx/sdk-dapp-utils": "1.0.6",
     "axios": "1.7.4",
     "classnames": "2.3.2",
     "immer": "^10.1.1",
@@ -22,7 +22,6 @@
     "react-router-dom": "6.16.0"
   },
   "scripts": {
-    "lint": "eslint --ext js,ts,tsx src --fix",
     "lint": "eslint --ext js,ts,tsx src --fix",
     "run-cypress": "npx cypress run",
     "start:devnet": "yarn run copy:devnet-config & vite dev",

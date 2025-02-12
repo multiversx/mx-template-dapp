@@ -31,9 +31,8 @@ export const useGetTransactions = (payload?: TransactionsPropsType) => {
         ...(payload ?? {})
       });
 
-      const interpretedTransactions = data.map(
-        (transaction: ServerTransactionType) =>
-          getInterpretedTransaction({ transaction, address, explorerAddress })
+      const interpretedTransactions = data.map((transaction) =>
+        getInterpretedTransaction({ transaction, address, explorerAddress })
       );
 
       setTransactions(interpretedTransactions);
