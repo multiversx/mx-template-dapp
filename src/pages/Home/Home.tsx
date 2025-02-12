@@ -16,7 +16,6 @@ export const Home = () => {
                     href='https://www.npmjs.com/package/@multiversx/sdk-dapp-core'
                     target='_blank'
                     className='text-gray-400 underline decoration-dotted hover:decoration-solid'
-                    rel='noopener noreferrer'
                   >
                     sdk-dapp-core
                   </a>{' '}
@@ -27,7 +26,6 @@ export const Home = () => {
                     href='https://multiversx.com/'
                     target='_blank'
                     className='text-gray-400 underline decoration-dotted hover:decoration-solid'
-                    rel='noopener noreferrer'
                   >
                     MultiversX
                   </a>{' '}

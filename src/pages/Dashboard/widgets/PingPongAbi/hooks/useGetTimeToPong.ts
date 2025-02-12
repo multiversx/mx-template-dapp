@@ -1,12 +1,12 @@
+import { useGetAccount, useGetNetworkConfig } from 'hooks';
 import {
   Address,
   AddressValue,
   ContractFunction,
   ProxyNetworkProvider,
-  ResultsParser
-} from 'lib/sdkCore';
-import { useGetAccount, useGetNetworkConfig } from 'lib/sdkDappCore';
-import { smartContract } from 'utils/smartContract';
+  ResultsParser,
+  smartContract
+} from 'utils';
 
 const resultsParser = new ResultsParser();
 

@@ -1,6 +1,6 @@
 import { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp-core/out/types/transactions.types';
-import { getAccountProvider, TransactionManager } from 'lib/sdkDappCore';
 import { Transaction } from 'types';
+import { getAccountProvider, TransactionManager } from 'utils/sdkDappCore';
 
 type SignAndSendTransactionsProps = {
   transactions: Transaction[];

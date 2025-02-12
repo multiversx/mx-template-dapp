@@ -15,9 +15,14 @@ export { setCustomWalletAddress } from '@multiversx/sdk-dapp-core/out/store/acti
 export { refreshAccount } from '@multiversx/sdk-dapp-core/out/utils/account/refreshAccount';
 export { trimUsernameDomain } from '@multiversx/sdk-dapp-core/out/utils/account/trimUsernameDomain';
 export { initApp } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp';
-export { useGetAccount } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/account/useGetAccount';
-export { useGetIsLoggedIn } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/account/useGetIsLoggedIn';
-export { useGetLoginInfo } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/loginInfo/useGetLoginInfo';
-export { useGetNetworkConfig } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/network/useGetNetworkConfig';
-export { useGetPendingTransactions } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/transactions/useGetPendingTransactions';
 export { signTransactions } from '@multiversx/sdk-dapp-core/out/core/providers/strategies/helpers/signTransactions/signTransactions';
+export {
+  TRANSACTIONS_ENDPOINT,
+  ACCOUNTS_ENDPOINT
+} from '@multiversx/sdk-dapp-core/out/apiCalls/endpoints';
+export {
+  GAS_PRICE,
+  GAS_LIMIT,
+  VERSION
+} from '@multiversx/sdk-dapp-core/out/constants/mvx.constants';
+export { WALLET_PROVIDER_SEND_TRANSACTION_URL } from '@multiversx/sdk-dapp-core/out/constants/webWalletProvider.constants';
