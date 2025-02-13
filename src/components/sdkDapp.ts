@@ -18,7 +18,6 @@ export { WebWalletLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/WebWalle
 export { CrossWindowLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/CrossWindowLoginButton/CrossWindowLoginButton';
 export { XaliasLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/XaliasLoginButton/XaliasLoginButton';
 export { XaliasCrossWindowLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/XaliasCrossWindowLoginButton/XaliasCrossWindowLoginButton';
-export { AuthenticatedRoutesWrapper } from '@multiversx/sdk-dapp/wrappers/AuthenticatedRoutesWrapper/AuthenticatedRoutesWrapper';
 export { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext/AxiosInterceptorContext';
 export { DappProvider } from '@multiversx/sdk-dapp/wrappers/DappProvider/DappProvider';
 export { TransactionRow } from '@multiversx/sdk-dapp/UI/TransactionsTable/components/TransactionRow';

@@ -1,7 +1,6 @@
 import { contractAddress } from 'config';
 import { useScrollToElement } from 'hooks';
 import { WidgetType } from 'types/widget.types';
-import { AuthRedirectWrapper } from 'wrappers';
 import { Widget } from './components';
 import {
   Account,
@@ -91,12 +90,10 @@ export const Dashboard = () => {
   useScrollToElement();
 
   return (
-    <AuthRedirectWrapper>
-      <div className='flex flex-col gap-6 max-w-3xl w-full'>
-        {WIDGETS.map((element) => (
-          <Widget key={element.title} {...element} />
-        ))}
-      </div>
-    </AuthRedirectWrapper>
+    <div className='flex flex-col gap-6 max-w-3xl w-full'>
+      {WIDGETS.map((element) => (
+        <Widget key={element.title} {...element} />
+      ))}
+    </div>
   );
 };

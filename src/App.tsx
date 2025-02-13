@@ -57,7 +57,6 @@ const AppContent = () => {
           <NotificationModal />
           <SignTransactionsModals />
           <Routes>
-            <Route path={RouteNamesEnum.unlock} element={<Unlock />} />
             {routes.map((route) => (
               <Route
                 path={route.path}
