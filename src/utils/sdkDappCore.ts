@@ -23,8 +23,6 @@ export { useGetNetworkConfig } from '@multiversx/sdk-dapp-core/out/store/selecto
 export { useGetPendingTransactions } from '@multiversx/sdk-dapp-core/out/store/selectors/hooks/transactions/useGetPendingTransactions';
 export { getWindowLocation } from '@multiversx/sdk-dapp-core/out/utils/window/getWindowLocation';
 export { isWindowAvailable } from '@multiversx/sdk-dapp-core/out/utils/window/isWindowAvailable';
-export { safeRedirect } from '@multiversx/sdk-dapp-core/out/utils/window/safeRedirect';
-export { getSearchParamAddress } from '@multiversx/sdk-dapp-core/out/utils/account/getSearchParamAddress';
 export {
   TRANSACTIONS_ENDPOINT,
   ACCOUNTS_ENDPOINT
