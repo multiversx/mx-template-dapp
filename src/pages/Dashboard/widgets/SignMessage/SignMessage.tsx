@@ -8,7 +8,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'components/Button';
 import { OutputContainer } from 'components/OutputContainer';
-import { SignedMessageStatusesEnum, WidgetProps } from 'types';
+import { WidgetProps } from 'types';
+import { SignedMessageStatusesEnum } from 'types/sdkDapp.types';
 import { useSignMessage, useGetSignMessageSession } from 'utils/sdkDapp';
 import { SignFailure, SignSuccess } from './components';
 
