@@ -17,7 +17,6 @@ import {
 import { nativeAuth } from 'config';
 import { useWindowSize } from 'hooks';
 import { RouteNamesEnum } from 'localConstants';
-import { AuthRedirectWrapper } from 'wrappers';
 import {
   IframeButton,
   WebWalletLoginWrapper,
@@ -54,50 +53,48 @@ export const Unlock = () => {
   };
 
   return (
-    <AuthRedirectWrapper requireAuth={false}>
-      <div className='flex justify-center items-center'>
-        <div
-          className='flex flex-col p-6 items-center justify-center gap-4 rounded-xl bg-[#f6f8fa]'
-          data-testid='unlockPage'
-        >
-          <div className='flex flex-col items-center gap-1'>
-            <h2 className='text-2xl'>Login</h2>
+    <div className='flex justify-center items-center'>
+      <div
+        className='flex flex-col p-6 items-center justify-center gap-4 rounded-xl bg-[#f6f8fa]'
+        data-testid='unlockPage'
+      >
+        <div className='flex flex-col items-center gap-1'>
+          <h2 className='text-2xl'>Login</h2>
 
-            <p className='text-center text-gray-400'>Choose a login method</p>
-          </div>
+          <p className='text-center text-gray-400'>Choose a login method</p>
+        </div>
 
-          <div className='flex flex-col md:flex-row'>
-            <WalletConnectLoginButton
-              loginButtonText='xPortal App'
-              {...commonProps}
-            />
-            <LedgerLoginButton loginButtonText='Ledger' {...commonProps} />
-            <ExtensionLoginButton
-              loginButtonText='DeFi Wallet'
-              {...commonProps}
-            />
-            <OperaWalletLoginButton
-              loginButtonText='Opera Crypto Wallet - Beta'
-              {...commonProps}
-            />
-            <XaliasLoginWrapper {...commonProps} />
-            <WebWalletLoginWrapper {...commonProps} />
-            {isMobile && (
-              <IframeButton
-                loginButtonText='Passkey Proxy'
-                {...commonProps}
-                onClick={() => onInitiateLogin(IframeLoginTypes.passkey)}
-              />
-            )}
-
+        <div className='flex flex-col md:flex-row'>
+          <WalletConnectLoginButton
+            loginButtonText='xPortal App'
+            {...commonProps}
+          />
+          <LedgerLoginButton loginButtonText='Ledger' {...commonProps} />
+          <ExtensionLoginButton
+            loginButtonText='DeFi Wallet'
+            {...commonProps}
+          />
+          <OperaWalletLoginButton
+            loginButtonText='Opera Crypto Wallet - Beta'
+            {...commonProps}
+          />
+          <XaliasLoginWrapper {...commonProps} />
+          <WebWalletLoginWrapper {...commonProps} />
+          {isMobile && (
             <IframeButton
-              loginButtonText='Metamask Proxy'
+              loginButtonText='Passkey Proxy'
               {...commonProps}
-              onClick={() => onInitiateLogin(IframeLoginTypes.metamask)}
+              onClick={() => onInitiateLogin(IframeLoginTypes.passkey)}
             />
-          </div>
+          )}
+
+          <IframeButton
+            loginButtonText='Metamask Proxy'
+            {...commonProps}
+            onClick={() => onInitiateLogin(IframeLoginTypes.metamask)}
+          />
         </div>
       </div>
-    </AuthRedirectWrapper>
+    </div>
   );
 };
