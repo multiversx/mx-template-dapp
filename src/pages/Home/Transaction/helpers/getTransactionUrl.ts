@@ -1,5 +1,5 @@
-import { TokenTransfer } from '@multiversx/sdk-core';
-import { WALLET_PROVIDER_SEND_TRANSACTION_URL } from 'utils';
+import { TokenTransfer } from 'utils/sdkCore';
+import { WALLET_PROVIDER_SEND_TRANSACTION_URL } from 'utils/sdkDappCore';
 
 /**
  * For documentation, check out {@link https://docs.multiversx.com/wallet/webhooks#send-transaction-hook send transaciton hook}

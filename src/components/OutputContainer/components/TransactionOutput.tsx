@@ -1,9 +1,12 @@
 import React from 'react';
 import { Label } from 'components/Label';
-import { useGetNetworkConfig } from 'hooks';
 import { DataTestIdsEnum } from 'localConstants';
-import { SignedTransactionType } from 'types';
-import { ACCOUNTS_ENDPOINT, TRANSACTIONS_ENDPOINT } from 'utils';
+import { SignedTransactionType } from 'types/sdkDappCore.types';
+import {
+  ACCOUNTS_ENDPOINT,
+  TRANSACTIONS_ENDPOINT,
+  useGetNetworkConfig
+} from 'utils/sdkDappCore';
 import { ExplorerLink } from '../../ExplorerLink';
 import { FormatAmount } from '../../FormatAmount';
 

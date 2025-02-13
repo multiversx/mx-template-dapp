@@ -10,7 +10,7 @@ import {
   useGetAccount,
   useGetNetworkConfig,
   useGetPendingTransactions
-} from 'hooks';
+} from 'utils/sdkDappCore';
 import {
   signAndAutoSendBatchTransactions,
   sendBatchTransactions,

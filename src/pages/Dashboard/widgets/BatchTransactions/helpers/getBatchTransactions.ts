@@ -1,14 +1,11 @@
 import { TransactionProps } from 'types/transaction.types';
+import { Transaction, TransactionPayload, TokenTransfer } from 'utils/sdkCore';
 import {
-  Transaction,
-  TransactionPayload,
   GAS_LIMIT,
   GAS_PRICE,
-  EXTRA_GAS_LIMIT_GUARDED_TX,
-  TokenTransfer,
-  DECIMALS
-} from 'utils';
-
+  EXTRA_GAS_LIMIT_GUARDED_TX
+} from 'utils/sdkDappCore';
+import { DECIMALS } from 'utils/sdkDappUtils';
 const NUMBER_OF_TRANSACTIONS = 5;
 
 export const getBatchTransactions = ({

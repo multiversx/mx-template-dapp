@@ -1,5 +1,5 @@
-import { IProvider } from 'types';
-import { IDAppProviderAccount } from 'types/sdkDappUtilsTypes';
+import { IProvider } from 'types/sdkDappCore.types';
+import { IDAppProviderAccount } from 'types/sdkDappUtils.types';
 import {
   Address,
   Message,

@@ -8,7 +8,8 @@ import { ContractAddress } from 'components/ContractAddress';
 import { Label } from 'components/Label';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useSendPingPongTransaction, useGetPendingTransactions } from 'hooks';
+import { useSendPingPongTransaction } from 'hooks';
+import { useGetPendingTransactions } from 'utils/sdkDappCore';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 export const PingPongAbi = () => {

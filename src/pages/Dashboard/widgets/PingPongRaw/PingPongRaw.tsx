@@ -6,7 +6,8 @@ import { Button } from 'components/Button';
 import { PingPongOutput } from 'components/OutputContainer/components';
 import { OutputContainer } from 'components/OutputContainer/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
+import { useSendPingPongTransaction } from 'hooks';
+import { useGetPendingTransactions } from 'utils/sdkDappCore';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract

@@ -2,9 +2,8 @@ import { useMatch, useNavigate } from 'react-router-dom';
 import { Button } from 'components/Button';
 import { MxLink } from 'components/MxLink';
 import { environment } from 'config';
-import { useGetIsLoggedIn } from 'hooks';
 import { RouteNamesEnum } from 'localConstants';
-import { getAccountProvider } from 'utils';
+import { getAccountProvider, useGetIsLoggedIn } from 'utils/sdkDappCore';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
 
 export const Header = () => {

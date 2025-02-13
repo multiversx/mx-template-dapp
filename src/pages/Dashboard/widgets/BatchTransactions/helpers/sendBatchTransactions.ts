@@ -1,5 +1,5 @@
 import { TransactionProps } from 'types/transaction.types';
-import { getAccountProvider, TransactionManager } from 'utils';
+import { getAccountProvider, TransactionManager } from 'utils/sdkDappCore';
 import { getBatchTransactions } from './getBatchTransactions';
 
 export const sendBatchTransactions = async ({

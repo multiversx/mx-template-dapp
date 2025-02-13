@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'components';
 import { ExtendedProviders } from 'initConfig';
 import { RouteNamesEnum } from 'localConstants/routes';
-import { ProviderTypeEnum } from 'types';
+import { ProviderTypeEnum } from 'types/sdkDappCore.types';
 import { ProviderFactory } from 'utils/sdkDappCore';
 import { AuthRedirectWrapper } from 'wrappers';
 

@@ -1,6 +1,6 @@
-import { TransactionsDisplayInfoType } from 'types/sdkDappCoreTypes';
+import { TransactionsDisplayInfoType } from 'types/sdkDappCore.types';
 import { TransactionProps } from 'types/transaction.types';
-import { getAccountProvider, TransactionManager } from 'utils';
+import { getAccountProvider, TransactionManager } from 'utils/sdkDappCore';
 import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';
 
 type SwapAndLockTokensProps = TransactionProps & {
