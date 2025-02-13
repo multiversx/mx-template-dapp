@@ -1,7 +1,8 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { Footer } from './Footer';
 import { Header } from './Header';
 
+// TODO: AuthentictedRoutesWrapper
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className='flex min-h-screen flex-col bg-slate-200'>
