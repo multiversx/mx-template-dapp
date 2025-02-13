@@ -32,7 +32,7 @@ export const Transaction = () => {
         <p>
           <Label>Hash:</Label>
           <ExplorerLink
-            link={`/${TRANSACTIONS_ENDPOINT}/${txData.txHash}`}
+            page={`/${TRANSACTIONS_ENDPOINT}/${txData.txHash}`}
             className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
           >
             {txData.txHash}

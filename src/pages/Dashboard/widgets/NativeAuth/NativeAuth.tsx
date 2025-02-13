@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
+import { FormatAmount } from 'components/FormatAmount';
 import { Label } from 'components/Label';
 import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { OutputContainer } from 'components/OutputContainer';
-import { FormatAmountSDK } from 'components/sdkDappCoreUI';
 import { useGetLoginInfo, useGetNetworkConfig } from 'utils/sdkDappCore';
 import { useGetProfile } from './hooks';
 import { Username } from '../Account/components';
@@ -46,7 +46,7 @@ export const NativeAuth = () => {
 
       <div className='flex gap-1'>
         <Label>Balance:</Label>
-        <FormatAmountSDK
+        <FormatAmount
           value={profile?.balance ?? '0'}
           egldLabel={network.egldLabel}
           data-testid='balance'

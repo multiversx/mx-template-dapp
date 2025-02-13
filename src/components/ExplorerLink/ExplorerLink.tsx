@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
 import { ExplorerLinkSDK } from 'components/sdkDappCoreUI';
 import { WithClassnameType } from 'types';
-import { useGetNetworkConfig } from 'utils/sdkDappCore';
 import { ExplorerLinkSDKPropsType } from 'types/sdkDappCoreUI.types';
+import { useGetNetworkConfig } from 'utils/sdkDappCore';
 
 export interface ExplorerLinkPropsType
   extends Partial<ExplorerLinkSDKPropsType>,
