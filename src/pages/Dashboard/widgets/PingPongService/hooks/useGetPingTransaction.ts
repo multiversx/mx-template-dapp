@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from 'config';
-import { Transaction } from 'types/sdkCoreTypes';
+import { Transaction } from 'types/sdkCore.types';
 
 export const useGetPingTransaction = () => {
   return async () => {

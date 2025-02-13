@@ -11,3 +11,4 @@ export type {
   TransactionsDisplayInfoType,
   RawTransactionType
 } from '@multiversx/sdk-dapp/types/transactions.types';
+export { TransactionBatchStatusesEnum } from '@multiversx/sdk-dapp/types/enums.types';

@@ -1,3 +1,3 @@
-export * from './sdkDappUtils';
-export * from './sdkDappCore';
+export * from './sdkDapp';
+export * from './sdkCore';
 export * from './getCallbackRoute';

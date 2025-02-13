@@ -1,7 +1,7 @@
 import React from 'react';
 import { useWebWalletLogin } from '@multiversx/sdk-dapp/hooks/login/useWebWalletLogin';
 import { WebWalletLoginButtonPropsType } from '@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton/WebWalletLoginButton';
-import { CrossWindowLoginButton } from 'components/sdkDappComponents';
+import { CrossWindowLoginButton } from 'components/sdkDapp';
 import { DualLoginButton } from './DualLoginButton';
 
 export const WebWalletLoginWrapper = ({
