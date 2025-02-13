@@ -1,7 +1,7 @@
 import { Label } from 'components/Label';
 import { OutputContainer } from 'components/OutputContainer';
-import { FormatAmount } from 'components/sdkDappComponents';
-import { useGetAccountInfo, useGetNetworkConfig } from 'hooks';
+import { FormatAmount } from 'components/sdkDapp';
+import { useGetAccountInfo, useGetNetworkConfig } from 'utils/sdkDapp';
 import { Username } from './components';
 
 export const Account = () => {

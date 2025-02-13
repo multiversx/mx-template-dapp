@@ -8,10 +8,10 @@ import { Label } from 'components/Label';
 import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
-import { useGetLoginInfo } from 'hooks/sdkDappHooks';
+import { useSendPingPongTransaction } from 'hooks';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
+import { useGetLoginInfo, useGetPendingTransactions } from 'utils/sdkDapp';
 import {
   useGetTimeToPong,
   useGetPingTransaction,

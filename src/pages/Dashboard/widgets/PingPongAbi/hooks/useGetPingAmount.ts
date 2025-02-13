@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
-import { useGetNetworkConfig } from 'hooks';
-import { ContractFunction, ResultsParser, ProxyNetworkProvider } from 'utils';
+import {
+  ContractFunction,
+  ResultsParser,
+  ProxyNetworkProvider
+} from 'utils/sdkCore';
+import { useGetNetworkConfig } from 'utils/sdkDapp';
 import { smartContract } from 'utils/smartContract';
 
 const resultsParser = new ResultsParser();

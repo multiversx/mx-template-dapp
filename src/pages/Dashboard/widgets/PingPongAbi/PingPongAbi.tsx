@@ -8,9 +8,10 @@ import { ContractAddress } from 'components/ContractAddress';
 import { Label } from 'components/Label';
 import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
+import { useSendPingPongTransaction } from 'hooks';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
+import { useGetPendingTransactions } from 'utils/sdkDapp';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {

@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { useLocation } from 'react-router-dom';
-import { AuthenticatedRoutesWrapper } from 'components/sdkDappComponents';
+import { AuthenticatedRoutesWrapper } from 'components/sdkDapp';
 import { RouteNamesEnum } from 'localConstants/routes';
 import { routes } from 'routes/routes';
 import { Footer } from './Footer';

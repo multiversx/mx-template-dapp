@@ -1,7 +1,6 @@
-import { TRANSACTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 import { Label } from 'components/Label';
-import { ExplorerLink } from 'components/sdkDappComponents';
-import { useGetNetworkConfig } from 'hooks';
+import { ExplorerLink } from 'components/sdkDapp';
+import { useGetNetworkConfig, TRANSACTIONS_ENDPOINT } from 'utils/sdkDapp';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
 
 export const Transaction = () => {

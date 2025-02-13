@@ -1,5 +1,5 @@
-import { sendTransactions } from 'helpers/sdkDappHelpers';
 import { SessionEnum, isSafari } from 'localConstants/session';
+import { sendTransactions } from 'utils/sdkDapp';
 import { getBatchTransactions } from '../helpers';
 import { SendTransactionProps } from '../types';
 

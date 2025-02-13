@@ -5,7 +5,7 @@ import {
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
 import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
 import { Label } from 'components/Label';
-import { FormatAmount } from 'components/sdkDappComponents';
+import { FormatAmount } from 'components/sdkDapp';
 import { SignedTransactionType } from 'types';
 
 export const TransactionOutput = ({

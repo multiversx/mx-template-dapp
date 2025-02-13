@@ -1,4 +1,4 @@
-import { useGetSignMessageInfoStatus } from 'hooks';
+import { useGetSignMessageInfoStatus } from 'utils/sdkDapp';
 
 export const SignFailure = () => {
   const { errorMessage } = useGetSignMessageInfoStatus();

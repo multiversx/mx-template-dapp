@@ -1,6 +1,9 @@
 import { Label } from 'components/Label';
-import { CopyButton } from 'components/sdkDappComponents';
-import { useGetAccountInfo, useGetLastSignedMessageSession } from 'hooks';
+import { CopyButton } from 'components/sdkDapp';
+import {
+  useGetAccountInfo,
+  useGetLastSignedMessageSession
+} from 'utils/sdkDapp';
 import { decodeMessage } from '../helpers';
 
 export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {

@@ -1,25 +1,25 @@
 import { useState, useCallback } from 'react';
-import {
-  deleteTransactionToast,
-  removeAllSignedTransactions,
-  removeAllTransactionsToSign
-} from '@multiversx/sdk-dapp/services/transactions/clearTransactions';
 import { contractAddress } from 'config';
-import { newTransaction } from 'helpers/sdkDappHelpers';
 import { signAndSendTransactions } from 'helpers/signAndSendTransactions';
-import {
-  useGetAccountInfo,
-  useGetNetworkConfig,
-  useTrackTransactionStatus
-} from 'hooks/sdkDappHooks';
-import { GAS_PRICE, SessionEnum, VERSION } from 'localConstants';
+import { SessionEnum } from 'localConstants';
 import {
   PingRawProps,
   PingPongServiceProps,
   PongRawProps
 } from 'types/pingPong.types';
 import { getChainId } from 'utils/getChainId';
-import { Address } from 'utils/sdkDappCore';
+import { Address } from 'utils/sdkCore';
+import {
+  newTransaction,
+  deleteTransactionToast,
+  removeAllSignedTransactions,
+  removeAllTransactionsToSign,
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  useTrackTransactionStatus,
+  VERSION,
+  GAS_PRICE
+} from 'utils/sdkDapp';
 import { smartContract } from 'utils/smartContract';
 
 type PingPongTransactionProps = {

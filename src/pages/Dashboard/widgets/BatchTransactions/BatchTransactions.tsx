@@ -4,19 +4,20 @@ import {
   faArrowsRotate
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useGetBatches } from '@multiversx/sdk-dapp/hooks/transactions/batch/useGetBatches';
+
 import { Button } from 'components/Button';
 import {
   OutputContainer,
   TransactionsOutput
 } from 'components/OutputContainer';
+import { SessionEnum } from 'localConstants/session';
+import { SignedTransactionType, WidgetProps } from 'types';
 import {
   useGetAccountInfo,
   useGetNetworkConfig,
-  useGetPendingTransactions
-} from 'hooks';
-import { SessionEnum } from 'localConstants/session';
-import { SignedTransactionType, WidgetProps } from 'types';
+  useGetPendingTransactions,
+  useGetBatches
+} from 'utils/sdkDapp';
 import { useBatchTransactionContext } from 'wrappers';
 import {
   sendBatchTransactions,
