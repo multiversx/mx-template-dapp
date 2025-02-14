@@ -1,4 +1,4 @@
-import type { SetStateAction } from 'react';
+import { SetStateAction } from 'react';
 
 type GetCountdownSecondsType = {
   secondsLeft: number;

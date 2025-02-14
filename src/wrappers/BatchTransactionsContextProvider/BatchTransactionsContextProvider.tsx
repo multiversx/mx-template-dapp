@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { createContext, useContext, useState } from 'react';
 
 interface BatchTransactionsContextType {

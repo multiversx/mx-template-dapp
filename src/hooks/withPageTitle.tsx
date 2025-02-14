@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react';
+import { ComponentType } from 'react';
 import { memo, useEffect } from 'react';
 
 export const withPageTitle =
