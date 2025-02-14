@@ -25,13 +25,7 @@ export const BatchTransactions = () => {
     await signAndAutoSendBatchTransactions({
       address,
       nonce,
-      chainID: network.chainId,
-      transactionsDisplayInfo: {
-        processingMessage: 'Processing batch transactions',
-        errorMessage:
-          'An error has occurred during batch transaction execution',
-        successMessage: 'Batch transactions successful'
-      }
+      chainID: network.chainId
     });
   };
 
@@ -47,12 +41,7 @@ export const BatchTransactions = () => {
     await swapAndLockTokens({
       address,
       nonce,
-      chainID: network.chainId,
-      transactionsDisplayInfo: {
-        processingMessage: 'Processing swap and lock',
-        errorMessage: 'An error has occurred during swap and lock',
-        successMessage: 'Swap and lock successful'
-      }
+      chainID: network.chainId
     });
   };
 

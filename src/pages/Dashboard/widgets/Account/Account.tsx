@@ -1,18 +1,18 @@
 import { Label, OutputContainer } from 'components';
-import { FormatAmount, useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import { FormatAmount, useGetAccount, useGetNetworkConfig } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { Username } from './components';
 
 export const Account = () => {
   const { network } = useGetNetworkConfig();
-  const { address, account } = useGetAccountInfo();
+  const account = useGetAccount();
 
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>
         <p className='truncate'>
           <Label>Address: </Label>
-          <span data-testid='accountAddress'> {address}</span>
+          <span data-testid='accountAddress'> {account.address}</span>
         </p>
 
         <Username account={account} />
