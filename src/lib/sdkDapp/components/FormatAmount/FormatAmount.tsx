@@ -1,7 +1,5 @@
-import {
-  FormatAmountController,
-  useGetNetworkConfig
-} from 'lib/sdkDapp/sdkDappCore';
+import { FormatAmountController } from 'lib/sdkDapp/sdkDapp.helpers';
+import { useGetNetworkConfig } from 'lib/sdkDapp/sdkDapp.hooks';
 import { FormatAmountSDK } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
 import { FormatAmountSDKPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
 import { DECIMALS, DIGITS } from 'lib/sdkDappUtils';
