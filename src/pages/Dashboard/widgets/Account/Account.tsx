@@ -1,5 +1,6 @@
 import { Label, OutputContainer } from 'components';
 import { FormatAmount, useGetAccountInfo, useGetNetworkConfig } from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 import { Username } from './components';
 
 export const Account = () => {
@@ -24,7 +25,7 @@ export const Account = () => {
           <FormatAmount
             value={account.balance}
             egldLabel={network.egldLabel}
-            data-testid='balance'
+            data-testid={DataTestIdsEnum.balance}
           />
         </p>
       </div>
