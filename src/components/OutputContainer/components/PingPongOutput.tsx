@@ -1,5 +1,5 @@
 import { ContractAddress, Label } from 'components';
-import { SignedTransactionType } from 'types';
+import { SignedTransactionType } from 'lib';
 import { TransactionsOutput } from './TransactionsOutput';
 
 type PingPongOutputType = {
