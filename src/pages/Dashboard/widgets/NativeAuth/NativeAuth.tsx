@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
-import { Label, OutputContainer, MissingNativeAuthError } from 'components';
-import { FormatAmount } from 'components/FormatAmount';
+import {
+  Label,
+  OutputContainer,
+  MissingNativeAuthError,
+  FormatAmount
+} from 'components';
 import { useGetLoginInfo, useGetNetworkConfig } from 'lib';
 import { useGetProfile } from './hooks';
 import { Username } from '../Account/components';

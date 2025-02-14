@@ -1,5 +1,4 @@
-import { CopyButton } from 'components';
-import { Label } from 'components';
+import { CopyButton, Label } from 'components';
 import { Message } from 'lib';
 import { decodeMessage } from '../helpers';
 

@@ -1,7 +1,7 @@
-import { DECIMALS } from 'lib';
 import {
   GAS_LIMIT,
   GAS_PRICE,
+  DECIMALS,
   EXTRA_GAS_LIMIT_GUARDED_TX,
   Transaction,
   TransactionPayload,

@@ -1,6 +1,5 @@
-import { Label } from 'components/Label';
-import { trimUsernameDomain } from 'lib';
-import { AccountType } from 'lib/sdkDapp/sdkDappCore.types';
+import { Label } from 'components';
+import { trimUsernameDomain, AccountType } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { ProfileType } from 'types';
 

@@ -6,8 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, OutputContainer } from 'components';
-import { Address, Message } from 'lib';
-import { getAccountProvider, useGetAccount } from 'lib';
+import { Address, Message, getAccountProvider, useGetAccount } from 'lib';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = () => {

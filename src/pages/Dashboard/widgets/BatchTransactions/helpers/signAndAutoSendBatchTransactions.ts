@@ -3,7 +3,7 @@ import {
   TransactionManager,
   TransactionsDisplayInfoType
 } from 'lib';
-import { TransactionProps } from 'types/transaction.types';
+import { TransactionProps } from 'types';
 import { getBatchTransactions } from './getBatchTransactions';
 
 type SignAndAutoSendBatchTransactionsProps = TransactionProps & {
