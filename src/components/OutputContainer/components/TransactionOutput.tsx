@@ -18,7 +18,6 @@ export const TransactionOutput = ({
   const decodedData = transaction.data
     ? Buffer.from(transaction.data, 'base64').toString('ascii')
     : 'N/A';
-
   return (
     <div className='flex flex-col'>
       <p>
@@ -44,8 +43,8 @@ export const TransactionOutput = ({
         <Label>Amount: </Label>
         <FormatAmount
           value={transaction.value}
-          egldLabel={network.egldLabel}
           showLabel={transaction.value !== '0'}
+          egldLabel={network.egldLabel}
           data-testid={DataTestIdsEnum.balance}
         />
       </p>
