@@ -1,4 +1,4 @@
-import { OutputContainer, FormatAmount, Label } from 'components';
+import { FormatAmount, Label, OutputContainer } from 'components';
 import { useGetAccount, useGetNetworkConfig } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { Username } from './components';

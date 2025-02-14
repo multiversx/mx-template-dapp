@@ -1,11 +1,11 @@
-import { WithClassnameType } from 'types';
 import {
-  FormatAmountController,
-  useGetNetworkConfig,
-  FormatAmountSDK,
   DECIMALS,
-  DIGITS
+  DIGITS,
+  FormatAmountController,
+  FormatAmountSDK,
+  useGetNetworkConfig
 } from 'lib';
+import { WithClassnameType } from 'types';
 
 interface FormatAmountPropsType extends WithClassnameType {
   egldLabel?: string;

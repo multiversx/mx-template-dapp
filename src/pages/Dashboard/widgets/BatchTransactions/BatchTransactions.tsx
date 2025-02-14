@@ -1,18 +1,17 @@
 import {
-  faPaperPlane,
-  faArrowsRotate
+  faArrowsRotate,
+  faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { OutputContainer, TransactionsOutput, Button } from 'components';
+import { Button, OutputContainer, TransactionsOutput } from 'components';
 import {
+  useGetAccount,
   useGetNetworkConfig,
-  useGetPendingTransactions,
-  useGetAccount
+  useGetPendingTransactions
 } from 'lib';
-
 import {
-  signAndAutoSendBatchTransactions,
   sendBatchTransactions,
+  signAndAutoSendBatchTransactions,
   swapAndLockTokens
 } from './helpers';
 

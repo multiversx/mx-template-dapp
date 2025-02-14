@@ -1,4 +1,4 @@
-import { Label, ExplorerLink } from 'components';
+import { ExplorerLink, Label } from 'components';
 import { TRANSACTIONS_ENDPOINT, useGetNetworkConfig } from 'lib';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
 

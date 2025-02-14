@@ -1,7 +1,7 @@
 import {
-  TransactionsDisplayInfoType,
   getAccountProvider,
-  TransactionManager
+  TransactionManager,
+  TransactionsDisplayInfoType
 } from 'lib';
 import { TransactionProps } from 'types';
 import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';

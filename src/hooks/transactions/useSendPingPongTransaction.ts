@@ -2,12 +2,12 @@ import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers';
 import {
   Address,
-  Transaction,
-  TransactionPayload,
   GAS_LIMIT,
   GAS_PRICE,
-  useGetNetworkConfig,
-  useGetAccount
+  Transaction,
+  TransactionPayload,
+  useGetAccount,
+  useGetNetworkConfig
 } from 'lib';
 import { smartContract } from 'utils';
 
