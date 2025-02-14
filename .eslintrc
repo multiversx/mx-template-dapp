@@ -35,8 +35,9 @@
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "plugins": ["react-hooks", "prettier", "import"],
+  "plugins": ["react-hooks", "prettier", "import", "sort-exports"],
   "rules": {
+    "sort-exports/sort-exports": "error",
     "sort-imports": [
       "error",
       {

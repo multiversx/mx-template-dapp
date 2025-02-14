@@ -6,13 +6,6 @@ import {
 } from 'lib';
 import { WithClassnameType } from 'types';
 
-export interface ExplorerLinkPropsType
-  extends Partial<ExplorerLinkSDKPropsType>,
-    PropsWithChildren,
-    WithClassnameType {
-  page: string;
-}
-
 export const ExplorerLink = ({
   children,
   page,
@@ -26,3 +19,10 @@ export const ExplorerLink = ({
     </ExplorerLinkSDK>
   );
 };
+
+export interface ExplorerLinkPropsType
+  extends Partial<ExplorerLinkSDKPropsType>,
+    PropsWithChildren,
+    WithClassnameType {
+  page: string;
+}
