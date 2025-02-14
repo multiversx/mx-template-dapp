@@ -1,7 +1,7 @@
 import { BATCH_TRANSACTIONS_SC } from 'config';
-import { Transaction, TransactionPayload } from 'types/sdkCore.types';
+import { Transaction, TransactionPayload } from 'lib';
+import { GAS_PRICE, VERSION } from 'lib/sdkDapp/sdkDappCore';
 import { TransactionProps } from 'types/transaction.types';
-import { GAS_PRICE, VERSION } from 'utils/sdkDappCore';
 
 export const getSwapAndLockTransactions = ({
   address,

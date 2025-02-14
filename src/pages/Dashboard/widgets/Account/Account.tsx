@@ -1,7 +1,6 @@
-import { OutputContainer, FormatAmount } from 'components';
-import { Label } from 'components/Label';
+import { OutputContainer, FormatAmount, Label } from 'components';
+import { useGetAccount, useGetNetworkConfig } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
-import { useGetAccount, useGetNetworkConfig } from 'utils/sdkDappCore';
 import { Username } from './components';
 
 export const Account = () => {

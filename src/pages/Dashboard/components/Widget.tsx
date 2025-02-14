@@ -1,4 +1,4 @@
-import { Card } from 'components/Card';
+import { Card } from 'components';
 import { useIsWebProvider } from 'hooks';
 import { WidgetType } from 'types/widget.types';
 import { getCallbackRoute } from 'utils/getCallbackRoute';

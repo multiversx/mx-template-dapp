@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components';
 import { ExtendedProviders } from 'initConfig';
+import { ProviderFactory, ProviderTypeEnum } from 'lib';
 import { RouteNamesEnum } from 'localConstants/routes';
-import { ProviderTypeEnum } from 'types/sdkDappCore.types';
-import { ProviderFactory } from 'utils/sdkDappCore';
 
 export const Unlock = () => {
   const navigate = useNavigate();

@@ -3,14 +3,13 @@ import {
   faArrowsRotate
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from 'components/Button';
-import { TransactionsOutput } from 'components/OutputContainer/components';
-import { OutputContainer } from 'components/OutputContainer/OutputContainer';
+import { OutputContainer, TransactionsOutput, Button } from 'components';
 import {
-  useGetAccount,
   useGetNetworkConfig,
-  useGetPendingTransactions
-} from 'utils/sdkDappCore';
+  useGetPendingTransactions,
+  useGetAccount
+} from 'lib';
+
 import {
   signAndAutoSendBatchTransactions,
   sendBatchTransactions,

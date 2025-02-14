@@ -1,6 +1,9 @@
-import { TransactionsDisplayInfoType } from 'types/sdkDappCore.types';
+import {
+  getAccountProvider,
+  TransactionManager,
+  TransactionsDisplayInfoType
+} from 'lib';
 import { TransactionProps } from 'types/transaction.types';
-import { getAccountProvider, TransactionManager } from 'utils/sdkDappCore';
 import { getBatchTransactions } from './getBatchTransactions';
 
 type SignAndAutoSendBatchTransactionsProps = TransactionProps & {

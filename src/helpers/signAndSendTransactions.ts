@@ -1,4 +1,4 @@
-import { Transaction } from 'types/sdkCore.types';
+import { Transaction } from 'lib';
 import { TransactionsDisplayInfoType } from 'types/sdkDappCore.types';
 import { getAccountProvider, TransactionManager } from 'utils/sdkDappCore';
 

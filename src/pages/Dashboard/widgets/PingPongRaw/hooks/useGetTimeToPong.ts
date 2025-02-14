@@ -1,8 +1,7 @@
 import axios from 'axios';
 import BigNumber from 'bignumber.js';
 import { contractAddress } from 'config';
-import { Address, AddressValue } from 'utils/sdkCore';
-import { useGetAccount, useGetNetworkConfig } from 'utils/sdkDappCore';
+import { useGetAccount, useGetNetworkConfig, Address, AddressValue } from 'lib';
 import { PingPongResponseType } from '../types';
 
 const decodeTime = (data: PingPongResponseType) => {

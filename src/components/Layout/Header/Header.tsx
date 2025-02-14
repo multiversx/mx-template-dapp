@@ -1,6 +1,5 @@
 import { useMatch, useNavigate } from 'react-router-dom';
-import { Button } from 'components/Button';
-import { MxLink } from 'components/MxLink';
+import { Button, MxLink } from 'components';
 import { environment } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { getAccountProvider, useGetIsLoggedIn } from 'utils/sdkDappCore';
