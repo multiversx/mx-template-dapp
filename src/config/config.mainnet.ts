@@ -1,4 +1,4 @@
-import { EnvironmentsEnum } from 'lib/sdkDapp/sdkDapp.types';
+import { EnvironmentsEnum } from 'lib';
 
 export * from './sharedConfig';
 
