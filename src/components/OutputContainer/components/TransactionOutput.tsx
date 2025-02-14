@@ -6,6 +6,7 @@ import {
   TRANSACTIONS_ENDPOINT,
   useGetNetworkConfig
 } from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 import { SignedTransactionType } from 'types';
 
 export const TransactionOutput = ({
@@ -44,7 +45,7 @@ export const TransactionOutput = ({
           value={transaction.value}
           showLabel={transaction.value !== '0'}
           egldLabel={network.egldLabel}
-          data-testid='balance'
+          data-testid={DataTestIdsEnum.balance}
         />
       </p>
       <p>
