@@ -35,27 +35,32 @@
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "plugins": ["react-hooks", "prettier", "import"],
+  "plugins": ["react-hooks", "prettier", "import", "simple-import-sort"],
   "rules": {
-    "import/order": [
-      "warn",
+    "sort-imports": "off",
+    "import/order": "off",
+    "simple-import-sort/imports": [
+      "error",
       {
-        "groups": ["builtin", "external", "internal"],
-        "pathGroups": [
-          {
-            "pattern": "react",
-            "group": "external",
-            "position": "before"
-          }
-        ],
-        "pathGroupsExcludedImportTypes": ["react"],
-        "newlines-between": "ignore",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
+        "groups": [
+          ["^react$", "^react-dom$", "^react-router-dom$", "^react.*"],
+          ["^@?\\w"],
+          [
+            "^components$",
+            "^config$",
+            "^lib$",
+            "^localConstants$",
+            "^pages$",
+            "^routes$",
+            "^types$",
+            "^utils$",
+            "^wrappers$"
+          ],
+          ["^[./]"]
+        ]
       }
     ],
+    "simple-import-sort/exports": "error",
     "prettier/prettier": [
       "error",
       {

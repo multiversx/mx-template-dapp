@@ -1,15 +1,17 @@
+import { useNavigate } from 'react-router-dom';
+
 import { useIframeLogin } from '@multiversx/sdk-dapp/hooks/login/useIframeLogin';
 import {
   type ExtensionLoginButtonPropsType,
-  type WebWalletLoginButtonPropsType,
-  type OperaWalletLoginButtonPropsType,
   type LedgerLoginButtonPropsType,
-  type WalletConnectLoginButtonPropsType
+  type OperaWalletLoginButtonPropsType,
+  type WalletConnectLoginButtonPropsType,
+  type WebWalletLoginButtonPropsType
 } from '@multiversx/sdk-dapp/UI';
 import { IframeLoginTypes } from '@multiversx/sdk-web-wallet-iframe-provider/out/constants';
-import { useNavigate } from 'react-router-dom';
-import { nativeAuth } from 'config';
 import { useWindowSize } from 'hooks';
+
+import { nativeAuth } from 'config';
 import {
   ExtensionLoginButton,
   LedgerLoginButton,
@@ -17,6 +19,7 @@ import {
   WalletConnectLoginButton
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
+
 import {
   IframeButton,
   WebWalletLoginWrapper,

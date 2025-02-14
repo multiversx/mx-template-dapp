@@ -1,26 +1,28 @@
-import { useState, useCallback } from 'react';
-import { contractAddress } from 'config';
+import { useCallback, useState } from 'react';
+
 import { signAndSendTransactions } from 'helpers/signAndSendTransactions';
 import {
-  newTransaction,
-  deleteTransactionToast,
-  removeAllSignedTransactions,
-  removeAllTransactionsToSign,
-  Address,
-  useGetAccountInfo,
-  useGetNetworkConfig,
-  useTrackTransactionStatus,
-  VERSION,
-  GAS_PRICE
-} from 'lib';
-import { SessionEnum } from 'localConstants';
-import {
-  PingRawProps,
   PingPongServiceProps,
+  PingRawProps,
   PongRawProps
 } from 'types/pingPong.types';
 import { getChainId } from 'utils/getChainId';
 import { smartContract } from 'utils/smartContract';
+
+import { contractAddress } from 'config';
+import {
+  Address,
+  deleteTransactionToast,
+  GAS_PRICE,
+  newTransaction,
+  removeAllSignedTransactions,
+  removeAllTransactionsToSign,
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  useTrackTransactionStatus,
+  VERSION
+} from 'lib';
+import { SessionEnum } from 'localConstants';
 
 type PingPongTransactionProps = {
   type: SessionEnum;

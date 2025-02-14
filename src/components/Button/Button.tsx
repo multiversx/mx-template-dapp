@@ -1,4 +1,5 @@
-import type { PropsWithChildren, MouseEvent } from 'react';
+import type { MouseEvent, PropsWithChildren } from 'react';
+
 import { WithClassnameType } from 'types';
 
 interface ButtonType extends WithClassnameType, PropsWithChildren {

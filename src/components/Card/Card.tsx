@@ -1,6 +1,8 @@
 import type { PropsWithChildren } from 'react';
+
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { WithClassnameType } from 'types';
 
 interface CardType extends PropsWithChildren, WithClassnameType {

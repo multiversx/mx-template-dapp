@@ -6,9 +6,9 @@ import {
   removeAllTransactionsToSign,
   setTransactionsDisplayInfoState,
   setTransactionsToSignedState,
-  useSendBatchTransactions,
+  TransactionBatchStatusesEnum,
   useGetSignedTransactions,
-  TransactionBatchStatusesEnum
+  useSendBatchTransactions
 } from 'lib';
 import { SessionEnum } from 'localConstants';
 import { useBatchTransactionContext } from 'wrappers';

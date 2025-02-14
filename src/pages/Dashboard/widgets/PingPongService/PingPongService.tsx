@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getCountdownSeconds, setTimeRemaining } from 'helpers';
+import { useSendPingPongTransaction } from 'hooks';
 import moment from 'moment';
+
 import {
   Button,
   ContractAddress,
@@ -10,15 +14,14 @@ import {
   OutputContainer,
   PingPongOutput
 } from 'components';
-import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useSendPingPongTransaction } from 'hooks';
 import { useGetLoginInfo, useGetPendingTransactions } from 'lib';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
+
 import {
-  useGetTimeToPong,
   useGetPingTransaction,
-  useGetPongTransaction
+  useGetPongTransaction,
+  useGetTimeToPong
 } from './hooks';
 
 // The transactions are being done by directly requesting to template-dapp service

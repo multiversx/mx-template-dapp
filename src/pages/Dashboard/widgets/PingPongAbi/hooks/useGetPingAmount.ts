@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 
 import {
   ContractFunction,
-  ResultsParser,
   ProxyNetworkProvider,
+  ResultsParser,
   useGetNetworkConfig
 } from 'lib';
 import { smartContract } from 'utils';

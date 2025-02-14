@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getCountdownSeconds, setTimeRemaining } from 'helpers';
+import { useSendPingPongTransaction } from 'hooks';
 import moment from 'moment';
+
 import {
   Button,
   ContractAddress,
@@ -10,12 +13,11 @@ import {
   OutputContainer,
   PingPongOutput
 } from 'components';
-import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useSendPingPongTransaction } from 'hooks';
 import { useGetPendingTransactions } from 'lib';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
-import { useGetTimeToPong, useGetPingAmount } from './hooks';
+
+import { useGetPingAmount, useGetTimeToPong } from './hooks';
 
 export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
   const { hasPendingTransactions } = useGetPendingTransactions();

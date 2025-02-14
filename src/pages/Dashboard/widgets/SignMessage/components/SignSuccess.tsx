@@ -1,9 +1,10 @@
 import { Label } from 'components';
 import {
+  CopyButton,
   useGetAccountInfo,
-  useGetLastSignedMessageSession,
-  CopyButton
+  useGetLastSignedMessageSession
 } from 'lib';
+
 import { decodeMessage } from '../helpers';
 
 export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {

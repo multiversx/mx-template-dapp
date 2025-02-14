@@ -1,15 +1,17 @@
-import { contractAddress } from 'config';
 import { useScrollToElement } from 'hooks';
 import { WidgetType } from 'types/widget.types';
+
+import { contractAddress } from 'config';
+
 import { Widget } from './components';
 import {
   Account,
-  PingPongAbi,
-  SignMessage,
-  NativeAuth,
   BatchTransactions,
+  NativeAuth,
+  PingPongAbi,
   PingPongRaw,
   PingPongService,
+  SignMessage,
   Transactions
 } from './widgets';
 

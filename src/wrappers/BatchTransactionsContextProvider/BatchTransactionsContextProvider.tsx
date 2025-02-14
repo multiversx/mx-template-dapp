@@ -1,5 +1,5 @@
+import { createContext, useContext, useState } from 'react';
 import type { PropsWithChildren } from 'react';
-import { createContext, useState, useContext } from 'react';
 
 interface BatchTransactionsContextType {
   sendBatchTransactionsOnDemand: boolean;

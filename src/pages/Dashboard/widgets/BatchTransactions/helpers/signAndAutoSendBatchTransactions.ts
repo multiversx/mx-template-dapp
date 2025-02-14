@@ -1,8 +1,7 @@
-import { SessionEnum, isSafari } from 'localConstants/session';
-import {
-  refreshAccount,
-  sendBatchTransactions
-} from 'lib';
+import { isSafari, SessionEnum } from 'localConstants/session';
+
+import { refreshAccount, sendBatchTransactions } from 'lib';
+
 import { getBatchTransactions } from '../helpers';
 import { SendTransactionProps } from '../types';
 

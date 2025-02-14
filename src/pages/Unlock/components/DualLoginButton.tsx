@@ -1,4 +1,5 @@
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
+
 import { InitiateLoginFunctionType } from '@multiversx/sdk-dapp/types/login.types';
 import { WebWalletLoginButtonPropsType } from '@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton/WebWalletLoginButton';
 

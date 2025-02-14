@@ -1,13 +1,14 @@
+import { smartContract } from 'utils/smartContract';
+
 import {
   Address,
   AddressValue,
   ContractFunction,
-  ResultsParser,
   ProxyNetworkProvider,
+  ResultsParser,
   useGetAccount,
   useGetNetworkConfig
 } from 'lib';
-import { smartContract } from 'utils/smartContract';
 
 const resultsParser = new ResultsParser();
 

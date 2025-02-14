@@ -1,2 +1,2 @@
-export * from './useGetTimeToPong';
 export * from './useGetPingAmount';
+export * from './useGetTimeToPong';
