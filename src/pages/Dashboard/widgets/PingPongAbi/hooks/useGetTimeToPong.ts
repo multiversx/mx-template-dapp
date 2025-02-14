@@ -2,8 +2,8 @@ import {
   Address,
   AddressValue,
   ContractFunction,
-  ResultsParser,
   ProxyNetworkProvider,
+  ResultsParser,
   useGetAccount,
   useGetNetworkConfig
 } from 'lib';

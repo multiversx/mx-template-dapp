@@ -1,10 +1,10 @@
 import { Label } from 'components';
 import {
-  TRANSACTIONS_ENDPOINT,
-  useGetNetworkConfig,
   ACCOUNTS_ENDPOINT,
   ExplorerLink,
-  FormatAmount
+  FormatAmount,
+  TRANSACTIONS_ENDPOINT,
+  useGetNetworkConfig
 } from 'lib';
 import { SignedTransactionType } from 'types';
 

@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { useEffect, memo } from 'react';
+import { memo, useEffect } from 'react';
 
 export const withPageTitle =
   (title: string, Component: ComponentType) => () => {

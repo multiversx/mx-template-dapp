@@ -1,4 +1,4 @@
-import { useGetAccountProvider, LoginMethodsEnum } from 'lib';
+import { LoginMethodsEnum, useGetAccountProvider } from 'lib';
 
 export const useIsWebProvider = () => {
   const { providerType } = useGetAccountProvider();

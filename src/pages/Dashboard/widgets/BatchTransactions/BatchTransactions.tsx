@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react';
 import {
-  faPaperPlane,
-  faArrowsRotate
+  faArrowsRotate,
+  faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { OutputContainer, TransactionsOutput, Button } from 'components';
+import { useEffect, useState } from 'react';
+import { Button, OutputContainer, TransactionsOutput } from 'components';
 import {
   useGetAccountInfo,
+  useGetBatches,
   useGetNetworkConfig,
-  useGetPendingTransactions,
-  useGetBatches
+  useGetPendingTransactions
 } from 'lib';
 import { SessionEnum } from 'localConstants/session';
 import { SignedTransactionType, WidgetProps } from 'types';

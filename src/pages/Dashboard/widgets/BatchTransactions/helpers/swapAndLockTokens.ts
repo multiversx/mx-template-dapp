@@ -1,5 +1,5 @@
-import { SessionEnum, isSafari } from 'localConstants/session';
-import { sendBatchTransactions, refreshAccount } from 'lib';
+import { refreshAccount, sendBatchTransactions } from 'lib';
+import { isSafari, SessionEnum } from 'localConstants/session';
 import { getSwapAndLockTransactions } from '../helpers';
 import { SendTransactionProps } from '../types';
 

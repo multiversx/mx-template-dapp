@@ -1,5 +1,5 @@
-export * from './withPageTitle';
 export * from './transactions';
-export * from './useScrollToElement';
 export * from './useIsWebProvider';
+export * from './useScrollToElement';
 export * from './useWindowSize';
+export * from './withPageTitle';

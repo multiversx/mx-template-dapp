@@ -1,11 +1,9 @@
 import type { PropsWithChildren } from 'react';
-import { useLocation } from 'react-router-dom';
+import { AuthRedirectWrapper } from 'wrappers';
 import { Footer } from './Footer';
 import { Header } from './Header';
-import { AuthRedirectWrapper } from 'wrappers';
 
 export const Layout = ({ children }: PropsWithChildren) => {
-  const { search } = useLocation();
   return (
     <div className='flex min-h-screen flex-col bg-slate-200'>
       <Header />

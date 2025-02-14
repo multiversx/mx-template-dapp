@@ -37,10 +37,25 @@
   ],
   "plugins": ["react-hooks", "prettier", "import"],
   "rules": {
-    "import/order": [
-      "warn",
+    "sort-imports": [
+      "error",
       {
-        "groups": ["builtin", "external", "internal"],
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
         "pathGroups": [
           {
             "pattern": "react",
@@ -48,8 +63,7 @@
             "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react"],
-        "newlines-between": "ignore",
+        "newlines-between": "never",
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true
@@ -92,7 +106,6 @@
     "react/jsx-wrap-multilines": "off",
     "react/destructuring-assignment": "off",
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["warn"],
     "react/no-array-index-key": "off"
   }
 }

@@ -1,22 +1,22 @@
-import { useState, useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers/signAndSendTransactions';
 import {
-  newTransaction,
+  Address,
   deleteTransactionToast,
+  GAS_PRICE,
+  newTransaction,
   removeAllSignedTransactions,
   removeAllTransactionsToSign,
-  Address,
   useGetAccountInfo,
   useGetNetworkConfig,
   useTrackTransactionStatus,
-  VERSION,
-  GAS_PRICE
+  VERSION
 } from 'lib';
 import { SessionEnum } from 'localConstants';
 import {
-  PingRawProps,
   PingPongServiceProps,
+  PingRawProps,
   PongRawProps
 } from 'types/pingPong.types';
 import { getChainId } from 'utils/getChainId';

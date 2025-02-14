@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import type { MouseEvent } from 'react';
 import {
-  faFileSignature,
+  faArrowsRotate,
   faBroom,
-  faArrowsRotate
+  faFileSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { MouseEvent } from 'react';
+import { useState } from 'react';
 import { Button, OutputContainer } from 'components';
-import { useSignMessage, useGetSignMessageSession } from 'lib';
+import { useGetSignMessageSession, useSignMessage } from 'lib';
 import { WidgetProps } from 'types';
 import { SignedMessageStatusesEnum } from 'types';
 import { SignFailure, SignSuccess } from './components';

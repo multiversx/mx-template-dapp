@@ -1,8 +1,8 @@
 import { Label } from 'components';
 import {
+  CopyButton,
   useGetAccountInfo,
-  useGetLastSignedMessageSession,
-  CopyButton
+  useGetLastSignedMessageSession
 } from 'lib';
 import { decodeMessage } from '../helpers';
 

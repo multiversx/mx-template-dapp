@@ -4,12 +4,12 @@ import { WidgetType } from 'types/widget.types';
 import { Widget } from './components';
 import {
   Account,
-  PingPongAbi,
-  SignMessage,
-  NativeAuth,
   BatchTransactions,
+  NativeAuth,
+  PingPongAbi,
   PingPongRaw,
   PingPongService,
+  SignMessage,
   Transactions
 } from './widgets';
 

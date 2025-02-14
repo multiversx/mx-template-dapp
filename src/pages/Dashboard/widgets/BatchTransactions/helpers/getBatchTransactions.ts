@@ -1,12 +1,12 @@
 import {
   DECIMALS,
-  TokenTransfer,
   EXTRA_GAS_LIMIT_GUARDED_TX,
   GAS_LIMIT,
   GAS_PRICE,
-  VERSION,
   newTransaction,
-  Transaction
+  TokenTransfer,
+  Transaction,
+  VERSION
 } from 'lib';
 import { TransactionProps } from 'types/transaction.types';
 
