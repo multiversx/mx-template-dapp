@@ -9,8 +9,15 @@ import { getBatchTransactions } from './getBatchTransactions';
 export const signAndAutoSendBatchTransactions = async ({
   address,
   nonce,
-  chainID
-}: TransactionProps) => {
+  chainID,
+  transactionsDisplayInfo = {
+    processingMessage: 'Processing transactions',
+    errorMessage: 'An error has occurred during transaction execution',
+    successMessage: 'Batch transactions successful'
+  }
+}: TransactionProps & {
+  transactionsDisplayInfo?: TransactionsDisplayInfoType;
+}) => {
   const provider = getAccountProvider();
   const txManager = TransactionManager.getInstance();
 
@@ -27,12 +34,6 @@ export const signAndAutoSendBatchTransactions = async ({
     [signedTransactions[1], signedTransactions[2]],
     [signedTransactions[3], signedTransactions[4]]
   ];
-
-  const transactionsDisplayInfo: TransactionsDisplayInfoType = {
-    processingMessage: 'Processing transactions',
-    errorMessage: 'An error has occurred during transaction execution',
-    successMessage: 'Batch transactions successful'
-  };
 
   const sentTransactions = await txManager.send(groupedTransactions);
   await txManager.track(sentTransactions, { transactionsDisplayInfo });
