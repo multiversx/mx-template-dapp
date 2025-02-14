@@ -7,7 +7,7 @@ import {
   Transaction,
   UserSecretKey,
   UserSigner
-} from 'utils/sdkCore';
+} from 'lib';
 import { signTransactions } from 'lib/sdkDapp/sdkDappCore';
 import { LoginModal } from './LoginModal';
 

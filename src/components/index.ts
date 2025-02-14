@@ -8,6 +8,7 @@ export * from './ExplorerLink';
 export * from './CopyButton';
 export * from './FormatAmount';
 export * from './Label';
+export * from './Loader';
 export * from './Layout';
 export * from './MissingNativeAuthError';
 export * from './MxLink';

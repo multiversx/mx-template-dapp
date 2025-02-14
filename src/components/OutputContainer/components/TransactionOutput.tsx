@@ -1,10 +1,9 @@
-import { Label } from 'components';
+import { Label, ExplorerLink, FormatAmount } from 'components';
 import {
   TRANSACTIONS_ENDPOINT,
   useGetNetworkConfig,
   ACCOUNTS_ENDPOINT,
-  SignedTransactionType,
-  ExplorerLink
+  SignedTransactionType
 } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 
