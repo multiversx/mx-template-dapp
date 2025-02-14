@@ -13,8 +13,6 @@ export { ProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/Pr
 export { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';
 export { TransactionsTableController } from '@multiversx/sdk-dapp-core/out/controllers/TransactionsTableController';
 export { WALLET_PROVIDER_SEND_TRANSACTION_URL } from '@multiversx/sdk-dapp-core/out/constants/webWalletProvider.constants';
-export { createBoundedUseStore } from '@multiversx/sdk-dapp-core/out/store/createBoundedStore';
-export { explorerUrlBuilder } from '@multiversx/sdk-dapp-core/out/utils/transactions/explorerUrlBuilder';
 export { getAccountProvider } from '@multiversx/sdk-dapp-core/out/core/providers/helpers/accountProvider';
 export { getActiveTransactionsStatus } from '@multiversx/sdk-dapp-core/out/utils/transactions/getActiveTransactionsStatus';
 export { getInterpretedTransaction } from '@multiversx/sdk-dapp-core/out/utils/transactions/getInterpretedTransaction';

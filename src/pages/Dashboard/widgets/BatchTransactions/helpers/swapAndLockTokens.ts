@@ -9,8 +9,15 @@ import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';
 export const swapAndLockTokens = async ({
   address,
   nonce,
-  chainID
-}: TransactionProps) => {
+  chainID,
+  transactionsDisplayInfo = {
+    processingMessage: 'Processing transactions',
+    errorMessage: 'An error has occurred during transaction execution',
+    successMessage: 'Swap and lock transactions successful'
+  }
+}: TransactionProps & {
+  transactionsDisplayInfo?: TransactionsDisplayInfoType;
+}) => {
   const provider = getAccountProvider();
   const txManager = TransactionManager.getInstance();
 
@@ -27,12 +34,6 @@ export const swapAndLockTokens = async ({
     [transactions[1], transactions[2]],
     [transactions[3]]
   ];
-
-  const transactionsDisplayInfo: TransactionsDisplayInfoType = {
-    processingMessage: 'Processing transactions',
-    errorMessage: 'An error has occurred during transaction execution',
-    successMessage: 'Swap and lock transactions successful'
-  };
 
   const sentTransactions = await txManager.send(groupedTransactions);
   await txManager.track(sentTransactions, { transactionsDisplayInfo });
