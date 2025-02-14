@@ -1,8 +1,3 @@
-// Generate your own WalletConnect 2 ProjectId here: https://cloud.walletconnect.com/app
-export const walletConnectV2ProjectId = '9b1a9564f91cb659ffe21b73d5c4e2d8';
-export const apiTimeout = 6000;
-export const transactionSize = 10;
-export const nativeAuth = true;
 export const BATCH_TRANSACTIONS_SC = {
   egld_wEGLD: {
     contract: 'erd1qqqqqqqqqqqqqpgqpv09kfzry5y4sj05udcngesat07umyj70n4sa2c0rp',
@@ -21,3 +16,11 @@ export const BATCH_TRANSACTIONS_SC = {
     data: 'ESDTTransfer@4D45582D613635396430@0de0b6b3a7640000@6c6f636b546f6b656e73@05a0'
   }
 };
+
+export const apiTimeout = 6000;
+
+export const nativeAuth = true;
+
+export const transactionSize = 10;
+// Generate your own WalletConnect 2 ProjectId here: https://cloud.walletconnect.com/app
+export const walletConnectV2ProjectId = '9b1a9564f91cb659ffe21b73d5c4e2d8';

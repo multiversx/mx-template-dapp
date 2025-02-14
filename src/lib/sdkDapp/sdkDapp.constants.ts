@@ -1,4 +1,3 @@
-export { TRANSACTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 export {
   DECIMALS,
   EXTRA_GAS_LIMIT_GUARDED_TX,
@@ -6,3 +5,4 @@ export {
   GAS_PRICE,
   VERSION
 } from '@multiversx/sdk-dapp/constants';
+export { TRANSACTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
