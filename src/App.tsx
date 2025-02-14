@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { PageNotFound } from 'pages';
 import { routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
 import { Layout } from './components';
@@ -16,7 +17,7 @@ export const App = () => {
                 element={<route.component />}
               />
             ))}
-            <Route path='*' element={<div>NOT FOUND</div>} />
+            <Route path='*' element={<PageNotFound />} />
           </Routes>
         </Layout>
       </BatchTransactionsContextProvider>
