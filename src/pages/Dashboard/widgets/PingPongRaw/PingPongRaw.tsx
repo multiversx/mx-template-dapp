@@ -12,8 +12,9 @@ import {
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetPendingTransactions } from 'lib';
+import { SignedTransactionType } from 'lib';
 import { SessionEnum } from 'localConstants';
-import { SignedTransactionType, WidgetProps } from 'types';
+import { WidgetProps } from 'types';
 import { useGetPingAmount, useGetTimeToPong } from './hooks';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract

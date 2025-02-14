@@ -9,3 +9,4 @@ export { ResultsParser } from '@multiversx/sdk-core/out/smartcontracts/resultsPa
 export { SmartContract } from '@multiversx/sdk-core/out/smartcontracts/smartContract';
 export { TokenTransfer } from '@multiversx/sdk-core/out/tokens';
 export { Transaction } from '@multiversx/sdk-core/out/transaction';
+export { WALLET_PROVIDER_SEND_TRANSACTION_URL } from '@multiversx/sdk-dapp/constants';

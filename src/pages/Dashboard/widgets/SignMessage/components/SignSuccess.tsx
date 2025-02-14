@@ -1,26 +1,23 @@
 import { Label } from 'components';
-import {
-  CopyButton,
-  useGetAccountInfo,
-  useGetLastSignedMessageSession
-} from 'lib';
+import { CopyButton, Message, useGetLastSignedMessageSession } from 'lib';
 import { decodeMessage } from '../helpers';
 
-export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {
-  const { address } = useGetAccountInfo();
+interface VerifyMessagePropsType {
+  message: Message;
+}
 
+export const SignSuccess = (props: VerifyMessagePropsType) => {
   const signedMessageInfo = useGetLastSignedMessageSession();
 
-  if (!signedMessageInfo?.signature) {
+  if (!signedMessageInfo?.signature || !props.message) {
     return null;
   }
 
   const { signature } = signedMessageInfo;
 
   const { encodedMessage, decodedMessage } = decodeMessage({
-    address,
-    message: messageToSign,
-    signature
+    message: props.message,
+    signature: signature
   });
 
   return (
