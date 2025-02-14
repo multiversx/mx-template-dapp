@@ -28,7 +28,7 @@ export const SignSuccess = (props: VerifyMessagePropsType) => {
             readOnly
             className='w-full resize-none outline-none bg-transparent'
             rows={2}
-            value={props.signature}
+            defaultValue={props.signature}
           />
           <CopyButton text={props.signature} />
         </div>
