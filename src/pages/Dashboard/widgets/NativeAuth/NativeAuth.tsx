@@ -45,6 +45,7 @@ export const NativeAuth = () => {
         <Label>Balance:</Label>
         <FormatAmount
           value={profile?.balance ?? '0'}
+          showLabel={profile?.balance !== '0'}
           egldLabel={network.egldLabel}
           data-testid='balance'
         />
