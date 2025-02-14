@@ -1,5 +1,4 @@
 import { SignedTransactionType } from 'types';
-
 import { TransactionOutput } from './TransactionOutput';
 
 export const TransactionsOutput = ({

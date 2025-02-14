@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-
 import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers/signAndSendTransactions';
 import {

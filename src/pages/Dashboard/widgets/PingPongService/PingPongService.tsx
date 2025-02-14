@@ -2,7 +2,6 @@ import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-
 import {
   Button,
   ContractAddress,
@@ -16,7 +15,6 @@ import { useSendPingPongTransaction } from 'hooks';
 import { useGetLoginInfo, useGetPendingTransactions } from 'lib';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
-
 import {
   useGetPingTransaction,
   useGetPongTransaction,

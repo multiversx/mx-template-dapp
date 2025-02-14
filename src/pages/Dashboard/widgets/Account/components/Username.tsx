@@ -1,5 +1,4 @@
 import type { AccountType } from '@multiversx/sdk-dapp/types';
-
 import { Label } from 'components';
 import { trimUsernameDomain } from 'lib';
 import { ProfileType } from 'types';

@@ -1,6 +1,5 @@
 import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-
 import { useGetPingTransaction } from '../useGetPingTransaction';
 
 const pingTransaction = {

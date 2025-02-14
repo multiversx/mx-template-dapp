@@ -4,7 +4,6 @@ import {
   useGetAccountInfo,
   useGetLastSignedMessageSession
 } from 'lib';
-
 import { decodeMessage } from '../helpers';
 
 export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {

@@ -2,7 +2,6 @@ import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-
 import {
   Button,
   ContractAddress,
@@ -15,7 +14,6 @@ import { useSendPingPongTransaction } from 'hooks';
 import { useGetPendingTransactions } from 'lib';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
-
 import { useGetPingAmount, useGetTimeToPong } from './hooks';
 
 // Raw transaction are being done by directly requesting to API instead of calling the smartcontract

@@ -1,6 +1,5 @@
 import { Label } from 'components';
 import { ExplorerLink, TRANSACTIONS_ENDPOINT, useGetNetworkConfig } from 'lib';
-
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
 
 export const Transaction = () => {

@@ -4,7 +4,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-
 import { Button, OutputContainer, TransactionsOutput } from 'components';
 import {
   useGetAccountInfo,
@@ -15,7 +14,6 @@ import {
 import { SessionEnum } from 'localConstants/session';
 import { SignedTransactionType, WidgetProps } from 'types';
 import { useBatchTransactionContext } from 'wrappers';
-
 import {
   sendBatchTransactions,
   signAndAutoSendBatchTransactions,

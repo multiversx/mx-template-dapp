@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import type { PropsWithChildren } from 'react';
-
 import { Loader } from 'lib';
 import { WithClassnameType } from 'types';
 

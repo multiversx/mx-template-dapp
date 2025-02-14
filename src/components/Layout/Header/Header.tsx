@@ -1,10 +1,8 @@
 import { useMatch } from 'react-router-dom';
-
 import { Button, MxLink } from 'components';
 import { environment } from 'config';
 import { logout, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
-
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
 
 const callbackUrl = `${window.location.origin}/unlock`;

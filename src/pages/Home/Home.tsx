@@ -1,5 +1,4 @@
 import { PageWrapper } from 'wrappers';
-
 import { Transaction } from './Transaction';
 
 export const Home = () => {
