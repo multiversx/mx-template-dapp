@@ -1,4 +1,4 @@
-import { refreshAccount, sendTransactions } from 'lib/sdkDapp/sdkDapp.helpers';
+import { refreshAccount, sendTransactions } from 'lib';
 import { isSafari } from 'localConstants';
 import { Transaction, TransactionsDisplayInfoType } from 'types';
 
