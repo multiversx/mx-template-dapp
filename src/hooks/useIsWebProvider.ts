@@ -1,5 +1,5 @@
-import { ProviderTypeEnum } from 'types/sdkDappCore.types';
-import { getAccountProvider } from 'utils/sdkDappCore';
+import { getAccountProvider } from 'lib/sdkDapp/sdkDappCore';
+import { ProviderTypeEnum } from 'lib/sdkDapp/sdkDappCore.types';
 
 export const useIsWebProvider = () => {
   const provider = getAccountProvider();

@@ -1,4 +1,4 @@
-import { addressIsValid, getWindowLocation } from './sdkDappCore';
+import { addressIsValid, getWindowLocation } from '../lib/sdkDapp/sdkDappCore';
 
 export const getSearchParamAddress = () => {
   const { search } = getWindowLocation();

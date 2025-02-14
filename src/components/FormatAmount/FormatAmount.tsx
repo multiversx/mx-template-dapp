@@ -1,7 +1,10 @@
 import { FormatAmountSDK } from 'components/sdkDappCoreUI';
 import { WithClassnameType } from 'types';
-import { FormatAmountController, useGetNetworkConfig } from 'utils/sdkDappCore';
-import { DECIMALS, DIGITS } from 'utils/sdkDappUtils';
+import {
+  FormatAmountController,
+  useGetNetworkConfig
+} from 'lib/sdkDapp/sdkDappCore';
+import { DECIMALS, DIGITS } from 'lib/sdkDappUtils/sdkDappUtils';
 
 interface FormatAmountPropsType extends WithClassnameType {
   egldLabel?: string;

@@ -1,14 +1,12 @@
-import React from 'react';
-import { Label } from 'components/Label';
-import { DataTestIdsEnum } from 'localConstants';
-import { SignedTransactionType } from 'types/sdkDappCore.types';
+import { Label } from 'components';
 import {
-  ACCOUNTS_ENDPOINT,
   TRANSACTIONS_ENDPOINT,
-  useGetNetworkConfig
-} from 'utils/sdkDappCore';
-import { ExplorerLink } from '../../ExplorerLink';
-import { FormatAmount } from '../../FormatAmount';
+  useGetNetworkConfig,
+  ACCOUNTS_ENDPOINT,
+  SignedTransactionType,
+  ExplorerLink
+} from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 
 export const TransactionOutput = ({
   transaction

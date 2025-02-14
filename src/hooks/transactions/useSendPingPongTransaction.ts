@@ -5,10 +5,9 @@ import {
   Transaction,
   TransactionPayload,
   GAS_LIMIT,
-  GAS_PRICE,
-  useGetAccount,
-  useGetNetworkConfig
+  GAS_PRICE
 } from 'lib';
+import { useGetNetworkConfig } from 'lib/sdkDapp/sdkDappCore';
 import { smartContract } from 'utils';
 
 const PING_TRANSACTION_INFO = {

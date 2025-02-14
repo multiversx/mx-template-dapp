@@ -1,5 +1,5 @@
-import { IProvider } from 'types/sdkDappCore.types';
-import { IDAppProviderAccount } from 'types/sdkDappUtils.types';
+import { IProvider } from 'lib/sdkDapp/sdkDappCore.types';
+import { IDAppProviderAccount } from 'lib/sdkDappUtils/sdkDappUtils.types';
 import {
   Address,
   Message,
@@ -8,7 +8,7 @@ import {
   UserSecretKey,
   UserSigner
 } from 'utils/sdkCore';
-import { signTransactions } from 'utils/sdkDappCore';
+import { signTransactions } from 'lib/sdkDapp/sdkDappCore';
 import { LoginModal } from './LoginModal';
 
 const notInitializedError = (caller: string) => () => {

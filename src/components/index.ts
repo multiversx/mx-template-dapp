@@ -4,6 +4,7 @@ export * from './MxLink';
 export * from './Button';
 export * from './Card';
 export * from './ContractAddress';
+export * from './ExplorerLink';
 export * from './CopyButton';
 export * from './FormatAmount';
 export * from './Label';
