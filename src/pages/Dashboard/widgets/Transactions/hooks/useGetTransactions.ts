@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { apiTimeout, transactionSize } from 'config';
 import { ServerTransactionType } from 'types/sdkDappCore.types';
 import {
-  useGetNetworkConfig,
-  useGetAccount,
+  getInterpretedTransaction,
   getTransactions,
-  getInterpretedTransaction
+  useGetAccount,
+  useGetNetworkConfig
 } from 'utils/sdkDappCore';
 import { TransactionsPropsType } from '../types';
 

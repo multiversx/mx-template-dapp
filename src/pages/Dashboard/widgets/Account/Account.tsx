@@ -1,4 +1,4 @@
-import { OutputContainer, FormatAmount } from 'components';
+import { FormatAmount, OutputContainer } from 'components';
 import { Label } from 'components/Label';
 import { DataTestIdsEnum } from 'localConstants';
 import { useGetAccount, useGetNetworkConfig } from 'utils/sdkDappCore';
