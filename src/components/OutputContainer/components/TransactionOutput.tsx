@@ -1,6 +1,8 @@
-import { ExplorerLink, FormatAmount, Label } from 'components';
+import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
+  ExplorerLink,
+  FormatAmount,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
   useGetNetworkConfig

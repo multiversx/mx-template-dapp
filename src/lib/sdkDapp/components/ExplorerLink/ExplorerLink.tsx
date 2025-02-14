@@ -1,10 +1,8 @@
 import { PropsWithChildren } from 'react';
-import {
-  ExplorerLinkSDK,
-  ExplorerLinkSDKPropsType,
-  useGetNetworkConfig
-} from 'lib';
-import { WithClassnameType } from 'types';
+import { useGetNetworkConfig } from 'lib/sdkDapp/sdkDappCore';
+import { ExplorerLinkSDK } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
+import { ExplorerLinkSDKPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
+import { WithClassnameType } from 'types/componentsTypes';
 
 export const ExplorerLink = ({
   children,

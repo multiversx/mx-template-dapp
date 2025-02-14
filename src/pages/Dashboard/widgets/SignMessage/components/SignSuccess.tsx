@@ -1,5 +1,5 @@
-import { CopyButton, Label } from 'components';
-import { Message } from 'lib';
+import { Label } from 'components';
+import { CopyButton, Message } from 'lib';
 import { decodeMessage } from '../helpers';
 
 interface VerifyMessagePropsType {
