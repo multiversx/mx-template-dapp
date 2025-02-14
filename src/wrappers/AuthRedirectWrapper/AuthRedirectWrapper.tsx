@@ -1,18 +1,17 @@
 import { PropsWithChildren, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, matchPath } from 'react-router-dom';
 import { RouteNamesEnum } from 'localConstants';
+import { routes } from 'routes';
 import { useGetIsLoggedIn } from 'utils/sdkDappCore';
 
-interface AuthRedirectWrapperPropsType extends PropsWithChildren {
-  requireAuth?: boolean;
-}
-
-export const AuthRedirectWrapper = ({
-  children,
-  requireAuth = true
-}: AuthRedirectWrapperPropsType) => {
+export const AuthRedirectWrapper = ({ children }: PropsWithChildren) => {
   const isLoggedIn = useGetIsLoggedIn();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const currentRoute = routes.find((route) => matchPath(route.path, pathname));
+
+  const requireAuth = Boolean(currentRoute?.authenticatedRoute);
 
   useEffect(() => {
     if (isLoggedIn && !requireAuth) {
@@ -24,7 +23,7 @@ export const AuthRedirectWrapper = ({
     if (!isLoggedIn && requireAuth) {
       navigate(RouteNamesEnum.unlock);
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, currentRoute]);
 
   return <>{children}</>;
 };
