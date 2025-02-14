@@ -7,7 +7,7 @@ import {
   useGetAccount,
   useGetNetworkConfig
 } from 'lib';
-import { smartContract } from 'utils/smartContract';
+import { smartContract } from 'utils';
 
 const resultsParser = new ResultsParser();
 
@@ -16,6 +16,10 @@ export const useGetTimeToPong = () => {
   const { address } = useGetAccount();
 
   const getTimeToPong = async () => {
+    if (!address) {
+      return;
+    }
+
     try {
       const query = smartContract.createQuery({
         func: new ContractFunction('getTimeToPong'),

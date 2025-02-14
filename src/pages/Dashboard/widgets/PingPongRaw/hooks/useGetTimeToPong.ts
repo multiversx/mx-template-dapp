@@ -35,7 +35,7 @@ export const useGetTimeToPong = () => {
       );
 
       return decodeTime(data);
-    } catch (err) {
+    } catch {
       return null;
     }
   };
