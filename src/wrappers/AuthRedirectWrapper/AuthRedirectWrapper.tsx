@@ -1,13 +1,8 @@
 import { PropsWithChildren, useEffect } from 'react';
-import {
-  matchRoutes,
-  useLocation,
-  useNavigate,
-  matchPath
-} from 'react-router-dom';
+import { useLocation, useNavigate, matchPath } from 'react-router-dom';
 import { RouteNamesEnum } from 'localConstants';
-import { useGetIsLoggedIn } from 'utils/sdkDapp';
 import { routes } from 'routes';
+import { useGetIsLoggedIn } from 'utils/sdkDapp';
 
 export const AuthRedirectWrapper = ({ children }: PropsWithChildren) => {
   const isLoggedIn = useGetIsLoggedIn();
