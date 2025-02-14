@@ -2,8 +2,10 @@ export { AbiRegistry } from '@multiversx/sdk-core/out/smartcontracts/typesystem/
 export { Address } from '@multiversx/sdk-core/out/address';
 export { AddressValue } from '@multiversx/sdk-core/out/smartcontracts/typesystem/address';
 export { ContractFunction } from '@multiversx/sdk-core/out/smartcontracts/function';
+export type { IPlainTransactionObject } from '@multiversx/sdk-core/out/interface';
 export { Message } from '@multiversx/sdk-core/out/message';
-export { ProxyNetworkProvider } from '@multiversx/sdk-core/out';
+export { ProxyNetworkProvider } from '@multiversx/sdk-core/out/networkProviders/proxyNetworkProvider';
 export { ResultsParser } from '@multiversx/sdk-core/out/smartcontracts/resultsParser';
 export { SmartContract } from '@multiversx/sdk-core/out/smartcontracts/smartContract';
-export { TokenTransfer } from '@multiversx/sdk-core/out';
+export { TokenTransfer } from '@multiversx/sdk-core/out/tokens';
+export { Transaction } from '@multiversx/sdk-core/out/transaction';
