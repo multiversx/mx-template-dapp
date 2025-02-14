@@ -9,7 +9,6 @@ export {
   VERSION
 } from '@multiversx/sdk-dapp-core/out/constants/mvx.constants';
 export { FormatAmountController } from '@multiversx/sdk-dapp-core/out/controllers/FormatAmountController';
-export type { FormatAmountControllerPropsType } from '@multiversx/sdk-dapp-core/out/controllers/FormatAmountController/types';
 export { ProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/ProviderFactory';
 export { TransactionManager } from '@multiversx/sdk-dapp-core/out/core/managers/TransactionManager';
 export { TransactionsTableController } from '@multiversx/sdk-dapp-core/out/controllers/TransactionsTableController';
