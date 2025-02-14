@@ -3,7 +3,10 @@
  * and allows testing with Jest (see `moduleNameMapper` in package.json)
  */
 export { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
+export { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext/AxiosInterceptorContext';
 export { CopyButton } from '@multiversx/sdk-dapp/UI/CopyButton/CopyButton';
+export { CrossWindowLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/CrossWindowLoginButton/CrossWindowLoginButton';
+export { DappProvider } from '@multiversx/sdk-dapp/wrappers/DappProvider/DappProvider';
 export { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
 export { ExtensionLoginButton } from '@multiversx/sdk-dapp/UI/extension/ExtensionLoginButton/ExtensionLoginButton';
 export { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
@@ -18,9 +21,6 @@ export { TransactionRow } from '@multiversx/sdk-dapp/UI/TransactionsTable/compon
 export { TransactionsTable } from '@multiversx/sdk-dapp/UI/TransactionsTable/TransactionsTable';
 export { TransactionsToastList } from '@multiversx/sdk-dapp/UI/TransactionsToastList/TransactionsToastList';
 export { WalletConnectLoginButton } from '@multiversx/sdk-dapp/UI/walletConnect/WalletConnectLoginButton/WalletConnectLoginButton';
-export { CrossWindowLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/CrossWindowLoginButton/CrossWindowLoginButton';
 export { WebWalletLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton/WebWalletLoginButton';
 export { XaliasCrossWindowLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/XaliasCrossWindowLoginButton/XaliasCrossWindowLoginButton';
 export { XaliasLoginButton } from '@multiversx/sdk-dapp/UI/webWallet/XaliasLoginButton/XaliasLoginButton';
-export { AxiosInterceptorContext } from '@multiversx/sdk-dapp/wrappers/AxiosInterceptorContext/AxiosInterceptorContext';
-export { DappProvider } from '@multiversx/sdk-dapp/wrappers/DappProvider/DappProvider';

@@ -1,11 +1,5 @@
 import { Button } from 'components';
 
-export interface IframeButtonPropsType {
-  loginButtonText?: string;
-  disabled?: boolean;
-  onClick?: () => void;
-}
-
 export const IframeButton = ({
   disabled,
   onClick,
@@ -21,3 +15,9 @@ export const IframeButton = ({
     </Button>
   );
 };
+
+export interface IframeButtonPropsType {
+  loginButtonText?: string;
+  disabled?: boolean;
+  onClick?: () => void;
+}

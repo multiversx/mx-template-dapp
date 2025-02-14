@@ -1,9 +1,9 @@
-export { TokenTransfer } from '@multiversx/sdk-core/out';
-export { ProxyNetworkProvider } from '@multiversx/sdk-core/out';
+export { AbiRegistry } from '@multiversx/sdk-core/out/smartcontracts/typesystem/abiRegistry';
 export { Address } from '@multiversx/sdk-core/out/address';
-export { Message } from '@multiversx/sdk-core/out/message';
+export { AddressValue } from '@multiversx/sdk-core/out/smartcontracts/typesystem/address';
 export { ContractFunction } from '@multiversx/sdk-core/out/smartcontracts/function';
+export { Message } from '@multiversx/sdk-core/out/message';
+export { ProxyNetworkProvider } from '@multiversx/sdk-core/out';
 export { ResultsParser } from '@multiversx/sdk-core/out/smartcontracts/resultsParser';
 export { SmartContract } from '@multiversx/sdk-core/out/smartcontracts/smartContract';
-export { AbiRegistry } from '@multiversx/sdk-core/out/smartcontracts/typesystem/abiRegistry';
-export { AddressValue } from '@multiversx/sdk-core/out/smartcontracts/typesystem/address';
+export { TokenTransfer } from '@multiversx/sdk-core/out';
