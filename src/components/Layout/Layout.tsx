@@ -7,11 +7,11 @@ export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className='flex min-h-screen flex-col bg-slate-200'>
       <Header />
-      <AuthRedirectWrapper>
-        <main className='flex flex-grow items-stretch justify-center p-6'>
-          {children}
-        </main>
-      </AuthRedirectWrapper>
+
+      <main className='flex flex-grow items-stretch justify-center p-6'>
+        <AuthRedirectWrapper>{children}</AuthRedirectWrapper>
+      </main>
+
       <Footer />
     </div>
   );
