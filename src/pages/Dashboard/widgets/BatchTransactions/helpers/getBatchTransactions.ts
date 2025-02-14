@@ -5,7 +5,8 @@ import {
   GAS_PRICE,
   TokenTransfer,
   Transaction,
-  TransactionPayload
+  TransactionPayload,
+  VERSION
 } from 'lib';
 import { TransactionProps } from 'types';
 const NUMBER_OF_TRANSACTIONS = 5;
@@ -32,7 +33,7 @@ export const getBatchTransactions = ({
       gasPrice: GAS_PRICE,
       chainID,
       sender: address,
-      version: 1,
+      version: VERSION,
       nonce: nonce ? nonce + id : undefined
     });
   });

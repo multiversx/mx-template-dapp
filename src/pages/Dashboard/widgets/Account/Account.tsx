@@ -1,13 +1,11 @@
 import { Label, OutputContainer } from 'components';
-import { FormatAmount, useGetAccount, useGetNetworkConfig } from 'lib';
+import { FormatAmount, useGetAccountInfo, useGetNetworkConfig } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { Username } from './components';
 
 export const Account = () => {
-  const account = useGetAccount();
-  const {
-    network: { egldLabel }
-  } = useGetNetworkConfig();
+  const { network } = useGetNetworkConfig();
+  const { address, account } = useGetAccountInfo();
 
   if (!account.address) {
     return <></>;
@@ -18,7 +16,7 @@ export const Account = () => {
       <div className='flex flex-col text-black' data-testid='topInfo'>
         <p className='truncate'>
           <Label>Address: </Label>
-          <span data-testid='accountAddress'> {account.address}</span>
+          <span data-testid='accountAddress'> {address}</span>
         </p>
 
         <Username account={account} />
@@ -30,7 +28,7 @@ export const Account = () => {
           <Label>Balance: </Label>
           <FormatAmount
             value={account.balance}
-            egldLabel={egldLabel}
+            egldLabel={network.egldLabel}
             data-testid={DataTestIdsEnum.balance}
           />
         </p>

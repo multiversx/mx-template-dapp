@@ -4,6 +4,7 @@ import { getTransactionUrl, useTransactionOutcome } from './helpers';
 
 export const Transaction = () => {
   const { network } = useGetNetworkConfig();
+
   const transactionUrl = getTransactionUrl(network.walletAddress);
 
   const txData = useTransactionOutcome();

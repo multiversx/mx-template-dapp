@@ -11,13 +11,12 @@ export type {
 export type { ICustomProvider } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export type { IProvider } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export type { InitAppType } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp.types';
+export { NftEnumType } from '@multiversx/sdk-dapp-core/out/types/tokens.types';
+export { ProviderTypeEnum } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export type {
-  InterpretedTransactionType,
   ServerTransactionType,
   TokenArgumentType
 } from '@multiversx/sdk-dapp-core/out/types/serverTransactions.types';
-export { NftEnumType } from '@multiversx/sdk-dapp-core/out/types/tokens.types';
-export { ProviderTypeEnum } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export type { SignedTransactionType } from '@multiversx/sdk-dapp-core/out/types/transactions.types';
 export type { StoreType } from '@multiversx/sdk-dapp-core/out/store/store.types';
 export type { TokenOptionType } from '@multiversx/sdk-dapp-core/out/types/tokens.types';

@@ -14,9 +14,7 @@ export const TransactionOutput = ({
 }: {
   transaction: SignedTransactionType;
 }) => {
-  const {
-    network: { egldLabel }
-  } = useGetNetworkConfig();
+  const { network } = useGetNetworkConfig();
   const decodedData = transaction.data
     ? Buffer.from(transaction.data, 'base64').toString('ascii')
     : 'N/A';
@@ -46,8 +44,9 @@ export const TransactionOutput = ({
         <Label>Amount: </Label>
         <FormatAmount
           value={transaction.value}
-          egldLabel={egldLabel}
-          data-testid={DataTestIdsEnum.balance}
+          // showLabel={transaction.value !== '0'}
+          egldLabel={network.egldLabel}
+          data-testid='balance'
         />
       </p>
       <p>
