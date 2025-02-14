@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 import { AuthRedirectWrapper } from 'wrappers';
 import { Footer } from './Footer';
 import { Header } from './Header';
