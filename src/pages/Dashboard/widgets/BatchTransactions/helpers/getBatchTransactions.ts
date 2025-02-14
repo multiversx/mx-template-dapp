@@ -1,5 +1,3 @@
-import { TransactionProps } from 'types/transaction.types';
-
 import {
   DECIMALS,
   EXTRA_GAS_LIMIT_GUARDED_TX,
@@ -10,6 +8,7 @@ import {
   Transaction,
   VERSION
 } from 'lib';
+import { TransactionProps } from 'types/transaction.types';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 

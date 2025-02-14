@@ -1,5 +1,3 @@
-import { smartContract } from 'utils/smartContract';
-
 import {
   Address,
   AddressValue,
@@ -9,6 +7,7 @@ import {
   useGetAccount,
   useGetNetworkConfig
 } from 'lib';
+import { smartContract } from 'utils/smartContract';
 
 const resultsParser = new ResultsParser();
 

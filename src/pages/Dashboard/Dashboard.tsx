@@ -1,7 +1,6 @@
+import { contractAddress } from 'config';
 import { useScrollToElement } from 'hooks';
 import { WidgetType } from 'types/widget.types';
-
-import { contractAddress } from 'config';
 
 import { Widget } from './components';
 import {

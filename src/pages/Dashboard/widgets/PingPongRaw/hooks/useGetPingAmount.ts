@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-
 import axios from 'axios';
 import BigNumber from 'bignumber.js';
+import { useEffect, useState } from 'react';
 
 import { contractAddress } from 'config';
 import { useGetNetworkConfig } from 'lib';

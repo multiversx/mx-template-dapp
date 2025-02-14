@@ -1,6 +1,5 @@
-import { useState } from 'react';
-
 import axios from 'axios';
+import { useState } from 'react';
 
 import { API_URL } from 'config';
 import { ProfileType } from 'types';

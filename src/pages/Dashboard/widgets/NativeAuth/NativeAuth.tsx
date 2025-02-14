@@ -4,6 +4,7 @@ import { Label, MissingNativeAuthError, OutputContainer } from 'components';
 import { FormatAmount, useGetLoginInfo, useGetNetworkConfig } from 'lib';
 
 import { Username } from '../Account/components';
+
 import { useGetProfile } from './hooks';
 
 export const NativeAuth = () => {

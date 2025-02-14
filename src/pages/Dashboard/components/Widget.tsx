@@ -1,8 +1,7 @@
+import { Card } from 'components';
 import { useIsWebProvider } from 'hooks';
 import { WidgetType } from 'types/widget.types';
 import { getCallbackRoute } from 'utils/getCallbackRoute';
-
-import { Card } from 'components';
 
 export const Widget = ({
   title,

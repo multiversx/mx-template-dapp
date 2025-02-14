@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import type { MouseEvent } from 'react';
-
 import {
   faArrowsRotate,
   faBroom,
   faFileSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import type { MouseEvent } from 'react';
 
 import { Button, OutputContainer } from 'components';
 import { useGetSignMessageSession, useSignMessage } from 'lib';

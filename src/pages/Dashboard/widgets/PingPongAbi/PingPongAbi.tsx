@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react';
-
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useSendPingPongTransaction } from 'hooks';
 import moment from 'moment';
+import { useEffect, useState } from 'react';
 
 import {
   Button,
@@ -13,6 +10,8 @@ import {
   OutputContainer,
   PingPongOutput
 } from 'components';
+import { getCountdownSeconds, setTimeRemaining } from 'helpers';
+import { useSendPingPongTransaction } from 'hooks';
 import { useGetPendingTransactions } from 'lib';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
