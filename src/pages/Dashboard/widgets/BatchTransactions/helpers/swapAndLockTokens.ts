@@ -1,6 +1,5 @@
 import { SessionEnum, isSafari } from 'localConstants/session';
-import { sendBatchTransactions } from 'lib/sdkDapp/sdkDapp.helpers';
-import { refreshAccount } from 'lib/sdkDapp/sdkDapp.helpers';
+import { sendBatchTransactions, refreshAccount } from 'lib';
 import { getSwapAndLockTransactions } from '../helpers';
 import { SendTransactionProps } from '../types';
 
