@@ -3,7 +3,6 @@ export * from './Card';
 export * from './ContractAddress';
 export * from './Label';
 export * from './Layout';
-export * from './Layout';
 export * from './Loader';
 export * from './MissingNativeAuthError';
 export * from './MxLink';

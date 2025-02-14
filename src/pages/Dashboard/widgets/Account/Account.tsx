@@ -7,10 +7,6 @@ export const Account = () => {
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
 
-  if (!account.address) {
-    return <></>;
-  }
-
   return (
     <OutputContainer>
       <div className='flex flex-col text-black' data-testid='topInfo'>

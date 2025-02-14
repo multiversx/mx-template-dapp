@@ -10,18 +10,18 @@ export const sendBatchTransactions = async ({
   const provider = getAccountProvider();
   const txManager = TransactionManager.getInstance();
 
-  const transactions = getBatchTransactions({
+  const transactionsToSign = getBatchTransactions({
     address,
     chainID,
     nonce
   });
 
-  const signedTransactions = await provider.signTransactions(transactions);
+  const transactions = await provider.signTransactions(transactionsToSign);
 
   const groupedTransactions = [
-    [signedTransactions[0]],
-    [signedTransactions[1], signedTransactions[2]],
-    [signedTransactions[3], signedTransactions[4]]
+    [transactions[0]],
+    [transactions[1], transactions[2]],
+    [transactions[3], transactions[4]]
   ];
 
   const sentTransactions = await txManager.send(groupedTransactions);
