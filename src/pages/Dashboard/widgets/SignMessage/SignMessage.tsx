@@ -8,9 +8,9 @@ import { MouseEvent } from 'react';
 import { useState } from 'react';
 import { Button, OutputContainer } from 'components';
 import {
+  SignedMessageStatusesEnum,
   useGetSignMessageSession,
-  useSignMessage,
-  SignedMessageStatusesEnum
+  useSignMessage
 } from 'lib';
 import { WidgetProps } from 'types';
 import { SignFailure, SignSuccess } from './components';
