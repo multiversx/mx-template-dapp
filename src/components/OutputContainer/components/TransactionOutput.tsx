@@ -3,11 +3,11 @@ import {
   ACCOUNTS_ENDPOINT,
   ExplorerLink,
   FormatAmount,
+  SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
   useGetNetworkConfig
 } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
-import { SignedTransactionType } from 'types';
 
 export const TransactionOutput = ({
   transaction
