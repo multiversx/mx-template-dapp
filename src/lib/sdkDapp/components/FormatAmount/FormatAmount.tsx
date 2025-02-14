@@ -1,12 +1,11 @@
 import {
-  DECIMALS,
-  DIGITS,
   FormatAmountController,
-  useGetNetworkConfig,
-  FormatAmountSDK,
-  FormatAmountSDKPropsType
-} from 'lib';
-import { WithClassnameType } from 'types';
+  useGetNetworkConfig
+} from 'lib/sdkDapp/sdkDappCore';
+import { FormatAmountSDK } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
+import { FormatAmountSDKPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
+import { DECIMALS, DIGITS } from 'lib/sdkDappUtils';
+import { WithClassnameType } from 'types/componentsTypes';
 
 interface FormatAmountPropsType
   extends Partial<FormatAmountSDKPropsType>,
@@ -35,6 +34,7 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
       dataTestId={props['data-testid']}
       isValid={isValid}
       label={label}
+      showLabel={props.showLabel}
       valueDecimal={valueDecimal}
       valueInteger={valueInteger}
     />

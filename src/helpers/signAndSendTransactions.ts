@@ -11,12 +11,13 @@ type SignAndSendTransactionsProps = {
 };
 
 export const signAndSendTransactions = async ({
-  transactions
+  transactions,
+  transactionsDisplayInfo
 }: SignAndSendTransactionsProps) => {
   const provider = getAccountProvider();
   const txManager = TransactionManager.getInstance();
 
   const signedTransactions = await provider.signTransactions(transactions);
   const sentTransactions = await txManager.send(signedTransactions);
-  await txManager.track(sentTransactions);
+  await txManager.track(sentTransactions, { transactionsDisplayInfo });
 };
