@@ -1,4 +1,4 @@
-import { SignedTransactionType } from 'types';
+import { SignedTransactionType } from 'lib';
 import { TransactionOutput } from './TransactionOutput';
 
 export const TransactionsOutput = ({
