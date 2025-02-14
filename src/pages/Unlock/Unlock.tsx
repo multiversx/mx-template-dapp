@@ -13,7 +13,7 @@ import {
   LedgerLoginButton,
   OperaWalletLoginButton,
   WalletConnectLoginButton
-} from 'components/sdkDapp';
+} from 'components';
 import { nativeAuth } from 'config';
 import { useWindowSize } from 'hooks';
 import { RouteNamesEnum } from 'localConstants';

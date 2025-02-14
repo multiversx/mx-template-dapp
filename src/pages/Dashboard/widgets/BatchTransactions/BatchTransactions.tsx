@@ -5,11 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button } from 'components/Button';
-import {
-  OutputContainer,
-  TransactionsOutput
-} from 'components/OutputContainer';
+import { OutputContainer, TransactionsOutput, Button } from 'components';
 import { SessionEnum } from 'localConstants/session';
 import { SignedTransactionType, WidgetProps } from 'types';
 import {
@@ -17,7 +13,7 @@ import {
   useGetNetworkConfig,
   useGetPendingTransactions,
   useGetBatches
-} from 'utils/sdkDapp';
+} from 'utils';
 import { useBatchTransactionContext } from 'wrappers';
 import {
   sendBatchTransactions,

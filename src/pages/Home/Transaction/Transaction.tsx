@@ -1,5 +1,4 @@
-import { Label } from 'components/Label';
-import { ExplorerLink } from 'components/sdkDapp';
+import { Label, ExplorerLink } from 'components';
 import { useGetNetworkConfig, TRANSACTIONS_ENDPOINT } from 'utils/sdkDapp';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
 
