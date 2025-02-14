@@ -2,7 +2,7 @@ import './styles/globals.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { initApp } from 'lib/sdkDapp/sdkDappCore';
+import { initApp } from 'lib';
 import { App } from './App';
 import { config } from './initConfig';
 

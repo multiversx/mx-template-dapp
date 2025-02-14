@@ -1,4 +1,4 @@
-import { InterpretedTransactionType } from 'lib/sdkDapp/sdkDappCore.types';
+import { InterpretedTransactionType } from 'lib';
 
 export type TransactionsPropsType = {
   receiver?: string;

@@ -6,7 +6,7 @@ import {
   ICustomProvider,
   InitAppType,
   ProviderTypeEnum
-} from './lib/sdkDapp/sdkDappCore.types';
+} from './lib';
 
 const ADDITIONAL_PROVIDERS = {
   inMemoryProvider: 'inMemoryProvider'

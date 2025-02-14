@@ -1,5 +1,4 @@
-import { CopyButtonSDK } from 'components/sdkDappCoreUI';
-import { CopyButtonSDKPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
+import { CopyButtonSDKPropsType, CopyButtonSDK } from 'lib';
 
 export const CopyButton = (props: Partial<CopyButtonSDKPropsType>) => {
   return <CopyButtonSDK {...props} />;
