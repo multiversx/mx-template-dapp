@@ -1,7 +1,7 @@
 export {
+  CopyButton as CopyButtonSDK,
+  ExplorerLink as ExplorerLinkSDK,
   FormatAmount as FormatAmountSDK,
   TransactionsTable as TransactionsTableSDK,
-  ExplorerLink as ExplorerLinkSDK,
-  TrimText as TrimTextSDK,
-  CopyButton as CopyButtonSDK
+  TrimText as TrimTextSDK
 } from '@multiversx/sdk-dapp-core-ui/react';
