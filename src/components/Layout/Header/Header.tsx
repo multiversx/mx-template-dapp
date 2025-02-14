@@ -5,7 +5,6 @@ import { environment } from 'config';
 import { RouteNamesEnum } from 'localConstants';
 import { getAccountProvider, useGetIsLoggedIn } from 'utils/sdkDappCore';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
-import { RouteNamesEnum } from 'localConstants';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
