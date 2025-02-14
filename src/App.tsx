@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { PageNotFound } from 'pages';
+import { PageNotFound } from 'pages/PageNotFound/PageNotFound';
 import { routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
 import { Layout } from './components';

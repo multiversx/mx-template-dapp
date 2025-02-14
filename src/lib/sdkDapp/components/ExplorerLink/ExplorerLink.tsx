@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { useGetNetworkConfig } from 'lib/sdkDapp/sdkDappCore';
+import { useGetNetworkConfig } from 'lib/sdkDapp/sdkDapp.hooks';
 import { ExplorerLinkSDK } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
 import { ExplorerLinkSDKPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
 import { WithClassnameType } from 'types/componentsTypes';
