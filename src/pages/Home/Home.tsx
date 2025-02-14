@@ -32,7 +32,6 @@ export const Home = () => {
             </div>
             <Transaction />
           </div>
-          <Transaction />
         </div>
         <div className='h-4/6 bg-mvx-white bg-contain bg-no-repeat w-1/2 bg-center' />
       </div>
