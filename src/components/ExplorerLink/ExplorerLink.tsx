@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
 import {
   ExplorerLinkSDK,
-  useGetNetworkConfig,
-  ExplorerLinkSDKPropsType
+  ExplorerLinkSDKPropsType,
+  useGetNetworkConfig
 } from 'lib';
 import { WithClassnameType } from 'types';
 

@@ -1,5 +1,5 @@
 import { Label } from 'components';
-import { trimUsernameDomain, AccountType } from 'lib';
+import { AccountType, trimUsernameDomain } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { ProfileType } from 'types';
 

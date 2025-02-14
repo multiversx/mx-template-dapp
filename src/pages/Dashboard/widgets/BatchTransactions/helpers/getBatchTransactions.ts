@@ -1,11 +1,11 @@
 import {
-  GAS_LIMIT,
-  GAS_PRICE,
   DECIMALS,
   EXTRA_GAS_LIMIT_GUARDED_TX,
+  GAS_LIMIT,
+  GAS_PRICE,
+  TokenTransfer,
   Transaction,
-  TransactionPayload,
-  TokenTransfer
+  TransactionPayload
 } from 'lib';
 import { TransactionProps } from 'types';
 const NUMBER_OF_TRANSACTIONS = 5;

@@ -4,12 +4,12 @@ import { WidgetType } from 'types/widget.types';
 import { Widget } from './components';
 import {
   Account,
-  SignMessage,
   BatchTransactions,
-  PingPongRaw,
-  Transactions,
   PingPongAbi,
-  PingPongService
+  PingPongRaw,
+  PingPongService,
+  SignMessage,
+  Transactions
 } from './widgets';
 
 const WIDGETS: WidgetType[] = [

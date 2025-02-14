@@ -1,13 +1,13 @@
 import {
-  IProvider,
-  IDAppProviderAccount,
   Address,
+  IDAppProviderAccount,
+  IProvider,
   Message,
   MessageComputer,
+  signTransactions,
   Transaction,
   UserSecretKey,
-  UserSigner,
-  signTransactions
+  UserSigner
 } from 'lib';
 import { LoginModal } from './LoginModal';
 
