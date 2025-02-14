@@ -1,11 +1,11 @@
+import { Label } from 'components';
 import {
   TRANSACTIONS_ENDPOINT,
-  ACCOUNTS_ENDPOINT
-} from '@multiversx/sdk-dapp/apiCalls/endpoints';
-import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
-import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
-import { Label } from 'components/Label';
-import { FormatAmount } from 'components/sdkDapp';
+  useGetNetworkConfig,
+  ACCOUNTS_ENDPOINT,
+  ExplorerLink,
+  FormatAmount
+} from 'lib';
 import { SignedTransactionType } from 'types';
 
 export const TransactionOutput = ({

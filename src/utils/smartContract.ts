@@ -1,6 +1,6 @@
 import { contractAddress } from 'config';
 import json from 'contracts/ping-pong.abi.json';
-import { AbiRegistry, Address, SmartContract } from './sdkCore';
+import { AbiRegistry, Address, SmartContract } from 'lib';
 
 const abi = AbiRegistry.create(json);
 

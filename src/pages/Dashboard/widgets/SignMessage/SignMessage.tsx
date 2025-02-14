@@ -6,11 +6,10 @@ import {
   faArrowsRotate
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from 'components/Button';
-import { OutputContainer } from 'components/OutputContainer';
+import { Button, OutputContainer } from 'components';
+import { useSignMessage, useGetSignMessageSession } from 'lib';
 import { WidgetProps } from 'types';
-import { SignedMessageStatusesEnum } from 'types/sdkDapp.types';
-import { useSignMessage, useGetSignMessageSession } from 'utils/sdkDapp';
+import { SignedMessageStatusesEnum } from 'types';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = ({ callbackRoute }: WidgetProps) => {

@@ -1,4 +1,4 @@
-import { Message } from 'utils/sdkCore';
+import { Message } from 'lib';
 
 export const decodeMessage = ({
   message,

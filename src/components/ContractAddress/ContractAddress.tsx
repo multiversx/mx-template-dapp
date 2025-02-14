@@ -1,6 +1,6 @@
-import { Label } from 'components/Label';
-import { ACCOUNTS_ENDPOINT, ExplorerLink } from 'components/sdkDapp';
+import { Label } from 'components';
 import { contractAddress } from 'config';
+import { ExplorerLink, ACCOUNTS_ENDPOINT } from 'lib';
 
 export const ContractAddress = () => {
   return (

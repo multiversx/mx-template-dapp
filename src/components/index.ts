@@ -1,5 +1,4 @@
 export * from './Layout';
-export * from './sdkDapp';
 export * from './Card';
 export * from './MxLink';
 export * from './Button';

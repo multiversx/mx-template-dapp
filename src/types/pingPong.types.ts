@@ -1,4 +1,4 @@
-import { Transaction } from 'types/sdkCore.types';
+import { Transaction } from 'lib';
 
 export type PongRawProps = {
   callbackRoute: string;

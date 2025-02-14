@@ -1,7 +1,6 @@
-import React from 'react';
 import { useXaliasLogin } from '@multiversx/sdk-dapp/hooks/login/useXaliasLogin';
 import { WebWalletLoginButtonPropsType } from '@multiversx/sdk-dapp/UI/webWallet/WebWalletLoginButton/WebWalletLoginButton';
-import { XaliasCrossWindowLoginButton } from 'components/sdkDapp';
+import { XaliasCrossWindowLoginButton } from 'lib';
 import { DualLoginButton } from './DualLoginButton';
 
 export const XaliasLoginWrapper = ({

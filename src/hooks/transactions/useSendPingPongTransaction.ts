@@ -1,6 +1,18 @@
 import { useState, useCallback } from 'react';
 import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers/signAndSendTransactions';
+import {
+  newTransaction,
+  deleteTransactionToast,
+  removeAllSignedTransactions,
+  removeAllTransactionsToSign,
+  Address,
+  useGetAccountInfo,
+  useGetNetworkConfig,
+  useTrackTransactionStatus,
+  VERSION,
+  GAS_PRICE
+} from 'lib';
 import { SessionEnum } from 'localConstants';
 import {
   PingRawProps,
@@ -8,18 +20,6 @@ import {
   PongRawProps
 } from 'types/pingPong.types';
 import { getChainId } from 'utils/getChainId';
-import { Address } from 'utils/sdkCore';
-import {
-  newTransaction,
-  deleteTransactionToast,
-  removeAllSignedTransactions,
-  removeAllTransactionsToSign,
-  useGetAccountInfo,
-  useGetNetworkConfig,
-  useTrackTransactionStatus,
-  VERSION,
-  GAS_PRICE
-} from 'utils/sdkDapp';
 import { smartContract } from 'utils/smartContract';
 
 type PingPongTransactionProps = {
