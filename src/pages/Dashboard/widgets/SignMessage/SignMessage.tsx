@@ -4,12 +4,15 @@ import {
   faFileSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { MouseEvent } from 'react';
+import { MouseEvent } from 'react';
 import { useState } from 'react';
 import { Button, OutputContainer } from 'components';
-import { useGetSignMessageSession, useSignMessage } from 'lib';
+import {
+  useGetSignMessageSession,
+  useSignMessage,
+  SignedMessageStatusesEnum
+} from 'lib';
 import { WidgetProps } from 'types';
-import { SignedMessageStatusesEnum } from 'types';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = ({ callbackRoute }: WidgetProps) => {
