@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { TransactionRow, OutputContainer } from 'components';
-import { useGetActiveTransactionsStatus } from 'utils';
+import { OutputContainer } from 'components';
+import { useGetActiveTransactionsStatus, TransactionRow } from 'lib';
 import { useGetTransactions } from './hooks';
 import { TransactionsPropsType } from './types';
 

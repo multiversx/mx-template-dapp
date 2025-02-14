@@ -1,3 +1,3 @@
 export * from './getCallbackRoute';
-export * from './sdkCore';
-export * from './sdkDapp';
+export * from './getChainId';
+export * from './smartContract';

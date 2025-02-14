@@ -7,9 +7,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, OutputContainer } from 'components';
+import { useSignMessage, useGetSignMessageSession } from 'lib';
 import { WidgetProps } from 'types';
 import { SignedMessageStatusesEnum } from 'types';
-import { useSignMessage, useGetSignMessageSession } from 'utils';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = ({ callbackRoute }: WidgetProps) => {

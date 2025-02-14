@@ -1,14 +1,14 @@
-import { Transaction } from 'types/sdkCore.types';
-import { TransactionProps } from 'types/transaction.types';
-import { TokenTransfer } from 'utils/sdkCore';
 import {
   DECIMALS,
+  TokenTransfer,
   EXTRA_GAS_LIMIT_GUARDED_TX,
   GAS_LIMIT,
   GAS_PRICE,
   VERSION,
-  newTransaction
-} from 'utils/sdkDapp';
+  newTransaction,
+  Transaction
+} from 'lib';
+import { TransactionProps } from 'types/transaction.types';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 

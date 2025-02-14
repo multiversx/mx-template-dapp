@@ -12,9 +12,9 @@ import {
 } from 'components';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
+import { useGetLoginInfo, useGetPendingTransactions } from 'lib';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
-import { useGetLoginInfo, useGetPendingTransactions } from 'utils';
 import {
   useGetTimeToPong,
   useGetPingTransaction,

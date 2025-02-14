@@ -12,9 +12,9 @@ import {
 } from 'components';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
+import { useGetPendingTransactions } from 'lib';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
-import { useGetPendingTransactions } from 'utils';
 import { useGetTimeToPong, useGetPingAmount } from './hooks';
 
 export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {

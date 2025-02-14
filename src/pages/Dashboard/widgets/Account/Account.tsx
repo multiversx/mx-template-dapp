@@ -1,5 +1,5 @@
-import { Label, OutputContainer, FormatAmount } from 'components';
-import { useGetAccountInfo, useGetNetworkConfig } from 'utils';
+import { Label, OutputContainer } from 'components';
+import { useGetAccountInfo, useGetNetworkConfig, FormatAmount } from 'lib';
 import { Username } from './components';
 
 export const Account = () => {

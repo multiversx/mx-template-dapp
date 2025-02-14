@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { SessionEnum } from 'localConstants';
-import { TransactionBatchStatusesEnum } from 'types/sdkDapp.types';
 import {
   deleteTransactionToast,
   removeAllSignedTransactions,
@@ -9,8 +7,10 @@ import {
   setTransactionsDisplayInfoState,
   setTransactionsToSignedState,
   useSendBatchTransactions,
-  useGetSignedTransactions
-} from 'utils/sdkDapp';
+  useGetSignedTransactions,
+  TransactionBatchStatusesEnum
+} from 'lib';
+import { SessionEnum } from 'localConstants';
 import { useBatchTransactionContext } from 'wrappers';
 
 export const useSendSignedTransactions = ({

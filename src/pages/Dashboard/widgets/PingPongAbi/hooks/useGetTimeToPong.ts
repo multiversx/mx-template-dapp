@@ -3,9 +3,10 @@ import {
   AddressValue,
   ContractFunction,
   ResultsParser,
-  ProxyNetworkProvider
-} from 'utils/sdkCore';
-import { useGetAccount, useGetNetworkConfig } from 'utils/sdkDapp';
+  ProxyNetworkProvider,
+  useGetAccount,
+  useGetNetworkConfig
+} from 'lib';
 import { smartContract } from 'utils/smartContract';
 
 const resultsParser = new ResultsParser();

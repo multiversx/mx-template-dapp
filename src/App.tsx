@@ -1,15 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import {
-  AxiosInterceptorContext, // using this is optional
-  DappProvider,
-  Layout,
-  TransactionsToastList,
-  NotificationModal,
-  SignTransactionsModals
-  // uncomment this to use the custom transaction tracker
-  // TransactionsTracker
-} from 'components';
+import { Layout } from 'components';
 
 import {
   apiTimeout,
@@ -17,8 +8,18 @@ import {
   environment,
   sampleAuthenticatedDomains
 } from 'config';
+import {
+  AxiosInterceptorContext, // using this is optional
+  DappProvider,
+  TransactionsToastList,
+  NotificationModal,
+  SignTransactionsModals
+  // uncomment this to use the custom transaction tracker
+  // TransactionsTracker
+} from 'lib';
+
 import { RouteNamesEnum } from 'localConstants';
-import { PageNotFound, Unlock } from 'pages';
+import { PageNotFound } from 'pages';
 import { routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
 

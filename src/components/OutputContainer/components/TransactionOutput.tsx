@@ -1,11 +1,12 @@
+import { Label } from 'components';
 import {
+  TRANSACTIONS_ENDPOINT,
+  useGetNetworkConfig,
   ACCOUNTS_ENDPOINT,
   ExplorerLink,
-  FormatAmount,
-  Label
-} from 'components';
+  FormatAmount
+} from 'lib';
 import { SignedTransactionType } from 'types';
-import { TRANSACTIONS_ENDPOINT, useGetNetworkConfig } from 'utils';
 
 export const TransactionOutput = ({
   transaction

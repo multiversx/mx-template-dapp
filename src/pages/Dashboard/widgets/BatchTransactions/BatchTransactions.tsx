@@ -6,14 +6,14 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { OutputContainer, TransactionsOutput, Button } from 'components';
-import { SessionEnum } from 'localConstants/session';
-import { SignedTransactionType, WidgetProps } from 'types';
 import {
   useGetAccountInfo,
   useGetNetworkConfig,
   useGetPendingTransactions,
   useGetBatches
-} from 'utils';
+} from 'lib';
+import { SessionEnum } from 'localConstants/session';
+import { SignedTransactionType, WidgetProps } from 'types';
 import { useBatchTransactionContext } from 'wrappers';
 import {
   sendBatchTransactions,
