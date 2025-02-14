@@ -1,6 +1,6 @@
 import {
-  faPaperPlane,
-  faArrowsRotate
+  faArrowsRotate,
+  faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'components/Button';
@@ -12,8 +12,8 @@ import {
   useGetPendingTransactions
 } from 'utils/sdkDappCore';
 import {
-  signAndAutoSendBatchTransactions,
   sendBatchTransactions,
+  signAndAutoSendBatchTransactions,
   swapAndLockTokens
 } from './helpers';
 

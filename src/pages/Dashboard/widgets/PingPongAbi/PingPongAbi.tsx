@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import moment from 'moment';
+import { useEffect, useState } from 'react';
 import { Button } from 'components/Button';
 import { ContractAddress } from 'components/ContractAddress';
 import { Label } from 'components/Label';
@@ -10,7 +9,7 @@ import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetPendingTransactions } from 'utils/sdkDappCore';
-import { useGetTimeToPong, useGetPingAmount } from './hooks';
+import { useGetPingAmount, useGetTimeToPong } from './hooks';
 
 export const PingPongAbi = () => {
   const transactions = useGetPendingTransactions();

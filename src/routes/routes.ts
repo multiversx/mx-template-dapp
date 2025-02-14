@@ -1,5 +1,5 @@
 import { RouteNamesEnum } from 'localConstants';
-import { Unlock, Home, Disclaimer } from 'pages';
+import { Disclaimer, Home, Unlock } from 'pages';
 import { Dashboard } from 'pages/Dashboard';
 import { RouteType } from 'types';
 

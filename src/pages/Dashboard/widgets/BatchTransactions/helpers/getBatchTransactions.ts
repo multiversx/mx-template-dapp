@@ -1,9 +1,9 @@
 import { TransactionProps } from 'types/transaction.types';
-import { Transaction, TransactionPayload, TokenTransfer } from 'utils/sdkCore';
+import { TokenTransfer, Transaction, TransactionPayload } from 'utils/sdkCore';
 import {
+  EXTRA_GAS_LIMIT_GUARDED_TX,
   GAS_LIMIT,
-  GAS_PRICE,
-  EXTRA_GAS_LIMIT_GUARDED_TX
+  GAS_PRICE
 } from 'utils/sdkDappCore';
 import { DECIMALS } from 'utils/sdkDappUtils';
 const NUMBER_OF_TRANSACTIONS = 5;
