@@ -5,10 +5,8 @@ import {
   faArrowsRotate
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from 'components/Button';
-import { OutputContainer } from 'components/OutputContainer';
-import { Address, Message } from 'utils/sdkCore';
-import { getAccountProvider, useGetAccount } from 'utils/sdkDappCore';
+import { Button, OutputContainer } from 'components';
+import { Address, Message, getAccountProvider, useGetAccount } from 'lib';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = () => {

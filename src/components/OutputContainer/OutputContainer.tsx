@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import classNames from 'classnames';
-import { Loader } from 'components/Loader';
+import { Loader } from 'components';
 import { WithClassnameType } from 'types';
 
 interface OutputContainerPropsType

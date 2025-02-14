@@ -1,6 +1,5 @@
-import { ExplorerLink } from 'components/ExplorerLink';
-import { Label } from 'components/Label';
-import { TRANSACTIONS_ENDPOINT, useGetNetworkConfig } from 'utils/sdkDappCore';
+import { Label, ExplorerLink } from 'components';
+import { TRANSACTIONS_ENDPOINT, useGetNetworkConfig } from 'lib';
 import { getTransactionUrl, useTransactionOutcome } from './helpers';
 
 export const Transaction = () => {
