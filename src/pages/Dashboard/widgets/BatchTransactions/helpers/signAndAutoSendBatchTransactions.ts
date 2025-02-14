@@ -2,7 +2,7 @@ import { SessionEnum, isSafari } from 'localConstants/session';
 import {
   refreshAccount,
   sendBatchTransactions
-} from 'lib/sdkDapp/sdkDapp.helpers';
+} from 'lib';
 import { getBatchTransactions } from '../helpers';
 import { SendTransactionProps } from '../types';
 
