@@ -1,9 +1,9 @@
-import { FormatAmountController } from 'lib/sdkDapp/sdkDapp.helpers';
-import { useGetNetworkConfig } from 'lib/sdkDapp/sdkDapp.hooks';
-import { FormatAmountSDK } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
-import { FormatAmountSDKPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
-import { DECIMALS, DIGITS } from 'lib/sdkDappUtils';
-import { WithClassnameType } from 'types/componentsTypes';
+import { WithClassnameType } from 'types';
+import { FormatAmountSDK } from '../../../sdkDappCoreUI/sdkDappCoreUI.components';
+import { FormatAmountSDKPropsType } from '../../../sdkDappCoreUI/sdkDappCoreUI.types';
+import { DECIMALS, DIGITS } from '../../../sdkDappUtils';
+import { FormatAmountController } from '../../sdkDapp.helpers';
+import { useGetNetworkConfig } from '../../sdkDapp.hooks';
 
 interface FormatAmountPropsType
   extends Partial<FormatAmountSDKPropsType>,
