@@ -2,7 +2,13 @@ import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { Button, OutputContainer, PingPongOutput } from 'components';
+import {
+  Button,
+  ContractAddress,
+  Label,
+  OutputContainer,
+  PingPongOutput
+} from 'components';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetPendingTransactions } from 'lib';
@@ -82,6 +88,18 @@ export const PingPongRaw = () => {
       </div>
 
       <OutputContainer>
+        {!hasPendingTransactions && (
+          <>
+            <ContractAddress />
+            {!pongAllowed && (
+              <p>
+                <Label>Time remaining: </Label>
+                <span className='text-red-600'>{timeRemaining}</span> until able
+                to pong
+              </p>
+            )}
+          </>
+        )}
         <PingPongOutput
           transactions={transactions}
           pongAllowed={pongAllowed}

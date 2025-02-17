@@ -5,6 +5,7 @@ import { Widget } from './components';
 import {
   Account,
   BatchTransactions,
+  NativeAuth,
   PingPongAbi,
   PingPongRaw,
   PingPongService,
@@ -47,6 +48,13 @@ const WIDGETS: WidgetType[] = [
     widget: SignMessage,
     description: 'Message signing using the connected account',
     reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account-1'
+  },
+  {
+    title: 'Native auth',
+    widget: NativeAuth,
+    description:
+      'A secure authentication token can be used to interact with the backend',
+    reference: 'https://github.com/multiversx/mx-sdk-js-native-auth-server'
   },
   {
     title: 'Batch Transactions',
