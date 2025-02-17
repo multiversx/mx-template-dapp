@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import { PropsWithChildren } from 'react';
-import { Loader } from 'lib';
-import { WithClassnameType } from 'types';
+import { Loader, WithClassnameType } from 'lib';
 
 interface OutputContainerPropsType
   extends PropsWithChildren,
@@ -8,18 +8,19 @@ interface OutputContainerPropsType
   isLoading?: boolean;
 }
 
-export const OutputContainer = (props: OutputContainerPropsType) => {
-  const { children, isLoading = false, className = 'p-4' } = props;
-
-  return (
-    <div
-      className={classNames(
-        'text-sm border border-gray-200 rounded overflow-auto',
-        className
-      )}
-      data-testid={props['data-testid']}
-    >
-      {isLoading ? <Loader /> : children}
-    </div>
-  );
-};
+export const OutputContainer = ({
+  children,
+  isLoading = false,
+  className = 'p-4',
+  'data-testid': dataTestId
+}: OutputContainerPropsType) => (
+  <div
+    data-testid={dataTestId}
+    className={classNames(
+      'text-sm border border-gray-200 rounded overflow-auto',
+      className
+    )}
+  >
+    {isLoading ? <Loader /> : children}
+  </div>
+);
