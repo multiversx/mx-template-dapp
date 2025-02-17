@@ -25,7 +25,7 @@ export const sendBatchTransactions = async ({
   ];
 
   const sentTransactions = await txManager.send(groupedTransactions);
-  await txManager.track(sentTransactions);
+  const sessionId = await txManager.track(sentTransactions);
 
-  return { sentTransactions };
+  return { sentTransactions, sessionId };
 };

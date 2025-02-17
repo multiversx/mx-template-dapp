@@ -36,7 +36,9 @@ export const swapAndLockTokens = async ({
   ];
 
   const sentTransactions = await txManager.send(groupedTransactions);
-  await txManager.track(sentTransactions, { transactionsDisplayInfo });
+  const sessionId = await txManager.track(sentTransactions, {
+    transactionsDisplayInfo
+  });
 
-  return { sentTransactions };
+  return { sentTransactions, sessionId };
 };
