@@ -8,5 +8,6 @@ export { getActiveTransactionsStatus } from '@multiversx/sdk-dapp-core/out/utils
 export { getInterpretedTransaction } from '@multiversx/sdk-dapp-core/out/utils/transactions/getInterpretedTransaction';
 export { getTransactions } from '@multiversx/sdk-dapp-core/out/apiCalls/transactions/getTransactions';
 export { initApp } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp';
+export { setAxiosInterceptors } from '@multiversx/sdk-dapp-core/out/utils/network/setAxiosInterceptors';
 export { signTransactions } from '@multiversx/sdk-dapp-core/out/core/providers/strategies/helpers/signTransactions/signTransactions';
 export { trimUsernameDomain } from '@multiversx/sdk-dapp-core/out/utils/account/trimUsernameDomain';
