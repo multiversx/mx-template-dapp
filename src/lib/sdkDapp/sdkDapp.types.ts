@@ -1,3 +1,4 @@
+export type { AccountType } from '@multiversx/sdk-dapp/types/account.types';
 export {
   EnvironmentsEnum,
   LoginMethodsEnum,
