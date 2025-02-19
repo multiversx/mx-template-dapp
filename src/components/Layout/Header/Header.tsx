@@ -13,6 +13,7 @@ import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
 import { useState } from 'react';
 import { ExtendedProviders } from 'initConfig';
+import { IProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
@@ -25,7 +26,7 @@ export const Header = () => {
     navigate(RouteNamesEnum.home);
   };
 
-  const handleLogin = async (type: ProviderTypeEnum, anchor: HTMLElement) => {
+  const handleLogin = async ({ type, anchor }: IProviderFactory) => {
     const provider = await ProviderFactory.create({
       type,
       anchor
@@ -63,7 +64,10 @@ export const Header = () => {
           <UnlockPanelSDK
             open={open}
             onLogin={(options) =>
-              handleLogin(options.detail.provider, options.detail.anchor)
+              handleLogin({
+                type: options.detail.provider,
+                anchor: options.detail.anchor
+              })
             }
             onClose={() => {
               setOpen(false);
@@ -71,13 +75,11 @@ export const Header = () => {
           >
             <UnlockButtonSDK
               label='In Memory Provider'
-              onClick={async () => {
-                const provider = await ProviderFactory.create({
+              onClick={() =>
+                handleLogin({
                   type: ExtendedProviders.inMemoryProvider
-                });
-                await provider?.login();
-                navigate(RouteNamesEnum.dashboard);
-              }}
+                })
+              }
             />
           </UnlockPanelSDK>
         </div>
