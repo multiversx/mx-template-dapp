@@ -32,6 +32,7 @@ export const Header = () => {
       anchor
     });
     await provider?.login();
+    setOpen(false);
     navigate(RouteNamesEnum.dashboard);
   };
 
