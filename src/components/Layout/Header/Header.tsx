@@ -1,23 +1,37 @@
-import { useMatch, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, MxLink } from 'components';
 import { environment } from 'config';
-import { getAccountProvider, useGetIsLoggedIn } from 'lib';
+import {
+  getAccountProvider,
+  ProviderFactory,
+  ProviderTypeEnum,
+  useGetIsLoggedIn,
+  UnlockButtonSDK,
+  UnlockPanelSDK
+} from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
+import { useState } from 'react';
+import { ExtendedProviders } from 'initConfig';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
-  const isUnlockRoute = Boolean(useMatch(RouteNamesEnum.unlock));
   const navigate = useNavigate();
   const provider = getAccountProvider();
-
-  const ConnectButton = isUnlockRoute ? null : (
-    <MxLink to={RouteNamesEnum.unlock}>Connect</MxLink>
-  );
+  const [open, setOpen] = useState(false);
 
   const handleLogout = async () => {
     await provider.logout();
-    navigate(RouteNamesEnum.unlock);
+    navigate(RouteNamesEnum.home);
+  };
+
+  const handleLogin = async (type: ProviderTypeEnum, anchor: HTMLElement) => {
+    const provider = await ProviderFactory.create({
+      type,
+      anchor
+    });
+    await provider?.login();
+    navigate(RouteNamesEnum.dashboard);
   };
 
   return (
@@ -44,8 +58,28 @@ export const Header = () => {
               Close
             </Button>
           ) : (
-            ConnectButton
+            <Button onClick={() => setOpen(true)}>Connect</Button>
           )}
+          <UnlockPanelSDK
+            open={open}
+            onLogin={(options) =>
+              handleLogin(options.detail.provider, options.detail.anchor)
+            }
+            onClose={() => {
+              setOpen(false);
+            }}
+          >
+            <UnlockButtonSDK
+              label='In Memory Provider'
+              onClick={async () => {
+                const provider = await ProviderFactory.create({
+                  type: ExtendedProviders.inMemoryProvider
+                });
+                await provider?.login();
+                navigate(RouteNamesEnum.dashboard);
+              }}
+            />
+          </UnlockPanelSDK>
         </div>
       </nav>
     </header>
