@@ -88,7 +88,7 @@ export const ConnectButton = () => {
           setOpen(false);
         }}
       >
-        <UnlockButtonSDK
+        <UnlockButton
           label='In Memory Provider'
           onClick={() =>
             handleLogin({
@@ -96,7 +96,7 @@ export const ConnectButton = () => {
             })
           }
         />
-      </UnlockPanelSDK>
+      </UnlockButton>
     </>
   );
 };
