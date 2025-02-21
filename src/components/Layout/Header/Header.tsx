@@ -1,39 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import { Button, MxLink } from 'components';
 import { environment } from 'config';
-import {
-  getAccountProvider,
-  ProviderFactory,
-  ProviderTypeEnum,
-  useGetIsLoggedIn,
-  UnlockButtonSDK,
-  UnlockPanelSDK
-} from 'lib';
+import { getAccountProvider, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
-import { useState } from 'react';
-import { ExtendedProviders } from 'initConfig';
-import { IProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
+import ConnectButton from './components/ConnectButton';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
   const navigate = useNavigate();
   const provider = getAccountProvider();
-  const [open, setOpen] = useState(false);
 
   const handleLogout = async () => {
     await provider.logout();
     navigate(RouteNamesEnum.home);
-  };
-
-  const handleLogin = async ({ type, anchor }: IProviderFactory) => {
-    const provider = await ProviderFactory.create({
-      type,
-      anchor
-    });
-    await provider?.login();
-    setOpen(false);
-    navigate(RouteNamesEnum.dashboard);
   };
 
   return (
@@ -60,29 +40,8 @@ export const Header = () => {
               Close
             </Button>
           ) : (
-            <Button onClick={() => setOpen(true)}>Connect</Button>
+            <ConnectButton />
           )}
-          <UnlockPanelSDK
-            open={open}
-            onLogin={(options) =>
-              handleLogin({
-                type: options.detail.provider,
-                anchor: options.detail.anchor
-              })
-            }
-            onClose={() => {
-              setOpen(false);
-            }}
-          >
-            <UnlockButtonSDK
-              label='In Memory Provider'
-              onClick={() =>
-                handleLogin({
-                  type: ExtendedProviders.inMemoryProvider
-                })
-              }
-            />
-          </UnlockPanelSDK>
         </div>
       </nav>
     </header>
