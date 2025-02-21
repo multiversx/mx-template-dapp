@@ -6,7 +6,7 @@ import { IProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/t
 import { useNavigate } from 'react-router-dom';
 import { RouteNamesEnum } from 'localConstants';
 
-const ConnectButton = () => {
+export const ConnectButton = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -46,5 +46,3 @@ const ConnectButton = () => {
     </>
   );
 };
-
-export default ConnectButton;

@@ -4,7 +4,7 @@ import { environment } from 'config';
 import { getAccountProvider, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
-import ConnectButton from './components/ConnectButton';
+import { ConnectButton } from './components';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
