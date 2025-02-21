@@ -1,6 +1,6 @@
 import { Button } from 'components';
 import { useState } from 'react';
-import { UnlockPanelSDK, UnlockButtonSDK, ProviderFactory } from 'lib';
+import { UnlockPanel, UnlockButton, ProviderFactory } from 'lib';
 import { ExtendedProviders } from 'initConfig';
 import { IProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 import { useNavigate } from 'react-router-dom';
@@ -22,7 +22,7 @@ export const ConnectButton = () => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>Connect</Button>
-      <UnlockPanelSDK
+      <UnlockPanel
         open={open}
         onLogin={(options) =>
           handleLogin({
@@ -34,7 +34,7 @@ export const ConnectButton = () => {
           setOpen(false);
         }}
       >
-        <UnlockButtonSDK
+        <UnlockButton
           label='In Memory Provider'
           onClick={() =>
             handleLogin({
@@ -42,7 +42,7 @@ export const ConnectButton = () => {
             })
           }
         />
-      </UnlockPanelSDK>
+      </UnlockPanel>
     </>
   );
 };
