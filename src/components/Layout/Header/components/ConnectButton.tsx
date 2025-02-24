@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'components';
 import { ExtendedProviders } from 'initConfig';
 import {
+  IProviderFactory,
   ProviderFactory,
   UnlockButton,
-  UnlockPanel,
-  IProviderFactory
+  UnlockPanel
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
-const SHOW_ADVANCED_LOGIN_METHOD = false;
+const SHOW_ADVANCED_LOGIN_METHOD = true;
 
 export const ConnectButton = () => {
   const [open, setOpen] = useState(false);

@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { createRoot } from 'react-dom/client';
 import { Button } from 'components';
@@ -43,15 +43,76 @@ const modalStyles = {
   }
 };
 
+interface ModalProps {
+  onSubmit: (values: { privateKey: string; address: string }) => void;
+  onClose: () => void;
+  needsAddress?: boolean;
+}
+
+const Modal = ({ onSubmit, onClose, needsAddress }: ModalProps) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const privateKey = formData.get('privateKey')?.toString() || '';
+    const address = formData.get('address')?.toString() || '';
+
+    if ((needsAddress && !address) || !privateKey) {
+      alert(`Please enter ${needsAddress ? 'address and' : ''} private key`);
+      return;
+    }
+
+    onSubmit({ privateKey, address });
+  };
+
+  return createPortal(
+    <div style={modalStyles.overlay}>
+      <div style={modalStyles.modal}>
+        <h2>Authenticate</h2>
+        <form onSubmit={handleSubmit} style={modalStyles.form}>
+          {needsAddress && (
+            <div>
+              <label>
+                Address
+                <input
+                  style={modalStyles.input}
+                  type='text'
+                  name='address'
+                  autoFocus
+                  required
+                />
+              </label>
+            </div>
+          )}
+          <div>
+            <label>
+              Private Key
+              <input
+                style={modalStyles.input}
+                type='text'
+                name='privateKey'
+                autoFocus={!needsAddress}
+                required
+              />
+            </label>
+          </div>
+          <div style={modalStyles.buttonGroup}>
+            <Button onClick={onClose}>Cancel</Button>
+            <Button type='submit'>Submit</Button>
+          </div>
+        </form>
+      </div>
+    </div>,
+    document.body
+  );
+};
+
 export class LoginModal {
   private static instance: LoginModal;
-  private modalContainer: HTMLDivElement;
-  private root: ReturnType<typeof createRoot>;
+  private modalRoot: HTMLDivElement;
 
   private constructor() {
-    this.modalContainer = document.createElement('div');
-    document.body.appendChild(this.modalContainer);
-    this.root = createRoot(this.modalContainer);
+    this.modalRoot = document.createElement('div');
+    document.body.appendChild(this.modalRoot);
   }
 
   public static getInstance(): LoginModal {
@@ -66,82 +127,28 @@ export class LoginModal {
     address: string;
   }> {
     return new Promise((resolve) => {
-      const ModalPortal = () => {
-        const privateKeyRef = useRef<HTMLInputElement>(null);
-        const addressRef = useRef<HTMLInputElement>(null);
-        const [isOpen, setIsOpen] = useState(true);
+      const root = createRoot(this.modalRoot);
 
-        const handleSubmit = useCallback((e: React.FormEvent) => {
-          e.preventDefault();
-          const privateKey = privateKeyRef.current?.value || '';
-          const address = addressRef.current?.value || '';
-
-          if ((options?.needsAddress && !address) || !privateKey) {
-            alert(
-              `Please enter ${
-                options?.needsAddress ? 'address and' : ''
-              } private key`
-            );
-            return;
-          }
-
-          setIsOpen(false);
-          resolve({ privateKey, address });
-        }, []);
-
-        const handleClose = useCallback(() => {
-          setIsOpen(false);
-          resolve({ privateKey: '', address: '' });
-        }, []);
-
-        if (!isOpen) {
-          return null;
-        }
-
-        const modalContent = (
-          <div style={modalStyles.overlay}>
-            <div style={modalStyles.modal}>
-              <h2>Authenticate</h2>
-              <form onSubmit={handleSubmit} style={modalStyles.form}>
-                {options?.needsAddress && (
-                  <div>
-                    <label>
-                      Address
-                      <input
-                        style={modalStyles.input}
-                        type='text'
-                        ref={addressRef}
-                        autoFocus
-                        required
-                      />
-                    </label>
-                  </div>
-                )}
-                <div>
-                  <label>
-                    Private Key
-                    <input
-                      style={modalStyles.input}
-                      type='text'
-                      ref={privateKeyRef}
-                      autoFocus={!options?.needsAddress}
-                      required
-                    />
-                  </label>
-                </div>
-                <div style={modalStyles.buttonGroup}>
-                  <Button onClick={handleClose}>Cancel</Button>
-                  <Button type='submit'>Submit</Button>
-                </div>
-              </form>
-            </div>
-          </div>
-        );
-
-        return createPortal(modalContent, document.body);
+      const handleSubmit = (values: {
+        privateKey: string;
+        address: string;
+      }) => {
+        root.unmount();
+        resolve(values);
       };
 
-      this.root.render(ModalPortal());
+      const handleClose = () => {
+        root.unmount();
+        resolve({ privateKey: '', address: '' });
+      };
+
+      root.render(
+        <Modal
+          onSubmit={handleSubmit}
+          onClose={handleClose}
+          needsAddress={options?.needsAddress}
+        />
+      );
     });
   }
 }
