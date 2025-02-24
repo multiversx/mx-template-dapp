@@ -7,6 +7,7 @@ import {
   ProviderTypeEnum
 } from './lib';
 import { InMemoryProvider } from './provider/inMemoryProvider';
+import { walletConnectV2ProjectId } from 'config';
 
 const ADDITIONAL_PROVIDERS = {
   inMemoryProvider: 'inMemoryProvider'
@@ -39,6 +40,11 @@ export const config: InitAppType = {
     environment: EnvironmentsEnum.devnet,
     network: {
       walletAddress: 'https://devnet-wallet.multiversx.com'
+    },
+    providers: {
+      walletConnect: {
+        walletConnectV2ProjectId
+      }
     },
     successfulToastLifetime: DEFAULT_TOAST_LIEFTIME
   }
