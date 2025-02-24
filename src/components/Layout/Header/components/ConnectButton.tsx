@@ -32,7 +32,7 @@ export const ConnectButton = () => {
         open={open}
         onLogin={({ detail }) =>
           handleLogin({
-            type: detail.type,
+            type: detail.provider,
             anchor: detail.anchor
           })
         }
