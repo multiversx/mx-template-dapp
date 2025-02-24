@@ -11,3 +11,4 @@ export { TokenTransfer } from '@multiversx/sdk-core/out/tokens';
 export { Transaction } from '@multiversx/sdk-core/out/transaction';
 export { TransactionPayload } from '@multiversx/sdk-core/out/transactionPayload';
 export { UserSecretKey, UserSigner } from '@multiversx/sdk-core/out/wallet';
+export type { IProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
