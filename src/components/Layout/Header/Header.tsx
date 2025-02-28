@@ -5,6 +5,7 @@ import { getAccountProvider, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
 import { ConnectButton } from './components';
+import { NotificationsButton } from './components/NotificationsButton';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
@@ -32,16 +33,19 @@ export const Header = () => {
             <p className='text-gray-600'>{environment}</p>
           </div>
 
-          {isLoggedIn ? (
-            <Button
-              onClick={handleLogout}
-              className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
-            >
-              Close
-            </Button>
-          ) : (
-            <ConnectButton />
+          {isLoggedIn && (
+            <>
+              <NotificationsButton />
+              <Button
+                onClick={handleLogout}
+                className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
+              >
+                Close
+              </Button>
+            </>
           )}
+
+          {!isLoggedIn && <ConnectButton />}
         </div>
       </nav>
     </header>

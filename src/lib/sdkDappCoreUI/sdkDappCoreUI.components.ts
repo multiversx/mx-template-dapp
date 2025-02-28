@@ -3,6 +3,6 @@ export {
   ExplorerLink as ExplorerLinkSDK,
   FormatAmount as FormatAmountSDK,
   TransactionsTable as TransactionsTableSDK,
-  UnlockPanel,
-  UnlockButton
+  UnlockButton,
+  UnlockPanel
 } from '@multiversx/sdk-dapp-core-ui/react';
