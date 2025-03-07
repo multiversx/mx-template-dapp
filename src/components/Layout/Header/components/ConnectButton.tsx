@@ -13,7 +13,7 @@ import { RouteNamesEnum } from 'localConstants';
 const SHOW_ADVANCED_LOGIN_METHOD = true;
 
 export const ConnectButton = () => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async ({ type, anchor }: IProviderFactory) => {
@@ -25,20 +25,26 @@ export const ConnectButton = () => {
     navigate(RouteNamesEnum.dashboard);
   };
 
+  const handleOpenUnlockPanel = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseUnlockPanel = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
-      <Button onClick={() => setOpen(true)}>Connect</Button>
+      <Button onClick={handleOpenUnlockPanel}>Connect</Button>
       <UnlockPanel
-        open={open}
+        isOpen={isOpen}
         onLogin={({ detail }) =>
           handleLogin({
             type: detail.provider,
             anchor: detail.anchor
           })
         }
-        onClose={() => {
-          setOpen(false);
-        }}
+        onClose={handleCloseUnlockPanel}
       >
         {
           // you can safely remove this if you don't need to implement a custom provider
