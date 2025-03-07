@@ -13,7 +13,7 @@ export const ExplorerLink = ({
 
   return (
     <ExplorerLinkSDK link={`${network.explorerAddress}${page}`} {...rest}>
-      {children ? <div slot='content'>{children}</div> : null}
+      {children ? <span slot='content'>{children}</span> : null}
     </ExplorerLinkSDK>
   );
 };
