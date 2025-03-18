@@ -6,10 +6,6 @@ import svgrPlugin from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
-  //TODO remove this when excluded from optional dependencies
-  optimizeDeps: {
-    exclude: ['@multiversx/sdk-dapp-core-ui'] // Prevent Vite from trying to pre-bundle it
-  },
   server: {
     port: Number(process.env.PORT) || 3000,
     strictPort: true,
