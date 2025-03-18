@@ -1,15 +1,17 @@
+import axios from 'axios';
 import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers';
 import {
+  AbiRegistry,
   Address,
   GAS_LIMIT,
   GAS_PRICE,
+  SmartContractTransactionsFactory,
   Transaction,
-  TransactionPayload,
+  TransactionsFactoryConfig,
   useGetAccount,
   useGetNetworkConfig
 } from 'lib';
-import { smartContract } from 'utils';
 
 const PING_TRANSACTION_INFO = {
   processingMessage: 'Processing Ping transaction',
@@ -27,15 +29,28 @@ export const useSendPingPongTransaction = () => {
   const { network } = useGetNetworkConfig();
   const { address } = useGetAccount();
 
+  const getSmartContractFactory = async () => {
+    const response = await axios.get('src/contracts/ping-pong.abi.json');
+    const abi = AbiRegistry.create(response.data);
+    const scFactory = new SmartContractTransactionsFactory({
+      config: new TransactionsFactoryConfig({
+        chainID: network.chainId
+      }),
+      abi
+    });
+
+    return scFactory;
+  };
+
   const sendPingTransaction = async (amount: string) => {
     const pingTransaction = new Transaction({
-      value: amount,
-      data: new TransactionPayload('ping'),
-      receiver: address,
-      gasLimit: 10 * GAS_LIMIT,
-      gasPrice: GAS_PRICE,
+      value: BigInt(amount),
+      data: Buffer.from('ping'),
+      receiver: new Address(address),
+      gasLimit: BigInt(10 * GAS_LIMIT),
+      gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
-      sender: address,
+      sender: new Address(address),
       version: 1
     });
 
@@ -46,13 +61,16 @@ export const useSendPingPongTransaction = () => {
   };
 
   const sendPingTransactionFromAbi = async (amount: string) => {
-    const pingTransaction = smartContract.methodsExplicit
-      .ping()
-      .withSender(new Address(address))
-      .withValue(amount ?? '0')
-      .withGasLimit(60000000)
-      .withChainID(network.chainId)
-      .buildTransaction();
+    const scFactory = await getSmartContractFactory();
+    const pingTransaction = scFactory.createTransactionForExecute(
+      new Address(address),
+      {
+        gasLimit: BigInt(60000000),
+        function: 'ping',
+        contract: new Address(contractAddress),
+        nativeTransferAmount: BigInt(amount)
+      }
+    );
 
     const sessionId = await signAndSendTransactions({
       transactions: [pingTransaction],
@@ -73,13 +91,13 @@ export const useSendPingPongTransaction = () => {
 
   const sendPongTransaction = async () => {
     const pongTransaction = new Transaction({
-      value: '0',
-      data: new TransactionPayload('pong'),
-      receiver: contractAddress,
-      gasLimit: GAS_LIMIT,
-      gasPrice: GAS_PRICE,
+      value: BigInt(0),
+      data: Buffer.from('pong'),
+      receiver: new Address(contractAddress),
+      gasLimit: BigInt(GAS_LIMIT),
+      gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
-      sender: address,
+      sender: new Address(address),
       version: 1
     });
 
@@ -90,13 +108,16 @@ export const useSendPingPongTransaction = () => {
   };
 
   const sendPongTransactionFromAbi = async () => {
-    const pongTransaction = smartContract.methodsExplicit
-      .pong()
-      .withSender(new Address(address))
-      .withValue('0')
-      .withGasLimit(60000000)
-      .withChainID(network.chainId)
-      .buildTransaction();
+    const scFactory = await getSmartContractFactory();
+    const pongTransaction = scFactory.createTransactionForExecute(
+      new Address(address),
+      {
+        gasLimit: BigInt(60000000),
+        function: 'pong',
+        contract: new Address(contractAddress),
+        nativeTransferAmount: BigInt(0)
+      }
+    );
 
     const sessionId = await signAndSendTransactions({
       transactions: [pongTransaction],

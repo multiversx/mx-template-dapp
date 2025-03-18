@@ -1,14 +1,18 @@
-export { AbiRegistry } from '@multiversx/sdk-core/out/smartcontracts/typesystem/abiRegistry';
-export { Address } from '@multiversx/sdk-core/out/address';
-export { AddressValue } from '@multiversx/sdk-core/out/smartcontracts/typesystem/address';
-export { ContractFunction } from '@multiversx/sdk-core/out/smartcontracts/function';
-export { Message, MessageComputer } from '@multiversx/sdk-core/out/message';
-export { ProxyNetworkProvider } from '@multiversx/sdk-core/out/networkProviders';
-export { ResultsParser } from '@multiversx/sdk-core/out/smartcontracts/resultsParser';
-export { SignableMessage } from '@multiversx/sdk-core/out/signableMessage';
-export { SmartContract } from '@multiversx/sdk-core/out/smartcontracts/smartContract';
-export { TokenTransfer } from '@multiversx/sdk-core/out/tokens';
-export { Transaction } from '@multiversx/sdk-core/out/transaction';
-export { TransactionPayload } from '@multiversx/sdk-core/out/transactionPayload';
-export { UserSecretKey, UserSigner } from '@multiversx/sdk-core/out/wallet';
-export type { IProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
+export {
+  AbiRegistry,
+  Address,
+  AddressValue,
+  ContractFunction,
+  Message,
+  MessageComputer,
+  ProxyNetworkProvider,
+  SmartContract,
+  SmartContractController,
+  SmartContractTransactionsFactory,
+  TokenTransfer,
+  Transaction,
+  TransactionPayload,
+  TransactionsFactoryConfig,
+  UserSecretKey,
+  UserSigner
+} from '@multiversx/sdk-core';
