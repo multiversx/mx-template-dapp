@@ -16,6 +16,7 @@ wdio/node_modules
 
 # misc
 /src/config/index.ts
+/src/styles/index.css
 .DS_Store
 .idea
 .env.local
