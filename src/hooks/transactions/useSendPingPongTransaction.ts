@@ -1,3 +1,9 @@
+import {
+  AbiRegistry,
+  TransactionsFactoryConfig
+} from '@multiversx/sdk-core/out';
+import { SmartContractTransactionsFactory } from '@multiversx/sdk-core/out';
+import axios from 'axios';
 import { useCallback, useState } from 'react';
 import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers/signAndSendTransactions';
@@ -19,8 +25,6 @@ import {
   PingRawProps,
   PongRawProps
 } from 'types/pingPong.types';
-import { getChainId } from 'utils/getChainId';
-import { smartContract } from 'utils/smartContract';
 
 type PingPongTransactionProps = {
   type: SessionEnum;
@@ -89,17 +93,33 @@ export const useSendPingPongTransaction = ({
     []
   );
 
+  const getSmartContractFactory = async () => {
+    const response = await axios.get('src/contracts/ping-pong.abi.json');
+    const abi = AbiRegistry.create(response.data);
+    const scFactory = new SmartContractTransactionsFactory({
+      config: new TransactionsFactoryConfig({
+        chainID: network.chainId
+      }),
+      abi
+    });
+
+    return scFactory;
+  };
+
   const sendPingTransactionFromAbi = useCallback(
     async ({ amount, callbackRoute }: PingRawProps) => {
       clearAllTransactions();
 
-      const pingTransaction = smartContract.methodsExplicit
-        .ping()
-        .withSender(new Address(address))
-        .withValue(amount ?? '0')
-        .withGasLimit(60000000)
-        .withChainID(getChainId())
-        .buildTransaction();
+      const scFactory = await getSmartContractFactory();
+      const pingTransaction = scFactory.createTransactionForExecute(
+        new Address(address),
+        {
+          gasLimit: BigInt(60000000),
+          function: 'ping',
+          contract: new Address(contractAddress),
+          nativeTransferAmount: BigInt(amount)
+        }
+      );
 
       const sessionId = await signAndSendTransactions({
         transactions: [pingTransaction],
@@ -161,13 +181,16 @@ export const useSendPingPongTransaction = ({
     async ({ callbackRoute }: PongRawProps) => {
       clearAllTransactions();
 
-      const pongTransaction = smartContract.methodsExplicit
-        .pong()
-        .withSender(new Address(address))
-        .withValue('0')
-        .withGasLimit(60000000)
-        .withChainID(getChainId())
-        .buildTransaction();
+      const scFactory = await getSmartContractFactory();
+      const pongTransaction = scFactory.createTransactionForExecute(
+        new Address(address),
+        {
+          gasLimit: BigInt(60000000),
+          function: 'pong',
+          contract: new Address(contractAddress),
+          nativeTransferAmount: BigInt(0)
+        }
+      );
 
       const sessionId = await signAndSendTransactions({
         transactions: [pongTransaction],

@@ -1,3 +1,4 @@
+import { Address, Message } from 'lib';
 import { decodeMessage } from '../decodeMessage';
 
 const address =
@@ -10,9 +11,11 @@ const signedMessage = '0x68656c6c6f20776f726c64';
 describe('decodeMessage', () => {
   it('should decode message', async () => {
     const { decodedMessage, encodedMessage } = decodeMessage({
-      address,
       signature,
-      message: rawMessage
+      message: new Message({
+        data: new Uint8Array(Buffer.from(rawMessage)),
+        address: new Address(address)
+      })
     });
 
     // Assert the result is correct based on your mock data
