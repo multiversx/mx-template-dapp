@@ -1,4 +1,3 @@
-import { ArgSerializer } from '@multiversx/sdk-core';
 import axios from 'axios';
 import { contractAddress } from 'config';
 import {
@@ -31,19 +30,13 @@ export const useGetTimeToPong = () => {
         abi
       });
 
-      const result = await scController.query({
+      const [result] = await scController.query({
         contract: Address.newFromBech32(contractAddress),
         function: 'getTimeToPong',
-        arguments: new ArgSerializer().valuesToBuffers([
-          new AddressValue(Address.newFromBech32(address))
-        ])
+        arguments: [new AddressValue(new Address(address))]
       });
 
-      console.log('result', result);
-
-      const secondsRemaining: number = Number(
-        Buffer.from(result[0]).toString()
-      );
+      const secondsRemaining: number = result?.valueOf()?.toNumber();
 
       return secondsRemaining;
     } catch (err) {
