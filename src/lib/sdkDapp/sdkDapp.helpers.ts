@@ -10,6 +10,7 @@ export { getIsProviderEqualTo } from '@multiversx/sdk-dapp/utils/account/getIsPr
 export { getTransactions } from '@multiversx/sdk-dapp/apiCalls/transactions/getTransactions';
 export { logout } from '@multiversx/sdk-dapp/utils/logout';
 export { newTransaction } from '@multiversx/sdk-dapp/models';
+export { parseAmount } from '@multiversx/sdk-dapp/utils/operations/parseAmount';
 export { refreshAccount } from '@multiversx/sdk-dapp/utils/account/refreshAccount';
 export { sendBatchTransactions } from '@multiversx/sdk-dapp/services/transactions/sendBatchTransactions';
 export { sendTransactions } from '@multiversx/sdk-dapp/services/transactions/sendTransactions';
