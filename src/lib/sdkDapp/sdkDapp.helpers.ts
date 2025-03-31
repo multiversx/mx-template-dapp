@@ -4,7 +4,6 @@ export {
   removeAllSignedTransactions,
   removeAllTransactionsToSign
 } from '@multiversx/sdk-dapp/services/transactions/clearTransactions';
-export { formatAmount } from '@multiversx/sdk-dapp/utils/operations/formatAmount';
 export { getInterpretedTransaction } from '@multiversx/sdk-dapp/utils/transactions/getInterpretedTransaction';
 export { getIsProviderEqualTo } from '@multiversx/sdk-dapp/utils/account/getIsProviderEqualTo';
 export { getTransactions } from '@multiversx/sdk-dapp/apiCalls/transactions/getTransactions';
