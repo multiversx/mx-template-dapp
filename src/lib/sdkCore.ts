@@ -9,10 +9,11 @@ export {
   SmartContract,
   SmartContractController,
   SmartContractTransactionsFactory,
+  Token,
   TokenTransfer,
   Transaction,
-  TransactionPayload,
   TransactionsFactoryConfig,
+  TransferTransactionsFactory,
   UserSecretKey,
   UserSigner
 } from '@multiversx/sdk-core';
