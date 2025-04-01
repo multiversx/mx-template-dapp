@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import {
   ITransactionsTableRow,
+  MvxTransactionsTable,
   ServerTransactionType,
   TransactionsTableController,
-  TransactionsTableSDK,
   useGetAccount,
   useGetNetworkConfig
 } from 'lib';
@@ -39,5 +39,5 @@ export const TransactionsTable = ({
     );
   };
 
-  return <TransactionsTableSDK transactions={processedTransaction} />;
+  return <MvxTransactionsTable transactions={processedTransaction} />;
 };

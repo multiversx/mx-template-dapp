@@ -1,5 +1,5 @@
-import { CopyButtonSDK } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
-import { CopyButtonSDKPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
+import { MvxCopyButton } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
+import { MvxCopyButtonPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
 
 export const CopyButton = ({
   className,
@@ -7,9 +7,9 @@ export const CopyButton = ({
   copyIcon,
   iconClass,
   successIcon
-}: Partial<CopyButtonSDKPropsType>) => {
+}: Partial<MvxCopyButtonPropsType>) => {
   return (
-    <CopyButtonSDK
+    <MvxCopyButton
       class={className}
       text={text}
       copyIcon={copyIcon}

@@ -1,12 +1,12 @@
 import { WithClassnameType } from 'types';
-import { FormatAmountSDK } from '../../../sdkDappCoreUI/sdkDappCoreUI.components';
-import { FormatAmountSDKPropsType } from '../../../sdkDappCoreUI/sdkDappCoreUI.types';
+import { MvxFormatAmount } from '../../../sdkDappCoreUI/sdkDappCoreUI.components';
+import { MvxFormatAmountPropsType } from '../../../sdkDappCoreUI/sdkDappCoreUI.types';
 import { DECIMALS, DIGITS } from '../../../sdkDappUtils';
 import { FormatAmountController } from '../../sdkDapp.helpers';
 import { useGetNetworkConfig } from '../../sdkDapp.hooks';
 
 interface FormatAmountPropsType
-  extends Partial<FormatAmountSDKPropsType>,
+  extends Partial<MvxFormatAmountPropsType>,
     WithClassnameType {
   egldLabel?: string;
   value: string;
@@ -27,7 +27,7 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
     });
 
   return (
-    <FormatAmountSDK
+    <MvxFormatAmount
       class={props.className}
       dataTestId={props['data-testid']}
       isValid={isValid}

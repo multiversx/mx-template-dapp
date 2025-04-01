@@ -1,5 +1,5 @@
-export type { CopyButton as CopyButtonSDKPropsType } from '@multiversx/sdk-dapp-core-ui/web-components/copy-button';
-export type { ExplorerLink as ExplorerLinkSDKPropsType } from '@multiversx/sdk-dapp-core-ui/web-components/explorer-link';
-export type { FormatAmount as FormatAmountSDKPropsType } from '@multiversx/sdk-dapp-core-ui/web-components/format-amount';
 export type { ITransactionsTableRow } from '@multiversx/sdk-dapp-core-ui';
-export type { TransactionsTable as TransactionsTableSDKPropsType } from '@multiversx/sdk-dapp-core-ui/web-components/transactions-table';
+export type { MvxCopyButton as MvxCopyButtonPropsType } from '@multiversx/sdk-dapp-core-ui/web-components/mvx-copy-button';
+export type { MvxExplorerLink as MvxExplorerLinkPropsType } from '@multiversx/sdk-dapp-core-ui/web-components/mvx-explorer-link';
+export type { MvxFormatAmount as MvxFormatAmountPropsType } from '@multiversx/sdk-dapp-core-ui/web-components/mvx-format-amount';
+export type { MvxTransactionsTable as MvxTransactionsTablePropsType } from '@multiversx/sdk-dapp-core-ui/web-components/mvx-transactions-table';

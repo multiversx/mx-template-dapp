@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { useGetNetworkConfig } from 'lib/sdkDapp/sdkDapp.hooks';
-import { ExplorerLinkSDK } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
+import { MvxExplorerLink } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
 import { WithClassnameType } from 'types/componentsTypes';
 
 export const ExplorerLink = ({
@@ -12,13 +12,13 @@ export const ExplorerLink = ({
   const { network } = useGetNetworkConfig();
 
   return (
-    <ExplorerLinkSDK
+    <MvxExplorerLink
       link={`${network.explorerAddress}${page}`}
       class={className}
       dataTestId={dataTestId}
     >
       {children ? <span slot='content'>{children}</span> : null}
-    </ExplorerLinkSDK>
+    </MvxExplorerLink>
   );
 };
 
