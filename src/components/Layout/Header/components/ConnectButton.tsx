@@ -4,9 +4,9 @@ import { Button } from 'components';
 import { ExtendedProviders } from 'initConfig';
 import {
   IProviderFactory,
-  ProviderFactory,
-  UnlockButton,
-  UnlockPanel
+  MvxUnlockButton,
+  MvxUnlockPanel,
+  ProviderFactory
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
@@ -36,7 +36,7 @@ export const ConnectButton = () => {
   return (
     <>
       <Button onClick={handleOpenUnlockPanel}>Connect</Button>
-      <UnlockPanel
+      <MvxUnlockPanel
         isOpen={isOpen}
         onLogin={({ detail }) =>
           handleLogin({
@@ -49,7 +49,7 @@ export const ConnectButton = () => {
         {
           // you can safely remove this if you don't need to implement a custom provider
           SHOW_ADVANCED_LOGIN_METHOD && (
-            <UnlockButton
+            <MvxUnlockButton
               buttonLabel='In Memory Provider'
               onClick={() =>
                 handleLogin({
@@ -59,7 +59,7 @@ export const ConnectButton = () => {
             />
           )
         }
-      </UnlockPanel>
+      </MvxUnlockPanel>
     </>
   );
 };
