@@ -3,6 +3,7 @@ export { EnvironmentsEnum } from '@multiversx/sdk-dapp-core/out/types/enums.type
 export type { FormatAmountControllerPropsType } from '@multiversx/sdk-dapp-core/out/controllers/FormatAmountController/types';
 export type { ICustomProvider } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export type { IProvider } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
+export type { IProviderFactory } from '@multiversx/sdk-dapp-core/out/core/providers/types/providerFactory.types';
 export type { InitAppType } from '@multiversx/sdk-dapp-core/out/core/methods/initApp/initApp.types';
 export type {
   InterpretedTransactionType,

@@ -1,26 +1,29 @@
 import { PropsWithChildren } from 'react';
 import { useGetNetworkConfig } from 'lib/sdkDapp/sdkDapp.hooks';
 import { ExplorerLinkSDK } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
-import { ExplorerLinkSDKPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
 import { WithClassnameType } from 'types/componentsTypes';
 
 export const ExplorerLink = ({
   children,
   page,
-  ...rest
+  className,
+  'data-testid': dataTestId
 }: ExplorerLinkPropsType) => {
   const { network } = useGetNetworkConfig();
 
   return (
-    <ExplorerLinkSDK link={`${network.explorerAddress}${page}`} {...rest}>
+    <ExplorerLinkSDK
+      link={`${network.explorerAddress}${page}`}
+      class={className}
+      dataTestId={dataTestId}
+    >
       {children ? <span slot='content'>{children}</span> : null}
     </ExplorerLinkSDK>
   );
 };
 
 export interface ExplorerLinkPropsType
-  extends Partial<ExplorerLinkSDKPropsType>,
-    PropsWithChildren,
-    WithClassnameType {
+  extends WithClassnameType,
+    PropsWithChildren {
   page: string;
 }
