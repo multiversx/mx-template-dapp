@@ -1,24 +1,21 @@
 import { Label } from 'components';
 import { CopyButton, Message, useGetLastSignedMessageSession } from 'lib';
-import { decodeMessage } from '../helpers';
 
 interface VerifyMessagePropsType {
-  message: Message;
+  message?: Message;
 }
 
 export const SignSuccess = (props: VerifyMessagePropsType) => {
   const signedMessageInfo = useGetLastSignedMessageSession();
 
-  if (!signedMessageInfo?.signature || !props.message) {
+  if (!signedMessageInfo?.signature) {
     return null;
   }
 
   const { signature } = signedMessageInfo;
 
-  const { encodedMessage, decodedMessage } = decodeMessage({
-    message: props.message,
-    signature: signature
-  });
+  const decodedMessage = signedMessageInfo?.message;
+  const encodedMessage = props.message?.data || decodedMessage;
 
   return (
     <div className='flex flex-col gap-6'>
