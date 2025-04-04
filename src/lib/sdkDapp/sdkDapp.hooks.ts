@@ -13,6 +13,7 @@ export { useGetPendingTransactions } from '@multiversx/sdk-dapp/hooks/transactio
 export { useGetSignMessageInfoStatus } from '@multiversx/sdk-dapp/hooks/signMessage/useGetSignedMessageStatus';
 export { useGetSignMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage/useGetSignMessageSession';
 export { useGetSignedTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useGetSignedTransactions';
+export { useParseSignedTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useParseSignedTransactions';
 export { useSendBatchTransactions } from '@multiversx/sdk-dapp/hooks/transactions/batch/useSendBatchTransactions';
 export { useSignMessage } from '@multiversx/sdk-dapp/hooks/signMessage/useSignMessage';
 export { useSignTransactions } from '@multiversx/sdk-dapp/hooks/transactions/useSignTransactions';
