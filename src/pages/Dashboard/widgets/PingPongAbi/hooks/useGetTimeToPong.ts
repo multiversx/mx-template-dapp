@@ -36,7 +36,8 @@ export const useGetTimeToPong = () => {
         arguments: [new AddressValue(new Address(address))]
       });
 
-      const secondsRemaining: number = result?.valueOf()?.toNumber();
+      const value = result?.valueOf();
+      const secondsRemaining: number = Number(value);
 
       return secondsRemaining;
     } catch (err) {

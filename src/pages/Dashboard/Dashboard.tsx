@@ -1,5 +1,6 @@
 import { contractAddress } from 'config';
 import { useScrollToElement } from 'hooks';
+import { useParseSignedTransactions } from 'lib';
 import { WidgetType } from 'types/widget.types';
 import { Widget } from './components';
 import {
@@ -83,6 +84,9 @@ const WIDGETS: WidgetType[] = [
 
 export const Dashboard = () => {
   useScrollToElement();
+  useParseSignedTransactions(() => {
+    console.log('Transactions cancelled');
+  });
 
   return (
     <div className='flex flex-col gap-6 max-w-3xl w-full'>

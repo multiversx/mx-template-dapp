@@ -7,7 +7,7 @@ export const decodeMessage = ({
   message: Message;
   signature: string;
 }): { encodedMessage: string; decodedMessage: string } => {
-  const messageObj = JSON.parse(JSON.stringify(message));
+  const messageObj = JSON.parse(JSON.stringify(message.data));
   messageObj.signature = `0x${signature}`;
 
   const encodedMessage =
