@@ -12,11 +12,12 @@ module.exports = {
     '^.+\\.(ts|js|tsx|jsx)$': '@swc/jest'
   },
   transformIgnorePatterns: [
-    'node_modules/(?!@multiversx/sdk-guardians-provider|@multiversx/sdk-dapp-form|@multiversx/sdk-dapp-nft|@multiversx/sdk-dapp|@multiversx/sdk-wallet-connect-provider|@multiversx/sdk-guardians-provider|@multiversx/sdk-wallet|react-redux|swiper|ssr-window|dom7|axios|react-tooltip|uuid|uint8arrays|multiformats|@lifeomic/axios-fetch|@walletconnect)'
+    'node_modules/(?!(@multiversx/sdk-.*|@noble/ed25519|react-redux|swiper|ssr-window|dom7|axios|react-tooltip|uuid|uint8arrays|multiformats|@lifeomic/axios-fetch|@walletconnect)/)'
   ],
   moduleNameMapper: {
     '^react-native$': 'react-native-web',
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy'
+    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+    '^@multiversx/sdk-(.*)$': '@multiversx/sdk-$1'
   },
   setupFilesAfterEnv: ['./src/setupTests.ts'],
   moduleFileExtensions: [
