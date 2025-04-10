@@ -1,5 +1,6 @@
 import './styles/globals.css';
 
+import { walletConnectV2ProjectId } from 'config';
 import {
   EnvironmentsEnum,
   ICustomProvider,
@@ -7,7 +8,6 @@ import {
   ProviderTypeEnum
 } from './lib';
 import { InMemoryProvider } from './provider/inMemoryProvider';
-import { walletConnectV2ProjectId } from 'config';
 
 const ADDITIONAL_PROVIDERS = {
   inMemoryProvider: 'inMemoryProvider'
