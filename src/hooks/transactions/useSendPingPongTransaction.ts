@@ -4,7 +4,6 @@ import { signAndSendTransactions } from 'helpers';
 import {
   AbiRegistry,
   Address,
-  GAS_LIMIT,
   GAS_PRICE,
   SmartContractTransactionsFactory,
   Transaction,
@@ -45,9 +44,9 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransaction = async (amount: string) => {
     const pingTransaction = new Transaction({
       value: BigInt(amount),
-      data: Buffer.from('ping'),
-      receiver: new Address(address),
-      gasLimit: BigInt(10 * GAS_LIMIT),
+      data: Uint8Array.from(Buffer.from('ping')),
+      receiver: new Address(contractAddress),
+      gasLimit: BigInt(60000000),
       gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
       sender: new Address(address),
@@ -92,9 +91,9 @@ export const useSendPingPongTransaction = () => {
   const sendPongTransaction = async () => {
     const pongTransaction = new Transaction({
       value: BigInt(0),
-      data: Buffer.from('pong'),
+      data: Uint8Array.from(Buffer.from('pong')),
       receiver: new Address(contractAddress),
-      gasLimit: BigInt(GAS_LIMIT),
+      gasLimit: BigInt(60000000),
       gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
       sender: new Address(address),

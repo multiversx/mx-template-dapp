@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { contractAddress } from 'config';
+import pingPongAbi from 'contracts/ping-pong.abi.json';
 import {
   AbiRegistry,
   Address,
@@ -21,8 +21,7 @@ export const useGetTimeToPong = () => {
     }
 
     try {
-      const response = await axios.get('src/contracts/ping-pong.abi.json');
-      const abi = AbiRegistry.create(response.data);
+      const abi = AbiRegistry.create(pingPongAbi);
 
       const scController = new SmartContractController({
         chainID: network.chainId,
