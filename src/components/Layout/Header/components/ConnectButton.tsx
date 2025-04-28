@@ -1,42 +1,35 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from 'components';
-import { ExtendedProviders } from 'initConfig';
-import {
-  IProviderFactory,
-  MvxUnlockButton,
-  MvxUnlockPanel,
-  ProviderFactory
-} from 'lib';
+import { UnlockPanelManager } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
-const SHOW_ADVANCED_LOGIN_METHOD = true;
-
 export const ConnectButton = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-
-  const handleLogin = async ({ type, anchor }: IProviderFactory) => {
-    const provider = await ProviderFactory.create({
-      type,
-      anchor
-    });
-    await provider?.login();
+  const unlockPanelInstance = UnlockPanelManager.init(() => {
     navigate(RouteNamesEnum.dashboard);
-  };
+  });
+
+  // const handleLogin = async ({ type, anchor }: IProviderFactory) => {
+  //   const provider = await ProviderFactory.create({
+  //     type,
+  //     anchor
+  //   });
+  //   await provider?.login();
+  //   navigate(RouteNamesEnum.dashboard);
+  // };
 
   const handleOpenUnlockPanel = () => {
-    setIsOpen(true);
+    unlockPanelInstance.openUnlockPanel();
   };
 
-  const handleCloseUnlockPanel = () => {
-    setIsOpen(false);
-  };
+  // const handleCloseUnlockPanel = () => {
+  //   setIsOpen(false);
+  // };
 
   return (
     <>
       <Button onClick={handleOpenUnlockPanel}>Connect</Button>
-      <MvxUnlockPanel
+      {/* <MvxUnlockPanel
         isOpen={isOpen}
         onLogin={({ detail }) =>
           handleLogin({
@@ -59,7 +52,7 @@ export const ConnectButton = () => {
             />
           )
         }
-      </MvxUnlockPanel>
+      </MvxUnlockPanel> */}
     </>
   );
 };
