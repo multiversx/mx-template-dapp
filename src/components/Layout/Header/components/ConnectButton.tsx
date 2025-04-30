@@ -6,7 +6,7 @@ import { RouteNamesEnum } from 'localConstants';
 export const ConnectButton = () => {
   const navigate = useNavigate();
   const unlockPanelManager = UnlockPanelManager.init({
-    loginCallback: () => {
+    loginHandler: () => {
       navigate(RouteNamesEnum.dashboard);
     }
   });
