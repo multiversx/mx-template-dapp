@@ -3,6 +3,5 @@ export {
   MvxExplorerLink,
   MvxFormatAmount,
   MvxTransactionsTable,
-  MvxUnlockButton,
-  MvxUnlockPanel
+  MvxUnlockButton
 } from '@multiversx/sdk-dapp-core-ui/react';
