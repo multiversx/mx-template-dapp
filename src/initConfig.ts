@@ -22,9 +22,9 @@ const DEFAULT_TOAST_LIEFTIME = 5000;
 
 const providers: ICustomProvider<ProviderTypeEnum>[] = [
   {
-    name: ADDITIONAL_PROVIDERS.inMemoryProvider,
+    name: 'In Memory Provider',
     type: ExtendedProviders.inMemoryProvider,
-    icon: '',
+    iconUrl: 'https://www.svgrepo.com/show/30601/wallet.svg',
     constructor: async (_address?: string) => new InMemoryProvider()
   }
 ];
