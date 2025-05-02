@@ -24,7 +24,7 @@ const providers: ICustomProvider<ProviderTypeEnum>[] = [
   {
     name: 'In Memory Provider',
     type: ExtendedProviders.inMemoryProvider,
-    iconUrl: 'https://www.svgrepo.com/show/30601/wallet.svg',
+    iconUrl: `${window.location.origin}/multiversx-white.svg`,
     constructor: async (_address?: string) => new InMemoryProvider()
   }
 ];
