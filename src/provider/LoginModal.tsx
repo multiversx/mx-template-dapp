@@ -180,8 +180,6 @@ export class LoginModal {
         resolve({ privateKey: '', address: '' });
       };
 
-      console.log('anchor', options?.anchor);
-
       root.render(
         <Modal
           onSubmit={handleSubmit}
