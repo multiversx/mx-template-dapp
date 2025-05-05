@@ -10,7 +10,7 @@
     "@fortawesome/free-solid-svg-icons": "6.5.1",
     "@fortawesome/react-fontawesome": "0.2.0",
     "@multiversx/sdk-core": "^14.x",
-    "@multiversx/sdk-dapp-core": "0.0.0-alpha.19",
+    "@multiversx/sdk-dapp-core": "0.0.0-alpha.20",
     "@multiversx/sdk-dapp-core-ui": "0.0.0-alpha.13",
     "@multiversx/sdk-dapp-utils": "2.0.0",
     "@tailwindcss/postcss": "4.0.15",
