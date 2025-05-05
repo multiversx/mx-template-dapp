@@ -24,8 +24,8 @@ const providers: ICustomProvider<ProviderTypeEnum>[] = [
   {
     name: ADDITIONAL_PROVIDERS.inMemoryProvider,
     type: ExtendedProviders.inMemoryProvider,
-    icon: '',
-    constructor: async (_address?: string) => new InMemoryProvider()
+    iconUrl: '',
+    constructor: async (options) => new InMemoryProvider(options)
   }
 ];
 

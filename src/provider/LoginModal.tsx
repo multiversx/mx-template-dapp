@@ -31,6 +31,7 @@ const modalStyles = {
   input: {
     padding: '8px',
     marginTop: '5px',
+    backgroundColor: '#FFF',
     width: '100%',
     borderRadius: '4px',
     border: '1px solid #ccc'
@@ -40,6 +41,32 @@ const modalStyles = {
     gap: '10px',
     justifyContent: 'flex-end',
     marginTop: '15px'
+  },
+  button: {
+    backgroundColor: '#2563eb',
+    color: 'white',
+    padding: '8px 16px',
+    borderRadius: '8px',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '14px',
+    fontWeight: '500',
+    ':hover': {
+      backgroundColor: '#1d4ed8'
+    }
+  }
+};
+
+const containerStyles = {
+  ...modalStyles,
+  overlay: {
+    position: 'relative' as const
+  },
+  modal: {
+    padding: modalStyles.modal.padding,
+    borderRadius: '8px',
+    width: '100%',
+    maxWidth: '100%'
   }
 };
 
@@ -47,9 +74,11 @@ interface ModalProps {
   onSubmit: (values: { privateKey: string; address: string }) => void;
   onClose: () => void;
   needsAddress?: boolean;
+  anchor?: HTMLElement;
 }
 
-const Modal = ({ onSubmit, onClose, needsAddress }: ModalProps) => {
+const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
+  const styles = anchor ? containerStyles : modalStyles;
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -65,18 +94,19 @@ const Modal = ({ onSubmit, onClose, needsAddress }: ModalProps) => {
   };
 
   return createPortal(
-    <div style={modalStyles.overlay}>
-      <div style={modalStyles.modal}>
+    <div style={styles.overlay}>
+      <div style={styles.modal}>
         <h2>Authenticate</h2>
-        <form onSubmit={handleSubmit} style={modalStyles.form}>
+        <form onSubmit={handleSubmit} style={styles.form}>
           {needsAddress && (
             <div>
               <label>
                 Address
                 <input
-                  style={modalStyles.input}
+                  style={styles.input}
                   type='text'
                   name='address'
+                  placeholder='Public key'
                   autoFocus
                   required
                 />
@@ -87,32 +117,37 @@ const Modal = ({ onSubmit, onClose, needsAddress }: ModalProps) => {
             <label>
               Private Key
               <input
-                style={modalStyles.input}
+                style={styles.input}
                 type='text'
                 name='privateKey'
+                placeholder='Private key'
                 autoFocus={!needsAddress}
                 required
               />
             </label>
           </div>
-          <div style={modalStyles.buttonGroup}>
-            <Button onClick={onClose}>Cancel</Button>
-            <Button type='submit'>Submit</Button>
+          <div style={styles.buttonGroup}>
+            <Button onClick={onClose} {...{ style: styles.button }}>
+              Cancel
+            </Button>
+            <Button type='submit' {...{ style: styles.button }}>
+              Submit
+            </Button>
           </div>
         </form>
       </div>
     </div>,
-    document.body
+    anchor || document.body
   );
 };
 
 export class LoginModal {
   private static instance: LoginModal;
-  private modalRoot: HTMLDivElement;
+  private _modalRoot: HTMLDivElement;
 
   private constructor() {
-    this.modalRoot = document.createElement('div');
-    document.body.appendChild(this.modalRoot);
+    this._modalRoot = document.createElement('div');
+    document.body.appendChild(this._modalRoot);
   }
 
   public static getInstance(): LoginModal {
@@ -122,12 +157,15 @@ export class LoginModal {
     return LoginModal.instance;
   }
 
-  public showModal(options?: { needsAddress: boolean }): Promise<{
+  public showModal(options?: {
+    needsAddress: boolean;
+    anchor?: HTMLElement;
+  }): Promise<{
     privateKey: string;
     address: string;
   }> {
     return new Promise((resolve) => {
-      const root = createRoot(this.modalRoot);
+      const root = createRoot(this._modalRoot);
 
       const handleSubmit = (values: {
         privateKey: string;
@@ -142,11 +180,14 @@ export class LoginModal {
         resolve({ privateKey: '', address: '' });
       };
 
+      console.log('anchor', options?.anchor);
+
       root.render(
         <Modal
           onSubmit={handleSubmit}
           onClose={handleClose}
           needsAddress={options?.needsAddress}
+          anchor={options?.anchor}
         />
       );
     });
