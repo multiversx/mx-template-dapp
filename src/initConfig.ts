@@ -25,7 +25,7 @@ const providers: ICustomProvider<ProviderTypeEnum>[] = [
     name: 'In Memory Provider',
     type: ExtendedProviders.inMemoryProvider,
     iconUrl: `${window.location.origin}/multiversx-white.svg`,
-    constructor: async (_address?: string) => new InMemoryProvider()
+    constructor: async (options) => new InMemoryProvider(options)
   }
 ];
 

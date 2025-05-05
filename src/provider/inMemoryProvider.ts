@@ -6,6 +6,7 @@ import {
   MessageComputer,
   signTransactions,
   Transaction,
+  TransactionComputer,
   UserSecretKey,
   UserSigner
 } from 'lib';
@@ -19,14 +20,16 @@ let privateKey = '';
 
 export class InMemoryProvider implements IProvider {
   private modal = LoginModal.getInstance();
+  private _anchor?: HTMLElement;
   private _account: IDAppProviderAccount = {
     address: ''
   };
 
-  constructor(address?: string) {
-    if (address) {
+  constructor(options?: { address?: string; anchor?: HTMLElement }) {
+    this._anchor = options?.anchor;
+    if (options?.address) {
       this.setAccount({
-        address
+        address: options.address
       });
     }
   }
@@ -66,8 +69,11 @@ export class InMemoryProvider implements IProvider {
   async signTransaction(transaction: Transaction) {
     const _privateKey = await this._getPrivateKey('signTransaction');
     const signer = new UserSigner(UserSecretKey.fromString(_privateKey));
-    const signature = await signer.sign(transaction.serializeForSigning());
-    transaction.applySignature(new Uint8Array(signature));
+    const transactionComputer = new TransactionComputer();
+    const bytesToSign = transactionComputer.computeBytesForSigning(transaction);
+    const signature = await signer.sign(bytesToSign);
+    transaction.signature = new Uint8Array(signature);
+
     return transaction;
   }
 
@@ -98,7 +104,8 @@ export class InMemoryProvider implements IProvider {
     return new Promise(async (resolve, reject) => {
       const { address, privateKey: userPrivateKey } =
         await this.modal.showModal({
-          needsAddress: true
+          needsAddress: true,
+          anchor: this._anchor
         });
 
       if (!address || !userPrivateKey) {
