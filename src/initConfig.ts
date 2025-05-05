@@ -22,9 +22,9 @@ const DEFAULT_TOAST_LIEFTIME = 5000;
 
 const providers: ICustomProvider<ProviderTypeEnum>[] = [
   {
-    name: ADDITIONAL_PROVIDERS.inMemoryProvider,
+    name: 'In Memory Provider',
     type: ExtendedProviders.inMemoryProvider,
-    iconUrl: '',
+    iconUrl: `${window.location.origin}/multiversx-white.svg`,
     constructor: async (options) => new InMemoryProvider(options)
   }
 ];
