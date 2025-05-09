@@ -1,7 +1,6 @@
+import BigNumber from 'bignumber.js';
 import {
   Address,
-  Token,
-  TokenTransfer,
   Transaction,
   TransactionsFactoryConfig,
   TransferTransactionsFactory
@@ -20,17 +19,14 @@ export const getBatchTransactions = ({
   const factory = new TransferTransactionsFactory({ config: factoryConfig });
 
   return transactions.map((id) => {
-    const tokenTransfer = new TokenTransfer({
-      token: new Token({ identifier: 'WEGLD-d7c6bb' }),
-      amount: BigInt(id + 1)
-    });
-
-    return factory.createTransactionForESDTTokenTransfer(
+    const tokenTransfer = factory.createTransactionForNativeTokenTransfer(
       Address.newFromBech32(address),
       {
         receiver: Address.newFromBech32(address),
-        tokenTransfers: [tokenTransfer]
+        nativeAmount: BigInt(new BigNumber(id).plus(1).shiftedBy(18).toFixed())
       }
     );
+
+    return tokenTransfer;
   });
 };
