@@ -18,14 +18,14 @@ import { useGetPingAmount, useGetTimeToPong } from './hooks';
 export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
 
-  const { sendPingTransaction, sendPongTransaction, multiTx } =
+  const { sendPingTransaction, sendPongTransaction } =
     useSendPingPongTransaction();
 
   const transactions = useGetPendingTransactions();
   const hasPendingTransactions = transactions.length > 0;
   const pingAmount = useGetPingAmount();
 
-  const [hasPing, setHasPing] = useState<boolean>(true);
+  const [hasPing, setHasPing] = useState(true);
   const [secondsLeft, setSecondsLeft] = useState<number>(0);
 
   const setSecondsRemaining = async () => {
@@ -65,16 +65,6 @@ export const PingPongRaw = () => {
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
         <div className='flex justify-start gap-2'>
-          <Button
-            disabled={!hasPing || hasPendingTransactions}
-            onClick={multiTx}
-            data-testid='btnPingRaw'
-            data-cy='transactionBtn'
-          >
-            <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
-            Multi Transfer
-          </Button>
-
           <Button
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
