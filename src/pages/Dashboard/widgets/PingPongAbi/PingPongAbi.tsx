@@ -23,7 +23,7 @@ export const PingPongAbi = () => {
     useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
 
-  const [hasPing, setHasPing] = useState<boolean>(true);
+  const [hasPing, setHasPing] = useState(true);
   const [secondsLeft, setSecondsLeft] = useState<number>(0);
 
   const setSecondsRemaining = async () => {
