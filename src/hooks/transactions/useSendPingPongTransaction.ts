@@ -4,7 +4,6 @@ import { signAndSendTransactions } from 'helpers';
 import {
   AbiRegistry,
   Address,
-  GAS_LIMIT,
   GAS_PRICE,
   SmartContractTransactionsFactory,
   Transaction,
@@ -46,8 +45,8 @@ export const useSendPingPongTransaction = () => {
     const pingTransaction = new Transaction({
       value: BigInt(amount),
       data: Buffer.from('ping'),
-      receiver: new Address(address),
-      gasLimit: BigInt(10 * GAS_LIMIT),
+      receiver: new Address(contractAddress),
+      gasLimit: BigInt(6000000),
       gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
       sender: new Address(address),
@@ -65,7 +64,7 @@ export const useSendPingPongTransaction = () => {
     const pingTransaction = scFactory.createTransactionForExecute(
       new Address(address),
       {
-        gasLimit: BigInt(60000000),
+        gasLimit: BigInt(6000000),
         function: 'ping',
         contract: new Address(contractAddress),
         nativeTransferAmount: BigInt(amount)
@@ -94,7 +93,7 @@ export const useSendPingPongTransaction = () => {
       value: BigInt(0),
       data: Buffer.from('pong'),
       receiver: new Address(contractAddress),
-      gasLimit: BigInt(GAS_LIMIT),
+      gasLimit: BigInt(6000000),
       gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
       sender: new Address(address),
@@ -107,48 +106,12 @@ export const useSendPingPongTransaction = () => {
     });
   };
 
-  //FIXME: to be removed
-  const multiTx = async () => {
-    const transaction = new Transaction({
-      value: BigInt(1),
-      data: Buffer.from('d3JhcEVnbGQ='),
-      receiver: new Address(
-        'erd1qqqqqqqqqqqqqpgqqkwzsxkjc83vlfex9dmznwm7tjvxlqqkpauqx0n782'
-      ),
-      gasLimit: BigInt(100000000),
-      gasPrice: BigInt(1000000000),
-      chainID: network.chainId,
-      sender: new Address(address),
-      version: 2
-    });
-
-    const secondTransaction = new Transaction({
-      value: BigInt(0),
-      data: Buffer.from(
-        'TXVsdGlFU0RUTkZUVHJhbnNmZXJAMDAwMDAwMDAwMDAwMDAwMDA1MDAxMzllZDdhZTRhYTAzNzkyZTZiY2IzMzIzOTRhNDBmZTc0NmVlZmE0N2NlYkAwMkA1NzQ1NDc0YzQ0MmQ2MTMyMzg2MzM1MzlAQDhhYzcyMzA0ODllODAwMDBANGQ0NTU4MmQ2MTM2MzUzOTY0MzBAQDA3YmM1ZDZlMzEzNDdlYTdmMTExMWRANjE2NDY0NGM2OTcxNzU2OTY0Njk3NDc5QDg5NjNkZDhjMmM1ZTAwMDBAMDdhODhmYjIzNWQ1M2ZmMzBmZWZhOQ=='
-      ),
-      receiver: new Address(address),
-      gasLimit: BigInt(4200000),
-      gasPrice: BigInt(1000000000),
-      chainID: network.chainId,
-      sender: new Address(address),
-      version: 2
-    });
-
-    const sessionId = await signAndSendTransactions({
-      transactions: [transaction, secondTransaction],
-      transactionsDisplayInfo: PONG_TRANSACTION_INFO
-    });
-
-    return sessionId;
-  };
-
   const sendPongTransactionFromAbi = async () => {
     const scFactory = await getSmartContractFactory();
     const pongTransaction = scFactory.createTransactionForExecute(
       new Address(address),
       {
-        gasLimit: BigInt(60000000),
+        gasLimit: BigInt(6000000),
         function: 'pong',
         contract: new Address(contractAddress),
         nativeTransferAmount: BigInt(0)
@@ -180,7 +143,6 @@ export const useSendPingPongTransaction = () => {
     sendPongTransaction,
     sendPongTransactionFromAbi,
     sendPingTransactionFromService,
-    sendPongTransactionFromService,
-    multiTx
+    sendPongTransactionFromService
   };
 };

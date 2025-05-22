@@ -1,5 +1,4 @@
 import { contractAddress } from 'config';
-import { useScrollToElement } from 'hooks';
 import { WidgetType } from 'types/widget.types';
 import { Widget } from './components';
 import {
@@ -82,8 +81,6 @@ const WIDGETS: WidgetType[] = [
 ];
 
 export const Dashboard = () => {
-  useScrollToElement();
-
   return (
     <div className='flex flex-col gap-6 max-w-3xl w-full'>
       {WIDGETS.map((element) => (
