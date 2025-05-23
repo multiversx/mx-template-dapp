@@ -1,14 +1,13 @@
 import axios from 'axios';
 import { API_URL } from 'config';
 import { Transaction, useGetLoginInfo } from 'lib';
-import { PingPongServiceTransactionType } from '../types';
 
 export const useGetPingTransaction = () => {
   const { tokenLogin } = useGetLoginInfo();
 
   return async () => {
     try {
-      const response = await axios.post<PingPongServiceTransactionType>(
+      const { data } = await axios.post(
         '/ping-pong/abi/ping',
         {},
         {
@@ -19,7 +18,7 @@ export const useGetPingTransaction = () => {
         }
       );
 
-      const pingTransaction = Transaction.newFromPlainObject(response.data);
+      const pingTransaction = Transaction.newFromPlainObject(data);
 
       return pingTransaction;
     } catch (err) {
