@@ -6,8 +6,8 @@ It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/pack
 See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
 
 ### Tests
-[![E2E tests](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml)
 
+[![E2E tests](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml)
 
 ## Requirements
 
@@ -33,9 +33,9 @@ yarn install
 In the project folder run:
 
 ```bash
-yarn start:devnet
-yarn start:testnet
-yarn start:mainnet
+yarn start-devnet
+yarn start-testnet
+yarn start-mainnet
 ```
 
 This will start the React app in development mode, using the configs found in the `vite.config.ts` file.
@@ -44,10 +44,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-> **Note:** 
-While in development, to test the passkeys provider use the following command:
-`open -a Google\ Chrome --args --ignore-certificate-errors --ignore-urlfetcher-cert-requests`
-Make sure to close all instances of Chrome after the development session.
+> **Note:**
+> While in development, to test the passkeys provider use the following command:
+> `open -a Google\ Chrome --args --ignore-certificate-errors --ignore-urlfetcher-cert-requests`
+> Make sure to close all instances of Chrome after the development session.
 
 ### Step 3. Build for testing and production use
 
@@ -55,9 +55,9 @@ A build of the app is necessary to deploy for testing purposes or for production
 To build the project run:
 
 ```bash
-yarn build:devnet
-yarn build:testnet
-yarn build:mainnet
+yarn build-devnet
+yarn build-testnet
+yarn build-mainnet
 ```
 
 ## Roadmap
@@ -75,4 +75,3 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
