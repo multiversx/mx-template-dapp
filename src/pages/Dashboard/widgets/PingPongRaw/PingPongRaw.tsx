@@ -26,7 +26,7 @@ export const PingPongRaw = () => {
   const pingAmount = useGetPingAmount();
 
   const [hasPing, setHasPing] = useState(true);
-  const [secondsLeft, setSecondsLeft] = useState<number>(0);
+  const [secondsLeft, setSecondsLeft] = useState(0);
 
   const setSecondsRemaining = async () => {
     const secondsRemaining = await getTimeToPong();
@@ -61,6 +61,7 @@ export const PingPongRaw = () => {
     setSecondsRemaining();
   }, [hasPendingTransactions]);
 
+  console.log({ pongAllowed, hasPing, hasPendingTransactions });
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
