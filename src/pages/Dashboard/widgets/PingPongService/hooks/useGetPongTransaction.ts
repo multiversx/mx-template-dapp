@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API_URL } from 'config';
-import { Address, Transaction, useGetLoginInfo } from 'lib';
+import { Transaction, useGetLoginInfo } from 'lib';
 import { PingPongServiceTransactionType } from '../types';
 
 export const useGetPongTransaction = () => {
@@ -19,27 +19,7 @@ export const useGetPongTransaction = () => {
         }
       );
 
-      const {
-        data,
-        gasLimit,
-        gasPrice,
-        value,
-        nonce,
-        receiver,
-        sender,
-        ...rest
-      } = response.data;
-
-      const pongTransaction = new Transaction({
-        data: Uint8Array.from(Buffer.from(data)),
-        gasLimit: BigInt(gasLimit),
-        gasPrice: BigInt(gasPrice),
-        value: BigInt(value),
-        nonce: BigInt(nonce),
-        receiver: new Address(receiver),
-        sender: new Address(sender),
-        ...rest
-      });
+      const pongTransaction = Transaction.newFromPlainObject(response.data);
 
       return pongTransaction;
     } catch (err) {
