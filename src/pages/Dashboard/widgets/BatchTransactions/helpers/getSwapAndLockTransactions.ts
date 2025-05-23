@@ -19,7 +19,7 @@ export const getSwapAndLockTransactions = ({
       sender: Address.newFromBech32(address),
       value: BigInt('1000000000000000000'),
       version: VERSION,
-      data: Buffer.from(BATCH_TRANSACTIONS_SC.egld_wEGLD.data)
+      data: Uint8Array.from(Buffer.from(BATCH_TRANSACTIONS_SC.egld_wEGLD.data))
     }),
     new Transaction({
       chainID,
@@ -32,7 +32,7 @@ export const getSwapAndLockTransactions = ({
       sender: Address.newFromBech32(address),
       value: BigInt('0'),
       version: VERSION,
-      data: Buffer.from(BATCH_TRANSACTIONS_SC.wEGLD_USDC.data)
+      data: Uint8Array.from(Buffer.from(BATCH_TRANSACTIONS_SC.wEGLD_USDC.data))
     }),
     new Transaction({
       chainID,
@@ -43,7 +43,7 @@ export const getSwapAndLockTransactions = ({
       sender: Address.newFromBech32(address),
       value: BigInt('0'),
       version: VERSION,
-      data: Buffer.from(BATCH_TRANSACTIONS_SC.wEGLD_MEX.data)
+      data: Uint8Array.from(Buffer.from(BATCH_TRANSACTIONS_SC.wEGLD_MEX.data))
     }),
     new Transaction({
       chainID,
@@ -54,7 +54,7 @@ export const getSwapAndLockTransactions = ({
       sender: Address.newFromBech32(address),
       value: BigInt('0'),
       version: VERSION,
-      data: Buffer.from(BATCH_TRANSACTIONS_SC.lock_MEX.data)
+      data: Uint8Array.from(Buffer.from(BATCH_TRANSACTIONS_SC.lock_MEX.data))
     })
   ];
 };
