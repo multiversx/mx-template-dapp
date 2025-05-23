@@ -1,15 +1,14 @@
-export type { AccountType } from '@multiversx/sdk-dapp/types/account.types';
-export {
-  EnvironmentsEnum,
-  LoginMethodsEnum,
-  SignedMessageStatusesEnum
-} from '@multiversx/sdk-dapp/types/enums.types';
+export type { AccountType } from '@multiversx/sdk-dapp/out/types/account.types';
+export { EnvironmentsEnum } from '@multiversx/sdk-dapp/out/types/enums.types';
+export type { FormatAmountControllerPropsType } from '@multiversx/sdk-dapp/out/controllers/FormatAmountController/types';
+export type { ICustomProvider } from '@multiversx/sdk-dapp/out/core/providers/types/providerFactory.types';
+export type { IProvider } from '@multiversx/sdk-dapp/out/core/providers/types/providerFactory.types';
+export type { IProviderFactory } from '@multiversx/sdk-dapp/out/core/providers/types/providerFactory.types';
+export type { InitAppType } from '@multiversx/sdk-dapp/out/core/methods/initApp/initApp.types';
 export type {
-  RawTransactionType,
-  SignedTransactionType,
-  TransactionsDisplayInfoType
-} from '@multiversx/sdk-dapp/types/transactions.types';
-export type { RouteType } from '@multiversx/sdk-dapp/types/index';
-export type { ServerTransactionType } from '@multiversx/sdk-dapp/types/serverTransactions.types';
-export { TransactionBatchStatusesEnum } from '@multiversx/sdk-dapp/types/enums.types';
-export type { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+  InterpretedTransactionType,
+  ServerTransactionType
+} from '@multiversx/sdk-dapp/out/types/serverTransactions.types';
+export { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/core/providers/types/providerFactory.types';
+export type { SignedTransactionType } from '@multiversx/sdk-dapp/out/types/transactions.types';
+export type { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp/out/types/transactions.types';

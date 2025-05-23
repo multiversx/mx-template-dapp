@@ -1,47 +1,20 @@
-import { useMatch } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, MxLink } from 'components';
 import { environment } from 'config';
-import { logout, useGetIsLoggedIn } from 'lib';
+import { getAccountProvider, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
-
-const callbackUrl = `${window.location.origin}/unlock`;
-const onRedirect = undefined; // use this to redirect with useNavigate to a specific page after logout
-const shouldAttemptReLogin = false; // use for special cases where you want to re-login after logout
-const options = {
-  /*
-   * @param {boolean} [shouldBroadcastLogoutAcrossTabs=true]
-   * @description If your dApp supports multiple accounts on multiple tabs,
-   * this param will broadcast the logout event across all tabs.
-   */
-  shouldBroadcastLogoutAcrossTabs: true,
-  /*
-   * @param {boolean} [hasConsentPopup=false]
-   * @description Set it to true if you want to perform async calls before logging out on Safari.
-   * It will open a consent popup for the user to confirm the action before leaving the page.
-   */
-  hasConsentPopup: false
-};
+import { ConnectButton } from './components';
+import { NotificationsButton } from './components/NotificationsButton';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
-  const isUnlockRoute = Boolean(useMatch(RouteNamesEnum.unlock));
+  const navigate = useNavigate();
+  const provider = getAccountProvider();
 
-  const ConnectButton = isUnlockRoute ? null : (
-    <MxLink to={RouteNamesEnum.unlock}>Connect</MxLink>
-  );
-
-  const handleLogout = () => {
-    sessionStorage.clear();
-    logout(
-      callbackUrl,
-      /*
-       * following are optional params. Feel free to remove them in your implementation
-       */
-      onRedirect,
-      shouldAttemptReLogin,
-      options
-    );
+  const handleLogout = async () => {
+    await provider.logout();
+    navigate(RouteNamesEnum.home);
   };
 
   return (
@@ -60,16 +33,19 @@ export const Header = () => {
             <p className='text-gray-600'>{environment}</p>
           </div>
 
-          {isLoggedIn ? (
-            <Button
-              onClick={handleLogout}
-              className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
-            >
-              Close
-            </Button>
-          ) : (
-            ConnectButton
+          {isLoggedIn && (
+            <>
+              <NotificationsButton />
+              <Button
+                onClick={handleLogout}
+                className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 text-gray-600 hover:bg-slate-100 mx-0'
+              >
+                Close
+              </Button>
+            </>
           )}
+
+          {!isLoggedIn && <ConnectButton />}
         </div>
       </nav>
     </header>

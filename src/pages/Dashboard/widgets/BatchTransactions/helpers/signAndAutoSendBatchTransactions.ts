@@ -1,47 +1,42 @@
-import { refreshAccount, sendBatchTransactions } from 'lib';
-import { isSafari, SessionEnum } from 'localConstants/session';
-import { getBatchTransactions } from '../helpers';
-import { SendTransactionProps } from '../types';
+import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
+import { TransactionProps } from 'types';
+import { getBatchTransactions } from './getBatchTransactions';
+import { transactionsHandler } from './transactionsHandler';
 
-// this process will not go through useSendSignedTransactions
-// it will automatically sign and send transactions
 export const signAndAutoSendBatchTransactions = async ({
   address,
   nonce,
   chainID,
-  callbackRoute
-}: SendTransactionProps) => {
+  transactionsDisplayInfo = {
+    processingMessage: 'Processing transactions',
+    errorMessage: 'An error has occurred during transaction execution',
+    successMessage: 'Batch transactions successful'
+  }
+}: TransactionProps & {
+  transactionsDisplayInfo?: TransactionsDisplayInfoType;
+}) => {
+  const provider = getAccountProvider();
+
   const transactions = getBatchTransactions({
     address,
     nonce,
     chainID
   });
 
+  const signedTransactions = await provider.signTransactions(transactions);
+
   const groupedTransactions = [
-    [transactions[0]],
-    [transactions[1], transactions[2]],
-    [transactions[3], transactions[4]]
+    [signedTransactions[0]],
+    [signedTransactions[1], signedTransactions[2]],
+    [signedTransactions[3], signedTransactions[4]]
   ];
 
-  await refreshAccount();
-
-  const { batchId, error } = await sendBatchTransactions({
+  const { sentTransactions, sessionId } = await transactionsHandler({
     transactions: groupedTransactions,
-    customTransactionInformation: { redirectAfterSign: true },
-    transactionsDisplayInfo: {
-      processingMessage: 'Processing transactions',
-      errorMessage: 'An error has occurred during transaction execution',
-      successMessage: 'Batch transactions successful'
-    },
-    callbackRoute,
-    hasConsentPopup: isSafari
+    options: {
+      transactionsDisplayInfo
+    }
   });
-  if (error) {
-    console.error('Could not execute transactions', error);
-    return {};
-  }
 
-  sessionStorage.setItem(SessionEnum.batchId, batchId);
-
-  return { batchId };
+  return { sentTransactions, sessionId };
 };

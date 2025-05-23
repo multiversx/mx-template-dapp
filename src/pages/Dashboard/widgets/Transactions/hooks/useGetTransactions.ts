@@ -34,6 +34,7 @@ export const useGetTransactions = (payload?: TransactionsPropsType) => {
       const interpretedTransactions = data.map((transaction) =>
         getInterpretedTransaction({ transaction, address, explorerAddress })
       );
+
       setTransactions(interpretedTransactions);
     } catch (error) {
       console.error('Failed to fetch transactions', error);

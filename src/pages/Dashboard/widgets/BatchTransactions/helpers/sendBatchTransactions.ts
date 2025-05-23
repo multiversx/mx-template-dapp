@@ -1,38 +1,32 @@
-import { sendTransactions } from 'lib/sdkDapp/sdkDapp.helpers';
-import { isSafari, SessionEnum } from 'localConstants/session';
-import { getBatchTransactions } from '../helpers';
-import { SendTransactionProps } from '../types';
+import { getAccountProvider } from 'lib';
+import { TransactionProps } from 'types';
+import { getBatchTransactions } from './getBatchTransactions';
+import { transactionsHandler } from './transactionsHandler';
 
 export const sendBatchTransactions = async ({
   address,
   chainID,
-  nonce,
-  callbackRoute
-}: SendTransactionProps) => {
-  const transactions = getBatchTransactions({
+  nonce
+}: TransactionProps) => {
+  const provider = getAccountProvider();
+
+  const transactionsToSign = getBatchTransactions({
     address,
     chainID,
     nonce
   });
 
-  const { sessionId, error } = await sendTransactions({
-    transactions,
-    signWithoutSending: true,
-    customTransactionInformation: { redirectAfterSign: true },
-    callbackRoute,
-    hasConsentPopup: isSafari
+  const transactions = await provider.signTransactions(transactionsToSign);
+
+  const groupedTransactions = [
+    [transactions[0]],
+    [transactions[1], transactions[2]],
+    [transactions[3], transactions[4]]
+  ];
+
+  const { sentTransactions, sessionId } = await transactionsHandler({
+    transactions: groupedTransactions
   });
 
-  if (error) {
-    console.error('Could not execute transactions', error);
-    return {};
-  }
-
-  const newBatchSessionId = Date.now().toString();
-  // sdk-dapp by default takes the last session id from sdk-dapp’s redux store on page refresh
-  // in order to differentiate the transactions between widgets, a persistence of sessionId is needed
-  sessionStorage.setItem(SessionEnum.batchSessionId, newBatchSessionId);
-  sessionStorage.setItem(SessionEnum.signedSessionId, sessionId);
-
-  return { newBatchSessionId, sessionId };
+  return { sentTransactions, sessionId };
 };

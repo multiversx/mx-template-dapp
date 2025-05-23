@@ -1,30 +1,27 @@
-import { refreshAccount, sendTransactions } from 'lib';
-import { isSafari } from 'localConstants';
-import { Transaction, TransactionsDisplayInfoType } from 'types';
+import {
+  getAccountProvider,
+  Transaction,
+  TransactionManager,
+  TransactionsDisplayInfoType
+} from 'lib';
 
 type SignAndSendTransactionsProps = {
   transactions: Transaction[];
-  callbackRoute: string;
-  transactionsDisplayInfo: TransactionsDisplayInfoType;
+  transactionsDisplayInfo?: TransactionsDisplayInfoType;
 };
 
 export const signAndSendTransactions = async ({
   transactions,
-  callbackRoute,
   transactionsDisplayInfo
 }: SignAndSendTransactionsProps) => {
-  await refreshAccount();
+  const provider = getAccountProvider();
+  const txManager = TransactionManager.getInstance();
 
-  const { sessionId } = await sendTransactions({
-    transactions,
-    transactionsDisplayInfo,
-    redirectAfterSign: false,
-    callbackRoute,
-    // NOTE: performing async calls (eg: `await refreshAccount()`) before opening a new tab
-    // can cause the new tab to be blocked by Safari's popup blocker.
-    // To support this feature, we can set `hasConsentPopup` to `true`
-    hasConsentPopup: isSafari
+  const signedTransactions = await provider.signTransactions(transactions);
+  const sentTransactions = await txManager.send(signedTransactions);
+  const sessionId = await txManager.track(sentTransactions, {
+    transactionsDisplayInfo
   });
 
-  return sessionId;
+  return { sentTransactions, sessionId };
 };
