@@ -1,11 +1,11 @@
 import {
   AbiRegistry,
+  SmartContractTransactionsFactory,
   TransactionsFactoryConfig
 } from '@multiversx/sdk-core/out';
-import { SmartContractTransactionsFactory } from '@multiversx/sdk-core/out';
-import axios from 'axios';
 import { useCallback, useState } from 'react';
 import { contractAddress } from 'config';
+import pingPongAbi from 'contracts/ping-pong.abi.json';
 import { signAndSendTransactions } from 'helpers/signAndSendTransactions';
 import {
   Address,
@@ -94,8 +94,7 @@ export const useSendPingPongTransaction = ({
   );
 
   const getSmartContractFactory = async () => {
-    const response = await axios.get('src/contracts/ping-pong.abi.json');
-    const abi = AbiRegistry.create(response.data);
+    const abi = AbiRegistry.create(pingPongAbi);
     const scFactory = new SmartContractTransactionsFactory({
       config: new TransactionsFactoryConfig({
         chainID: network.chainId
