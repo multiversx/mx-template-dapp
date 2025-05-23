@@ -74,7 +74,7 @@ const WIDGETS: WidgetType[] = [
     widget: Transactions,
     description: 'List transactions for the connected account',
     reference:
-      'https://api.elrond.com/#/accounts/AccountController_getAccountTransactions'
+      'https://api.multiversx.com/#/accounts/AccountController_getAccountTransactions'
   },
   {
     title: 'Transactions (Ping & Pong)',
@@ -82,7 +82,7 @@ const WIDGETS: WidgetType[] = [
     props: { receiver: contractAddress },
     description: 'List transactions filtered for a given Smart Contract',
     reference:
-      'https://api.elrond.com/#/accounts/AccountController_getAccountTransactions'
+      'https://api.multiversx.com/#/accounts/AccountController_getAccountTransactions'
   }
 ];
 

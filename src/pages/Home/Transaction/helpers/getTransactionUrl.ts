@@ -1,4 +1,4 @@
-import { TokenTransfer, WALLET_PROVIDER_SEND_TRANSACTION_URL } from 'lib';
+import { parseAmount, WALLET_PROVIDER_SEND_TRANSACTION_URL } from 'lib';
 
 /**
  * For documentation, check out {@link https://docs.multiversx.com/wallet/webhooks#send-transaction-hook send transaciton hook}
@@ -9,7 +9,7 @@ export const getTransactionUrl = (walletAddress: string) => {
   const receiver =
     'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag'; // add your receiver address here
   const data = 'Hello_world';
-  const value = TokenTransfer.egldFromAmount('0.01').toString();
+  const value = parseAmount('0.01');
   const callbackUrl = encodeURIComponent(window.location.origin);
   const gasLimit = '116500'; // Minimum gasLimit for guarded wallets
 

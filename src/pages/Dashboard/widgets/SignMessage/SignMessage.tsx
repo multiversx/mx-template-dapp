@@ -91,9 +91,7 @@ export const SignMessage = ({ callbackRoute }: WidgetProps) => {
           />
         )}
 
-        {isSuccess && (
-          <SignSuccess messageToSign={messageSession?.message ?? ''} />
-        )}
+        {isSuccess && <SignSuccess />}
 
         {isError && <SignFailure />}
       </OutputContainer>
