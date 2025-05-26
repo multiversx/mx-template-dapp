@@ -1083,7 +1083,22 @@
     axios "^1.7.4"
     bip39 "3.1.0"
 
-"@multiversx/sdk-dapp-ui@>=0.0.0", "@multiversx/sdk-dapp-ui@^0.x":
+"@multiversx/sdk-dapp-ui@>=0.0.4":
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.4.tgz#ca9afc762a32865a7fa6316f7b50d9a0937b0714"
+  integrity sha512-8Zp/VYmBtsYOam3Z8SgKupzb1USA4WNAiOoEVjhGThCOO7nLoK6Y+W0xWSUMN0wVOqMzdxjS69iSIR3U2ZdRHA==
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" ">= 6.7.2"
+    "@fortawesome/free-solid-svg-icons" ">= 6.7.2"
+    "@multiversx/sdk-dapp-utils" ">= 1.0.4"
+    "@stencil/react-output-target" "0.8.2"
+    classnames ">= 2.5.1"
+    lodash.inrange "^3.3.0"
+    lodash.range "^3.2.0"
+    qrcode ">= 1.5.4"
+    sass-embedded "^1.85.1"
+
+"@multiversx/sdk-dapp-ui@^0.x":
   version "0.0.0"
   resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.0.tgz#49847e7acf7a4a944f1f0aee03dc964b84ccde4b"
   integrity sha512-uMCJmZQ8wB7Pcd1iGeJphUvtyY8M7KgI17aAZCHpFvMIC5vPOoDA3oBw77x3G8aOHpkX+6N2h/T3ubC7FRfrGQ==
@@ -1104,9 +1119,9 @@
   integrity sha512-NcaQUgXrjDqjKJgbUj1eM11ID7sDJRVFamjEA/VO4qquP8jBOrSeW0ltvppHElZGC/A14tNDERPbZQkrLIa2KQ==
 
 "@multiversx/sdk-dapp@^5.x":
-  version "5.0.0-alpha.0"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp/-/sdk-dapp-5.0.0-alpha.0.tgz#9fdc32635b78ad92622929057c654d17e69ca03a"
-  integrity sha512-QzGeHW0FZ8RDqZP2unC2wgZtE2eKcRqCaIaV4S1jcgCiyx0plWukSkj8zXoPMIxetS8BJQjL+MfSSQwHwt3t+Q==
+  version "5.0.0-alpha.1"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp/-/sdk-dapp-5.0.0-alpha.1.tgz#5e35d8d08dccab57eb5a76d3042957ffcdf82096"
+  integrity sha512-9GatImHp/dFef08GpJmZ2CMBuG7MlgMtMf3ShVTyyyrswAeUqq+DZ7NeSG3nhax3WTOrJeeE3v11nPL2FVwuTA==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "14.0.2"
@@ -1132,7 +1147,7 @@
     socket.io-client "4.7.5"
     zustand "4.4.7"
   optionalDependencies:
-    "@multiversx/sdk-dapp-ui" ">=0.0.0"
+    "@multiversx/sdk-dapp-ui" ">=0.0.4"
 
 "@multiversx/sdk-extension-provider@5.0.0":
   version "5.0.0"
