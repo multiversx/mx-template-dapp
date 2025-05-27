@@ -12,7 +12,6 @@ export const useGetTimeToPong = () => {
         }
       );
 
-      console.log({ data });
       return data.timeToPong;
     } catch (err) {
       console.error(err);
