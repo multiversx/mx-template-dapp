@@ -49,13 +49,13 @@ initApp(config).then(() => {
 
 ## 3. Logging in and out
 
-### 3.1 Logging in
+### 3.1 [Logging in](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/pages/Unlock/Unlock.tsx)
 
 Login buttons have been removed and there is a universal Unlock side panel, which can be inserted in the DOM at a desired location.
 
 > NOTE: Web-wallet URL login is no longer supported
 
-Example of how to use the `UnlockPanelManager` in the [unlock route](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/pages/Unlock/Unlock.tsx) is shown below. Of course the `openUnlockPanel()` method can also be linked to a button.
+Example of how to use the `UnlockPanelManager` in the `unlock` route is shown below. Of course the `openUnlockPanel()` method can also be linked to a button.
 
 ```tsx
 import { useEffect } from 'react';
@@ -93,9 +93,15 @@ export const Unlock = () => {
 };
 ```
 
-### 3.2 Loggin out
+### 3.2 [Logging out](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/components/Layout/Header/Header.tsx#L14)
 
+In order to perform a logut action you simply need to get the current signing provider and call the `logout()` method:
 
+```typescript
+import { getAccountProvider } from '@multiversx/sdk-dapp/out/providers/helpers/accountProvider';
+const provider = getAccountProvider();
+await provider.logout();
+```
 
 ## 4. [Sending transactions](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/helpers/signAndSendTransactions.ts)
 
