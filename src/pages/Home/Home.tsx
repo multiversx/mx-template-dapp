@@ -12,11 +12,11 @@ export const Home = () => {
               <p className='text-gray-400'>
                 The{' '}
                 <a
-                  href='https://www.npmjs.com/package/@multiversx/sdk-dapp-core'
+                  href='https://www.npmjs.com/package/@multiversx/sdk-dapp'
                   target='_blank'
                   className='text-gray-400 underline decoration-dotted hover:decoration-solid'
                 >
-                  sdk-dapp-core
+                  sdk-dapp
                 </a>{' '}
                 starter project for any dApp <br className='hidden xl:block' />
                 built on the{' '}
