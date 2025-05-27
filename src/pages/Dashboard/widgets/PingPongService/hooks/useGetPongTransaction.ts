@@ -1,19 +1,26 @@
 import axios from 'axios';
 import { API_URL } from 'config';
-import { Transaction } from 'lib';
+import { Transaction, useGetLoginInfo } from 'lib';
 
 export const useGetPongTransaction = () => {
+  const { tokenLogin } = useGetLoginInfo();
+
   return async () => {
     try {
-      const { data } = await axios.post<Transaction>(
+      const { data } = await axios.post(
         '/ping-pong/abi/pong',
         {},
         {
-          baseURL: API_URL
+          baseURL: API_URL,
+          headers: {
+            Authorization: `Bearer ${tokenLogin?.nativeAuthToken}`
+          }
         }
       );
 
-      return data;
+      const pongTransaction = Transaction.newFromPlainObject(data);
+
+      return pongTransaction;
     } catch (err) {
       console.error('Unable to get Pong Transaction', err);
       return null;
