@@ -23,5 +23,5 @@ export const signAndSendTransactions = async ({
     transactionsDisplayInfo
   });
 
-  return { sentTransactions, sessionId };
+  return sessionId;
 };

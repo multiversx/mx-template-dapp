@@ -24,9 +24,9 @@ export const sendBatchTransactions = async ({
     [transactions[3], transactions[4]]
   ];
 
-  const { sentTransactions, sessionId } = await transactionsHandler({
+  const sessionId = await transactionsHandler({
     transactions: groupedTransactions
   });
 
-  return { sentTransactions, sessionId };
+  return sessionId;
 };

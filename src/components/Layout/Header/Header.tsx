@@ -4,7 +4,6 @@ import { environment } from 'config';
 import { getAccountProvider, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
-import { ConnectButton } from './components';
 import { NotificationsButton } from './components/NotificationsButton';
 
 export const Header = () => {
@@ -45,7 +44,15 @@ export const Header = () => {
             </>
           )}
 
-          {!isLoggedIn && <ConnectButton />}
+          {!isLoggedIn && (
+            <Button
+              onClick={() => {
+                navigate(RouteNamesEnum.unlock);
+              }}
+            >
+              Connect
+            </Button>
+          )}
         </div>
       </nav>
     </header>

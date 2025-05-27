@@ -1,6 +1,5 @@
 export { FormatAmountController } from '@multiversx/sdk-dapp/out/controllers/FormatAmountController';
 export { NotificationsFeedManager } from '@multiversx/sdk-dapp/out/managers/NotificationsFeedManager/NotificationsFeedManager';
-export { ProviderFactory } from '@multiversx/sdk-dapp/out/providers/ProviderFactory';
 export { TransactionManager } from '@multiversx/sdk-dapp/out/managers/TransactionManager';
 export { TransactionsTableController } from '@multiversx/sdk-dapp/out/controllers/TransactionsTableController';
 export { UnlockPanelManager } from '@multiversx/sdk-dapp/out/managers/UnlockPanelManager';
