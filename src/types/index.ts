@@ -1,4 +1,4 @@
-export * from './componentsTypes';
+export * from './componentTypes';
 export * from './pingPong.types';
 export * from './profile.types';
 export * from './routes.types';

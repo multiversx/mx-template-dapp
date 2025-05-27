@@ -5,10 +5,10 @@ export type { ICustomProvider } from '@multiversx/sdk-dapp/out/providers/types/p
 export type { IProvider } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 export type { IProviderFactory } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 export type { InitAppType } from '@multiversx/sdk-dapp/out/methods/initApp/initApp.types';
-export type {
-  InterpretedTransactionType,
-  ServerTransactionType
-} from '@multiversx/sdk-dapp/out/types/serverTransactions.types';
+export type { InterpretedTransactionType } from '@multiversx/sdk-dapp/out/types/serverTransactions.types';
 export { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+export type { RouteType } from '@multiversx/sdk-dapp/types/index';
+export type { ServerTransactionType } from '@multiversx/sdk-dapp/types/serverTransactions.types';
 export type { SignedTransactionType } from '@multiversx/sdk-dapp/out/types/transactions.types';
+export { TransactionBatchStatusesEnum } from '@multiversx/sdk-dapp/types/enums.types';
 export type { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp/out/types/transactions.types';
