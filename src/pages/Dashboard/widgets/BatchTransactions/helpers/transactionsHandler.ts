@@ -13,12 +13,13 @@ type TransactionsHandlerType = {
 };
 
 export const transactionsHandler = async ({
-  transactions
+  transactions,
+  options
 }: TransactionsHandlerType) => {
   const txManager = TransactionManager.getInstance();
 
   const sentTransactions = await txManager.send(transactions);
-  const sessionId = await txManager.track(sentTransactions);
+  const sessionId = await txManager.track(sentTransactions, options);
 
-  return { sentTransactions, sessionId };
+  return sessionId;
 };

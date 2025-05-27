@@ -31,12 +31,12 @@ export const signAndAutoSendBatchTransactions = async ({
     [signedTransactions[3], signedTransactions[4]]
   ];
 
-  const { sentTransactions, sessionId } = await transactionsHandler({
+  const sessionId = await transactionsHandler({
     transactions: groupedTransactions,
     options: {
       transactionsDisplayInfo
     }
   });
 
-  return { sentTransactions, sessionId };
+  return sessionId;
 };

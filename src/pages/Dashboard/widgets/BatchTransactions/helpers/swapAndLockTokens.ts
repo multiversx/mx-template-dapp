@@ -31,12 +31,12 @@ export const swapAndLockTokens = async ({
     [transactions[3]]
   ];
 
-  const { sentTransactions, sessionId } = await transactionsHandler({
+  const sessionId = await transactionsHandler({
     transactions: groupedTransactions,
     options: {
       transactionsDisplayInfo
     }
   });
 
-  return { sentTransactions, sessionId };
+  return sessionId;
 };
