@@ -71,7 +71,7 @@ export const Unlock = () => {
     loginHandler: () => {
       navigate(RouteNamesEnum.dashboard);
     },
-    closeCallback: () => {
+    onClose: () => {
       navigate(RouteNamesEnum.home);
     }
   });
