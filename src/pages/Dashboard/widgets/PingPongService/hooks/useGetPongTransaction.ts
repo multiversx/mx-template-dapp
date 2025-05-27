@@ -15,7 +15,6 @@ export const useGetPongTransaction = () => {
 
       const pongTransaction = Transaction.newFromPlainObject(data);
 
-      console.log({ pongTransaction });
       return pongTransaction;
     } catch (err) {
       console.error('Unable to get Pong Transaction', err);
