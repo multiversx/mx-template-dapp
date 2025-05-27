@@ -1,20 +1,15 @@
 import axios from 'axios';
 import { API_URL } from 'config';
-import { Transaction, useGetLoginInfo } from 'lib';
+import { Transaction } from 'lib';
 
 export const useGetPingTransaction = () => {
-  const { tokenLogin } = useGetLoginInfo();
-
   return async () => {
     try {
       const { data } = await axios.post(
         '/ping-pong/abi/ping',
         {},
         {
-          baseURL: API_URL,
-          headers: {
-            Authorization: `Bearer ${tokenLogin?.nativeAuthToken}`
-          }
+          baseURL: API_URL
         }
       );
 
