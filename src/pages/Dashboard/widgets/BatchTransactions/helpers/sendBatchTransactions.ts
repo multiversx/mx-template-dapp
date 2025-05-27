@@ -1,7 +1,7 @@
 import { getAccountProvider } from 'lib';
 import { TransactionProps } from 'types';
 import { getBatchTransactions } from './getBatchTransactions';
-import { transactionsHandler } from './transactionsHandler';
+import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 
 export const sendBatchTransactions = async ({
   address,
@@ -24,7 +24,7 @@ export const sendBatchTransactions = async ({
     [transactions[3], transactions[4]]
   ];
 
-  const sessionId = await transactionsHandler({
+  const sessionId = await sendAndTrackTransactions({
     transactions: groupedTransactions
   });
 

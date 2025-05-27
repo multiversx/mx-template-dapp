@@ -1,7 +1,7 @@
 import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
 import { TransactionProps } from 'types';
 import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';
-import { transactionsHandler } from './transactionsHandler';
+import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 
 export const swapAndLockTokens = async ({
   address,
@@ -31,7 +31,7 @@ export const swapAndLockTokens = async ({
     [transactions[3]]
   ];
 
-  const sessionId = await transactionsHandler({
+  const sessionId = await sendAndTrackTransactions({
     transactions: groupedTransactions,
     options: {
       transactionsDisplayInfo
