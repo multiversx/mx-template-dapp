@@ -1,24 +1,22 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Layout } from 'components';
+import {
+  apiTimeout,
+  environment,
+  sampleAuthenticatedDomains,
+  walletConnectV2ProjectId
+} from 'config';
 import {
   AxiosInterceptorContext, // using this is optional
   DappProvider,
-  Layout,
-  TransactionsToastList,
   NotificationModal,
-  SignTransactionsModals
+  SignTransactionsModals,
+  TransactionsToastList
   // uncomment this to use the custom transaction tracker
   // TransactionsTracker
-} from 'components';
-
-import {
-  apiTimeout,
-  walletConnectV2ProjectId,
-  environment,
-  sampleAuthenticatedDomains
-} from 'config';
+} from 'lib';
 import { RouteNamesEnum } from 'localConstants';
-import { PageNotFound, Unlock } from 'pages';
+import { PageNotFound } from 'pages';
 import { routes } from 'routes';
 import { BatchTransactionsContextProvider } from 'wrappers';
 
@@ -56,7 +54,6 @@ const AppContent = () => {
           <NotificationModal />
           <SignTransactionsModals />
           <Routes>
-            <Route path={RouteNamesEnum.unlock} element={<Unlock />} />
             {routes.map((route) => (
               <Route
                 path={route.path}

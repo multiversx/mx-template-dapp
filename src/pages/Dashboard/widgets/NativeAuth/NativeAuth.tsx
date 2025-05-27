@@ -1,11 +1,8 @@
 import { useEffect } from 'react';
-import { Label } from 'components/Label';
-import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
-import { OutputContainer } from 'components/OutputContainer';
-import { FormatAmount } from 'components/sdkDappComponents';
-import { useGetLoginInfo, useGetNetworkConfig } from 'hooks';
-import { useGetProfile } from './hooks';
+import { Label, MissingNativeAuthError, OutputContainer } from 'components';
+import { FormatAmount, useGetLoginInfo, useGetNetworkConfig } from 'lib';
 import { Username } from '../Account/components';
+import { useGetProfile } from './hooks';
 
 export const NativeAuth = () => {
   const { tokenLogin, isLoggedIn } = useGetLoginInfo();

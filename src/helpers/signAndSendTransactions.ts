@@ -1,7 +1,6 @@
-import { Transaction, TransactionsDisplayInfoType } from 'types';
-
-import { refreshAccount, sendTransactions } from './sdkDappHelpers';
+import { refreshAccount, sendTransactions } from 'lib';
 import { isSafari } from 'localConstants';
+import { Transaction, TransactionsDisplayInfoType } from 'types';
 
 type SignAndSendTransactionsProps = {
   transactions: Transaction[];

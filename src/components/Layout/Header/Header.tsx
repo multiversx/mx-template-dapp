@@ -1,11 +1,9 @@
-import { Button } from 'components/Button';
-import { MxLink } from 'components/MxLink';
+import { useMatch } from 'react-router-dom';
+import { Button, MxLink } from 'components';
 import { environment } from 'config';
-import { logout } from 'helpers';
-import { useGetIsLoggedIn } from 'hooks';
+import { logout, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import MultiversXLogo from '../../../assets/img/multiversx-logo.svg?react';
-import { useMatch } from 'react-router-dom';
 
 const callbackUrl = `${window.location.origin}/unlock`;
 const onRedirect = undefined; // use this to redirect with useNavigate to a specific page after logout

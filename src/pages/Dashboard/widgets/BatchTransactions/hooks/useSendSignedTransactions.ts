@@ -1,18 +1,15 @@
 import { useEffect, useState } from 'react';
-
-import { TransactionBatchStatusesEnum } from '@multiversx/sdk-dapp/types/enums.types';
-import {
-  useSendBatchTransactions,
-  useGetSignedTransactions
-} from 'hooks/sdkDappHooks';
-import { SessionEnum } from 'localConstants';
 import {
   deleteTransactionToast,
   removeAllSignedTransactions,
   removeAllTransactionsToSign,
   setTransactionsDisplayInfoState,
-  setTransactionsToSignedState
-} from 'services/sdkDappServices';
+  setTransactionsToSignedState,
+  TransactionBatchStatusesEnum,
+  useGetSignedTransactions,
+  useSendBatchTransactions
+} from 'lib';
+import { SessionEnum } from 'localConstants';
 import { useBatchTransactionContext } from 'wrappers';
 
 export const useSendSignedTransactions = ({

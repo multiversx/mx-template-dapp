@@ -1,11 +1,8 @@
-import { Label } from 'components/Label';
-import { CopyButton } from 'components/sdkDappComponents';
-import { useGetAccountInfo, useGetLastSignedMessageSession } from 'hooks';
-import { decodeMessage } from '../helpers';
+import { Label } from 'components';
+import { CopyButton, Message, useGetLastSignedMessageSession } from 'lib';
+import { decodeMessage } from '../helpers/decodeMessage';
 
-export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {
-  const { address } = useGetAccountInfo();
-
+export const SignSuccess = () => {
   const signedMessageInfo = useGetLastSignedMessageSession();
 
   if (!signedMessageInfo?.signature) {
@@ -14,10 +11,11 @@ export const SignSuccess = ({ messageToSign }: { messageToSign: string }) => {
 
   const { signature } = signedMessageInfo;
 
-  const { encodedMessage, decodedMessage } = decodeMessage({
-    address,
-    message: messageToSign,
-    signature
+  const { decodedMessage, encodedMessage } = decodeMessage({
+    signature,
+    message: new Message({
+      data: new Uint8Array(Buffer.from(signedMessageInfo?.message ?? ''))
+    })
   });
 
   return (

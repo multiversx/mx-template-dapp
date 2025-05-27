@@ -1,12 +1,13 @@
+import { Label } from 'components';
 import {
+  ACCOUNTS_ENDPOINT,
+  ExplorerLink,
+  FormatAmount,
+  SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
-  ACCOUNTS_ENDPOINT
-} from '@multiversx/sdk-dapp/apiCalls/endpoints';
-import { useGetNetworkConfig } from '@multiversx/sdk-dapp/hooks/useGetNetworkConfig';
-import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
-import { Label } from 'components/Label';
-import { FormatAmount } from 'components/sdkDappComponents';
-import { SignedTransactionType } from 'types';
+  useGetNetworkConfig
+} from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 
 export const TransactionOutput = ({
   transaction
@@ -44,7 +45,7 @@ export const TransactionOutput = ({
           value={transaction.value}
           showLabel={transaction.value !== '0'}
           egldLabel={network.egldLabel}
-          data-testid='balance'
+          data-testid={DataTestIdsEnum.balance}
         />
       </p>
       <p>

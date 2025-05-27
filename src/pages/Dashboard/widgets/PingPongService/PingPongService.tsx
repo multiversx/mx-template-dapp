@@ -1,21 +1,24 @@
-import { useEffect, useState } from 'react';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { Button } from 'components/Button';
-import { ContractAddress } from 'components/ContractAddress';
-import { Label } from 'components/Label';
-import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
-import { OutputContainer, PingPongOutput } from 'components/OutputContainer';
+import { useEffect, useState } from 'react';
+import {
+  Button,
+  ContractAddress,
+  Label,
+  MissingNativeAuthError,
+  OutputContainer,
+  PingPongOutput
+} from 'components';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { useGetPendingTransactions, useSendPingPongTransaction } from 'hooks';
-import { useGetLoginInfo } from 'hooks/sdkDappHooks';
+import { useSendPingPongTransaction } from 'hooks';
+import { useGetLoginInfo, useGetPendingTransactions } from 'lib';
 import { SessionEnum } from 'localConstants';
 import { SignedTransactionType, WidgetProps } from 'types';
 import {
-  useGetTimeToPong,
   useGetPingTransaction,
-  useGetPongTransaction
+  useGetPongTransaction,
+  useGetTimeToPong
 } from './hooks';
 
 // The transactions are being done by directly requesting to template-dapp service

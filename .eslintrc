@@ -35,12 +35,28 @@
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended"
   ],
-  "plugins": ["react-hooks", "prettier", "import"],
+  "plugins": ["react-hooks", "prettier", "import", "sort-exports"],
   "rules": {
-    "import/order": [
-      "warn",
+    "sort-exports/sort-exports": "error",
+    "sort-imports": [
+      "error",
       {
-        "groups": ["builtin", "external", "internal"],
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
         "pathGroups": [
           {
             "pattern": "react",
@@ -48,8 +64,7 @@
             "position": "before"
           }
         ],
-        "pathGroupsExcludedImportTypes": ["react"],
-        "newlines-between": "ignore",
+        "newlines-between": "never",
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true
@@ -63,6 +78,13 @@
       }
     ],
     "@typescript-eslint/indent": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -85,7 +107,6 @@
     "react/jsx-wrap-multilines": "off",
     "react/destructuring-assignment": "off",
     "no-shadow": "off",
-    "@typescript-eslint/no-shadow": ["warn"],
     "react/no-array-index-key": "off"
   }
 }

@@ -1,16 +1,18 @@
-import { useState } from 'react';
-import type { MouseEvent } from 'react';
 import {
-  faFileSignature,
+  faArrowsRotate,
   faBroom,
-  faArrowsRotate
+  faFileSignature
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useGetSignMessageSession } from '@multiversx/sdk-dapp/hooks/signMessage/useGetSignMessageSession';
-import { Button } from 'components/Button';
-import { OutputContainer } from 'components/OutputContainer';
-import { useSignMessage } from 'hooks';
-import { SignedMessageStatusesEnum, WidgetProps } from 'types';
+import { MouseEvent } from 'react';
+import { useState } from 'react';
+import { Button, OutputContainer } from 'components';
+import {
+  SignedMessageStatusesEnum,
+  useGetSignMessageSession,
+  useSignMessage
+} from 'lib';
+import { WidgetProps } from 'types';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = ({ callbackRoute }: WidgetProps) => {
@@ -89,9 +91,7 @@ export const SignMessage = ({ callbackRoute }: WidgetProps) => {
           />
         )}
 
-        {isSuccess && (
-          <SignSuccess messageToSign={messageSession?.message ?? ''} />
-        )}
+        {isSuccess && <SignSuccess />}
 
         {isError && <SignFailure />}
       </OutputContainer>
