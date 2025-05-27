@@ -4,7 +4,7 @@ import {
   TransactionsDisplayInfoType
 } from 'lib';
 
-type TransactionsHandlerType = {
+type SendAndTrackTransactionsType = {
   transactions: Transaction[] | Transaction[][];
   options?: {
     disableToasts?: boolean;
@@ -12,10 +12,10 @@ type TransactionsHandlerType = {
   };
 };
 
-export const transactionsHandler = async ({
+export const sendAndTrackTransactions = async ({
   transactions,
   options
-}: TransactionsHandlerType) => {
+}: SendAndTrackTransactionsType) => {
   const txManager = TransactionManager.getInstance();
 
   const sentTransactions = await txManager.send(transactions);
