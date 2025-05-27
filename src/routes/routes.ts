@@ -13,6 +13,11 @@ export const routes: RouteWithTitleType[] = [
     title: 'Home',
     component: Home
   },
+    {
+    path: RouteNamesEnum.unlock,
+    title: 'Unlock',
+    component: Unlock
+  },
   {
     path: RouteNamesEnum.dashboard,
     title: 'Dashboard',
@@ -28,10 +33,5 @@ export const routes: RouteWithTitleType[] = [
     path: RouteNamesEnum.logout,
     title: 'Logout',
     component: Logout
-  },
-  {
-    path: RouteNamesEnum.unlock,
-    title: 'Unlock',
-    component: Unlock
   }
 ];
