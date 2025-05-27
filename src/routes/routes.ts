@@ -22,11 +22,6 @@ export const routes: RouteWithTitleType[] = [
     ]
   },
   {
-    path: RouteNamesEnum.unlock,
-    title: 'Unlock',
-    component: Unlock
-  },
-  {
     path: RouteNamesEnum.dashboard,
     title: 'Dashboard',
     component: Dashboard,
