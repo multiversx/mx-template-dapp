@@ -1,4 +1,4 @@
 export * from './sdkCore';
 export * from './sdkDapp';
-export * from './sdkDappCoreUI';
+export * from './sdkDappUI';
 export * from './sdkDappUtils';

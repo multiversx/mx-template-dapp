@@ -1,5 +1,5 @@
-import { MvxCopyButton } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
-import { MvxCopyButtonPropsType } from 'lib/sdkDappCoreUI/sdkDappCoreUI.types';
+import { MvxCopyButton } from 'lib/sdkDappUI/sdkDappUI.components';
+import { MvxCopyButtonPropsType } from 'lib/sdkDappUI/sdkDappUI.types';
 
 export const CopyButton = ({
   className,

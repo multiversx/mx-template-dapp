@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { useGetNetworkConfig } from 'lib/sdkDapp/sdkDapp.hooks';
-import { MvxExplorerLink } from 'lib/sdkDappCoreUI/sdkDappCoreUI.components';
+import { MvxExplorerLink } from 'lib/sdkDappUI/sdkDappUI.components';
 import { WithClassnameType } from 'types/components.types';
 
 export const ExplorerLink = ({

@@ -1,6 +1,6 @@
 import { WithClassnameType } from 'types';
-import { MvxFormatAmount } from '../../../sdkDappCoreUI/sdkDappCoreUI.components';
-import { MvxFormatAmountPropsType } from '../../../sdkDappCoreUI/sdkDappCoreUI.types';
+import { MvxFormatAmount } from '../../../sdkDappUI/sdkDappUI.components';
+import { MvxFormatAmountPropsType } from '../../../sdkDappUI/sdkDappUI.types';
 import { DECIMALS, DIGITS } from '../../../sdkDappUtils';
 import { FormatAmountController } from '../../sdkDapp.helpers';
 import { useGetNetworkConfig } from '../../sdkDapp.hooks';

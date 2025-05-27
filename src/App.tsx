@@ -13,10 +13,18 @@ export const App = () => {
             <Routes>
               {routes.map((route) => (
                 <Route
-                  key={`route-key-'${route.path}`}
+                  key={`route-key-${route.path}`}
                   path={route.path}
                   element={<route.component />}
-                />
+                >
+                  {route.children?.map((child) => (
+                    <Route
+                      key={`route-key-${route.path}-${child.path}`}
+                      path={child.path}
+                      element={<child.component />}
+                    />
+                  ))}
+                </Route>
               ))}
               <Route path='*' element={<PageNotFound />} />
             </Routes>
