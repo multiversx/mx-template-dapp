@@ -7,3 +7,4 @@ export { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/provi
 export type { ServerTransactionType } from '@multiversx/sdk-dapp/out/types/serverTransactions.types';
 export type { SignedTransactionType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 export type { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp/out/types/transactions.types';
+export type { TransactionsRowType } from '@multiversx/sdk-dapp/out/controllers/TransactionsTableController/transactionsTableController.types';

@@ -4,8 +4,8 @@ import { Button } from 'components';
 import { NotificationsFeedManager } from 'lib';
 
 export const NotificationsButton = () => {
-  const handleOpenNotificationsFeed = () => {
-    NotificationsFeedManager.getInstance().openNotificationsFeed();
+  const handleOpenNotificationsFeed = async () => {
+    await NotificationsFeedManager.getInstance().openNotificationsFeed();
   };
 
   return (
