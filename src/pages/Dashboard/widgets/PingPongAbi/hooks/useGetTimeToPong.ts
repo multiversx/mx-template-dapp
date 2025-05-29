@@ -29,11 +29,15 @@ export const useGetTimeToPong = () => {
         abi
       });
 
+      console.log(JSON.stringify(proxy));
+
       const result = await scController.query({
         contract: Address.newFromBech32(contractAddress),
         function: 'getTimeToPong',
         arguments: [new AddressValue(new Address(address))]
       });
+
+      console.log({ result });
 
       const time = result.toString();
       const secondsRemaining = time ? Number(result.toString()) : null;
