@@ -132,9 +132,16 @@ export class InMemoryProvider implements IProvider {
         data: new Uint8Array(Buffer.from(message))
       });
       const signedMessage = await this.signMessage(msg);
-      const signature = Buffer.from(String(signedMessage?.signature)).toString(
-        'hex'
-      );
+
+      if (!signedMessage.signature) {
+        resolve({
+          address,
+          signature: ''
+        });
+        return;
+      }
+
+      const signature = Buffer.from(signedMessage.signature).toString('hex');
 
       this.setAccount({
         address,
