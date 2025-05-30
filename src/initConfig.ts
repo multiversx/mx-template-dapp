@@ -38,9 +38,6 @@ export const config: InitAppType = {
   dAppConfig: {
     nativeAuth: true,
     environment: EnvironmentsEnum.devnet,
-    network: {
-      walletAddress: 'https://devnet-wallet.multiversx.com'
-    },
     providers: {
       walletConnect: {
         walletConnectV2ProjectId
@@ -50,5 +47,5 @@ export const config: InitAppType = {
   }
 
   // Option 2: Add providers using the config `customProviders` array
-  // customProviders: [customWalletProvider]
+  // customProviders: [providers]
 };

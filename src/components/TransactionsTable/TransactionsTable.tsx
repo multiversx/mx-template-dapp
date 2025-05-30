@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import {
-  ITransactionsTableRow,
   MvxTransactionsTable,
   ServerTransactionType,
+  TransactionsRowType,
   TransactionsTableController,
   useGetAccount,
   useGetNetworkConfig
@@ -18,7 +18,7 @@ export const TransactionsTable = ({
   const { address } = useGetAccount();
   const { network } = useGetNetworkConfig();
   const [processedTransaction, setProcessedTransactions] = useState<
-    ITransactionsTableRow[]
+    TransactionsRowType[]
   >([]);
 
   useEffect(() => {
@@ -34,9 +34,7 @@ export const TransactionsTable = ({
         transactions
       });
 
-    setProcessedTransactions(
-      transactionsData as unknown as ITransactionsTableRow[]
-    );
+    setProcessedTransactions(transactionsData);
   };
 
   return <MvxTransactionsTable transactions={processedTransaction} />;

@@ -1060,48 +1060,10 @@
     axios "^1.7.4"
     bip39 "3.1.0"
 
-"@multiversx/sdk-core@^14.x":
-  version "14.1.1"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-core/-/sdk-core-14.1.1.tgz#708f9deb6e728aad6118032020a7b80488a5f5e3"
-  integrity sha512-DbIf1n2i99hEUl2TH/EisR764ynR4Mpfwp+nHVktVb4hnK1QuW2IFbO9zHl2JGeDHe/tOsUdbWkMQt0BLX5GeQ==
-  dependencies:
-    "@multiversx/sdk-transaction-decoder" "1.0.2"
-    "@noble/ed25519" "1.7.3"
-    "@noble/hashes" "1.3.0"
-    bech32 "1.1.4"
-    blake2b "2.1.3"
-    buffer "6.0.3"
-    ed25519-hd-key "1.1.2"
-    ed2curve "0.3.0"
-    json-bigint "1.0.0"
-    keccak "3.0.2"
-    scryptsy "2.1.0"
-    tweetnacl "1.0.3"
-    uuid "8.3.2"
-  optionalDependencies:
-    "@multiversx/sdk-bls-wasm" "0.3.5"
-    axios "^1.7.4"
-    bip39 "3.1.0"
-
-"@multiversx/sdk-dapp-ui@>=0.0.4":
-  version "0.0.4"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.4.tgz#ca9afc762a32865a7fa6316f7b50d9a0937b0714"
-  integrity sha512-8Zp/VYmBtsYOam3Z8SgKupzb1USA4WNAiOoEVjhGThCOO7nLoK6Y+W0xWSUMN0wVOqMzdxjS69iSIR3U2ZdRHA==
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" ">= 6.7.2"
-    "@fortawesome/free-solid-svg-icons" ">= 6.7.2"
-    "@multiversx/sdk-dapp-utils" ">= 1.0.4"
-    "@stencil/react-output-target" "0.8.2"
-    classnames ">= 2.5.1"
-    lodash.inrange "^3.3.0"
-    lodash.range "^3.2.0"
-    qrcode ">= 1.5.4"
-    sass-embedded "^1.85.1"
-
-"@multiversx/sdk-dapp-ui@^0.x":
-  version "0.0.0"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.0.tgz#49847e7acf7a4a944f1f0aee03dc964b84ccde4b"
-  integrity sha512-uMCJmZQ8wB7Pcd1iGeJphUvtyY8M7KgI17aAZCHpFvMIC5vPOoDA3oBw77x3G8aOHpkX+6N2h/T3ubC7FRfrGQ==
+"@multiversx/sdk-dapp-ui@0.0.6", "@multiversx/sdk-dapp-ui@>=0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.6.tgz#f4b0d66c456b42fca14927abe37e7e7637a8b0ff"
+  integrity sha512-iJg9OYlcx0TTifzn5XuVMSfgq/Exk4OQRpLrEDtdUkMDRM00TlvxWRg7tKVkWtsBUk7koWA1WVo6g7HCf2Sm5g==
   dependencies:
     "@fortawesome/fontawesome-svg-core" ">= 6.7.2"
     "@fortawesome/free-solid-svg-icons" ">= 6.7.2"
@@ -1118,10 +1080,10 @@
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-2.0.0.tgz#15cae568ae5d25ea2ac12c3793d52d18db5ac1fe"
   integrity sha512-NcaQUgXrjDqjKJgbUj1eM11ID7sDJRVFamjEA/VO4qquP8jBOrSeW0ltvppHElZGC/A14tNDERPbZQkrLIa2KQ==
 
-"@multiversx/sdk-dapp@^5.x":
-  version "5.0.0-alpha.2"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp/-/sdk-dapp-5.0.0-alpha.2.tgz#e2746b233ebdd447c11e9398aa5b6f9b834258c5"
-  integrity sha512-OiPLUc4NhqLEsxsH2tKvhOeec91PPcBiPD1vIal+gVGyJKfHyd3WYEQ7ilRDbkKF6qLyqdyF6UOlZJ5aopbTYQ==
+"@multiversx/sdk-dapp@5.0.0-alpha.5":
+  version "5.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-5.0.0-alpha.5.tgz#f129dbb7c398aaa54301c419174c0543883936e0"
+  integrity sha512-aimk5eOJGTTN8RpX6HwLgtFFMG8vOKxlvFByK468LCn6U/6HVJWoPWyBvX9SWZZKNi4YmWjnB+uUh1f52lvYmg==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-core" "14.0.2"
@@ -1147,7 +1109,7 @@
     socket.io-client "4.7.5"
     zustand "4.4.7"
   optionalDependencies:
-    "@multiversx/sdk-dapp-ui" ">=0.0.4"
+    "@multiversx/sdk-dapp-ui" ">=0.0.6"
 
 "@multiversx/sdk-extension-provider@5.0.0":
   version "5.0.0"
@@ -3474,7 +3436,7 @@ buffer-indexof-polyfill@~1.0.0:
   resolved "https://registry.yarnpkg.com/buffer-indexof-polyfill/-/buffer-indexof-polyfill-1.0.2.tgz#d2732135c5999c64b277fcf9b1abe3498254729c"
   integrity sha512-I7wzHwA3t1/lwXQh+A5PbNvJxgfo5r3xulgpYDB5zckTu/Z9oUK9biouBKQUjEqzaz3HnAT6TYoovmE+GqSf7A==
 
-"buffer-polyfill@npm:buffer@^6.0.3":
+"buffer-polyfill@npm:buffer@^6.0.3", buffer@6.0.3, buffer@^6.0.3:
   version "6.0.3"
   resolved "https://registry.yarnpkg.com/buffer/-/buffer-6.0.3.tgz#2ace578459cc8fbe2a70aaa8f52ee63b6a74c6c6"
   integrity sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==
@@ -3486,14 +3448,6 @@ buffer-xor@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/buffer-xor/-/buffer-xor-1.0.3.tgz#26e61ed1422fb70dd42e6e36729ed51d855fe8d9"
   integrity sha512-571s0T7nZWK6vB67HI5dyUF7wXiNcfaPPPTl6zYCNApANjIvYJTg7hlud/+cJpdAhS7dVzqMLmfhfHR3rAcOjQ==
-
-buffer@6.0.3, buffer@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/buffer/-/buffer-6.0.3.tgz#2ace578459cc8fbe2a70aaa8f52ee63b6a74c6c6"
-  integrity sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==
-  dependencies:
-    base64-js "^1.3.1"
-    ieee754 "^1.2.1"
 
 buffer@^5.2.1, buffer@^5.5.0, buffer@^5.7.1:
   version "5.7.1"
@@ -9311,16 +9265,7 @@ string-length@^5.0.1:
     char-regex "^2.0.0"
     strip-ansi "^7.0.1"
 
-"string-width-cjs@npm:string-width@^4.2.0":
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
-
-string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -9403,14 +9348,7 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
-  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
-  dependencies:
-    ansi-regex "^5.0.1"
-
-strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -10465,7 +10403,7 @@ workerpool@^6.5.1:
   resolved "https://registry.yarnpkg.com/workerpool/-/workerpool-6.5.1.tgz#060f73b39d0caf97c6db64da004cd01b4c099544"
   integrity sha512-Fs4dNYcsdpYSAfVxhnl1L5zTksjvOJxtC5hzMNl+1t9B8hTJTdKDyZ5ju7ztgPy+ft9tBFXoOlDNiOT9WUXZlA==
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -10478,15 +10416,6 @@ wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
-  dependencies:
-    ansi-styles "^4.0.0"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-
-wrap-ansi@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
-  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"

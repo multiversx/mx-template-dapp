@@ -5,14 +5,13 @@ import { DECIMALS, DIGITS } from '../../../sdkDappUtils';
 import { FormatAmountController } from '../../sdkDapp.helpers';
 import { useGetNetworkConfig } from '../../sdkDapp.hooks';
 
-interface FormatAmountPropsType
+interface IFormatAmountProps
   extends Partial<MvxFormatAmountPropsType>,
     WithClassnameType {
-  egldLabel?: string;
   value: string;
 }
 
-export const FormatAmount = (props: FormatAmountPropsType) => {
+export const FormatAmount = (props: IFormatAmountProps) => {
   const {
     network: { egldLabel }
   } = useGetNetworkConfig();
