@@ -35,8 +35,6 @@ export const useGetTimeToPong = () => {
         arguments: [new AddressValue(new Address(address))]
       });
 
-      console.log({ result });
-
       const time = result.toString();
       const secondsRemaining = time ? Number(result.toString()) : null;
 
