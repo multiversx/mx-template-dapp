@@ -13,8 +13,6 @@ import {
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetLoginInfo, useGetPendingTransactions } from 'lib';
-import { SessionEnum } from 'localConstants';
-import { SignedTransactionType, WidgetProps } from 'types';
 import {
   useGetPingTransaction,
   useGetPongTransaction,
@@ -22,24 +20,18 @@ import {
 } from './hooks';
 
 // The transactions are being done by directly requesting to template-dapp service
-export const PingPongService = ({ callbackRoute }: WidgetProps) => {
-  const [stateTransactions, setStateTransactions] = useState<
-    SignedTransactionType[] | null
-  >(null);
-  const [hasPing, setHasPing] = useState<boolean>(true);
+export const PingPongService = () => {
+  const [hasPing, setHasPing] = useState(true);
   const [secondsLeft, setSecondsLeft] = useState<number>(0);
 
-  const {
-    sendPingTransactionFromService,
-    sendPongTransactionFromService,
-    transactionStatus
-  } = useSendPingPongTransaction({
-    type: SessionEnum.abiPingPongServiceSessionId
-  });
+  const { sendPingTransactionFromService, sendPongTransactionFromService } =
+    useSendPingPongTransaction();
   const getTimeToPong = useGetTimeToPong();
   const getPingTransaction = useGetPingTransaction();
   const getPongTransaction = useGetPongTransaction();
-  const { hasPendingTransactions } = useGetPendingTransactions();
+  const transactions = useGetPendingTransactions();
+  const hasPendingTransactions = transactions.length > 0;
+
   const { tokenLogin } = useGetLoginInfo();
 
   const setSecondsRemaining = async () => {
@@ -63,10 +55,7 @@ export const PingPongService = ({ callbackRoute }: WidgetProps) => {
       return;
     }
 
-    await sendPingTransactionFromService({
-      transactions: [pingTransaction],
-      callbackRoute
-    });
+    await sendPingTransactionFromService([pingTransaction]);
   };
 
   const onSendPongTransaction = async () => {
@@ -76,10 +65,7 @@ export const PingPongService = ({ callbackRoute }: WidgetProps) => {
       return;
     }
 
-    await sendPongTransactionFromService({
-      transactions: [pongTransaction],
-      callbackRoute
-    });
+    await sendPongTransactionFromService([pongTransaction]);
   };
 
   const timeRemaining = moment()
@@ -92,12 +78,6 @@ export const PingPongService = ({ callbackRoute }: WidgetProps) => {
   useEffect(() => {
     getCountdownSeconds({ secondsLeft, setSecondsLeft });
   }, [hasPing]);
-
-  useEffect(() => {
-    if (transactionStatus.transactions) {
-      setStateTransactions(transactionStatus.transactions);
-    }
-  }, [transactionStatus]);
 
   useEffect(() => {
     setSecondsRemaining();
@@ -134,7 +114,7 @@ export const PingPongService = ({ callbackRoute }: WidgetProps) => {
       </div>
 
       <OutputContainer>
-        {!stateTransactions && (
+        {!hasPendingTransactions && (
           <>
             <ContractAddress />
             {!pongAllowed && (
@@ -147,7 +127,7 @@ export const PingPongService = ({ callbackRoute }: WidgetProps) => {
           </>
         )}
         <PingPongOutput
-          transactions={stateTransactions}
+          transactions={transactions}
           pongAllowed={pongAllowed}
           timeRemaining={timeRemaining}
         />

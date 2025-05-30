@@ -1,7 +1,5 @@
 import { Card } from 'components';
-import { useIsWebProvider } from 'hooks';
 import { WidgetType } from 'types/widget.types';
-import { getCallbackRoute } from 'utils/getCallbackRoute';
 
 export const Widget = ({
   title,
@@ -11,11 +9,6 @@ export const Widget = ({
   widget: MxWidget,
   props = {}
 }: WidgetType) => {
-  const { isWebProvider } = useIsWebProvider();
-  const callbackRoute = anchor
-    ? getCallbackRoute({ anchor, isWebProvider })
-    : '';
-
   return (
     <Card
       title={title}
@@ -23,7 +16,7 @@ export const Widget = ({
       reference={reference}
       anchor={anchor}
     >
-      <MxWidget callbackRoute={callbackRoute} {...props} />
+      <MxWidget {...props} />
     </Card>
   );
 };

@@ -21,7 +21,7 @@ export const AuthRedirectWrapper = ({ children }: PropsWithChildren) => {
     }
 
     if (!isLoggedIn && requireAuth) {
-      navigate(RouteNamesEnum.unlock);
+      navigate(RouteNamesEnum.home);
     }
   }, [isLoggedIn, currentRoute]);
 

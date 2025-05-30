@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import { PageWrapper } from 'wrappers';
 import { Transaction } from './Transaction';
 
@@ -34,6 +35,7 @@ export const Home = () => {
           </div>
         </div>
         <div className='h-4/6 bg-mvx-white bg-contain bg-no-repeat w-1/2 bg-center' />
+        <Outlet />
       </div>
     </PageWrapper>
   );
