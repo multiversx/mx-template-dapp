@@ -20,7 +20,13 @@ export const signAndSendTransactions = async ({
   const signedTransactions = await provider.signTransactions(transactions);
   const sentTransactions = await txManager.send(signedTransactions);
   const sessionId = await txManager.track(sentTransactions, {
-    transactionsDisplayInfo
+    transactionsDisplayInfo,
+    onSuccess: async (id) => {
+      console.log('onSuccess -->', id);
+    },
+    onFail: async (id) => {
+      console.log('onFail -->', id);
+    }
   });
 
   return sessionId;
