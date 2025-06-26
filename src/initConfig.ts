@@ -1,29 +1,13 @@
 import './styles/globals.css';
 
 import { walletConnectV2ProjectId } from 'config';
-import {
-  EnvironmentsEnum,
-  ICustomProvider,
-  InitAppType,
-  ProviderTypeEnum
-} from './lib';
+import { EnvironmentsEnum, ICustomProvider, InitAppType } from './lib';
 import { InMemoryProvider } from './provider/inMemoryProvider';
 
-const ADDITIONAL_PROVIDERS = {
-  inMemoryProvider: 'inMemoryProvider'
-} as const;
-
-export const ExtendedProviders = {
-  ...ProviderTypeEnum,
-  ...ADDITIONAL_PROVIDERS
-} as const;
-
-const DEFAULT_TOAST_LIEFTIME = 5000;
-
-const providers: ICustomProvider<ProviderTypeEnum>[] = [
+const providers: ICustomProvider[] = [
   {
     name: 'In Memory Provider',
-    type: ExtendedProviders.inMemoryProvider,
+    type: 'inMemoryProvider',
     iconUrl: `${window.location.origin}/multiversx-white.svg`,
     constructor: async (options) => new InMemoryProvider(options)
   }
@@ -42,8 +26,7 @@ export const config: InitAppType = {
       walletConnect: {
         walletConnectV2ProjectId
       }
-    },
-    successfulToastLifetime: DEFAULT_TOAST_LIEFTIME
+    }
   }
 
   // Option 2: Add providers using the config `customProviders` array
