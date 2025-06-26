@@ -79,25 +79,6 @@ export const useSendPingPongTransaction = () => {
     return sessionId;
   };
 
-  const sendToSelf = async () => {
-    const selfTx = new Transaction({
-      value: BigInt(0),
-      data: Buffer.from('self'),
-      receiver: new Address(address),
-      gasLimit: BigInt(6000000),
-      gasPrice: BigInt(GAS_PRICE),
-      chainID: network.chainId,
-      sender: new Address(address),
-      version: 1
-    });
-    const sessionId = await signAndSendTransactions({
-      transactions: [selfTx],
-      transactionsDisplayInfo: PING_TRANSACTION_INFO
-    });
-
-    return sessionId;
-  };
-
   const sendPingTransactionFromService = async (
     transactions: Transaction[]
   ) => {
@@ -162,7 +143,6 @@ export const useSendPingPongTransaction = () => {
     sendPongTransaction,
     sendPongTransactionFromAbi,
     sendPingTransactionFromService,
-    sendPongTransactionFromService,
-    sendToSelf
+    sendPongTransactionFromService
   };
 };

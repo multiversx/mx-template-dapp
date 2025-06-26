@@ -18,7 +18,7 @@ import { useGetPingAmount, useGetTimeToPong } from './hooks';
 export const PingPongRaw = () => {
   const getTimeToPong = useGetTimeToPong();
 
-  const { sendPingTransaction, sendPongTransaction, sendToSelf } =
+  const { sendPingTransaction, sendPongTransaction } =
     useSendPingPongTransaction();
 
   const transactions = useGetPendingTransactions();
@@ -85,8 +85,6 @@ export const PingPongRaw = () => {
             Pong
           </Button>
         </div>
-
-        <Button onClick={sendToSelf}>Send to self</Button>
       </div>
 
       <OutputContainer>
