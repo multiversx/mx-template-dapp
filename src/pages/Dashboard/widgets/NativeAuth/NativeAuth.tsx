@@ -1,6 +1,13 @@
 import { useEffect } from 'react';
 import { Label, MissingNativeAuthError, OutputContainer } from 'components';
-import { FormatAmount, useGetLoginInfo, useGetNetworkConfig } from 'lib';
+import {
+  DECIMALS,
+  DIGITS,
+  FormatAmountController,
+  MvxFormatAmount,
+  useGetLoginInfo,
+  useGetNetworkConfig
+} from 'lib';
 import { Username } from '../Account/components';
 import { useGetProfile } from './hooks';
 
@@ -8,6 +15,13 @@ export const NativeAuth = () => {
   const { tokenLogin, isLoggedIn } = useGetLoginInfo();
   const { isLoading, profile, getProfile } = useGetProfile();
   const { network } = useGetNetworkConfig();
+  const { isValid, valueDecimal, valueInteger, label } =
+    FormatAmountController.getData({
+      digits: DIGITS,
+      decimals: DECIMALS,
+      egldLabel: network.egldLabel,
+      input: profile?.balance ?? '0'
+    });
 
   useEffect(() => {
     // On page refresh, tokenInfo is null which implies that we do not have access to loginInfo data
@@ -43,10 +57,11 @@ export const NativeAuth = () => {
 
       <div className='flex gap-1'>
         <Label>Balance:</Label>
-        <FormatAmount
-          value={profile?.balance ?? '0'}
-          showLabel={profile?.balance !== '0'}
-          egldLabel={network.egldLabel}
+        <MvxFormatAmount
+          isValid={isValid}
+          valueInteger={valueInteger}
+          valueDecimal={valueDecimal}
+          label={label}
           data-testid='balance'
         />
       </div>
