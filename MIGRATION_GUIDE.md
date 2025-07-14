@@ -40,16 +40,16 @@ initApp(config).then(() => {
 });
 ```
 
-## 2. Summary of Changes in [`App.tsx`](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/App.tsx)
+## 3. Summary of Changes in [`App.tsx`](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/App.tsx)
 
 - AxiosInterceptorContext is now created as a local component
 - DappProvider was removed ❌ and initialization is now made in initApp
 - NotificationModal, SignTransactionsModals and TransactionsToastList are removed ❌ and functionality is handled under the hood
-- Unlock page is a child route since it only diplays a side panel over an existing route (in our case Home `/`)
+- Unlock page is a child route since it only displays a side panel over an existing route (in our case Home `/`)
 
-## 3. Logging in and out
+## 4. Logging in and out
 
-### 3.1 [Logging in](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/pages/Unlock/Unlock.tsx)
+### 4.1 [Logging in](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/pages/Unlock/Unlock.tsx)
 
 Login buttons have been removed ❌ and there is a universal Unlock side panel, which can be inserted in the DOM at a desired location.
 
@@ -96,9 +96,9 @@ export const Unlock = () => {
 - isAccountLoading has been deprecated
 - `import { getIsProviderEqualTo } from “@multiversx/sdk-dapp/utils/account/getIsProviderEqualTo”` --> removed ❌
 
-### 3.2 [Logging out](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/components/Layout/Header/Header.tsx#L14)
+### 4.2 [Logging out](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/components/Layout/Header/Header.tsx#L14)
 
-In order to perform a logut action you simply need to get the current signing provider and call the `logout()` method:
+In order to perform a logout action you simply need to get the current signing provider and call the `logout()` method:
 
 ```typescript
 import { getAccountProvider } from '@multiversx/sdk-dapp/out/providers/helpers/accountProvider';
@@ -106,12 +106,12 @@ const provider = getAccountProvider();
 await provider.logout();
 ```
 
-## 4. [Sending transactions](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/helpers/signAndSendTransactions.ts)
+## 5. [Sending transactions](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/helpers/signAndSendTransactions.ts)
 
 - `sendTransactions` and `useSendBatchTransactions` have been replaced by `provider.signTransactions`, `txManager.send` and `txManager.track`
 - `newTransaction` function has been removed ❌ and you need to create `Transaction` objects directly
 
-## 5. [Tracking transactions](https://github.com/multiversx/mx-template-dapp/blob/423e782fec5e04b6a35b6297eaf253eb8d7ca1ba/src/helpers/signAndSendTransactions.ts#L22)
+## 6. [Tracking transactions](https://github.com/multiversx/mx-template-dapp/blob/423e782fec5e04b6a35b6297eaf253eb8d7ca1ba/src/helpers/signAndSendTransactions.ts#L22)
 
 Tracking transactions is now handled using the `txManager.track` method. You should use this method to monitor the status and outcome of your transactions after sending them. Refer to the linked file for implementation details and examples.
 
@@ -126,7 +126,7 @@ Tracking transactions is now handled using the `txManager.track` method. You sho
 
  - [onFail](https://github.com/multiversx/mx-sdk-dapp/blob/0d7d9627ceccda56982a73c8ac00ed0558f0e2ec/src/hooks/transactions/useTrackTransactionStatus.ts#L34) and [onSuccess](https://github.com/multiversx/mx-sdk-dapp/blob/0d7d9627ceccda56982a73c8ac00ed0558f0e2ec/src/hooks/transactions/batch/tracker/useVerifyBatchStatus.ts#L11) callbacks can now be configured in [initApp config](https://github.com/multiversx/mx-sdk-dapp/blob/1518a070f10ef0dc133e756c07b6fc0f2165bddb/src/methods/initApp/initApp.types.ts#L42) or with [TransactionManager.setCallbacks](https://github.com/multiversx/mx-sdk-dapp/blob/1518a070f10ef0dc133e756c07b6fc0f2165bddb/src/managers/TransactionManager/TransactionManager.ts#L45)
 
-## 6. [UI components are now imported from sdk-dapp-core-ui](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/lib/sdkDappUI/sdkDappUI.components.ts)
+## 7. [UI components are now imported from sdk-dapp-core-ui](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/lib/sdkDappUI/sdkDappUI.components.ts)
 
   - [CopyButton.tsx](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/lib/sdkDapp/components/CopyButton/CopyButton.tsx)
   - [ExplorerLink.tsx](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/lib/sdkDapp/components/ExplorerLink/ExplorerLink.tsx)
@@ -145,7 +145,7 @@ Some new UI elements have been added:
   - [UnlockPanel](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/pages/Unlock/Unlock.tsx#L10) replaces [login buttons](https://github.com/multiversx/mx-sdk-dapp/blob/old-main/src/UI/walletConnect/WalletConnectLoginButton/WalletConnectLoginButton.tsx)
   - [NotificationsFeed](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/components/Layout/Header/components/NotificationsButton.tsx)
 
-## 7. Methods
+## 8. Methods
 
 - `import { deleteCustomToast } from “@multiversx/sdk-dapp/utils/toasts/customToastsActions”` --> `import { removeCustomToast } from “@multiversx/sdk-dapp/out/store/actions/toasts/toastsActions”`
 - `export { setNonce } from “@multiversx/sdk-dapp/out/utils/account”;` --> `export { setAccountNonce as setNonce } from “@multiversx/sdk-dapp/out/store/actions”`
@@ -163,10 +163,10 @@ Some new UI elements have been added:
 const addressComputer = new AddressComputer();
 const getShardOfAddress = addressComputer.getShardOfAddress;
 export { getShardOfAddress };`
-- `walletConnectDeepLink` isn now set in [initApp](https://github.com/multiversx/mx-sdk-dapp/blob/1518a070f10ef0dc133e756c07b6fc0f2165bddb/src/methods/initApp/initApp.types.ts#L23C21-L23C40)
+- `walletConnectDeepLink` is now set in [initApp](https://github.com/multiversx/mx-sdk-dapp/blob/1518a070f10ef0dc133e756c07b6fc0f2165bddb/src/methods/initApp/initApp.types.ts#L23C21-L23C40)
 
 
-## 7. [Types](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/lib/sdkDapp/sdkDapp.types.ts)
+## 9. [Types](https://github.com/multiversx/mx-template-dapp/blob/a98cadfc291321e9874acd7e53632a6b43ca8c59/src/lib/sdkDapp/sdkDapp.types.ts)
 
   - `LoginMethodsEnum` is replaced by `ProviderTypeEnum`
   - `RawTransactionType` was removed ❌
