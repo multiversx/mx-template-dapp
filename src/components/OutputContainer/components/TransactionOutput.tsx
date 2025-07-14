@@ -1,10 +1,10 @@
-import { getExplorerLink } from '@multiversx/sdk-dapp/out/utils/transactions/getExplorerLink';
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
   DECIMALS,
   DIGITS,
   FormatAmountController,
+  getExplorerLink,
   MvxExplorerLink,
   MvxFormatAmount,
   SignedTransactionType,

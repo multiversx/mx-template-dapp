@@ -1,7 +1,11 @@
-import { getExplorerLink } from '@multiversx/sdk-dapp/out/utils/transactions/getExplorerLink';
 import { Label } from 'components';
 import { contractAddress } from 'config';
-import { ACCOUNTS_ENDPOINT, MvxExplorerLink, useGetNetworkConfig } from 'lib';
+import {
+  ACCOUNTS_ENDPOINT,
+  getExplorerLink,
+  MvxExplorerLink,
+  useGetNetworkConfig
+} from 'lib';
 
 export const ContractAddress = () => {
   const { network } = useGetNetworkConfig();

@@ -6,6 +6,7 @@ export { UnlockPanelManager } from '@multiversx/sdk-dapp/out/managers/UnlockPane
 export { WALLET_PROVIDER_SEND_TRANSACTION_URL } from '@multiversx/sdk-dapp/out/constants/webWalletProvider.constants';
 export { getAccountProvider } from '@multiversx/sdk-dapp/out/providers/helpers/accountProvider';
 export { getActiveTransactionsStatus } from '@multiversx/sdk-dapp/out/utils/transactions/getActiveTransactionsStatus';
+export { getExplorerLink } from '@multiversx/sdk-dapp/out/utils/transactions/getExplorerLink';
 export { getInterpretedTransaction } from '@multiversx/sdk-dapp/out/utils/transactions/getInterpretedTransaction';
 export { getTransactions } from '@multiversx/sdk-dapp/out/apiCalls/transactions/getTransactions';
 export { initApp } from '@multiversx/sdk-dapp/out/methods/initApp/initApp';
