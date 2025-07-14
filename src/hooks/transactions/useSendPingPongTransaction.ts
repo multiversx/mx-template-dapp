@@ -1,34 +1,16 @@
+import axios from 'axios';
+import { contractAddress } from 'config';
+import { signAndSendTransactions } from 'helpers';
 import {
   AbiRegistry,
-  SmartContractTransactionsFactory,
-  TransactionsFactoryConfig
-} from '@multiversx/sdk-core/out';
-import { useCallback, useState } from 'react';
-import { contractAddress } from 'config';
-import pingPongAbi from 'contracts/ping-pong.abi.json';
-import { signAndSendTransactions } from 'helpers/signAndSendTransactions';
-import {
   Address,
-  deleteTransactionToast,
   GAS_PRICE,
-  newTransaction,
-  removeAllSignedTransactions,
-  removeAllTransactionsToSign,
-  useGetAccountInfo,
-  useGetNetworkConfig,
-  useTrackTransactionStatus,
-  VERSION
+  SmartContractTransactionsFactory,
+  Transaction,
+  TransactionsFactoryConfig,
+  useGetAccount,
+  useGetNetworkConfig
 } from 'lib';
-import { SessionEnum } from 'localConstants';
-import {
-  PingPongServiceProps,
-  PingRawProps,
-  PongRawProps
-} from 'types/pingPong.types';
-
-type PingPongTransactionProps = {
-  type: SessionEnum;
-};
 
 const PING_TRANSACTION_INFO = {
   processingMessage: 'Processing Ping transaction',
@@ -42,59 +24,13 @@ const PONG_TRANSACTION_INFO = {
   successMessage: 'Pong transaction successful'
 };
 
-export const useSendPingPongTransaction = ({
-  type
-}: PingPongTransactionProps) => {
-  // Needed in order to differentiate widgets between each other
-  // By default sdk-dapp takes the last sessionId available which will display on every widget the same transaction
-  // this usually appears on page refreshes
-  const [pingPongSessionId, setPingPongSessionId] = useState(
-    sessionStorage.getItem(type)
-  );
-
+export const useSendPingPongTransaction = () => {
   const { network } = useGetNetworkConfig();
-  const { address, account } = useGetAccountInfo();
-
-  const transactionStatus = useTrackTransactionStatus({
-    transactionId: pingPongSessionId ?? '0'
-  });
-
-  const clearAllTransactions = () => {
-    removeAllSignedTransactions();
-    removeAllTransactionsToSign();
-    deleteTransactionToast(pingPongSessionId ?? '');
-  };
-
-  const sendPingTransaction = useCallback(
-    async ({ amount, callbackRoute }: PingRawProps) => {
-      clearAllTransactions();
-
-      const pingTransaction = newTransaction({
-        value: amount,
-        data: 'ping',
-        receiver: contractAddress,
-        gasLimit: 60000000,
-        gasPrice: GAS_PRICE,
-        chainID: network.chainId,
-        nonce: account.nonce,
-        sender: address,
-        version: VERSION
-      });
-
-      const sessionId = await signAndSendTransactions({
-        transactions: [pingTransaction],
-        callbackRoute,
-        transactionsDisplayInfo: PING_TRANSACTION_INFO
-      });
-
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+  const { address } = useGetAccount();
 
   const getSmartContractFactory = async () => {
-    const abi = AbiRegistry.create(pingPongAbi);
+    const response = await axios.get('src/contracts/ping-pong.abi.json');
+    const abi = AbiRegistry.create(response.data);
     const scFactory = new SmartContractTransactionsFactory({
       config: new TransactionsFactoryConfig({
         chainID: network.chainId
@@ -105,119 +41,101 @@ export const useSendPingPongTransaction = ({
     return scFactory;
   };
 
-  const sendPingTransactionFromAbi = useCallback(
-    async ({ amount, callbackRoute }: PingRawProps) => {
-      clearAllTransactions();
+  const sendPingTransaction = async (amount: string) => {
+    const pingTransaction = new Transaction({
+      value: BigInt(amount),
+      data: Buffer.from('ping'),
+      receiver: new Address(contractAddress),
+      gasLimit: BigInt(6000000),
+      gasPrice: BigInt(GAS_PRICE),
+      chainID: network.chainId,
+      sender: new Address(address),
+      version: 1
+    });
 
-      const scFactory = await getSmartContractFactory();
-      const pingTransaction = scFactory.createTransactionForExecute(
-        new Address(address),
-        {
-          gasLimit: BigInt(60000000),
-          function: 'ping',
-          contract: new Address(contractAddress),
-          nativeTransferAmount: BigInt(amount)
-        }
-      );
+    await signAndSendTransactions({
+      transactions: [pingTransaction],
+      transactionsDisplayInfo: PING_TRANSACTION_INFO
+    });
+  };
 
-      const sessionId = await signAndSendTransactions({
-        transactions: [pingTransaction],
-        callbackRoute,
-        transactionsDisplayInfo: PING_TRANSACTION_INFO
-      });
+  const sendPingTransactionFromAbi = async (amount: string) => {
+    const scFactory = await getSmartContractFactory();
+    const pingTransaction = scFactory.createTransactionForExecute(
+      new Address(address),
+      {
+        gasLimit: BigInt(6000000),
+        function: 'ping',
+        contract: new Address(contractAddress),
+        nativeTransferAmount: BigInt(amount)
+      }
+    );
 
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+    const sessionId = await signAndSendTransactions({
+      transactions: [pingTransaction],
+      transactionsDisplayInfo: PING_TRANSACTION_INFO
+    });
 
-  const sendPingTransactionFromService = useCallback(
-    async ({ transactions, callbackRoute }: PingPongServiceProps) => {
-      clearAllTransactions();
+    return sessionId;
+  };
 
-      const sessionId = await signAndSendTransactions({
-        transactions,
-        callbackRoute,
-        transactionsDisplayInfo: PING_TRANSACTION_INFO
-      });
+  const sendPingTransactionFromService = async (
+    transactions: Transaction[]
+  ) => {
+    await signAndSendTransactions({
+      transactions,
+      transactionsDisplayInfo: PING_TRANSACTION_INFO
+    });
+  };
 
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+  const sendPongTransaction = async () => {
+    const pongTransaction = new Transaction({
+      value: BigInt(0),
+      data: Buffer.from('pong'),
+      receiver: new Address(contractAddress),
+      gasLimit: BigInt(6000000),
+      gasPrice: BigInt(GAS_PRICE),
+      chainID: network.chainId,
+      sender: new Address(address),
+      version: 1
+    });
 
-  const sendPongTransaction = useCallback(
-    async ({ callbackRoute }: PongRawProps) => {
-      clearAllTransactions();
+    await signAndSendTransactions({
+      transactions: [pongTransaction],
+      transactionsDisplayInfo: PONG_TRANSACTION_INFO
+    });
+  };
 
-      const pongTransaction = newTransaction({
-        value: '0',
-        data: 'pong',
-        receiver: contractAddress,
-        gasLimit: 60000000,
-        gasPrice: GAS_PRICE,
-        chainID: network.chainId,
-        nonce: account.nonce,
-        sender: address,
-        version: VERSION
-      });
+  const sendPongTransactionFromAbi = async () => {
+    const scFactory = await getSmartContractFactory();
+    const pongTransaction = scFactory.createTransactionForExecute(
+      new Address(address),
+      {
+        gasLimit: BigInt(6000000),
+        function: 'pong',
+        contract: new Address(contractAddress),
+        nativeTransferAmount: BigInt(0)
+      }
+    );
 
-      const sessionId = await signAndSendTransactions({
-        transactions: [pongTransaction],
-        callbackRoute,
-        transactionsDisplayInfo: PONG_TRANSACTION_INFO
-      });
+    const sessionId = await signAndSendTransactions({
+      transactions: [pongTransaction],
+      transactionsDisplayInfo: PONG_TRANSACTION_INFO
+    });
 
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+    return sessionId;
+  };
 
-  const sendPongTransactionFromAbi = useCallback(
-    async ({ callbackRoute }: PongRawProps) => {
-      clearAllTransactions();
+  const sendPongTransactionFromService = async (
+    transactions: Transaction[]
+  ) => {
+    const sessionId = await signAndSendTransactions({
+      transactions,
+      transactionsDisplayInfo: PONG_TRANSACTION_INFO
+    });
 
-      const scFactory = await getSmartContractFactory();
-      const pongTransaction = scFactory.createTransactionForExecute(
-        new Address(address),
-        {
-          gasLimit: BigInt(60000000),
-          function: 'pong',
-          contract: new Address(contractAddress),
-          nativeTransferAmount: BigInt(0)
-        }
-      );
-
-      const sessionId = await signAndSendTransactions({
-        transactions: [pongTransaction],
-        callbackRoute,
-        transactionsDisplayInfo: PONG_TRANSACTION_INFO
-      });
-
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
-
-  const sendPongTransactionFromService = useCallback(
-    async ({ transactions, callbackRoute }: PingPongServiceProps) => {
-      clearAllTransactions();
-
-      const sessionId = await signAndSendTransactions({
-        transactions,
-        callbackRoute,
-        transactionsDisplayInfo: PONG_TRANSACTION_INFO
-      });
-
-      sessionStorage.setItem(type, sessionId);
-      setPingPongSessionId(sessionId);
-    },
-    []
-  );
+    return sessionId;
+  };
 
   return {
     sendPingTransaction,
@@ -225,7 +143,6 @@ export const useSendPingPongTransaction = ({
     sendPongTransaction,
     sendPongTransactionFromAbi,
     sendPingTransactionFromService,
-    sendPongTransactionFromService,
-    transactionStatus
+    sendPongTransactionFromService
   };
 };

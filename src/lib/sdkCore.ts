@@ -4,9 +4,17 @@ export {
   AddressValue,
   ContractFunction,
   Message,
+  MessageComputer,
   ProxyNetworkProvider,
   SmartContract,
   SmartContractController,
+  SmartContractTransactionsFactory,
+  Token,
   TokenTransfer,
-  Transaction
+  Transaction,
+  TransactionComputer,
+  TransactionsFactoryConfig,
+  TransferTransactionsFactory,
+  UserSecretKey,
+  UserSigner
 } from '@multiversx/sdk-core';

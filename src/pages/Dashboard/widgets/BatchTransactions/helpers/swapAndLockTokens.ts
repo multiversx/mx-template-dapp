@@ -1,19 +1,29 @@
-import { refreshAccount, sendBatchTransactions } from 'lib';
-import { isSafari, SessionEnum } from 'localConstants/session';
-import { getSwapAndLockTransactions } from '../helpers';
-import { SendTransactionProps } from '../types';
+import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
+import { TransactionProps } from 'types';
+import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';
+import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 
 export const swapAndLockTokens = async ({
   address,
   nonce,
   chainID,
-  callbackRoute
-}: SendTransactionProps) => {
-  const transactions = getSwapAndLockTransactions({
+  transactionsDisplayInfo = {
+    processingMessage: 'Processing transactions',
+    errorMessage: 'An error has occurred during transaction execution',
+    successMessage: 'Swap and lock transactions successful'
+  }
+}: TransactionProps & {
+  transactionsDisplayInfo?: TransactionsDisplayInfoType;
+}) => {
+  const provider = getAccountProvider();
+
+  const transactionsToSign = getSwapAndLockTransactions({
     address,
     chainID,
     nonce
   });
+
+  const transactions = await provider.signTransactions(transactionsToSign);
 
   const groupedTransactions = [
     [transactions[0]],
@@ -21,26 +31,12 @@ export const swapAndLockTokens = async ({
     [transactions[3]]
   ];
 
-  await refreshAccount();
-
-  const { batchId, error } = await sendBatchTransactions({
+  const sessionId = await sendAndTrackTransactions({
     transactions: groupedTransactions,
-    customTransactionInformation: { redirectAfterSign: true },
-    transactionsDisplayInfo: {
-      processingMessage: 'Processing transactions',
-      errorMessage: 'An error has occurred during transaction execution',
-      successMessage: 'Batch transactions successful'
-    },
-    callbackRoute,
-    hasConsentPopup: isSafari
+    options: {
+      transactionsDisplayInfo
+    }
   });
 
-  if (error) {
-    console.error('Could not execute transactions', error);
-    return {};
-  }
-
-  sessionStorage.setItem(SessionEnum.batchId, batchId);
-
-  return { batchId };
+  return sessionId;
 };

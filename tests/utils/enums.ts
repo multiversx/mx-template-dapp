@@ -34,18 +34,6 @@ export enum GlobalDataEnum {
   transactionCanceled = 'Transaction canceled'
 }
 
-export enum RoutesEnum {
-  converters = 'converters',
-  auth = 'auth',
-  signMsg = 'sign-message',
-  scDeploy = 'smart-contract',
-  explainer = 'explainer',
-  login = 'unlock',
-  xportal = 'walletconnect',
-  ledger = 'ledger',
-  dashboard = 'dashboard'
-}
-
 export enum GlobalSelectorEnum {
   homeTitle = 'home-title',
   homeDescription = 'home-description',
@@ -65,7 +53,6 @@ export enum GlobalSelectorEnum {
   crossWindowLoginBtn = '[data-testid="webWalletLoginBtn"]',
   legacyWebWalletLoginDropdownButton = '[data-testid="legacyWebWalletLoginDropdownButton"]',
   legacyDropdownValue = '//*[@aria-labelledby="dropdown-button"]',
-  sendToSelfBtn = 'button*=Send to self',
   accesWalletBtn = '[data-testid="submitButton"]',
   signBtn = '[data-testid="signBtn"]',
   toastSelector = 'transactionToastTitle',
@@ -102,6 +89,24 @@ export enum GlobalSelectorEnum {
   signButton = 'signButton'
 }
 
+export enum RoutesEnum {
+  converters = 'converters',
+  auth = 'auth',
+  signMsg = 'sign-message',
+  scDeploy = 'smart-contract',
+  explainer = 'explainer',
+  login = 'unlock',
+  xportal = 'walletconnect',
+  ledger = 'ledger',
+  dashboard = 'dashboard'
+}
+
+export enum TransactionIndexEnum {
+  ping = 0,
+  swapLock = 3,
+  signBatch = 4
+}
+
 export enum WalletAdressEnum {
   adress1 = 'erd1qtknph0q5hsm4hmjpvzusj8vgy8m48lpvclnv6jlkw4uu7sacj6smz8uhg',
   adress2 = 'erd16fq70uf7mdkkkv3fylawk7269ef63kv2vh5s4lrtm58aufve8dtqjlhjjn',
@@ -110,10 +115,4 @@ export enum WalletAdressEnum {
   adress5 = 'erd130zl7gmh3dzz5ed5xhypxrxmzd4ev9940zcwaz8vgpxkx6xg0s7q07jpej',
   adress6 = 'erd1p7a4q6qz9pns8mytcw62n2anuhd8nh6qkh4w5mzf9s7urdlkud5q94d630',
   adress7 = 'erd1tqtxnneypvga204w3e26096kpyxmtfk660yq7fh3jswtwagpwuds2a8wr3'
-}
-
-export enum TransactionIndexEnum {
-  ping = 0,
-  swapLock = 3,
-  signBatch = 4
 }

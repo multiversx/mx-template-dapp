@@ -12,26 +12,18 @@ import {
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetPendingTransactions } from 'lib';
-import { SessionEnum } from 'localConstants';
-import { SignedTransactionType, WidgetProps } from 'types';
 import { useGetPingAmount, useGetTimeToPong } from './hooks';
 
-export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
-  const { hasPendingTransactions } = useGetPendingTransactions();
+export const PingPongAbi = () => {
+  const transactions = useGetPendingTransactions();
+  const hasPendingTransactions = transactions.length > 0;
+
   const getTimeToPong = useGetTimeToPong();
-  const {
-    sendPingTransactionFromAbi,
-    sendPongTransactionFromAbi,
-    transactionStatus
-  } = useSendPingPongTransaction({
-    type: SessionEnum.abiPingPongSessionId
-  });
+  const { sendPingTransactionFromAbi, sendPongTransactionFromAbi } =
+    useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
 
-  const [stateTransactions, setStateTransactions] = useState<
-    SignedTransactionType[] | null
-  >(null);
-  const [hasPing, setHasPing] = useState<boolean>(true);
+  const [hasPing, setHasPing] = useState(true);
   const [secondsLeft, setSecondsLeft] = useState<number>(0);
 
   const setSecondsRemaining = async () => {
@@ -45,11 +37,11 @@ export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
   };
 
   const onSendPingTransaction = async () => {
-    await sendPingTransactionFromAbi({ amount: pingAmount, callbackRoute });
+    await sendPingTransactionFromAbi(pingAmount);
   };
 
   const onSendPongTransaction = async () => {
-    await sendPongTransactionFromAbi({ callbackRoute });
+    await sendPongTransactionFromAbi();
   };
 
   const timeRemaining = moment()
@@ -62,12 +54,6 @@ export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
   useEffect(() => {
     getCountdownSeconds({ secondsLeft, setSecondsLeft });
   }, [hasPing]);
-
-  useEffect(() => {
-    if (transactionStatus.transactions) {
-      setStateTransactions(transactionStatus.transactions);
-    }
-  }, [transactionStatus]);
 
   useEffect(() => {
     setSecondsRemaining();
@@ -102,7 +88,7 @@ export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
       </div>
 
       <OutputContainer>
-        {!stateTransactions && (
+        {!hasPendingTransactions && (
           <>
             <ContractAddress />
             {!pongAllowed && (
@@ -116,7 +102,7 @@ export const PingPongAbi = ({ callbackRoute }: WidgetProps) => {
         )}
 
         <PingPongOutput
-          transactions={stateTransactions}
+          transactions={transactions}
           pongAllowed={pongAllowed}
           timeRemaining={timeRemaining}
         />
