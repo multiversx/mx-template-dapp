@@ -1,3 +1,4 @@
+import { getExplorerLink } from '@multiversx/sdk-dapp/out/utils/transactions/getExplorerLink';
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
@@ -31,14 +32,22 @@ export const TransactionOutput = ({
       input: account.balance
     });
 
-  console.log('Transaction: ', transaction);
+  const explorerAddress = network.explorerAddress;
+  const hashExplorerLink = getExplorerLink({
+    to: `/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`,
+    explorerAddress
+  });
+  const receiverExplorerLink = getExplorerLink({
+    to: `/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`,
+    explorerAddress
+  });
 
   return (
     <div className='flex flex-col'>
       <p>
         <Label>Hash:</Label>
         <MvxExplorerLink
-          link={`${network.explorerAddress}/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`}
+          link={hashExplorerLink}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.hash}
@@ -47,7 +56,7 @@ export const TransactionOutput = ({
       <p>
         <Label>Receiver:</Label>
         <MvxExplorerLink
-          link={`${network.explorerAddress}/${ACCOUNTS_ENDPOINT}/${transaction.receiver}`}
+          link={receiverExplorerLink}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.receiver}
