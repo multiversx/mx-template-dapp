@@ -22,7 +22,7 @@ export const Button = ({
   return (
     <button
       id={id}
-      data-testid={otherProps['data-testid']}
+      {...otherProps}
       disabled={disabled}
       onClick={onClick}
       className={className}

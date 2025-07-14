@@ -3,106 +3,57 @@ import {
   faPaperPlane
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
 import { Button, OutputContainer, TransactionsOutput } from 'components';
 import {
-  useGetAccountInfo,
-  useGetBatches,
+  useGetAccount,
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'lib';
-import { SessionEnum } from 'localConstants/session';
-import { SignedTransactionType, WidgetProps } from 'types';
-import { useBatchTransactionContext } from 'wrappers';
 import {
   sendBatchTransactions,
   signAndAutoSendBatchTransactions,
   swapAndLockTokens
 } from './helpers';
-import { useSendSignedTransactions } from './hooks';
 
-export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
-  const { setSendBatchTransactionsOnDemand } = useBatchTransactionContext();
-  const { address, account } = useGetAccountInfo();
+export const BatchTransactions = () => {
+  const { address, nonce } = useGetAccount();
   const { network } = useGetNetworkConfig();
-  const { batches } = useGetBatches();
-  const { hasPendingTransactions } = useGetPendingTransactions();
-  const [trackBatchId, setTrackBatchId] = useState(
-    sessionStorage.getItem(SessionEnum.batchId)
-  );
-
-  const [stateTransactions, setStateTransactions] = useState<
-    SignedTransactionType[] | null
-  >(null);
-  const [currentSessionId, setCurrentSessionId] = useState(
-    sessionStorage.getItem(SessionEnum.signedSessionId) || ''
-  );
-
-  const { batchId, setBatchSessionId } = useSendSignedTransactions({
-    signedSessionId: currentSessionId
-  });
-
-  // If manual batch transactions are executed, track the batchId
-  useEffect(() => {
-    if (batchId) {
-      setTrackBatchId(batchId);
-    }
-  }, [batchId]);
-
-  useEffect(() => {
-    if (trackBatchId && batches[trackBatchId]) {
-      setStateTransactions(batches[trackBatchId].transactions.flat());
-    }
-  }, [trackBatchId, batches]);
+  const transactions = useGetPendingTransactions();
+  const hasPendingTransactions = transactions.length > 0;
 
   const executeSignAndAutoSendBatchTransactions = async () => {
-    setSendBatchTransactionsOnDemand(false);
-
-    const { batchId: batchIdResult } = await signAndAutoSendBatchTransactions({
+    await signAndAutoSendBatchTransactions({
       address,
-      nonce: account.nonce,
+      nonce,
       chainID: network.chainId,
-      callbackRoute
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing batch transactions',
+        errorMessage:
+          'An error has occurred during batch transaction execution',
+        successMessage: 'Batch transactions successful'
+      }
     });
-
-    if (!batchIdResult) {
-      return;
-    }
-
-    setTrackBatchId(batchIdResult);
   };
 
   const executeBatchTransactions = async () => {
-    setSendBatchTransactionsOnDemand(true);
-    const { newBatchSessionId, sessionId } = await sendBatchTransactions({
+    await sendBatchTransactions({
       address,
-      nonce: account.nonce,
-      chainID: network.chainId,
-      callbackRoute
+      nonce,
+      chainID: network.chainId
     });
-
-    if (!newBatchSessionId || !sessionId) {
-      return;
-    }
-
-    setBatchSessionId(newBatchSessionId);
-    setCurrentSessionId(sessionId);
   };
 
   const executeSwapAndLockTokens = async () => {
-    setSendBatchTransactionsOnDemand(true);
-    const { batchId: currentBatchId } = await swapAndLockTokens({
+    await swapAndLockTokens({
       address,
-      nonce: account.nonce,
+      nonce,
       chainID: network.chainId,
-      callbackRoute
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing swap and lock',
+        errorMessage: 'An error has occurred during swap and lock',
+        successMessage: 'Swap and lock successful'
+      }
     });
-
-    if (!currentBatchId) {
-      return;
-    }
-
-    setTrackBatchId(currentBatchId);
   };
 
   return (
@@ -124,7 +75,6 @@ export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
           <FontAwesomeIcon icon={faPaperPlane} className='mr-1' />
           Sign batch & controlled sending
         </Button>
-
         <Button
           data-testid='swap-lock'
           onClick={executeSwapAndLockTokens}
@@ -136,9 +86,7 @@ export const BatchTransactions = ({ callbackRoute }: WidgetProps) => {
       </div>
 
       <OutputContainer>
-        {stateTransactions && (
-          <TransactionsOutput transactions={stateTransactions.flat()} />
-        )}
+        <TransactionsOutput transactions={transactions} />
       </OutputContainer>
     </div>
   );

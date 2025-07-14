@@ -1,23 +1,21 @@
 import { Label } from 'components';
-import { CopyButton, Message, useGetLastSignedMessageSession } from 'lib';
+import { CopyButton, Message } from 'lib';
 import { decodeMessage } from '../helpers';
 
 interface VerifyMessagePropsType {
   message: Message;
+  signature: string;
+  address: string;
 }
 
 export const SignSuccess = (props: VerifyMessagePropsType) => {
-  const signedMessageInfo = useGetLastSignedMessageSession();
-
-  if (!signedMessageInfo?.signature || !props.message) {
+  if (props.message == null) {
     return null;
   }
 
-  const { signature } = signedMessageInfo;
-
   const { encodedMessage, decodedMessage } = decodeMessage({
     message: props.message,
-    signature: signature
+    signature: props.signature
   });
 
   return (
@@ -30,9 +28,9 @@ export const SignSuccess = (props: VerifyMessagePropsType) => {
             readOnly
             className='w-full resize-none outline-none bg-transparent'
             rows={2}
-            defaultValue={signature}
+            defaultValue={props.signature}
           />
-          <CopyButton text={signature} />
+          <CopyButton text={props.signature} />
         </div>
 
         <div className='flex flex-row w-full gap-2'>

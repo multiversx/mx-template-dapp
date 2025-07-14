@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
+import { contractAddress } from 'config';
+import pingPongAbi from 'contracts/ping-pong.abi.json';
 import {
-  ContractFunction,
+  AbiRegistry,
+  Address,
   ProxyNetworkProvider,
-  ResultsParser,
+  SmartContractController,
   useGetNetworkConfig
 } from 'lib';
-import { smartContract } from 'utils';
-
-const resultsParser = new ResultsParser();
 
 export const useGetPingAmount = () => {
   const { network } = useGetNetworkConfig();
@@ -17,19 +17,21 @@ export const useGetPingAmount = () => {
 
   const getPingAmount = async () => {
     try {
-      const query = smartContract.createQuery({
-        func: new ContractFunction('getPingAmount')
+      const abi = AbiRegistry.create(pingPongAbi);
+
+      const scController = new SmartContractController({
+        chainID: network.chainId,
+        networkProvider: proxy,
+        abi
       });
-      const queryResponse = await proxy.queryContract(query);
 
-      const endpointDefinition = smartContract.getEndpoint('getPingAmount');
+      const [result] = await scController.query({
+        contract: Address.newFromBech32(contractAddress),
+        function: 'getPingAmount',
+        arguments: []
+      });
 
-      const { firstValue: amount } = resultsParser.parseQueryResponse(
-        queryResponse,
-        endpointDefinition
-      );
-
-      setPingAmount(amount?.valueOf()?.toString(10));
+      setPingAmount(result?.valueOf()?.toString(10));
     } catch (err) {
       console.error('Unable to call getPingAmount', err);
     }
