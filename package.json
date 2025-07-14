@@ -9,7 +9,7 @@
     "@fortawesome/fontawesome-svg-core": "6.5.1",
     "@fortawesome/free-solid-svg-icons": "6.5.1",
     "@fortawesome/react-fontawesome": "0.2.0",
-    "@multiversx/sdk-core": "14.2.3",
+    "@multiversx/sdk-core": "14.2.6",
     "@multiversx/sdk-dapp": "^5.x",
     "@multiversx/sdk-dapp-ui": "^0.x",
     "@multiversx/sdk-dapp-utils": "2.0.2",
