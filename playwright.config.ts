@@ -21,7 +21,7 @@ export default defineConfig({
     }
   ],
   webServer: {
-    command: 'npm run start:devnet',
+    command: 'npm run start-devnet',
     timeout: 120 * 1000,
     reuseExistingServer: true
   }
