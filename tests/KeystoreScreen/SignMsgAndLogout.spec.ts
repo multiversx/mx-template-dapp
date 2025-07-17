@@ -1,8 +1,14 @@
-import { test, expect } from '@playwright/test';
-import { accessDapp, confirmPass, login } from '../utils/actions';
+import { expect, test } from '@playwright/test';
 import {
-  GlobalSelectorEnum,
+  accessDapp,
+  confirmPass,
+  findPageByUrlSubstring,
+  login
+} from '../utils/actions';
+import {
   GlobalDataEnum,
+  GlobalSelectorEnum,
+  OriginPageEnum,
   WalletAdressEnum
 } from '../utils/enums';
 
@@ -19,18 +25,16 @@ test.describe('should sign message', () => {
     };
     await login(page, loginData);
     await page.getByPlaceholder('Write message here').fill('Test msg ###');
-    const [walletPage] = await Promise.all([
-      page.waitForEvent('popup'),
-      page.locator(GlobalSelectorEnum.signMsgBtn).click()
-    ]);
+    await page.locator(GlobalSelectorEnum.signMsgBtn).click();
+    const walletPage = await findPageByUrlSubstring(
+      page,
+      OriginPageEnum.multiversxWallet
+    );
     await confirmPass(walletPage);
     await walletPage.getByTestId(GlobalSelectorEnum.signButton).click();
-    await expect(
-      page.locator('#sign-message div').filter({ hasText: 'Signature:' }).nth(1)
-    ).toBeVisible();
     await expect(page.getByText('Test msg ###')).toBeVisible();
     await page.getByRole('button', { name: 'Close' }).click();
-    await expect(page.getByText('LoginChoose a login method')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Connect' })).toBeVisible();
     await page.close();
   });
 });

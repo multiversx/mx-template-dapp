@@ -3,12 +3,11 @@ import {
   accessDapp,
   batchTransactions,
   handlePopup,
-  login,
-  pingPongHandler
+  login
 } from '../utils/actions';
 import {
-  GlobalSelectorEnum,
   GlobalDataEnum,
+  GlobalSelectorEnum,
   WalletAdressEnum
 } from '../utils/enums';
 
@@ -25,10 +24,7 @@ test.describe('Batch transaction test', () => {
     };
     await login(page, loginData);
     await batchTransactions(page, GlobalSelectorEnum.swapLockType);
-    await page.waitForTimeout(8000);
-    await handlePopup(page, () =>
-      page.locator(GlobalSelectorEnum.lastBatchTransaction).click()
-    );
+    await handlePopup(page);
     await page.close();
   });
 });

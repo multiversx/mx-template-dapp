@@ -6,8 +6,8 @@ import {
   login
 } from '../utils/actions';
 import {
-  GlobalSelectorEnum,
   GlobalDataEnum,
+  GlobalSelectorEnum,
   WalletAdressEnum
 } from '../utils/enums';
 
@@ -25,9 +25,7 @@ test.describe('Batch controlled sending', () => {
     await login(page, loginData);
     await batchTransactions(page, GlobalSelectorEnum.controlledSendingType);
     await page.waitForTimeout(8000);
-    await handlePopup(page, () =>
-      page.locator(GlobalSelectorEnum.lastBatchControlledTransaction).click()
-    );
+    await handlePopup(page);
     await page.close();
   });
 });

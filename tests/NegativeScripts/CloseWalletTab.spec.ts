@@ -1,8 +1,14 @@
-import { test, expect } from '@playwright/test';
-import { accessDapp, initTransaction, login } from '../utils/actions';
+import { expect, test } from '@playwright/test';
 import {
-  GlobalSelectorEnum,
+  accessDapp,
+  findPageByUrlSubstring,
+  initTransaction,
+  login
+} from '../utils/actions';
+import {
   GlobalDataEnum,
+  GlobalSelectorEnum,
+  OriginPageEnum,
   WalletAdressEnum
 } from '../utils/enums';
 
@@ -11,22 +17,22 @@ test.describe('test refresh window', () => {
     await accessDapp(page);
   });
 
-  test('reload and wallet window and close it', async ({
-    page,
-    browser,
-    context
-  }) => {
+  test('reload and wallet window and close it', async ({ page, context }) => {
     const loginData = {
       selector: GlobalSelectorEnum.keystoreBtn,
       file: GlobalDataEnum.keystoreFile,
       address: WalletAdressEnum.adress3
     };
     await login(page, loginData);
-    const walletpage = await initTransaction(page);
+    await initTransaction(page);
+    const wallePage = await findPageByUrlSubstring(
+      page,
+      OriginPageEnum.multiversxWallet
+    );
     await page.waitForTimeout(3000);
     try {
-      await walletpage.reload();
-      await walletpage.waitForLoadState('load');
+      await wallePage.reload();
+      await wallePage.waitForLoadState('load');
     } catch (error) {
       console.error('Error during page reload:', error);
     }

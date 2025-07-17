@@ -1,8 +1,8 @@
 import { test } from '@playwright/test';
 import { accessDapp, login, pingPongHandler } from '../utils/actions';
 import {
-  GlobalSelectorEnum,
   GlobalDataEnum,
+  GlobalSelectorEnum,
   WalletAdressEnum
 } from '../utils/enums';
 

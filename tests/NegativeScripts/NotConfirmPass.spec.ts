@@ -1,8 +1,9 @@
-import { test, expect } from '@playwright/test';
-import { accessDapp, initTransaction, login } from '../utils/actions';
+import { expect, test } from '@playwright/test';
+import { accessDapp, findPageByUrlSubstring, login } from '../utils/actions';
 import {
-  GlobalSelectorEnum,
   GlobalDataEnum,
+  GlobalSelectorEnum,
+  OriginPageEnum,
   WalletAdressEnum
 } from '../utils/enums';
 
@@ -11,17 +12,22 @@ test.describe('test invalid password', () => {
     await accessDapp(page);
   });
 
-  test('3 invalid password', async ({ page, browser, context }) => {
+  test('3 invalid password', async ({ page }) => {
     const loginData = {
       selector: GlobalSelectorEnum.keystoreBtn,
       file: GlobalDataEnum.keystoreFile,
       address: WalletAdressEnum.adress3
     };
     await login(page, loginData);
-    const walletpage = await initTransaction(page);
+    await page.getByTestId(GlobalSelectorEnum.signAndBatchType).click();
+    const walletPage = await findPageByUrlSubstring(
+      page,
+      OriginPageEnum.multiversxWallet
+    );
+
     for (let i = 0; i < 3; i++) {
-      await walletpage.getByTestId(GlobalSelectorEnum.accesPass).fill('test');
-      await walletpage.locator(GlobalSelectorEnum.accesWalletBtn).click();
+      await walletPage.getByTestId(GlobalSelectorEnum.accesPass).fill('test');
+      await walletPage.locator(GlobalSelectorEnum.accesWalletBtn).click();
     }
     await expect(
       page.getByText(GlobalDataEnum.transactionCanceled)
