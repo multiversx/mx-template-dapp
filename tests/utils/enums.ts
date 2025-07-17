@@ -90,7 +90,8 @@ export enum GlobalSelectorEnum {
   closeButton = 'closeButton',
   signButton = 'signButton',
   transactionLink = '.transaction-link',
-  closePoupBtn = 'mvx-provider-idle-screen'
+  closePoupBtn = 'mvx-provider-idle-screen',
+  test = 'test'
 }
 
 export enum OriginPageEnum {
