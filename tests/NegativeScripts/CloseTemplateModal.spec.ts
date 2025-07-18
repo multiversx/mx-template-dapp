@@ -1,8 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 import { accessDapp, initTransaction, login } from '../utils/actions';
 import {
-  GlobalSelectorEnum,
   GlobalDataEnum,
+  GlobalSelectorEnum,
   WalletAdressEnum
 } from '../utils/enums';
 
@@ -19,7 +19,11 @@ test.describe('cancel transaction from template window', () => {
     };
     await login(page, loginData);
     await initTransaction(page);
-    await page.getByTestId(GlobalSelectorEnum.closeButton).click();
+    await page.waitForTimeout(5000);
+    await page
+      .locator(GlobalSelectorEnum.closePoupBtn)
+      .getByRole('button', { name: 'Close' })
+      .click();
     await expect(
       page.getByText(GlobalDataEnum.transactionCanceled)
     ).toBeVisible();

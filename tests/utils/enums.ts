@@ -7,6 +7,7 @@ export enum GlobalDataEnum {
   signature = '94ea7c3c28c2e718cbac76d00423e2cfbde63017120e5353c17b675fb7d78a1e855ee55e41f021d40dad1487db11f5e897c314aaff7d4cc4dc82062abaa97403',
   address = 'erd16xlzk48ftvhxp8dyq6d0kkfpgpfechlzycfm9xmdmwna66pvkymqvz4vzq',
   signedMsgPlaceHolder = 'Insert or paste the message that was signed.',
+  // eslint-disable-next-line quotes
   signaturePlaceHolder = "Insert or paste the signature. You don't have to add '0x' prefix.",
   confirmationMsg = 'Valid',
   invalidMsg = 'Invalid',
@@ -65,6 +66,7 @@ export enum GlobalSelectorEnum {
   ledgerBtn = '[data-testid="ledgerLoginButton"]',
   pemBtn = '[data-testid="pemBtn"]',
   modalCloseBtn = '[data-testid="modalCloseButton"]',
+  // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
   closeTemplateModal = 'button*=Close',
   confirmParagraph = '//*[@id="dapp-modal"]/div/div/div/p',
   closeBtn = '[data-testid="closeButton"]',
@@ -86,7 +88,14 @@ export enum GlobalSelectorEnum {
   lastBatchTransaction = 'div:nth-child(5) > .dapp-core-component__explorerLinkStyles__link',
   lastBatchControlledTransaction = 'div:nth-child(6) > .dapp-core-component__explorerLinkStyles__link',
   closeButton = 'closeButton',
-  signButton = 'signButton'
+  signButton = 'signButton',
+  transactionLink = '.transaction-link',
+  closePoupBtn = 'mvx-provider-idle-screen'
+}
+
+export enum OriginPageEnum {
+  multiversxWallet = 'wallet.multiversx.com',
+  explorerPage = 'devnet-explorer.multiversx.com'
 }
 
 export enum RoutesEnum {

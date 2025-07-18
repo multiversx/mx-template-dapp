@@ -1,13 +1,10 @@
 import { expect, Page } from '@playwright/test';
-import { initTransaction, confirmPass } from '../utils/actions';
-import { GlobalSelectorEnum } from '../utils/enums';
-
-export const closeTransaction = async (page: Page) => {
-  const walletPage = await initTransaction(page);
-  await walletPage
-    .getByTestId(GlobalSelectorEnum.keystoreCloseModalBtn)
-    .click();
-};
+import {
+  confirmPass,
+  findPageByUrlSubstring,
+  initTransaction
+} from '../utils/actions';
+import { GlobalSelectorEnum, OriginPageEnum } from '../utils/enums';
 
 export const closeTemplateModal = async (page: Page) => {
   await initTransaction(page);
@@ -23,6 +20,15 @@ export const closeTemplateModal = async (page: Page) => {
   await initTransaction(page);
   await page.bringToFront();
   await expect(page.locator(GlobalSelectorEnum.accesWalletBtn)).toBeVisible();
+};
+
+export const closeTransaction = async (page: Page) => {
+  await initTransaction(page);
+  const wallePage = await findPageByUrlSubstring(
+    page,
+    OriginPageEnum.multiversxWallet
+  );
+  await wallePage.getByTestId(GlobalSelectorEnum.keystoreCloseModalBtn).click();
 };
 
 export const closeWalletTab = async (page: Page) => {
