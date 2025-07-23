@@ -16,10 +16,6 @@ See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
 
 ## Getting Started
 
-The dapp is a client side only project and is built using the [Create React App](https://create-react-app.dev) scripts.
-
-### Instalation and running
-
 ### Step 1. Install modules
 
 From a terminal, navigate to the project folder and run:
