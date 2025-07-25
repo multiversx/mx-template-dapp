@@ -5,17 +5,11 @@ export const Widget = ({
   title,
   description,
   reference,
-  anchor,
   widget: MxWidget,
   props = {}
 }: WidgetType) => {
   return (
-    <Card
-      title={title}
-      description={description}
-      reference={reference}
-      anchor={anchor}
-    >
+    <Card title={title} description={description} reference={reference}>
       <MxWidget {...props} />
     </Card>
   );

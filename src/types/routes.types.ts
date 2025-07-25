@@ -1,5 +1,5 @@
 export interface RouteType {
   path: string;
-  component: any;
+  component: () => React.ReactNode;
   authenticatedRoute?: boolean;
 }
