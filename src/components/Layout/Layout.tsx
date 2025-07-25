@@ -1,7 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { AuthRedirectWrapper } from 'wrappers';
-import { Footer } from './Footer';
-import { Header } from './Header';
+import { Footer, Header } from './components';
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
