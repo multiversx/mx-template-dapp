@@ -7,4 +7,3 @@ export * from './Loader';
 export * from './MissingNativeAuthError';
 export * from './MxLink';
 export * from './OutputContainer';
-export * from './TransactionsTable';
