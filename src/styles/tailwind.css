@@ -1,0 +1,5 @@
+@import 'tailwindcss';
+
+@theme {
+    --background-image-mvx-white: url('../multiversx-white.svg');
+}
