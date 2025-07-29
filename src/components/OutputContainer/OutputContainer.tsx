@@ -18,7 +18,7 @@ export const OutputContainer = ({
   <div
     data-testid={dataTestId}
     className={classNames(
-      'text-sm border border-gray-200 rounded overflow-auto',
+      'text-sm text-primary font-normal bg-secondary rounded-xl overflow-auto',
       className
     )}
   >

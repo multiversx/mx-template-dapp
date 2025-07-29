@@ -11,7 +11,7 @@ import {
 } from 'components';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
-import { useGetPendingTransactions } from 'lib';
+import { CopyButton, MvxExplorerLink, useGetPendingTransactions } from 'lib';
 import { useGetPingAmount, useGetTimeToPong } from './hooks';
 
 export const PingPongAbi = () => {
@@ -62,13 +62,49 @@ export const PingPongAbi = () => {
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
+        <Label>Contract: </Label>
+
+        <OutputContainer>
+          {!hasPendingTransactions && (
+            <>
+              <div className='flex justify-between items-center'>
+                <ContractAddress />
+
+                <div className='flex gap-1 text-primary'>
+                  <CopyButton />
+
+                  <MvxExplorerLink
+                  // link={explorerLink}
+                  // className=''
+                  ></MvxExplorerLink>
+                </div>
+              </div>
+              {!pongAllowed && (
+                <p>
+                  <Label>Time remaining: </Label>
+                  <span className='text-red-600'>{timeRemaining}</span> until
+                  able to pong
+                </p>
+              )}
+            </>
+          )}
+
+          <PingPongOutput
+            transactions={transactions}
+            pongAllowed={pongAllowed}
+            timeRemaining={timeRemaining}
+          />
+        </OutputContainer>
+      </div>
+
+      <div className='flex flex-col gap-2'>
         <div className='flex justify-start gap-2'>
           <Button
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
             data-testid='btnPingAbi'
             data-cy='transactionBtn'
-            className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:!text-black disabled:cursor-not-allowed'
+            className='inline-block rounded-lg px-2 py-2 text-center text-sm hover:no-underline my-0 bg-btn-primary text-btn-primary hover:bg-btn-hover mr-0 disabled:bg-btn-secondary cursor-pointer disabled:cursor-not-allowed disabled:text-black'
           >
             <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
             Ping
@@ -79,34 +115,13 @@ export const PingPongAbi = () => {
             data-testid='btnPongAbi'
             data-cy='transactionBtn'
             onClick={onSendPongTransaction}
-            className='inline-block rounded-lg px-3 py-2 text-center hover:no-underline my-0 bg-blue-600 text-white hover:bg-blue-700 mr-0 disabled:bg-gray-200 disabled:!text-black disabled:cursor-not-allowed'
+            className='inline-block rounded-lg px-3 py-2 text-center text-sm hover:no-underline my-0 bg-btn-primary text-btn-primary hover:bg-btn-hover mr-0 disabled:bg-btn-secondary cursor-pointer disabled:cursor-not-allowed disabled:text-black'
           >
             <FontAwesomeIcon icon={faArrowDown} className='mr-1' />
             Pong
           </Button>
         </div>
       </div>
-
-      <OutputContainer>
-        {!hasPendingTransactions && (
-          <>
-            <ContractAddress />
-            {!pongAllowed && (
-              <p>
-                <Label>Time remaining: </Label>
-                <span className='text-red-600'>{timeRemaining}</span> until able
-                to pong
-              </p>
-            )}
-          </>
-        )}
-
-        <PingPongOutput
-          transactions={transactions}
-          pongAllowed={pongAllowed}
-          timeRemaining={timeRemaining}
-        />
-      </OutputContainer>
     </div>
   );
 };

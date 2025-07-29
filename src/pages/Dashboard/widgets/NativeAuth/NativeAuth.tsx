@@ -8,7 +8,7 @@ import {
   useGetLoginInfo,
   useGetNetworkConfig
 } from 'lib';
-import { Username } from '../Account/components';
+import { Username } from 'pages/Dashboard/components/LeftPanel/components/Account/components';
 import { useGetProfile } from './hooks';
 
 export const NativeAuth = () => {
@@ -45,26 +45,49 @@ export const NativeAuth = () => {
   }
 
   return (
-    <OutputContainer isLoading={isLoading}>
-      <p>
-        <Label>Address:</Label> {profile?.address ?? 'N/A'}
-      </p>
+    <div className='flex flex-col gap-8'>
+      <div className='flex flex-col gap-2'>
+        <Label>Address</Label>
 
-      <Username account={profile} />
-      <p>
-        <Label>Shard: </Label> {profile?.shard ?? 'N/A'}
-      </p>
-
-      <div className='flex gap-1'>
-        <Label>Balance:</Label>
-        <MvxFormatAmount
-          isValid={isValid}
-          valueInteger={valueInteger}
-          valueDecimal={valueDecimal}
-          label={label}
-          data-testid='balance'
-        />
+        <OutputContainer isLoading={isLoading}>
+          <p className='flex flex-col'>{profile?.address ?? 'N/A'}</p>
+        </OutputContainer>
       </div>
-    </OutputContainer>
+
+      <div className='flex gap-8 w-full'>
+        <div className='flex flex-col gap-2 w-1/3'>
+          <Label>Herotag</Label>
+
+          <OutputContainer isLoading={isLoading}>
+            <Username account={profile} />
+          </OutputContainer>
+        </div>
+
+        <div className='flex flex-col gap-2 w-1/3'>
+          <Label>Shard</Label>
+
+          <OutputContainer isLoading={isLoading}>
+            <p>{profile?.shard ?? 'N/A'}</p>
+          </OutputContainer>
+        </div>
+
+        <div className='flex flex-col gap-2 w-1/3'>
+          <Label>Balance</Label>
+
+          <OutputContainer isLoading={isLoading}>
+            {' '}
+            <div className='flex gap-1'>
+              <MvxFormatAmount
+                isValid={isValid}
+                valueInteger={valueInteger}
+                valueDecimal={valueDecimal}
+                label={label}
+                data-testid='balance'
+              />
+            </div>
+          </OutputContainer>
+        </div>
+      </div>
+    </div>
   );
 };

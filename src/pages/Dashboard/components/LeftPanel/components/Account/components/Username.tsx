@@ -1,4 +1,3 @@
-import { Label } from 'components';
 import { AccountType, trimUsernameDomain } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { ProfileType } from 'types';
@@ -14,7 +13,6 @@ export const Username = (props: {
 
   return (
     <p>
-      <Label>Herotag: </Label>
       <span data-testid={DataTestIdsEnum.heroTag}>
         {account.username ? trimUsernameDomain(account.username) : 'N/A'}
       </span>

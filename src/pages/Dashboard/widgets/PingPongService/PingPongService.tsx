@@ -12,7 +12,12 @@ import {
 } from 'components';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { useSendPingPongTransaction } from 'hooks';
-import { useGetLoginInfo, useGetPendingTransactions } from 'lib';
+import {
+  CopyButton,
+  MvxExplorerLink,
+  useGetLoginInfo,
+  useGetPendingTransactions
+} from 'lib';
 import {
   useGetPingTransaction,
   useGetPongTransaction,
@@ -90,6 +95,41 @@ export const PingPongService = () => {
   return (
     <div className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
+        <Label>Contract: </Label>
+
+        <OutputContainer>
+          {!hasPendingTransactions && (
+            <>
+              <div className='flex justify-between items-center'>
+                <ContractAddress />
+
+                <div className='flex gap-1 text-primary'>
+                  <CopyButton />
+
+                  <MvxExplorerLink
+                  // link={explorerLink}
+                  // className=''
+                  ></MvxExplorerLink>
+                </div>
+              </div>
+              {!pongAllowed && (
+                <p>
+                  <Label>Time remaining: </Label>
+                  <span className='text-red-600'>{timeRemaining}</span> until
+                  able to pong
+                </p>
+              )}
+            </>
+          )}
+          <PingPongOutput
+            transactions={transactions}
+            pongAllowed={pongAllowed}
+            timeRemaining={timeRemaining}
+          />
+        </OutputContainer>
+      </div>
+
+      <div className='flex flex-col gap-2'>
         <div className='flex justify-start gap-2'>
           <Button
             disabled={!hasPing || hasPendingTransactions}
@@ -112,26 +152,6 @@ export const PingPongService = () => {
           </Button>
         </div>
       </div>
-
-      <OutputContainer>
-        {!hasPendingTransactions && (
-          <>
-            <ContractAddress />
-            {!pongAllowed && (
-              <p>
-                <Label>Time remaining: </Label>
-                <span className='text-red-600'>{timeRemaining}</span> until able
-                to pong
-              </p>
-            )}
-          </>
-        )}
-        <PingPongOutput
-          transactions={transactions}
-          pongAllowed={pongAllowed}
-          timeRemaining={timeRemaining}
-        />
-      </OutputContainer>
     </div>
   );
 };

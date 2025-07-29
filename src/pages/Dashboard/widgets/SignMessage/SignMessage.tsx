@@ -1,7 +1,7 @@
 import {
   faArrowsRotate,
   faBroom,
-  faFileSignature
+  faPenNib
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MouseEvent, useState } from 'react';
@@ -53,6 +53,34 @@ export const SignMessage = () => {
 
   return (
     <div className='flex flex-col gap-6'>
+      <div className='flex flex-col gap-2'>
+        <label className='text-secondary text-sm font-normal'>Message</label>
+        <OutputContainer>
+          {!['success', 'error'].includes(state) && (
+            <textarea
+              placeholder='Write message here'
+              className='text-secondary resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
+              onChange={(event) => {
+                setMessage(event.currentTarget.value);
+              }}
+              onKeyUp={(event) => {
+                setMessage(event.currentTarget.value);
+              }}
+            />
+          )}
+
+          {state === 'success' && signedMessage != null && (
+            <SignSuccess
+              message={signedMessage}
+              signature={signatrue}
+              address={address}
+            />
+          )}
+
+          {state === 'error' && <SignFailure />}
+        </OutputContainer>
+      </div>
+
       <div className='flex gap-2 items-start'>
         {['success', 'error'].includes(state) ? (
           <Button
@@ -71,36 +99,12 @@ export const SignMessage = () => {
         ) : (
           <Button data-testid='signMsgBtn' onClick={handleSubmit}>
             <>
-              <FontAwesomeIcon icon={faFileSignature} className='mr-1' />
+              <FontAwesomeIcon icon={faPenNib} className='mr-1' />
               Sign
             </>
           </Button>
         )}
       </div>
-      <OutputContainer>
-        {!['success', 'error'].includes(state) && (
-          <textarea
-            placeholder='Write message here'
-            className='resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
-            onChange={(event) => {
-              setMessage(event.currentTarget.value);
-            }}
-            onKeyUp={(event) => {
-              setMessage(event.currentTarget.value);
-            }}
-          />
-        )}
-
-        {state === 'success' && signedMessage != null && (
-          <SignSuccess
-            message={signedMessage}
-            signature={signatrue}
-            address={address}
-          />
-        )}
-
-        {state === 'error' && <SignFailure />}
-      </OutputContainer>
     </div>
   );
 };

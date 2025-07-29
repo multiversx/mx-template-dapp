@@ -15,11 +15,11 @@ export const Card = (props: CardType) => {
 
   return (
     <div
-      className='flex flex-col flex-1 rounded-xl bg-white p-6 justify-center'
+      className='flex flex-col flex-1 rounded-xl bg-primary p-6 justify-center border border-primary'
       data-testid={props['data-testid']}
       id={anchor}
     >
-      <h2 className='flex text-xl font-medium group'>
+      <h2 className='flex text-2xl font-medium group text-primary'>
         {title}
         <a
           href={reference}
@@ -29,7 +29,9 @@ export const Card = (props: CardType) => {
           <FontAwesomeIcon icon={faInfoCircle} size='sm' />
         </a>
       </h2>
-      {description && <p className='text-gray-400 mb-6'>{description}</p>}
+      {description && (
+        <p className='text-secondary mb-6 text-lg font-medium'>{description}</p>
+      )}
       {children}
     </div>
   );

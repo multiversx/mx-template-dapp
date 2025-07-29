@@ -1,8 +1,8 @@
 import { contractAddress } from 'config';
 import { WidgetType } from 'types/widget.types';
-import { Widget } from './components';
+import { DashboardHeader, LeftPanel } from './components';
+import { Widget } from './components/Widget/Widget';
 import {
-  Account,
   BatchTransactions,
   NativeAuth,
   PingPongAbi,
@@ -13,12 +13,6 @@ import {
 } from './widgets';
 
 const WIDGETS: WidgetType[] = [
-  {
-    title: 'Account',
-    widget: Account,
-    description: 'Connected account details',
-    reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account'
-  },
   {
     title: 'Ping & Pong (Manual)',
     widget: PingPongRaw,
@@ -82,10 +76,17 @@ const WIDGETS: WidgetType[] = [
 
 export const Dashboard = () => {
   return (
-    <div className='flex flex-col gap-6 max-w-3xl w-full'>
-      {WIDGETS.map((element) => (
-        <Widget key={element.title} {...element} />
-      ))}
+    <div className='flex w-screen'>
+      <LeftPanel />
+
+      <div className='flex flex-col justify-center items-center'>
+        <DashboardHeader />
+        <div className='flex flex-col gap-6 max-w-3xl w-full'>
+          {WIDGETS.map((element) => (
+            <Widget key={element.title} {...element} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

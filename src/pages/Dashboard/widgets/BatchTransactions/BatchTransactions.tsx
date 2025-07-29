@@ -58,6 +58,10 @@ export const BatchTransactions = () => {
 
   return (
     <div className='flex flex-col gap-6'>
+      <OutputContainer>
+        <TransactionsOutput transactions={transactions} />
+      </OutputContainer>
+
       <div className='flex flex-col md:flex-row gap-2 items-start'>
         <Button
           data-testid='sign-auto-send'
@@ -84,10 +88,6 @@ export const BatchTransactions = () => {
           Swap & Lock
         </Button>
       </div>
-
-      <OutputContainer>
-        <TransactionsOutput transactions={transactions} />
-      </OutputContainer>
     </div>
   );
 };
