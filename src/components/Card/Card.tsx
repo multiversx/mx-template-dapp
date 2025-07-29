@@ -19,14 +19,10 @@ export const Card = (props: CardType) => {
       data-testid={props['data-testid']}
       id={anchor}
     >
-      <h2 className='flex text-2xl font-medium group text-primary'>
+      <h2 className='flex justify-between items-center text-2xl font-medium group text-primary'>
         {title}
-        <a
-          href={reference}
-          target='_blank'
-          className='hidden group-hover:block ml-2 text-blue-600'
-        >
-          <FontAwesomeIcon icon={faInfoCircle} size='sm' />
+        <a href={reference} target='_blank' className='text-secondary '>
+          <FontAwesomeIcon icon={faInfoCircle} className='w-3.5 h-3.5' />
         </a>
       </h2>
       {description && (
