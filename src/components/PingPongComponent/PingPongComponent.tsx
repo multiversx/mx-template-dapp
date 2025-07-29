@@ -21,8 +21,10 @@ import {
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'lib';
+import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
 
 interface PingPongComponentPropsType {
+  id: ItemsIdEnum;
   sendPingTransaction: (amount: any) => Promise<any>;
   sendPongTransaction: (transaction?: any) => Promise<any>;
   getTimeToPong: () => Promise<number | null | undefined>;
@@ -33,6 +35,7 @@ interface PingPongComponentPropsType {
 }
 
 export const PingPongComponent = ({
+  id,
   sendPingTransaction,
   sendPongTransaction,
   getTimeToPong,
@@ -117,7 +120,7 @@ export const PingPongComponent = ({
   }
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div id={id} className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
         <Label>Contract: </Label>
 

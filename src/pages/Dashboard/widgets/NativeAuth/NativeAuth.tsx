@@ -9,6 +9,7 @@ import {
   useGetNetworkConfig
 } from 'lib';
 import { Username } from 'pages/Dashboard/components/LeftPanel/components/Account/components';
+import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
 import { useGetProfile } from './hooks';
 
 export const NativeAuth = () => {
@@ -45,7 +46,7 @@ export const NativeAuth = () => {
   }
 
   return (
-    <div className='flex flex-col gap-8'>
+    <div id={ItemsIdEnum.nativeAuth} className='flex flex-col gap-8'>
       <div className='flex flex-col gap-2'>
         <Label>Address</Label>
 

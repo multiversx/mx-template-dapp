@@ -5,7 +5,7 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { Label } from 'components';
 import {
   DECIMALS,
@@ -34,6 +34,12 @@ export const Account = () => {
       egldLabel: network.egldLabel,
       input: account.balance
     });
+
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  const toggleCollapse = () => {
+    setIsCollapsed((isCollapsed) => !isCollapsed);
+  };
 
   const accountDetails: AccountDetailsType[] = [
     {
@@ -71,26 +77,34 @@ export const Account = () => {
       <div className='flex justify-between items-center'>
         <h2 className='text-base text-secondary'>Connected account details</h2>
 
-        <FontAwesomeIcon icon={faChevronUp} className='text-primary' />
+        <FontAwesomeIcon
+          icon={faChevronUp}
+          className={`text-primary transition-transform duration-300 ${
+            isCollapsed ? 'rotate-180' : ''
+          }`}
+          onClick={toggleCollapse}
+        />
       </div>
 
-      <div className='flex flex-col' data-testid='topInfo'>
-        {accountDetails.map((accountDetail, index) => (
-          <div key={index} className='flex gap-2 items-center'>
-            <FontAwesomeIcon
-              icon={accountDetail.icon}
-              className='border border-primary rounded-lg p-1.5 text-primary'
-            />
+      {!isCollapsed && (
+        <div className='flex flex-col' data-testid='topInfo'>
+          {accountDetails.map((accountDetail, index) => (
+            <div key={index} className='flex gap-2 items-center'>
+              <FontAwesomeIcon
+                icon={accountDetail.icon}
+                className='border border-primary rounded-lg p-1.5 text-primary'
+              />
 
-            <p className='truncate flex flex-col'>
-              <Label>{accountDetail.label}</Label>
-              <span className='text-primary text-base'>
-                {accountDetail.value}
-              </span>
-            </p>
-          </div>
-        ))}
-      </div>
+              <p className='truncate flex flex-col'>
+                <Label>{accountDetail.label}</Label>
+                <span className='text-primary text-base'>
+                  {accountDetail.value}
+                </span>
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { PingPongComponent } from 'components';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetLoginInfo } from 'lib';
+import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
 import {
   useGetPingTransaction,
   useGetPongTransaction,
@@ -19,6 +20,7 @@ export const PingPongService = () => {
 
   return (
     <PingPongComponent
+      id={ItemsIdEnum.pingPongService}
       sendPingTransaction={sendPingTransactionFromService}
       sendPongTransaction={sendPongTransactionFromService}
       getTimeToPong={getTimeToPong}

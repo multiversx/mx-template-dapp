@@ -30,10 +30,13 @@ export const Header = () => {
 
   const handleChangeTheme = () => {
     const currentIcon = themeIcon;
+
     if (currentIcon === faSun) {
       setThemeIcon(faMoon);
+      document.documentElement.setAttribute('data-theme', 'mvx:dark-theme');
     } else {
       setThemeIcon(faSun);
+      document.documentElement.setAttribute('data-theme', 'mvx:light-theme');
     }
   };
 
@@ -57,7 +60,7 @@ export const Header = () => {
 
           <div className='flex gap-1 items-center relative'>
             <div className='w-3 h-3 rounded-full absolute left-0 -top-0.5 bg-accent flex items-center justify-center'>
-              <div className='w-2 h-2 rounded-full bg-black' />
+              <div className='w-2 h-2 rounded-full !bg-devnet' />
             </div>
             <p className='text-secondary font-normal text-sm bg-primary w-20 h-8 flex items-center justify-center rounded-lg border border-primary'>
               {environment[0].toUpperCase() + environment.slice(1)}

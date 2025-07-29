@@ -9,6 +9,7 @@ import {
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'lib';
+import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
 import {
   sendBatchTransactions,
   signAndAutoSendBatchTransactions,
@@ -57,7 +58,7 @@ export const BatchTransactions = () => {
   };
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div id={ItemsIdEnum.batchTransactions} className='flex flex-col gap-6'>
       <OutputContainer>
         <TransactionsOutput transactions={transactions} />
       </OutputContainer>

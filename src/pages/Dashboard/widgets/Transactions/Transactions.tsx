@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { OutputContainer, TransactionsTable } from 'components';
 import { getActiveTransactionsStatus } from 'lib';
+import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
 import { useGetTransactions } from './hooks';
 import { TransactionsPropsType } from './types';
 
@@ -29,7 +30,7 @@ export const Transactions = (props: TransactionsPropsType) => {
   }
 
   return (
-    <div className='flex flex-col'>
+    <div id={ItemsIdEnum.transactionsAll} className='flex flex-col'>
       <OutputContainer isLoading={isLoading} className='p-0'>
         <div className='w-full h-full overflow-x-auto bg-white shadow rounded-lg'>
           <TransactionsTable transactions={transactions} />

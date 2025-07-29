@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MouseEvent, useState } from 'react';
 import { Button, OutputContainer } from 'components';
 import { Address, getAccountProvider, Message, useGetAccount } from 'lib';
+import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = () => {
@@ -52,7 +53,7 @@ export const SignMessage = () => {
   };
 
   return (
-    <div className='flex flex-col gap-6'>
+    <div id={ItemsIdEnum.signMessage} className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
         <label className='text-secondary text-sm font-normal'>Message</label>
         <OutputContainer>
