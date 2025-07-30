@@ -130,7 +130,7 @@ export const PingPongComponent = ({
               <div className='flex justify-between items-center'>
                 {contractAddress}
 
-                <div className='flex gap-1 text-primary'>
+                <div className='flex gap-1 text-primary transition-all duration-300'>
                   <CopyButton />
 
                   <MvxExplorerLink link={explorerLink} />

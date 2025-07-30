@@ -53,27 +53,27 @@ export const Header = () => {
         <div className='flex justify-end container mx-auto items-center gap-4'>
           <button
             onClick={handleChangeTheme}
-            className='text-secondary font-normal text-sm bg-primary w-8 h-8 flex items-center justify-center rounded-lg border border-primary cursor-pointer'
+            className='text-secondary font-normal text-sm bg-primary transition-all duration-300 w-8 h-8 flex items-center justify-center rounded-lg border border-primary cursor-pointer'
           >
             <FontAwesomeIcon icon={themeIcon} />
           </button>
 
           <div className='flex gap-1 items-center relative'>
-            <div className='w-3 h-3 rounded-full absolute left-0 -top-0.5 bg-accent flex items-center justify-center'>
+            <div className='w-3 h-3 rounded-full absolute left-0 -top-0.5 bg-accent transition-all duration-300 flex items-center justify-center'>
               <div className='w-2 h-2 rounded-full !bg-devnet' />
             </div>
-            <p className='text-secondary font-normal text-sm bg-primary w-20 h-8 flex items-center justify-center rounded-lg border border-primary'>
+            <p className='text-secondary font-normal text-sm bg-primary transition-all duration-300 w-20 h-8 flex items-center justify-center rounded-lg border border-primary'>
               {environment[0].toUpperCase() + environment.slice(1)}
             </p>
           </div>
 
-          <div className='bg-primary h-8 flex items-center justify-center rounded-lg border border-primary pl-3.5 pr-3 py-3'>
+          <div className='bg-primary transition-all duration-300 h-8 flex items-center justify-center rounded-lg border border-primary pl-3.5 pr-3 py-3'>
             <div className='flex gap-2'>
-              <p className='truncate text-secondary font-normal text-sm'>
+              <p className='truncate text-secondary transition-all duration-300 font-normal text-sm'>
                 {address}
               </p>
 
-              <div className='flex gap-1 text-link'>
+              <div className='flex gap-1 text-link transition-all duration-300'>
                 <CopyButton />
 
                 <MvxExplorerLink
@@ -89,7 +89,7 @@ export const Header = () => {
               <>
                 <Button
                   onClick={handleLogout}
-                  className='text-center text-link'
+                  className='text-center text-link transition-all duration-300'
                 >
                   <FontAwesomeIcon icon={faPowerOff} className='' />
                 </Button>

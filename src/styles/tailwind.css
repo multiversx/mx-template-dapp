@@ -9,7 +9,7 @@
     --background-color-btn-secondary: var(--mvx-white);
     --color-primary: var(--mvx-text-color-primary);
     --color-secondary: var(--mvx-text-color-secondary);
-    --color-accent: var(--mvx-text-accent-color);
+    /* --color-accent: var(--mvx-text-accent-color);  */
     --color-btn-primary: var(--mvx-button-text-primary);
     --color-link: var(--mvx-link-color);
     --border-color-primary: var(--mvx-border-color-primary);

@@ -55,12 +55,14 @@ export const SignMessage = () => {
   return (
     <div id={ItemsIdEnum.signMessage} className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
-        <label className='text-secondary text-sm font-normal'>Message</label>
+        <label className='text-secondary transition-all duration-300 text-sm font-normal'>
+          Message
+        </label>
         <OutputContainer>
           {!['success', 'error'].includes(state) && (
             <textarea
               placeholder='Write message here'
-              className='text-secondary resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
+              className='text-secondary transition-all duration-300 resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
               onChange={(event) => {
                 setMessage(event.currentTarget.value);
               }}

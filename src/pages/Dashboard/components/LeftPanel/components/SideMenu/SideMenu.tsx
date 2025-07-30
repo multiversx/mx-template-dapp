@@ -82,7 +82,9 @@ export const SideMenu = () => {
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex items-center justify-between'>
-        <h2 className='text-base text-secondary'>Library</h2>
+        <h2 className='text-base transition-all duration-300 text-secondary'>
+          Library
+        </h2>
 
         <FontAwesomeIcon
           icon={faChevronUp}
@@ -93,24 +95,34 @@ export const SideMenu = () => {
         />
       </div>
 
-      {!isCollapsed && (
-        <div className='flex flex-col'>
-          {menuItems.map((item) => (
-            <div
-              key={item.id}
-              className={classNames(
-                'flex items-center gap-2 p-2 cursor-pointer',
-                { 'bg-primary rounded-lg font-bold': item.id === activeItem }
-              )}
-              onClick={() => handleMenuItemClick(item.id)}
-            >
-              <FontAwesomeIcon icon={item.icon} className='text-primary' />
+      <div
+        className={classNames('flex flex-col transition-all duration-300', {
+          hidden: isCollapsed
+        })}
+      >
+        {menuItems.map((item) => (
+          <div
+            key={item.id}
+            className={classNames(
+              'flex items-center gap-2 p-2 cursor-pointer',
+              {
+                'bg-primary transition-all duration-300 rounded-lg font-bold':
+                  item.id === activeItem
+              }
+            )}
+            onClick={() => handleMenuItemClick(item.id)}
+          >
+            <FontAwesomeIcon
+              icon={item.icon}
+              className='text-primary transition-all duration-300'
+            />
 
-              <div className='text-primary text-sm'>{item.title}</div>
+            <div className='text-primary transition-all duration-300 text-sm'>
+              {item.title}
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
 import { Label } from 'components';
 import {
@@ -75,7 +76,9 @@ export const Account = () => {
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex justify-between items-center'>
-        <h2 className='text-base text-secondary'>Connected account details</h2>
+        <h2 className='text-base transition-all duration-300 text-secondary'>
+          Connected account details
+        </h2>
 
         <FontAwesomeIcon
           icon={faChevronUp}
@@ -86,25 +89,26 @@ export const Account = () => {
         />
       </div>
 
-      {!isCollapsed && (
-        <div className='flex flex-col' data-testid='topInfo'>
-          {accountDetails.map((accountDetail, index) => (
-            <div key={index} className='flex gap-2 items-center'>
-              <FontAwesomeIcon
-                icon={accountDetail.icon}
-                className='border border-primary rounded-lg p-1.5 text-primary'
-              />
+      <div
+        className={classNames('flex flex-col', { hidden: isCollapsed })}
+        data-testid='topInfo'
+      >
+        {accountDetails.map((accountDetail, index) => (
+          <div key={index} className='flex gap-2 items-center'>
+            <FontAwesomeIcon
+              icon={accountDetail.icon}
+              className='border border-primary rounded-lg p-1.5 text-primary transition-all duration-300'
+            />
 
-              <p className='truncate flex flex-col'>
-                <Label>{accountDetail.label}</Label>
-                <span className='text-primary text-base'>
-                  {accountDetail.value}
-                </span>
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
+            <p className='truncate flex flex-col'>
+              <Label>{accountDetail.label}</Label>
+              <span className='text-primary transition-all duration-300 text-base'>
+                {accountDetail.value}
+              </span>
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
