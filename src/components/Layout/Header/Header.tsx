@@ -21,7 +21,7 @@ export const Header = () => {
   const navigate = useNavigate();
   const provider = getAccountProvider();
   const { address } = useGetAccountInfo();
-  const [themeIcon, setThemeIcon] = useState(faSun);
+  const [themeIcon, setThemeIcon] = useState(faMoon);
 
   const handleLogout = async () => {
     await provider.logout();
@@ -29,14 +29,12 @@ export const Header = () => {
   };
 
   const handleChangeTheme = () => {
-    const currentIcon = themeIcon;
-
-    if (currentIcon === faSun) {
-      setThemeIcon(faMoon);
+    if (themeIcon === faSun) {
       document.documentElement.setAttribute('data-theme', 'mvx:dark-theme');
+      setThemeIcon(faMoon);
     } else {
-      setThemeIcon(faSun);
       document.documentElement.setAttribute('data-theme', 'mvx:light-theme');
+      setThemeIcon(faSun);
     }
   };
 
@@ -69,7 +67,7 @@ export const Header = () => {
 
           <div className='bg-primary transition-all duration-300 h-8 flex items-center justify-center rounded-lg border border-primary pl-3.5 pr-3 py-3'>
             <div className='flex gap-2'>
-              <p className='truncate text-secondary transition-all duration-300 font-normal text-sm'>
+              <p className='truncate max-w-100 text-secondary transition-all duration-300 font-normal text-sm'>
                 {address}
               </p>
 
@@ -90,9 +88,9 @@ export const Header = () => {
                 <Button
                   onClick={handleLogout}
                   className='text-center text-link transition-all duration-300'
-                >
-                  <FontAwesomeIcon icon={faPowerOff} className='' />
-                </Button>
+                  icon={faPowerOff}
+                  iconClassName='px-0'
+                />
               </>
             )}
           </div>
@@ -106,9 +104,8 @@ export const Header = () => {
               onClick={() => {
                 navigate(RouteNamesEnum.unlock);
               }}
-            >
-              Connect
-            </Button>
+              label='Connect'
+            />
           )}
         </div>
       </nav>

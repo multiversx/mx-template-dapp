@@ -1,8 +1,8 @@
 import {
   faArrowsRotate,
-  faPaperPlane
+  faPaperPlane,
+  IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, OutputContainer, TransactionsOutput } from 'components';
 import {
   useGetAccount,
@@ -15,6 +15,13 @@ import {
   signAndAutoSendBatchTransactions,
   swapAndLockTokens
 } from './helpers';
+
+interface BatchTransactionsButtonsType {
+  dataTestId: string;
+  onclickFunction: () => Promise<void>;
+  icon: IconDefinition;
+  label: string;
+}
 
 export const BatchTransactions = () => {
   const { address, nonce } = useGetAccount();
@@ -57,6 +64,27 @@ export const BatchTransactions = () => {
     });
   };
 
+  const batchTransactionsButtons: BatchTransactionsButtonsType[] = [
+    {
+      dataTestId: 'sign-auto-send',
+      onclickFunction: executeSignAndAutoSendBatchTransactions,
+      icon: faPaperPlane,
+      label: 'Sign & send batch'
+    },
+    {
+      dataTestId: 'send-transactions',
+      onclickFunction: executeBatchTransactions,
+      icon: faPaperPlane,
+      label: 'Sign batch & controlled sending'
+    },
+    {
+      dataTestId: 'swap-lock',
+      onclickFunction: executeSwapAndLockTokens,
+      icon: faArrowsRotate,
+      label: 'Swap & Lock'
+    }
+  ];
+
   return (
     <div id={ItemsIdEnum.batchTransactions} className='flex flex-col gap-6'>
       <OutputContainer>
@@ -64,30 +92,16 @@ export const BatchTransactions = () => {
       </OutputContainer>
 
       <div className='flex flex-col md:flex-row gap-2 items-start'>
-        <Button
-          data-testid='sign-auto-send'
-          onClick={executeSignAndAutoSendBatchTransactions}
-          disabled={hasPendingTransactions}
-        >
-          <FontAwesomeIcon icon={faPaperPlane} className='mr-1' />
-          Sign & send batch
-        </Button>
-        <Button
-          data-testid='send-transactions'
-          onClick={executeBatchTransactions}
-          disabled={hasPendingTransactions}
-        >
-          <FontAwesomeIcon icon={faPaperPlane} className='mr-1' />
-          Sign batch & controlled sending
-        </Button>
-        <Button
-          data-testid='swap-lock'
-          onClick={executeSwapAndLockTokens}
-          disabled={hasPendingTransactions}
-        >
-          <FontAwesomeIcon icon={faArrowsRotate} className='mr-1' />
-          Swap & Lock
-        </Button>
+        {batchTransactionsButtons.map((button) => (
+          <Button
+            key={button.dataTestId}
+            data-testid={button.dataTestId}
+            onClick={button.onclickFunction}
+            disabled={hasPendingTransactions}
+            icon={button.icon}
+            label={button.label}
+          />
+        ))}
       </div>
     </div>
   );

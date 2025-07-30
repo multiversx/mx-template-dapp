@@ -1,5 +1,4 @@
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
@@ -160,19 +159,17 @@ export const PingPongComponent = ({
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
             data-cy='transactionBtn'
-          >
-            <FontAwesomeIcon icon={faArrowUp} className='mr-1' />
-            Ping
-          </Button>
+            icon={faArrowUp}
+            label='Ping'
+          />
 
           <Button
             disabled={!pongAllowed || hasPing || hasPendingTransactions}
             data-cy='transactionBtn'
             onClick={onSendPongTransaction}
-          >
-            <FontAwesomeIcon icon={faArrowDown} className='mr-1' />
-            Pong
-          </Button>
+            icon={faArrowDown}
+            label='Pong'
+          />
         </div>
       </div>
     </div>

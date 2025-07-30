@@ -79,10 +79,10 @@ export const Dashboard = () => {
     <div className='flex w-screen'>
       <LeftPanel />
 
-      <div className='flex flex-col justify-center items-center flex-1 overflow-y-auto'>
+      <div className='flex flex-col justify-center items-center flex-1 overflow-y-auto w-full'>
         <DashboardHeader />
 
-        <div className='flex flex-col gap-6 max-w-3xl w-full'>
+        <div className='flex flex-col gap-6 p-6 w-full'>
           {WIDGETS.map((element) => (
             <Widget key={element.title} {...element} />
           ))}

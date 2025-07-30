@@ -3,7 +3,6 @@ import {
   faBroom,
   faPenNib
 } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MouseEvent, useState } from 'react';
 import { Button, OutputContainer } from 'components';
 import { Address, getAccountProvider, Message, useGetAccount } from 'lib';
@@ -90,22 +89,16 @@ export const SignMessage = () => {
             data-testid='closeTransactionSuccessBtn'
             id='closeButton'
             onClick={handleClear}
-          >
-            <>
-              <FontAwesomeIcon
-                icon={state === 'success' ? faBroom : faArrowsRotate}
-                className='mr-1'
-              />
-              {state === 'error' ? 'Try again' : 'Clear'}
-            </>
-          </Button>
+            icon={state === 'success' ? faBroom : faArrowsRotate}
+            label={state === 'error' ? 'Try again' : 'Clear'}
+          />
         ) : (
-          <Button data-testid='signMsgBtn' onClick={handleSubmit}>
-            <>
-              <FontAwesomeIcon icon={faPenNib} className='mr-1' />
-              Sign
-            </>
-          </Button>
+          <Button
+            data-testid='signMsgBtn'
+            onClick={handleSubmit}
+            icon={faPenNib}
+            label='Sign'
+          />
         )}
       </div>
     </div>

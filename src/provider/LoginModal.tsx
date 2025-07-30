@@ -127,12 +127,17 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
             </label>
           </div>
           <div style={styles.buttonGroup}>
-            <Button onClick={onClose} {...{ style: styles.button }}>
-              Cancel
-            </Button>
-            <Button type='submit' {...{ style: styles.button }}>
-              Submit
-            </Button>
+            <Button
+              onClick={onClose}
+              label='Cancel'
+              {...{ style: styles.button }}
+            />
+
+            <Button
+              type='submit'
+              label='Submit'
+              {...{ style: styles.button }}
+            />
           </div>
         </form>
       </div>

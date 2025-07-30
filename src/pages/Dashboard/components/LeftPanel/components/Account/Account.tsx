@@ -46,7 +46,7 @@ export const Account = () => {
     {
       icon: faWallet,
       label: 'Address',
-      value: address
+      value: <div className='truncate'>{address}</div>
     },
     {
       icon: faWallet,
