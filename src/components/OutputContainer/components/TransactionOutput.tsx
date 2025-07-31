@@ -1,6 +1,7 @@
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
+  CopyButton,
   DECIMALS,
   DIGITS,
   FormatAmountController,
@@ -44,23 +45,29 @@ export const TransactionOutput = ({
 
   return (
     <div className='flex flex-col'>
-      <p>
+      <p className='flex gap-2'>
         <Label>Hash:</Label>
-        <MvxExplorerLink
-          link={hashExplorerLink}
-          className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
-        >
+        <div className='flex justify-between w-full'>
           {transaction.hash}
-        </MvxExplorerLink>
+
+          <div className='flex gap-3'>
+            <CopyButton text={transaction.hash} />
+
+            <MvxExplorerLink link={hashExplorerLink} />
+          </div>
+        </div>
       </p>
-      <p>
+      <p className='flex gap-2'>
         <Label>Receiver:</Label>
-        <MvxExplorerLink
-          link={receiverExplorerLink}
-          className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
-        >
+        <div className='flex justify-between w-full'>
           {transaction.receiver}
-        </MvxExplorerLink>
+
+          <div className='flex gap-3'>
+            <CopyButton text={transaction.receiver} />
+
+            <MvxExplorerLink link={receiverExplorerLink} />
+          </div>
+        </div>
       </p>
 
       <p>

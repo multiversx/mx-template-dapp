@@ -1,8 +1,10 @@
 import {
   faArrowsRotate,
   faBroom,
+  faPaste,
   faPenNib
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MouseEvent, useState } from 'react';
 import { Button, OutputContainer } from 'components';
 import { Address, getAccountProvider, Message, useGetAccount } from 'lib';
@@ -51,6 +53,12 @@ export const SignMessage = () => {
     setState('pending');
   };
 
+  const handlePasteClick = async () => {
+    const message = await navigator.clipboard.readText();
+
+    setMessage(message);
+  };
+
   return (
     <div id={ItemsIdEnum.signMessage} className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
@@ -61,7 +69,8 @@ export const SignMessage = () => {
           {!['success', 'error'].includes(state) && (
             <textarea
               placeholder='Write message here'
-              className='text-secondary transition-all duration-300 resize-none w-full h-32 rounded-lg focus:outline-none focus:border-blue-500'
+              className='text-secondary transition-all duration-300 resize-none w-full h-32 rounded-lg focus:outline-none'
+              value={message}
               onChange={(event) => {
                 setMessage(event.currentTarget.value);
               }}
@@ -78,6 +87,17 @@ export const SignMessage = () => {
               address={address}
             />
           )}
+
+          <div className='w-full flex justify-end'>
+            <button
+              onClick={handlePasteClick}
+              className='text-tertiary text-sm font-semibold flex items-center bg-tertiary rounded-md cursor-pointer px-1'
+            >
+              <span className='p-1'>Paste</span>
+
+              <FontAwesomeIcon icon={faPaste} className='p-1' />
+            </button>
+          </div>
 
           {state === 'error' && <SignFailure />}
         </OutputContainer>

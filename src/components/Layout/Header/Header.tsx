@@ -1,84 +1,58 @@
-import { faMoon, faPowerOff, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faPowerOff, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import TemplateLogo from 'assets/img/template-logo.svg?react';
-import { Button, MxLink } from 'components';
+import { AddressComponent, Button, MxLink } from 'components';
 import { environment } from 'config';
-import {
-  CopyButton,
-  getAccountProvider,
-  MvxExplorerLink,
-  useGetAccountInfo,
-  useGetIsLoggedIn
-} from 'lib';
+import { getAccountProvider, useGetAccountInfo, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
-// import { GitHubButton } from './components/GitHubButton';
-// import { NotificationsButton } from './components/NotificationsButton';
+import {
+  GitHubButton,
+  HeaderElementContainer,
+  NotificationsButton,
+  SwitchThemeButton,
+  TemplateLogo
+} from './components';
 
 export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
   const navigate = useNavigate();
   const provider = getAccountProvider();
   const { address } = useGetAccountInfo();
-  const [themeIcon, setThemeIcon] = useState(faMoon);
 
   const handleLogout = async () => {
     await provider.logout();
     navigate(RouteNamesEnum.home);
   };
 
-  const handleChangeTheme = () => {
-    if (themeIcon === faSun) {
-      document.documentElement.setAttribute('data-theme', 'mvx:dark-theme');
-      setThemeIcon(faMoon);
-    } else {
-      document.documentElement.setAttribute('data-theme', 'mvx:light-theme');
-      setThemeIcon(faSun);
-    }
-  };
-
   return (
-    <header className='flex flex-row align-center justify-between pl-6 pr-6 pt-6'>
+    <header className='flex flex-row align-center justify-between p-4 lg:py-8 :px-10'>
       <MxLink
         className='flex items-center justify-between'
         to={isLoggedIn ? RouteNamesEnum.dashboard : RouteNamesEnum.home}
       >
-        <TemplateLogo className='w-full h-6 fill-primary' />
+        <TemplateLogo />
       </MxLink>
 
       <nav className='h-full w-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent'>
         <div className='flex justify-end container mx-auto items-center gap-4'>
-          <button
-            onClick={handleChangeTheme}
-            className='text-secondary font-normal text-sm bg-primary transition-all duration-300 w-8 h-8 flex items-center justify-center rounded-lg border border-primary cursor-pointer'
-          >
-            <FontAwesomeIcon icon={themeIcon} />
-          </button>
-
+          <SwitchThemeButton />
+          <GitHubButton />
+          {isLoggedIn && <NotificationsButton />}
           <div className='flex gap-1 items-center relative'>
             <div className='w-3 h-3 rounded-full absolute left-0 -top-0.5 bg-accent transition-all duration-300 flex items-center justify-center'>
-              <div className='w-2 h-2 rounded-full !bg-devnet' />
+              <div className='w-2 h-2 rounded-full bg-btn-primary' />
             </div>
-            <p className='text-secondary font-normal text-sm bg-primary transition-all duration-300 w-20 h-8 flex items-center justify-center rounded-lg border border-primary'>
+
+            <HeaderElementContainer className='w-20 cursor-none'>
               {environment[0].toUpperCase() + environment.slice(1)}
-            </p>
+            </HeaderElementContainer>
           </div>
 
-          <div className='bg-primary transition-all duration-300 h-8 flex items-center justify-center rounded-lg border border-primary pl-3.5 pr-3 py-3'>
-            <div className='flex gap-2'>
-              <p className='truncate max-w-100 text-secondary transition-all duration-300 font-normal text-sm'>
-                {address}
-              </p>
+          <HeaderElementContainer className='hidden lg:!flex w-fit cursor-none pl-3.5 pr-3'>
+            <div className='flex gap-2 items-center justify-center'>
+              <FontAwesomeIcon icon={faWallet} className='text-accent' />
 
-              <div className='flex gap-1 text-link transition-all duration-300'>
-                <CopyButton />
-
-                <MvxExplorerLink
-                // link={explorerLink}
-                // className=''
-                ></MvxExplorerLink>
-              </div>
+              <AddressComponent address={address} isHeader />
             </div>
 
             <span className='w-0.25 h-3.25 bg-link mx-2' />
@@ -93,11 +67,7 @@ export const Header = () => {
                 />
               </>
             )}
-          </div>
-          {/* 
-          <GitHubButton />
-
-          <NotificationsButton /> */}
+          </HeaderElementContainer>
 
           {!isLoggedIn && (
             <Button

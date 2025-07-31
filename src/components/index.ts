@@ -1,6 +1,6 @@
+export * from './AddressComponent';
 export * from './Button';
 export * from './Card';
-export * from './ContractAddress';
 export * from './Label';
 export * from './Layout';
 export * from './Loader';

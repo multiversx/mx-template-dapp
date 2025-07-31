@@ -3,6 +3,7 @@ import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import {
+  AddressComponent,
   Button,
   Label,
   MissingNativeAuthError,
@@ -11,15 +12,7 @@ import {
 } from 'components';
 import { contractAddress } from 'config';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import {
-  ACCOUNTS_ENDPOINT,
-  CopyButton,
-  getExplorerLink,
-  MvxExplorerLink,
-  Transaction,
-  useGetNetworkConfig,
-  useGetPendingTransactions
-} from 'lib';
+import { Transaction, useGetPendingTransactions } from 'lib';
 import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
 
 interface PingPongComponentPropsType {
@@ -43,8 +36,6 @@ export const PingPongComponent = ({
   getPongTransaction,
   tokenLogin
 }: PingPongComponentPropsType) => {
-  const { network } = useGetNetworkConfig();
-
   const transactions = useGetPendingTransactions();
   const hasPendingTransactions = transactions.length > 0;
 
@@ -108,12 +99,6 @@ export const PingPongComponent = ({
     setSecondsRemaining();
   }, [hasPendingTransactions]);
 
-  const explorerAddress = network.explorerAddress;
-  const explorerLink = getExplorerLink({
-    to: `/${ACCOUNTS_ENDPOINT}/${contractAddress}`,
-    explorerAddress
-  });
-
   if (tokenLogin && !tokenLogin?.nativeAuthToken) {
     return <MissingNativeAuthError />;
   }
@@ -126,15 +111,10 @@ export const PingPongComponent = ({
         <OutputContainer>
           {!hasPendingTransactions && (
             <>
-              <div className='flex justify-between items-center'>
-                {contractAddress}
-
-                <div className='flex gap-1 text-primary transition-all duration-300'>
-                  <CopyButton />
-
-                  <MvxExplorerLink link={explorerLink} />
-                </div>
+              <div className='flex justify-between items-center gap-3'>
+                <AddressComponent address={contractAddress} />
               </div>
+
               {!pongAllowed && (
                 <p>
                   <Label>Time remaining: </Label>

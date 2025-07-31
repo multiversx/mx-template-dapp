@@ -1,5 +1,10 @@
 import { useEffect } from 'react';
-import { Label, MissingNativeAuthError, OutputContainer } from 'components';
+import {
+  AddressComponent,
+  Label,
+  MissingNativeAuthError,
+  OutputContainer
+} from 'components';
 import {
   DECIMALS,
   DIGITS,
@@ -51,12 +56,14 @@ export const NativeAuth = () => {
         <Label>Address</Label>
 
         <OutputContainer isLoading={isLoading}>
-          <p className='flex flex-col'>{profile?.address ?? 'N/A'}</p>
+          <div className='flex justify-between items-center gap-3'>
+            <AddressComponent address={profile?.address ?? 'N/A'} />
+          </div>
         </OutputContainer>
       </div>
 
       <div className='flex gap-8 w-full'>
-        <div className='flex flex-col gap-2 w-1/3'>
+        <div className='flex flex-col gap-2 sm:w-1/3'>
           <Label>Herotag</Label>
 
           <OutputContainer isLoading={isLoading}>
@@ -64,7 +71,7 @@ export const NativeAuth = () => {
           </OutputContainer>
         </div>
 
-        <div className='flex flex-col gap-2 w-1/3'>
+        <div className='flex flex-col gap-2 sm:w-1/3'>
           <Label>Shard</Label>
 
           <OutputContainer isLoading={isLoading}>
@@ -72,7 +79,7 @@ export const NativeAuth = () => {
           </OutputContainer>
         </div>
 
-        <div className='flex flex-col gap-2 w-1/3'>
+        <div className='flex flex-col gap-2 sm:w-1/3'>
           <Label>Balance</Label>
 
           <OutputContainer isLoading={isLoading}>

@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 import { contractAddress } from 'config';
 import { WidgetType } from 'types/widget.types';
 import { DashboardHeader, LeftPanel } from './components';
@@ -75,14 +77,36 @@ const WIDGETS: WidgetType[] = [
 ];
 
 export const Dashboard = () => {
-  return (
-    <div className='flex w-screen'>
-      <LeftPanel />
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
-      <div className='flex flex-col justify-center items-center flex-1 overflow-y-auto w-full'>
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return (
+    <div className='flex w-screen min-h-screen relative border-t border-primary'>
+      <div
+        className={classNames(
+          {
+            'fixed bottom-0 left-0 right-0 z-50 max-h-full overflow-y-auto':
+              !isDesktop
+          },
+          { flex: isDesktop }
+        )}
+      >
+        <LeftPanel />
+      </div>
+
+      <div className='flex flex-col gap-6 justify-center items-center flex-1 w-full overflow-auto border-l border-primary p-4 lg:p-6'>
         <DashboardHeader />
 
-        <div className='flex flex-col gap-6 p-6 w-full'>
+        <div className='flex flex-col gap-6  w-full'>
           {WIDGETS.map((element) => (
             <Widget key={element.title} {...element} />
           ))}

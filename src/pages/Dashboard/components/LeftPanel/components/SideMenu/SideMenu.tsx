@@ -1,12 +1,15 @@
 import {
   faChevronUp,
+  faCirclePlus,
   faFilter,
   faFingerprint,
+  faGripLines,
   faPenNib,
   faRectangleList,
   faTableTennisPaddleBall,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
+import { faGripLinesVertical } from '@fortawesome/free-solid-svg-icons/faGripLinesVertical';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useState } from 'react';
@@ -26,12 +29,12 @@ const menuItems: MenuItemsType[] = [
   },
   {
     title: 'Ping & Pong (ABI)',
-    icon: faTableTennisPaddleBall,
+    icon: faGripLines,
     id: ItemsIdEnum.pingPongAbi
   },
   {
     title: 'Ping & Pong (Backend)',
-    icon: faTableTennisPaddleBall,
+    icon: faGripLinesVertical,
     id: ItemsIdEnum.pingPongService
   },
   {
@@ -46,7 +49,7 @@ const menuItems: MenuItemsType[] = [
   },
   {
     title: 'Batch Transactions',
-    icon: faTableTennisPaddleBall,
+    icon: faCirclePlus,
     id: ItemsIdEnum.batchTransactions
   },
   {

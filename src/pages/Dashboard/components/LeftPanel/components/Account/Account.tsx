@@ -1,25 +1,26 @@
 import {
   faChevronUp,
   faLayerGroup,
-  faWallet,
-  IconDefinition
+  faWallet
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
+import XLogo from 'assets/img/x-logo.svg?react';
 import { Label } from 'components';
 import {
   DECIMALS,
   DIGITS,
   FormatAmountController,
   MvxFormatAmount,
+  MvxTrim,
   useGetAccountInfo,
   useGetNetworkConfig
 } from 'lib';
 import { Username } from './components';
 
 interface AccountDetailsType {
-  icon: IconDefinition;
+  icon: ReactNode;
   label: string;
   value: string | ReactNode;
 }
@@ -44,22 +45,22 @@ export const Account = () => {
 
   const accountDetails: AccountDetailsType[] = [
     {
-      icon: faWallet,
+      icon: <FontAwesomeIcon icon={faWallet} className='w-6 h-6' />,
       label: 'Address',
-      value: <div className='truncate'>{address}</div>
+      value: <MvxTrim text={address} className='w-max' />
     },
     {
-      icon: faWallet,
+      icon: <FontAwesomeIcon icon={faWallet} className='w-6 h-6' />,
       label: 'Herotag',
       value: <Username account={account} />
     },
     {
-      icon: faLayerGroup,
+      icon: <FontAwesomeIcon icon={faLayerGroup} className='w-6 h-6' />,
       label: 'Shard',
       value: account.shard
     },
     {
-      icon: faLayerGroup,
+      icon: <XLogo className='fill-primary w-6 h-6' />,
       label: 'Balance',
       value: (
         <MvxFormatAmount
@@ -95,11 +96,12 @@ export const Account = () => {
       >
         {accountDetails.map((accountDetail, index) => (
           <div key={index} className='flex gap-2 items-center'>
-            <FontAwesomeIcon
-              icon={accountDetail.icon}
-              className='border border-primary rounded-lg p-1.5 text-primary transition-all duration-300'
-            />
-
+            <div
+              className='border border-primary rounded-lg p-1.5 text-primary
+            transition-all duration-300'
+            >
+              {accountDetail.icon}
+            </div>
             <p className='truncate flex flex-col'>
               <Label>{accountDetail.label}</Label>
               <span className='text-primary transition-all duration-300 text-base'>

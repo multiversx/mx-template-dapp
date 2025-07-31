@@ -15,7 +15,7 @@ export const Card = (props: CardType) => {
 
   return (
     <div
-      className='flex flex-col flex-1 rounded-xl bg-primary transition-all duration-300 p-6 justify-center border border-primary'
+      className='flex flex-col gap-4 flex-1 rounded-xl bg-primary transition-all duration-300 p-6 justify-center border border-primary'
       data-testid={props['data-testid']}
       id={anchor}
     >
@@ -29,6 +29,7 @@ export const Card = (props: CardType) => {
           <FontAwesomeIcon icon={faInfoCircle} className='w-3.5 h-3.5' />
         </a>
       </h2>
+
       {description && (
         <p className='text-secondary transition-all duration-300 mb-6 text-lg font-medium'>
           {description}
