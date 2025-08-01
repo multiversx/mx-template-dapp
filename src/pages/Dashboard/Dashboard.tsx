@@ -78,6 +78,7 @@ const WIDGETS: WidgetType[] = [
 
 export const Dashboard = () => {
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -90,7 +91,7 @@ export const Dashboard = () => {
   }, []);
 
   return (
-    <div className='flex w-screen min-h-screen relative border-t border-primary'>
+    <div className='flex w-screen min-h-screen relative border-t border-b border-primary transition-all duration-300'>
       <div
         className={classNames(
           {
@@ -100,10 +101,21 @@ export const Dashboard = () => {
           { flex: isDesktop }
         )}
       >
-        <LeftPanel />
+        <LeftPanel
+          isOpen={isMobilePanelOpen}
+          setIsOpen={setIsMobilePanelOpen}
+        />
       </div>
 
-      <div className='flex flex-col gap-6 justify-center items-center flex-1 w-full overflow-auto border-l border-primary p-4 lg:p-6'>
+      <div
+        className={classNames(
+          'flex flex-col gap-6 justify-center items-center flex-1 w-full overflow-auto border-l border-primary p-4 lg:p-6 transition-all duration-300',
+          {
+            'opacity-20 pointer-events-none': isMobilePanelOpen
+          }
+        )}
+        style={{ backgroundImage: 'url(src/assets/img/background.svg)' }}
+      >
         <DashboardHeader />
 
         <div className='flex flex-col gap-6  w-full'>

@@ -6,7 +6,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TemplateLogo from 'assets/img/template-logo.svg?react';
 import { AddressComponent, Button } from 'components';
@@ -14,8 +13,12 @@ import { getAccountProvider, useGetAccountInfo, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import { Account, SideMenu } from './components';
 
-export const LeftPanel = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface LeftPanelPropsType {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
+
+export const LeftPanel = ({ isOpen, setIsOpen }: LeftPanelPropsType) => {
   const handleOpenPanel = () => {
     setIsOpen(!isOpen);
   };
@@ -36,7 +39,7 @@ export const LeftPanel = () => {
   return (
     <div
       className={classNames(
-        'flex flex-col w-screen lg:w-80 gap-8 lg:gap-0 p-4 lg:p-6 sticky lg:h-screen top-0 bg-primary lg:bg-accent',
+        'flex flex-col w-screen lg:w-80 gap-8 lg:gap-0 p-4 lg:p-6 sticky lg:h-screen top-0 bg-primary lg:bg-accent transition-all duration-300',
         { 'rounded-t-2xl lg:rounded-t-none p-6': isOpen }
       )}
     >
@@ -48,7 +51,7 @@ export const LeftPanel = () => {
 
         <FontAwesomeIcon
           icon={isOpen ? faClose : faChevronDown}
-          className={classNames('text-primary', {
+          className={classNames('text-primary transition-all duration-300', {
             '!text-link': isOpen
           })}
           size={isOpen ? 'xl' : 'sm'}
@@ -79,12 +82,12 @@ export const LeftPanel = () => {
           )}
         </div>
 
-        <div className='flex flex-col gap-4 bg-accent p-6 lg:p-0 rounded-2xl'>
+        <div className='flex flex-col gap-4 bg-accent p-6 lg:p-0 rounded-2xl transition-all duration-300'>
           <Account />
 
           <div className='w-full h-0.25 bg-neutral-700 opacity-40 transition-all duration-300' />
 
-          <SideMenu />
+          <SideMenu setIsOpen={setIsOpen} />
         </div>
       </div>
     </div>

@@ -15,6 +15,9 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
 
+interface SideMenuPropsType {
+  setIsOpen: (isOpen: boolean) => void;
+}
 interface MenuItemsType {
   title: string;
   icon: IconDefinition;
@@ -64,7 +67,7 @@ const menuItems: MenuItemsType[] = [
   }
 ];
 
-export const SideMenu = () => {
+export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeItem, setActiveItem] = useState(ItemsIdEnum.pingPongRaw);
 
@@ -73,9 +76,10 @@ export const SideMenu = () => {
   };
 
   const handleMenuItemClick = (id: ItemsIdEnum) => {
+    setIsOpen(false);
     const target = document.getElementById(id);
     if (target) {
-      const y = target.getBoundingClientRect().top + window.scrollY - 135;
+      const y = target.getBoundingClientRect().top + window.scrollY - 250;
       window.scrollTo({ top: y, behavior: 'smooth' });
 
       setActiveItem(id);
@@ -107,9 +111,9 @@ export const SideMenu = () => {
           <div
             key={item.id}
             className={classNames(
-              'flex items-center gap-2 p-2 cursor-pointer',
+              'flex items-center gap-2 p-2 cursor-pointer text-tertiary transition-all duration-300',
               {
-                'bg-primary transition-all duration-300 rounded-lg font-bold':
+                'text-primary bg-primary rounded-lg font-bold':
                   item.id === activeItem
               }
             )}
@@ -117,10 +121,10 @@ export const SideMenu = () => {
           >
             <FontAwesomeIcon
               icon={item.icon}
-              className='text-primary transition-all duration-300'
+              className='transition-all duration-300'
             />
 
-            <div className='text-primary transition-all duration-300 text-sm'>
+            <div className='transition-all duration-300 text-sm'>
               {item.title}
             </div>
           </div>

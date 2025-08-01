@@ -69,6 +69,8 @@ export const Account = () => {
           valueDecimal={valueDecimal}
           label={label}
           data-testid='balance'
+          decimalClass='opacity-70'
+          labelClass='opacity-70'
         />
       )
     }

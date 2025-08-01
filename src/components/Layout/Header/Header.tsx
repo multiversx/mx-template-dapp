@@ -39,8 +39,8 @@ export const Header = () => {
           <GitHubButton />
           {isLoggedIn && <NotificationsButton />}
           <div className='flex gap-1 items-center relative'>
-            <div className='w-3 h-3 rounded-full absolute left-0 -top-0.5 bg-accent transition-all duration-300 flex items-center justify-center'>
-              <div className='w-2 h-2 rounded-full bg-btn-primary' />
+            <div className='w-3 h-3 rounded-full absolute -left-0.5 -top-0.5 bg-accent transition-all duration-300 flex items-center justify-center'>
+              <div className='w-2 h-2 rounded-full bg-btn-primary transition-all duration-300' />
             </div>
 
             <HeaderElementContainer className='w-20 cursor-none'>
@@ -48,14 +48,15 @@ export const Header = () => {
             </HeaderElementContainer>
           </div>
 
-          <HeaderElementContainer className='hidden lg:!flex w-fit cursor-none pl-3.5 pr-3'>
+          <HeaderElementContainer className='hidden lg:!flex !rounded-full gap-3 w-fit cursor-none pl-3.5 pr-3'>
             <div className='flex gap-2 items-center justify-center'>
-              <FontAwesomeIcon icon={faWallet} className='text-accent' />
+              <FontAwesomeIcon
+                icon={faWallet}
+                className='text-accent transition-all duration-300'
+              />
 
               <AddressComponent address={address} isHeader />
             </div>
-
-            <span className='w-0.25 h-3.25 bg-link mx-2' />
 
             {isLoggedIn && (
               <>

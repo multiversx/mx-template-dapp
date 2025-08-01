@@ -24,7 +24,7 @@ export const Card = (props: CardType) => {
         <a
           href={reference}
           target='_blank'
-          className='text-secondary transition-all duration-300'
+          className='text-link transition-all duration-300'
         >
           <FontAwesomeIcon icon={faInfoCircle} className='w-3.5 h-3.5' />
         </a>

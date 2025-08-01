@@ -10,7 +10,7 @@ export const DashboardHeader = () => (
         href='https://react.dev/'
         target='_blank'
         rel='noreferrer'
-        className='underline hover:text-primary'
+        className='underline hover:text-primary transition-all duration-300'
       >
         React.js
       </a>{' '}
@@ -19,7 +19,7 @@ export const DashboardHeader = () => (
         href='https://www.typescriptlang.org/'
         target='_blank'
         rel='noreferrer'
-        className='underline hover:text-primary'
+        className='underline hover:text-primary transition-all duration-300'
       >
         Typescript
       </a>
@@ -28,7 +28,7 @@ export const DashboardHeader = () => (
         href='https://www.npmjs.com/package/@multiversx/sdk-dapp'
         target='_blank'
         rel='noreferrer'
-        className='underline hover:text-primary'
+        className='underline hover:text-primary transition-all duration-300'
       >
         @multiversx/sdk-dapp
       </a>

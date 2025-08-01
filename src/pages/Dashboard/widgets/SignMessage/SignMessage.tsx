@@ -91,7 +91,7 @@ export const SignMessage = () => {
           <div className='w-full flex justify-end'>
             <button
               onClick={handlePasteClick}
-              className='text-tertiary text-sm font-semibold flex items-center bg-tertiary rounded-md cursor-pointer px-1'
+              className='text-tertiary text-sm font-semibold flex items-center bg-btn-tertiary rounded-md cursor-pointer px-1 transition-all duration-300'
             >
               <span className='p-1'>Paste</span>
 
