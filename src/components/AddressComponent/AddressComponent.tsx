@@ -1,10 +1,11 @@
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { contractAddress } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
   CopyButton,
   getExplorerLink,
-  MvxExplorerLink,
   MvxTrim,
   useGetNetworkConfig
 } from 'lib';
@@ -42,7 +43,9 @@ export const AddressComponent = ({
       >
         <CopyButton text={address} />
 
-        <MvxExplorerLink link={explorerLink} />
+        <a href={explorerLink} target='_blank' rel='noreferrer'>
+          <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+        </a>
       </div>
     </>
   );

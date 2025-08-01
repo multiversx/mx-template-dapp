@@ -16,7 +16,7 @@ export const HeaderElementContainer = ({
   <div
     onClick={onClickFunction}
     className={classNames(
-      'text-tertiary font-normal text-sm bg-primary transition-all duration-300 w-8 h-8 flex items-center justify-center rounded-lg border border-primary cursor-pointer',
+      'text-tertiary font-normal text-sm bg-primary transition-all duration-300 w-8 h-8 flex items-center justify-center rounded-lg border border-secondary cursor-pointer',
       className
     )}
   >

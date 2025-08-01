@@ -15,7 +15,7 @@ export const Card = (props: CardType) => {
 
   return (
     <div
-      className='flex flex-col gap-4 flex-1 rounded-xl bg-primary transition-all duration-300 p-6 justify-center border border-primary'
+      className='flex flex-col gap-4 flex-1 rounded-xl bg-primary transition-all duration-300 p-6 lg:p-10 justify-center border border-secondary'
       data-testid={props['data-testid']}
       id={anchor}
     >

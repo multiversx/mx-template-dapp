@@ -91,7 +91,7 @@ export const Dashboard = () => {
   }, []);
 
   return (
-    <div className='flex w-screen min-h-screen relative border-t border-b border-primary transition-all duration-300'>
+    <div className='flex w-screen min-h-screen relative border-t border-b border-secondary transition-all duration-300'>
       <div
         className={classNames(
           {
@@ -109,7 +109,7 @@ export const Dashboard = () => {
 
       <div
         className={classNames(
-          'flex flex-col gap-6 justify-center items-center flex-1 w-full overflow-auto border-l border-primary p-4 lg:p-6 transition-all duration-300',
+          'flex flex-col gap-6 justify-center items-center flex-1 w-full overflow-auto border-l border-secondary p-4 lg:p-6 transition-all duration-300',
           {
             'opacity-20 pointer-events-none': isMobilePanelOpen
           }

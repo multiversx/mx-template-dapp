@@ -7,8 +7,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
-import TemplateLogo from 'assets/img/template-logo.svg?react';
 import { AddressComponent, Button } from 'components';
+import { TemplateLogo } from 'components/Layout/Header/components';
 import { getAccountProvider, useGetAccountInfo, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import { Account, SideMenu } from './components';
@@ -47,7 +47,7 @@ export const LeftPanel = ({ isOpen, setIsOpen }: LeftPanelPropsType) => {
         className='flex lg:hidden justify-between items-center pt-2 pb-1'
         onClick={handleOpenPanel}
       >
-        <TemplateLogo className='fill-primary' />
+        <TemplateLogo />
 
         <FontAwesomeIcon
           icon={isOpen ? faClose : faChevronDown}
@@ -63,9 +63,9 @@ export const LeftPanel = ({ isOpen, setIsOpen }: LeftPanelPropsType) => {
           hidden: !isOpen && !isDesktop
         })}
       >
-        <div className='lg:hidden bg-accent transition-all duration-300 h-8 flex items-center justify-between rounded-full border border-primary px-6 py-4'>
+        <div className='lg:hidden bg-accent transition-all duration-300 h-8 flex items-center justify-between rounded-full border border-secondary px-6 py-4'>
           <div className='flex gap-2 items-center justify-center'>
-            <FontAwesomeIcon icon={faWallet} className='text-teal-400' />
+            <FontAwesomeIcon icon={faWallet} className='text-accent' />
 
             <AddressComponent address={address} isHeader />
           </div>

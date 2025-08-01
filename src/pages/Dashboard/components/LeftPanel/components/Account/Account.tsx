@@ -4,9 +4,9 @@ import {
   faWallet
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import XLogo from 'assets/img/x-logo.svg?react';
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
-import XLogo from 'assets/img/x-logo.svg?react';
 import { Label } from 'components';
 import {
   DECIMALS,
@@ -99,7 +99,7 @@ export const Account = () => {
         {accountDetails.map((accountDetail, index) => (
           <div key={index} className='flex gap-2 items-center'>
             <div
-              className='border border-primary rounded-lg p-1.5 text-primary
+              className='border border-secondary rounded-lg p-1.5 text-primary
             transition-all duration-300'
             >
               {accountDetail.icon}

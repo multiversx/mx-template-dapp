@@ -24,15 +24,18 @@ export const Transactions = (props: TransactionsPropsType) => {
   if (!isLoading && transactions.length === 0) {
     return (
       <OutputContainer>
-        <p className='text-gray-400'>No transactions found</p>
+        <p>No transactions found</p>
       </OutputContainer>
     );
   }
 
   return (
-    <div id={ItemsIdEnum.transactionsAll} className='flex flex-col'>
+    <div
+      id={ItemsIdEnum.transactionsAll}
+      className='flex flex-col border border-secondary rounded-xl'
+    >
       <OutputContainer isLoading={isLoading} className='p-0'>
-        <div className='w-full h-full overflow-x-auto bg-white shadow rounded-lg'>
+        <div className='w-full h-full overflow-x-auto shadow rounded-lg'>
           <TransactionsTable transactions={transactions} />
         </div>
       </OutputContainer>
