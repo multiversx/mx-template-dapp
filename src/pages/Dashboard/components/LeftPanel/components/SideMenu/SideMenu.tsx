@@ -1,18 +1,18 @@
 import {
   faChevronUp,
-  faCirclePlus,
   faFilter,
   faFingerprint,
-  faGripLines,
   faPenNib,
   faRectangleList,
   faTableTennisPaddleBall,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
-import { faGripLinesVertical } from '@fortawesome/free-solid-svg-icons/faGripLinesVertical';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { FunctionComponent, SVGProps, useState } from 'react';
+import IconBatch from 'assets/img/batch-tx.svg?react';
+import IconAbi from 'assets/img/ping-pong-abi.svg?react';
+import IconBackend from 'assets/img/ping-pong-backend.svg?react';
 import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
 
 interface SideMenuPropsType {
@@ -20,7 +20,7 @@ interface SideMenuPropsType {
 }
 interface MenuItemsType {
   title: string;
-  icon: IconDefinition;
+  icon?: IconDefinition | FunctionComponent<SVGProps<SVGSVGElement>>;
   id: ItemsIdEnum;
 }
 
@@ -32,12 +32,12 @@ const menuItems: MenuItemsType[] = [
   },
   {
     title: 'Ping & Pong (ABI)',
-    icon: faGripLines,
+    icon: IconAbi,
     id: ItemsIdEnum.pingPongAbi
   },
   {
     title: 'Ping & Pong (Backend)',
-    icon: faGripLinesVertical,
+    icon: IconBackend,
     id: ItemsIdEnum.pingPongService
   },
   {
@@ -52,7 +52,7 @@ const menuItems: MenuItemsType[] = [
   },
   {
     title: 'Batch Transactions',
-    icon: faCirclePlus,
+    icon: IconBatch,
     id: ItemsIdEnum.batchTransactions
   },
   {
@@ -86,6 +86,15 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
     }
   };
 
+  const setItemIcon = (
+    icon: IconDefinition | FunctionComponent<SVGProps<SVGSVGElement>>
+  ) => {
+    if ('iconName' in icon) return <FontAwesomeIcon icon={icon} />;
+
+    const IconComponent = icon;
+    return <IconComponent />;
+  };
+
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex items-center justify-between'>
@@ -111,18 +120,15 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
           <div
             key={item.id}
             className={classNames(
-              'flex items-center gap-2 p-2 cursor-pointer text-tertiary transition-all duration-300',
+              'flex items-center gap-2 p-2 cursor-pointer text-tertiary transition-all duration-300 fill-tertiary',
               {
-                'text-primary bg-primary rounded-lg font-bold':
+                'text-primary bg-primary fill-primary rounded-lg font-bold':
                   item.id === activeItem
               }
             )}
             onClick={() => handleMenuItemClick(item.id)}
           >
-            <FontAwesomeIcon
-              icon={item.icon}
-              className='transition-all duration-300'
-            />
+            {item.icon && setItemIcon(item.icon)}
 
             <div className='transition-all duration-300 text-sm'>
               {item.title}

@@ -1,5 +1,4 @@
 import {
-  faChevronDown,
   faClose,
   faPowerOff,
   faWallet
@@ -7,6 +6,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import IconExpand from 'assets/img/expand-up-down.svg?react';
 import { AddressComponent, Button } from 'components';
 import { TemplateLogo } from 'components/Layout/Header/components';
 import { getAccountProvider, useGetAccountInfo, useGetIsLoggedIn } from 'lib';
@@ -39,23 +39,21 @@ export const LeftPanel = ({ isOpen, setIsOpen }: LeftPanelPropsType) => {
   return (
     <div
       className={classNames(
-        'flex flex-col w-screen lg:w-80 gap-8 lg:gap-0 p-4 lg:p-6 sticky lg:h-screen top-0 bg-primary lg:bg-accent transition-all duration-300',
+        'flex flex-col w-screen lg:w-80 gap-8 lg:gap-0 py-4 p-6 sticky lg:h-screen top-0 bg-primary lg:bg-accent transition-all duration-300',
         { 'rounded-t-2xl lg:rounded-t-none p-6': isOpen }
       )}
     >
       <div
-        className='flex lg:hidden justify-between items-center pt-2 pb-1'
+        className='flex lg:hidden justify-between items-center pt-2 pb-1 transition-all duration-300'
         onClick={handleOpenPanel}
       >
         <TemplateLogo />
 
-        <FontAwesomeIcon
-          icon={isOpen ? faClose : faChevronDown}
-          className={classNames('text-primary transition-all duration-300', {
-            '!text-link': isOpen
-          })}
-          size={isOpen ? 'xl' : 'sm'}
-        />
+        {isOpen ? (
+          <FontAwesomeIcon icon={faClose} className='text-link' size='xl' />
+        ) : (
+          <IconExpand className='fill-primary' />
+        )}
       </div>
 
       <div

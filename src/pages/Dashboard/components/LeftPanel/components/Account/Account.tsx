@@ -4,9 +4,9 @@ import {
   faWallet
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import XLogo from 'assets/img/x-logo.svg?react';
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
+import XLogo from 'assets/img/x-logo.svg?react';
 import { Label } from 'components';
 import {
   DECIMALS,
@@ -20,7 +20,7 @@ import {
 import { Username } from './components';
 
 interface AccountDetailsType {
-  icon: ReactNode;
+  icon: ReactNode | string;
   label: string;
   value: string | ReactNode;
 }
@@ -50,7 +50,7 @@ export const Account = () => {
       value: <MvxTrim text={address} className='w-max' />
     },
     {
-      icon: <FontAwesomeIcon icon={faWallet} className='w-6 h-6' />,
+      icon: account.username ? account.username.slice(0, 3) : '@',
       label: 'Herotag',
       value: <Username account={account} />
     },
@@ -97,13 +97,14 @@ export const Account = () => {
         data-testid='topInfo'
       >
         {accountDetails.map((accountDetail, index) => (
-          <div key={index} className='flex gap-2 items-center'>
+          <div key={index} className='flex h-14 gap-2 items-center'>
             <div
-              className='border border-secondary rounded-lg p-1.5 text-primary
+              className='w-10 h-10 flex items-center justify-center text-tertiary border border-secondary rounded-lg p-1.5
             transition-all duration-300'
             >
               {accountDetail.icon}
             </div>
+
             <p className='truncate flex flex-col'>
               <Label>{accountDetail.label}</Label>
               <span className='text-primary transition-all duration-300 text-base'>

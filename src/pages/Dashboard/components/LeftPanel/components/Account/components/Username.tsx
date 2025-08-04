@@ -12,7 +12,9 @@ export const Username = (props: {
   }
 
   return (
-    <p>
+    <p className='flex gap-0.5'>
+      <span className='text-accent'>{account.username ? '@' : ''}</span>
+
       <span data-testid={DataTestIdsEnum.heroTag}>
         {account.username ? trimUsernameDomain(account.username) : 'N/A'}
       </span>
