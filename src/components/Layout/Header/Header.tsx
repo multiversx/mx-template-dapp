@@ -48,27 +48,25 @@ export const Header = () => {
             </HeaderElementContainer>
           </div>
 
-          <HeaderElementContainer className='hidden lg:!flex !rounded-full gap-3 w-fit cursor-none pl-3.5 pr-3'>
-            <div className='flex gap-2 items-center justify-center'>
-              <FontAwesomeIcon
-                icon={faWallet}
-                className='text-accent transition-all duration-300'
-              />
-
-              <AddressComponent address={address} isHeader />
-            </div>
-
-            {isLoggedIn && (
-              <>
-                <Button
-                  onClick={handleLogout}
-                  className='text-center text-link transition-all duration-300'
-                  icon={faPowerOff}
-                  iconClassName='px-0'
+          {isLoggedIn && (
+            <HeaderElementContainer className='hidden lg:!flex !rounded-full gap-3 w-fit cursor-none pl-3.5 pr-3'>
+              <div className='flex gap-2 items-center justify-center'>
+                <FontAwesomeIcon
+                  icon={faWallet}
+                  className='text-accent transition-all duration-300'
                 />
-              </>
-            )}
-          </HeaderElementContainer>
+
+                <AddressComponent address={address} isHeader />
+              </div>
+
+              <Button
+                onClick={handleLogout}
+                className='text-center text-link transition-all duration-300'
+                icon={faPowerOff}
+                iconClassName='px-0'
+              />
+            </HeaderElementContainer>
+          )}
 
           {!isLoggedIn && (
             <Button
