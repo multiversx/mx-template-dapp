@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ID_API_URL } from 'config';
+import { ID_API_URL } from 'config/config.mainnet';
 
 export const useGetUserHerotag = (address: string) => {
   const [profileUrl, setProfileUrl] = useState('');
