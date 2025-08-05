@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { contractAddress } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
-  CopyButton,
   getExplorerLink,
+  MvxCopyButton,
   MvxTrim,
   useGetNetworkConfig
 } from 'lib';
@@ -41,7 +41,7 @@ export const AddressComponent = ({
           { '!text-link': isHeader }
         )}
       >
-        <CopyButton text={address} />
+        <MvxCopyButton text={address} />
 
         <a href={explorerLink} target='_blank' rel='noreferrer'>
           <FontAwesomeIcon icon={faArrowUpRightFromSquare} />

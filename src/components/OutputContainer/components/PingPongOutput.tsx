@@ -1,10 +1,11 @@
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Label } from 'components';
 import { contractAddress } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
-  CopyButton,
   getExplorerLink,
-  MvxExplorerLink,
+  MvxCopyButton,
   SignedTransactionType,
   useGetNetworkConfig
 } from 'lib';
@@ -39,9 +40,11 @@ export const PingPongOutput = ({
         {contractAddress}
 
         <div className='flex gap-3'>
-          <CopyButton text={contractAddress} />
+          <MvxCopyButton text={contractAddress} />
 
-          <MvxExplorerLink link={explorerLink} />
+          <a href={explorerLink} target='_blank' rel='noreferrer'>
+            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+          </a>
         </div>
       </div>
 

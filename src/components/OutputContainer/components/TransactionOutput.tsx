@@ -1,12 +1,13 @@
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
-  CopyButton,
   DECIMALS,
   DIGITS,
   FormatAmountController,
   getExplorerLink,
-  MvxExplorerLink,
+  MvxCopyButton,
   MvxFormatAmount,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
@@ -51,9 +52,11 @@ export const TransactionOutput = ({
           {transaction.hash}
 
           <div className='flex gap-3'>
-            <CopyButton text={transaction.hash} />
+            <MvxCopyButton text={transaction.hash} />
 
-            <MvxExplorerLink link={hashExplorerLink} />
+            <a href={hashExplorerLink} target='_blank' rel='noreferrer'>
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
           </div>
         </div>
       </p>
@@ -63,9 +66,11 @@ export const TransactionOutput = ({
           {transaction.receiver}
 
           <div className='flex gap-3'>
-            <CopyButton text={transaction.receiver} />
+            <MvxCopyButton text={transaction.receiver} />
 
-            <MvxExplorerLink link={receiverExplorerLink} />
+            <a href={receiverExplorerLink} target='_blank' rel='noreferrer'>
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
           </div>
         </div>
       </p>

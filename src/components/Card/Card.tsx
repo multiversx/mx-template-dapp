@@ -24,9 +24,12 @@ export const Card = (props: CardType) => {
         <a
           href={reference}
           target='_blank'
-          className='text-link transition-all duration-300'
+          className='text-link transition-all duration-300 flex items-center'
         >
-          <FontAwesomeIcon icon={faInfoCircle} className='w-3.5 h-3.5' />
+          <FontAwesomeIcon
+            icon={faInfoCircle}
+            className='max-w-3.5 max-h-3.5'
+          />
         </a>
       </h2>
 
