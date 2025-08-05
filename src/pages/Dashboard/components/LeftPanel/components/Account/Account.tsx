@@ -18,6 +18,7 @@ import {
   useGetNetworkConfig
 } from 'lib';
 import { Username } from './components';
+import { useGetUserHerotag } from './hooks/useGetUserHerotag';
 
 interface AccountDetailsType {
   icon: ReactNode | string;
@@ -43,6 +44,8 @@ export const Account = () => {
     setIsCollapsed((isCollapsed) => !isCollapsed);
   };
 
+  const [herotag, profileUrl] = useGetUserHerotag(address);
+
   const accountDetails: AccountDetailsType[] = [
     {
       icon: <FontAwesomeIcon icon={faWallet} className='w-6 h-6' />,
@@ -50,9 +53,17 @@ export const Account = () => {
       value: <MvxTrim text={address} className='w-max' />
     },
     {
-      icon: account.username ? account.username.slice(0, 3) : '@',
+      icon: herotag ? (
+        profileUrl ? (
+          <img src={profileUrl} className='rounded-full' />
+        ) : (
+          herotag.slice(0, 3)
+        )
+      ) : (
+        '@'
+      ),
       label: 'Herotag',
-      value: <Username account={account} />
+      value: <Username address={address} />
     },
     {
       icon: <FontAwesomeIcon icon={faLayerGroup} className='w-6 h-6' />,
@@ -99,7 +110,7 @@ export const Account = () => {
         {accountDetails.map((accountDetail, index) => (
           <div key={index} className='flex h-14 gap-2 items-center'>
             <div
-              className='w-10 h-10 flex items-center justify-center text-tertiary border border-secondary rounded-lg p-1.5
+              className='min-w-10 min-h-10 max-h-10 max-w-10 flex items-center justify-center text-tertiary border border-secondary rounded-lg overflow-hidden p-1.5
             transition-all duration-300'
             >
               {accountDetail.icon}

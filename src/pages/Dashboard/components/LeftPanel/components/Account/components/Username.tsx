@@ -1,22 +1,22 @@
 import { AccountType, trimUsernameDomain } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { ProfileType } from 'types';
+import { useGetUserHerotag } from '../hooks/useGetUserHerotag';
 
 export const Username = (props: {
-  account: AccountType | ProfileType | null;
+  account?: AccountType | ProfileType | null;
+  address: string;
 }) => {
-  const { account } = props;
+  const { address } = props;
 
-  if (!account) {
-    return null;
-  }
+  const [herotag] = useGetUserHerotag(address);
 
   return (
     <p className='flex gap-0.5'>
-      <span className='text-accent'>{account.username ? '@' : ''}</span>
+      <span className='text-accent'>{herotag ? '@' : ''}</span>
 
       <span data-testid={DataTestIdsEnum.heroTag}>
-        {account.username ? trimUsernameDomain(account.username) : 'N/A'}
+        {herotag ? trimUsernameDomain(herotag) : 'N/A'}
       </span>
     </p>
   );
