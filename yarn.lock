@@ -556,6 +556,13 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.7.2"
 
+"@fortawesome/free-regular-svg-icons@6.5.1":
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-6.5.1.tgz#c98a91d2c9137ed54a7aa2362a916f46503e0627"
+  integrity sha512-m6ShXn+wvqEU69wSP84coxLbNl7sGVZb+Ca+XZq6k30SzuP3X4TfPqtycgUh9ASwlNh5OfQCd8pDIWxl+O+LlQ==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.5.1"
+
 "@fortawesome/free-solid-svg-icons@6.5.1":
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.5.1.tgz#737b8d787debe88b400ab7528f47be333031274a"
@@ -1100,10 +1107,25 @@
     axios "^1.10.0"
     bip39 "3.1.0"
 
-"@multiversx/sdk-dapp-ui@>=0.0.16", "@multiversx/sdk-dapp-ui@^0.x":
+"@multiversx/sdk-dapp-ui@>=0.0.16":
   version "0.0.16"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.16.tgz#8a84b8eedec9de7abfeb3b338a02f1d53abcf674"
   integrity sha512-yh4DMS7ZzZJvj3ElZqdlriT+ulkRtmrldOkpw5gM9OmNoknZZAbVRV1rjr83AOPdqM50u9rcJAxKanvPQfaYQQ==
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" ">=6.7.2"
+    "@fortawesome/free-solid-svg-icons" ">=6.7.2"
+    "@rollup/plugin-image" "^3.0.3"
+    "@stencil/react-output-target" "1.2.0"
+    classnames ">=2.5.1"
+    lodash.inrange "^3.3.0"
+    lodash.range "^3.2.0"
+    qrcode ">=1.5.4"
+    sass-embedded "^1.85.1"
+
+"@multiversx/sdk-dapp-ui@^0.x":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.23.tgz#7c925943b32830f8cea81b16fae957c189fb8515"
+  integrity sha512-hewc8gf+7MzEqIbwvTQKp52gCdLN9DtV1Esm77M/Yp9FlN69zCr8CYtusSiP3swJ/rkfG8KC0E8MWpzQvRcoQw==
   dependencies:
     "@fortawesome/fontawesome-svg-core" ">=6.7.2"
     "@fortawesome/free-solid-svg-icons" ">=6.7.2"
