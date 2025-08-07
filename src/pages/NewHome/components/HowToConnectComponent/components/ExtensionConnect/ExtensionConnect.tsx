@@ -22,7 +22,7 @@ const browserLogos: BrowserLogo[] = [
 export const ExtensionConnect = () => {
   const IconComponent = WalletIcon;
   return (
-    <div className='bg-secondary p-10 rounded-3xl flex justify-between'>
+    <div className='bg-secondary p-8 lg:p-10 rounded-3xl flex flex-col lg:flex-row justify-between gap-10 w-full'>
       <div className='flex flex-col gap-10'>
         <IconComponent />
 
@@ -38,26 +38,26 @@ export const ExtensionConnect = () => {
           </p>
         </div>
 
-        <div className='flex gap-8 items-center'>
+        <div className='flex items-center justify-between max-w-80'>
           <a
             href=''
             target='_blank'
-            className='text-accent text-lg font-semibold'
+            className='text-accent text-sm xxs:text-lg font-semibold'
           >
-            <span className='p-3'>Get Extension</span>
+            <span className='p-2 xxs::p-3'>Get Extension</span>
 
             <FontAwesomeIcon icon={faArrowRight} />
           </a>
 
           <div className='flex gap-2.5'>
             {browserLogos.map(({ icon: Icon }, index) => (
-              <Icon key={index} />
+              <Icon key={index} className='w-4 h-4 xxs:w-6 xxs:h-6' />
             ))}
           </div>
         </div>
       </div>
 
-      <img src={extensionImage} className='max-w-117 max-h-110' />
+      <img src={extensionImage} className='max-w-83 lg:max-w-117' />
     </div>
   );
 };

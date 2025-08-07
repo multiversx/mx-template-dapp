@@ -20,7 +20,7 @@ export const ConnectCard = ({
   const IconComponent = icon;
 
   return (
-    <div className='bg-secondary p-10 flex flex-col gap-10 rounded-3xl'>
+    <div className='bg-secondary p-8 lg:p-10 flex flex-col gap-10 rounded-3xl'>
       <IconComponent />
 
       <div className='flex flex-col gap-4'>

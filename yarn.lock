@@ -1107,22 +1107,7 @@
     axios "^1.10.0"
     bip39 "3.1.0"
 
-"@multiversx/sdk-dapp-ui@>=0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.16.tgz#8a84b8eedec9de7abfeb3b338a02f1d53abcf674"
-  integrity sha512-yh4DMS7ZzZJvj3ElZqdlriT+ulkRtmrldOkpw5gM9OmNoknZZAbVRV1rjr83AOPdqM50u9rcJAxKanvPQfaYQQ==
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" ">=6.7.2"
-    "@fortawesome/free-solid-svg-icons" ">=6.7.2"
-    "@rollup/plugin-image" "^3.0.3"
-    "@stencil/react-output-target" "1.2.0"
-    classnames ">=2.5.1"
-    lodash.inrange "^3.3.0"
-    lodash.range "^3.2.0"
-    qrcode ">=1.5.4"
-    sass-embedded "^1.85.1"
-
-"@multiversx/sdk-dapp-ui@^0.x":
+"@multiversx/sdk-dapp-ui@>=0.0.20", "@multiversx/sdk-dapp-ui@^0.x":
   version "0.0.23"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.23.tgz#7c925943b32830f8cea81b16fae957c189fb8515"
   integrity sha512-hewc8gf+7MzEqIbwvTQKp52gCdLN9DtV1Esm77M/Yp9FlN69zCr8CYtusSiP3swJ/rkfG8KC0E8MWpzQvRcoQw==
@@ -1143,9 +1128,9 @@
   integrity sha512-qxkYV3qtLxY6nckXsxtYZJ8zLY0zalpxgLQfYWaz2uOjEswraky/2PLxSaws1ts0YP3PPc0SrKIDfN9wVOA7EQ==
 
 "@multiversx/sdk-dapp@^5.x":
-  version "5.0.5"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-5.0.5.tgz#99a7f57e1e437c512c5e713802ae1008aa2d1665"
-  integrity sha512-Z2t60pi7EY4yQ8JFsCNKIAq9sfJd4+VxLjVBr4Iq/nqu0UVwv3vxu4Yvda1XIzBRcs2QFKfwF3BiCqI/9IfJxg==
+  version "5.0.13"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-5.0.13.tgz#c4aa940b6d599aad71df1b69ecfc7b44eab4dd2d"
+  integrity sha512-PJm3+D3MGAHINzI68aWPDAIc0UEQsJ6h8CjOUUyIBAbso9Wvho4f5lRtnWeXSBjTgz8ov0TZQ4usSXWLzwGmFw==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-extension-provider" "5.0.0"
@@ -1157,7 +1142,7 @@
     "@multiversx/sdk-web-wallet-cross-window-provider" "3.1.3"
     "@multiversx/sdk-web-wallet-iframe-provider" "3.0.3"
     "@multiversx/sdk-web-wallet-provider" "5.0.0"
-    "@multiversx/sdk-webview-provider" "3.1.2"
+    "@multiversx/sdk-webview-provider" "3.1.3"
     immer "10.1.1"
     linkifyjs "4.3.1"
     lodash.isempty "4.4.0"
@@ -1170,7 +1155,7 @@
     socket.io-client "4.7.5"
     zustand "4.4.7"
   optionalDependencies:
-    "@multiversx/sdk-dapp-ui" ">=0.0.16"
+    "@multiversx/sdk-dapp-ui" ">=0.0.20"
 
 "@multiversx/sdk-extension-provider@5.0.0":
   version "5.0.0"
@@ -1261,10 +1246,10 @@
   dependencies:
     qs "6.10.3"
 
-"@multiversx/sdk-webview-provider@3.1.2":
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-webview-provider/-/sdk-webview-provider-3.1.2.tgz#d65ca0bc2fece8dcc5a97fa30f0a1986f84ca491"
-  integrity sha512-3461dHVlEKWJb4/FCuoyCvuO8EAZqdGW6k7K47nb0O0kuDC4hXgjVk70lPRX3TSyFyQCpOJ988U5eRW0EPCQEA==
+"@multiversx/sdk-webview-provider@3.1.3":
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-webview-provider/-/sdk-webview-provider-3.1.3.tgz#66da7205270be5720cfb8bdf9581cbdcf84e44bb"
+  integrity sha512-9FbeVs3BgK+vwXcwcC6L7EEaosq8ftHbgQqzRyX+npFRjmJgY3P/tB4biJK5Y1iI6zFbYmGvNq2RklHY6+M8ow==
 
 "@napi-rs/wasm-runtime@^0.2.11":
   version "0.2.12"

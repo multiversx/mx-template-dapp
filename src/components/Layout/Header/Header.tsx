@@ -36,14 +36,16 @@ export const Header = () => {
       <nav className='h-full w-full text-sm sm:relative sm:left-auto sm:top-auto sm:flex sm:w-auto sm:flex-row sm:justify-end sm:bg-transparent'>
         <div className='flex justify-end container mx-auto items-center gap-4'>
           <SwitchThemeButton />
+
           <GitHubButton />
+
           {isLoggedIn && <NotificationsButton />}
           <div className='flex gap-1 items-center relative'>
             <div className='w-3 h-3 rounded-full absolute -left-0.5 -top-0.5 bg-accent transition-all duration-300 flex items-center justify-center'>
               <div className='w-2 h-2 rounded-full bg-btn-primary transition-all duration-300' />
             </div>
 
-            <HeaderElementContainer className='w-20 cursor-none'>
+            <HeaderElementContainer className='w-20 cursor-none bg-primary'>
               {environment[0].toUpperCase() + environment.slice(1)}
             </HeaderElementContainer>
           </div>

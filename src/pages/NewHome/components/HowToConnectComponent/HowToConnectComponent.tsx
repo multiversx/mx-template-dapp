@@ -4,8 +4,7 @@ import PasskeyIcon from 'assets/img/passkey-icon.svg?react';
 import WebWalletIcon from 'assets/img/web-wallet-icon.svg?react';
 import XAliasIcon from 'assets/img/xalias-icon.svg?react';
 import XPortalIcon from 'assets/img/xportal-icon.svg?react';
-import { ConnectCard } from 'components/ConnectCard';
-import { ExtensionConnect } from '../ExtensionConnect';
+import { ConnectCard, ExtensionConnect } from './components';
 
 const connectCards = [
   {
@@ -58,11 +57,11 @@ const connectCards = [
   }
 ];
 
-export const ConnectComponent = () => {
+export const HowToConnectComponent = () => {
   return (
-    <div className='flex flex-col gap-20 px-6 pb-6 pt-32 bg-primary rounded-4xl'>
+    <div className='flex flex-col items-center w-full justify-center gap-20 px-2 lg:px-6 pb-2 lg:pb-6 pt-20 lg:pt-32 bg-primary rounded-4xl'>
       <div className='flex flex-col gap-4 items-center justify-center'>
-        <h1 className='text-primary text-6xl font-medium leading-[1] tracking-[-1.92px]'>
+        <h1 className='text-primary text-center text-4xl xxs:text-5xl xs:text-6xl font-medium leading-[1] tracking-[-1.92px]'>
           How can you connect
         </h1>
 
@@ -71,10 +70,10 @@ export const ConnectComponent = () => {
         </p>
       </div>
 
-      <div className='flex flex-col gap-6'>
+      <div className='flex flex-col gap-6 items-center justify-center w-full'>
         <ExtensionConnect />
 
-        <div className='grid grid-cols-3 gap-6'>
+        <div className='grid grid-cols-1 items-stretch justify-center lg:grid-cols-3 gap-6'>
           {connectCards.map((card, index) => (
             <ConnectCard
               key={index}

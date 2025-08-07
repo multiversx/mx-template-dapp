@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { HeaderElementContainer } from '../HeaderElementContainer';
 
 export const SwitchThemeButton = () => {
-  const theme = document.documentElement.getAttribute('data-theme');
+  const theme = document.documentElement.getAttribute('data-mvx-theme');
 
   const [themeIcon, setThemeIcon] = useState(
     theme === 'mvx:dark-theme' ? faMoon : faSun
@@ -12,10 +12,13 @@ export const SwitchThemeButton = () => {
 
   const handleChangeTheme = () => {
     if (themeIcon === faSun) {
-      document.documentElement.setAttribute('data-theme', 'mvx:dark-theme');
+      document.documentElement.setAttribute('data-mvx-theme', 'mvx:dark-theme');
       setThemeIcon(faMoon);
     } else {
-      document.documentElement.setAttribute('data-theme', 'mvx:light-theme');
+      document.documentElement.setAttribute(
+        'data-mvx-theme',
+        'mvx:light-theme'
+      );
       setThemeIcon(faSun);
     }
   };

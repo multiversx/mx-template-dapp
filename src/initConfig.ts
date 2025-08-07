@@ -1,5 +1,6 @@
 import './styles/tailwind.css';
 import './styles/style.css';
+import './styles/variables.css';
 
 import { walletConnectV2ProjectId } from 'config';
 import { EnvironmentsEnum, InitAppType } from './lib';
