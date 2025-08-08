@@ -1,12 +1,9 @@
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
-  DECIMALS,
-  DIGITS,
-  FormatAmountController,
+  ExplorerLink,
+  FormatAmount,
   getExplorerLink,
-  MvxExplorerLink,
-  MvxFormatAmount,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
   useGetAccountInfo,
@@ -24,14 +21,6 @@ export const TransactionOutput = ({
     ? Buffer.from(transaction.data, 'base64').toString('ascii')
     : 'N/A';
 
-  const { isValid, valueDecimal, valueInteger, label } =
-    FormatAmountController.getData({
-      digits: DIGITS,
-      decimals: DECIMALS,
-      egldLabel: network.egldLabel,
-      input: account.balance
-    });
-
   const explorerAddress = network.explorerAddress;
   const hashExplorerLink = getExplorerLink({
     to: `/${TRANSACTIONS_ENDPOINT}/${transaction.hash}`,
@@ -46,32 +35,26 @@ export const TransactionOutput = ({
     <div className='flex flex-col'>
       <p>
         <Label>Hash:</Label>
-        <MvxExplorerLink
-          link={hashExplorerLink}
+        <ExplorerLink
+          page={hashExplorerLink}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.hash}
-        </MvxExplorerLink>
+        </ExplorerLink>
       </p>
       <p>
         <Label>Receiver:</Label>
-        <MvxExplorerLink
-          link={receiverExplorerLink}
+        <ExplorerLink
+          page={receiverExplorerLink}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.receiver}
-        </MvxExplorerLink>
+        </ExplorerLink>
       </p>
 
       <p>
         <Label>Amount: </Label>
-        <MvxFormatAmount
-          isValid={isValid}
-          valueInteger={valueInteger}
-          valueDecimal={valueDecimal}
-          label={label}
-          data-testid='balance'
-        />
+        <FormatAmount value={account.balance} />
       </p>
       <p>
         <Label>Gas price: </Label>
