@@ -1,9 +1,9 @@
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
+  ExplorerLink,
   FormatAmount,
   getExplorerLink,
-  MvxExplorerLink,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
   useGetAccountInfo,
@@ -35,21 +35,21 @@ export const TransactionOutput = ({
     <div className='flex flex-col'>
       <p>
         <Label>Hash:</Label>
-        <MvxExplorerLink
-          link={hashExplorerLink}
+        <ExplorerLink
+          page={hashExplorerLink}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.hash}
-        </MvxExplorerLink>
+        </ExplorerLink>
       </p>
       <p>
         <Label>Receiver:</Label>
-        <MvxExplorerLink
-          link={receiverExplorerLink}
+        <ExplorerLink
+          page={receiverExplorerLink}
           className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
         >
           {transaction.receiver}
-        </MvxExplorerLink>
+        </ExplorerLink>
       </p>
 
       <p>

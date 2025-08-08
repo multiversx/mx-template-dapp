@@ -2,8 +2,8 @@ import { Label } from 'components';
 import { contractAddress } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
+  ExplorerLink,
   getExplorerLink,
-  MvxExplorerLink,
   useGetNetworkConfig
 } from 'lib';
 
@@ -17,12 +17,13 @@ export const ContractAddress = () => {
   return (
     <p>
       <Label>Contract: </Label>
-      <MvxExplorerLink
-        link={explorerLink}
+
+      <ExplorerLink
+        page={explorerLink}
         className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
       >
         {contractAddress}
-      </MvxExplorerLink>
+      </ExplorerLink>
     </p>
   );
 };
