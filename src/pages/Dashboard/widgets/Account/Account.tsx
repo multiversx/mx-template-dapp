@@ -1,25 +1,9 @@
 import { Label, OutputContainer } from 'components';
-import {
-  DECIMALS,
-  DIGITS,
-  FormatAmountController,
-  MvxFormatAmount,
-  useGetAccountInfo,
-  useGetNetworkConfig
-} from 'lib';
+import { FormatAmount, useGetAccountInfo } from 'lib';
 import { Username } from './components';
 
 export const Account = () => {
-  const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
-
-  const { isValid, valueDecimal, valueInteger, label } =
-    FormatAmountController.getData({
-      digits: DIGITS,
-      decimals: DECIMALS,
-      egldLabel: network.egldLabel,
-      input: account.balance
-    });
 
   return (
     <OutputContainer>
@@ -37,13 +21,7 @@ export const Account = () => {
         <p>
           <Label>Balance: </Label>
 
-          <MvxFormatAmount
-            isValid={isValid}
-            valueInteger={valueInteger}
-            valueDecimal={valueDecimal}
-            label={label}
-            data-testid='balance'
-          />
+          <FormatAmount value={account.balance} />
         </p>
       </div>
     </OutputContainer>

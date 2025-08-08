@@ -1,12 +1,9 @@
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
-  DECIMALS,
-  DIGITS,
-  FormatAmountController,
+  FormatAmount,
   getExplorerLink,
   MvxExplorerLink,
-  MvxFormatAmount,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
   useGetAccountInfo,
@@ -23,14 +20,6 @@ export const TransactionOutput = ({
   const decodedData = transaction.data
     ? Buffer.from(transaction.data, 'base64').toString('ascii')
     : 'N/A';
-
-  const { isValid, valueDecimal, valueInteger, label } =
-    FormatAmountController.getData({
-      digits: DIGITS,
-      decimals: DECIMALS,
-      egldLabel: network.egldLabel,
-      input: account.balance
-    });
 
   const explorerAddress = network.explorerAddress;
   const hashExplorerLink = getExplorerLink({
@@ -65,13 +54,7 @@ export const TransactionOutput = ({
 
       <p>
         <Label>Amount: </Label>
-        <MvxFormatAmount
-          isValid={isValid}
-          valueInteger={valueInteger}
-          valueDecimal={valueDecimal}
-          label={label}
-          data-testid='balance'
-        />
+        <FormatAmount value={account.balance} />
       </p>
       <p>
         <Label>Gas price: </Label>
