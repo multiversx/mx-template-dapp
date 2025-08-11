@@ -1,10 +1,11 @@
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MouseEvent, PropsWithChildren } from 'react';
+
 import { WithClassnameType } from 'types';
 
 interface ButtonType extends WithClassnameType, PropsWithChildren {
-  onClick?: (e: MouseEvent) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
   dataTestId?: string;
   dataCy?: string;

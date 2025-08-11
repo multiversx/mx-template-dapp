@@ -18,11 +18,8 @@ export const BATCH_TRANSACTIONS_SC = {
 };
 
 export const GITHUB_REPO_URL = 'https://github.com/multiversx/mx-template-dapp';
-
 export const apiTimeout = 6000;
-
 export const nativeAuth = true;
-
 export const transactionSize = 10;
 
 // Generate your own WalletConnect 2 ProjectId here: https://cloud.walletconnect.com/app
