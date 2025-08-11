@@ -81,6 +81,7 @@
     "mochawesome-report-generator": "6.2.0",
     "postcss": "8.4.30",
     "prettier": "3.0.3",
+    "sass": "^1.90.0",
     "tailwindcss": "4.0.15",
     "ts-jest": "29.1.1",
     "ts-node": "10.9.2",

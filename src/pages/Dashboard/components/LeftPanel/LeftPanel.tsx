@@ -6,11 +6,12 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
+
 import IconExpand from 'assets/img/expand-up-down.svg?react';
-import { AddressComponent, Button } from 'components';
-import { TemplateLogo } from 'components/Layout/Header/components';
+import { AddressComponent, Button, Logo } from 'components';
 import { getAccountProvider, useGetAccountInfo, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
+
 import { Account, SideMenu } from './components';
 
 interface LeftPanelPropsType {
@@ -47,7 +48,7 @@ export const LeftPanel = ({ isOpen, setIsOpen }: LeftPanelPropsType) => {
         className='flex lg:hidden justify-between items-center pt-2 pb-1 transition-all duration-300'
         onClick={handleOpenPanel}
       >
-        <TemplateLogo />
+        <Logo />
 
         {isOpen ? (
           <FontAwesomeIcon icon={faClose} className='text-link' size='xl' />
