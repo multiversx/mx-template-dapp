@@ -1,7 +1,17 @@
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PropsWithChildren } from 'react';
+
 import { WithClassnameType } from 'types';
+
+// prettier-ignore
+const styles = {
+  cardContainer: 'card-container flex flex-col gap-4 flex-1 rounded-xl bg-primary transition-all duration-300 p-6 lg:p-10 justify-center border border-secondary',
+  cardTitle: 'card-title flex justify-between items-center text-2xl font-medium group text-primary transition-all duration-300',
+  cardRef: 'card-ref text-link hover:text-primary transition-all duration-300 flex items-center',
+  cardRefIcon: 'max-w-3.5 max-h-3.5',
+  cardDescription: 'card-description text-secondary transition-all duration-300 mb-6 text-lg font-medium'
+} satisfies Record<string, string>;
 
 interface CardType extends PropsWithChildren, WithClassnameType {
   title: string;
@@ -11,33 +21,25 @@ interface CardType extends PropsWithChildren, WithClassnameType {
 }
 
 export const Card = (props: CardType) => {
-  const { title, children, description, reference, anchor } = props;
+  const {
+    title,
+    children,
+    description,
+    reference,
+    anchor,
+    'data-testid': dataTestId
+  } = props;
 
   return (
-    <div
-      className='flex flex-col gap-4 flex-1 rounded-xl bg-primary transition-all duration-300 p-6 lg:p-10 justify-center border border-secondary'
-      data-testid={props['data-testid']}
-      id={anchor}
-    >
-      <h2 className='flex justify-between items-center text-2xl font-medium group text-primary transition-all duration-300'>
+    <div id={anchor} className={styles.cardContainer} data-testid={dataTestId}>
+      <h2 className={styles.cardTitle}>
         {title}
-        <a
-          href={reference}
-          target='_blank'
-          className='text-link transition-all duration-300 flex items-center'
-        >
-          <FontAwesomeIcon
-            icon={faInfoCircle}
-            className='max-w-3.5 max-h-3.5'
-          />
+        <a href={reference} target='_blank' className={styles.cardRef}>
+          <FontAwesomeIcon icon={faInfoCircle} className={styles.cardRefIcon} />
         </a>
       </h2>
 
-      {description && (
-        <p className='text-secondary transition-all duration-300 mb-6 text-lg font-medium'>
-          {description}
-        </p>
-      )}
+      {description && <p className={styles.cardDescription}>{description}</p>}
       {children}
     </div>
   );

@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+
 import { contractAddress } from 'config';
 import { WidgetType } from 'types/widget.types';
-import { DashboardHeader, LeftPanel } from './components';
-import { Widget } from './components/Widget/Widget';
+
+import { DashboardHeader, LeftPanel, Widget } from './components';
 import {
   BatchTransactions,
   NativeAuth,
@@ -14,7 +15,7 @@ import {
   Transactions
 } from './widgets';
 
-const WIDGETS: WidgetType[] = [
+const dashboardWidgets: WidgetType[] = [
   {
     title: 'Ping & Pong (Manual)',
     widget: PingPongRaw,
@@ -77,28 +78,14 @@ const WIDGETS: WidgetType[] = [
 ];
 
 export const Dashboard = () => {
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   return (
     <div className='flex w-screen min-h-screen relative border-t border-b border-secondary transition-all duration-300'>
       <div
         className={classNames(
-          {
-            'fixed bottom-0 left-0 right-0 z-50 max-h-full overflow-y-auto':
-              !isDesktop
-          },
-          { flex: isDesktop }
+          'fixed bottom-0 left-0 right-0 z-50 max-h-full overflow-y-auto lg:static lg:max-h-none lg:overflow-visible',
+          'lg:flex'
         )}
       >
         <LeftPanel
@@ -119,7 +106,7 @@ export const Dashboard = () => {
         <DashboardHeader />
 
         <div className='flex flex-col gap-6  w-full'>
-          {WIDGETS.map((element) => (
+          {dashboardWidgets.map((element) => (
             <Widget key={element.title} {...element} />
           ))}
         </div>

@@ -1,4 +1,4 @@
-export enum ItemsIdEnum {
+export enum ItemsIdentifiersEnum {
   pingPongRaw = 'ping-pong-raw',
   pingPongAbi = 'ping-pong-abi',
   pingPongService = 'ping-pong-service',

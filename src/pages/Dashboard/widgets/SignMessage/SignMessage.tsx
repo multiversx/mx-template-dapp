@@ -6,9 +6,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MouseEvent, useState } from 'react';
+
 import { Button, OutputContainer } from 'components';
 import { Address, getAccountProvider, Message, useGetAccount } from 'lib';
-import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
+import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
+
 import { SignFailure, SignSuccess } from './components';
 
 export const SignMessage = () => {
@@ -60,7 +62,7 @@ export const SignMessage = () => {
   };
 
   return (
-    <div id={ItemsIdEnum.signMessage} className='flex flex-col gap-6'>
+    <div id={ItemsIdentifiersEnum.signMessage} className='flex flex-col gap-6'>
       <div className='flex flex-col gap-2'>
         <label className='text-secondary transition-all duration-300 text-sm font-normal'>
           Message

@@ -10,10 +10,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { FunctionComponent, SVGProps, useState } from 'react';
+
 import IconBatch from 'assets/img/batch-tx.svg?react';
 import IconAbi from 'assets/img/ping-pong-abi.svg?react';
 import IconBackend from 'assets/img/ping-pong-backend.svg?react';
-import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
+import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 interface SideMenuPropsType {
   setIsOpen: (isOpen: boolean) => void;
@@ -21,61 +22,63 @@ interface SideMenuPropsType {
 interface MenuItemsType {
   title: string;
   icon?: IconDefinition | FunctionComponent<SVGProps<SVGSVGElement>>;
-  id: ItemsIdEnum;
+  id: ItemsIdentifiersEnum;
 }
 
 const menuItems: MenuItemsType[] = [
   {
     title: 'Ping & Pong (Manual)',
     icon: faTableTennisPaddleBall,
-    id: ItemsIdEnum.pingPongRaw
+    id: ItemsIdentifiersEnum.pingPongRaw
   },
   {
     title: 'Ping & Pong (ABI)',
     icon: IconAbi,
-    id: ItemsIdEnum.pingPongAbi
+    id: ItemsIdentifiersEnum.pingPongAbi
   },
   {
     title: 'Ping & Pong (Backend)',
     icon: IconBackend,
-    id: ItemsIdEnum.pingPongService
+    id: ItemsIdentifiersEnum.pingPongService
   },
   {
     title: 'Sign message',
     icon: faPenNib,
-    id: ItemsIdEnum.signMessage
+    id: ItemsIdentifiersEnum.signMessage
   },
   {
     title: 'Native auth',
     icon: faFingerprint,
-    id: ItemsIdEnum.nativeAuth
+    id: ItemsIdentifiersEnum.nativeAuth
   },
   {
     title: 'Batch Transactions',
     icon: IconBatch,
-    id: ItemsIdEnum.batchTransactions
+    id: ItemsIdentifiersEnum.batchTransactions
   },
   {
     title: 'Transactions (All)',
     icon: faRectangleList,
-    id: ItemsIdEnum.transactionsAll
+    id: ItemsIdentifiersEnum.transactionsAll
   },
   {
     title: 'Transactions (Ping & Pong)',
     icon: faFilter,
-    id: ItemsIdEnum.transactionsPingPong
+    id: ItemsIdentifiersEnum.transactionsPingPong
   }
 ];
 
 export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [activeItem, setActiveItem] = useState(ItemsIdEnum.pingPongRaw);
+  const [activeItem, setActiveItem] = useState(
+    ItemsIdentifiersEnum.pingPongRaw
+  );
 
   const toggleCollapse = () => {
     setIsCollapsed((isCollapsed) => !isCollapsed);
   };
 
-  const handleMenuItemClick = (id: ItemsIdEnum) => {
+  const handleMenuItemClick = (id: ItemsIdentifiersEnum) => {
     setIsOpen(false);
     const target = document.getElementById(id);
     if (target) {
@@ -112,7 +115,7 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
       </div>
 
       <div
-        className={classNames('flex flex-col transition-all duration-300', {
+        className={classNames('flex flex-col transition-all duration-300 ', {
           hidden: isCollapsed
         })}
       >
@@ -120,7 +123,7 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
           <div
             key={item.id}
             className={classNames(
-              'flex items-center gap-2 p-2 cursor-pointer text-tertiary transition-all duration-300 fill-tertiary',
+              'flex items-center gap-2 p-2 cursor-pointer text-tertiary hover:text-primary hover:bg-primary hover:font-bold transition-all duration-300 fill-tertiary hover:fill-primary hover:rounded-lg',
               {
                 'text-primary bg-primary fill-primary rounded-lg font-bold':
                   item.id === activeItem
