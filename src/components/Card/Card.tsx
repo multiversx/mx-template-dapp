@@ -1,6 +1,7 @@
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PropsWithChildren } from 'react';
+
 import { WithClassnameType } from 'types';
 
 interface CardType extends PropsWithChildren, WithClassnameType {
@@ -11,12 +12,19 @@ interface CardType extends PropsWithChildren, WithClassnameType {
 }
 
 export const Card = (props: CardType) => {
-  const { title, children, description, reference, anchor } = props;
+  const {
+    title,
+    children,
+    description,
+    reference,
+    anchor,
+    'data-testid': dataTestId
+  } = props;
 
   return (
     <div
       className='flex flex-col gap-4 flex-1 rounded-xl bg-primary transition-all duration-300 p-6 lg:p-10 justify-center border border-secondary'
-      data-testid={props['data-testid']}
+      data-testid={dataTestId}
       id={anchor}
     >
       <h2 className='flex justify-between items-center text-2xl font-medium group text-primary transition-all duration-300'>

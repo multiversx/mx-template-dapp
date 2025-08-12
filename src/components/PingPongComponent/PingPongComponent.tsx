@@ -2,6 +2,7 @@ import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
+
 import {
   AddressComponent,
   Button,
@@ -13,10 +14,10 @@ import {
 import { contractAddress } from 'config';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import { Transaction, useGetPendingTransactions } from 'lib';
-import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
+import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 interface PingPongComponentPropsType {
-  id: ItemsIdEnum;
+  id: ItemsIdentifiersEnum;
   sendPingTransaction: (amount: any) => Promise<any>;
   sendPongTransaction: (transaction?: any) => Promise<any>;
   getTimeToPong: () => Promise<number | null | undefined>;

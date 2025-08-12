@@ -19,7 +19,10 @@ interface LeftPanelPropsType {
   setIsOpen: (isOpen: boolean) => void;
 }
 
-export const LeftPanel = ({ isOpen, setIsOpen }: LeftPanelPropsType) => {
+export const LeftPanel = ({
+  isOpen = false,
+  setIsOpen
+}: LeftPanelPropsType) => {
   const handleOpenPanel = () => {
     setIsOpen(!isOpen);
   };

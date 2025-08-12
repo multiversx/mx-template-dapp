@@ -26,19 +26,17 @@ export const Button = ({
   iconClassName = 'px-1.5',
   label,
   ...otherProps
-}: ButtonType) => {
-  return (
-    <button
-      id={id}
-      {...otherProps}
-      disabled={disabled}
-      onClick={onClick}
-      className={className}
-      type={type}
-    >
-      {icon && <FontAwesomeIcon icon={icon} className={iconClassName} />}
+}: ButtonType) => (
+  <button
+    id={id}
+    {...otherProps}
+    disabled={disabled}
+    onClick={onClick}
+    className={className}
+    type={type}
+  >
+    {icon && <FontAwesomeIcon icon={icon} className={iconClassName} />}
 
-      {label && <span className='px-1.5'>{label}</span>}
-    </button>
-  );
-};
+    {label && <span className='px-1.5'>{label}</span>}
+  </button>
+);

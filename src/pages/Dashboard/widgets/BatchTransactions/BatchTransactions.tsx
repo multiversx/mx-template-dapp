@@ -3,13 +3,15 @@ import {
   faPaperPlane,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
+
 import { Button, OutputContainer, TransactionsOutput } from 'components';
 import {
   useGetAccount,
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'lib';
-import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
+import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
+
 import {
   sendBatchTransactions,
   signAndAutoSendBatchTransactions,
@@ -86,7 +88,10 @@ export const BatchTransactions = () => {
   ];
 
   return (
-    <div id={ItemsIdEnum.batchTransactions} className='flex flex-col gap-6'>
+    <div
+      id={ItemsIdentifiersEnum.batchTransactions}
+      className='flex flex-col gap-6'
+    >
       <OutputContainer>
         <TransactionsOutput transactions={transactions} />
       </OutputContainer>

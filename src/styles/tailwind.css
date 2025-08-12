@@ -1,8 +1,6 @@
 @import 'tailwindcss';
 
 @theme {
-  --breakpoint-xxxs: 20rem; /* 320px */
-  --breakpoint-xxs: 26.75rem; /* 428px */
   --breakpoint-xs: 30rem; /* 480px */
   --background-color-primary: var(--mvx-bg-color-primary);
   --background-color-secondary: var(--mvx-bg-color-secondary);
@@ -24,8 +22,7 @@
   --border-color-logo: var(--mvx-text-color-primary);
 }
 
-:root,
-:root[data-mvx-theme='mvx-vibe-theme'],
-[data-mvx-theme='mvx-vibe-theme'] {
+:root[data-mvx-theme='mvx:vibe-theme'],
+[data-mvx-theme='mvx:vibe-theme'] {
   --background-color-primary: purple;
 }

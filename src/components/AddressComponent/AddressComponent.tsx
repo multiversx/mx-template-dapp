@@ -1,6 +1,7 @@
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+
 import { contractAddress } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
@@ -10,7 +11,7 @@ import {
   useGetNetworkConfig
 } from 'lib';
 
-interface ContractAddressPropsType {
+interface AddressComponentPropsType {
   address: string;
   isHeader?: boolean;
 }
@@ -18,16 +19,18 @@ interface ContractAddressPropsType {
 export const AddressComponent = ({
   address,
   isHeader = false
-}: ContractAddressPropsType) => {
-  const { network } = useGetNetworkConfig();
-  const explorerAddress = network.explorerAddress;
+}: AddressComponentPropsType) => {
+  const {
+    network: { explorerAddress }
+  } = useGetNetworkConfig();
+
   const explorerLink = getExplorerLink({
     to: `/${ACCOUNTS_ENDPOINT}/${contractAddress}`,
     explorerAddress
   });
   return (
     <>
-      <p className='text-primary transition-all duration-300 font-normal text-xs xxs:text-sm pt-1 lg:pt-0 overflow-auto'>
+      <p className='text-primary transition-all duration-300 font-normal text-xs xs:text-sm pt-1 lg:pt-0 overflow-auto'>
         {isHeader ? (
           <MvxTrim text={address} className='!w-max' />
         ) : (
