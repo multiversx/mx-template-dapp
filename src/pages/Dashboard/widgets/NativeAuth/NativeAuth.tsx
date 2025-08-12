@@ -19,19 +19,13 @@ import { useGetProfile } from './hooks';
 
 export const NativeAuth = () => {
   const { tokenLogin, isLoggedIn } = useGetLoginInfo();
+  const account = useGetAccount();
   const { isLoading, profile, getProfile } = useGetProfile();
-  const { network } = useGetNetworkConfig();
-  const { isValid, valueDecimal, valueInteger, label } =
-    FormatAmountController.getData({
-      digits: DIGITS,
-      decimals: DECIMALS,
-      egldLabel: network.egldLabel,
-      input: profile?.balance ?? '0'
-    });
 
   useEffect(() => {
     // On page refresh, tokenInfo is null which implies that we do not have access to loginInfo data
     if (isLoggedIn && tokenLogin?.nativeAuthToken) {
+      // native auth network call example
       getProfile();
     }
   }, [isLoggedIn]);
