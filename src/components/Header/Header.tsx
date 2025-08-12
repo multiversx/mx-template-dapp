@@ -2,6 +2,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faPowerOff, faWallet } from '@fortawesome/free-solid-svg-icons';
 import { faBell, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -147,7 +148,11 @@ export const Header = () => {
           </div>
         )}
 
-        {!isLoggedIn && <Button onClick={handleLogIn} label='Connect' />}
+        {!isLoggedIn && (
+          <MvxButton onClick={handleLogIn} size='small'>
+            Connect
+          </MvxButton>
+        )}
       </nav>
     </header>
   );
