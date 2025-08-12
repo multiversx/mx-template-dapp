@@ -30,11 +30,11 @@ const styles = {
   headerNavigationButtonTooltip: 'header-navigation-button-tooltip p-1 leading-none whitespace-nowrap text-[#737373]',
   headerNavigationNetwork: 'header-navigation-network h-8 border border-[#262626] rounded-xl lg:h-10 relative w-22 flex items-center justify-center leading-none capitalize text-[#E8E8E8] before:absolute before:rounded-full before:w-2 before:lg:w-2.5 before:h-2 before:lg:h-2.5 before:bg-[#23f7dd] before:z-2 before:-top-0.25 before:lg:-top-0.5 before:-left-0.25 before:lg:-left-0.5 after:absolute after:bg-[#353535] after:rounded-lg after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
   headerNavigationNetworkLabel: 'header-navigation-network-label relative z-1',
-  walletContainer: 'hidden lg:!flex !rounded-full gap-3 w-fit cursor-none pl-3.5 pr-3',
+  walletContainer: 'hidden lg:!flex !rounded-full gap-3 w-fit pl-3.5 pr-3',
   walletInfo: 'flex gap-2 items-center justify-center',
   walletIcon: 'text-accent transition-all duration-300',
-  logoutButton: 'text-center text-link transition-all duration-300',
-  logoutIcon: 'px-0'
+  logoutButton: 'text-center text-link hover:text-primary transition-all duration-300',
+  logoutIcon: 'px-0 cursor-pointer'
 } satisfies Record<string, string>;
 
 interface HeaderBrowseButtonType {

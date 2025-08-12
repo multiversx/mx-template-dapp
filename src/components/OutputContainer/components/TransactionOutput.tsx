@@ -1,18 +1,26 @@
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
-  ExplorerLink,
   FormatAmount,
   getExplorerLink,
   MvxCopyButton,
-  MvxFormatAmount,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
   useGetAccountInfo,
   useGetNetworkConfig
 } from 'lib';
+
+// prettier-ignore
+const styles = {
+  transactionContainer: 'transaction-container flex flex-col',
+  transactionElementContainer: 'transaction-elem-container flex gap-2',
+  transactionElement: 'transaction-elem flex justify-between w-full',
+  buttons: 'buttons flex gap-3',
+  dataContainer: 'data-container whitespace-nowrap'
+} satisfies Record<string, string>;
 
 export const TransactionOutput = ({
   transaction
@@ -36,13 +44,14 @@ export const TransactionOutput = ({
   });
 
   return (
-    <div className='flex flex-col'>
-      <p className='flex gap-2'>
+    <div className={styles.transactionContainer}>
+      <p className={styles.transactionContainer}>
         <Label>Hash:</Label>
-        <div className='flex justify-between w-full'>
+
+        <div className={styles.transactionElement}>
           {transaction.hash}
 
-          <div className='flex gap-3'>
+          <div className={styles.buttons}>
             <MvxCopyButton text={transaction.hash} />
 
             <a href={hashExplorerLink} target='_blank' rel='noreferrer'>
@@ -51,12 +60,13 @@ export const TransactionOutput = ({
           </div>
         </div>
       </p>
-      <p className='flex gap-2'>
+
+      <p className={styles.transactionElementContainer}>
         <Label>Receiver:</Label>
-        <div className='flex justify-between w-full'>
+        <div className={styles.transactionElement}>
           {transaction.receiver}
 
-          <div className='flex gap-3'>
+          <div className={styles.buttons}>
             <MvxCopyButton text={transaction.receiver} />
 
             <a href={receiverExplorerLink} target='_blank' rel='noreferrer'>
@@ -78,7 +88,7 @@ export const TransactionOutput = ({
         <Label>Gas limit: </Label>
         {transaction.gasLimit}
       </p>
-      <p className='whitespace-nowrap'>
+      <p className={styles.dataContainer}>
         <Label>Data: </Label> {decodedData}
       </p>
     </div>

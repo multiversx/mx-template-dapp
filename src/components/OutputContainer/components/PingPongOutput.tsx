@@ -1,5 +1,6 @@
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Label } from 'components';
 import { contractAddress } from 'config';
 import {
@@ -9,6 +10,7 @@ import {
   SignedTransactionType,
   useGetNetworkConfig
 } from 'lib';
+
 import { TransactionsOutput } from './TransactionsOutput';
 
 type PingPongOutputType = {

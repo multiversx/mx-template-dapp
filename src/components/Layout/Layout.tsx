@@ -4,11 +4,17 @@ import { Footer } from 'components/Footer';
 import { Header } from 'components/Header';
 import { AuthRedirectWrapper } from 'wrappers';
 
+// prettier-ignore
+const styles = {
+  layoutContainer: 'layout-container flex min-h-screen flex-col bg-accent transition-all duration-300',
+  mainContainer: 'main-container flex flex-grow items-stretch justify-center'
+} satisfies Record<string, string>;
+
 export const Layout = ({ children }: PropsWithChildren) => (
-  <div className='flex min-h-screen flex-col bg-accent transition-all duration-300'>
+  <div className={styles.layoutContainer}>
     <Header />
 
-    <main className='flex flex-grow items-stretch justify-center'>
+    <main className={styles.mainContainer}>
       <AuthRedirectWrapper>{children}</AuthRedirectWrapper>
     </main>
     <Footer />

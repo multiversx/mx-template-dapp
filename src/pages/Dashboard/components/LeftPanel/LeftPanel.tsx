@@ -43,7 +43,7 @@ export const LeftPanel = ({
   return (
     <div
       className={classNames(
-        'flex flex-col w-screen lg:w-80 gap-8 lg:gap-0 py-4 p-6 sticky lg:h-screen top-0 bg-primary lg:bg-accent transition-all duration-300',
+        'flex flex-col w-screen lg:w-80 gap-8 lg:gap-0 py-4 p-6 sticky lg:h-screen top-0 bg-primary lg:bg-accent transition-all duration-300 overflow-y-scroll',
         { 'rounded-t-2xl lg:rounded-t-none p-6': isOpen }
       )}
     >

@@ -115,7 +115,7 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
       </div>
 
       <div
-        className={classNames('flex flex-col transition-all duration-300', {
+        className={classNames('flex flex-col transition-all duration-300 ', {
           hidden: isCollapsed
         })}
       >
@@ -123,7 +123,7 @@ export const SideMenu = ({ setIsOpen }: SideMenuPropsType) => {
           <div
             key={item.id}
             className={classNames(
-              'flex items-center gap-2 p-2 cursor-pointer text-tertiary transition-all duration-300 fill-tertiary',
+              'flex items-center gap-2 p-2 cursor-pointer text-tertiary hover:text-primary hover:bg-primary hover:font-bold transition-all duration-300 fill-tertiary hover:fill-primary hover:rounded-lg',
               {
                 'text-primary bg-primary fill-primary rounded-lg font-bold':
                   item.id === activeItem
