@@ -19,7 +19,7 @@ interface ThemeTooltipOptionType {
 // prettier-ignore
 const styles = {
   themeTooltip: 'theme-tooltip',
-  themeTooltipTrigger: 'theme-tooltip-trigger flex h-8 lg:h-10 cursor-pointer gap-1.5 lg:gap-2 items-center justify-center w-12 min-w-12 max-w-12 lg:min-w-16 lg:max-w-16 lg:w-16 relative after:absolute after:opacity-40 after:bg-[#353535] after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none after:rounded-xl after:duration-200 after:ease-out after:transition-all hover:after:opacity-100',
+  themeTooltipTrigger: 'theme-tooltip-trigger flex h-8 lg:h-10 cursor-pointer gap-1 lg:gap-2 items-center justify-center w-12 min-w-12 max-w-12 lg:min-w-16 lg:max-w-16 lg:w-16 relative after:absolute after:opacity-40 after:bg-[#353535] after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none after:rounded-xl after:duration-200 after:ease-out after:transition-all hover:after:opacity-100',
   themeTooltipTriggerDots: 'theme-tooltip-trigger-dots relative z-1',
   themeTooltipTriggerIcon: 'theme-tooltip-trigger-icon transition-all text-xs relative z-1 duration-200 ease-out text-[#E8E8E8]',
   themeTooltipTriggerIconRotated: 'rotate-180',
@@ -27,7 +27,7 @@ const styles = {
   themeTooltipOption: 'theme-tooltip-option w-60 flex p-3 flex group text-white gap-3 items-center transition-all duration-200 ease-out cursor-pointer relative after:transition-all after:duration-200 after:ease-out after:absolute after:opacity-0 hover:after:opacity-40 after:left-0 after:right-0 after:bottom-0 after:top-0 after:bg-[#353535] after:pointer-events-none after:rounded-lg',
   themeTooltipOptionActive: 'after:bg-black after:opacity-100 text-[#23f7dd]!',
   themeTooltipOptionDots: 'theme-tooltip-option-dots flex w-5 h-5 justify-between relative z-1',
-  themeTooltipOptionLabel: 'theme-tooltip-option-label leading-none relative z-1',
+  themeTooltipOptionLabel: 'theme-tooltip-option-label leading-none relative z-1 text-base font-medium',
   themeTooltipOptionArrow: 'theme-tooltip-option-arrow ml-auto duration-200 transition-all ease-out opacity-0 text-[#B6B3AF] group-hover:opacity-100'
 } satisfies Record<string, string>;
 
