@@ -6,6 +6,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
+
 import XLogo from 'assets/img/x-logo.svg?react';
 import { Label } from 'components';
 import {
@@ -17,6 +18,7 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig
 } from 'lib';
+
 import { Username } from './components';
 import { useGetUserHerotag } from './hooks/useGetUserHerotag';
 

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import {
   AddressComponent,
   Label,
@@ -10,17 +11,28 @@ import {
   DIGITS,
   FormatAmountController,
   MvxFormatAmount,
+  useGetAccount,
   useGetLoginInfo,
   useGetNetworkConfig
 } from 'lib';
 import { Username } from 'pages/Dashboard/components/LeftPanel/components/Account/components';
 import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
+
 import { useGetProfile } from './hooks';
 
 export const NativeAuth = () => {
+  const { network } = useGetNetworkConfig();
   const { tokenLogin, isLoggedIn } = useGetLoginInfo();
   const account = useGetAccount();
   const { isLoading, profile, getProfile } = useGetProfile();
+
+  const { isValid, valueDecimal, valueInteger, label } =
+    FormatAmountController.getData({
+      digits: DIGITS,
+      decimals: DECIMALS,
+      egldLabel: network.egldLabel,
+      input: account.balance
+    });
 
   useEffect(() => {
     // On page refresh, tokenInfo is null which implies that we do not have access to loginInfo data
