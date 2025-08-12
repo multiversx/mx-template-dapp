@@ -1235,10 +1235,10 @@
     axios "^1.10.0"
     bip39 "3.1.0"
 
-"@multiversx/sdk-dapp-ui@>=0.0.23", "@multiversx/sdk-dapp-ui@^0.x":
-  version "0.0.24"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.24.tgz#d34b34beb01a37a1acc8212b1e3371543c8bdff9"
-  integrity sha512-Po1Zyvojr5gmKE8PqeK8SCeDHoRSW51dfBiB03Hqkli+HOEIeht9rgOelTVcGExNLaC/myFI8calWtfaPJJhBA==
+"@multiversx/sdk-dapp-ui@>=0.0.24", "@multiversx/sdk-dapp-ui@^0.0.25":
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-ui/-/sdk-dapp-ui-0.0.25.tgz#3f0f7c875dd21a54c6c51c2f77375d1a1b89fc4a"
+  integrity sha512-vsNjJ1XPD5wPPhI4jj3iVFxjd4T9rKovluMpwnMj4OwTjsVddrgIdC7t43mdp9q85sQekqtq98k7f9C75ruYBQ==
   dependencies:
     "@fortawesome/fontawesome-svg-core" ">=6.7.2"
     "@fortawesome/free-solid-svg-icons" ">=6.7.2"
@@ -1260,10 +1260,10 @@
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-2.0.2.tgz#a82252ca166ba24462e925c5a8d249fd8e166906"
   integrity sha512-qxkYV3qtLxY6nckXsxtYZJ8zLY0zalpxgLQfYWaz2uOjEswraky/2PLxSaws1ts0YP3PPc0SrKIDfN9wVOA7EQ==
 
-"@multiversx/sdk-dapp@^5.x":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-5.1.0.tgz#3efbb5b0161d57e6f52d9c0a480412c2b2e059b1"
-  integrity sha512-2J+uqxkYNLgyt4CvPEPM4sCLFinr5F3Ud+6sC+y2gtne79cgWmqKwXiVdkp/+icrbrFtoc1KZCKUNQ4kNQYoxA==
+"@multiversx/sdk-dapp@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-5.1.1.tgz#cdcaa1bebc1eccf1ac712fac61f0bfae5b6a9cd9"
+  integrity sha512-moqMutUYlsflWbqrtdT1ZBIyA/kSnTGaCKIEInRAU/5qLyi+sqdb9Yxu3wAf+xxwVlCFH3Cioj3UW02SC1wo/w==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@multiversx/sdk-extension-provider" "5.1.1"
@@ -1288,7 +1288,7 @@
     socket.io-client "4.7.5"
     zustand "4.4.7"
   optionalDependencies:
-    "@multiversx/sdk-dapp-ui" ">=0.0.23"
+    "@multiversx/sdk-dapp-ui" ">=0.0.24"
 
 "@multiversx/sdk-extension-provider@5.1.1":
   version "5.1.1"
