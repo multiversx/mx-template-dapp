@@ -16,7 +16,6 @@ import {
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
-import './header.scss';
 import { ThemeTooltip } from './components';
 
 // prettier-ignore
