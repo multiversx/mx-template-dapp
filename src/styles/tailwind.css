@@ -1,28 +1,31 @@
 @import 'tailwindcss';
 
 @theme {
-    --breakpoint-xxxs: 20rem; /* 320px */
-    --breakpoint-xxs: 26.75rem; /* 428px */
-    --breakpoint-xs: 30rem; /* 480px */
-    --background-image-mvx-white: url('../multiversx-white.svg');
-    --background-color-primary: var(--mvx-bg-color-primary);
-    --background-color-secondary: var(--mvx-bg-color-secondary);
-    --background-color-accent: var(--mvx-bg-accent-color);
-    --background-color-btn-primary: var(--mvx-button-bg-primary);
-    --background-color-btn-secondary: var(--mvx-white);
-    --background-color-btn-tertiary: var(--mvx-button-bg-secondary);
-    --color-primary: var(--mvx-text-color-primary);
-    --color-secondary: var(--mvx-text-color-secondary);
-    --color-tertiary: var(--mvx-text-color-tertiary);
-    --color-accent: var(--mvx-text-accent-color); 
-    --color-btn-primary: var(--mvx-button-text-primary);
-    --color-link: var(--mvx-link-color);
-    --border-color-primary: var(--mvx-border-color-primary);
-    --border-color-secondary: var(--mvx-border-color-secondary);
+  --breakpoint-xxxs: 20rem; /* 320px */
+  --breakpoint-xxs: 26.75rem; /* 428px */
+  --breakpoint-xs: 30rem; /* 480px */
+  --background-color-primary: var(--mvx-bg-color-primary);
+  --background-color-secondary: var(--mvx-bg-color-secondary);
+  --background-color-accent: var(--mvx-bg-accent-color);
+  --background-color-btn-primary: var(--mvx-button-bg-primary);
+  --background-color-btn-secondary: var(--mvx-white);
+  --background-color-btn-tertiary: var(--mvx-button-bg-secondary);
+  --color-primary: var(--mvx-text-color-primary);
+  --color-secondary: var(--mvx-text-color-secondary);
+  --color-tertiary: var(--mvx-text-color-tertiary);
+  --color-accent: var(--mvx-text-accent-color);
+  --color-btn-primary: var(--mvx-button-text-primary);
+  --color-link: var(--mvx-link-color);
+  --border-color-primary: var(--mvx-border-color-primary);
+  --border-color-secondary: var(--mvx-border-color-secondary);
 
-    --background-color-logo-primary: var(--mvx-text-color-primary);
-    --background-color-logo-secondary: var(--mvx-button-text-primary);
-    --border-color-logo: var(--mvx-text-color-primary)
+  --background-color-logo-primary: var(--mvx-text-color-primary);
+  --background-color-logo-secondary: var(--mvx-button-text-primary);
+  --border-color-logo: var(--mvx-text-color-primary);
+}
 
-
+:root,
+:root[data-mvx-theme='mvx-vibe-theme'],
+[data-mvx-theme='mvx-vibe-theme'] {
+  --background-color-primary: purple;
 }
