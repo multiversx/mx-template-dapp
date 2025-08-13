@@ -3,8 +3,10 @@ import {
   faPaperPlane,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 
-import { Button, OutputContainer, TransactionsOutput } from 'components';
+import { OutputContainer, TransactionsOutput } from 'components';
 import {
   useGetAccount,
   useGetNetworkConfig,
@@ -18,9 +20,16 @@ import {
   swapAndLockTokens
 } from './helpers';
 
+const styles = {
+  batchTx: 'batch-tx flex flex-col gap-6',
+  buttonsContainer:
+    'buttons-container flex flex-col md:flex-row gap-2 items-start',
+  batchTxButton: 'batch-tx-button text-sm font-normal'
+} satisfies Record<string, string>;
+
 interface BatchTransactionsButtonsType {
   dataTestId: string;
-  onclickFunction: () => Promise<void>;
+  onClickFunction: () => Promise<void>;
   icon: IconDefinition;
   label: string;
 }
@@ -69,43 +78,46 @@ export const BatchTransactions = () => {
   const batchTransactionsButtons: BatchTransactionsButtonsType[] = [
     {
       dataTestId: 'sign-auto-send',
-      onclickFunction: executeSignAndAutoSendBatchTransactions,
+      onClickFunction: executeSignAndAutoSendBatchTransactions,
       icon: faPaperPlane,
       label: 'Sign & send batch'
     },
     {
       dataTestId: 'send-transactions',
-      onclickFunction: executeBatchTransactions,
+      onClickFunction: executeBatchTransactions,
       icon: faPaperPlane,
       label: 'Sign batch & controlled sending'
     },
     {
       dataTestId: 'swap-lock',
-      onclickFunction: executeSwapAndLockTokens,
+      onClickFunction: executeSwapAndLockTokens,
       icon: faArrowsRotate,
       label: 'Swap & Lock'
     }
   ];
 
   return (
-    <div
-      id={ItemsIdentifiersEnum.batchTransactions}
-      className='flex flex-col gap-6'
-    >
+    <div id={ItemsIdentifiersEnum.batchTransactions} className={styles.batchTx}>
       <OutputContainer>
         <TransactionsOutput transactions={transactions} />
       </OutputContainer>
 
-      <div className='flex flex-col md:flex-row gap-2 items-start'>
+      <div className={styles.buttonsContainer}>
         {batchTransactionsButtons.map((button) => (
-          <Button
+          <MvxButton
             key={button.dataTestId}
             data-testid={button.dataTestId}
-            onClick={button.onclickFunction}
+            onClick={button.onClickFunction}
             disabled={hasPendingTransactions}
-            icon={button.icon}
-            label={button.label}
-          />
+            size='small'
+          >
+            <FontAwesomeIcon
+              icon={button.icon}
+              className={styles.batchTxButton}
+            />
+
+            <span className={styles.batchTxButton}>{button.label}</span>
+          </MvxButton>
         ))}
       </div>
     </div>

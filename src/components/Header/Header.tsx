@@ -6,7 +6,7 @@ import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AddressComponent, Button, Logo, Tooltip } from 'components';
+import { AddressComponent, Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
 import {
   getAccountProvider,
@@ -34,8 +34,7 @@ const styles = {
   walletContainer: 'hidden lg:!flex !rounded-full gap-3 w-fit pl-3.5 pr-3',
   walletInfo: 'flex gap-2 items-center justify-center',
   walletIcon: 'text-accent transition-all duration-300',
-  logoutButton: 'text-center text-link hover:text-primary transition-all duration-300',
-  logoutIcon: 'px-0 cursor-pointer'
+  logoutButton: 'text-center text-link hover:text-primary transition-all duration-300 cursor-pointer'
 } satisfies Record<string, string>;
 
 interface HeaderBrowseButtonType {
@@ -140,12 +139,9 @@ export const Header = () => {
               <AddressComponent address={address} isHeader />
             </div>
 
-            <Button
-              onClick={handleLogout}
-              className={styles.logoutButton}
-              icon={faPowerOff}
-              iconClassName={styles.logoutIcon}
-            />
+            <button onClick={handleLogout} className={styles.logoutButton}>
+              <FontAwesomeIcon icon={faPowerOff} />
+            </button>
           </div>
         )}
 

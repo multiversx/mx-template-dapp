@@ -1,11 +1,12 @@
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 
 import {
   AddressComponent,
-  Button,
   Label,
   MissingNativeAuthError,
   OutputContainer,
@@ -23,7 +24,8 @@ const styles = {
   addressComponent: 'address-component flex justify-between items-center gap-3',
   timeRemaining: 'text-red-600',
   buttonsContainer: 'buttons-container flex flex-col gap-2',
-  buttons: 'buttons flex justify-start gap-2'
+  buttons: 'buttons flex justify-start gap-2',
+  buttonContent: 'button-content text-sm font-normal'
 } satisfies Record<string, string>;
 
 interface PingPongComponentPropsType {
@@ -147,21 +149,31 @@ export const PingPongComponent = ({
 
       <div className={styles.buttonsContainer}>
         <div className={styles.buttons}>
-          <Button
+          <MvxButton
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
-            data-cy='transactionBtn'
-            icon={faArrowUp}
-            label='Ping'
-          />
+            size='small'
+          >
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              className={styles.buttonContent}
+            />
 
-          <Button
+            <span className={styles.buttonContent}>Ping</span>
+          </MvxButton>
+
+          <MvxButton
             disabled={!pongAllowed || hasPing || hasPendingTransactions}
-            data-cy='transactionBtn'
             onClick={onSendPongTransaction}
-            icon={faArrowDown}
-            label='Pong'
-          />
+            size='small'
+          >
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              className={styles.buttonContent}
+            />
+
+            <span className={styles.buttonContent}>Pong</span>
+          </MvxButton>
         </div>
       </div>
     </div>
