@@ -5,13 +5,18 @@ import {
   faPenNib
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { MouseEvent, useState } from 'react';
 
-import { Button, OutputContainer } from 'components';
+import { OutputContainer } from 'components';
 import { Address, getAccountProvider, Message, useGetAccount } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 import { SignFailure, SignSuccess } from './components';
+
+const styles = {
+  buttonContent: 'button-content text-sm font-normal'
+} satisfies Record<string, string>;
 
 export const SignMessage = () => {
   const [message, setMessage] = useState('');
@@ -107,20 +112,31 @@ export const SignMessage = () => {
 
       <div className='flex gap-2 items-start'>
         {['success', 'error'].includes(state) ? (
-          <Button
+          <MvxButton
             data-testid='closeTransactionSuccessBtn'
             id='closeButton'
             onClick={handleClear}
-            icon={state === 'success' ? faBroom : faArrowsRotate}
-            label={state === 'error' ? 'Try again' : 'Clear'}
-          />
+            size='small'
+          >
+            <FontAwesomeIcon
+              icon={state === 'success' ? faBroom : faArrowsRotate}
+              className={styles.buttonContent}
+            />
+
+            <span className={styles.buttonContent}>
+              {state === 'error' ? 'Try again' : 'Clear'}
+            </span>
+          </MvxButton>
         ) : (
-          <Button
+          <MvxButton
             data-testid='signMsgBtn'
             onClick={handleSubmit}
-            icon={faPenNib}
-            label='Sign'
-          />
+            size='small'
+          >
+            <FontAwesomeIcon icon={faPenNib} className={styles.buttonContent} />
+
+            <span className={styles.buttonContent}>Sign</span>
+          </MvxButton>
         )}
       </div>
     </div>

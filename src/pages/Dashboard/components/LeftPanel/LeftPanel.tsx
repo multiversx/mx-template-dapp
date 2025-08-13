@@ -8,11 +8,16 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
 import IconExpand from 'assets/img/expand-up-down.svg?react';
-import { AddressComponent, Button, Logo } from 'components';
+import { AddressComponent, Logo } from 'components';
 import { getAccountProvider, useGetAccountInfo, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
 import { Account, SideMenu } from './components';
+
+const styles = {
+  logoutButton:
+    'text-center text-link hover:text-primary transition-all duration-300 cursor-pointer'
+} satisfies Record<string, string>;
 
 interface LeftPanelPropsType {
   isOpen: boolean;
@@ -73,14 +78,9 @@ export const LeftPanel = ({
           </div>
 
           {isLoggedIn && (
-            <>
-              <Button
-                onClick={handleLogout}
-                className='text-center text-link transition-all duration-300'
-                icon={faPowerOff}
-                iconClassName='px-0'
-              />
-            </>
+            <button onClick={handleLogout} className={styles.logoutButton}>
+              <FontAwesomeIcon icon={faPowerOff} />
+            </button>
           )}
         </div>
 
