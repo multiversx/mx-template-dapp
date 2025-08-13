@@ -1,7 +1,14 @@
 import { AccountType, trimUsernameDomain } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { ProfileType } from 'types';
+
 import { useGetUserHerotag } from '../hooks/useGetUserHerotag';
+
+// prettier-ignore
+const styles = {
+  usernameContainer: 'username-container flex gap-0.5',
+  herotag: 'herotag text-accent'
+} satisfies Record<string, string>;
 
 export const Username = (props: {
   account?: AccountType | ProfileType | null;
@@ -12,8 +19,8 @@ export const Username = (props: {
   const [herotag] = useGetUserHerotag(address);
 
   return (
-    <p className='flex gap-0.5'>
-      <span className='text-accent'>{herotag ? '@' : ''}</span>
+    <p className={styles.usernameContainer}>
+      <span className={styles.herotag}>{herotag ? '@' : ''}</span>
 
       <span data-testid={DataTestIdsEnum.heroTag}>
         {herotag ? trimUsernameDomain(herotag) : 'N/A'}

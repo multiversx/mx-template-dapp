@@ -13,6 +13,13 @@ import {
 
 import { TransactionsOutput } from './TransactionsOutput';
 
+// prettier-ignore
+const styles = {
+  pingPongAddressContainer: 'ping-pong-address-container flex justify-between mb-4',
+  pingPongButtons: 'ping-pong-buttons flex gap-3',
+  timeRemaining: 'time-remaining text-red-600'
+} satisfies Record<string, string>;
+
 type PingPongOutputType = {
   timeRemaining: string;
   pongAllowed: boolean;
@@ -38,10 +45,10 @@ export const PingPongOutput = ({
 
   return (
     <>
-      <div className='flex justify-between mb-4'>
+      <div className={styles.pingPongAddressContainer}>
         {contractAddress}
 
-        <div className='flex gap-3'>
+        <div className={styles.pingPongButtons}>
           <MvxCopyButton text={contractAddress} />
 
           <a href={explorerLink} target='_blank' rel='noreferrer'>
@@ -51,11 +58,12 @@ export const PingPongOutput = ({
       </div>
 
       <TransactionsOutput transactions={transactions} />
+
       {!pongAllowed && (
         <p>
           <Label>Time remaining: </Label>
-          <span className='text-red-600'>{timeRemaining}</span> until able to
-          pong
+          <span className={styles.timeRemaining}>{timeRemaining}</span> until
+          able to pong
         </p>
       )}
     </>

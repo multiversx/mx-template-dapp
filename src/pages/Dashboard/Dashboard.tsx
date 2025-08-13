@@ -15,6 +15,16 @@ import {
   Transactions
 } from './widgets';
 
+// prettier-ignore
+const styles = {
+  dashboardContainer: 'dashboard-container flex w-screen min-h-screen relative border-t border-b border-secondary transition-all duration-300',
+  mobilePanelContainer: 'mobile-panel-container fixed bottom-0 left-0 right-0 z-50 max-h-full overflow-y-auto lg:static lg:max-h-none lg:overflow-visible',
+  desktopPanelContainer: 'desktop-panel-container lg:flex',
+  dashboardContent: 'dashboard-content flex flex-col gap-6 justify-center items-center flex-1 w-full overflow-auto border-l border-secondary p-4 lg:p-6 transition-all duration-300',
+  dashboardContentMobilePanelOpen: 'dashboard-content-mobile-panel-open opacity-20 pointer-events-none',
+  dashboardWidgets: 'dashboard-widgets flex flex-col gap-6  w-full'
+} satisfies Record<string, string>;
+
 const dashboardWidgets: WidgetType[] = [
   {
     title: 'Ping & Pong (Manual)',
@@ -81,11 +91,11 @@ export const Dashboard = () => {
   const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
 
   return (
-    <div className='flex w-screen min-h-screen relative border-t border-b border-secondary transition-all duration-300'>
+    <div className={styles.dashboardContainer}>
       <div
         className={classNames(
-          'fixed bottom-0 left-0 right-0 z-50 max-h-full overflow-y-auto lg:static lg:max-h-none lg:overflow-visible',
-          'lg:flex'
+          styles.mobilePanelContainer,
+          styles.desktopPanelContainer
         )}
       >
         <LeftPanel
@@ -95,17 +105,14 @@ export const Dashboard = () => {
       </div>
 
       <div
-        className={classNames(
-          'flex flex-col gap-6 justify-center items-center flex-1 w-full overflow-auto border-l border-secondary p-4 lg:p-6 transition-all duration-300',
-          {
-            'opacity-20 pointer-events-none': isMobilePanelOpen
-          }
-        )}
+        className={classNames(styles.dashboardContent, {
+          [styles.dashboardContentMobilePanelOpen]: isMobilePanelOpen
+        })}
         style={{ backgroundImage: 'url(src/assets/img/background.svg)' }}
       >
         <DashboardHeader />
 
-        <div className='flex flex-col gap-6  w-full'>
+        <div className={styles.dashboardWidgets}>
           {dashboardWidgets.map((element) => (
             <Widget key={element.title} {...element} />
           ))}
