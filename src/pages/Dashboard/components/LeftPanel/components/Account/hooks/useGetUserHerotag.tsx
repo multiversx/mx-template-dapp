@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ID_API_URL } from 'config/config.mainnet';
+
+import { ID_API_URL, USERS_API_URL } from 'config/config.mainnet';
 
 export const useGetUserHerotag = (address: string) => {
   const [profileUrl, setProfileUrl] = useState('');
@@ -9,7 +10,7 @@ export const useGetUserHerotag = (address: string) => {
   const getUserProfileData = async (address: string) => {
     if (!address) return;
     try {
-      const { data } = await axios.get(`/users/api/v1/users/${address}`, {
+      const { data } = await axios.get(`${USERS_API_URL}${address}`, {
         baseURL: ID_API_URL
       });
 

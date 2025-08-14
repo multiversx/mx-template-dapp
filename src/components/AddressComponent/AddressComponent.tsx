@@ -1,6 +1,7 @@
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+
 import { contractAddress } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
@@ -10,7 +11,17 @@ import {
   useGetNetworkConfig
 } from 'lib';
 
-interface ContractAddressPropsType {
+// prettier-ignore
+const styles = {
+  addressContainer: 'address-container text-primary transition-all duration-300 font-normal text-xs xs:text-sm pt-1 lg:pt-0 overflow-auto',
+  address: 'address break-words lg:break-normal',
+  trimmedAddress: 'trimmed-address !w-max',
+  addressButtons: 'address-buttons flex gap-1 transition-all duration-300',
+  addressButton: 'address-button text-primary hover:text-accent',
+  addressButtonHeader: '!text-link hover:!text-primary'
+} satisfies Record<string, string>;
+
+interface AddressComponentPropsType {
   address: string;
   isHeader?: boolean;
 }
@@ -18,32 +29,41 @@ interface ContractAddressPropsType {
 export const AddressComponent = ({
   address,
   isHeader = false
-}: ContractAddressPropsType) => {
-  const { network } = useGetNetworkConfig();
-  const explorerAddress = network.explorerAddress;
+}: AddressComponentPropsType) => {
+  const {
+    network: { explorerAddress }
+  } = useGetNetworkConfig();
+
   const explorerLink = getExplorerLink({
     to: `/${ACCOUNTS_ENDPOINT}/${contractAddress}`,
     explorerAddress
   });
   return (
     <>
-      <p className='text-primary transition-all duration-300 font-normal text-xs xxs:text-sm pt-1 lg:pt-0 overflow-auto'>
+      <p className={styles.addressContainer}>
         {isHeader ? (
-          <MvxTrim text={address} className='!w-max' />
+          <MvxTrim text={address} className={styles.trimmedAddress} />
         ) : (
-          <span className='break-words lg:break-normal'>{address}</span>
+          <span className={styles.address}>{address}</span>
         )}
       </p>
 
-      <div
-        className={classNames(
-          'flex gap-1 text-primary transition-all duration-300',
-          { '!text-link': isHeader }
-        )}
-      >
-        <MvxCopyButton text={address} />
+      <div className={styles.addressButtons}>
+        <MvxCopyButton
+          text={address}
+          className={classNames(styles.addressButton, {
+            [styles.addressButtonHeader]: isHeader
+          })}
+        />
 
-        <a href={explorerLink} target='_blank' rel='noreferrer'>
+        <a
+          href={explorerLink}
+          target='_blank'
+          rel='noreferrer'
+          className={classNames(styles.addressButton, {
+            [styles.addressButtonHeader]: isHeader
+          })}
+        >
           <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
         </a>
       </div>

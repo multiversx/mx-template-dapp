@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import {
   AddressComponent,
   Label,
@@ -10,28 +11,44 @@ import {
   DIGITS,
   FormatAmountController,
   MvxFormatAmount,
+  useGetAccount,
   useGetLoginInfo,
   useGetNetworkConfig
 } from 'lib';
 import { Username } from 'pages/Dashboard/components/LeftPanel/components/Account/components';
-import { ItemsIdEnum } from 'pages/Dashboard/dashboard.types';
+import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
+
 import { useGetProfile } from './hooks';
 
+// prettier-ignore
+const styles = {
+  nativeAuthContainer: 'native-auth-container flex flex-col gap-8',
+  nativeAuthAddressContainer: 'native-auth-address-container flex flex-col gap-2',
+  nativeAuthAddress: 'native-auth-address flex justify-between items-center gap-3',
+  nativeAuthDetails: 'native-auth-details flex gap-8 w-full',
+  nativeAuthDetailContainer: 'native-auth-detail-container flex flex-col gap-2 sm:w-1/3',
+  nativeAuthAmount: 'native-auth-amount flex gap-1',
+  nativeAuthMissingProfile: 'native-auth-missing-profile flex items-center gap-1'
+} satisfies Record<string, string>;
+
 export const NativeAuth = () => {
-  const { tokenLogin, isLoggedIn } = useGetLoginInfo();
-  const { isLoading, profile, getProfile } = useGetProfile();
   const { network } = useGetNetworkConfig();
+  const { tokenLogin, isLoggedIn } = useGetLoginInfo();
+  const account = useGetAccount();
+  const { isLoading, profile, getProfile } = useGetProfile();
+
   const { isValid, valueDecimal, valueInteger, label } =
     FormatAmountController.getData({
       digits: DIGITS,
       decimals: DECIMALS,
       egldLabel: network.egldLabel,
-      input: profile?.balance ?? '0'
+      input: account.balance
     });
 
   useEffect(() => {
     // On page refresh, tokenInfo is null which implies that we do not have access to loginInfo data
     if (isLoggedIn && tokenLogin?.nativeAuthToken) {
+      // native auth network call example
       getProfile();
     }
   }, [isLoggedIn]);
@@ -43,7 +60,7 @@ export const NativeAuth = () => {
   if (!profile && !isLoading) {
     return (
       <OutputContainer>
-        <div className='flex items-center gap-1'>
+        <div className={styles.nativeAuthMissingProfile}>
           <p>Unable to load profile</p>
         </div>
       </OutputContainer>
@@ -51,19 +68,22 @@ export const NativeAuth = () => {
   }
 
   return (
-    <div id={ItemsIdEnum.nativeAuth} className='flex flex-col gap-8'>
-      <div className='flex flex-col gap-2'>
+    <div
+      id={ItemsIdentifiersEnum.nativeAuth}
+      className={styles.nativeAuthContainer}
+    >
+      <div className={styles.nativeAuthAddressContainer}>
         <Label>Address</Label>
 
         <OutputContainer isLoading={isLoading}>
-          <div className='flex justify-between items-center gap-3'>
+          <div className={styles.nativeAuthAddress}>
             <AddressComponent address={profile?.address ?? 'N/A'} />
           </div>
         </OutputContainer>
       </div>
 
-      <div className='flex gap-8 w-full'>
-        <div className='flex flex-col gap-2 sm:w-1/3'>
+      <div className={styles.nativeAuthDetails}>
+        <div className={styles.nativeAuthDetailContainer}>
           <Label>Herotag</Label>
 
           <OutputContainer isLoading={isLoading}>
@@ -71,7 +91,7 @@ export const NativeAuth = () => {
           </OutputContainer>
         </div>
 
-        <div className='flex flex-col gap-2 sm:w-1/3'>
+        <div className={styles.nativeAuthDetailContainer}>
           <Label>Shard</Label>
 
           <OutputContainer isLoading={isLoading}>
@@ -79,12 +99,11 @@ export const NativeAuth = () => {
           </OutputContainer>
         </div>
 
-        <div className='flex flex-col gap-2 sm:w-1/3'>
+        <div className={styles.nativeAuthDetailContainer}>
           <Label>Balance</Label>
 
           <OutputContainer isLoading={isLoading}>
-            {' '}
-            <div className='flex gap-1'>
+            <div className={styles.nativeAuthAmount}>
               <MvxFormatAmount
                 isValid={isValid}
                 valueInteger={valueInteger}

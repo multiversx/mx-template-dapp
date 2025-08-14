@@ -1,21 +1,18 @@
 @import 'tailwindcss';
 
 @theme {
-    --breakpoint-xxxs: 20rem; /* 320px */
-    --breakpoint-xxs: 26.75rem; /* 428px */
     --breakpoint-xs: 30rem; /* 480px */
-    --background-image-mvx-white: url('../multiversx-white.svg');
     --background-image-dark-theme: url('../dark-theme-bg.png');
     --background-image-vibe-theme: url('../vibe-theme-bg.png');
     --background-image-light-theme: url('../light-theme-bg.png');
     --background-color-primary: var(--mvx-bg-color-primary);
     --background-color-secondary: var(--mvx-bg-color-secondary);
-    --background-color-tertiary: var(--mvx-hover-bg-primary);
+    /* --background-color-tertiary: var(--mvx-hover-bg-primary); */
     --background-color-accent: var(--mvx-bg-accent-color);
-    --background-color-accent-variant: var(--mvx-bg-accent-variant-color);
+    /* --background-color-accent-variant: var(--mvx-bg-accent-variant-color); */
     --background-color-btn-primary: var(--mvx-button-bg-primary);
     --background-color-btn-secondary: var(--mvx-button-bg-secondary);
-    --background-color-btn-tertiary: var(--mvx-white);
+    /* --background-color-btn-tertiary: var(--mvx-white); */
     --background-color-btn-tertiary: var(--mvx-button-bg-secondary);
     --color-primary: var(--mvx-text-color-primary);
     --color-secondary: var(--mvx-text-color-secondary);
@@ -23,14 +20,37 @@
     --color-accent: var(--mvx-text-accent-color); 
     --color-btn-primary: var(--mvx-button-text-primary);
     --color-link: var(--mvx-link-color);
-
     --border-color-primary: var(--mvx-border-color-primary);
     --border-color-secondary: var(--mvx-border-color-secondary);
 
-    --background-color-logo-primary: var(--mvx-text-color-primary);
-    --background-color-logo-secondary: var(--mvx-button-text-primary);
-    --border-color-logo: var(--mvx-text-color-primary);
+  --background-color-logo-primary: var(--mvx-text-color-primary);
+  --background-color-logo-secondary: var(--mvx-button-text-primary);
+  --border-color-logo: var(--mvx-text-color-primary);
 
-    --background-color-label: var(--mvx-button-text-primary);
+   /* --background-color-label: var(--mvx-button-text-primary); */
+}
 
+:root[data-mvx-theme='mvx:vibe-theme'],
+[data-mvx-theme='mvx:vibe-theme'] {
+    --mvx-bg-color-primary: #3C1543;
+  --mvx-bg-color-secondary: rgba(96, 6, 112, 0.30);
+  --mvx-bg-accent-color: #310339;
+  --mvx-bg-accent-variant-color: #310339;
+
+  --mvx-hover-color-primary: rgba(93, 66, 110, 0.40);
+
+  --mvx-text-color-primary: #FFF;
+  --mvx-text-color-secondary: rgba(255, 255, 255, 0.60);
+  --mvx-text-color-tertiary: #F8F8FF;
+  --mvx-text-accent-color: #F04DFF;
+  --mvx-link-color: #DDCEDB;
+
+  --mvx-label-color: #DDCEDB;
+
+  --mvx-icon-bg: #310339;
+
+  --mvx-button-bg-primary: #F04DFF;
+  --mvx-button-bg-secondary: #600670;
+
+  --mvx-border-color-secondary: rgba(93, 66, 110, 0.40)
 }

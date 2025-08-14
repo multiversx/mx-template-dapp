@@ -1,17 +1,22 @@
 import { PropsWithChildren } from 'react';
+
+import { Footer } from 'components/Footer';
+import { Header } from 'components/Header';
 import { AuthRedirectWrapper } from 'wrappers';
-import { Footer } from './Footer';
-import { Header } from './Header';
 
-export const Layout = ({ children }: PropsWithChildren) => {
-  return (
-    <div className='flex min-h-screen flex-col bg-accent transition-all duration-300'>
-      <Header />
+// prettier-ignore
+const styles = {
+  layoutContainer: 'layout-container flex min-h-screen flex-col bg-accent transition-all duration-300',
+  mainContainer: 'main-container flex flex-grow items-stretch justify-center'
+} satisfies Record<string, string>;
 
-      <main className='flex flex-grow items-stretch justify-center'>
-        <AuthRedirectWrapper>{children}</AuthRedirectWrapper>
-      </main>
-      <Footer />
-    </div>
-  );
-};
+export const Layout = ({ children }: PropsWithChildren) => (
+  <div className={styles.layoutContainer}>
+    <Header />
+
+    <main className={styles.mainContainer}>
+      <AuthRedirectWrapper>{children}</AuthRedirectWrapper>
+    </main>
+    <Footer />
+  </div>
+);

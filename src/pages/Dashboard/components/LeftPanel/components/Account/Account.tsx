@@ -6,6 +6,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
+
 import XLogo from 'assets/img/x-logo.svg?react';
 import { Label } from 'components';
 import {
@@ -17,8 +18,24 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig
 } from 'lib';
+
 import { Username } from './components';
 import { useGetUserHerotag } from './hooks/useGetUserHerotag';
+
+// prettier-ignore
+const styles = {
+  connectedAccountContainer: 'connected-account flex flex-col gap-4',
+  connectedAccountHeader: 'connected-account-header flex justify-between items-center',
+  connectedAccountHeaderTitle: 'connected-account-header-title text-base transition-all duration-300 text-secondary',
+  connectedAccountHeaderIcon: 'connected-account-header-icon text-primary transition-transform duration-300',
+  connectedAccountHeaderIconRotated: 'rotate-180',
+  connectedAccountDetails: 'connected-account-details flex flex-col',
+  connectedAccountDetailsHidden: 'hidden',
+  connectedAccountInfo: 'connected-account-info flex h-14 gap-2 items-center',
+  connectedAccountInfoIcon: 'connected-account-info-icon min-w-10 min-h-10 max-h-10 max-w-10 flex items-center justify-center text-tertiary border border-secondary rounded-lg overflow-hidden p-1.5 transition-all duration-300',
+  connectedAccountInfoText: 'connected-account-info-text truncate flex flex-col',
+  connectedAccountInfoTextValue: 'connected-account-info-text-value text-primary transition-all duration-300 text-base'
+} satisfies Record<string, string>;
 
 interface AccountDetailsType {
   icon: ReactNode | string;
@@ -88,37 +105,36 @@ export const Account = () => {
   ];
 
   return (
-    <div className='flex flex-col gap-4'>
-      <div className='flex justify-between items-center'>
-        <h2 className='text-base transition-all duration-300 text-secondary'>
+    <div className={styles.connectedAccountContainer}>
+      <div className={styles.connectedAccountHeader}>
+        <h2 className={styles.connectedAccountHeaderTitle}>
           Connected account details
         </h2>
 
         <FontAwesomeIcon
           icon={faChevronUp}
-          className={`text-primary transition-transform duration-300 ${
-            isCollapsed ? 'rotate-180' : ''
-          }`}
+          className={classNames(styles.connectedAccountHeaderIcon, {
+            [styles.connectedAccountHeaderIconRotated]: isCollapsed
+          })}
           onClick={toggleCollapse}
         />
       </div>
 
       <div
-        className={classNames('flex flex-col', { hidden: isCollapsed })}
         data-testid='topInfo'
+        className={classNames(styles.connectedAccountDetails, {
+          [styles.connectedAccountDetailsHidden]: isCollapsed
+        })}
       >
         {accountDetails.map((accountDetail, index) => (
-          <div key={index} className='flex h-14 gap-2 items-center'>
-            <div
-              className='min-w-10 min-h-10 max-h-10 max-w-10 flex items-center justify-center text-tertiary border border-secondary rounded-lg overflow-hidden p-1.5
-            transition-all duration-300'
-            >
+          <div key={index} className={styles.connectedAccountInfo}>
+            <div className={styles.connectedAccountInfoIcon}>
               {accountDetail.icon}
             </div>
 
-            <p className='truncate flex flex-col'>
+            <p className={styles.connectedAccountInfoText}>
               <Label>{accountDetail.label}</Label>
-              <span className='text-primary transition-all duration-300 text-base'>
+              <span className={styles.connectedAccountInfoTextValue}>
                 {accountDetail.value}
               </span>
             </p>
