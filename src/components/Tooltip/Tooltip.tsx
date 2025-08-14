@@ -21,7 +21,7 @@ const styles = {
   tooltipContentWrapper: 'tooltip-content-wrapper left-1/2 -translate-x-1/2 absolute z-10',
   tooltipContentWrapperTop: 'bottom-full pb-3',
   tooltipContentWrapperBottom: 'top-full pt-3',
-  tooltipContent: 'tooltip-content flex-row text-left text-xs gap-1 cursor-default bg-[#171717] rounded-xl border border-[#262626] p-1 relative after:w-2 after:h-2 after:border after:border-[#262626] after:bg-[#171717] after:absolute after:left-1/2 after:origin-center after:-translate-x-1/2 after:-rotate-45',
+  tooltipContent: 'tooltip-content flex-row text-left text-xs gap-1 cursor-default bg-primary rounded-xl border border-secondary p-1 relative after:w-2 after:h-2 after:border after:border-secondary after:bg-primary after:absolute after:left-1/2 after:origin-center after:-translate-x-1/2 after:-rotate-45',
   tooltipContentTop: 'after:-bottom-1 after:border-t-0 after:border-r-0',
   tooltipContentBottom: 'after:-top-1 after:border-b-0 after:border-l-0',
   tooltipTrigger: 'tooltip-trigger'

@@ -1,5 +1,10 @@
 import { PropsWithChildren } from 'react';
 
+// prettier-ignore
+const styles = {
+  linkAddress: 'link-address underline hover:text-primary transition-all duration-300'
+} satisfies Record<string, string>;
+
 interface LinkComponentPropsType extends PropsWithChildren {
   linkAddress: string;
 }
@@ -12,7 +17,7 @@ export const LinkComponent = ({
     href={linkAddress}
     target='_blank'
     rel='noreferrer'
-    className='underline hover:text-primary transition-all duration-300'
+    className={styles.linkAddress}
   >
     {children}
   </a>

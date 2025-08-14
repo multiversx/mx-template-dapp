@@ -14,9 +14,21 @@ import { RouteNamesEnum } from 'localConstants';
 
 import { Account, SideMenu } from './components';
 
+// prettier-ignore
 const styles = {
-  logoutButton:
-    'text-center text-link hover:text-primary transition-all duration-300 cursor-pointer'
+  leftPanelContainer: 'left-panel-container flex flex-col w-screen lg:w-80 gap-8 lg:gap-0 py-4 p-6 sticky lg:h-screen top-0 bg-primary lg:bg-accent transition-all duration-300 overflow-y-scroll',
+  leftPanelContainerOpen: 'left-panel-container-open rounded-t-2xl lg:rounded-t-none p-6',
+  leftPanelMobileHeader: 'left-panel-mobile-header flex lg:hidden justify-between items-center pt-2 pb-1 transition-all duration-300',
+  leftPanelMobileHeaderIconClose: 'left-panel-mobile-header-icon-close text-link', 
+  leftPanelMobileHeaderIconOpen: 'left-panel-mobile-header-icon-open fill-primary', 
+  leftPanel: 'left-panel flex flex-col gap-4',
+  leftPanelHidden: 'hidden',
+  leftPanelMobileAddressSection: 'left-panel-mobile-address-section lg:hidden bg-accent transition-all duration-300 h-8 flex items-center justify-between rounded-full border border-secondary px-6 py-4',
+  leftPanelMobileAddress: 'left-panel-mobile-address flex gap-2 items-center justify-center',
+  leftPanelMobileAddressIcon: 'left-panel-mobile-address-icon text-accent',
+  logoutButton: 'text-center text-link hover:text-primary transition-all duration-300 cursor-pointer',
+  leftPanelComponents: 'flex flex-col gap-4 bg-accent p-6 lg:p-0 rounded-2xl transition-all duration-300',
+  leftPanelBar: 'w-full h-0.25 bg-neutral-700 opacity-40 transition-all duration-300'
 } satisfies Record<string, string>;
 
 interface LeftPanelPropsType {
@@ -47,32 +59,35 @@ export const LeftPanel = ({
 
   return (
     <div
-      className={classNames(
-        'flex flex-col w-screen lg:w-80 gap-8 lg:gap-0 py-4 p-6 sticky lg:h-screen top-0 bg-primary lg:bg-accent transition-all duration-300 overflow-y-scroll',
-        { 'rounded-t-2xl lg:rounded-t-none p-6': isOpen }
-      )}
+      className={classNames(styles.leftPanelContainer, {
+        [styles.leftPanelContainerOpen]: isOpen
+      })}
     >
-      <div
-        className='flex lg:hidden justify-between items-center pt-2 pb-1 transition-all duration-300'
-        onClick={handleOpenPanel}
-      >
+      <div className={styles.leftPanelMobileHeader} onClick={handleOpenPanel}>
         <Logo />
 
         {isOpen ? (
-          <FontAwesomeIcon icon={faClose} className='text-link' size='xl' />
+          <FontAwesomeIcon
+            icon={faClose}
+            className={styles.leftPanelMobileHeaderIconClose}
+            size='xl'
+          />
         ) : (
-          <IconExpand className='fill-primary' />
+          <IconExpand className={styles.leftPanelMobileHeaderIconOpen} />
         )}
       </div>
 
       <div
-        className={classNames('flex flex-col gap-4', {
-          hidden: !isOpen && !isDesktop
+        className={classNames(styles.leftPanel, {
+          [styles.leftPanelHidden]: !isOpen && !isDesktop
         })}
       >
-        <div className='lg:hidden bg-accent transition-all duration-300 h-8 flex items-center justify-between rounded-full border border-secondary px-6 py-4'>
-          <div className='flex gap-2 items-center justify-center'>
-            <FontAwesomeIcon icon={faWallet} className='text-accent' />
+        <div className={styles.leftPanelMobileAddressSection}>
+          <div className={styles.leftPanelMobileAddress}>
+            <FontAwesomeIcon
+              icon={faWallet}
+              className={styles.leftPanelMobileAddressIcon}
+            />
 
             <AddressComponent address={address} isHeader />
           </div>
@@ -84,10 +99,10 @@ export const LeftPanel = ({
           )}
         </div>
 
-        <div className='flex flex-col gap-4 bg-accent p-6 lg:p-0 rounded-2xl transition-all duration-300'>
+        <div className={styles.leftPanelComponents}>
           <Account />
 
-          <div className='w-full h-0.25 bg-neutral-700 opacity-40 transition-all duration-300' />
+          <div className={styles.leftPanelBar} />
 
           <SideMenu setIsOpen={setIsOpen} />
         </div>

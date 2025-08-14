@@ -8,7 +8,6 @@ export * from './Layout';
 export * from './Loader';
 export * from './Logo';
 export * from './MissingNativeAuthError';
-export * from './MxLink';
 export * from './OutputContainer';
 export * from './PingPongComponent';
 export * from './Tooltip';
