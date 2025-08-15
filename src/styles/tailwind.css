@@ -14,6 +14,7 @@
     --background-color-btn-secondary: var(--mvx-button-bg-secondary);
     /* --background-color-btn-tertiary: var(--mvx-white); */
     --background-color-btn-tertiary: var(--mvx-button-bg-secondary);
+    --background-color-btn-variant: var(--mvx-button-bg-variant);
     --color-primary: var(--mvx-text-color-primary);
     --color-secondary: var(--mvx-text-color-secondary);
     --color-tertiary: var(--mvx-text-color-tertiary);
@@ -32,7 +33,7 @@
 
 :root[data-mvx-theme='mvx:vibe-theme'],
 [data-mvx-theme='mvx:vibe-theme'] {
-    --mvx-bg-color-primary: #3C1543;
+  --mvx-bg-color-primary: #3C1543;
   --mvx-bg-color-secondary: rgba(96, 6, 112, 0.30);
   --mvx-bg-accent-color: #310339;
   --mvx-bg-accent-variant-color: #310339;
@@ -51,6 +52,7 @@
 
   --mvx-button-bg-primary: #F04DFF;
   --mvx-button-bg-secondary: #600670;
+  --mvx-button-bg-variant: rgba(96, 6, 112, 0.40);
 
   --mvx-border-color-secondary: rgba(93, 66, 110, 0.40)
 }

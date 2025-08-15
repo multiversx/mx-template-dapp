@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import { OutputContainer, TransactionsTable } from 'components';
 import { getActiveTransactionsStatus } from 'lib';
-import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 import { useGetTransactions } from './hooks';
 import { TransactionsPropsType } from './types';
@@ -38,10 +37,7 @@ export const Transactions = (props: TransactionsPropsType) => {
   }
 
   return (
-    <div
-      id={ItemsIdentifiersEnum.transactionsAll}
-      className={styles.transactionsContainer}
-    >
+    <div id={props.id} className={styles.transactionsContainer}>
       <OutputContainer isLoading={isLoading} className='p-0'>
         <div className={styles.transactionsTable}>
           <TransactionsTable transactions={transactions} />

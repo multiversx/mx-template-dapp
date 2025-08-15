@@ -8,12 +8,12 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
-import { FunctionComponent, SVGProps, useState } from 'react';
-
 import IconBatch from 'assets/img/batch-tx.svg?react';
 import IconAbi from 'assets/img/ping-pong-abi.svg?react';
 import IconBackend from 'assets/img/ping-pong-backend.svg?react';
+import classNames from 'classnames';
+import { FunctionComponent, SVGProps, useState } from 'react';
+
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 // prettier-ignore

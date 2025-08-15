@@ -5,6 +5,7 @@ import { contractAddress } from 'config';
 import { WidgetType } from 'types/widget.types';
 
 import { DashboardHeader, LeftPanel, Widget } from './components';
+import { ItemsIdentifiersEnum } from './dashboard.types';
 import {
   BatchTransactions,
   NativeAuth,
@@ -72,14 +73,16 @@ const dashboardWidgets: WidgetType[] = [
   },
   {
     title: 'Transactions (All)',
-    widget: Transactions,
+    widget: () => <Transactions id={ItemsIdentifiersEnum.transactionsAll} />,
     description: 'List transactions for the connected account',
     reference:
       'https://api.multiversx.com/#/accounts/AccountController_getAccountTransactions'
   },
   {
     title: 'Transactions (Ping & Pong)',
-    widget: Transactions,
+    widget: () => (
+      <Transactions id={ItemsIdentifiersEnum.transactionsPingPong} />
+    ),
     props: { receiver: contractAddress },
     description: 'List transactions filtered for a given Smart Contract',
     reference:
