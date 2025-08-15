@@ -1,6 +1,7 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent, SVGProps } from 'react';
+
 import ArcLogo from 'assets/img/arc-logo.svg?react';
 import BraveLogo from 'assets/img/brave-logo.svg?react';
 import ChromeLogo from 'assets/img/chrome-logo.svg?react';
@@ -51,7 +52,7 @@ export const ExtensionConnect = () => {
 
           <div className='flex gap-2.5'>
             {browserLogos.map(({ icon: Icon }, index) => (
-              <Icon key={index} className='w-4 h-4 xxs:w-6 xxs:h-6' />
+              <Icon key={index} />
             ))}
           </div>
         </div>

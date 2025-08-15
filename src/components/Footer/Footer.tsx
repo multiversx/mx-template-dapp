@@ -1,11 +1,12 @@
-import HeartIcon from 'assets/img/heart.svg?react';
+import { faCopyright } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // prettier-ignore
 const styles = {
-  footer: 'footer mx-auto w-full max-w-prose py-4 text-center text-gray-400',
-  footerContainer: 'footer-container flex flex-col items-center text sm text-gray-400',
-  disclaimer: 'disclaimer text-gray-400 text-sm py-3 px-4 hover:cursor-pointer hover:underline',
-  footerDescription: 'footer-description flex items-center text-sm hover:underline'
+  footer: 'footer mx-auto w-full max-w-prose py-4 text-center',
+  footerContainer: 'footer-container flex flex-col font-medium items-center text-sm text-[#989898]',
+  disclaimer: 'disclaimer text-neutral-500 text-sm py-3 px-4 hover:cursor-pointer hover:underline',
+  footerDescription: 'footer-description flex items-center gap-1 text-sm hover:underline'
 } satisfies Record<string, string>;
 
 export const Footer = () => (
@@ -15,14 +16,11 @@ export const Footer = () => (
         Disclaimer
       </a>
 
-      <a
-        target='_blank'
-        className={styles.footerDescription}
-        href='https://multiversx.com/'
-      >
-        Made with <HeartIcon className='mx-1 fill-gray-400' /> by the MultiversX
-        team
-      </a>
+      <div className={styles.footerDescription}>
+        <FontAwesomeIcon icon={faCopyright} />
+
+        <span> 2025 MultiversX. All rights reserved</span>
+      </div>
     </div>
   </footer>
 );

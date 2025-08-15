@@ -9,7 +9,7 @@
     --background-color-secondary: var(--mvx-bg-color-secondary);
     /* --background-color-tertiary: var(--mvx-hover-bg-primary); */
     --background-color-accent: var(--mvx-bg-accent-color);
-    /* --background-color-accent-variant: var(--mvx-bg-accent-variant-color); */
+    --background-color-accent-variant: var(--mvx-bg-accent-variant-color);
     --background-color-btn-primary: var(--mvx-button-bg-primary);
     --background-color-btn-secondary: var(--mvx-button-bg-secondary);
     /* --background-color-btn-tertiary: var(--mvx-white); */

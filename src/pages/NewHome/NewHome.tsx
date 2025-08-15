@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+
 import { HeroComponent, HowToConnectComponent } from './components';
 
 export const NewHome = () => (

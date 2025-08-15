@@ -23,7 +23,7 @@ const styles = {
   desktopPanelContainer: 'desktop-panel-container lg:flex',
   dashboardContent: 'dashboard-content flex flex-col gap-6 justify-center items-center flex-1 w-full overflow-auto border-l border-secondary p-4 lg:p-6 transition-all duration-300',
   dashboardContentMobilePanelOpen: 'dashboard-content-mobile-panel-open opacity-20 pointer-events-none',
-  dashboardWidgets: 'dashboard-widgets flex flex-col gap-6  w-full'
+  dashboardWidgets: 'dashboard-widgets flex flex-col gap-6  w-full max-w-320'
 } satisfies Record<string, string>;
 
 const dashboardWidgets: WidgetType[] = [

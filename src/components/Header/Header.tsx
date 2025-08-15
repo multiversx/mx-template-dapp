@@ -164,7 +164,8 @@ export const Header = () => {
         {!isLoggedIn && (
           <MvxButton
             onClick={handleLogIn}
-            className={styles.headerNavigationConnect}
+            // className={styles.headerNavigationConnect}
+            size='small'
           >
             Connect
           </MvxButton>

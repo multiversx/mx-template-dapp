@@ -4,6 +4,7 @@ import PasskeyIcon from 'assets/img/passkey-icon.svg?react';
 import WebWalletIcon from 'assets/img/web-wallet-icon.svg?react';
 import XAliasIcon from 'assets/img/xalias-icon.svg?react';
 import XPortalIcon from 'assets/img/xportal-icon.svg?react';
+
 import { ConnectCard, ExtensionConnect } from './components';
 
 const connectCards = [
@@ -59,7 +60,7 @@ const connectCards = [
 
 export const HowToConnectComponent = () => {
   return (
-    <div className='flex flex-col items-center w-full justify-center gap-20 px-2 lg:px-6 pb-2 lg:pb-6 pt-20 lg:pt-32 bg-primary rounded-4xl'>
+    <div className='flex flex-col items-center w-full justify-center gap-16 lg:gap-20 px-2 lg:px-6 pb-2 lg:pb-6 pt-20 lg:pt-32 bg-primary rounded-4xl'>
       <div className='flex flex-col gap-4 items-center justify-center'>
         <h1 className='text-primary text-center text-4xl xxs:text-5xl xs:text-6xl font-medium leading-[1] tracking-[-1.92px]'>
           How can you connect
