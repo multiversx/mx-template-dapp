@@ -2,6 +2,16 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent, SVGProps } from 'react';
 
+// prettier-ignore
+const styles = {
+  connectCardContainer: 'connect-card-container bg-secondary p-8 lg:p-10 flex flex-col gap-10 rounded-2xl lg:rounded-3xl transition-all duration-200 ease-out',
+  connectCardText: 'connect-card-text flex flex-col gap-4 flex-1',
+  connectCardTitle: 'connect-card-title text-3xl text-primary font-medium tracking-[-0.96px] leading-[1] transition-all duration-200 ease-out',
+  connectCardDescription: 'connect-card-description text-secondary text-xl tracking-[-0.21px] leading-[1.5] transition-all duration-200 ease-out',
+  connectCardLink: 'connect-card-link text-accent text-lg font-semibold transition-all duration-200 ease-out',
+  connectCardLinkTitle: 'connect-card-link-title p-3'
+} satisfies Record<string, string>;
+
 interface ConnectCardPropsType {
   icon: FunctionComponent<SVGProps<SVGSVGElement>>;
   title: string;
@@ -20,25 +30,21 @@ export const ConnectCard = ({
   const IconComponent = icon;
 
   return (
-    <div className='bg-secondary p-8 lg:p-10 flex flex-col gap-10 rounded-3xl transition-all duration-200 ease-out'>
+    <div className={styles.connectCardContainer}>
       <IconComponent />
 
-      <div className='flex flex-col gap-4'>
-        <h2 className='text-3xl text-primary font-medium tracking-[-0.96px] leading-[1] transition-all duration-200 ease-out'>
-          {title}
-        </h2>
+      <div className={styles.connectCardText}>
+        <h2 className={styles.connectCardTitle}>{title}</h2>
 
-        <p className='text-secondary text-xl tracking-[-0.21px] leading-[1.5] transition-all duration-200 ease-out'>
-          {description}
-        </p>
+        <p className={styles.connectCardDescription}>{description}</p>
       </div>
 
       <a
         href={linkDownloadAddress}
         target='_blank'
-        className='text-accent text-lg font-semibold transition-all duration-200 ease-out'
+        className={styles.connectCardLink}
       >
-        <span className='p-3'>{linkTitle}</span>
+        <span className={styles.connectCardLinkTitle}>{linkTitle}</span>
 
         <FontAwesomeIcon icon={faArrowRight} />
       </a>

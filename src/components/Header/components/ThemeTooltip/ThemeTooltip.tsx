@@ -4,7 +4,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { MouseEvent, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 
 import { Tooltip } from 'components';
 
@@ -69,6 +69,20 @@ export const ThemeTooltip = () => {
         themeOption.identifier
       );
     };
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      const theme = document.documentElement.getAttribute('data-mvx-theme');
+      setRootTheme(theme);
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-mvx-theme']
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   if (!activeTheme) {
     return null;

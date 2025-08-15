@@ -14,6 +14,25 @@ import brightLightIcon from 'assets/img/bright-light-icon.svg?react';
 import tealLabIcon from 'assets/img/teal-lab-icon.svg?react';
 import vibeModeIcon from 'assets/img/vibe-mode-icon.svg?react';
 
+// prettier-ignore
+const styles = {
+  heroContainer: 'hero-container flex flex-col items-center justify-between w-full lg:h-160 rounded-3xl bg-cover bg-no-repeat bg-center p-8 lg:p-20 border border-secondary backdrop-blur-md transition-all duration-200 ease-out',
+  heroSectionTop: 'hero-section-top flex flex-col items-start lg:items-center justify-center gap-10',
+  heroSectionTopContent: 'hero-section-top-content flex flex-col lg:items-center justify-center gap-6',
+  heroTitle: 'hero-title !text-primary text-[42px] lg:text-[84px] font-medium leading-[1] tracking-[-2.52px] transition-all duration-200 ease-out',
+  heroDescription: 'hero-description text-secondary text-xl lg:text-2xl lg:text-center leading-[1.5] tracking-[-0.24px] max-w-138 transition-all duration-200 ease-out',
+  heroSectionTopButtons: 'hero-section-top-buttons flex flex-col lg:flex-row items-start lg:items-center justify-start gap-6',
+  heroSectionTopDocButton: 'hero-section-top-doc-button bg-btn-secondary hover:bg-btn-primary rounded-xl transition-all duration-200 ease-out',
+  heroSectionBottom: 'hero-section-bottom hidden lg:!flex gap-6',
+  heroSectionBottomThemeOptions: 'hero-section-bottom-theme-options text-primary opacity-60 hover:opacity-100 flex flex-col items-center gap-2 w-20 relative cursor-pointer transition-all duration-200 ease-out',
+  heroSectionBottomThemeOptionsOpacityFull: 'opacity-100',
+  heroSectionBottomThemeOption: 'hero-section-bottom-theme-option flex flex-col items-center gap-1 relative',
+  themeOptionIcon: 'theme-option-icon fill-primary',
+  themeOptionTitle: 'theme-option-title text-primary transition-all duration-200 ease-out',
+  themeOptionActiveDot: 'theme-option-active-dot w-2 h-2 rounded-full bg-tertiary transition-all duration-200 ease-out',
+  themeOptionActiveLabel: 'theme-option-active-label flex items-center justify-center px-1 absolute -top-1.5 left-10 z-10 text-xs text-accent uppercase bg-accent border border-accent rounded-md transition-all duration-200 ease-out'
+} satisfies Record<string, string>;
+
 interface ThemeOptionType {
   identifier: string;
   icon: FunctionComponent<SVGProps<SVGSVGElement>>;
@@ -82,30 +101,25 @@ export const HeroComponent = () => {
 
   return (
     <div
-      className={classNames(
-        'flex flex-col items-center justify-between w-full lg:h-160 rounded-3xl bg-cover bg-no-repeat bg-center p-8 lg:p-20 border border-secondary backdrop-blur-md transition-all duration-200 ease-out',
-        activeTheme?.backgroundClass
-      )}
+      className={classNames(styles.heroContainer, activeTheme?.backgroundClass)}
     >
-      <div className='flex flex-col items-start lg:items-center justify-center gap-10'>
-        <div className='flex flex-col lg:items-center justify-center gap-6'>
-          <h1 className='!text-primary text-[42px] lg:text-[84px] font-medium leading-[1] tracking-[-2.52px] transition-all duration-200 ease-out'>
-            dApp Template
-          </h1>
+      <div className={styles.heroSectionTop}>
+        <div className={styles.heroSectionTopContent}>
+          <h1 className={styles.heroTitle}>dApp Template</h1>
 
-          <p className='text-secondary text-xl lg:text-2xl lg:text-center leading-[1.5] tracking-[-0.24px] max-w-138 transition-all duration-200 ease-out'>
+          <p className={styles.heroDescription}>
             The sdk-dapp starter project for any dApp built on the MultiversX
             blockchain.
           </p>
         </div>
 
-        <div className='flex flex-col lg:flex-row items-start lg:items-center justify-start gap-6'>
+        <div className={styles.heroSectionTopButtons}>
           <MvxButton size='small'>Connect Wallet</MvxButton>
 
           <MvxButton
             size='small'
             variant='secondary'
-            className='bg-btn-secondary hover:bg-btn-primary rounded-xl transition-all duration-200 ease-out'
+            className={styles.heroSectionTopDocButton}
           >
             See Documentation
             <FontAwesomeIcon icon={faArrowRight} />
@@ -113,34 +127,31 @@ export const HeroComponent = () => {
         </div>
       </div>
 
-      <div className='hidden lg:!flex gap-6 '>
+      <div className={styles.heroSectionBottom}>
         {themeOptions.map((themeOption) => {
           const Icon = themeOption.icon;
           return (
             <div
               key={themeOption.identifier}
               onClick={handleThemeSwitch(themeOption)}
-              className={classNames(
-                'text-primary opacity-60 hover:opacity-100 flex flex-col items-center gap-2 w-20 relative cursor-pointer transition-all duration-200 ease-out',
-                {
-                  'opacity-100':
-                    themeOption.identifier === activeTheme?.identifier
-                }
-              )}
+              className={classNames(styles.heroSectionBottomThemeOptions, {
+                [styles.heroSectionBottomThemeOptionsOpacityFull]:
+                  themeOption.identifier === activeTheme?.identifier
+              })}
             >
-              <div className='flex flex-col items-center gap-1 relative'>
-                <Icon className='fill-primary' />
+              <div className={styles.heroSectionBottomThemeOption}>
+                <Icon className={styles.themeOptionIcon} />
 
-                <span className='text-primary transition-all duration-200 ease-out'>
+                <span className={styles.themeOptionTitle}>
                   {themeOption.title}
                 </span>
               </div>
 
               {themeOption.identifier === activeTheme?.identifier && (
                 <>
-                  <span className='w-2 h-2 rounded-full bg-tertiary transition-all duration-200 ease-out' />
+                  <span className={styles.themeOptionActiveDot} />
 
-                  <div className='flex items-center justify-center px-1 absolute -top-1.5 left-10 z-10 text-xs text-accent uppercase bg-accent border border-accent rounded-md transition-all duration-200 ease-out'>
+                  <div className={styles.themeOptionActiveLabel}>
                     {themeOption.label}
                   </div>
                 </>
