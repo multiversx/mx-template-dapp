@@ -60,13 +60,13 @@ const connectCards = [
 
 export const HowToConnectComponent = () => {
   return (
-    <div className='flex flex-col items-center w-full justify-center gap-16 lg:gap-20 px-2 lg:px-6 pb-2 lg:pb-6 pt-20 lg:pt-32 bg-primary rounded-4xl'>
+    <div className='flex flex-col items-center w-full justify-center gap-16 lg:gap-20 px-2 lg:px-6 pb-2 lg:pb-6 pt-20 lg:pt-32 bg-primary rounded-4xl transition-all duration-200 ease-out'>
       <div className='flex flex-col gap-4 items-center justify-center'>
-        <h1 className='text-primary text-center text-4xl xxs:text-5xl xs:text-6xl font-medium leading-[1] tracking-[-1.92px]'>
+        <h1 className='text-primary text-center text-4xl xxs:text-5xl xs:text-6xl font-medium leading-[1] tracking-[-1.92px] transition-all duration-200 ease-out'>
           How can you connect
         </h1>
 
-        <p className='text-secondary text-xl leading-[1.5] tracking-[-0.21px]'>
+        <p className='text-secondary text-xl leading-[1.5] tracking-[-0.21px] transition-all duration-200 ease-out'>
           Choose your path, you must.
         </p>
       </div>

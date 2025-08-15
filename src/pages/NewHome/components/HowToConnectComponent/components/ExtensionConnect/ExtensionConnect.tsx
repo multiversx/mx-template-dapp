@@ -23,16 +23,16 @@ const browserLogos: BrowserLogo[] = [
 export const ExtensionConnect = () => {
   const IconComponent = WalletIcon;
   return (
-    <div className='bg-secondary p-8 lg:p-10 rounded-3xl flex flex-col lg:flex-row justify-between gap-10 w-full'>
+    <div className='bg-secondary p-8 lg:p-10 rounded-3xl flex flex-col lg:flex-row justify-between gap-10 w-full transition-all duration-200 ease-out'>
       <div className='flex flex-col gap-10'>
         <IconComponent />
 
         <div className='flex flex-col gap-4'>
-          <h2 className='text-3xl text-primary font-medium tracking-[-0.96px] leading-[1]'>
+          <h2 className='text-3xl text-primary font-medium tracking-[-0.96px] leading-[1] transition-all duration-200 ease-out'>
             MultiversX Wallet Extension
           </h2>
 
-          <p className='text-secondary text-xl tracking-[-0.21px] leading-[1.5]'>
+          <p className='text-secondary text-xl tracking-[-0.21px] leading-[1.5] transition-all duration-200 ease-out'>
             The MultiversX DeFi Wallet can be installed on Firefox, Chrome,
             Brave, and other chromium-based browsers. This extension is free and
             secure.
@@ -43,7 +43,7 @@ export const ExtensionConnect = () => {
           <a
             href=''
             target='_blank'
-            className='text-accent text-sm xxs:text-lg font-semibold'
+            className='text-accent text-sm xxs:text-lg font-semibold transition-all duration-200 ease-out'
           >
             <span className='p-2 xxs::p-3'>Get Extension</span>
 

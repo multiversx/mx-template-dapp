@@ -8,8 +8,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   MvxButton,
-  MvxCopyButton,
-  MvxDataWithExplorerLink
+  MvxCopyButton
+  // MvxDataWithExplorerLink
 } from '@multiversx/sdk-dapp-ui/react';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { AddressComponent, Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
 import {
-  ACCOUNTS_ENDPOINT,
+  // ACCOUNTS_ENDPOINT,
   getAccountProvider,
   NotificationsFeedManager,
   useGetAccountInfo,
@@ -35,15 +35,15 @@ const styles = {
   headerNavigation: 'header-navigation flex items-center gap-2 lg:gap-4',
   headerNavigationButtons: 'header-navigation-buttons flex gap-2 lg:gap-4',
   headerNavigationButton: 'header-navigation-button flex justify-center items-center w-8 lg:w-10 h-8 lg:h-10 rounded-xl cursor-pointer relative after:rounded-xl after:absolute after:bg-btn-variant after:transition-all after:duration-200 after:ease-out after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none hover:after:opacity-100',
-  headerNavigationButtonIcon: 'header-navigation-button-icon flex justify-center relative text-xs lg:text-base z-1 items-center text-tertiary',
-  headerNavigationButtonTooltip: 'header-navigation-button-tooltip p-1 leading-none whitespace-nowrap text-tertiary',
-  headerNavigationNetwork: 'header-navigation-network h-8 border border-secondary rounded-xl lg:h-10 relative w-22 flex items-center justify-center leading-none capitalize text-tertiary before:absolute before:rounded-full before:w-2 before:lg:w-2.5 before:h-2 before:lg:h-2.5 before:bg-btn-primary before:z-2 before:-top-0.25 before:lg:-top-0.5 before:-left-0.25 before:lg:-left-0.5 after:absolute after:bg-primary after:rounded-lg after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
+  headerNavigationButtonIcon: 'header-navigation-button-icon flex justify-center relative text-xs lg:text-base z-1 items-center text-tertiary transition-all duration-200 ease-out',
+  headerNavigationButtonTooltip: 'header-navigation-button-tooltip p-1 leading-none whitespace-nowrap text-tertiary transition-all duration-200 ease-out',
+  headerNavigationNetwork: 'header-navigation-network h-8 border border-secondary rounded-xl lg:h-10 relative w-22 flex items-center justify-center leading-none capitalize text-tertiary before:absolute before:rounded-full before:w-2 before:lg:w-2.5 before:h-2 before:lg:h-2.5 before:bg-btn-primary before:z-2 before:-top-0.25 before:lg:-top-0.5 before:-left-0.25 before:lg:-left-0.5 after:absolute after:bg-primary after:rounded-lg after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none transition-all duration-200 ease-out',
   headerNavigationNetworkLabel: 'header-navigation-network-label relative z-1',
   headerNavigationConnect: 'header-navigation-connect h-8 lg:h-10',
-  walletContainer: 'hidden lg:!flex !rounded-full gap-3 w-fit pl-3.5 pr-3 py-1.5 bg-primary border border-secondary text-primary',
+  walletContainer: 'hidden lg:!flex !rounded-full gap-3 w-fit pl-3.5 pr-3 py-1.5 bg-primary border border-secondary text-primary transition-all duration-200 ease-out',
   walletInfo: 'flex gap-2 items-center justify-center',
-  walletIcon: 'text-accent transition-all duration-300',
-  logoutButton: 'text-center text-link hover:text-primary transition-all duration-300 cursor-pointer'
+  walletIcon: 'text-accent transition-all duration-200 ease-out',
+  logoutButton: 'text-center text-link hover:text-primary transition-all duration-200 ease-out cursor-pointer'
 } satisfies Record<string, string>;
 
 interface HeaderBrowseButtonType {
@@ -143,10 +143,10 @@ export const Header = () => {
 
         <MvxCopyButton text={address} iconClass='w-8 h-8' />
 
-        <MvxDataWithExplorerLink
+        {/* <MvxDataWithExplorerLink
           data={address}
           explorerLink={`/${ACCOUNTS_ENDPOINT}/${address}`}
-        />
+        /> */}
 
         {isLoggedIn && (
           <div className={styles.walletContainer}>

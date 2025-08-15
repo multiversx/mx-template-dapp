@@ -20,15 +20,15 @@ export const ConnectCard = ({
   const IconComponent = icon;
 
   return (
-    <div className='bg-secondary p-8 lg:p-10 flex flex-col gap-10 rounded-3xl'>
+    <div className='bg-secondary p-8 lg:p-10 flex flex-col gap-10 rounded-3xl transition-all duration-200 ease-out'>
       <IconComponent />
 
       <div className='flex flex-col gap-4'>
-        <h2 className='text-3xl text-primary font-medium tracking-[-0.96px] leading-[1]'>
+        <h2 className='text-3xl text-primary font-medium tracking-[-0.96px] leading-[1] transition-all duration-200 ease-out'>
           {title}
         </h2>
 
-        <p className='text-secondary text-xl tracking-[-0.21px] leading-[1.5]'>
+        <p className='text-secondary text-xl tracking-[-0.21px] leading-[1.5] transition-all duration-200 ease-out'>
           {description}
         </p>
       </div>
@@ -36,7 +36,7 @@ export const ConnectCard = ({
       <a
         href={linkDownloadAddress}
         target='_blank'
-        className='text-accent text-lg font-semibold'
+        className='text-accent text-lg font-semibold transition-all duration-200 ease-out'
       >
         <span className='p-3'>{linkTitle}</span>
 

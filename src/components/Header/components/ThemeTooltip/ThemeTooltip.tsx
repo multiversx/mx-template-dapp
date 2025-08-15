@@ -25,7 +25,7 @@ const styles = {
   themeTooltipTriggerIconRotated: 'rotate-180',
   themeTooltipOptions: 'theme-tooltip-options flex-col gap-1 flex',
   themeTooltipOption: 'theme-tooltip-option w-60 flex p-3 flex group text-primary font-normal gap-3 items-center transition-all duration-200 ease-out cursor-pointer relative after:transition-all after:duration-200 after:ease-out after:absolute after:opacity-0 hover:after:opacity-40 after:left-0 after:right-0 after:bottom-0 after:top-0 after:bg-accent after:pointer-events-none after:rounded-lg',
-  themeTooltipOptionActive: 'after:bg-accent after:opacity-100 !text-accent !font-medium',
+  themeTooltipOptionActive: 'after:bg-accent after:opacity-100 !text-accent !font-medium transition-all duration-200 ease-out',
   themeTooltipOptionDots: 'theme-tooltip-option-dots flex w-5 h-5 justify-between relative z-1',
   themeTooltipOptionLabel: 'theme-tooltip-option-label leading-none relative z-1 text-base',
   themeTooltipOptionArrow: 'theme-tooltip-option-arrow ml-auto duration-200 transition-all ease-out opacity-0 text-link group-hover:opacity-100'

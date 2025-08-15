@@ -83,17 +83,17 @@ export const HeroComponent = () => {
   return (
     <div
       className={classNames(
-        'flex flex-col items-center justify-between w-full lg:h-160 rounded-3xl bg-cover bg-no-repeat bg-center p-8 lg:p-20 border border-secondary backdrop-blur-md',
+        'flex flex-col items-center justify-between w-full lg:h-160 rounded-3xl bg-cover bg-no-repeat bg-center p-8 lg:p-20 border border-secondary backdrop-blur-md transition-all duration-200 ease-out',
         activeTheme?.backgroundClass
       )}
     >
       <div className='flex flex-col items-start lg:items-center justify-center gap-10'>
         <div className='flex flex-col lg:items-center justify-center gap-6'>
-          <h1 className='!text-primary text-[42px] lg:text-[84px] font-medium leading-[1] tracking-[-2.52px]'>
+          <h1 className='!text-primary text-[42px] lg:text-[84px] font-medium leading-[1] tracking-[-2.52px] transition-all duration-200 ease-out'>
             dApp Template
           </h1>
 
-          <p className='text-secondary text-xl lg:text-2xl lg:text-center leading-[1.5] tracking-[-0.24px] max-w-138'>
+          <p className='text-secondary text-xl lg:text-2xl lg:text-center leading-[1.5] tracking-[-0.24px] max-w-138 transition-all duration-200 ease-out'>
             The sdk-dapp starter project for any dApp built on the MultiversX
             blockchain.
           </p>
@@ -105,7 +105,7 @@ export const HeroComponent = () => {
           <MvxButton
             size='small'
             variant='secondary'
-            className='bg-btn-secondary hover:bg-btn-primary rounded-xl'
+            className='bg-btn-secondary hover:bg-btn-primary rounded-xl transition-all duration-200 ease-out'
           >
             See Documentation
             <FontAwesomeIcon icon={faArrowRight} />
@@ -121,7 +121,7 @@ export const HeroComponent = () => {
               key={themeOption.identifier}
               onClick={handleThemeSwitch(themeOption)}
               className={classNames(
-                'text-primary opacity-60 hover:opacity-100 flex flex-col items-center gap-2 w-20 relative cursor-pointer',
+                'text-primary opacity-60 hover:opacity-100 flex flex-col items-center gap-2 w-20 relative cursor-pointer transition-all duration-200 ease-out',
                 {
                   'opacity-100':
                     themeOption.identifier === activeTheme?.identifier
@@ -131,14 +131,16 @@ export const HeroComponent = () => {
               <div className='flex flex-col items-center gap-1 relative'>
                 <Icon className='fill-primary' />
 
-                <span className='text-primary'>{themeOption.title}</span>
+                <span className='text-primary transition-all duration-200 ease-out'>
+                  {themeOption.title}
+                </span>
               </div>
 
               {themeOption.identifier === activeTheme?.identifier && (
                 <>
-                  <span className='w-2 h-2 rounded-full bg-tertiary' />
+                  <span className='w-2 h-2 rounded-full bg-tertiary transition-all duration-200 ease-out' />
 
-                  <div className='flex items-center justify-center px-1 absolute -top-1.5 left-10 z-10 text-xs text-accent uppercase bg-accent border border-accent rounded-md'>
+                  <div className='flex items-center justify-center px-1 absolute -top-1.5 left-10 z-10 text-xs text-accent uppercase bg-accent border border-accent rounded-md transition-all duration-200 ease-out'>
                     {themeOption.label}
                   </div>
                 </>

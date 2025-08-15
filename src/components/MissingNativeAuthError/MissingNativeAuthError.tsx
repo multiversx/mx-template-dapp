@@ -4,7 +4,7 @@ import { OutputContainer } from '../OutputContainer';
 const styles = {
   errorContainer: 'error-container flex items-center gap-1',
   emphasizedText: 'emphasized-text ml-1 mr-1 inline-block px-2 py-1 text-sm font-semibold leading-none bg-red-500 text-white rounded',
-  nativeAuthText: 'native-auth-text ml-1 mr-1 inline-block px-2 py-1 text-sm font-semibold leading-none bg-primary text-primary rounded'
+  nativeAuthText: 'native-auth-text ml-1 mr-1 inline-block px-2 py-1 text-sm font-semibold leading-none bg-primary text-primary rounded transition-all duration-200 ease-out'
 } satisfies Record<string, string>;
 
 export const MissingNativeAuthError = () => (

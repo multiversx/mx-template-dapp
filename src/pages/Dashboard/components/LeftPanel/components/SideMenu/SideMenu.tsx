@@ -8,26 +8,26 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import IconBatch from 'assets/img/batch-tx.svg?react';
-import IconAbi from 'assets/img/ping-pong-abi.svg?react';
-import IconBackend from 'assets/img/ping-pong-backend.svg?react';
 import classNames from 'classnames';
 import { FunctionComponent, SVGProps, useState } from 'react';
 
+import IconBatch from 'assets/img/batch-tx.svg?react';
+import IconAbi from 'assets/img/ping-pong-abi.svg?react';
+import IconBackend from 'assets/img/ping-pong-backend.svg?react';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 // prettier-ignore
 const styles = {
   sideMenuContainer: 'side-menu-container flex flex-col gap-4',
   sideMenuHeader: 'side-menu-header flex items-center justify-between',
-  sideMenuHeaderTitle: 'side-menu-header-title text-base transition-all duration-300 text-secondary',
-  sideMenuHeaderIcon: 'side-menu-header-icon text-primary transition-transform duration-300',
+  sideMenuHeaderTitle: 'side-menu-header-title text-base transition-all duration-200 ease-out text-secondary',
+  sideMenuHeaderIcon: 'side-menu-header-icon text-primary transition-transform duration-200 ease-out',
   sideMenuHeaderIconRotated: 'rotate-180',
-  sideMenuItems: 'side-menu-items flex flex-col transition-all duration-300',
+  sideMenuItems: 'side-menu-items flex flex-col transition-all duration-200 ease-out',
   sideMenuItemsHidden: 'hidden',
-  sideMenuItem: 'side-menu-item flex items-center gap-2 p-2 cursor-pointer text-tertiary hover:text-primary hover:bg-primary hover:font-bold transition-all duration-300 fill-tertiary hover:fill-primary hover:rounded-lg',
-  sideMenuItemActive: 'side-menu-item-active text-primary bg-primary fill-primary rounded-lg font-bold',
-  sideMenuItemTitle: 'side-menu-item-title transition-all duration-300 text-sm'
+  sideMenuItem: 'side-menu-item flex items-center gap-2 p-2 cursor-pointer text-tertiary hover:text-primary hover:bg-primary hover:font-bold transition-all duration-200 ease-out fill-tertiary hover:fill-primary hover:rounded-lg',
+  sideMenuItemActive: 'side-menu-item-active text-primary bg-primary fill-primary rounded-lg font-bold transition-all duration-200 ease-out',
+  sideMenuItemTitle: 'side-menu-item-title transition-all duration-200 ease-out text-sm'
 } satisfies Record<string, string>;
 
 interface SideMenuPropsType {

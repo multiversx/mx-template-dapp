@@ -8,7 +8,7 @@ import { TransactionsPropsType } from './types';
 
 // prettier-ignore
 const styles = {
-  transactionsContainer: 'transactions-container flex flex-col border border-secondary rounded-xl',
+  transactionsContainer: 'transactions-container flex flex-col border border-secondary rounded-xl transition-all duration-200 ease-out',
   transactionsTable: 'transactions-table w-full h-full overflow-x-auto shadow rounded-lg'
 } satisfies Record<string, string>;
 

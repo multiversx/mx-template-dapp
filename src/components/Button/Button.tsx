@@ -21,7 +21,7 @@ export const Button = ({
   disabled = false,
   type = 'button',
   id,
-  className = 'inline-block rounded-lg px-2 py-1.5 text-center text-sm font-medium hover:no-underline my-0 bg-btn-primary transition-all duration-300 text-btn-primary hover:bg-btn-tertiary hover:text-black mr-0 disabled:bg-btn-tertiary cursor-pointer disabled:cursor-not-allowed disabled:text-black',
+  className = 'inline-block rounded-lg px-2 py-1.5 text-center text-sm font-medium hover:no-underline my-0 bg-btn-primary transition-all duration-200 ease-out text-btn-primary hover:bg-btn-tertiary hover:text-black mr-0 disabled:bg-btn-tertiary cursor-pointer disabled:cursor-not-allowed disabled:text-black',
   icon,
   iconClassName = 'px-1.5',
   label,
