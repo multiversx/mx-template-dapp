@@ -1,6 +1,5 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import classNames from 'classnames';
 import {
   FunctionComponent,
@@ -124,20 +123,16 @@ export const HeroComponent = () => {
         </div>
 
         <div className={styles.heroSectionTopButtons}>
-          {/* <MvxButton onClick={handleLogIn} size='small'>
-            Connect Wallet
-          </MvxButton> */}
-
           <Button onClick={handleLogIn}>Connect Wallet</Button>
 
-          <MvxButton
-            size='small'
+          <Button
+            onClick={handleLogIn}
             variant='secondary'
             className={styles.heroSectionTopDocButton}
           >
             See Documentation
             <FontAwesomeIcon icon={faArrowRight} />
-          </MvxButton>
+          </Button>
         </div>
       </div>
 

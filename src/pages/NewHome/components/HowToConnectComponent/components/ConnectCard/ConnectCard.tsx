@@ -8,7 +8,7 @@ const styles = {
   connectCardText: 'connect-card-text flex flex-col gap-4 flex-1',
   connectCardTitle: 'connect-card-title text-3xl text-primary font-medium tracking-[-0.96px] leading-[1] transition-all duration-200 ease-out',
   connectCardDescription: 'connect-card-description text-secondary text-xl tracking-[-0.21px] leading-[1.5] transition-all duration-200 ease-out',
-  connectCardLink: 'connect-card-link text-accent text-lg font-semibold transition-all duration-200 ease-out',
+  connectCardLink: 'connect-card-link text-accent hover:opacity-75 text-lg font-semibold transition-all duration-200 ease-out',
   connectCardLinkTitle: 'connect-card-link-title p-3'
 } satisfies Record<string, string>;
 

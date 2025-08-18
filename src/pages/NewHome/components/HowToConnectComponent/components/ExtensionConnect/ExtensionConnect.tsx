@@ -29,7 +29,7 @@ const styles = {
   extensionCardTitle: 'extension-card-title text-3xl text-primary font-medium tracking-[-0.96px] leading-[1] transition-all duration-200 ease-out',
   extensionCardDescription: 'extension-card-description text-secondary text-xl tracking-[-0.21px] leading-[1.5] transition-all duration-200 ease-out',
   extensionCardDownloadSection: 'extension-card-download-section flex items-center justify-between max-w-80',
-  extensionCardLink: 'extension-card-link text-accent text-sm sm:text-lg font-semibold transition-all duration-200 ease-out',
+  extensionCardLink: 'extension-card-link text-accent hover:opacity-75 text-sm sm:text-lg font-semibold transition-all duration-200 ease-out',
   extensionCardLinkTitle: 'extension-card-link-title p-2 xs:p-3',
   extensionCardLogos: 'extension-card-logos flex gap-2.5 items-center',
   extensionCardImage: 'relative max-w-100 w-full pb-10',
