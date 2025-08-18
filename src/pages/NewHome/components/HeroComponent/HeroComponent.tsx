@@ -9,10 +9,12 @@ import {
   useEffect,
   useState
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import brightLightIcon from 'assets/img/bright-light-icon.svg?react';
 import tealLabIcon from 'assets/img/teal-lab-icon.svg?react';
 import vibeModeIcon from 'assets/img/vibe-mode-icon.svg?react';
+import { RouteNamesEnum } from 'localConstants';
 
 // prettier-ignore
 const styles = {
@@ -70,6 +72,13 @@ export const HeroComponent = () => {
     document.documentElement.getAttribute('data-mvx-theme')
   );
 
+  const navigate = useNavigate();
+
+  const handleLogIn = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    navigate(RouteNamesEnum.unlock);
+  };
+
   const activeTheme = themeOptions.find(
     (themeOption) => themeOption.identifier === rootTheme
   );
@@ -114,7 +123,9 @@ export const HeroComponent = () => {
         </div>
 
         <div className={styles.heroSectionTopButtons}>
-          <MvxButton size='small'>Connect Wallet</MvxButton>
+          <MvxButton onClick={handleLogIn} size='small'>
+            Connect Wallet
+          </MvxButton>
 
           <MvxButton
             size='small'

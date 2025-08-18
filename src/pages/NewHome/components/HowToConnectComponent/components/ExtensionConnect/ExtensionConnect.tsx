@@ -8,7 +8,16 @@ import ChromeLogo from 'assets/img/chrome-logo.svg?react';
 import Circles from 'assets/img/circles.svg?react';
 import extensionImage from 'assets/img/extension-image.png';
 import FirefoxLogo from 'assets/img/firefox-logo.svg?react';
+import WalletBraveLogo from 'assets/img/wallet-brave-logo.svg?react';
+import WalletChromeLogo from 'assets/img/wallet-chrome-logo.svg?react';
+import WalletFirefoxLogo from 'assets/img/wallet-firefox-logo.svg?react';
 import WalletIcon from 'assets/img/web-wallet-icon.svg?react';
+import { getDetectedBrowser } from 'helpers/getDetectedBrowser';
+import {
+  BrowserEnum,
+  CHROME_EXTENSION_LINK,
+  FIREFOX_ADDON_LINK
+} from 'localConstants';
 
 import { BrowserFrame } from './components';
 
@@ -23,7 +32,7 @@ const styles = {
   extensionCardLink: 'extension-card-link text-accent text-sm sm:text-lg font-semibold transition-all duration-200 ease-out',
   extensionCardLinkTitle: 'extension-card-link-title p-2 xs:p-3',
   extensionCardLogos: 'extension-card-logos flex gap-2.5 items-center',
-  extensionCardImage: 'relative max-w-100 w-full',
+  extensionCardImage: 'relative max-w-100 w-full pb-10',
   extensionCardCircles: 'extension-card-circles absolute -right-22 -top-10 z-50', 
   extensionCardScreen: 'extension-card-image absolute top-10 right-4'
 } satisfies Record<string, string>;
@@ -40,11 +49,28 @@ const browserLogos: BrowserLogo[] = [
 ];
 
 export const ExtensionConnect = () => {
-  const IconComponent = WalletIcon;
+  const detectedBrowser = getDetectedBrowser();
+  const isFirefox = detectedBrowser === BrowserEnum.Firefox;
+
+  const getBrowserIcon = (browser?: BrowserEnum) => {
+    switch (browser) {
+      case BrowserEnum.Firefox:
+        return <WalletFirefoxLogo />;
+      case BrowserEnum.Brave:
+        return <WalletBraveLogo />;
+      case BrowserEnum.Chrome:
+        return <WalletChromeLogo />;
+      default:
+        return <WalletIcon />;
+    }
+  };
+
+  const icon = getBrowserIcon(detectedBrowser);
+
   return (
     <div className={styles.extensionCardContainer}>
       <div className={styles.extensionCardContent}>
-        <IconComponent />
+        {icon}
 
         <div className={styles.extensionCardText}>
           <h2 className={styles.extensionCardTitle}>
@@ -59,7 +85,11 @@ export const ExtensionConnect = () => {
         </div>
 
         <div className={styles.extensionCardDownloadSection}>
-          <a href='' target='_blank' className={styles.extensionCardLink}>
+          <a
+            href={isFirefox ? FIREFOX_ADDON_LINK : CHROME_EXTENSION_LINK}
+            target='_blank'
+            className={styles.extensionCardLink}
+          >
             <span className={styles.extensionCardLinkTitle}>Get Extension</span>
 
             <FontAwesomeIcon icon={faArrowRight} />

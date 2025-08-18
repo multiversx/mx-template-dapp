@@ -4,6 +4,12 @@ import PasskeyIcon from 'assets/img/passkey-icon.svg?react';
 import WebWalletIcon from 'assets/img/web-wallet-icon.svg?react';
 import XAliasIcon from 'assets/img/xalias-icon.svg?react';
 import XPortalIcon from 'assets/img/xportal-icon.svg?react';
+import { getDetectedBrowser } from 'helpers/getDetectedBrowser';
+import {
+  BrowserEnum,
+  CHROME_METAMASK_EXTENSION_LINK,
+  FIREFOX_METAMASK_ADDON_LINK
+} from 'localConstants';
 
 import { ConnectCard, ExtensionConnect } from './components';
 
@@ -17,58 +23,62 @@ const styles = {
   howToConnectContentCards: 'how-to-connect-content-cards grid grid-cols-1 items-stretch justify-center lg:grid-cols-3 gap-2 lg:gap-6'
 } satisfies Record<string, string>;
 
-const connectCards = [
-  {
-    icon: MetamaskIcon,
-    title: 'Metamask Snap',
-    description:
-      'Explore the entire MultiversX ecosystem with Metamask! Securely manage, swap and transfer your assets.',
-    linkTitle: 'Get Metamask',
-    linkDownloadAddress: ''
-  },
-  {
-    icon: PasskeyIcon,
-    title: 'Passkey',
-    description:
-      'Passkeys offer a more secure and user-friendly way to authenticate and sign transactions.',
-    linkTitle: 'Get Passkey',
-    linkDownloadAddress: ''
-  },
-  {
-    icon: XPortalIcon,
-    title: 'xPortal Wallet',
-    description:
-      'The easiest way to invest, spend globally with a crypto card and earn yield across DeFi and stablecoins.',
-    linkTitle: 'Get xPortal',
-    linkDownloadAddress: ''
-  },
-  {
-    icon: LedgerIcon,
-    title: 'Ledger',
-    description:
-      'You can safely store your EGLD by installing the MultiversX EGLD app on your Ledger Nano S or Ledger Nano X device',
-    linkTitle: 'Get Started',
-    linkDownloadAddress: ''
-  },
-  {
-    icon: WebWalletIcon,
-    title: 'MultiversX Web Wallet',
-    description:
-      'Store, swap, and transfer tokens or NFTs. Connect to Web3 apps on MultiversX blockchain.',
-    linkTitle: 'Get MultiversX Wallet',
-    linkDownloadAddress: ''
-  },
-  {
-    icon: XAliasIcon,
-    title: 'xAlias',
-    description:
-      'xAlias offers one-click login and wallet creation using your Google email.',
-    linkTitle: 'Get xAlias',
-    linkDownloadAddress: ''
-  }
-];
-
 export const HowToConnectComponent = () => {
+  const detectedBrowser = getDetectedBrowser();
+  const isFirefox = detectedBrowser === BrowserEnum.Firefox;
+
+  const connectCards = [
+    {
+      icon: MetamaskIcon,
+      title: 'Metamask Snap',
+      description:
+        'Explore the entire MultiversX ecosystem with Metamask! Securely manage, swap and transfer your assets.',
+      linkTitle: 'Get Metamask',
+      linkDownloadAddress: isFirefox
+        ? FIREFOX_METAMASK_ADDON_LINK
+        : CHROME_METAMASK_EXTENSION_LINK
+    },
+    {
+      icon: PasskeyIcon,
+      title: 'Passkey',
+      description:
+        'Passkeys offer a more secure and user-friendly way to authenticate and sign transactions.',
+      linkTitle: 'Get Passkey',
+      linkDownloadAddress: ''
+    },
+    {
+      icon: XPortalIcon,
+      title: 'xPortal Wallet',
+      description:
+        'The easiest way to invest, spend globally with a crypto card and earn yield across DeFi and stablecoins.',
+      linkTitle: 'Get xPortal',
+      linkDownloadAddress: ''
+    },
+    {
+      icon: LedgerIcon,
+      title: 'Ledger',
+      description:
+        'You can safely store your EGLD by installing the MultiversX EGLD app on your Ledger Nano S or Ledger Nano X device',
+      linkTitle: 'Get Started',
+      linkDownloadAddress: ''
+    },
+    {
+      icon: WebWalletIcon,
+      title: 'MultiversX Web Wallet',
+      description:
+        'Store, swap, and transfer tokens or NFTs. Connect to Web3 apps on MultiversX blockchain.',
+      linkTitle: 'Get MultiversX Wallet',
+      linkDownloadAddress: ''
+    },
+    {
+      icon: XAliasIcon,
+      title: 'xAlias',
+      description:
+        'xAlias offers one-click login and wallet creation using your Google email.',
+      linkTitle: 'Get xAlias',
+      linkDownloadAddress: ''
+    }
+  ];
   return (
     <div className={styles.howToConnectContainer}>
       <div className={styles.howToConnectHeader}>
