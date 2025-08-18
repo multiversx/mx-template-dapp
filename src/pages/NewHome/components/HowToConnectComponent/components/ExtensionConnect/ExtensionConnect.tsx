@@ -1,4 +1,4 @@
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent, SVGProps } from 'react';
 
@@ -92,7 +92,7 @@ export const ExtensionConnect = () => {
           >
             <span className={styles.extensionCardLinkTitle}>Get Extension</span>
 
-            <FontAwesomeIcon icon={faArrowRight} />
+            <FontAwesomeIcon icon={faArrowRightLong} />
           </a>
 
           <div className={styles.extensionCardLogos}>

@@ -1,4 +1,4 @@
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import {
@@ -131,7 +131,7 @@ export const HeroComponent = () => {
             className={styles.heroSectionTopDocButton}
           >
             See Documentation
-            <FontAwesomeIcon icon={faArrowRight} />
+            <FontAwesomeIcon icon={faArrowRightLong} />
           </Button>
         </div>
       </div>

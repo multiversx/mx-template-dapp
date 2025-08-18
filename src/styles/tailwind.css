@@ -14,8 +14,9 @@
     --background-color-btn-secondary: var(--mvx-button-bg-secondary);
     --background-color-btn-tertiary: var(--mvx-button-bg-secondary);
     --background-color-btn-variant: var(--mvx-button-bg-variant);
+    --background-color-btn-hover: var(--mvx-hover-color-primary);
     --background-color-logo-primary: var(--mvx-text-color-primary);
-    --background-color-logo-secondary: var(--mvx-button-text-primary);
+    /* --background-color-logo-secondary: var(--mvx-button-text-primary); */
     --background-color-icon: var(--mvx-link-color);
     --color-primary: var(--mvx-text-color-primary);
     --color-secondary: var(--mvx-text-color-secondary);
