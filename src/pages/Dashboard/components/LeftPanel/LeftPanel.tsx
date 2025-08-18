@@ -21,10 +21,10 @@ const styles = {
   leftPanelMobileHeader: 'left-panel-mobile-header flex lg:hidden justify-between items-center pt-2 pb-1 transition-all duration-200 ease-out',
   leftPanelMobileHeaderIconClose: 'left-panel-mobile-header-icon-close text-link transition-all duration-200 ease-out', 
   leftPanelMobileHeaderIconOpen: 'left-panel-mobile-header-icon-open fill-primary', 
-  leftPanel: 'left-panel flex flex-col gap-4',
+  leftPanel: 'left-panel lg:!flex flex-col gap-4',
   leftPanelHidden: 'hidden',
   leftPanelMobileAddressSection: 'left-panel-mobile-address-section lg:hidden bg-accent transition-all duration-200 ease-out h-8 flex items-center justify-between rounded-full border border-secondary px-6 py-4',
-  leftPanelMobileAddress: 'left-panel-mobile-address flex gap-2 items-center justify-center',
+  leftPanelMobileAddress: 'left-panel-mobile-address flex gap-2 items-center justify-center w-[calc(100%-50px)]',
   leftPanelMobileAddressIcon: 'left-panel-mobile-address-icon text-accent transition-all duration-200 ease-out',
   logoutButton: 'text-center text-link hover:text-primary transition-all duration-200 ease-out cursor-pointer',
   leftPanelComponents: 'flex flex-col gap-4 bg-accent p-6 lg:p-0 rounded-2xl transition-all duration-200 ease-out',
@@ -43,7 +43,6 @@ export const LeftPanel = ({
   const handleOpenPanel = () => {
     setIsOpen(!isOpen);
   };
-  const isDesktop = window.innerWidth >= 1024;
 
   const { address } = useGetAccountInfo();
 
@@ -79,7 +78,7 @@ export const LeftPanel = ({
 
       <div
         className={classNames(styles.leftPanel, {
-          [styles.leftPanelHidden]: !isOpen && !isDesktop
+          [styles.leftPanelHidden]: !isOpen
         })}
       >
         <div className={styles.leftPanelMobileAddressSection}>
