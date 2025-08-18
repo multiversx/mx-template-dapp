@@ -13,7 +13,7 @@
     "@fortawesome/react-fontawesome": "0.2.0",
     "@multiversx/sdk-core": "14.2.6",
     "@multiversx/sdk-dapp": "^5.1.1",
-    "@multiversx/sdk-dapp-ui": "^0.0.26",
+    "@multiversx/sdk-dapp-ui": "0.0.26",
     "@multiversx/sdk-dapp-utils": "2.0.2",
     "axios": "1.10.0",
     "bignumber.js": "^9.x",

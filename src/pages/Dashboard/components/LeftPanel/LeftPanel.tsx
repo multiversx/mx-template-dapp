@@ -21,7 +21,7 @@ const styles = {
   leftPanelMobileHeader: 'left-panel-mobile-header flex lg:hidden justify-between items-center pt-2 pb-1 transition-all duration-200 ease-out',
   leftPanelMobileHeaderIconClose: 'left-panel-mobile-header-icon-close text-link transition-all duration-200 ease-out', 
   leftPanelMobileHeaderIconOpen: 'left-panel-mobile-header-icon-open fill-primary', 
-  leftPanel: 'left-panel lg:!flex flex-col gap-4',
+  leftPanel: 'left-panel flex flex-col gap-4 lg:!block',
   leftPanelHidden: 'hidden',
   leftPanelMobileAddressSection: 'left-panel-mobile-address-section lg:hidden bg-accent transition-all duration-200 ease-out h-8 flex items-center justify-between rounded-full border border-secondary px-6 py-4',
   leftPanelMobileAddress: 'left-panel-mobile-address flex gap-2 items-center justify-center w-[calc(100%-50px)]',
