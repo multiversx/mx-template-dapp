@@ -7,14 +7,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  MvxButton,
   MvxCopyButton
   // MvxDataWithExplorerLink
 } from '@multiversx/sdk-dapp-ui/react';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AddressComponent, Logo, Tooltip } from 'components';
+import { AddressComponent, Button, Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
 import {
   // ACCOUNTS_ENDPOINT,
@@ -141,7 +140,10 @@ export const Header = () => {
           </div>
         </div>
 
-        <MvxCopyButton text={address} iconClass='w-8 h-8' />
+        <MvxCopyButton
+          text={address}
+          iconClass='w-6 h-6 fill-primary hover:fill-red-500 hover:!opacity-100'
+        />
 
         {/* <MvxDataWithExplorerLink
           data={address}
@@ -162,13 +164,15 @@ export const Header = () => {
         )}
 
         {!isLoggedIn && (
-          <MvxButton
-            onClick={handleLogIn}
-            // className={styles.headerNavigationConnect}
-            size='small'
-          >
-            Connect
-          </MvxButton>
+          // <MvxButton
+          //   onClick={handleLogIn}
+          //   className={styles.headerNavigationConnect}
+          //   // size='small'
+          // >
+          //   Connect
+          // </MvxButton>
+
+          <Button onClick={handleLogIn}>Connect</Button>
         )}
       </nav>
     </header>

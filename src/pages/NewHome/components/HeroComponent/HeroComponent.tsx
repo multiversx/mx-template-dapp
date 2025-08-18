@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import brightLightIcon from 'assets/img/bright-light-icon.svg?react';
 import tealLabIcon from 'assets/img/teal-lab-icon.svg?react';
 import vibeModeIcon from 'assets/img/vibe-mode-icon.svg?react';
+import { Button } from 'components';
 import { RouteNamesEnum } from 'localConstants';
 
 // prettier-ignore
@@ -123,9 +124,11 @@ export const HeroComponent = () => {
         </div>
 
         <div className={styles.heroSectionTopButtons}>
-          <MvxButton onClick={handleLogIn} size='small'>
+          {/* <MvxButton onClick={handleLogIn} size='small'>
             Connect Wallet
-          </MvxButton>
+          </MvxButton> */}
+
+          <Button onClick={handleLogIn}>Connect Wallet</Button>
 
           <MvxButton
             size='small'
