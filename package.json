@@ -1,7 +1,7 @@
 {
   "name": "@multiversx/mx-template-dapp",
   "description": "MultiversX Dapp Template",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
   "repository": "@multiversx/mx-template-dapp",
@@ -13,7 +13,7 @@
     "@multiversx/sdk-core": "14.2.6",
     "@multiversx/sdk-dapp": "^5.x",
     "@multiversx/sdk-dapp-ui": "^0.x",
-    "@multiversx/sdk-dapp-utils": "2.0.2",
+    "@multiversx/sdk-dapp-utils": "^3.x",
     "axios": "1.10.0",
     "bignumber.js": "^9.x",
     "classnames": "2.3.2",
@@ -26,18 +26,19 @@
   "scripts": {
     "lint": "eslint --ext js,ts,tsx src --fix",
     "run-cypress": "npx cypress run",
-    "start-devnet": "yarn run copy-devnet-config & vite dev",
-    "start-testnet": "yarn run copy-testnet-config & vite dev",
-    "start-mainnet": "yarn run copy-mainnet-config & vite dev",
-    "build-devnet": "tsc & yarn run copy-devnet-config & vite build",
-    "build-testnet": "tsc & yarn run copy-testnet-config & vite build",
-    "build-mainnet": "tsc & yarn run copy-mainnet-config & vite build",
+    "start-devnet": "npm run copy-devnet-config & vite dev --force",
+    "start-testnet": "npm run copy-testnet-config & vite dev",
+    "start-mainnet": "npm run copy-mainnet-config & vite dev",
+    "build-devnet": "tsc & npm run copy-devnet-config & vite build",
+    "build-testnet": "tsc & npm run copy-testnet-config & vite build",
+    "build-mainnet": "tsc & npm run copy-mainnet-config & vite build",
     "copy-devnet-config": "cp ./src/config/config.devnet.ts ./src/config/index.ts",
     "copy-testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "copy-mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "test": "jest",
     "wdio-smoke": "wdio run wdio/wdio.conf.ts",
-    "smoke": "wdio run wdio/wdio.conf.ts --suite smoke"
+    "smoke": "wdio run wdio/wdio.conf.ts --suite smoke",
+    "install-verdaccio": "pnpm remove @multiversx/sdk-dapp && pnpm install @multiversx/sdk-dapp@latest --registry http://localhost:4873"
   },
   "browserslist": [
     ">0.2%",
@@ -57,6 +58,7 @@
     "@types/jest": "29.5.5",
     "@types/node": "20.7.1",
     "@types/react": "18.2.23",
+    "@types/react-dom": "^19.1.7",
     "@types/react-router-dom": "5.3.3",
     "@typescript-eslint/eslint-plugin": "6.7.0",
     "@typescript-eslint/parser": "6.7.0",
@@ -77,6 +79,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "eslint-plugin-sort-exports": "0.9.1",
     "jest": "29.7.0",
+    "jest-chain-transform": "^0.0.8",
     "jest-environment-jsdom": "29.7.0",
     "jest-watch-typeahead": "2.2.2",
     "mochawesome-merge": "4.3.0",
@@ -92,7 +95,9 @@
     "vite-plugin-svgr": "4.0.0",
     "vite-tsconfig-paths": "4.2.1"
   },
-  "resolutions": {
-    "**/*/nth-check": "2.0.1"
+  "pnpm": {
+    "overrides": {
+      "nth-check": "2.0.1"
+    }
   }
 }
