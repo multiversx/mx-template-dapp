@@ -9,14 +9,12 @@
     --background-color-secondary: var(--mvx-bg-color-secondary);
     --background-color-tertiary: var(--mvx-hover-bg-primary);
     --background-color-accent: var(--mvx-bg-accent-color);
-    /* --background-color-accent-variant: var(--mvx-bg-accent-variant-color); */
     --background-color-btn-primary: var(--mvx-button-bg-primary);
     --background-color-btn-secondary: var(--mvx-button-bg-secondary);
     --background-color-btn-tertiary: var(--mvx-button-bg-secondary);
     --background-color-btn-variant: var(--mvx-button-bg-variant);
     --background-color-btn-hover: var(--mvx-hover-color-primary);
     --background-color-logo-primary: var(--mvx-text-color-primary);
-    /* --background-color-logo-secondary: var(--mvx-button-text-primary); */
     --background-color-icon: var(--mvx-link-color);
     --color-primary: var(--mvx-text-color-primary);
     --color-secondary: var(--mvx-text-color-secondary);
@@ -25,15 +23,17 @@
     --color-btn-primary: var(--mvx-button-text-primary);
     --color-btn-secondary: var(--mvx-button-text-secondary);
     --color-link: var(--mvx-link-color);
-    /* --border-color-primary: var(--mvx-border-color-primary); */
     --border-color-secondary: var(--mvx-border-color-secondary);
     --border-color-logo: var(--mvx-text-color-primary);
-   /* --background-color-label: var(--mvx-button-text-primary); */
 }
 
 :root {
+  --mvx-violet-350: #B5A0B9;
+  --mvx-violet-875: #510D5D;
   --mvx-violet-925: #310339;
   --mvx-purple-150: #DDCEDB;
+  --mvx-purple-850: #431C4E;
+  --mvx-purple-875: #471150;
   --mvx-purple-925: #3C1543;
   --mvx-slate-75: #F8F8FF;
   --mvx-fuchsia-550: #F04DFF;
@@ -42,21 +42,21 @@
 :root[data-mvx-theme='mvx:vibe-theme'],
 [data-mvx-theme='mvx:vibe-theme'] {
   --mvx-bg-color-primary: var(--mvx-purple-925);
-  --mvx-bg-color-secondary: rgba(96, 6, 112, 0.30);
+  --mvx-bg-color-secondary: var(--mvx-purple-875);
   --mvx-bg-accent-color: var(--mvx-violet-925);
   --mvx-bg-accent-variant-color: var(--mvx-violet-925);
-  --mvx-hover-color-primary: rgba(93, 66, 110, 0.40);
+  --mvx-hover-color-primary: var(--mvx-purple-850);
   --mvx-text-color-primary: var(--mvx-white);
-  --mvx-text-color-secondary: rgba(255, 255, 255, 0.60);
+  --mvx-text-color-secondary: var(--mvx-violet-350);
   --mvx-text-color-tertiary: var(--mvx-slate-75);
   --mvx-text-accent-color: var(--mvx-fuchsia-550);
   --mvx-link-color: var(--mvx-purple-150);
   --mvx-label-color: var(--mvx-purple-150);
   --mvx-icon-bg: var(--mvx-violet-925);
   --mvx-button-bg-primary: var(--mvx-fuchsia-550);
-  --mvx-button-bg-secondary: rgba(96, 6, 112, 0.40);
-  --mvx-button-bg-variant: rgba(96, 6, 112, 0.40);
+  --mvx-button-bg-secondary: var(--mvx-violet-875);
+  --mvx-button-bg-variant: var(--mvx-violet-875);
   --mvx-button-text-primary: var(--mvx-black);
   --mvx-button-text-secondary: var(--mvx-neutral-225);
-  --mvx-border-color-secondary: rgba(93, 66, 110, 0.40);
+  --mvx-border-color-secondary: var(--mvx-purple-850);
 }
