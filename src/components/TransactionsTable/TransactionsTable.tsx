@@ -17,13 +17,13 @@ export const TransactionsTable = ({
 }: TransactionsTablePropsType) => {
   const { address } = useGetAccount();
   const { network } = useGetNetworkConfig();
-  const [processedTransaction, setProcessedTransactions] = useState<
+  const [processedTransactions, setProcessedTransactions] = useState<
     TransactionsRowType[]
   >([]);
 
   useEffect(() => {
     processTransactions();
-  }, []);
+  }, [transactions]);
 
   const processTransactions = async () => {
     const transactionsData =
@@ -37,5 +37,5 @@ export const TransactionsTable = ({
     setProcessedTransactions(transactionsData);
   };
 
-  return <MvxTransactionsTable transactions={processedTransaction} />;
+  return <MvxTransactionsTable transactions={processedTransactions} />;
 };
