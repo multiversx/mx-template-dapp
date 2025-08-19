@@ -18,7 +18,7 @@ import { DOCUMENTATION_LINK, RouteNamesEnum } from 'localConstants';
 
 // prettier-ignore
 const styles = {
-  heroContainer: 'hero-container flex flex-col items-center justify-between w-full lg:h-160 rounded-3xl bg-cover bg-no-repeat bg-center p-8 lg:p-20 border border-secondary backdrop-blur-md transition-all duration-200 ease-out',
+  heroContainer: 'hero-container shadow-xl shadow-secondary/15 flex flex-col items-center justify-between w-full lg:h-160 rounded-3xl bg-cover bg-no-repeat bg-center p-8 lg:p-20 border border-secondary backdrop-blur-md transition-all duration-200 ease-out',
   heroSectionTop: 'hero-section-top flex flex-col items-start lg:items-center justify-center gap-10',
   heroSectionTopContent: 'hero-section-top-content flex flex-col lg:items-center justify-center gap-6',
   heroTitle: 'hero-title !text-primary text-[42px] lg:text-[84px] font-medium leading-[1] tracking-[-2.52px] transition-all duration-200 ease-out',
