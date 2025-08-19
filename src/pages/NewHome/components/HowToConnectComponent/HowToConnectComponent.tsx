@@ -2,13 +2,15 @@ import LedgerIcon from 'assets/img/ledger-icon.svg?react';
 import MetamaskIcon from 'assets/img/metamask-icon.svg?react';
 import PasskeyIcon from 'assets/img/passkey-icon.svg?react';
 import WebWalletIcon from 'assets/img/web-wallet-icon.svg?react';
-import XAliasIcon from 'assets/img/xalias-icon.svg?react';
 import XPortalIcon from 'assets/img/xportal-icon.svg?react';
 import { getDetectedBrowser } from 'helpers/getDetectedBrowser';
 import {
   BrowserEnum,
   CHROME_METAMASK_EXTENSION_LINK,
-  FIREFOX_METAMASK_ADDON_LINK
+  FIREFOX_METAMASK_ADDON_LINK,
+  GET_LEDGER,
+  GET_XPORTAL,
+  WALLET_ADDRESS
 } from 'localConstants';
 
 import { ConnectCard, ExtensionConnect } from './components';
@@ -44,7 +46,7 @@ export const HowToConnectComponent = () => {
       description:
         'Passkeys offer a more secure and user-friendly way to authenticate and sign transactions.',
       linkTitle: 'Get Passkey',
-      linkDownloadAddress: ''
+      linkDownloadAddress: WALLET_ADDRESS
     },
     {
       icon: XPortalIcon,
@@ -52,7 +54,7 @@ export const HowToConnectComponent = () => {
       description:
         'The easiest way to invest, spend globally with a crypto card and earn yield across DeFi and stablecoins.',
       linkTitle: 'Get xPortal',
-      linkDownloadAddress: ''
+      linkDownloadAddress: GET_XPORTAL
     },
     {
       icon: LedgerIcon,
@@ -60,7 +62,7 @@ export const HowToConnectComponent = () => {
       description:
         'You can safely store your EGLD by installing the MultiversX EGLD app on your Ledger Nano S or Ledger Nano X device',
       linkTitle: 'Get Started',
-      linkDownloadAddress: ''
+      linkDownloadAddress: GET_LEDGER
     },
     {
       icon: WebWalletIcon,
@@ -68,15 +70,7 @@ export const HowToConnectComponent = () => {
       description:
         'Store, swap, and transfer tokens or NFTs. Connect to Web3 apps on MultiversX blockchain.',
       linkTitle: 'Get MultiversX Wallet',
-      linkDownloadAddress: ''
-    },
-    {
-      icon: XAliasIcon,
-      title: 'xAlias',
-      description:
-        'xAlias offers one-click login and wallet creation using your Google email.',
-      linkTitle: 'Get xAlias',
-      linkDownloadAddress: ''
+      linkDownloadAddress: WALLET_ADDRESS
     }
   ];
   return (
@@ -100,7 +94,7 @@ export const HowToConnectComponent = () => {
               title={card.title}
               description={card.description}
               linkTitle={card.linkTitle}
-              linkDownloadAddress={card.linkTitle}
+              linkDownloadAddress={card.linkDownloadAddress}
             />
           ))}
         </div>

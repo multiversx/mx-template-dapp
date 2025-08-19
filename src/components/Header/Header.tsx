@@ -6,10 +6,9 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  MvxCopyButton
-  // MvxDataWithExplorerLink
-} from '@multiversx/sdk-dapp-ui/react';
+import // MvxCopyButton
+// MvxDataWithExplorerLink
+'@multiversx/sdk-dapp-ui/react';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -39,7 +38,7 @@ const styles = {
   headerNavigationNetwork: 'header-navigation-network h-8 border border-secondary rounded-xl lg:h-10 relative w-22 flex items-center justify-center leading-none capitalize text-tertiary before:absolute before:rounded-full before:w-2 before:lg:w-2.5 before:h-2 before:lg:h-2.5 before:bg-btn-primary before:z-2 before:-top-0.25 before:lg:-top-0.5 before:-left-0.25 before:lg:-left-0.5 after:absolute after:bg-primary after:rounded-lg after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none transition-all duration-200 ease-out',
   headerNavigationNetworkLabel: 'header-navigation-network-label relative z-1',
   headerNavigationConnect: 'header-navigation-connect h-8 lg:h-10',
-  walletContainer: 'hidden lg:!flex !rounded-full gap-3 w-fit pl-3.5 pr-3 py-1.5 bg-primary border border-secondary text-primary transition-all duration-200 ease-out',
+  walletContainer: 'wallet-container hidden lg:!flex !rounded-full gap-3 w-fit pl-3.5 pr-3 py-1.5 bg-primary border border-secondary text-primary transition-all duration-200 ease-out',
   walletInfo: 'flex gap-2 items-center justify-center',
   walletIcon: 'text-accent transition-all duration-200 ease-out',
   logoutButton: 'text-center text-link hover:text-primary transition-all duration-200 ease-out cursor-pointer'
@@ -115,17 +114,19 @@ export const Header = () => {
             <Tooltip
               key={`header-${headerBrowseButton.label}-button`}
               position='bottom'
-              trigger={() => (
-                <div
-                  onClick={headerBrowseButton.handleClick}
-                  className={styles.headerNavigationButton}
-                >
-                  <FontAwesomeIcon
-                    className={styles.headerNavigationButtonIcon}
-                    icon={headerBrowseButton.icon}
-                  />
-                </div>
-              )}
+              trigger={() =>
+                headerBrowseButton.isVisible && (
+                  <div
+                    onClick={headerBrowseButton.handleClick}
+                    className={styles.headerNavigationButton}
+                  >
+                    <FontAwesomeIcon
+                      className={styles.headerNavigationButtonIcon}
+                      icon={headerBrowseButton.icon}
+                    />
+                  </div>
+                )
+              }
             >
               <div className={styles.headerNavigationButtonTooltip}>
                 {headerBrowseButton.label}
@@ -140,10 +141,10 @@ export const Header = () => {
           </div>
         </div>
 
-        <MvxCopyButton
+        {/* <MvxCopyButton
           text={address}
           iconClass='w-6 h-6 fill-primary hover:fill-red-500 hover:!opacity-100'
-        />
+        /> */}
 
         {/* <MvxDataWithExplorerLink
           data={address}

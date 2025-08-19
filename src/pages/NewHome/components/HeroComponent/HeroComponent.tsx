@@ -14,7 +14,7 @@ import brightLightIcon from 'assets/img/bright-light-icon.svg?react';
 import tealLabIcon from 'assets/img/teal-lab-icon.svg?react';
 import vibeModeIcon from 'assets/img/vibe-mode-icon.svg?react';
 import { Button } from 'components';
-import { RouteNamesEnum } from 'localConstants';
+import { DOCUMENTATION_LINK, RouteNamesEnum } from 'localConstants';
 
 // prettier-ignore
 const styles = {
@@ -24,9 +24,11 @@ const styles = {
   heroTitle: 'hero-title !text-primary text-[42px] lg:text-[84px] font-medium leading-[1] tracking-[-2.52px] transition-all duration-200 ease-out',
   heroDescription: 'hero-description text-secondary text-xl lg:text-2xl lg:text-center leading-[1.5] tracking-[-0.24px] max-w-138 transition-all duration-200 ease-out',
   heroSectionTopButtons: 'hero-section-top-buttons flex flex-col lg:flex-row items-start lg:items-center justify-start gap-6',
-  heroSectionTopDocButton: 'hero-section-top-doc-button bg-btn-secondary hover:bg-btn-primary rounded-xl transition-all duration-200 ease-out',
+  heroSectionTopDocButton: 'hero-section-top-doc-button flex items-center px-3 text-btn-secondary bg-btn-secondary hover:bg-btn-primary hover:text-btn-primary font-bold rounded-xl h-8 lg:h-10 transition-all duration-200 ease-out',
+  heroSectionTopDocButtonText: 'hero-section-top-doc-button-text px-4',
+    heroSectionTopDocButtonIcon: 'hero-section-top-doc-button-icon px-3',
   heroSectionBottom: 'hero-section-bottom hidden lg:!flex gap-6',
-  heroSectionBottomThemeOptions: 'hero-section-bottom-theme-options text-primary opacity-60 hover:opacity-100 flex flex-col items-center gap-2 w-20 relative cursor-pointer transition-all duration-200 ease-out',
+  heroSectionBottomThemeOptions: 'hero-section-bottom-theme-options text-btn opacity-60 hover:opacity-100 flex flex-col items-center gap-2 w-20 relative cursor-pointer transition-all duration-200 ease-out',
   heroSectionBottomThemeOptionsOpacityFull: 'opacity-100',
   heroSectionBottomThemeOption: 'hero-section-bottom-theme-option flex flex-col items-center gap-1 relative',
   themeOptionIcon: 'theme-option-icon fill-primary',
@@ -125,14 +127,20 @@ export const HeroComponent = () => {
         <div className={styles.heroSectionTopButtons}>
           <Button onClick={handleLogIn}>Connect Wallet</Button>
 
-          <Button
-            onClick={handleLogIn}
-            variant='secondary'
+          <a
+            href={DOCUMENTATION_LINK}
+            target='_blank'
             className={styles.heroSectionTopDocButton}
           >
-            See Documentation
-            <FontAwesomeIcon icon={faArrowRightLong} />
-          </Button>
+            <span className={styles.heroSectionTopDocButtonText}>
+              See Documentation
+            </span>
+
+            <FontAwesomeIcon
+              icon={faArrowRightLong}
+              className={styles.heroSectionTopDocButtonIcon}
+            />
+          </a>
         </div>
       </div>
 

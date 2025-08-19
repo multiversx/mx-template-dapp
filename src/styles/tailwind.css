@@ -23,6 +23,7 @@
     --color-tertiary: var(--mvx-text-color-tertiary);
     --color-accent: var(--mvx-text-accent-color); 
     --color-btn-primary: var(--mvx-button-text-primary);
+    --color-btn-secondary: var(--mvx-button-text-secondary);
     --color-link: var(--mvx-link-color);
     /* --border-color-primary: var(--mvx-border-color-primary); */
     --border-color-secondary: var(--mvx-border-color-secondary);
@@ -55,5 +56,7 @@
   --mvx-button-bg-primary: var(--mvx-fuchsia-550);
   --mvx-button-bg-secondary: rgba(96, 6, 112, 0.40);
   --mvx-button-bg-variant: rgba(96, 6, 112, 0.40);
-  --mvx-border-color-secondary: rgba(93, 66, 110, 0.40)
+  --mvx-button-text-primary: var(--mvx-black);
+  --mvx-button-text-secondary: var(--mvx-neutral-225);
+  --mvx-border-color-secondary: rgba(93, 66, 110, 0.40);
 }
