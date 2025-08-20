@@ -21,13 +21,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - name: Run install
-        uses: borales/actions-yarn@v4
+          node-version: 22
+      - name: Setup pnpm
+        run: npm install -g pnpm
+      - name: Install Dependencies
+        uses: nick-fields/retry@v3
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: true
         with:
-            cmd: install   
+          timeout_minutes: 120
+          retry_on: error
+          max_attempts: 2
+          command: pnpm install
       - name: Start WDIO
-        run: npm run wdio-smoke
+        run: pnpm run wdio-smoke
     

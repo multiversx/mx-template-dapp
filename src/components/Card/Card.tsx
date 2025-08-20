@@ -13,34 +13,30 @@ const styles = {
   cardDescription: 'card-description text-secondary transition-all duration-200 ease-out mb-6 text-lg font-medium'
 } satisfies Record<string, string>;
 
-interface CardType extends PropsWithChildren, WithClassnameType {
+interface CardPropsType extends PropsWithChildren, WithClassnameType {
   title: string;
   description?: string;
   reference: string;
   anchor?: string;
 }
 
-export const Card = (props: CardType) => {
-  const {
-    title,
-    children,
-    description,
-    reference,
-    anchor,
-    'data-testid': dataTestId
-  } = props;
+export const Card = ({
+  title,
+  children,
+  description,
+  reference,
+  anchor,
+  'data-testid': dataTestId
+}: CardPropsType) => (
+  <div id={anchor} className={styles.cardContainer} data-testid={dataTestId}>
+    <h2 className={styles.cardTitle}>
+      {title}
+      <a href={reference} target='_blank' className={styles.cardRef}>
+        <FontAwesomeIcon icon={faInfoCircle} className={styles.cardRefIcon} />
+      </a>
+    </h2>
 
-  return (
-    <div id={anchor} className={styles.cardContainer} data-testid={dataTestId}>
-      <h2 className={styles.cardTitle}>
-        {title}
-        <a href={reference} target='_blank' className={styles.cardRef}>
-          <FontAwesomeIcon icon={faInfoCircle} className={styles.cardRefIcon} />
-        </a>
-      </h2>
-
-      {description && <p className={styles.cardDescription}>{description}</p>}
-      {children}
-    </div>
-  );
-};
+    {description && <p className={styles.cardDescription}>{description}</p>}
+    {children}
+  </div>
+);
