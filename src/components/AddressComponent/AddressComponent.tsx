@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -38,8 +39,9 @@ export const AddressComponent = ({
     to: `/${ACCOUNTS_ENDPOINT}/${contractAddress}`,
     explorerAddress
   });
+
   return (
-    <>
+    <Fragment>
       <p className={styles.addressContainer}>
         {isHeader ? (
           <MvxTrim text={address} className={styles.trimmedAddress} />
@@ -67,6 +69,6 @@ export const AddressComponent = ({
           <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
         </a>
       </div>
-    </>
+    </Fragment>
   );
 };

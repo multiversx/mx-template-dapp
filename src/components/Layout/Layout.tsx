@@ -1,7 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { Footer } from 'components/Footer';
-import { Header } from 'components/Header';
+import { Footer, Header } from 'components';
 import { AuthRedirectWrapper } from 'wrappers';
 
 // prettier-ignore

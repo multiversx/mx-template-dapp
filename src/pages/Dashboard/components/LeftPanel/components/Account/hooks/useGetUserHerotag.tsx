@@ -7,8 +7,11 @@ export const useGetUserHerotag = (address: string) => {
   const [profileUrl, setProfileUrl] = useState('');
   const [herotag, setHerotag] = useState('');
 
-  const getUserProfileData = async (address: string) => {
-    if (!address) return;
+  const getUserProfileData = async (address?: string) => {
+    if (!address) {
+      return;
+    }
+
     try {
       const { data } = await axios.get(`${USERS_API_URL}${address}`, {
         baseURL: ID_API_URL
