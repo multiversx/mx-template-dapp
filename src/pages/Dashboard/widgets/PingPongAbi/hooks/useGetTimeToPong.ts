@@ -1,19 +1,10 @@
 import { contractAddress } from 'config';
-import pingPongAbi from 'contracts/ping-pong.abi.json';
-import {
-  AbiRegistry,
-  Address,
-  AddressValue,
-  ProxyNetworkProvider,
-  SmartContractController,
-  useGetAccount,
-  useGetNetworkConfig
-} from 'lib';
+import { Address, AddressValue, useGetAccount } from 'lib';
+import { useGetScController } from './useGetScController';
 
 export const useGetTimeToPong = () => {
-  const { network } = useGetNetworkConfig();
   const { address } = useGetAccount();
-  const proxy = new ProxyNetworkProvider(network.apiAddress);
+  const scController = useGetScController();
 
   const getTimeToPong = async () => {
     if (!address) {
@@ -21,14 +12,6 @@ export const useGetTimeToPong = () => {
     }
 
     try {
-      const abi = AbiRegistry.create(pingPongAbi);
-
-      const scController = new SmartContractController({
-        chainID: network.chainId,
-        networkProvider: proxy,
-        abi
-      });
-
       const result = await scController.query({
         contract: Address.newFromBech32(contractAddress),
         function: 'getTimeToPong',
