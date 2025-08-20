@@ -59,4 +59,5 @@
   --mvx-button-text-primary: var(--mvx-black);
   --mvx-button-text-secondary: var(--mvx-neutral-225);
   --mvx-border-color-secondary: var(--mvx-purple-850);
+  --mvx-scrollbar-thumb: var(--mvx-violet-925);
 }
