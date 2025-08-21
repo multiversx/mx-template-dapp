@@ -34,7 +34,11 @@ const styles = {
   connectedAccountInfo: 'connected-account-info flex h-14 gap-2 items-center',
   connectedAccountInfoIcon: 'connected-account-info-icon min-w-10 min-h-10 max-h-10 max-w-10 flex items-center justify-center text-tertiary border border-secondary rounded-lg overflow-hidden p-1.5 transition-all duration-200 ease-out',
   connectedAccountInfoText: 'connected-account-info-text truncate flex flex-col',
-  connectedAccountInfoTextValue: 'connected-account-info-text-value text-primary transition-all duration-200 ease-out text-base'
+  connectedAccountInfoTextValue: 'connected-account-info-text-value text-primary transition-all duration-200 ease-out text-base',
+  connectedAccountDetailsIcon: 'connected-account-details-icon w-6 h-6',
+  connectedAccountDetailsHerotag: 'connected-account-details-herotag rounded-full',
+  connectedAccountDetailsXLogo: 'connected-account-details-xlogo fill-primary w-6 h-6 transition-all duration-200 ease-out',
+  connectedAccountDetailsTrimAddress: 'w-max'
 } satisfies Record<string, string>;
 
 interface AccountDetailsType {
@@ -65,14 +69,27 @@ export const Account = () => {
 
   const accountDetails: AccountDetailsType[] = [
     {
-      icon: <FontAwesomeIcon icon={faWallet} className='w-6 h-6' />,
+      icon: (
+        <FontAwesomeIcon
+          icon={faWallet}
+          className={styles.connectedAccountDetailsIcon}
+        />
+      ),
       label: 'Address',
-      value: <MvxTrim text={address} className='w-max' />
+      value: (
+        <MvxTrim
+          text={address}
+          className={styles.connectedAccountDetailsTrimAddress}
+        />
+      )
     },
     {
       icon: herotag ? (
         profileUrl ? (
-          <img src={profileUrl} className='rounded-full' />
+          <img
+            src={profileUrl}
+            className={styles.connectedAccountDetailsHerotag}
+          />
         ) : (
           herotag.slice(0, 3)
         )
@@ -83,12 +100,17 @@ export const Account = () => {
       value: <Username address={address} />
     },
     {
-      icon: <FontAwesomeIcon icon={faLayerGroup} className='w-6 h-6' />,
+      icon: (
+        <FontAwesomeIcon
+          icon={faLayerGroup}
+          className={styles.connectedAccountDetailsIcon}
+        />
+      ),
       label: 'Shard',
       value: account.shard
     },
     {
-      icon: <XLogo className='fill-primary w-6 h-6' />,
+      icon: <XLogo className={styles.connectedAccountDetailsXLogo} />,
       label: 'Balance',
       value: (
         <MvxFormatAmount

@@ -31,7 +31,7 @@ const styles = {
   heroSectionBottomThemeOptions: 'hero-section-bottom-theme-options text-btn opacity-60 hover:opacity-100 flex flex-col items-center gap-2 w-20 relative cursor-pointer transition-all duration-200 ease-out',
   heroSectionBottomThemeOptionsOpacityFull: 'opacity-100',
   heroSectionBottomThemeOption: 'hero-section-bottom-theme-option flex flex-col items-center gap-1 relative',
-  themeOptionIcon: 'theme-option-icon fill-primary',
+  themeOptionIcon: 'theme-option-icon fill-primary transition-all duration-200 ease-out',
   themeOptionTitle: 'theme-option-title text-primary transition-all duration-200 ease-out',
   themeOptionActiveDot: 'theme-option-active-dot w-2 h-2 rounded-full bg-tertiary transition-all duration-200 ease-out',
   themeOptionActiveLabel: 'theme-option-active-label flex items-center justify-center px-1 absolute -top-1.5 left-10 z-10 text-xs text-accent uppercase bg-accent border border-accent rounded-md transition-all duration-200 ease-out'

@@ -20,7 +20,7 @@ const styles = {
   leftPanelContainerOpen: 'left-panel-container-open rounded-t-2xl lg:rounded-t-none p-6',
   leftPanelMobileHeader: 'left-panel-mobile-header flex lg:hidden justify-between items-center pt-2 pb-1 transition-all duration-200 ease-out',
   leftPanelMobileHeaderIconClose: 'left-panel-mobile-header-icon-close text-link transition-all duration-200 ease-out', 
-  leftPanelMobileHeaderIconOpen: 'left-panel-mobile-header-icon-open fill-primary', 
+  leftPanelMobileHeaderIconOpen: 'left-panel-mobile-header-icon-open fill-primary transition-all duration-200 ease-out', 
   leftPanel: 'left-panel flex flex-col gap-4 lg:!block',
   leftPanelHidden: 'hidden',
   leftPanelMobileAddressSection: 'left-panel-mobile-address-section lg:hidden bg-accent transition-all duration-200 ease-out h-8 flex items-center justify-between rounded-full border border-secondary px-6 py-4',
