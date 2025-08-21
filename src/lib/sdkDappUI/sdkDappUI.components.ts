@@ -1,5 +1,7 @@
 export {
+  MvxButton,
   MvxCopyButton,
+  MvxDataWithExplorerLink,
   MvxExplorerLink,
   MvxFormatAmount,
   MvxTransactionsTable,

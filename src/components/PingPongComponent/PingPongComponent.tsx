@@ -1,12 +1,10 @@
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
-import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 
 import {
-  AddressComponent,
   Label,
   MissingNativeAuthError,
   OutputContainer,
@@ -14,14 +12,15 @@ import {
 } from 'components';
 import { contractAddress } from 'config';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { Transaction, useGetPendingTransactions } from 'lib';
+import { MvxButton, MvxDataWithExplorerLink } from 'lib';
+import { ACCOUNTS_ENDPOINT, Transaction, useGetPendingTransactions } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 // prettier-ignore
 const styles = {
   pingPongContainer: 'ping-pong-container flex flex-col gap-6',
   infosContainer: 'infos-container flex flex-col gap-2',
-  addressComponent: 'address-component flex justify-between items-center gap-3',
+  addressComponent: 'address-component flex w-full justify-between',
   timeRemaining: 'text-red-600',
   buttonsContainer: 'buttons-container flex flex-col gap-2',
   buttons: 'buttons flex justify-start gap-2',
@@ -124,9 +123,12 @@ export const PingPongComponent = ({
         <OutputContainer>
           {!hasPendingTransactions && (
             <>
-              <div className={styles.addressComponent}>
-                <AddressComponent address={contractAddress} />
-              </div>
+              <MvxDataWithExplorerLink
+                withTooltip={true}
+                data={contractAddress}
+                className={styles.addressComponent}
+                explorerLink={`/${ACCOUNTS_ENDPOINT}/${contractAddress}`}
+              />
 
               {!pongAllowed && (
                 <p>

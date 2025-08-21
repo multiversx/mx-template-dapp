@@ -1,19 +1,21 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
   faBell,
+  faCreditCard,
   faPowerOff,
-  faWallet,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AddressComponent, Logo, Tooltip } from 'components';
+import { Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
 import {
+  ACCOUNTS_ENDPOINT,
   getAccountProvider,
+  MvxButton,
+  MvxDataWithExplorerLink,
   NotificationsFeedManager,
   useGetAccountInfo,
   useGetIsLoggedIn,
@@ -31,14 +33,14 @@ const styles = {
   headerNavigationButtons: 'header-navigation-buttons flex gap-2 lg:gap-4',
   headerNavigationButton: 'header-navigation-button flex justify-center items-center w-8 lg:w-10 h-8 lg:h-10 rounded-xl cursor-pointer relative after:rounded-xl after:absolute after:bg-btn-tertiary after:opacity-40 after:transition-all after:duration-200 after:ease-out after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none hover:after:opacity-100',
   headerNavigationButtonIcon: 'header-navigation-button-icon flex justify-center relative text-xs lg:text-base z-1 items-center text-tertiary',
-  headerNavigationButtonTooltip: 'header-navigation-button-tooltip p-1 leading-none whitespace-nowrap text-tertiary',
-  headerNavigationNetwork: 'header-navigation-network h-8 border border-secondary rounded-xl lg:h-10 relative w-22 flex items-center justify-center leading-none capitalize text-tertiary before:absolute before:rounded-full before:w-2 before:lg:w-2.5 before:h-2 before:lg:h-2.5 before:bg-btn-primary before:z-2 before:-top-0.25 before:lg:-top-0.5 before:-left-0.25 before:lg:-left-0.5 after:absolute after:bg-primary after:rounded-lg after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
+  headerNavigationTooltip: 'header-navigation-tooltip p-1 leading-none whitespace-nowrap text-tertiary',
+  headerNavigationNetwork: 'header-navigation-network h-8 border border-secondary rounded-xl lg:h-10 relative w-22 flex items-center justify-center leading-none capitalize text-tertiary before:absolute before:rounded-full before:w-2 before:lg:w-2.5 before:h-2 before:lg:h-2.5 before:bg-btn-primary before:z-2 before:-top-0.25 before:lg:-top-0.5 before:-left-0.25 before:lg:-left-0.5 after:absolute after:bg-btn-tertiary after:rounded-lg after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
   headerNavigationNetworkLabel: 'header-navigation-network-label relative z-1',
   headerNavigationConnect: 'header-navigation-connect h-8 lg:h-10',
-  walletContainer: 'hidden lg:!flex !rounded-full gap-3 w-fit pl-3.5 pr-3 py-1.5 bg-primary border border-secondary text-primary',
-  walletInfo: 'flex gap-2 items-center justify-center',
-  walletIcon: 'text-accent transition-all duration-300',
-  logoutButton: 'text-center text-link hover:text-primary transition-all duration-300 cursor-pointer'
+  headerNavigationAddress: 'header-navigation-address h-8 lg:h-10 w-8 lg:w-full justify-center text-xs rounded-xl lg:text-base lg:pr-4 lg:pl-5 max-w-100 flex relative lg:border lg:border-secondary lg:rounded-full items-center gap-3 after:absolute after:bg-btn-tertiary after:rounded-xl lg:after:rounded-full after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
+  headerNavigationAddressWallet: 'header-navigation-address-wallet relative z-1 text-accent hidden lg:flex!',
+  headerNavigationAddressExplorer: 'header-navigation-address-explorer min-w-0 relative z-1 hidden lg:block!',
+  headerNavigationAddressLogout: 'header-navigation-address-logout text-tertiary cursor-pointer relative z-1 transition-all duration-200 ease-out hover:text-accent',
 } satisfies Record<string, string>;
 
 interface HeaderBrowseButtonType {
@@ -56,7 +58,7 @@ export const Header = () => {
   const provider = getAccountProvider();
   const navigate = useNavigate();
 
-  const handleLogout = async (event: MouseEvent<HTMLButtonElement>) => {
+  const handleLogout = async (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     await provider.logout();
     navigate(RouteNamesEnum.home);
@@ -123,7 +125,7 @@ export const Header = () => {
                 </div>
               )}
             >
-              <div className={styles.headerNavigationButtonTooltip}>
+              <div className={styles.headerNavigationTooltip}>
                 {headerBrowseButton.label}
               </div>
             </Tooltip>
@@ -137,15 +139,33 @@ export const Header = () => {
         </div>
 
         {isLoggedIn && (
-          <div className={styles.walletContainer}>
-            <div className={styles.walletInfo}>
-              <FontAwesomeIcon icon={faWallet} className={styles.walletIcon} />
-              <AddressComponent address={address} isHeader />
+          <div className={styles.headerNavigationAddress}>
+            <FontAwesomeIcon
+              icon={faCreditCard}
+              className={styles.headerNavigationAddressWallet}
+            />
+
+            <div className={styles.headerNavigationAddressExplorer}>
+              <MvxDataWithExplorerLink
+                data={address}
+                withTooltip={true}
+                explorerLink={`/${ACCOUNTS_ENDPOINT}/${address}`}
+              />
             </div>
 
-            <button onClick={handleLogout} className={styles.logoutButton}>
-              <FontAwesomeIcon icon={faPowerOff} />
-            </button>
+            <Tooltip
+              position='bottom'
+              trigger={() => (
+                <div
+                  onClick={handleLogout}
+                  className={styles.headerNavigationAddressLogout}
+                >
+                  <FontAwesomeIcon icon={faPowerOff} />
+                </div>
+              )}
+            >
+              <div className={styles.headerNavigationTooltip}>Disconnect</div>
+            </Tooltip>
           </div>
         )}
 

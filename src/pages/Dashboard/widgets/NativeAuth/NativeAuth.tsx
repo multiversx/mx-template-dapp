@@ -1,15 +1,12 @@
 import { useEffect } from 'react';
 
+import { Label, MissingNativeAuthError, OutputContainer } from 'components';
 import {
-  AddressComponent,
-  Label,
-  MissingNativeAuthError,
-  OutputContainer
-} from 'components';
-import {
+  ACCOUNTS_ENDPOINT,
   DECIMALS,
   DIGITS,
   FormatAmountController,
+  MvxDataWithExplorerLink,
   MvxFormatAmount,
   useGetAccount,
   useGetLoginInfo,
@@ -24,7 +21,7 @@ import { useGetProfile } from './hooks';
 const styles = {
   nativeAuthContainer: 'native-auth-container flex flex-col gap-8',
   nativeAuthAddressContainer: 'native-auth-address-container flex flex-col gap-2',
-  nativeAuthAddress: 'native-auth-address flex justify-between items-center gap-3',
+  nativeAuthAddress: 'native-auth-address flex justify-between w-full',
   nativeAuthDetails: 'native-auth-details flex gap-8 w-full',
   nativeAuthDetailContainer: 'native-auth-detail-container flex flex-col gap-2 sm:w-1/3',
   nativeAuthAmount: 'native-auth-amount flex gap-1',
@@ -76,9 +73,12 @@ export const NativeAuth = () => {
         <Label>Address</Label>
 
         <OutputContainer isLoading={isLoading}>
-          <div className={styles.nativeAuthAddress}>
-            <AddressComponent address={profile?.address ?? 'N/A'} />
-          </div>
+          <MvxDataWithExplorerLink
+            withTooltip={true}
+            data={profile?.address ?? 'N/A'}
+            className={styles.nativeAuthAddress}
+            explorerLink={`/${ACCOUNTS_ENDPOINT}/${profile?.address}`}
+          />
         </OutputContainer>
       </div>
 

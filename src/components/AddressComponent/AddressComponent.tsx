@@ -1,7 +1,7 @@
-import { Fragment } from 'react';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import { Fragment } from 'react';
 
 import { contractAddress } from 'config';
 import {
