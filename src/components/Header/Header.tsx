@@ -6,18 +6,13 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  MvxButton,
-  MvxCopyButton,
-  MvxDataWithExplorerLink
-} from '@multiversx/sdk-dapp-ui/react';
+import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { AddressComponent, Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
 import {
-  ACCOUNTS_ENDPOINT,
   getAccountProvider,
   NotificationsFeedManager,
   useGetAccountInfo,
@@ -140,13 +135,6 @@ export const Header = () => {
             {network.id}
           </div>
         </div>
-
-        <MvxCopyButton text={address} iconClass='w-8 h-8' />
-
-        <MvxDataWithExplorerLink
-          data={address}
-          explorerLink={`/${ACCOUNTS_ENDPOINT}/${address}`}
-        />
 
         {isLoggedIn && (
           <div className={styles.walletContainer}>

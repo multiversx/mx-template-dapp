@@ -14,8 +14,10 @@ export const Layout = ({ children }: PropsWithChildren) => (
     <Header />
 
     <main className={styles.mainContainer}>
+      Test
       <AuthRedirectWrapper>{children}</AuthRedirectWrapper>
     </main>
+
     <Footer />
   </div>
 );
