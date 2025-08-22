@@ -6,7 +6,7 @@ import { WithClassnameType } from 'types';
 
 // prettier-ignore
 const styles = {
-  outputContainer: 'output-container text-sm text-primary font-normal bg-secondary transition-all duration-200 ease-out rounded-xl overflow-auto'
+  outputContainer: 'output-container text-sm text-primary font-normal bg-secondary transition-all duration-300 rounded-xl'
 } satisfies Record<string, string>;
 
 interface OutputContainerPropsType

@@ -1,4 +1,3 @@
-import { MvxTrim } from 'lib';
 import {
   REACT_LINK,
   SDK_DAPP_PACKAGE_LINK,
@@ -17,19 +16,6 @@ const styles = {
 export const DashboardHeader = () => (
   <div className={styles.dashboardHeaderContainer}>
     <div className={styles.dashboardHeaderTitle}>Welcome to dApp Template</div>
-
-    <div
-      className='text-xs sm:text-base'
-      style={{
-        padding: 24,
-        border: '1px solid white',
-        maxWidth: '100%',
-        width: '100%',
-        color: 'red'
-      }}
-    >
-      <MvxTrim text='erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex' />
-    </div>
 
     <div className={styles.dashboardHeaderDescription}>
       <span>The MultiversX dApp Template, built using </span>

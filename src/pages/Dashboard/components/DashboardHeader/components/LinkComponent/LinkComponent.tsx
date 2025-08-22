@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 // prettier-ignore
 const styles = {
-  linkAddress: 'link-address underline hover:text-primary transition-all duration-200 ease-out'
+  linkAddress: 'link-address underline hover:text-primary transition-all duration-200'
 } satisfies Record<string, string>;
 
 interface LinkComponentPropsType extends PropsWithChildren {
