@@ -10,7 +10,6 @@ import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Logo, Tooltip } from 'components';
-import { ThemeSelectorExample } from 'components/ThemeSelector/ThemeSelectorExample';
 import { GITHUB_REPO_URL } from 'config';
 import {
   ACCOUNTS_ENDPOINT,

@@ -24,25 +24,19 @@
 
 :root[data-mvx-theme='mvx:vibe-theme'],
 [data-mvx-theme='mvx:vibe-theme'] {
-    --mvx-bg-color-primary: #3C1543;
-  --mvx-bg-color-secondary: rgba(96, 6, 112, 0.30);
+  --mvx-bg-color-primary: #3c1543;
+  --mvx-bg-color-secondary: rgba(96, 6, 112, 0.3);
   --mvx-bg-accent-color: #310339;
   --mvx-bg-accent-variant-color: #310339;
-
-  --mvx-hover-color-primary: rgba(93, 66, 110, 0.40);
-
-  --mvx-text-color-primary: #FFF;
-  --mvx-text-color-secondary: rgba(255, 255, 255, 0.60);
-  --mvx-text-color-tertiary: #F8F8FF;
-  --mvx-text-accent-color: #F04DFF;
-  --mvx-link-color: #DDCEDB;
-
-  --mvx-label-color: #DDCEDB;
-
+  --mvx-hover-color-primary: rgba(93, 66, 110, 0.4);
+  --mvx-text-color-primary: #fff;
+  --mvx-text-color-secondary: rgba(255, 255, 255, 0.6);
+  --mvx-text-color-tertiary: #f8f8ff;
+  --mvx-text-accent-color: #f04dff;
+  --mvx-link-color: #ddcedb;
+  --mvx-label-color: #ddcedb;
   --mvx-icon-bg: #310339;
-
-  --mvx-button-bg-primary: #F04DFF;
+  --mvx-button-bg-primary: #f04dff;
   --mvx-button-bg-secondary: #600670;
-
-  --mvx-border-color-secondary: rgba(93, 66, 110, 0.40)
+  --mvx-border-color-secondary: rgba(93, 66, 110, 0.4);
 }

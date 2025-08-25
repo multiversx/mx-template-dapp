@@ -22,4 +22,6 @@ export interface TooltipPropsType extends WithClassnameType {
   content: ReactNode;
   skipTooltip?: boolean;
   place?: `${TooltipPlaceEnum}`;
+  hasDrawer?: boolean;
+  drawerTitle?: ReactNode;
 }

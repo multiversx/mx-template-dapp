@@ -76,8 +76,10 @@ export const ThemeTooltip = () => {
 
   return (
     <Tooltip
-      clickable
       place='bottom'
+      clickable={true}
+      hasDrawer={true}
+      drawerTitle='Choose Theme'
       identifier='theme-tooltip-identifier'
       className={styles.themeTooltip}
       content={
