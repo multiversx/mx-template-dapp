@@ -21,7 +21,9 @@
     "protobufjs": "^7.5.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-router-dom": "6.16.0"
+    "react-router-dom": "6.16.0",
+    "react-spring-bottom-sheet": "^3.4.1",
+    "react-tooltip": "^5.28.0"
   },
   "scripts": {
     "lint": "eslint --ext js,ts,tsx src --fix",

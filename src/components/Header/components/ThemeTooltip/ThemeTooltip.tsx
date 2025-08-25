@@ -76,51 +76,53 @@ export const ThemeTooltip = () => {
 
   return (
     <Tooltip
-      position='bottom'
+      clickable
+      place='bottom'
+      identifier='theme-tooltip-identifier'
       className={styles.themeTooltip}
-      trigger={(isTooltipVisible: boolean) => (
-        <div className={styles.themeTooltipTrigger}>
-          <ThemeTooltipDots
-            dotColors={activeTheme.dotColors}
-            className={styles.themeTooltipTriggerDots}
-          />
-
-          <FontAwesomeIcon
-            icon={faChevronDown}
-            className={classNames(styles.themeTooltipTriggerIcon, {
-              [styles.themeTooltipTriggerIconRotated]: isTooltipVisible
-            })}
-          />
-        </div>
-      )}
-    >
-      <div className={styles.themeTooltipOptions}>
-        {themeOptions.map((themeOption) => (
-          <div
-            key={`theme-${themeOption.identifier}-option`}
-            onClick={handleThemeSwitch(themeOption)}
-            className={classNames(styles.themeTooltipOption, {
-              [styles.themeTooltipOptionActive]:
-                themeOption.identifier === activeTheme.identifier
-            })}
-          >
-            <ThemeTooltipDots
-              dotColors={themeOption.dotColors}
-              className={styles.themeTooltipOptionDots}
-            />
-
-            <div className={styles.themeTooltipOptionLabel}>
-              {themeOption.label}
-            </div>
-
-            {themeOption.identifier !== activeTheme.identifier && (
-              <FontAwesomeIcon
-                icon={faArrowRightLong}
-                className={styles.themeTooltipOptionArrow}
+      content={
+        <div className={styles.themeTooltipOptions}>
+          {themeOptions.map((themeOption) => (
+            <div
+              key={`theme-${themeOption.identifier}-option`}
+              onClick={handleThemeSwitch(themeOption)}
+              className={classNames(styles.themeTooltipOption, {
+                [styles.themeTooltipOptionActive]:
+                  themeOption.identifier === activeTheme.identifier
+              })}
+            >
+              <ThemeTooltipDots
+                dotColors={themeOption.dotColors}
+                className={styles.themeTooltipOptionDots}
               />
-            )}
-          </div>
-        ))}
+
+              <div className={styles.themeTooltipOptionLabel}>
+                {themeOption.label}
+              </div>
+
+              {themeOption.identifier !== activeTheme.identifier && (
+                <FontAwesomeIcon
+                  icon={faArrowRightLong}
+                  className={styles.themeTooltipOptionArrow}
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      }
+    >
+      <div className={styles.themeTooltipTrigger}>
+        <ThemeTooltipDots
+          dotColors={activeTheme.dotColors}
+          className={styles.themeTooltipTriggerDots}
+        />
+
+        <FontAwesomeIcon
+          icon={faChevronDown}
+          className={classNames(styles.themeTooltipTriggerIcon, {
+            [styles.themeTooltipTriggerIconRotated]: false
+          })}
+        />
       </div>
     </Tooltip>
   );

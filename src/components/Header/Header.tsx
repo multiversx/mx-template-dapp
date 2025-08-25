@@ -10,6 +10,7 @@ import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Logo, Tooltip } from 'components';
+import { ThemeSelectorExample } from 'components/ThemeSelector/ThemeSelectorExample';
 import { GITHUB_REPO_URL } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
@@ -111,22 +112,19 @@ export const Header = () => {
         <div className={styles.headerNavigationButtons}>
           {headerBrowseButtons.map((headerBrowseButton) => (
             <Tooltip
+              identifier={`header-${headerBrowseButton.label}-button`}
               key={`header-${headerBrowseButton.label}-button`}
-              position='bottom'
-              trigger={() => (
-                <div
-                  onClick={headerBrowseButton.handleClick}
-                  className={styles.headerNavigationButton}
-                >
-                  <FontAwesomeIcon
-                    className={styles.headerNavigationButtonIcon}
-                    icon={headerBrowseButton.icon}
-                  />
-                </div>
-              )}
+              content={headerBrowseButton.label}
+              place='bottom'
             >
-              <div className={styles.headerNavigationTooltip}>
-                {headerBrowseButton.label}
+              <div
+                onClick={headerBrowseButton.handleClick}
+                className={styles.headerNavigationButton}
+              >
+                <FontAwesomeIcon
+                  className={styles.headerNavigationButtonIcon}
+                  icon={headerBrowseButton.icon}
+                />
               </div>
             </Tooltip>
           ))}
@@ -154,17 +152,16 @@ export const Header = () => {
             </div>
 
             <Tooltip
-              position='bottom'
-              trigger={() => (
-                <div
-                  onClick={handleLogout}
-                  className={styles.headerNavigationAddressLogout}
-                >
-                  <FontAwesomeIcon icon={faPowerOff} />
-                </div>
-              )}
+              place='bottom'
+              identifier='disconnect-tooltip-identifier'
+              content='Disconnect'
             >
-              <div className={styles.headerNavigationTooltip}>Disconnect</div>
+              <div
+                onClick={handleLogout}
+                className={styles.headerNavigationAddressLogout}
+              >
+                <FontAwesomeIcon icon={faPowerOff} />
+              </div>
             </Tooltip>
           </div>
         )}

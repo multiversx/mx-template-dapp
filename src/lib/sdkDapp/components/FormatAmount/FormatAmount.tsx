@@ -1,4 +1,5 @@
 import { WithClassnameType } from 'types';
+
 import { MvxFormatAmount } from '../../../sdkDappUI/sdkDappUI.components';
 import { MvxFormatAmountPropsType } from '../../../sdkDappUI/sdkDappUI.types';
 import { DECIMALS, DIGITS } from '../../../sdkDappUtils';
