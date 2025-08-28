@@ -10,11 +10,6 @@ export const setTimeRemaining = (
       return {
         canPing: true
       };
-    case 0:
-      return {
-        timeRemaining: 0,
-        canPing: false
-      };
     default: {
       return {
         timeRemaining: secondsRemaining,
