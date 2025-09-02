@@ -1,5 +1,6 @@
 import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
 import { TransactionProps } from 'types';
+
 import { getBatchTransactions } from './getBatchTransactions';
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 

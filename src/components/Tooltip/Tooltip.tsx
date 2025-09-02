@@ -1,105 +1,88 @@
 import classNames from 'classnames';
-import {
-  FocusEvent,
-  MouseEvent,
-  PropsWithChildren,
-  ReactNode,
-  useState
-} from 'react';
+import { CSSProperties, MouseEvent, useState } from 'react';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 
-import { WithClassnameType } from 'types';
+import { Drawer } from 'components';
 
-interface TooltipPropsType extends PropsWithChildren, WithClassnameType {
-  trigger: (isTooltipVisible: boolean) => ReactNode;
-  triggerOnClick?: boolean;
-  position?: 'top' | 'bottom';
-}
+import { TooltipPlaceEnum, TooltipPropsType } from './tooltip.types';
 
 // prettier-ignore
 const styles = {
-  tooltip: 'tooltip flex relative',
-  tooltipContentWrapper: 'tooltip-content-wrapper left-1/2 -translate-x-1/2 absolute z-10',
-  tooltipContentWrapperTop: 'bottom-full pb-3',
-  tooltipContentWrapperBottom: 'top-full pt-3',
-  tooltipContent: 'tooltip-content flex-row text-left text-xs gap-1 cursor-default bg-primary rounded-xl border border-secondary p-1 relative after:w-2 after:h-2 after:border after:border-secondary after:bg-primary after:absolute after:left-1/2 after:origin-center after:-translate-x-1/2 after:-rotate-45 transition-all duration-200 ease-out',
-  tooltipContentTop: 'after:-bottom-1 after:border-t-0 after:border-r-0',
-  tooltipContentBottom: 'after:-top-1 after:border-b-0 after:border-l-0',
+  tooltipWrapper: 'tooltip-wrapper relative',
+  tooltipDrawer: 'tooltip-drawer md:hidden',
+  tooltip: 'tooltip bg-primary! border! border-secondary! z-1 rounded-xl! p-0! visible! pointer-events-all! before:absolute before:inset-0 before:bg-primary before:rounded-xl before:z-1',
+  tooltipMobile: 'tooltip-mobile hidden md:flex!',
+  tooltipContent: 'tooltip-content p-2 leading-tight text-neutral-500 text-xs text-center z-2 relative',
+  tooltipArrow: 'tooltip-arrow bg-primary! border! border-secondary! w-2! h-2!',
   tooltipTrigger: 'tooltip-trigger'
 } satisfies Record<string, string>;
 
 export const Tooltip = ({
-  position = 'top',
-  triggerOnClick = false,
-  className,
+  identifier,
   children,
-  trigger
+  className,
+  content,
+  skipTooltip,
+  hasDrawer,
+  drawerTitle,
+  place = TooltipPlaceEnum.bottom,
+  ...props
 }: TooltipPropsType) => {
-  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const handleTriggerClick = (event: MouseEvent<HTMLElement>) => {
-    if (!triggerOnClick) {
+  const tooltipWrapperStyle = {
+    '--rt-transition-show-delay': '200ms',
+    '--rt-transition-closing-delay': '200ms',
+    '--rt-opacity': 1
+  } as CSSProperties;
+
+  const handleTriggerClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (!hasDrawer) {
       return;
     }
 
     event.preventDefault();
-    setIsTooltipVisible((isTooltipVisible) => !isTooltipVisible);
-  };
-
-  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
-      setIsTooltipVisible(false);
-    }
-  };
-
-  const handleMouseEnter = (event: MouseEvent<HTMLDivElement>) => {
-    if (triggerOnClick) {
-      return;
-    }
-
-    event.preventDefault();
-    setIsTooltipVisible(true);
-  };
-
-  const handleMouseLeave = (event: MouseEvent<HTMLDivElement>) => {
-    if (triggerOnClick) {
-      return;
-    }
-
-    event.preventDefault();
-    setIsTooltipVisible(false);
+    setIsDrawerOpen(true);
   };
 
   return (
     <div
-      onClick={handleTriggerClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      className={classNames(styles.tooltip, className)}
+      className={classNames(styles.tooltipWrapper, className)}
+      style={tooltipWrapperStyle}
     >
-      {isTooltipVisible && (
-        <div
-          className={classNames(
-            styles.tooltipContentWrapper,
-            { [styles.tooltipContentWrapperTop]: position === 'top' },
-            { [styles.tooltipContentWrapperBottom]: position === 'bottom' }
-          )}
+      {hasDrawer && (
+        <Drawer
+          title={drawerTitle}
+          isOpen={isDrawerOpen}
+          setIsOpen={setIsDrawerOpen}
+          className={styles.tooltipDrawer}
         >
-          <div
-            onClick={(event) => event.stopPropagation()}
-            onBlur={handleBlur}
-            tabIndex={-1}
-            className={classNames(
-              styles.tooltipContent,
-              { [styles.tooltipContentTop]: position === 'top' },
-              { [styles.tooltipContentBottom]: position === 'bottom' }
-            )}
-          >
-            {children}
-          </div>
-        </div>
+          {content}
+        </Drawer>
       )}
 
-      <span className={styles.tooltipTrigger}>{trigger(isTooltipVisible)}</span>
+      {!skipTooltip && (
+        <ReactTooltip
+          place={place}
+          classNameArrow={styles.tooltipArrow}
+          anchorSelect={`#${identifier}`}
+          className={classNames(styles.tooltip, {
+            [styles.tooltipMobile]: hasDrawer
+          })}
+          {...props}
+        >
+          <div className={styles.tooltipContent}>{content}</div>
+        </ReactTooltip>
+      )}
+
+      <div
+        id={identifier}
+        data-testid={identifier}
+        onClick={handleTriggerClick}
+        className={styles.tooltipTrigger}
+      >
+        {children}
+      </div>
     </div>
   );
 };
