@@ -116,15 +116,17 @@ export const Header = () => {
               content={headerBrowseButton.label}
               place='bottom'
             >
-              <div
-                onClick={headerBrowseButton.handleClick}
-                className={styles.headerNavigationButton}
-              >
-                <FontAwesomeIcon
-                  className={styles.headerNavigationButtonIcon}
-                  icon={headerBrowseButton.icon}
-                />
-              </div>
+              {() => (
+                <div
+                  onClick={headerBrowseButton.handleClick}
+                  className={styles.headerNavigationButton}
+                >
+                  <FontAwesomeIcon
+                    className={styles.headerNavigationButtonIcon}
+                    icon={headerBrowseButton.icon}
+                  />
+                </div>
+              )}
             </Tooltip>
           ))}
         </div>
@@ -155,12 +157,14 @@ export const Header = () => {
               identifier='disconnect-tooltip-identifier'
               content='Disconnect'
             >
-              <div
-                onClick={handleLogout}
-                className={styles.headerNavigationAddressLogout}
-              >
-                <FontAwesomeIcon icon={faPowerOff} />
-              </div>
+              {() => (
+                <div
+                  onClick={handleLogout}
+                  className={styles.headerNavigationAddressLogout}
+                >
+                  <FontAwesomeIcon icon={faPowerOff} />
+                </div>
+              )}
             </Tooltip>
           </div>
         )}
