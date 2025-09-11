@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { WithClassnameType } from 'types';
+import { ThemeTooltipDotsPropsType } from './themeTooltipDots.types';
 
 // prettier-ignore
 const styles = {
@@ -8,11 +8,8 @@ const styles = {
   themeTooltipDot: 'theme-tooltip-dot w-1.5 h-1.5 lg:w-2 lg:h-2 lg:min-w-2 lg:min-h-2 min-w-1.5 lg:min-w-2 rounded-full transition-all duration-200 ease-out'
 } satisfies Record<string, string>;
 
-interface ThemeTooltipDotsPropsType extends WithClassnameType {
-  dotColors: string[];
-}
-
 export const ThemeTooltipDots = ({
+  size = 'medium',
   dotColors,
   className
 }: ThemeTooltipDotsPropsType) => (

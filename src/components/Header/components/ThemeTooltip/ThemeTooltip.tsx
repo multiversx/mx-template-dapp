@@ -23,10 +23,12 @@ const styles = {
   themeTooltipTriggerDots: 'theme-tooltip-trigger-dots relative z-1',
   themeTooltipTriggerIcon: 'theme-tooltip-trigger-icon transition-all text-xs relative z-1 duration-200 ease-out text-tertiary',
   themeTooltipTriggerIconRotated: 'rotate-180',
-  themeTooltipOptions: 'theme-tooltip-options flex-col gap-1 flex',
-  themeTooltipOption: 'theme-tooltip-option w-60 flex p-3 flex group text-primary font-normal gap-3 items-center transition-all duration-200 ease-out cursor-pointer relative after:transition-all after:duration-200 after:ease-out after:absolute after:opacity-0 hover:after:opacity-40 after:left-0 after:right-0 after:bottom-0 after:top-0 after:bg-accent after:pointer-events-none after:rounded-lg',
+  themeTooltipOptionsWrapper: 'theme-tooltip-options-wrapper flex-col gap-1 flex',
+  themeTooltipOptionsTitle: 'theme-tooltip-options-title md:hidden leading-none mb-4 text-secondary',
+  themeTooltipOptions: 'theme-tooltip-options rounded-lg overflow-hidden flex-col flex',
+  themeTooltipOption: 'theme-tooltip-option h-15 md:h-auto w-full md:w-60 flex p-3 flex group text-primary font-normal gap-3 items-center transition-all duration-200 ease-out cursor-pointer relative after:transition-all after:duration-200 after:ease-out after:absolute after:opacity-0 hover:after:opacity-40 after:left-0 after:right-0 after:bottom-0 after:top-0 after:bg-accent after:pointer-events-none md:after:rounded-lg',
   themeTooltipOptionActive: 'after:bg-accent after:opacity-100 !text-accent !font-medium',
-  themeTooltipOptionDots: 'theme-tooltip-option-dots flex w-5 h-5 justify-between relative z-1',
+  themeTooltipOptionDots: 'theme-tooltip-option-dots flex w-10 h-10 p-1 md:p-0 md:w-5 md:h-5 justify-between relative z-1',
   themeTooltipOptionLabel: 'theme-tooltip-option-label leading-none relative z-1 text-base',
   themeTooltipOptionArrow: 'theme-tooltip-option-arrow ml-auto duration-200 transition-all ease-out opacity-0 text-link group-hover:opacity-100'
 } satisfies Record<string, string>;
@@ -83,33 +85,37 @@ export const ThemeTooltip = () => {
       identifier='theme-tooltip-identifier'
       className={styles.themeTooltip}
       content={
-        <div className={styles.themeTooltipOptions}>
-          {themeOptions.map((themeOption) => (
-            <div
-              key={`theme-${themeOption.identifier}-option`}
-              onClick={handleThemeSwitch(themeOption)}
-              className={classNames(styles.themeTooltipOption, {
-                [styles.themeTooltipOptionActive]:
-                  themeOption.identifier === activeTheme.identifier
-              })}
-            >
-              <ThemeTooltipDots
-                dotColors={themeOption.dotColors}
-                className={styles.themeTooltipOptionDots}
-              />
+        <div className={styles.themeTooltipOptionsWrapper}>
+          <div className={styles.themeTooltipOptionsTitle}>Themes</div>
 
-              <div className={styles.themeTooltipOptionLabel}>
-                {themeOption.label}
-              </div>
-
-              {themeOption.identifier !== activeTheme.identifier && (
-                <FontAwesomeIcon
-                  icon={faArrowRightLong}
-                  className={styles.themeTooltipOptionArrow}
+          <div className={styles.themeTooltipOptions}>
+            {themeOptions.map((themeOption) => (
+              <div
+                key={`theme-${themeOption.identifier}-option`}
+                onClick={handleThemeSwitch(themeOption)}
+                className={classNames(styles.themeTooltipOption, {
+                  [styles.themeTooltipOptionActive]:
+                    themeOption.identifier === activeTheme.identifier
+                })}
+              >
+                <ThemeTooltipDots
+                  dotColors={themeOption.dotColors}
+                  className={styles.themeTooltipOptionDots}
                 />
-              )}
-            </div>
-          ))}
+
+                <div className={styles.themeTooltipOptionLabel}>
+                  {themeOption.label}
+                </div>
+
+                {themeOption.identifier !== activeTheme.identifier && (
+                  <FontAwesomeIcon
+                    icon={faArrowRightLong}
+                    className={styles.themeTooltipOptionArrow}
+                  />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       }
     >
