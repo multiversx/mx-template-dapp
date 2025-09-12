@@ -36,7 +36,9 @@ const styles = {
   headerNavigationTooltip: 'header-navigation-tooltip p-1 leading-none whitespace-nowrap text-tertiary',
   headerNavigationNetwork: 'header-navigation-network h-8 border border-secondary rounded-xl lg:h-10 relative w-22 flex items-center justify-center leading-none capitalize text-tertiary before:absolute before:rounded-full before:w-2 before:lg:w-2.5 before:h-2 before:lg:h-2.5 before:bg-btn-primary before:z-2 before:-top-0.25 before:lg:-top-0.5 before:-left-0.25 before:lg:-left-0.5 after:absolute after:bg-btn-tertiary after:rounded-lg after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
   headerNavigationNetworkLabel: 'header-navigation-network-label relative z-1',
-  headerNavigationConnect: 'header-navigation-connect h-8 lg:h-10',
+  headerNavigationConnectDesktop: 'header-navigation-connect-desktop h-8 lg:h-10 hidden sm:block!',
+  headerNavigationConnectMobile: 'header-navigation-connect-mobile w-8 h-8 bg-btn-tertiary cursor-pointer flex justify-center items-center sm:hidden text-xs rounded-xl',
+  headerNavigationConnectIcon: 'header-navigation-connect-icon text-accent',
   headerNavigationAddress: 'header-navigation-address h-8 lg:h-10 w-8 lg:w-full text-primary justify-center text-xs rounded-xl lg:text-base lg:pr-4 lg:pl-5 max-w-100 flex relative lg:border lg:border-secondary lg:rounded-full items-center gap-3 after:absolute after:bg-btn-tertiary after:rounded-xl lg:after:rounded-full after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
   headerNavigationAddressWallet: 'header-navigation-address-wallet relative z-1 text-accent hidden lg:flex!',
   headerNavigationAddressExplorer: 'header-navigation-address-explorer min-w-0 relative z-1 hidden lg:block!',
@@ -69,7 +71,7 @@ export const Header = () => {
     window.open(GITHUB_REPO_URL);
   };
 
-  const handleLogIn = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleLogIn = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
     navigate(RouteNamesEnum.unlock);
   };
@@ -149,6 +151,7 @@ export const Header = () => {
                 data={address}
                 withTooltip={true}
                 explorerLink={`/${ACCOUNTS_ENDPOINT}/${address}`}
+                className='test'
               />
             </div>
 
@@ -172,10 +175,22 @@ export const Header = () => {
         {!isLoggedIn && (
           <MvxButton
             onClick={handleLogIn}
-            className={styles.headerNavigationConnect}
+            className={styles.headerNavigationConnectDesktop}
           >
             Connect
           </MvxButton>
+        )}
+
+        {!isLoggedIn && (
+          <div
+            onClick={handleLogIn}
+            className={styles.headerNavigationConnectMobile}
+          >
+            <FontAwesomeIcon
+              icon={faPowerOff}
+              className={styles.headerNavigationConnectIcon}
+            />
+          </div>
         )}
       </nav>
     </header>

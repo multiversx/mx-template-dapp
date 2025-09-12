@@ -28,7 +28,8 @@ export const Tooltip = ({
   place = TooltipPlaceEnum.bottom,
   ...props
 }: TooltipPropsType) => {
-  const [isDrawerOrTooltipOpen, setIsDrawerOrTooltipOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   const tooltipWrapperStyle = {
     '--rt-transition-show-delay': '200ms',
@@ -42,7 +43,7 @@ export const Tooltip = ({
     }
 
     event.preventDefault();
-    setIsDrawerOrTooltipOpen(true);
+    setIsDrawerOpen(true);
   };
 
   return (
@@ -53,8 +54,8 @@ export const Tooltip = ({
       {hasDrawer && (
         <Drawer
           title={drawerTitle}
-          isOpen={isDrawerOrTooltipOpen}
-          setIsOpen={setIsDrawerOrTooltipOpen}
+          isOpen={isDrawerOpen}
+          setIsOpen={setIsDrawerOpen}
           className={styles.tooltipDrawer}
         >
           {content}
@@ -64,8 +65,8 @@ export const Tooltip = ({
       {!skipTooltip && (
         <ReactTooltip
           place={place}
-          setIsOpen={setIsDrawerOrTooltipOpen}
           classNameArrow={styles.tooltipArrow}
+          setIsOpen={setIsTooltipOpen}
           anchorSelect={`#${identifier}`}
           className={classNames(styles.tooltip, {
             [styles.tooltipMobile]: hasDrawer
@@ -82,7 +83,7 @@ export const Tooltip = ({
         onClick={handleTriggerClick}
         className={styles.tooltipTrigger}
       >
-        {children(isDrawerOrTooltipOpen)}
+        {children(isDrawerOpen || isTooltipOpen)}
       </div>
     </div>
   );
