@@ -2,17 +2,17 @@ import { PropsWithChildren } from 'react';
 
 // prettier-ignore
 const styles = {
-  linkAddress: 'link-address underline hover:text-primary transition-all duration-200'
+  linkAddress: 'dashboard-header-text-link underline hover:text-primary transition-all duration-200'
 } satisfies Record<string, string>;
 
-interface LinkComponentPropsType extends PropsWithChildren {
+interface DashboardHeaderTextLinkPropsType extends PropsWithChildren {
   linkAddress: string;
 }
 
-export const LinkComponent = ({
+export const DashboardHeaderTextLink = ({
   linkAddress,
   children
-}: LinkComponentPropsType) => (
+}: DashboardHeaderTextLinkPropsType) => (
   <a
     href={linkAddress}
     target='_blank'

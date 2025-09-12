@@ -11,7 +11,7 @@ export enum TooltipPlaceEnum {
 }
 
 export interface TooltipPropsType extends WithClassnameType {
-  children: ReactNode;
+  children: (isTooltipOrDrawerOpen: boolean) => ReactNode;
   openOnClick?: ReactTooltipPropsType['openOnClick'];
   afterHide?: ReactTooltipPropsType['afterHide'];
   afterShow?: ReactTooltipPropsType['afterShow'];
