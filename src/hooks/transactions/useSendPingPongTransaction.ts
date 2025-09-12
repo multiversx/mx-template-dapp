@@ -1,3 +1,4 @@
+import { UserPublicKey } from '@multiversx/sdk-core/out';
 import axios from 'axios';
 import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers';
@@ -7,6 +8,7 @@ import {
   GAS_PRICE,
   SmartContractTransactionsFactory,
   Transaction,
+  TransactionComputer,
   TransactionsFactoryConfig,
   useGetAccount,
   useGetNetworkConfig
@@ -44,15 +46,15 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransaction = async (amount: string) => {
     const pingTransaction = new Transaction({
       value: BigInt(amount),
-      data: Buffer.from('ping'),
+      data: new Uint8Array(Buffer.from('ping')),
       receiver: new Address(contractAddress),
       gasLimit: BigInt(6000000),
       gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
-      sender: new Address(address),
-      version: 1
+      sender: new Address(address)
     });
 
+    console.log('==================', { pingTransaction });
     await signAndSendTransactions({
       transactions: [pingTransaction],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
@@ -61,7 +63,7 @@ export const useSendPingPongTransaction = () => {
 
   const sendPingTransactionFromAbi = async (amount: string) => {
     const scFactory = await getSmartContractFactory();
-    const pingTransaction = scFactory.createTransactionForExecute(
+    const pingTransaction = await scFactory.createTransactionForExecute(
       new Address(address),
       {
         gasLimit: BigInt(6000000),
@@ -91,7 +93,7 @@ export const useSendPingPongTransaction = () => {
   const sendPongTransaction = async () => {
     const pongTransaction = new Transaction({
       value: BigInt(0),
-      data: Buffer.from('pong'),
+      data: new Uint8Array(Buffer.from('pong')),
       receiver: new Address(contractAddress),
       gasLimit: BigInt(6000000),
       gasPrice: BigInt(GAS_PRICE),
@@ -108,7 +110,7 @@ export const useSendPingPongTransaction = () => {
 
   const sendPongTransactionFromAbi = async () => {
     const scFactory = await getSmartContractFactory();
-    const pongTransaction = scFactory.createTransactionForExecute(
+    const pongTransaction = await scFactory.createTransactionForExecute(
       new Address(address),
       {
         gasLimit: BigInt(6000000),

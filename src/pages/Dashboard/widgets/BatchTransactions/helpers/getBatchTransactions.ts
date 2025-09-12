@@ -18,8 +18,10 @@ export const getBatchTransactions = ({
   const factoryConfig = new TransactionsFactoryConfig({ chainID });
   const factory = new TransferTransactionsFactory({ config: factoryConfig });
 
-  return transactions.map((id) => {
-    const tokenTransfer = factory.createTransactionForNativeTokenTransfer(
+  const txs: Transaction[] = [];
+
+  transactions.forEach(async (id) => {
+    const tokenTransfer = await factory.createTransactionForNativeTokenTransfer(
       Address.newFromBech32(address),
       {
         receiver: Address.newFromBech32(address),
@@ -27,6 +29,9 @@ export const getBatchTransactions = ({
       }
     );
 
-    return tokenTransfer;
+    txs.push(tokenTransfer);
   });
+
+  console.log({ txs });
+  return txs;
 };
