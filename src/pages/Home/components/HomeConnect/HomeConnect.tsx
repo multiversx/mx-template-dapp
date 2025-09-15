@@ -1,17 +1,17 @@
-import LedgerIcon from 'assets/img/ledger-icon.svg?react';
-import MetamaskIcon from 'assets/img/metamask-icon.svg?react';
-import PasskeyIcon from 'assets/img/passkey-icon.svg?react';
-import WebWalletIcon from 'assets/img/web-wallet-icon.svg?react';
-import XPortalIcon from 'assets/img/xportal-icon.svg?react';
+import { ReactComponent as LedgerIcon } from 'assets/img/ledger-icon.svg';
+import { ReactComponent as MetamaskIcon } from 'assets/img/metamask-icon.svg';
+import { ReactComponent as PasskeyIcon } from 'assets/img/passkey-icon.svg';
+import { ReactComponent as WebWalletIcon } from 'assets/img/web-wallet-icon.svg';
+import { ReactComponent as XPortalIcon } from 'assets/img/xportal-icon.svg';
 import { getDetectedBrowser } from 'helpers/getDetectedBrowser';
 import {
   BrowserEnum,
   CHROME_METAMASK_EXTENSION_LINK,
   FIREFOX_METAMASK_ADDON_LINK,
   GET_LEDGER,
-  GET_XPORTAL,
-  WALLET_ADDRESS
+  GET_XPORTAL
 } from 'localConstants';
+import { useGetNetworkConfig } from 'lib';
 
 import { ConnectCard, ExtensionConnect } from './components';
 
@@ -25,9 +25,15 @@ const styles = {
   howToConnectContentCards: 'how-to-connect-content-cards grid grid-cols-1 items-stretch justify-center lg:grid-cols-3 gap-2 lg:gap-6'
 } satisfies Record<string, string>;
 
-export const HowToConnectComponent = () => {
+export const HomeConnect = () => {
+  const {
+    network: { walletAddress }
+  } = useGetNetworkConfig();
+
   const detectedBrowser = getDetectedBrowser();
   const isFirefox = detectedBrowser === BrowserEnum.Firefox;
+
+  console.log(useGetNetworkConfig());
 
   const connectCards = [
     {
@@ -46,7 +52,7 @@ export const HowToConnectComponent = () => {
       description:
         'Passkeys offer a more secure and user-friendly way to authenticate and sign transactions.',
       linkTitle: 'Get Passkey',
-      linkDownloadAddress: WALLET_ADDRESS
+      linkDownloadAddress: walletAddress
     },
     {
       icon: XPortalIcon,
@@ -70,7 +76,7 @@ export const HowToConnectComponent = () => {
       description:
         'Store, swap, and transfer tokens or NFTs. Connect to Web3 apps on MultiversX blockchain.',
       linkTitle: 'Get MultiversX Wallet',
-      linkDownloadAddress: WALLET_ADDRESS
+      linkDownloadAddress: walletAddress
     }
   ];
   return (

@@ -2,16 +2,16 @@ import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent, SVGProps } from 'react';
 
-import ArcLogo from 'assets/img/arc-logo.svg?react';
-import BraveLogo from 'assets/img/brave-logo.svg?react';
-import ChromeLogo from 'assets/img/chrome-logo.svg?react';
-import Circles from 'assets/img/circles.svg?react';
+import { ReactComponent as ArcLogo } from 'assets/img/arc-logo.svg';
+import { ReactComponent as BraveLogo } from 'assets/img/brave-logo.svg';
+import { ReactComponent as ChromeLogo } from 'assets/img/chrome-logo.svg';
+import { ReactComponent as Circles } from 'assets/img/circles.svg';
 import extensionImage from 'assets/img/extension-image.png';
-import FirefoxLogo from 'assets/img/firefox-logo.svg?react';
-import WalletBraveLogo from 'assets/img/wallet-brave-logo.svg?react';
-import WalletChromeLogo from 'assets/img/wallet-chrome-logo.svg?react';
-import WalletFirefoxLogo from 'assets/img/wallet-firefox-logo.svg?react';
-import WalletIcon from 'assets/img/web-wallet-icon.svg?react';
+import { ReactComponent as FirefoxLogo } from 'assets/img/firefox-logo.svg';
+import { ReactComponent as WalletBraveLogo } from 'assets/img/wallet-brave-logo.svg';
+import { ReactComponent as WalletChromeLogo } from 'assets/img/wallet-chrome-logo.svg';
+import { ReactComponent as WalletFirefoxLogo } from 'assets/img/wallet-firefox-logo.svg';
+import { ReactComponent as WalletIcon } from 'assets/img/web-wallet-icon.svg';
 import { getDetectedBrowser } from 'helpers/getDetectedBrowser';
 import {
   BrowserEnum,

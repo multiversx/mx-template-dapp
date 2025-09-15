@@ -73,7 +73,9 @@ const dashboardWidgets: WidgetType[] = [
   },
   {
     title: 'Transactions (All)',
-    widget: () => <Transactions id={ItemsIdentifiersEnum.transactionsAll} />,
+    widget: () => (
+      <Transactions identifier={ItemsIdentifiersEnum.transactionsAll} />
+    ),
     description: 'List transactions for the connected account',
     reference:
       'https://api.multiversx.com/#/accounts/AccountController_getAccountTransactions'
@@ -81,7 +83,7 @@ const dashboardWidgets: WidgetType[] = [
   {
     title: 'Transactions (Ping & Pong)',
     widget: () => (
-      <Transactions id={ItemsIdentifiersEnum.transactionsPingPong} />
+      <Transactions identifier={ItemsIdentifiersEnum.transactionsPingPong} />
     ),
     props: { receiver: contractAddress },
     description: 'List transactions filtered for a given Smart Contract',

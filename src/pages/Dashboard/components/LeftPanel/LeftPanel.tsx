@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
-import IconExpand from 'assets/img/expand-up-down.svg?react';
+import { ReactComponent as IconExpand } from 'assets/img/expand-up-down.svg';
 import { AddressComponent, Logo } from 'components';
 import { getAccountProvider, useGetAccountInfo, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';

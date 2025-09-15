@@ -1,6 +1,5 @@
 import { PingPongComponent } from 'components';
 import { useSendPingPongTransaction } from 'hooks';
-import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 import { useGetPingAmount, useGetTimeToPong } from './hooks';
 
@@ -12,7 +11,7 @@ export const PingPongAbi = () => {
 
   return (
     <PingPongComponent
-      id={ItemsIdentifiersEnum.pingPongAbi}
+      identifier='ping-pong-abi'
       sendPingTransaction={sendPingTransactionFromAbi}
       sendPongTransaction={sendPongTransactionFromAbi}
       getTimeToPong={getTimeToPong}

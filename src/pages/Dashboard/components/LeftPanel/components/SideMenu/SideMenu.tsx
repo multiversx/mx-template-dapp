@@ -11,9 +11,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { FunctionComponent, SVGProps, useState } from 'react';
 
-import IconBatch from 'assets/img/batch-tx.svg?react';
-import IconAbi from 'assets/img/ping-pong-abi.svg?react';
-import IconBackend from 'assets/img/ping-pong-backend.svg?react';
+import { ReactComponent as IconBatch } from 'assets/img/batch-tx.svg';
+import { ReactComponent as IconAbi } from 'assets/img/ping-pong-abi.svg';
+import { ReactComponent as IconBackend } from 'assets/img/ping-pong-backend.svg';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 // prettier-ignore

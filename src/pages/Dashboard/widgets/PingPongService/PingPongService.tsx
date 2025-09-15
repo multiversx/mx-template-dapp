@@ -1,7 +1,6 @@
 import { PingPongComponent } from 'components';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetLoginInfo } from 'lib';
-import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 import {
   useGetPingTransaction,
@@ -11,17 +10,17 @@ import {
 
 // The transactions are being done by directly requesting to template-dapp service
 export const PingPongService = () => {
-  const { sendPingTransactionFromService, sendPongTransactionFromService } =
-    useSendPingPongTransaction();
   const getTimeToPong = useGetTimeToPong();
   const getPingTransaction = useGetPingTransaction();
   const getPongTransaction = useGetPongTransaction();
 
   const { tokenLogin } = useGetLoginInfo();
+  const { sendPingTransactionFromService, sendPongTransactionFromService } =
+    useSendPingPongTransaction();
 
   return (
     <PingPongComponent
-      id={ItemsIdentifiersEnum.pingPongService}
+      identifier='ping-pong-service'
       sendPingTransaction={sendPingTransactionFromService}
       sendPongTransaction={sendPongTransactionFromService}
       getTimeToPong={getTimeToPong}

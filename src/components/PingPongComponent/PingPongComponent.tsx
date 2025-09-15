@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
 
 import {
   Label,
@@ -28,7 +28,7 @@ const styles = {
 } satisfies Record<string, string>;
 
 interface PingPongComponentPropsType {
-  id: ItemsIdentifiersEnum;
+  identifier: `${ItemsIdentifiersEnum}`;
   sendPingTransaction: (amount: any) => Promise<any>;
   sendPongTransaction: (transaction?: any) => Promise<any>;
   getTimeToPong: () => Promise<number | null | undefined>;
@@ -39,7 +39,7 @@ interface PingPongComponentPropsType {
 }
 
 export const PingPongComponent = ({
-  id,
+  identifier,
   sendPingTransaction,
   sendPongTransaction,
   getTimeToPong,
@@ -116,7 +116,7 @@ export const PingPongComponent = ({
   }
 
   return (
-    <div id={id} className={styles.pingPongContainer}>
+    <div id={identifier} className={styles.pingPongContainer}>
       <div className={styles.infosContainer}>
         <Label>Contract: </Label>
 

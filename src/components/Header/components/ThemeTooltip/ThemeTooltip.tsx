@@ -1,10 +1,10 @@
+import { MouseEvent, useEffect, useState } from 'react';
 import {
   faArrowRightLong,
   faChevronDown
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { MouseEvent, useEffect, useState } from 'react';
 
 import { Tooltip } from 'components';
 
@@ -74,10 +74,9 @@ export const ThemeTooltip = () => {
     };
 
   useEffect(() => {
-    const observer = new MutationObserver(() => {
-      const theme = document.documentElement.getAttribute('data-mvx-theme');
-      setRootTheme(theme);
-    });
+    const observer = new MutationObserver(() =>
+      setRootTheme(document.documentElement.getAttribute('data-mvx-theme'))
+    );
 
     observer.observe(document.documentElement, {
       attributes: true,

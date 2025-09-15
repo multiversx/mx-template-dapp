@@ -1,18 +1,12 @@
+import { Fragment, MouseEvent, ReactNode, useEffect, useState } from 'react';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
-import {
-  FunctionComponent,
-  MouseEvent,
-  SVGProps,
-  useEffect,
-  useState
-} from 'react';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 
-import brightLightIcon from 'assets/img/bright-light-icon.svg?react';
-import tealLabIcon from 'assets/img/teal-lab-icon.svg?react';
-import vibeModeIcon from 'assets/img/vibe-mode-icon.svg?react';
+import { ReactComponent as HomeLightThemeIcon } from 'assets/img/bright-light-icon.svg';
+import { ReactComponent as HomeVibeThemeIcon } from 'assets/img/vibe-mode-icon.svg';
+import { ReactComponent as HomeDarkThemeIcon } from 'assets/icons/home-dark-theme-icon.svg';
 import { Button } from 'components';
 import { DOCUMENTATION_LINK, RouteNamesEnum } from 'localConstants';
 
@@ -26,7 +20,7 @@ const styles = {
   heroSectionTopButtons: 'hero-section-top-buttons flex flex-col lg:flex-row items-start lg:items-center justify-start gap-6',
   heroSectionTopDocButton: 'hero-section-top-doc-button flex items-center px-3 text-btn-secondary bg-btn-secondary hover:bg-btn-primary hover:text-btn-primary font-bold rounded-xl h-8 lg:h-10 transition-all duration-200 ease-out',
   heroSectionTopDocButtonText: 'hero-section-top-doc-button-text px-4',
-    heroSectionTopDocButtonIcon: 'hero-section-top-doc-button-icon px-3',
+  heroSectionTopDocButtonIcon: 'hero-section-top-doc-button-icon px-3',
   heroSectionBottom: 'hero-section-bottom hidden lg:!flex gap-6',
   heroSectionBottomThemeOptions: 'hero-section-bottom-theme-options text-btn opacity-60 hover:opacity-100 flex flex-col items-center gap-2 w-20 relative cursor-pointer transition-all duration-200 ease-out',
   heroSectionBottomThemeOptionsOpacityFull: 'opacity-100',
@@ -39,7 +33,7 @@ const styles = {
 
 interface ThemeOptionType {
   identifier: string;
-  icon: FunctionComponent<SVGProps<SVGSVGElement>>;
+  icon: ReactNode;
   title: string;
   label: string;
   backgroundClass: string;
@@ -48,33 +42,33 @@ interface ThemeOptionType {
 const themeOptions: ThemeOptionType[] = [
   {
     identifier: 'mvx:dark-theme',
-    icon: tealLabIcon,
+    icon: <HomeDarkThemeIcon />,
     title: 'TealLab',
     label: 'Customizable',
     backgroundClass: 'bg-dark-theme'
   },
   {
     identifier: 'mvx:vibe-theme',
-    icon: vibeModeIcon,
+    icon: <HomeVibeThemeIcon />,
     title: 'VibeMode',
     label: 'Vibrant',
     backgroundClass: 'bg-vibe-theme'
   },
   {
     identifier: 'mvx:light-theme',
-    icon: brightLightIcon,
+    icon: <HomeLightThemeIcon />,
     title: 'BrightLight',
     label: 'Ownable',
     backgroundClass: 'bg-light-theme'
   }
 ];
 
-export const HeroComponent = () => {
+export const HomeHero = () => {
+  const navigate = useNavigate();
+
   const [rootTheme, setRootTheme] = useState(
     document.documentElement.getAttribute('data-mvx-theme')
   );
-
-  const navigate = useNavigate();
 
   const handleLogIn = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -128,8 +122,9 @@ export const HeroComponent = () => {
           <Button onClick={handleLogIn}>Connect Wallet</Button>
 
           <a
-            href={DOCUMENTATION_LINK}
             target='_blank'
+            rel='noreferrer'
+            href={DOCUMENTATION_LINK}
             className={styles.heroSectionTopDocButton}
           >
             <span className={styles.heroSectionTopDocButtonText}>
@@ -145,37 +140,36 @@ export const HeroComponent = () => {
       </div>
 
       <div className={styles.heroSectionBottom}>
-        {themeOptions.map((themeOption) => {
-          const Icon = themeOption.icon;
-          return (
-            <div
-              key={themeOption.identifier}
-              onClick={handleThemeSwitch(themeOption)}
-              className={classNames(styles.heroSectionBottomThemeOptions, {
-                [styles.heroSectionBottomThemeOptionsOpacityFull]:
-                  themeOption.identifier === activeTheme?.identifier
-              })}
-            >
-              <div className={styles.heroSectionBottomThemeOption}>
-                <Icon className={styles.themeOptionIcon} />
-
-                <span className={styles.themeOptionTitle}>
-                  {themeOption.title}
-                </span>
-              </div>
-
-              {themeOption.identifier === activeTheme?.identifier && (
-                <>
-                  <span className={styles.themeOptionActiveDot} />
-
-                  <div className={styles.themeOptionActiveLabel}>
-                    {themeOption.label}
-                  </div>
-                </>
+        {themeOptions.map((themeOption) => (
+          <div
+            key={themeOption.identifier}
+            onClick={handleThemeSwitch(themeOption)}
+            className={classNames(styles.heroSectionBottomThemeOptions, {
+              [styles.heroSectionBottomThemeOptionsOpacityFull]:
+                themeOption.identifier === activeTheme?.identifier
+            })}
+          >
+            <div className={styles.heroSectionBottomThemeOption}>
+              {themeOption.icon && (
+                <div className={styles.themeOptionIcon}>{themeOption.icon}</div>
               )}
+
+              <span className={styles.themeOptionTitle}>
+                {themeOption.title}
+              </span>
             </div>
-          );
-        })}
+
+            {themeOption.identifier === activeTheme?.identifier && (
+              <Fragment>
+                <span className={styles.themeOptionActiveDot} />
+
+                <div className={styles.themeOptionActiveLabel}>
+                  {themeOption.label}
+                </div>
+              </Fragment>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

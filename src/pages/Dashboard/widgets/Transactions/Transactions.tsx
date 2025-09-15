@@ -13,10 +13,9 @@ const styles = {
 } satisfies Record<string, string>;
 
 export const Transactions = (props: TransactionsPropsType) => {
+  const { success } = getActiveTransactionsStatus();
   const { isLoading, getTransactions, transactions } =
     useGetTransactions(props);
-
-  const { success } = getActiveTransactionsStatus();
 
   useEffect(() => {
     if (success) {
@@ -37,7 +36,7 @@ export const Transactions = (props: TransactionsPropsType) => {
   }
 
   return (
-    <div id={props.id} className={styles.transactionsContainer}>
+    <div id={props.identifier} className={styles.transactionsContainer}>
       <OutputContainer isLoading={isLoading} className='p-0'>
         <div className={styles.transactionsTable}>
           <TransactionsTable transactions={transactions} />
