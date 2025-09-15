@@ -11,18 +11,9 @@ export const useHandleThemeManagement = () => {
   const attributeHandle = 'data-mvx-theme';
 
   const allThemeOptions: ThemeOptionType[] = [
-    {
-      identifier: 'mvx:dark-theme',
-      label: 'TealLab'
-    },
-    {
-      identifier: 'mvx:vibe-theme',
-      label: 'VibeMode'
-    },
-    {
-      identifier: 'mvx:light-theme',
-      label: 'BrightLight'
-    }
+    { identifier: 'mvx:dark-theme', label: 'TealLab' },
+    { identifier: 'mvx:vibe-theme', label: 'VibeMode' },
+    { identifier: 'mvx:light-theme', label: 'BrightLight' }
   ];
 
   const [rootTheme, setRootTheme] = useState(
