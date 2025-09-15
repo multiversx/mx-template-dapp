@@ -4,15 +4,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { MouseEvent, useState } from 'react';
 
-import { Tooltip } from 'components';
+import { Tooltip } from 'components/Tooltip/Tooltip';
+import {
+  useHandleThemeManagement,
+  ThemeOptionType
+} from 'hooks/useHandleThemeManagement';
 
 import { ThemeTooltipDots } from './components';
 
-interface ThemeTooltipOptionType {
-  label: string;
-  identifier: string;
+interface ThemeTooltipOptionType extends ThemeOptionType {
   dotColors: string[];
 }
 
@@ -35,45 +36,27 @@ const styles = {
 } satisfies Record<string, string>;
 
 export const ThemeTooltip = () => {
-  const [rootTheme, setRootTheme] = useState(
-    document.documentElement.getAttribute('data-mvx-theme')
+  const { allThemeOptions, activeTheme, handleThemeSwitch } =
+    useHandleThemeManagement();
+
+  const themeDotColors: Record<string, string[]> = {
+    'mvx:dark-theme': ['#23F7DD', '#262626', '#B6B3AF', '#FFFFFF'],
+    'mvx:vibe-theme': ['#471150', '#5A2A62', '#D200FA', '#FFFFFF'],
+    'mvx:light-theme': ['#000000', '#A5A5A5', '#E2DEDC', '#F3EFED']
+  };
+
+  const tooltipThemeOptions = allThemeOptions.map(
+    (option): ThemeTooltipOptionType => ({
+      ...option,
+      dotColors: themeDotColors[option.identifier]
+    })
   );
 
-  const themeOptions: ThemeTooltipOptionType[] = [
-    {
-      label: 'TealLab',
-      identifier: 'mvx:dark-theme',
-      dotColors: ['#23F7DD', '#262626', '#B6B3AF', '#FFFFFF']
-    },
-    {
-      label: 'VibeMode',
-      identifier: 'mvx:vibe-theme',
-      dotColors: ['#471150', '#5A2A62', '#D200FA', '#FFFFFF']
-    },
-    {
-      label: 'BrightLight',
-      identifier: 'mvx:light-theme',
-      dotColors: ['#000000', '#A5A5A5', '#E2DEDC', '#F3EFED']
-    }
-  ];
+  const activeTooltipTheme = activeTheme
+    ? { ...activeTheme, dotColors: themeDotColors[activeTheme.identifier] }
+    : null;
 
-  const activeTheme = themeOptions.find(
-    (themeOption) => themeOption.identifier === rootTheme
-  );
-
-  const handleThemeSwitch =
-    (themeOption: ThemeTooltipOptionType) =>
-    (event: MouseEvent<HTMLDivElement>) => {
-      event.preventDefault();
-      setRootTheme(themeOption.identifier);
-
-      document.documentElement.setAttribute(
-        'data-mvx-theme',
-        themeOption.identifier
-      );
-    };
-
-  if (!activeTheme) {
+  if (!activeTooltipTheme) {
     return null;
   }
 
@@ -90,13 +73,13 @@ export const ThemeTooltip = () => {
           <div className={styles.themeTooltipOptionsTitle}>Themes</div>
 
           <div className={styles.themeTooltipOptions}>
-            {themeOptions.map((themeOption) => (
+            {tooltipThemeOptions.map((themeOption) => (
               <div
                 key={`theme-${themeOption.identifier}-option`}
-                onClick={handleThemeSwitch(themeOption)}
+                onClick={handleThemeSwitch(themeOption.identifier)}
                 className={classNames(styles.themeTooltipOption, {
                   [styles.themeTooltipOptionActive]:
-                    themeOption.identifier === activeTheme.identifier
+                    themeOption.identifier === activeTooltipTheme.identifier
                 })}
               >
                 <ThemeTooltipDots
@@ -109,7 +92,7 @@ export const ThemeTooltip = () => {
                   {themeOption.label}
                 </div>
 
-                {themeOption.identifier !== activeTheme.identifier && (
+                {themeOption.identifier !== activeTooltipTheme.identifier && (
                   <FontAwesomeIcon
                     icon={faArrowRightLong}
                     className={styles.themeTooltipOptionArrow}
@@ -128,7 +111,7 @@ export const ThemeTooltip = () => {
           })}
         >
           <ThemeTooltipDots
-            dotColors={activeTheme.dotColors}
+            dotColors={activeTooltipTheme.dotColors}
             className={styles.themeTooltipTriggerDots}
           />
 

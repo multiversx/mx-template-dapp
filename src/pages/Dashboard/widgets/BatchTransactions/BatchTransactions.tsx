@@ -4,8 +4,8 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 
+import { MvxButton } from 'lib';
 import { OutputContainer, TransactionsOutput } from 'components';
 import {
   useGetAccount,

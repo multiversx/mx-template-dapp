@@ -15,8 +15,8 @@ import { TransactionsOutput } from './TransactionsOutput';
 
 // prettier-ignore
 const styles = {
-  pingPongAddressContainer: 'ping-pong-address-container flex justify-between mb-4',
-  pingPongButtons: 'ping-pong-buttons flex gap-3',
+  pingPongAddressContainer: 'ping-pong-address-container flex gap-3 mb-4',
+  pingPongButtons: 'ping-pong-buttons flex gap-2',
   timeRemaining: 'time-remaining text-red-600'
 } satisfies Record<string, string>;
 

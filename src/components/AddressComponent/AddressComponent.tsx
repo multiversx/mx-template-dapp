@@ -14,12 +14,12 @@ import {
 
 // prettier-ignore
 const styles = {
-  addressContainer: 'address-container text-primary transition-all duration-300 font-normal text-xs xs:text-sm pt-1 lg:pt-0 overflow-auto',
+  addressContainer: 'address-container text-primary transition-all duration-200 ease-out font-normal text-xs xs:text-sm pt-1 lg:pt-0 overflow-auto',
   address: 'address break-words lg:break-normal',
   trimmedAddress: 'trimmed-address !w-max',
-  addressButtons: 'address-buttons flex gap-1 transition-all duration-300',
-  addressButton: 'address-button text-primary hover:text-accent',
-  addressButtonHeader: '!text-link hover:!text-primary'
+  addressButtons: 'address-buttons flex gap-1 transition-all duration-200 ease-out',
+  addressButton: 'address-button text-primary hover:text-accent transition-all duration-200 ease-out',
+  addressButtonHeader: '!text-link hover:!text-primary transition-all duration-200 ease-out'
 } satisfies Record<string, string>;
 
 interface AddressComponentPropsType {

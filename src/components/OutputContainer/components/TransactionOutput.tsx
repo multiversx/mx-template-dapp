@@ -17,8 +17,8 @@ import {
 const styles = {
   transactionContainer: 'transaction-container flex flex-col',
   transactionElementContainer: 'transaction-elem-container flex gap-2',
-  transactionElement: 'transaction-elem flex justify-between w-full',
-  buttons: 'buttons flex gap-3',
+  transactionElement: 'transaction-elem flex gap-3 w-full',
+  buttons: 'buttons flex gap-2',
   dataContainer: 'data-container whitespace-nowrap'
 } satisfies Record<string, string>;
 
@@ -45,7 +45,7 @@ export const TransactionOutput = ({
 
   return (
     <div className={styles.transactionContainer}>
-      <p className={styles.transactionContainer}>
+      <p className={styles.transactionElementContainer}>
         <Label>Hash:</Label>
 
         <div className={styles.transactionElement}>

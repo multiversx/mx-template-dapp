@@ -1,28 +1,43 @@
-import HeartIcon from 'assets/img/heart.svg?react';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import moment from 'moment';
+
+import { useGetNetworkConfig } from 'lib';
+
+import { version } from '../../../package.json';
 
 // prettier-ignore
 const styles = {
-  footer: 'footer mx-auto w-full max-w-prose py-4 text-center text-gray-400',
-  footerContainer: 'footer-container flex flex-col items-center text sm text-gray-400',
-  disclaimer: 'disclaimer text-gray-400 text-sm py-3 px-4 hover:cursor-pointer hover:underline',
-  footerDescription: 'footer-description flex items-center text-sm hover:underline'
+  footer: 'footer mx-auto w-full max-w-prose py-4 text-center',
+  footerContainer: 'footer-container flex flex-col gap-2 font-medium items-center justify-center text-sm text-[#989898]',
+  footerDescription: 'footer-description flex items-center justify-center gap-1 text-sm text-neutral-500 gap-1',
+  footerDescriptionNetwork: 'footer-description-network capitalize',
+  footerHeartIcon: 'text-red-500'
 } satisfies Record<string, string>;
 
-export const Footer = () => (
-  <footer className={styles.footer}>
-    <div className={styles.footerContainer}>
-      <a className={styles.disclaimer} href='/disclaimer'>
-        Disclaimer
-      </a>
+export const Footer = () => {
+  const { network } = useGetNetworkConfig();
+  const currentYear = moment().year();
 
-      <a
-        target='_blank'
-        className={styles.footerDescription}
-        href='https://multiversx.com/'
-      >
-        Made with <HeartIcon className='mx-1 fill-gray-400' /> by the MultiversX
-        team
-      </a>
-    </div>
-  </footer>
-);
+  return (
+    <footer className={styles.footer}>
+      <div className={styles.footerContainer}>
+        <div className={styles.footerDescription}>
+          <span className={styles.footerDescriptionNetwork}>
+            {network.id} Build
+          </span>
+
+          <span>{version}</span>
+        </div>
+
+        <div className={styles.footerDescription}>
+          <span>Made with</span>
+
+          <FontAwesomeIcon icon={faHeart} className={styles.footerHeartIcon} />
+
+          <span>by the MultiversX team, {currentYear}</span>
+        </div>
+      </div>
+    </footer>
+  );
+};
