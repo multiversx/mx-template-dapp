@@ -1,9 +1,13 @@
-import { Fragment, MouseEvent, ReactNode, useEffect, useState } from 'react';
+import { Fragment, MouseEvent, ReactNode } from 'react';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
+import {
+  useHandleThemeManagement,
+  ThemeOptionType
+} from 'hooks/useHandleThemeManagement';
 import { ReactComponent as HomeLightThemeIcon } from 'assets/img/bright-light-icon.svg';
 import { ReactComponent as HomeVibeThemeIcon } from 'assets/img/vibe-mode-icon.svg';
 import { ReactComponent as HomeDarkThemeIcon } from 'assets/icons/home-dark-theme-icon.svg';
@@ -31,83 +35,60 @@ const styles = {
   themeOptionActiveLabel: 'theme-option-active-label flex items-center justify-center px-1 absolute -top-1.5 left-10 z-10 text-xs text-accent uppercase bg-accent border border-accent rounded-md transition-all duration-200 ease-out'
 } satisfies Record<string, string>;
 
-interface ThemeOptionType {
-  identifier: string;
+interface HomeThemeOptionType extends ThemeOptionType {
   icon: ReactNode;
-  title: string;
-  label: string;
   backgroundClass: string;
+  title: string;
 }
-
-const themeOptions: ThemeOptionType[] = [
-  {
-    identifier: 'mvx:dark-theme',
-    icon: <HomeDarkThemeIcon />,
-    title: 'TealLab',
-    label: 'Customizable',
-    backgroundClass: 'bg-dark-theme'
-  },
-  {
-    identifier: 'mvx:vibe-theme',
-    icon: <HomeVibeThemeIcon />,
-    title: 'VibeMode',
-    label: 'Vibrant',
-    backgroundClass: 'bg-vibe-theme'
-  },
-  {
-    identifier: 'mvx:light-theme',
-    icon: <HomeLightThemeIcon />,
-    title: 'BrightLight',
-    label: 'Ownable',
-    backgroundClass: 'bg-light-theme'
-  }
-];
 
 export const HomeHero = () => {
   const navigate = useNavigate();
-
-  const [rootTheme, setRootTheme] = useState(
-    document.documentElement.getAttribute('data-mvx-theme')
-  );
+  const { allThemeOptions, activeTheme, handleThemeSwitch } =
+    useHandleThemeManagement();
 
   const handleLogIn = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     navigate(RouteNamesEnum.unlock);
   };
 
-  const activeTheme = themeOptions.find(
-    (themeOption) => themeOption.identifier === rootTheme
+  const themeExtraProperties: Record<
+    string,
+    Omit<HomeThemeOptionType, keyof ThemeOptionType>
+  > = {
+    'mvx:dark-theme': {
+      icon: <HomeDarkThemeIcon />,
+      title: 'Customizable',
+      backgroundClass: 'bg-dark-theme'
+    },
+    'mvx:vibe-theme': {
+      icon: <HomeVibeThemeIcon />,
+      title: 'Vibrant',
+      backgroundClass: 'bg-vibe-theme'
+    },
+    'mvx:light-theme': {
+      icon: <HomeLightThemeIcon />,
+      title: 'Ownable',
+      backgroundClass: 'bg-light-theme'
+    }
+  };
+
+  const homeThemeOptions: HomeThemeOptionType[] = allThemeOptions.map(
+    (option) => ({
+      ...option,
+      ...themeExtraProperties[option.identifier]
+    })
   );
 
-  const handleThemeSwitch =
-    (themeOption: ThemeOptionType) => (event: MouseEvent<HTMLDivElement>) => {
-      event.preventDefault();
-      setRootTheme(themeOption.identifier);
+  const activeHomeTheme = activeTheme
+    ? { ...activeTheme, ...themeExtraProperties[activeTheme.identifier] }
+    : null;
 
-      document.documentElement.setAttribute(
-        'data-mvx-theme',
-        themeOption.identifier
-      );
-    };
-
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      const theme = document.documentElement.getAttribute('data-mvx-theme');
-      setRootTheme(theme);
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['data-mvx-theme']
-    });
-
-    return () => observer.disconnect();
-  }, []);
+  const heroContainerClasses = activeHomeTheme
+    ? classNames(styles.heroContainer, activeHomeTheme.backgroundClass)
+    : styles.heroContainer;
 
   return (
-    <div
-      className={classNames(styles.heroContainer, activeTheme?.backgroundClass)}
-    >
+    <div className={heroContainerClasses}>
       <div className={styles.heroSectionTop}>
         <div className={styles.heroSectionTopContent}>
           <h1 className={styles.heroTitle}>dApp Template</h1>
@@ -139,38 +120,37 @@ export const HomeHero = () => {
         </div>
       </div>
 
-      <div className={styles.heroSectionBottom}>
-        {themeOptions.map((themeOption) => (
-          <div
-            key={themeOption.identifier}
-            onClick={handleThemeSwitch(themeOption)}
-            className={classNames(styles.heroSectionBottomThemeOptions, {
-              [styles.heroSectionBottomThemeOptionsOpacityFull]:
-                themeOption.identifier === activeTheme?.identifier
-            })}
-          >
-            <div className={styles.heroSectionBottomThemeOption}>
-              {themeOption.icon && (
+      {activeHomeTheme && (
+        <div className={styles.heroSectionBottom}>
+          {homeThemeOptions.map((themeOption) => (
+            <div
+              key={themeOption.identifier}
+              onClick={handleThemeSwitch(themeOption.identifier)}
+              className={classNames(styles.heroSectionBottomThemeOptions, {
+                [styles.heroSectionBottomThemeOptionsOpacityFull]:
+                  themeOption.identifier === activeHomeTheme.identifier
+              })}
+            >
+              <div className={styles.heroSectionBottomThemeOption}>
                 <div className={styles.themeOptionIcon}>{themeOption.icon}</div>
+                <span className={styles.themeOptionTitle}>
+                  {themeOption.title}
+                </span>
+              </div>
+
+              {themeOption.identifier === activeHomeTheme.identifier && (
+                <Fragment>
+                  <span className={styles.themeOptionActiveDot} />
+
+                  <div className={styles.themeOptionActiveLabel}>
+                    {themeOption.label}
+                  </div>
+                </Fragment>
               )}
-
-              <span className={styles.themeOptionTitle}>
-                {themeOption.title}
-              </span>
             </div>
-
-            {themeOption.identifier === activeTheme?.identifier && (
-              <Fragment>
-                <span className={styles.themeOptionActiveDot} />
-
-                <div className={styles.themeOptionActiveLabel}>
-                  {themeOption.label}
-                </div>
-              </Fragment>
-            )}
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
