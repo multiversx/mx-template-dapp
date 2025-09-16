@@ -78,7 +78,7 @@ export const TransactionOutput = ({
 
       <p>
         <Label>Amount: </Label>
-        <FormatAmount value={account.balance} />
+        <FormatAmount value={account.balance} data-testid='balance' />
       </p>
       <p>
         <Label>Gas price: </Label>

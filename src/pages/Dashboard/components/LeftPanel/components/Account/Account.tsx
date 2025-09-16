@@ -78,6 +78,7 @@ export const Account = () => {
       label: 'Address',
       value: (
         <MvxTrim
+          dataTestId='accountAddress'
           text={address}
           className={styles.connectedAccountDetailsTrimAddress}
         />

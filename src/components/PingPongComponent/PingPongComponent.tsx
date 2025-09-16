@@ -152,6 +152,7 @@ export const PingPongComponent = ({
       <div className={styles.buttonsContainer}>
         <div className={styles.buttons}>
           <MvxButton
+            data-testid='btnPing'
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
             size='small'
@@ -165,6 +166,7 @@ export const PingPongComponent = ({
           </MvxButton>
 
           <MvxButton
+            data-testid='btnPong'
             disabled={!pongAllowed || hasPing || hasPendingTransactions}
             onClick={onSendPongTransaction}
             size='small'
