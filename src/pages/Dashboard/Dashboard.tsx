@@ -1,8 +1,11 @@
+import classNames from 'classnames';
+import { useState } from 'react';
+
 import { contractAddress } from 'config';
 import { WidgetType } from 'types/widget.types';
-import { Widget } from './components';
+
+import { DashboardHeader, LeftPanel, Widget } from './components';
 import {
-  Account,
   BatchTransactions,
   NativeAuth,
   PingPongAbi,
@@ -12,13 +15,17 @@ import {
   Transactions
 } from './widgets';
 
-const WIDGETS: WidgetType[] = [
-  {
-    title: 'Account',
-    widget: Account,
-    description: 'Connected account details',
-    reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account'
-  },
+// prettier-ignore
+const styles = {
+  dashboardContainer: 'dashboard-container flex w-screen overflow-hidden min-h-screen relative border-t border-b border-secondary transition-all duration-200',
+  mobilePanelContainer: 'mobile-panel-container fixed bottom-0 left-0 right-0 z-50 max-h-full overflow-y-auto lg:static lg:max-h-none lg:overflow-visible',
+  desktopPanelContainer: 'desktop-panel-container lg:flex',
+  dashboardContent: 'dashboard-content flex flex-col gap-6 justify-center items-center flex-1 w-full overflow-auto border-l border-secondary p-4 lg:p-6 transition-all duration-200 ease-out',
+  dashboardContentMobilePanelOpen: 'dashboard-content-mobile-panel-open opacity-20 lg:opacity-100 pointer-events-none',
+  dashboardWidgets: 'dashboard-widgets flex flex-col gap-6  w-full max-w-320'
+} satisfies Record<string, string>;
+
+const dashboardWidgets: WidgetType[] = [
   {
     title: 'Ping & Pong (Manual)',
     widget: PingPongRaw,
@@ -65,14 +72,14 @@ const WIDGETS: WidgetType[] = [
   },
   {
     title: 'Transactions (All)',
-    widget: Transactions,
+    widget: () => <Transactions identifier='transactions-all' />,
     description: 'List transactions for the connected account',
     reference:
       'https://api.multiversx.com/#/accounts/AccountController_getAccountTransactions'
   },
   {
     title: 'Transactions (Ping & Pong)',
-    widget: Transactions,
+    widget: () => <Transactions identifier='transactions-ping-pong' />,
     props: { receiver: contractAddress },
     description: 'List transactions filtered for a given Smart Contract',
     reference:
@@ -81,11 +88,36 @@ const WIDGETS: WidgetType[] = [
 ];
 
 export const Dashboard = () => {
+  const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
+
   return (
-    <div className='flex flex-col gap-6 max-w-3xl w-full'>
-      {WIDGETS.map((element) => (
-        <Widget key={element.title} {...element} />
-      ))}
+    <div className={styles.dashboardContainer}>
+      <div
+        className={classNames(
+          styles.mobilePanelContainer,
+          styles.desktopPanelContainer
+        )}
+      >
+        <LeftPanel
+          isOpen={isMobilePanelOpen}
+          setIsOpen={setIsMobilePanelOpen}
+        />
+      </div>
+
+      <div
+        style={{ backgroundImage: 'url(src/assets/img/background.svg)' }}
+        className={classNames(styles.dashboardContent, {
+          [styles.dashboardContentMobilePanelOpen]: isMobilePanelOpen
+        })}
+      >
+        <DashboardHeader />
+
+        <div className={styles.dashboardWidgets}>
+          {dashboardWidgets.map((element) => (
+            <Widget key={element.title} {...element} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

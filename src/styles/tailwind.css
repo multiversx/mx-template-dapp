@@ -1,5 +1,61 @@
 @import 'tailwindcss';
 
 @theme {
-    --background-image-mvx-white: url('../multiversx-white.svg');
+  --breakpoint-xs: 30rem; /* 480px */
+  --background-image-dark-theme: url('../dark-theme-bg.png');
+  --background-image-vibe-theme: url('../vibe-theme-bg.png');
+  --background-image-light-theme: url('../light-theme-bg.png');
+  --background-color-primary: var(--mvx-bg-color-primary);
+  --background-color-secondary: var(--mvx-bg-color-secondary);
+  --background-color-tertiary: var(--mvx-hover-bg-primary);
+  --background-color-accent: var(--mvx-bg-accent-color);
+  --background-color-btn-primary: var(--mvx-button-bg-primary);
+  --background-color-btn-secondary: var(--mvx-button-bg-secondary);
+  --background-color-btn-tertiary: var(--mvx-button-bg-secondary);
+  --background-color-btn-variant: var(--mvx-button-bg-variant);
+  --background-color-btn-hover: var(--mvx-hover-color-primary);
+  --background-color-logo-primary: var(--mvx-text-color-primary);
+  --background-color-icon: var(--mvx-link-color);
+  --color-primary: var(--mvx-text-color-primary);
+  --color-secondary: var(--mvx-text-color-secondary);
+  --color-tertiary: var(--mvx-text-color-tertiary);
+  --color-accent: var(--mvx-text-accent-color);
+  --color-btn-primary: var(--mvx-button-text-primary);
+  --color-btn-secondary: var(--mvx-button-text-secondary);
+  --color-link: var(--mvx-link-color);
+  --border-color-secondary: var(--mvx-border-color-secondary);
+  --border-color-logo: var(--mvx-text-color-primary);
+}
+
+:root {
+  --mvx-slate-75: #f8f8ff;
+  --mvx-fuchsia-550: #f04dff;
+  --mvx-purple-150: #ddcedb;
+  --mvx-purple-350: #b5a0b9;
+  --mvx-purple-850: #431c4e;
+  --mvx-purple-875: #471150;
+  --mvx-purple-925: #3c1543;
+}
+
+:root[data-mvx-theme='mvx:vibe-theme'],
+[data-mvx-theme='mvx:vibe-theme'] {
+  --mvx-bg-color-primary: var(--mvx-purple-925);
+  --mvx-bg-color-secondary: var(--mvx-purple-875);
+  --mvx-bg-accent-color: var(--mvx-purple-925);
+  --mvx-bg-accent-variant-color: var(--mvx-purple-925);
+  --mvx-hover-color-primary: var(--mvx-purple-850);
+  --mvx-text-color-primary: var(--mvx-white);
+  --mvx-text-color-secondary: var(--mvx-purple-350);
+  --mvx-text-color-tertiary: var(--mvx-slate-75);
+  --mvx-text-accent-color: var(--mvx-fuchsia-550);
+  --mvx-link-color: var(--mvx-purple-150);
+  --mvx-label-color: var(--mvx-purple-150);
+  --mvx-icon-bg: var(--mvx-purple-925);
+  --mvx-button-bg-primary: var(--mvx-fuchsia-550);
+  --mvx-button-bg-secondary: var(--mvx-purple-875);
+  --mvx-button-bg-variant: var(--mvx-purple-875);
+  --mvx-button-text-primary: var(--mvx-black);
+  --mvx-button-text-secondary: var(--mvx-neutral-225);
+  --mvx-border-color-secondary: var(--mvx-purple-850);
+  --mvx-scrollbar-thumb: var(--mvx-purple-925);
 }

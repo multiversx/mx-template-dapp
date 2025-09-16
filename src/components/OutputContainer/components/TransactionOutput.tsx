@@ -1,14 +1,26 @@
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
-  ExplorerLink,
   FormatAmount,
   getExplorerLink,
+  MvxCopyButton,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
   useGetAccountInfo,
   useGetNetworkConfig
 } from 'lib';
+
+// prettier-ignore
+const styles = {
+  transactionContainer: 'transaction-container flex flex-col',
+  transactionElementContainer: 'transaction-elem-container flex gap-2',
+  transactionElement: 'transaction-elem flex gap-3 w-full',
+  buttons: 'buttons flex gap-2',
+  dataContainer: 'data-container whitespace-nowrap'
+} satisfies Record<string, string>;
 
 export const TransactionOutput = ({
   transaction
@@ -32,29 +44,41 @@ export const TransactionOutput = ({
   });
 
   return (
-    <div className='flex flex-col'>
-      <p>
+    <div className={styles.transactionContainer}>
+      <p className={styles.transactionElementContainer}>
         <Label>Hash:</Label>
-        <ExplorerLink
-          page={hashExplorerLink}
-          className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
-        >
+
+        <div className={styles.transactionElement}>
           {transaction.hash}
-        </ExplorerLink>
+
+          <div className={styles.buttons}>
+            <MvxCopyButton text={transaction.hash} />
+
+            <a href={hashExplorerLink} target='_blank' rel='noreferrer'>
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
+          </div>
+        </div>
       </p>
-      <p>
+
+      <p className={styles.transactionElementContainer}>
         <Label>Receiver:</Label>
-        <ExplorerLink
-          page={receiverExplorerLink}
-          className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
-        >
+        <div className={styles.transactionElement}>
           {transaction.receiver}
-        </ExplorerLink>
+
+          <div className={styles.buttons}>
+            <MvxCopyButton text={transaction.receiver} />
+
+            <a href={receiverExplorerLink} target='_blank' rel='noreferrer'>
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
+          </div>
+        </div>
       </p>
 
       <p>
         <Label>Amount: </Label>
-        <FormatAmount value={account.balance} />
+        <FormatAmount value={account.balance} data-testid='balance' />
       </p>
       <p>
         <Label>Gas price: </Label>
@@ -64,7 +88,7 @@ export const TransactionOutput = ({
         <Label>Gas limit: </Label>
         {transaction.gasLimit}
       </p>
-      <p className='whitespace-nowrap'>
+      <p className={styles.dataContainer}>
         <Label>Data: </Label> {decodedData}
       </p>
     </div>
