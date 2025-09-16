@@ -32,6 +32,5 @@ export const getBatchTransactions = ({
     txs.push(tokenTransfer);
   });
 
-  console.log({ txs });
   return txs;
 };

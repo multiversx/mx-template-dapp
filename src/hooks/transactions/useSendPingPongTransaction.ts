@@ -1,4 +1,3 @@
-import { UserPublicKey } from '@multiversx/sdk-core/out';
 import axios from 'axios';
 import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers';
@@ -8,7 +7,6 @@ import {
   GAS_PRICE,
   SmartContractTransactionsFactory,
   Transaction,
-  TransactionComputer,
   TransactionsFactoryConfig,
   useGetAccount,
   useGetNetworkConfig
@@ -54,7 +52,6 @@ export const useSendPingPongTransaction = () => {
       sender: new Address(address)
     });
 
-    console.log('==================', { pingTransaction });
     await signAndSendTransactions({
       transactions: [pingTransaction],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
