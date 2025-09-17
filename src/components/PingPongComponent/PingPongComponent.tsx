@@ -27,10 +27,15 @@ const styles = {
   buttonContent: 'button-content text-sm font-normal'
 } satisfies Record<string, string>;
 
+export interface PingTransactionPayloadType {
+  amount?: string;
+  transactions?: Transaction[];
+}
+
 interface PingPongComponentPropsType {
   identifier: `${ItemsIdentifiersEnum}`;
-  sendPingTransaction: (amount: any) => Promise<any>;
-  sendPongTransaction: (transaction?: any) => Promise<any>;
+  sendPingTransaction: (payload: PingTransactionPayloadType) => void;
+  sendPongTransaction: (transactions?: Transaction[]) => Promise<void>;
   getTimeToPong: () => Promise<number | null | undefined>;
   pingAmount?: string;
   getPingTransaction?: () => Promise<Transaction | null>;
@@ -70,30 +75,40 @@ export const PingPongComponent = ({
 
   const onSendPingTransaction = async () => {
     if (pingAmount) {
-      await sendPingTransaction(pingAmount);
-    } else if (getPingTransaction) {
-      const pingTransaction = await getPingTransaction();
-
-      if (!pingTransaction) {
-        return;
-      }
-
-      await sendPingTransaction([pingTransaction]);
+      await sendPingTransaction({ amount: pingAmount });
+      return;
     }
+
+    if (!getPingTransaction) {
+      return;
+    }
+
+    const pingTransaction = await getPingTransaction();
+
+    if (!pingTransaction) {
+      return;
+    }
+
+    await sendPingTransaction({ transactions: [pingTransaction] });
   };
 
   const onSendPongTransaction = async () => {
     if (pingAmount) {
       await sendPongTransaction();
-    } else if (getPongTransaction) {
-      const pongTransaction = await getPongTransaction();
-
-      if (!pongTransaction) {
-        return;
-      }
-
-      await sendPongTransaction([pongTransaction]);
+      return;
     }
+
+    if (!getPongTransaction) {
+      return;
+    }
+
+    const pongTransaction = await getPongTransaction();
+
+    if (!pongTransaction) {
+      return;
+    }
+
+    await sendPongTransaction([pongTransaction]);
   };
 
   const timeRemaining = moment()

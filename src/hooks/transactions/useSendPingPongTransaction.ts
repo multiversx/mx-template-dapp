@@ -72,12 +72,10 @@ export const useSendPingPongTransaction = () => {
       }
     );
 
-    const sessionId = await signAndSendTransactions({
+    await signAndSendTransactions({
       transactions: [pingTransaction],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
-
-    return sessionId;
   };
 
   const sendPingTransactionFromService = async (
@@ -119,23 +117,23 @@ export const useSendPingPongTransaction = () => {
       }
     );
 
-    const sessionId = await signAndSendTransactions({
+    await signAndSendTransactions({
       transactions: [pongTransaction],
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
-
-    return sessionId;
   };
 
   const sendPongTransactionFromService = async (
-    transactions: Transaction[]
+    transactions?: Transaction[]
   ) => {
-    const sessionId = await signAndSendTransactions({
+    if (!transactions) {
+      return;
+    }
+
+    await signAndSendTransactions({
       transactions,
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
-
-    return sessionId;
   };
 
   return {
