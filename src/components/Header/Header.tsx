@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
@@ -113,6 +114,7 @@ export const Header = () => {
         <div className={styles.headerNavigationButtons}>
           {headerBrowseButtons.map((headerBrowseButton) => (
             <Tooltip
+              className={classNames({ hidden: headerBrowseButton.isVisible })}
               identifier={`header-${headerBrowseButton.label}-button`}
               key={`header-${headerBrowseButton.label}-button`}
               content={headerBrowseButton.label}
@@ -151,7 +153,6 @@ export const Header = () => {
                 data={address}
                 withTooltip={true}
                 explorerLink={`/${ACCOUNTS_ENDPOINT}/${address}`}
-                className='test'
               />
             </div>
 
