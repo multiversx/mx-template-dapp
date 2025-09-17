@@ -1,10 +1,4 @@
-import {
-  Fragment,
-  FunctionComponent,
-  MouseEvent,
-  ReactNode,
-  SVGProps
-} from 'react';
+import { Fragment, FunctionComponent, MouseEvent, SVGProps } from 'react';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
