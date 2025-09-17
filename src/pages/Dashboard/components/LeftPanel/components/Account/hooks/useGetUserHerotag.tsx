@@ -24,7 +24,9 @@ export const useGetUserHerotag = (address: string) => {
   };
 
   useEffect(() => {
-    if (!address) return;
+    if (!address) {
+      return;
+    }
 
     const fetchUserProfileUrl = async () => {
       const data = await getUserProfileData(address);
@@ -35,5 +37,5 @@ export const useGetUserHerotag = (address: string) => {
     fetchUserProfileUrl();
   }, [address]);
 
-  return [herotag, profileUrl];
+  return { herotag, profileUrl };
 };

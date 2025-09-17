@@ -17,6 +17,12 @@ const styles = {
   tooltipTrigger: 'tooltip-trigger'
 } satisfies Record<string, string>;
 
+const tooltipWrapperStyle = {
+  '--rt-transition-show-delay': '200ms',
+  '--rt-transition-closing-delay': '200ms',
+  '--rt-opacity': 1
+} as CSSProperties;
+
 export const Tooltip = ({
   identifier,
   children,
@@ -30,12 +36,6 @@ export const Tooltip = ({
 }: TooltipPropsType) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
-
-  const tooltipWrapperStyle = {
-    '--rt-transition-show-delay': '200ms',
-    '--rt-transition-closing-delay': '200ms',
-    '--rt-opacity': 1
-  } as CSSProperties;
 
   const handleTriggerClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!hasDrawer) {
