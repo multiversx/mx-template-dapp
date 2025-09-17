@@ -46,6 +46,11 @@ export const Tooltip = ({
     setIsDrawerOpen(true);
   };
 
+  const handleTooltipToggle = (isOpen: boolean) => {
+    setIsTooltipOpen(isOpen);
+    setIsDrawerOpen(isOpen);
+  };
+
   return (
     <div
       style={tooltipWrapperStyle}
@@ -66,7 +71,7 @@ export const Tooltip = ({
         <ReactTooltip
           place={place}
           classNameArrow={styles.tooltipArrow}
-          setIsOpen={setIsTooltipOpen}
+          setIsOpen={handleTooltipToggle}
           anchorSelect={`#${identifier}`}
           className={classNames(styles.tooltip, {
             [styles.tooltipMobile]: hasDrawer

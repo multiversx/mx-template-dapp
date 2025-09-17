@@ -30,6 +30,5 @@
     "types": ["node", "vite/client", "chrome", "jest-environment-puppeteer"]
   },
   "include": ["src", "scripts", "assets", "vite-env.d.ts", "custom.d.ts"],
-  "exclude": ["enableDevHmr.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "exclude": ["enableDevHmr.ts"]
 }

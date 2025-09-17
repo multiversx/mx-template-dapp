@@ -1,4 +1,10 @@
-import { Fragment, MouseEvent, ReactNode } from 'react';
+import {
+  Fragment,
+  FunctionComponent,
+  MouseEvent,
+  ReactNode,
+  SVGProps
+} from 'react';
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +42,7 @@ const styles = {
 } satisfies Record<string, string>;
 
 interface HomeThemeOptionType extends ThemeOptionType {
-  icon: ReactNode;
+  icon: FunctionComponent<SVGProps<SVGSVGElement>>;
   backgroundClass: string;
   title: string;
 }
@@ -56,17 +62,17 @@ export const HomeHero = () => {
     Omit<HomeThemeOptionType, keyof ThemeOptionType>
   > = {
     'mvx:dark-theme': {
-      icon: <HomeDarkThemeIcon />,
+      icon: HomeDarkThemeIcon,
       title: 'Customizable',
       backgroundClass: 'bg-dark-theme'
     },
     'mvx:vibe-theme': {
-      icon: <HomeVibeThemeIcon />,
+      icon: HomeVibeThemeIcon,
       title: 'Vibrant',
       backgroundClass: 'bg-vibe-theme'
     },
     'mvx:light-theme': {
-      icon: <HomeLightThemeIcon />,
+      icon: HomeLightThemeIcon,
       title: 'Ownable',
       backgroundClass: 'bg-light-theme'
     }
@@ -132,9 +138,10 @@ export const HomeHero = () => {
               })}
             >
               <div className={styles.heroSectionBottomThemeOption}>
-                <div className={styles.themeOptionIcon}>{themeOption.icon}</div>
+                <themeOption.icon className={styles.themeOptionIcon} />
+
                 <span className={styles.themeOptionTitle}>
-                  {themeOption.title}
+                  {themeOption.label}
                 </span>
               </div>
 
@@ -143,7 +150,7 @@ export const HomeHero = () => {
                   <span className={styles.themeOptionActiveDot} />
 
                   <div className={styles.themeOptionActiveLabel}>
-                    {themeOption.label}
+                    {themeOption.title}
                   </div>
                 </Fragment>
               )}

@@ -15,7 +15,6 @@
     "@multiversx/sdk-dapp": "^5.1.4",
     "@multiversx/sdk-dapp-ui": "^0.0.27",
     "@multiversx/sdk-dapp-utils": "^3.x",
-    "@react-spring/web": "^10.0.1",
     "axios": "1.10.0",
     "bignumber.js": "^9.x",
     "classnames": "2.3.2",
