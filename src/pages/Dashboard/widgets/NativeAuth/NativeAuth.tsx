@@ -57,11 +57,13 @@ export const NativeAuth = () => {
 
   if (!profile && !isLoading) {
     return (
-      <OutputContainer>
-        <div className={styles.nativeAuthMissingProfile}>
-          <p>Unable to load profile</p>
-        </div>
-      </OutputContainer>
+      <div id={ItemsIdentifiersEnum.nativeAuth}>
+        <OutputContainer>
+          <div className={styles.nativeAuthMissingProfile}>
+            <p>Unable to load profile</p>
+          </div>
+        </OutputContainer>
+      </div>
     );
   }
 
