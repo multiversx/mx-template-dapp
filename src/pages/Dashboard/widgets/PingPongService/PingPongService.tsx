@@ -1,4 +1,4 @@
-import { PingPongComponent } from 'components';
+import { PingPongComponent, PingTransactionPayloadType } from 'components';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetLoginInfo } from 'lib';
 
@@ -18,10 +18,16 @@ export const PingPongService = () => {
   const { sendPingTransactionFromService, sendPongTransactionFromService } =
     useSendPingPongTransaction();
 
+  const handlePingTransaction = (payload: PingTransactionPayloadType) => {
+    if (payload.transactions) {
+      sendPingTransactionFromService(payload.transactions);
+    }
+  };
+
   return (
     <PingPongComponent
       identifier='ping-pong-service'
-      sendPingTransaction={sendPingTransactionFromService}
+      sendPingTransaction={handlePingTransaction}
       sendPongTransaction={sendPongTransactionFromService}
       getTimeToPong={getTimeToPong}
       getPingTransaction={getPingTransaction}

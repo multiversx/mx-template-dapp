@@ -33,8 +33,6 @@ export const HomeConnect = () => {
   const detectedBrowser = getDetectedBrowser();
   const isFirefox = detectedBrowser === BrowserEnum.Firefox;
 
-  console.log(useGetNetworkConfig());
-
   const connectCards = [
     {
       icon: MetamaskIcon,

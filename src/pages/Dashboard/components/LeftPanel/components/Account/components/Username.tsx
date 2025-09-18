@@ -16,15 +16,15 @@ export const Username = (props: {
 }) => {
   const { address } = props;
 
-  const [herotag] = useGetUserHerotag(address);
+  const { herotag } = useGetUserHerotag(address);
 
   return (
-    <p className={styles.usernameContainer}>
+    <div className={styles.usernameContainer}>
       <span className={styles.herotag}>{herotag ? '@' : ''}</span>
 
       <span data-testid={DataTestIdsEnum.heroTag}>
         {herotag ? trimUsernameDomain(herotag) : 'N/A'}
       </span>
-    </p>
+    </div>
   );
 };

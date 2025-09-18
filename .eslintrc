@@ -37,6 +37,8 @@
   ],
   "plugins": ["react-hooks", "prettier", "import", "sort-exports"],
   "rules": {
+    "no-nested-ternary":"warn",
+    "curly": ["error", "all"],
     "sort-exports/sort-exports": "off",
     "sort-imports": "off",
     "import/order": [

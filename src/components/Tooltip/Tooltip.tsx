@@ -17,6 +17,12 @@ const styles = {
   tooltipTrigger: 'tooltip-trigger'
 } satisfies Record<string, string>;
 
+const tooltipWrapperStyle = {
+  '--rt-transition-show-delay': '200ms',
+  '--rt-transition-closing-delay': '200ms',
+  '--rt-opacity': 1
+} as CSSProperties;
+
 export const Tooltip = ({
   identifier,
   children,
@@ -31,12 +37,6 @@ export const Tooltip = ({
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
-  const tooltipWrapperStyle = {
-    '--rt-transition-show-delay': '200ms',
-    '--rt-transition-closing-delay': '200ms',
-    '--rt-opacity': 1
-  } as CSSProperties;
-
   const handleTriggerClick = (event: MouseEvent<HTMLDivElement>) => {
     if (!hasDrawer) {
       return;
@@ -44,6 +44,11 @@ export const Tooltip = ({
 
     event.preventDefault();
     setIsDrawerOpen(true);
+  };
+
+  const handleTooltipToggle = (isOpen: boolean) => {
+    setIsTooltipOpen(isOpen);
+    setIsDrawerOpen(isOpen);
   };
 
   return (
@@ -66,7 +71,7 @@ export const Tooltip = ({
         <ReactTooltip
           place={place}
           classNameArrow={styles.tooltipArrow}
-          setIsOpen={setIsTooltipOpen}
+          setIsOpen={handleTooltipToggle}
           anchorSelect={`#${identifier}`}
           className={classNames(styles.tooltip, {
             [styles.tooltipMobile]: hasDrawer

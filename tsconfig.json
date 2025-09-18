@@ -1,35 +1,28 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
-    "target": "ES5",
+    "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "module": "esnext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "types": [
+      "vite/client",
+      "vite-plugin-svgr/client",
+      "jest",
+      "@testing-library/jest-dom"
+    ],
+    "allowJs": true,
     "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "Node",
-    // "allowImportingTsExtensions": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-
-    "allowJs": true,
-    "esModuleInterop": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-    "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
-    "useUnknownInCatchVariables": false,
-    "types": ["node", "vite/client", "chrome", "jest-environment-puppeteer"]
+    "baseUrl": "src"
   },
-  "include": ["src", "scripts", "assets", "vite-env.d.ts", "custom.d.ts"],
-  "exclude": ["enableDevHmr.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": ["src", "custom.d.ts"]
 }

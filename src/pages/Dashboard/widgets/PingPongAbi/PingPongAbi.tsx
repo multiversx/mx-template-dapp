@@ -1,4 +1,4 @@
-import { PingPongComponent } from 'components';
+import { PingPongComponent, PingTransactionPayloadType } from 'components';
 import { useSendPingPongTransaction } from 'hooks';
 
 import { useGetPingAmount, useGetTimeToPong } from './hooks';
@@ -9,10 +9,16 @@ export const PingPongAbi = () => {
     useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
 
+  const handlePingTransaction = (payload: PingTransactionPayloadType) => {
+    if (payload.amount) {
+      sendPingTransactionFromAbi(payload.amount);
+    }
+  };
+
   return (
     <PingPongComponent
       identifier='ping-pong-abi'
-      sendPingTransaction={sendPingTransactionFromAbi}
+      sendPingTransaction={handlePingTransaction}
       sendPongTransaction={sendPongTransactionFromAbi}
       getTimeToPong={getTimeToPong}
       pingAmount={pingAmount}
