@@ -4,7 +4,7 @@ import { Sheet } from 'react-modal-sheet';
 
 import { WithClassnameType } from 'types';
 
-import { styles } from './drawer.styles';
+import styles from './drawer.styles';
 
 interface DrawerPropsType extends PropsWithChildren, WithClassnameType {
   isOpen: boolean;

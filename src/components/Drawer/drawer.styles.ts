@@ -1,5 +1,5 @@
 // prettier-ignore
-export const styles = {
+export default {
   drawer: 'drawer flex',
   drawerBackdrop: 'drawer-backdrop bg-primary! transition-opacity duration-200 fixed inset-0 opacity-0 pointer-events-none z-40 ease-in-out md:hidden',
   drawerBackdropVisible: 'opacity-90 pointer-events-auto!',
