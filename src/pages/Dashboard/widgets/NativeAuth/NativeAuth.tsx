@@ -33,6 +33,7 @@ export const NativeAuth = () => {
   const { tokenLogin, isLoggedIn } = useGetLoginInfo();
   const account = useGetAccount();
   const { isLoading, profile, getProfile } = useGetProfile();
+  const explorerAddress = network.explorerAddress;
 
   const { isValid, valueDecimal, valueInteger, label } =
     FormatAmountController.getData({
@@ -77,7 +78,7 @@ export const NativeAuth = () => {
             withTooltip={true}
             data={profile?.address ?? 'N/A'}
             className={styles.nativeAuthAddress}
-            explorerLink={`/${ACCOUNTS_ENDPOINT}/${profile?.address}`}
+            explorerLink={`${explorerAddress}/${ACCOUNTS_ENDPOINT}/${profile?.address}`}
           />
         </OutputContainer>
       </div>

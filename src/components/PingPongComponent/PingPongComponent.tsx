@@ -12,7 +12,7 @@ import {
 } from 'components';
 import { contractAddress } from 'config';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { MvxButton, MvxDataWithExplorerLink } from 'lib';
+import { MvxButton, MvxDataWithExplorerLink, useGetNetworkConfig } from 'lib';
 import { ACCOUNTS_ENDPOINT, Transaction, useGetPendingTransactions } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
@@ -53,8 +53,10 @@ export const PingPongComponent = ({
   getPongTransaction,
   tokenLogin
 }: PingPongComponentPropsType) => {
+  const { network } = useGetNetworkConfig();
   const transactions = useGetPendingTransactions();
   const hasPendingTransactions = transactions.length > 0;
+  const explorerAddress = network.explorerAddress;
 
   const [hasPing, setHasPing] = useState(true);
   const [secondsLeft, setSecondsLeft] = useState(0);
@@ -142,7 +144,7 @@ export const PingPongComponent = ({
                 withTooltip={true}
                 data={contractAddress}
                 className={styles.addressComponent}
-                explorerLink={`/${ACCOUNTS_ENDPOINT}/${contractAddress}`}
+                explorerLink={`${explorerAddress}/${ACCOUNTS_ENDPOINT}/${contractAddress}`}
               />
 
               {!pongAllowed && (

@@ -41,6 +41,7 @@ export const Header = () => {
   const isLoggedIn = useGetIsLoggedIn();
   const provider = getAccountProvider();
   const navigate = useNavigate();
+  const explorerAddress = network.explorerAddress;
 
   const handleLogout = async (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -133,7 +134,7 @@ export const Header = () => {
               <MvxDataWithExplorerLink
                 data={address}
                 withTooltip={true}
-                explorerLink={`/${ACCOUNTS_ENDPOINT}/${address}`}
+                explorerLink={`${explorerAddress}/${ACCOUNTS_ENDPOINT}/${address}`}
               />
             </div>
 
