@@ -2,8 +2,10 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 import { ID_API_URL, USERS_API_URL } from 'config/config.mainnet';
+import { useGetAccountInfo } from 'lib';
 
-export const useGetUserHerotag = (address: string) => {
+export const useGetUserHerotag = () => {
+  const { address } = useGetAccountInfo();
   const [profileUrl, setProfileUrl] = useState('');
   const [herotag, setHerotag] = useState('');
 
