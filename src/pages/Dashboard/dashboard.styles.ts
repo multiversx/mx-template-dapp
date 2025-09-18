@@ -1,5 +1,5 @@
 // prettier-ignore
-export const styles = {
+export default {
   dashboardContainer: 'dashboard-container flex w-screen min-h-screen relative border-t border-b border-secondary transition-all duration-200',
   mobilePanelContainer: 'mobile-panel-container fixed bottom-0 left-0 right-0 z-50 max-h-full overflow-y-auto lg:static lg:max-h-none lg:overflow-visible',
   desktopPanelContainer: 'desktop-panel-container lg:flex',

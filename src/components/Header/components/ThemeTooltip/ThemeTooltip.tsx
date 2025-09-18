@@ -12,7 +12,7 @@ import {
 } from 'hooks/useHandleThemeManagement';
 
 import { ThemeTooltipDots } from './components';
-import { styles } from './themeTooltip.styles';
+import styles from './themeTooltip.styles';
 
 interface ThemeTooltipOptionType extends ThemeOptionType {
   dotColors: string[];

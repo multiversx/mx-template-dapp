@@ -14,7 +14,7 @@ import {
   SignMessage,
   Transactions
 } from './widgets';
-import { styles } from './dashboard.styles';
+import styles from './dashboard.styles';
 
 const dashboardWidgets: WidgetType[] = [
   {

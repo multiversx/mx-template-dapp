@@ -1,5 +1,5 @@
 // prettier-ignore
-export const styles = {
+export default {
   header: 'header flex items-center justify-between px-4 h-16 md:h-20 md:px-10',
   headerLogo: 'header-logo transition-opacity duration-200',
   headerNavigation: 'header-navigation flex items-center gap-2 lg:gap-4',
@@ -9,6 +9,7 @@ export const styles = {
   headerNavigationTooltip: 'header-navigation-tooltip p-1 leading-none whitespace-nowrap text-tertiary',
   headerNavigationNetwork: 'header-navigation-network h-8 border border-secondary rounded-xl lg:h-10 relative w-22 flex items-center justify-center leading-none capitalize text-tertiary before:absolute before:rounded-full before:w-2 before:lg:w-2.5 before:h-2 before:lg:h-2.5 before:bg-btn-primary before:z-2 before:-top-0.25 before:lg:-top-0.5 before:-left-0.25 before:lg:-left-0.5 after:absolute after:bg-primary after:rounded-lg after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
   headerNavigationNetworkLabel: 'header-navigation-network-label relative z-1',
+  headerNavigationConnect: 'header-navigation-connect',
   headerNavigationConnectDesktop: 'header-navigation-connect-desktop h-8 lg:h-10 hidden sm:block!',
   headerNavigationConnectMobile: 'header-navigation-connect-mobile w-8 h-8 bg-btn-tertiary cursor-pointer flex justify-center items-center sm:hidden text-xs rounded-xl',
   headerNavigationConnectIcon: 'header-navigation-connect-icon text-accent',

@@ -13,6 +13,7 @@ import {
 
 // prettier-ignore
 const styles = {
+  addressComponent: 'address-component flex overflow-hidden flex-1 w-full',
   addressContainer: 'address-container text-primary transition-all duration-200 ease-out font-normal text-xs xs:text-sm pt-1 lg:pt-0 overflow-auto',
   address: 'address break-words lg:break-normal',
   trimmedAddress: 'trimmed-address !w-max',
@@ -40,7 +41,7 @@ export const AddressComponent = ({
   });
 
   return (
-    <>
+    <div className={styles.addressComponent}>
       <p className={styles.addressContainer}>
         {isHeader ? (
           <MvxTrim text={address} className={styles.trimmedAddress} />
@@ -68,6 +69,6 @@ export const AddressComponent = ({
           <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
         </a>
       </div>
-    </>
+    </div>
   );
 };

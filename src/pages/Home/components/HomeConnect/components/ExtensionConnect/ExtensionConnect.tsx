@@ -20,7 +20,7 @@ import {
 } from 'localConstants';
 
 import { BrowserFrame } from './components';
-import { styles } from './extensionConnect.styles';
+import styles from './extensionConnect.styles';
 
 interface BrowserLogo {
   icon: FunctionComponent<SVGProps<SVGSVGElement>>;

@@ -1,5 +1,5 @@
 // prettier-ignore
-export const styles = {
+export default {
   heroContainer: 'hero-container shadow-xl shadow-secondary/15 flex flex-col items-center justify-between w-full lg:h-160 rounded-3xl bg-cover bg-no-repeat bg-center p-8 lg:p-20 border border-secondary backdrop-blur-md transition-all duration-200 ease-out',
   heroSectionTop: 'hero-section-top flex flex-col items-start lg:items-center justify-center gap-10',
   heroSectionTopContent: 'hero-section-top-content flex flex-col lg:items-center justify-center gap-6',

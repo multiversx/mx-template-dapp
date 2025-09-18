@@ -13,7 +13,7 @@ import { getAccountProvider, useGetAccountInfo, useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
 import { Account, SideMenu } from './components';
-import { styles } from './leftPanel.styles';
+import styles from './leftPanel.styles';
 
 interface LeftPanelPropsType {
   isOpen: boolean;

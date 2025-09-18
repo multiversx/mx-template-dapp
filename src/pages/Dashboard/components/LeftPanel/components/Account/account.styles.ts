@@ -1,5 +1,5 @@
 // prettier-ignore
-export const styles = {
+export default {
   connectedAccountContainer: 'connected-account flex flex-col gap-4',
   connectedAccountHeader: 'connected-account-header flex justify-between items-center',
   connectedAccountHeaderTitle: 'connected-account-header-title text-base transition-all duration-200 ease-out text-secondary',

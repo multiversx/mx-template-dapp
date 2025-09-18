@@ -1,5 +1,5 @@
 // prettier-ignore
-export const styles = {
+export default {
   sideMenuContainer: 'side-menu-container flex flex-col gap-4',
   sideMenuHeader: 'side-menu-header flex items-center justify-between',
   sideMenuHeaderTitle: 'side-menu-header-title text-base transition-all duration-200 ease-out text-secondary',

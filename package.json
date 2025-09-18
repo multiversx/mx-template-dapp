@@ -30,7 +30,7 @@
   "scripts": {
     "lint": "eslint --ext js,ts,tsx src --fix",
     "run-cypress": "npx cypress run",
-    "start-devnet": "npm run copy-devnet-config & vite dev --force",
+    "start-devnet": "npm run copy-devnet-config & vite dev",
     "start-testnet": "npm run copy-testnet-config & vite dev",
     "start-mainnet": "npm run copy-mainnet-config & vite dev",
     "build-devnet": "tsc & npm run copy-devnet-config & vite build",
@@ -39,10 +39,7 @@
     "copy-devnet-config": "cp ./src/config/config.devnet.ts ./src/config/index.ts",
     "copy-testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "copy-mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
-    "test": "jest",
-    "wdio-smoke": "wdio run wdio/wdio.conf.ts",
-    "smoke": "wdio run wdio/wdio.conf.ts --suite smoke",
-    "install-verdaccio": "pnpm remove @multiversx/sdk-dapp && pnpm install @multiversx/sdk-dapp@latest --registry http://localhost:4873"
+    "test": "jest"
   },
   "browserslist": [
     ">0.2%",
