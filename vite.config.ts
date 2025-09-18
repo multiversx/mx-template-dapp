@@ -1,11 +1,13 @@
 import basicSsl from '@vitejs/plugin-basic-ssl';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
+import type { PluginOption } from 'vite';
+import { analyzer } from 'vite-bundle-analyzer';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import svgrPlugin from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   server: {
     port: Number(process.env.PORT) || 3000,
     strictPort: true,
@@ -26,8 +28,14 @@ export default defineConfig({
     svgrPlugin(),
     nodePolyfills({
       globals: { Buffer: true, global: true, process: true }
-    })
+    }),
+    ...(command === 'build'
+      ? [analyzer({ analyzerMode: 'server' }) as unknown as PluginOption]
+      : [])
   ],
+  resolve: {
+    dedupe: ['@multiversx/sdk-core']
+  },
   css: {
     postcss: './postcss.config.js'
   },
@@ -40,4 +48,4 @@ export default defineConfig({
     host: 'localhost',
     strictPort: true
   }
-});
+}));
