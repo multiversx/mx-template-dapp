@@ -1,5 +1,5 @@
 // prettier-ignore
-export const styles = {
+export default {
   extensionCardContainer: 'extension-card-container bg-secondary p-8 lg:p-10 lg:h-115 rounded-2xl lg:rounded-3xl flex flex-col lg:flex-row justify-between gap-10 w-full transition-all duration-200 ease-out',
   extensionCardContent: 'extension-card-content flex flex-col gap-10 max-w-120',
   extensionCardText: 'extension-card-text flex flex-col gap-4',

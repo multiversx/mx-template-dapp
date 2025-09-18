@@ -25,7 +25,7 @@ import {
 import { RouteNamesEnum } from 'localConstants';
 
 import { ThemeTooltip } from './components';
-import { styles } from './header.styles';
+import styles from './header.styles';
 
 interface HeaderBrowseButtonType {
   handleClick: (event: MouseEvent<HTMLDivElement>) => void;
@@ -154,7 +154,7 @@ export const Header = () => {
             </Tooltip>
           </div>
         ) : (
-          <>
+          <div className={styles.headerNavigationConnect}>
             <MvxButton
               onClick={handleLogIn}
               className={styles.headerNavigationConnectDesktop}
@@ -171,7 +171,7 @@ export const Header = () => {
                 className={styles.headerNavigationConnectIcon}
               />
             </div>
-          </>
+          </div>
         )}
       </nav>
     </header>

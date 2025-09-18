@@ -21,17 +21,20 @@ import {
 
 import { Username } from './components';
 import { useGetUserHerotag } from './hooks/useGetUserHerotag';
-import { styles } from './account.styles';
+import styles from './account.styles';
 
 interface AccountDetailsType {
-  icon: ReactNode | string;
+  icon: ReactNode;
   label: string;
-  value: string | ReactNode;
+  value: ReactNode;
 }
 
 export const Account = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
+  const { herotag, profileUrl } = useGetUserHerotag(address);
 
   const { isValid, valueDecimal, valueInteger, label } =
     FormatAmountController.getData({
@@ -41,13 +44,9 @@ export const Account = () => {
       input: account.balance
     });
 
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
   const toggleCollapse = () => {
     setIsCollapsed((isCollapsed) => !isCollapsed);
   };
-
-  const { herotag, profileUrl } = useGetUserHerotag(address);
 
   const img = profileUrl && (
     <img src={profileUrl} className={styles.connectedAccountDetailsHerotag} />
@@ -111,10 +110,10 @@ export const Account = () => {
 
         <FontAwesomeIcon
           icon={faChevronUp}
+          onClick={toggleCollapse}
           className={classNames(styles.connectedAccountHeaderIcon, {
             [styles.connectedAccountHeaderIconRotated]: isCollapsed
           })}
-          onClick={toggleCollapse}
         />
       </div>
 
@@ -132,6 +131,7 @@ export const Account = () => {
 
             <div className={styles.connectedAccountInfoText}>
               <Label>{accountDetail.label}</Label>
+
               <span className={styles.connectedAccountInfoTextValue}>
                 {accountDetail.value}
               </span>

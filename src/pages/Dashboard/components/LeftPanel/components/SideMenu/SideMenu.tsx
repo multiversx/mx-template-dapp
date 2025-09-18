@@ -4,29 +4,20 @@ import {
   faFingerprint,
   faPenNib,
   faRectangleList,
-  faTableTennisPaddleBall,
-  IconDefinition
+  faTableTennisPaddleBall
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FunctionComponent, SVGProps, useState } from 'react';
+import { useState } from 'react';
 
 import { ReactComponent as IconBatch } from 'assets/img/batch-tx.svg';
 import { ReactComponent as IconAbi } from 'assets/img/ping-pong-abi.svg';
 import { ReactComponent as IconBackend } from 'assets/img/ping-pong-backend.svg';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
-import { styles } from './sideMenu.styles';
+import styles from './sideMenu.styles';
 import { ItemIcon } from './components';
-
-interface SideMenuPropsType {
-  setIsOpen: (isOpen: boolean) => void;
-}
-interface MenuItemsType {
-  title: string;
-  icon?: IconDefinition | FunctionComponent<SVGProps<SVGSVGElement>>;
-  id: ItemsIdentifiersEnum;
-}
+import { MenuItemsType, SideMenuPropsType } from './sideMenu.types';
 
 const menuItems: MenuItemsType[] = [
   {

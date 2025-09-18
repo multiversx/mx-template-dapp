@@ -14,7 +14,7 @@ import { ReactComponent as HomeDarkThemeIcon } from 'assets/icons/home-dark-them
 import { Button } from 'components';
 import { DOCUMENTATION_LINK, RouteNamesEnum } from 'localConstants';
 
-import { styles } from './homeHero.styles';
+import styles from './homeHero.styles';
 
 interface HomeThemeOptionType extends ThemeOptionType {
   icon: FunctionComponent<SVGProps<SVGSVGElement>>;
@@ -45,6 +45,7 @@ const themeExtraProperties: Record<
 
 export const HomeHero = () => {
   const navigate = useNavigate();
+
   const { allThemeOptions, activeTheme, handleThemeSwitch } =
     useHandleThemeManagement();
 
