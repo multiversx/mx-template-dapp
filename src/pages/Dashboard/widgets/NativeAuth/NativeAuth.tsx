@@ -90,7 +90,7 @@ export const NativeAuth = () => {
           <Label>Herotag</Label>
 
           <OutputContainer isLoading={isLoading}>
-            <Username address={profile?.address || ''} />
+            <Username />
           </OutputContainer>
         </div>
 

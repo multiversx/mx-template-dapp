@@ -1,6 +1,5 @@
-import { AccountType, trimUsernameDomain } from 'lib';
+import { trimUsernameDomain } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
-import { ProfileType } from 'types';
 
 import { useGetUserHerotag } from '../hooks/useGetUserHerotag';
 
@@ -10,13 +9,8 @@ const styles = {
   herotag: 'herotag text-accent transition-all duration-200 ease-out'
 } satisfies Record<string, string>;
 
-export const Username = (props: {
-  account?: AccountType | ProfileType | null;
-  address: string;
-}) => {
-  const { address } = props;
-
-  const { herotag } = useGetUserHerotag(address);
+export const Username = () => {
+  const { herotag } = useGetUserHerotag();
 
   return (
     <div className={styles.usernameContainer}>

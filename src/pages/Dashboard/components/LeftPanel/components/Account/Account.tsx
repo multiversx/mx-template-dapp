@@ -34,7 +34,7 @@ export const Account = () => {
 
   const { network } = useGetNetworkConfig();
   const { address, account } = useGetAccountInfo();
-  const { herotag, profileUrl } = useGetUserHerotag(address);
+  const { herotag, profileUrl } = useGetUserHerotag();
 
   const { isValid, valueDecimal, valueInteger, label } =
     FormatAmountController.getData({
@@ -72,7 +72,7 @@ export const Account = () => {
     {
       icon: herotag ? img || herotag.slice(0, 3) : '@',
       label: 'Herotag',
-      value: <Username address={address} />
+      value: <Username />
     },
     {
       icon: (
