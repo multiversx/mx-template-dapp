@@ -95,7 +95,7 @@ export const Header = () => {
         <div className={styles.headerNavigationButtons}>
           {headerBrowseButtons.map((headerBrowseButton) => (
             <Tooltip
-              className={classNames({ hidden: headerBrowseButton.isVisible })}
+              className={classNames({ hidden: !headerBrowseButton.isVisible })}
               identifier={`header-${headerBrowseButton.label}-button`}
               key={`header-${headerBrowseButton.label}-button`}
               content={headerBrowseButton.label}
