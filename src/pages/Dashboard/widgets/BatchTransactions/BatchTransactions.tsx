@@ -13,6 +13,7 @@ import {
   useGetPendingTransactions
 } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
+import { getTransactionsSource, setTransactionsSource } from 'helpers';
 
 import {
   sendBatchTransactions,
@@ -38,9 +39,13 @@ export const BatchTransactions = () => {
   const { address, nonce } = useGetAccount();
   const { network } = useGetNetworkConfig();
   const transactions = useGetPendingTransactions();
-  const hasPendingTransactions = transactions.length > 0;
+  const batchTransactions =
+    getTransactionsSource() === 'batch' ? transactions : [];
+  const hasPendingTransactions = batchTransactions.length > 0;
 
   const executeSignAndAutoSendBatchTransactions = async () => {
+    setTransactionsSource('batch');
+
     await signAndAutoSendBatchTransactions({
       address,
       nonce,
@@ -55,6 +60,8 @@ export const BatchTransactions = () => {
   };
 
   const executeBatchTransactions = async () => {
+    setTransactionsSource('batch');
+
     await sendBatchTransactions({
       address,
       nonce,
@@ -63,6 +70,8 @@ export const BatchTransactions = () => {
   };
 
   const executeSwapAndLockTokens = async () => {
+    setTransactionsSource('batch');
+
     await swapAndLockTokens({
       address,
       nonce,
@@ -98,10 +107,11 @@ export const BatchTransactions = () => {
 
   return (
     <div id={ItemsIdentifiersEnum.batchTransactions} className={styles.batchTx}>
-      <OutputContainer>
-        <TransactionsOutput transactions={transactions} />
-      </OutputContainer>
-
+      {batchTransactions.length > 0 && (
+        <OutputContainer>
+          <TransactionsOutput transactions={batchTransactions} />
+        </OutputContainer>
+      )}
       <div className={styles.buttonsContainer}>
         {batchTransactionsButtons.map((button) => (
           <MvxButton

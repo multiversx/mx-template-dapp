@@ -11,7 +11,12 @@ import {
   PingPongOutput
 } from 'components';
 import { contractAddress } from 'config';
-import { getCountdownSeconds, setTimeRemaining } from 'helpers';
+import {
+  getCountdownSeconds,
+  getTransactionsSource,
+  setTimeRemaining,
+  setTransactionsSource
+} from 'helpers';
 import { MvxButton, MvxDataWithExplorerLink, useGetNetworkConfig } from 'lib';
 import { ACCOUNTS_ENDPOINT, Transaction, useGetPendingTransactions } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
@@ -55,7 +60,9 @@ export const PingPongComponent = ({
 }: PingPongComponentPropsType) => {
   const { network } = useGetNetworkConfig();
   const transactions = useGetPendingTransactions();
-  const hasPendingTransactions = transactions.length > 0;
+  const pingPongTransactions =
+    getTransactionsSource() === identifier ? transactions : [];
+  const hasPendingTransactions = pingPongTransactions.length > 0;
   const explorerAddress = network.explorerAddress;
 
   const [hasPing, setHasPing] = useState(true);
@@ -76,6 +83,8 @@ export const PingPongComponent = ({
   };
 
   const onSendPingTransaction = async () => {
+    setTransactionsSource(identifier);
+
     if (pingAmount) {
       await sendPingTransaction({ amount: pingAmount });
       return;
@@ -95,6 +104,8 @@ export const PingPongComponent = ({
   };
 
   const onSendPongTransaction = async () => {
+    setTransactionsSource(identifier);
+
     if (pingAmount) {
       await sendPongTransaction();
       return;
@@ -159,7 +170,7 @@ export const PingPongComponent = ({
           )}
 
           <PingPongOutput
-            transactions={transactions}
+            transactions={pingPongTransactions}
             pongAllowed={pongAllowed}
             timeRemaining={timeRemaining}
           />
