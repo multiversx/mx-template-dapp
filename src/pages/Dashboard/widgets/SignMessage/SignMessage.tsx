@@ -105,19 +105,21 @@ export const SignMessage = () => {
             />
           )}
 
-          <div className={styles.signMessagePasteButtonContainer}>
-            <button
-              onClick={handlePasteClick}
-              className={styles.signMessagePasteButton}
-            >
-              <span className={styles.signMessagePasteButtonText}>Paste</span>
+          {!['success', 'error'].includes(state) && (
+            <div className={styles.signMessagePasteButtonContainer}>
+              <button
+                onClick={handlePasteClick}
+                className={styles.signMessagePasteButton}
+              >
+                <span className={styles.signMessagePasteButtonText}>Paste</span>
 
-              <FontAwesomeIcon
-                icon={faPaste}
-                className={styles.signMessagePasteButtonText}
-              />
-            </button>
-          </div>
+                <FontAwesomeIcon
+                  icon={faPaste}
+                  className={styles.signMessagePasteButtonText}
+                />
+              </button>
+            </div>
+          )}
 
           {state === 'error' && <SignFailure />}
         </OutputContainer>
