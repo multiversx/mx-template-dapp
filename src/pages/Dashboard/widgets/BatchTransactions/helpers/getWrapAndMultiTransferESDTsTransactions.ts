@@ -45,11 +45,10 @@ export const getWrapAndMultiTransferESDTsTransactions = ({
       version: VERSION,
       data: Uint8Array.from(
         Buffer.from(
-          'MultiESDTNFTTransfer@' +
-            address +
-            '@02@' +
-            '5745474C442D613238633539@00@0de0b6b3a7640000@' +
-            '555344432D333530633465@00@0de0b6b3a7640000'
+          BATCH_TRANSACTIONS_SC.multiTransfer_wEGLD_USDC.data.replace(
+            'address',
+            address
+          )
         )
       )
     })

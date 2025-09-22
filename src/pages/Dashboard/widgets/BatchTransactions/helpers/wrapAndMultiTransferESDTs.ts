@@ -8,11 +8,7 @@ export const wrapAndMultiTransferESDTs = async ({
   address,
   nonce,
   chainID,
-  transactionsDisplayInfo = {
-    processingMessage: 'Processing transactions',
-    errorMessage: 'An error has occurred during transaction execution',
-    successMessage: 'Wrap and multi-transfer transactions successful'
-  }
+  transactionsDisplayInfo
 }: TransactionProps & {
   transactionsDisplayInfo?: TransactionsDisplayInfoType;
 }) => {
