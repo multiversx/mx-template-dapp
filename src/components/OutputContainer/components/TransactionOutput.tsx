@@ -19,7 +19,8 @@ const styles = {
   transactionElementContainer: 'transaction-elem-container flex gap-2',
   transactionElement: 'transaction-elem flex gap-3 w-full',
   buttons: 'buttons flex gap-2',
-  dataContainer: 'data-container whitespace-nowrap'
+  dataContainer: 'data-container whitespace-nowrap',
+  decodedData: 'decoded-data whitespace-normal break-words'
 } satisfies Record<string, string>;
 
 export const TransactionOutput = ({
@@ -89,7 +90,8 @@ export const TransactionOutput = ({
         {transaction.gasLimit}
       </p>
       <p className={styles.dataContainer}>
-        <Label>Data: </Label> {decodedData}
+        <Label>Data: </Label>
+        <span className={styles.decodedData}>{decodedData}</span>
       </p>
     </div>
   );

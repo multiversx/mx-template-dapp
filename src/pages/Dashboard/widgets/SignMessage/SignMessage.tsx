@@ -38,7 +38,13 @@ export const SignMessage = () => {
   const { address } = useGetAccount();
   const provider = getAccountProvider();
 
+  const hasMessage = message.trim().length > 0;
+
   const handleSubmit = async () => {
+    if (!hasMessage) {
+      return;
+    }
+
     try {
       const messageToSign = new Message({
         address: new Address(address),
@@ -147,6 +153,7 @@ export const SignMessage = () => {
             data-testid='signMsgBtn'
             onClick={handleSubmit}
             size='small'
+            disabled={!hasMessage}
           >
             <FontAwesomeIcon
               icon={faPenNib}

@@ -16,9 +16,9 @@ import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 import { getTransactionsSource, setTransactionsSource } from 'helpers';
 
 import {
-  sendBatchTransactions,
   signAndAutoSendBatchTransactions,
-  swapAndLockTokens
+  swapAndLockTokens,
+  wrapAndMultiTransferESDTs
 } from './helpers';
 
 // prettier-ignore
@@ -59,13 +59,19 @@ export const BatchTransactions = () => {
     });
   };
 
-  const executeBatchTransactions = async () => {
+  const executeWrapMultiTransferESDTs = async () => {
     setTransactionsSource('batch');
 
-    await sendBatchTransactions({
+    await wrapAndMultiTransferESDTs({
       address,
       nonce,
-      chainID: network.chainId
+      chainID: network.chainId,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing wrap and multi-transfer ESDTs',
+        errorMessage:
+          'An error has occurred during wrap and multi-transfer ESDTs',
+        successMessage: 'Wrap and multi-transfer ESDTs successful'
+      }
     });
   };
 
@@ -92,10 +98,10 @@ export const BatchTransactions = () => {
       label: 'Sign & send batch'
     },
     {
-      dataTestId: 'send-transactions',
-      onClickFunction: executeBatchTransactions,
+      dataTestId: 'wrap-multi-transfer',
+      onClickFunction: executeWrapMultiTransferESDTs,
       icon: faPaperPlane,
-      label: 'Sign batch & controlled sending'
+      label: 'Wrap & Multi-Transfer'
     },
     {
       dataTestId: 'swap-lock',
