@@ -1,8 +1,9 @@
-import { faSync } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faSync, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { ToastManager } from '@multiversx/sdk-dapp/out/managers/internal';
 import { createRoot } from 'react-dom/client';
+
+import { MvxButton } from 'lib/sdkDappUI/sdkDappUI.components';
 
 import { useDidUserPing } from './useDidUserPing';
 
@@ -14,6 +15,7 @@ export const StatusButton = () => {
 
     ToastManager.getInstance().createCustomToast({
       toastId: 'status-toast',
+      hasCloseButton: false,
       instantiateToastElement: () => {
         const toastBody = document.createElement('div');
         const root = createRoot(toastBody);
@@ -42,32 +44,27 @@ export const StatusButton = () => {
 };
 
 const ToastContent = ({ hasPing }: { hasPing: boolean }) => {
-  if (hasPing) {
-    return (
-      <p className='text-white'>
-        ✅ Pinged <CloseToastButton />
-      </p>
-    );
-  }
-
-  return (
-    <p>
-      ❌ Not pinged <CloseToastButton />
-    </p>
-  );
-};
-
-const CloseToastButton = () => {
   const removeToast = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     ToastManager.getInstance().closeToast('status-toast');
   };
+
   return (
-    <a
-      onClick={removeToast}
-      className='text-white underline underline-offset-4 transition-opacity hover:opacity-80 cursor-pointer'
-    >
-      OK
-    </a>
+    <div className='flex items-start gap-3 text-white max-w-[520px]'>
+      <FontAwesomeIcon icon={hasPing ? faCheck : faTimes} className='mt-1' />
+
+      <div className='flex-1 basis-0 min-w-0 w-[420px] max-w-[420px] overflow-hidden'>
+        <h4 className='font-bold leading-tight'>
+          {hasPing ? 'User has pinged' : 'User has not pinged'}
+        </h4>
+
+        <a
+          onClick={removeToast}
+          className='text-white underline underline-offset-4 transition-opacity hover:opacity-80 cursor-pointer'
+        >
+          Close
+        </a>
+      </div>
+    </div>
   );
 };
