@@ -50,7 +50,7 @@ export const NativeAuth = () => {
         // native auth network call example
         getProfile();
       }
-    }, 100);
+    });
 
     return () => clearTimeout(timer);
   }, [isLoggedIn]);
