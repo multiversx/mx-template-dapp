@@ -16,6 +16,8 @@ import { MvxButton, MvxDataWithExplorerLink, useGetNetworkConfig } from 'lib';
 import { ACCOUNTS_ENDPOINT, Transaction, useGetPendingTransactions } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
+import { StatusButton } from './components/StatusButton';
+
 // prettier-ignore
 const styles = {
   pingPongContainer: 'ping-pong-container flex flex-col gap-6',
@@ -24,7 +26,8 @@ const styles = {
   timeRemaining: 'text-red-600',
   buttonsContainer: 'buttons-container flex flex-col gap-2',
   buttons: 'buttons flex justify-start gap-2',
-  buttonContent: 'button-content text-sm font-normal'
+  buttonContent: 'button-content text-sm font-normal',
+  addressRow: 'address-row flex flex-col gap-2 md:flex-row md:items-center md:justify-between'
 } satisfies Record<string, string>;
 
 export interface PingTransactionPayloadType {
@@ -137,33 +140,39 @@ export const PingPongComponent = ({
       <div className={styles.infosContainer}>
         <Label>Contract: </Label>
 
-        <OutputContainer>
-          {!hasPendingTransactions && (
-            <>
-              <MvxDataWithExplorerLink
-                withTooltip={true}
-                data={contractAddress}
-                className={styles.addressComponent}
-                explorerLink={`${explorerAddress}/${ACCOUNTS_ENDPOINT}/${contractAddress}`}
-              />
+        <div className={styles.addressRow}>
+          <OutputContainer className='p-4 flex-1 min-w-0'>
+            {!hasPendingTransactions && (
+              <>
+                <MvxDataWithExplorerLink
+                  withTooltip
+                  data={contractAddress}
+                  className={styles.addressComponent}
+                  explorerLink={`${explorerAddress}/${ACCOUNTS_ENDPOINT}/${contractAddress}`}
+                />
 
-              {!pongAllowed && (
-                <p>
-                  <Label>Time remaining: </Label>
-                  <span className={styles.timeRemaining}>{timeRemaining}</span>
+                {!pongAllowed && (
+                  <p>
+                    <Label>Time remaining: </Label>
+                    <span className={styles.timeRemaining}>
+                      {timeRemaining}
+                    </span>
 
-                  <span> until able to pong</span>
-                </p>
-              )}
-            </>
-          )}
+                    <span> until able to pong</span>
+                  </p>
+                )}
+              </>
+            )}
 
-          <PingPongOutput
-            transactions={transactions}
-            pongAllowed={pongAllowed}
-            timeRemaining={timeRemaining}
-          />
-        </OutputContainer>
+            <PingPongOutput
+              transactions={transactions}
+              pongAllowed={pongAllowed}
+              timeRemaining={timeRemaining}
+            />
+          </OutputContainer>
+
+          <StatusButton />
+        </div>
       </div>
 
       <div className={styles.buttonsContainer}>
