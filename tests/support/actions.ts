@@ -19,8 +19,17 @@ export const waitForPageByUrlSubstring = async (
   urlSubstring: string,
   timeout: number = TEST_CONSTANTS.PAGE_WAIT_TIMEOUT
 ) => {
-  // First check if page already exists
-  const existingPages = await page.context().pages();
+  // Check if page already exists
+  let existingPages: Page[];
+  try {
+    existingPages = await page.context().pages();
+  } catch (contextError) {
+    throw new Error(
+      'Browser context is closed or invalid. Cannot access pages. ' +
+        `Original error: ${contextError}`
+    );
+  }
+
   const existingPage = existingPages.find((browserPage) =>
     browserPage.url().includes(urlSubstring)
   );
@@ -28,13 +37,64 @@ export const waitForPageByUrlSubstring = async (
     return existingPage;
   }
 
-  // If no existing page, look for a new one
-  const newPage = await page.context().waitForEvent('page', { timeout });
-  await newPage.waitForURL((url) => url.hostname.includes(urlSubstring), {
-    timeout: TEST_CONSTANTS.URL_NAVIGATION_TIMEOUT
-  });
+  // Try current page navigation first
+  try {
+    await page.waitForURL((url) => url.hostname.includes(urlSubstring), {
+      timeout: TEST_CONSTANTS.URL_NAVIGATION_TIMEOUT
+    });
+    return page;
+  } catch (urlWaitError) {
+    // Fallback: Wait for new page to be created
+    try {
+      const newPage = await page.context().waitForEvent('page', {
+        timeout: timeout - TEST_CONSTANTS.URL_NAVIGATION_TIMEOUT
+      });
+      await newPage.waitForURL((url) => url.hostname.includes(urlSubstring), {
+        timeout: TEST_CONSTANTS.URL_NAVIGATION_TIMEOUT
+      });
+      return newPage;
+    } catch (newPageError) {
+      // Final fallback: Check all pages again in case one was created
+      let allPages: Page[];
+      try {
+        allPages = await page.context().pages();
+      } catch (finalContextError) {
+        throw new Error(
+          'Browser context is closed or invalid during final check. ' +
+            `Original error: ${finalContextError}`
+        );
+      }
 
-  return newPage;
+      const foundPage = allPages.find((browserPage) =>
+        browserPage.url().includes(urlSubstring)
+      );
+
+      if (foundPage) {
+        return foundPage;
+      }
+
+      // Get current page URL safely
+      let currentPageUrl: string;
+      try {
+        currentPageUrl = page.url();
+      } catch (urlError) {
+        currentPageUrl = 'Unable to get current page URL';
+      }
+
+      throw new Error(
+        `No page found with URL containing "${urlSubstring}" after ${timeout}ms. ` +
+          `Current page URL: ${currentPageUrl}, Available pages: ${allPages
+            .map((p) => {
+              try {
+                return p.url();
+              } catch {
+                return 'Unable to get URL';
+              }
+            })
+            .join(', ')}`
+      );
+    }
+  }
 };
 
 const authenticateWithKeystore = async (
@@ -67,7 +127,17 @@ export const connectWebWallet = async (
     password?: string;
   }
 ) => {
+  // Click the cross-window button to open wallet
   await page.getByTestId(SelectorsEnum.crossWindow).click();
+
+  // Add a small delay to ensure the click is processed
+  await page.waitForTimeout(1000);
+
+  // Debug: Check what pages exist before waiting
+  const pagesBefore = await page.context().pages();
+  console.log(
+    `Pages before waiting: ${pagesBefore.map((p) => p.url()).join(', ')}`
+  );
 
   // Wait for the web wallet page to be loaded which is the new tab
   const walletPage = await waitForPageByUrlSubstring(
