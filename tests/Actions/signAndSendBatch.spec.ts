@@ -1,21 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-import {
-  checkConnectionToWallet,
-  connectWebWallet,
-  navigateToConnectWallet,
-  confirmWalletTx,
-  waitForPageByUrlSubstring,
-  signBatchTransactions,
-  waitForToastToBeDisplayed,
-  getCurrentBalance,
-  checkToastShowsTransactionsSigned
-} from '../support/actions';
+import * as TestActions from '../support';
 import {
   TestDataEnums,
   SelectorsEnum,
   OriginPageEnum
-} from '../support/test.data';
+} from '../support/testdata';
+import { TEST_CONSTANTS } from '../support/constants';
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath,
@@ -24,9 +15,12 @@ const keystoreConfig = {
 
 test.describe('Batch Transactions', () => {
   test.beforeEach(async ({ page }) => {
-    await navigateToConnectWallet(page);
-    await connectWebWallet(page, keystoreConfig);
-    await checkConnectionToWallet(page, TestDataEnums.keystoreWalletAddress);
+    await TestActions.navigateToConnectWallet(page);
+    await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
+    await TestActions.checkConnectionToWallet(
+      page,
+      TestDataEnums.keystoreWalletAddress
+    );
   });
 
   test('should be able to sign and send batch transactions with the Web Wallet', async ({
@@ -35,11 +29,12 @@ test.describe('Batch Transactions', () => {
     const numberOfTransactions = 5; // 5 transactions are being sent to the contract
 
     // Get initial balance before any actions
-    const initialBalance = await getCurrentBalance(page);
-    console.log(`Initial balance: ${initialBalance}`);
+    const initialBalance = await TestActions.getCurrentBalance(page);
 
     // Check that initial balance is greater than 5
-    expect(initialBalance).toBeGreaterThan(5); // 5 EGLD is being sent to the contract
+    expect(initialBalance).toBeGreaterThan(
+      TEST_CONSTANTS.MIN_BALANCE_FOR_BATCH_TX
+    );
 
     // Click LeftPanel - Batch Transactions
     await page.getByText('Batch Transactions').first().click();
@@ -48,10 +43,10 @@ test.describe('Batch Transactions', () => {
     await page.getByTestId(SelectorsEnum.signAndBatchButton).click();
 
     // Wait for the web wallet page to be loaded which is the new tab
-    const walletPage = await waitForPageByUrlSubstring(
+    const walletPage = await TestActions.waitForPageByUrlSubstring({
       page,
-      OriginPageEnum.multiversxWallet
-    );
+      urlSubstring: OriginPageEnum.multiversxWallet
+    });
 
     // If the web wallet page is not loaded, throw an error
     if (!walletPage) {
@@ -61,19 +56,22 @@ test.describe('Batch Transactions', () => {
     }
 
     // Sign transaction by confirming with keystore in the web wallet
-    await confirmWalletTx(walletPage, keystoreConfig);
+    await TestActions.confirmWalletTransaction(walletPage, keystoreConfig);
 
     // Sign batch transactions in the web wallet
-    await signBatchTransactions(
+    await TestActions.signBatchTransactions({
       walletPage,
-      SelectorsEnum.signAndBatchButton,
+      buttonSelector: SelectorsEnum.signAndBatchButton,
       numberOfTransactions
-    );
+    });
 
     // Wait for transaction toast to be displayed
-    await waitForToastToBeDisplayed(page);
+    await TestActions.waitForToastToBeDisplayed(page);
 
     // Check that the transaction toast shows that all transactions are signed
-    await checkToastShowsTransactionsSigned(page, numberOfTransactions);
+    await TestActions.checkToastShowsTransactionsSigned(
+      page,
+      numberOfTransactions
+    );
   });
 });

@@ -1,11 +1,7 @@
 import { test } from '@playwright/test';
 
-import {
-  checkConnectionToWallet,
-  connectWebWallet,
-  navigateToConnectWallet
-} from '../support/actions';
-import { TestDataEnums } from '../support/test.data';
+import * as TestActions from '../support';
+import { TestDataEnums } from '../support/testdata';
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath,
@@ -18,22 +14,22 @@ const pemConfig = {
 
 test.describe('Connect a wallet', () => {
   test.beforeEach(async ({ page }) => {
-    await navigateToConnectWallet(page);
+    await TestActions.navigateToConnectWallet(page);
   });
 
   test('should be able to connect to Web Wallet with Keystore file', async ({
     page
   }) => {
-    await connectWebWallet(page, keystoreConfig);
+    await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
 
-    await checkConnectionToWallet(page, TestDataEnums.keystoreWalletAddress);
+    await TestActions.checkConnectionToWallet(page, TestDataEnums.keystoreWalletAddress);
   });
 
   test('should be able to connect to Web Wallet with PEM file', async ({
     page
   }) => {
-    await connectWebWallet(page, pemConfig);
+    await TestActions.connectWebWallet({ page, loginMethod: pemConfig });
 
-    await checkConnectionToWallet(page, TestDataEnums.pemWalletAddress);
+    await TestActions.checkConnectionToWallet(page, TestDataEnums.pemWalletAddress);
   });
 });

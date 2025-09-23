@@ -1,23 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-import {
-  checkConnectionToWallet,
-  connectWebWallet,
-  handlePingPong,
-  navigateToConnectWallet,
-  confirmWalletTx,
-  checkButtonStatus,
-  getCurrentBalance,
-  verifyBalanceChange,
-  waitForToastToBeDisplayed,
-  waitForPageByUrlSubstring
-} from '../support/actions';
+import * as TestActions from '../support';
 import {
   TestDataEnums,
   PingPongEnum,
   OriginPageEnum,
   SelectorsEnum
-} from '../support/test.data';
+} from '../support/testdata';
 import { TEST_CONSTANTS } from '../support/constants';
 
 const keystoreConfig = {
@@ -27,16 +16,19 @@ const keystoreConfig = {
 
 test.describe('Ping & Pong', () => {
   test.beforeEach(async ({ page }) => {
-    await navigateToConnectWallet(page);
-    await connectWebWallet(page, keystoreConfig);
-    await checkConnectionToWallet(page, TestDataEnums.keystoreWalletAddress);
+    await TestActions.navigateToConnectWallet(page);
+    await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
+    await TestActions.checkConnectionToWallet(
+      page,
+      TestDataEnums.keystoreWalletAddress
+    );
   });
 
   test('should be able to sign Ping & Pong (ABI) with the Web Wallet', async ({
     page
   }) => {
     // Get initial balance before any actions
-    const initialBalance = await getCurrentBalance(page);
+    const initialBalance = await TestActions.getCurrentBalance(page);
 
     // Check that initial balance is greater than the minimum required
     expect(initialBalance).toBeGreaterThan(
@@ -47,13 +39,16 @@ test.describe('Ping & Pong', () => {
     await page.getByText('Ping & Pong (ABI)').first().click();
 
     // Perform Ping or Pong action based on which button is enabled
-    const clickedButton = await handlePingPong(page, PingPongEnum.abi);
+    const clickedButton = await TestActions.handlePingPong(
+      page,
+      PingPongEnum.abi
+    );
 
     // Wait for the web wallet page to be loaded which is the new tab
-    const walletPage = await waitForPageByUrlSubstring(
+    const walletPage = await TestActions.waitForPageByUrlSubstring({
       page,
-      OriginPageEnum.multiversxWallet
-    );
+      urlSubstring: OriginPageEnum.multiversxWallet
+    });
 
     // If the web wallet page is not loaded, throw an error
     if (!walletPage) {
@@ -63,18 +58,26 @@ test.describe('Ping & Pong', () => {
     }
 
     // Sign transaction by confirming with keystore or pem
-    await confirmWalletTx(walletPage, keystoreConfig);
+    await TestActions.confirmWalletTransaction(walletPage, keystoreConfig);
 
     // Click on Sign button to confirm the transaction in the web wallet
     await walletPage.getByTestId(SelectorsEnum.signButton).click();
 
     // Wait for transaction toast to be displayed
-    await waitForToastToBeDisplayed(page);
+    await TestActions.waitForToastToBeDisplayed(page);
 
     // Check balance change based on the action performed
-    await verifyBalanceChange(page, initialBalance, clickedButton);
+    await TestActions.verifyBalanceChange({
+      page,
+      initialBalance,
+      clickedButton
+    });
 
     // Check that the button status changed after the action
-    await checkButtonStatus(page, PingPongEnum.abi, clickedButton);
+    await TestActions.checkButtonStatus({
+      page,
+      type: PingPongEnum.abi,
+      lastClickedButton: clickedButton
+    });
   });
 });

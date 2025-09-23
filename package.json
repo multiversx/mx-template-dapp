@@ -30,7 +30,7 @@
   "scripts": {
     "lint": "eslint --ext js,ts,tsx src --fix",
     "run-cypress": "npx cypress run",
-    "start-devnet": "npm run copy-devnet-config & vite dev --force",
+    "start-devnet": "npm run copy-devnet-config & vite dev",
     "start-testnet": "npm run copy-testnet-config & vite dev",
     "start-mainnet": "npm run copy-mainnet-config & vite dev",
     "build-devnet": "tsc & npm run copy-devnet-config & vite build",

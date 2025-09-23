@@ -1,17 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-import {
-  checkConnectionToWallet,
-  connectWebWallet,
-  navigateToConnectWallet,
-  confirmWalletTx,
-  waitForPageByUrlSubstring
-} from '../support/actions';
+import * as TestActions from '../support';
 import {
   TestDataEnums,
   SelectorsEnum,
   OriginPageEnum
-} from '../support/test.data';
+} from '../support/testdata';
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath,
@@ -20,9 +14,12 @@ const keystoreConfig = {
 
 test.describe('Sign Message', () => {
   test.beforeEach(async ({ page }) => {
-    await navigateToConnectWallet(page);
-    await connectWebWallet(page, keystoreConfig);
-    await checkConnectionToWallet(page, TestDataEnums.keystoreWalletAddress);
+    await TestActions.navigateToConnectWallet(page);
+    await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
+    await TestActions.checkConnectionToWallet(
+      page,
+      TestDataEnums.keystoreWalletAddress
+    );
   });
 
   test('should be able to sign Message with the Web Wallet', async ({
@@ -42,13 +39,13 @@ test.describe('Sign Message', () => {
     await page.getByTestId(SelectorsEnum.signMsgBtn).click();
 
     // Wait for the web wallet page to be loaded which is the new tab
-    const walletPage = await waitForPageByUrlSubstring(
+    const walletPage = await TestActions.waitForPageByUrlSubstring({
       page,
-      OriginPageEnum.multiversxWallet
-    );
+      urlSubstring: OriginPageEnum.multiversxWallet
+    });
 
     // Sign transaction by confirming with keystore in the web wallet
-    await confirmWalletTx(walletPage, keystoreConfig);
+    await TestActions.confirmWalletTransaction(walletPage, keystoreConfig);
 
     // Click on Sign button to confirm the sign message in the web wallet
     await walletPage.getByTestId(SelectorsEnum.signMsgWalletBtn).click();

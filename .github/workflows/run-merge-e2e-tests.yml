@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 jobs:
   Slack-Notification:
-    runs-on: ubuntu-latest
+    runs-on: runner-dapp
     steps:
       - name: Slack Notification
         uses: rtCamp/action-slack-notify@master
@@ -17,7 +17,7 @@ jobs:
           SLACK_TITLE : 'Playwright E2E Template RUN'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
   E2E-RUN:
-    runs-on: ubuntu-latest
+    runs-on: runner-dapp
     needs: Slack-Notification
     steps:
       - name: Checkout

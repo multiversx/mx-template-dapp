@@ -13,7 +13,7 @@ export enum OriginPageEnum {
 }
 
 export enum SelectorsEnum {
-  walletFile = '[data-testid="walletFile"]',
+  walletFile = 'walletFile',
   passwordInput = 'accessPass',
   submitButton = 'submitButton',
   confirmButton = 'confirmBtn',
