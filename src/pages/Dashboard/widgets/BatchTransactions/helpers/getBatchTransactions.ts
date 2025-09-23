@@ -13,7 +13,7 @@ const NUMBER_OF_TRANSACTIONS = 5;
 export const getBatchTransactions = ({
   address,
   chainID
-}: TransactionProps): Transaction[] => {
+}: TransactionProps): Promise<Transaction>[] => {
   const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
   const factoryConfig = new TransactionsFactoryConfig({ chainID });
