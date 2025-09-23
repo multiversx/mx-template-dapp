@@ -11,13 +11,13 @@ import {
   PingPongOutput
 } from 'components';
 import { contractAddress } from 'config';
+import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import {
-  getCountdownSeconds,
-  getTransactionsSource,
-  setTimeRemaining,
-  setTransactionsSource
-} from 'helpers';
-import { MvxButton, MvxDataWithExplorerLink, useGetNetworkConfig } from 'lib';
+  MvxButton,
+  MvxDataWithExplorerLink,
+  useGetNetworkConfig,
+  useGetPendingTransactionsSessions
+} from 'lib';
 import { ACCOUNTS_ENDPOINT, Transaction, useGetPendingTransactions } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
@@ -39,8 +39,12 @@ export interface PingTransactionPayloadType {
 
 interface PingPongComponentPropsType {
   identifier: `${ItemsIdentifiersEnum}`;
-  sendPingTransaction: (payload: PingTransactionPayloadType) => void;
-  sendPongTransaction: (transactions?: Transaction[]) => Promise<void>;
+  sendPingTransaction: (
+    payload: PingTransactionPayloadType
+  ) => Promise<string | undefined>;
+  sendPongTransaction: (
+    transactions?: Transaction[]
+  ) => Promise<string | undefined>;
   getTimeToPong: () => Promise<number | null | undefined>;
   pingAmount?: string;
   getPingTransaction?: () => Promise<Transaction | null>;
@@ -59,9 +63,11 @@ export const PingPongComponent = ({
   tokenLogin
 }: PingPongComponentPropsType) => {
   const { network } = useGetNetworkConfig();
+  const [state, setState] = useState<string>();
   const transactions = useGetPendingTransactions();
-  const pingPongTransactions =
-    getTransactionsSource() === identifier ? transactions : [];
+  const pendingSession = useGetPendingTransactionsSessions();
+  const [sessionId] = Object.keys(pendingSession);
+  const pingPongTransactions = state === sessionId ? transactions : [];
   const hasPendingTransactions = pingPongTransactions.length > 0;
   const explorerAddress = network.explorerAddress;
 
@@ -83,10 +89,9 @@ export const PingPongComponent = ({
   };
 
   const onSendPingTransaction = async () => {
-    setTransactionsSource(identifier);
-
     if (pingAmount) {
-      await sendPingTransaction({ amount: pingAmount });
+      const sessionId = await sendPingTransaction({ amount: pingAmount });
+      setState(sessionId);
       return;
     }
 
@@ -100,14 +105,16 @@ export const PingPongComponent = ({
       return;
     }
 
-    await sendPingTransaction({ transactions: [pingTransaction] });
+    const sessionId = await sendPingTransaction({
+      transactions: [pingTransaction]
+    });
+    setState(sessionId);
   };
 
   const onSendPongTransaction = async () => {
-    setTransactionsSource(identifier);
-
     if (pingAmount) {
-      await sendPongTransaction();
+      const sessionId = await sendPongTransaction();
+      setState(sessionId);
       return;
     }
 
@@ -121,7 +128,8 @@ export const PingPongComponent = ({
       return;
     }
 
-    await sendPongTransaction([pongTransaction]);
+    const sessionId = await sendPongTransaction([pongTransaction]);
+    setState(sessionId);
   };
 
   const timeRemaining = moment()

@@ -4,8 +4,9 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 
-import { MvxButton } from 'lib';
+import { MvxButton, useGetPendingTransactionsSessions } from 'lib';
 import { OutputContainer, TransactionsOutput } from 'components';
 import {
   useGetAccount,
@@ -13,7 +14,6 @@ import {
   useGetPendingTransactions
 } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
-import { getTransactionsSource, setTransactionsSource } from 'helpers';
 
 import {
   signAndAutoSendBatchTransactions,
@@ -38,15 +38,15 @@ interface BatchTransactionsButtonsType {
 export const BatchTransactions = () => {
   const { address, nonce } = useGetAccount();
   const { network } = useGetNetworkConfig();
+  const [state, setState] = useState('');
+  const pendingSession = useGetPendingTransactionsSessions();
+  const [sessionId] = Object.keys(pendingSession);
   const transactions = useGetPendingTransactions();
-  const batchTransactions =
-    getTransactionsSource() === 'batch' ? transactions : [];
+  const batchTransactions = state === sessionId ? transactions : [];
   const hasPendingTransactions = batchTransactions.length > 0;
 
   const executeSignAndAutoSendBatchTransactions = async () => {
-    setTransactionsSource('batch');
-
-    await signAndAutoSendBatchTransactions({
+    const sessionId = await signAndAutoSendBatchTransactions({
       address,
       nonce,
       chainID: network.chainId,
@@ -57,12 +57,12 @@ export const BatchTransactions = () => {
         successMessage: 'Batch transactions successful'
       }
     });
+
+    setState(sessionId);
   };
 
   const executeWrapMultiTransferESDTs = async () => {
-    setTransactionsSource('batch');
-
-    await wrapAndMultiTransferESDTs({
+    const sessionId = await wrapAndMultiTransferESDTs({
       address,
       nonce,
       chainID: network.chainId,
@@ -73,12 +73,12 @@ export const BatchTransactions = () => {
         successMessage: 'Wrap and multi-transfer ESDTs successful'
       }
     });
+
+    setState(sessionId);
   };
 
   const executeSwapAndLockTokens = async () => {
-    setTransactionsSource('batch');
-
-    await swapAndLockTokens({
+    const sessionId = await swapAndLockTokens({
       address,
       nonce,
       chainID: network.chainId,
@@ -88,6 +88,8 @@ export const BatchTransactions = () => {
         successMessage: 'Swap and lock successful'
       }
     });
+
+    setState(sessionId);
   };
 
   const batchTransactionsButtons: BatchTransactionsButtonsType[] = [
