@@ -1,0 +1,59 @@
+name: Playwright E2E Tests
+on:
+  schedule:
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+jobs:
+  Slack-Notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          if: always()
+          SLACK_ICON_EMOJI: ':robot_face:'
+          SLACK_USERNAME: Playwright Bot
+          SLACK_MESSAGE: E2E night tests are now running. A new notification will be sent when completed.
+          SLACK_TITLE : 'Playwright E2E Template RUN'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  E2E-RUN:
+    runs-on: ubuntu-latest
+    needs: Slack-Notification
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Setup pnpm
+        run: npm install -g pnpm
+      - name: Install Dependencies
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 120
+          retry_on: error
+          max_attempts: 2
+          command: pnpm install
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+      - name: Run Playwright E2E Tests
+        run: pnpm run run-playwright-test
+      - name: Slack Success Notification
+        uses: rtCamp/action-slack-notify@master
+        if: success()
+        env:
+          SLACK_ICON_EMOJI: ':white_check_mark:'
+          SLACK_USERNAME: Playwright Bot
+          SLACK_MESSAGE: 'E2E Night Tests completed successfully! All tests passed.'
+          SLACK_TITLE: 'Playwright E2E Tests - SUCCESS'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Slack Failure Notification
+        uses: rtCamp/action-slack-notify@master
+        if: failure()
+        env:
+          SLACK_ICON_EMOJI: ':x:'
+          SLACK_USERNAME: Playwright Bot
+          SLACK_MESSAGE: 'E2E Night Tests failed. Please check the logs for details.'
+          SLACK_TITLE: 'Playwright E2E Tests - FAILED'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

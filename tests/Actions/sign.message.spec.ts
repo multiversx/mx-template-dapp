@@ -1,0 +1,60 @@
+import { test, expect } from '@playwright/test';
+
+import {
+  checkConnectionToWallet,
+  connectWebWallet,
+  navigateToConnectWallet,
+  confirmWalletTx,
+  waitForPageByUrlSubstring
+} from '../support/actions';
+import {
+  TestDataEnums,
+  SelectorsEnum,
+  OriginPageEnum
+} from '../support/test.data';
+
+const keystoreConfig = {
+  keystore: TestDataEnums.keystoreFilePath,
+  password: TestDataEnums.keystoreFilePassword
+};
+
+test.describe('Sign Message', () => {
+  test.beforeEach(async ({ page }) => {
+    await navigateToConnectWallet(page);
+    await connectWebWallet(page, keystoreConfig);
+    await checkConnectionToWallet(page, TestDataEnums.keystoreWalletAddress);
+  });
+
+  test('should be able to sign Message with the Web Wallet', async ({
+    page
+  }) => {
+    const message = 'mvx';
+
+    // Click LeftPanel - Sign Message
+    await page.getByText('Sign Message').first().click();
+
+    // Write a message to be signed
+    await page
+      .getByRole('textbox', { name: 'Write message here' })
+      .fill(message);
+
+    // Click on Sign button
+    await page.getByTestId(SelectorsEnum.signMsgBtn).click();
+
+    // Wait for the web wallet page to be loaded which is the new tab
+    const walletPage = await waitForPageByUrlSubstring(
+      page,
+      OriginPageEnum.multiversxWallet
+    );
+
+    // Sign transaction by confirming with keystore in the web wallet
+    await confirmWalletTx(walletPage, keystoreConfig);
+
+    // Click on Sign button to confirm the sign message in the web wallet
+    await walletPage.getByTestId(SelectorsEnum.signMsgWalletBtn).click();
+
+    // Check that the decoded message is displayed which means the message was signed
+    await expect(page.getByPlaceholder('Decoded message')).toHaveValue(message);
+    // TODO: also check the encoded message and signature when testId are added
+  });
+});
