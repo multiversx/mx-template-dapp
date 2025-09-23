@@ -1,9 +1,8 @@
-import { Page } from '@playwright/test';
-
-import { PingPongEnum, SelectorsEnum } from './testdata';
+import { SelectorsEnum } from './testdata';
 import { TEST_CONSTANTS } from './constants';
+import { HandlePingPongType } from './types';
 
-export const handlePingPong = async (page: Page, type: PingPongEnum) => {
+export const handlePingPong = async ({ page, type }: HandlePingPongType) => {
   const container = page.locator(`#ping-pong-${type}`);
   const pingButton = container.getByTestId(SelectorsEnum.btnPing);
   const pongButton = container.getByTestId(SelectorsEnum.btnPong);

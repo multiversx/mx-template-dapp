@@ -1,6 +1,11 @@
 import { Page } from '@playwright/test';
 
 import { TEST_CONSTANTS } from './constants';
+import {
+  WaitForPageByUrlSubstringType,
+  WaitForNewPageType,
+  CreateNotFoundErrorType
+} from './types';
 
 const getPagesSafely = async (page: Page): Promise<Page[]> => {
   try {
@@ -30,11 +35,11 @@ const waitForCurrentPageNavigation = async (
   return page;
 };
 
-const waitForNewPage = async (
-  page: Page,
-  urlSubstring: string,
-  timeout: number
-): Promise<Page> => {
+const waitForNewPage = async ({
+  page,
+  urlSubstring,
+  timeout
+}: WaitForNewPageType): Promise<Page> => {
   const newPage = await page.context().waitForEvent('page', {
     timeout: timeout - TEST_CONSTANTS.URL_NAVIGATION_TIMEOUT
   });
@@ -56,12 +61,12 @@ const getAvailablePagesUrls = (pages: Page[]): string => {
   return pages.map((p) => getPageUrlSafely(p)).join(', ');
 };
 
-const createNotFoundError = (
-  urlSubstring: string,
-  timeout: number,
-  currentPageUrl: string,
-  availablePagesUrls: string
-): Error => {
+const createNotFoundError = ({
+  urlSubstring,
+  timeout,
+  currentPageUrl,
+  availablePagesUrls
+}: CreateNotFoundErrorType): Error => {
   return new Error(
     `No page found with URL containing "${urlSubstring}" after ${timeout}ms. ` +
       `Current page URL: ${currentPageUrl}, Available pages: ${availablePagesUrls}`
@@ -72,11 +77,7 @@ export const waitForPageByUrlSubstring = async ({
   page,
   urlSubstring,
   timeout = TEST_CONSTANTS.PAGE_WAIT_TIMEOUT
-}: {
-  page: Page;
-  urlSubstring: string;
-  timeout?: number;
-}) => {
+}: WaitForPageByUrlSubstringType) => {
   // Check if page already exists
   const existingPages = await getPagesSafely(page);
   const existingPage = findPageByUrl(existingPages, urlSubstring);
@@ -90,7 +91,7 @@ export const waitForPageByUrlSubstring = async ({
   } catch {
     // Fallback: Wait for new page to be created
     try {
-      return await waitForNewPage(page, urlSubstring, timeout);
+      return await waitForNewPage({ page, urlSubstring, timeout });
     } catch {
       // Final fallback: Check all pages again
       const allPages = await getPagesSafely(page);
@@ -104,12 +105,12 @@ export const waitForPageByUrlSubstring = async ({
       const currentPageUrl = getPageUrlSafely(page);
       const availablePagesUrls = getAvailablePagesUrls(allPages);
 
-      throw createNotFoundError(
+      throw createNotFoundError({
         urlSubstring,
         timeout,
         currentPageUrl,
         availablePagesUrls
-      );
+      });
     }
   }
 };

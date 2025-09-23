@@ -22,7 +22,10 @@ test.describe('Connect a wallet', () => {
   }) => {
     await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
 
-    await TestActions.checkConnectionToWallet(page, TestDataEnums.keystoreWalletAddress);
+    await TestActions.checkConnectionToWallet(
+      page,
+      TestDataEnums.keystoreWalletAddress
+    );
   });
 
   test('should be able to connect to Web Wallet with PEM file', async ({
@@ -30,6 +33,9 @@ test.describe('Connect a wallet', () => {
   }) => {
     await TestActions.connectWebWallet({ page, loginMethod: pemConfig });
 
-    await TestActions.checkConnectionToWallet(page, TestDataEnums.pemWalletAddress);
+    await TestActions.checkConnectionToWallet(
+      page,
+      TestDataEnums.pemWalletAddress
+    );
   });
 });

@@ -1,31 +1,29 @@
-import { expect, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 
 import { TEST_CONSTANTS } from './constants';
 import { getCurrentBalance } from './getCurrentBalance';
+import { CheckBalanceUpdateType } from './types';
 
 export const checkBalanceUpdate = async ({
   page,
   initialBalance,
   expectedChange
-}: {
-  page: Page;
-  initialBalance: number;
-  expectedChange: number;
-}) => {
+}: CheckBalanceUpdateType) => {
   const expectedBalance = initialBalance + expectedChange;
+
+  const pollFunction = async () => {
+    const currentBalance = await getCurrentBalance(page);
+    return currentBalance;
+  };
+
+  const pollOptions = {
+    message: `Balance should reach ${expectedBalance}`,
+    timeout: TEST_CONSTANTS.BALANCE_POLLING_TIMEOUT
+  };
 
   try {
     await expect
-      .poll(
-        async () => {
-          const currentBalance = await getCurrentBalance(page);
-          return currentBalance;
-        },
-        {
-          message: `Balance should reach ${expectedBalance}`,
-          timeout: TEST_CONSTANTS.BALANCE_POLLING_TIMEOUT
-        }
-      )
+      .poll(pollFunction, pollOptions)
       .toBeCloseTo(expectedBalance, TEST_CONSTANTS.BALANCE_PRECISION);
   } catch (error) {
     // If expect.poll times out, get the current balance for debugging

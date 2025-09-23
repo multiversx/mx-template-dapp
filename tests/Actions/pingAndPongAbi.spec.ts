@@ -39,10 +39,10 @@ test.describe('Ping & Pong', () => {
     await page.getByText('Ping & Pong (ABI)').first().click();
 
     // Perform Ping or Pong action based on which button is enabled
-    const clickedButton = await TestActions.handlePingPong(
+    const clickedButton = await TestActions.handlePingPong({
       page,
-      PingPongEnum.abi
-    );
+      type: PingPongEnum.abi
+    });
 
     // Wait for the web wallet page to be loaded which is the new tab
     const walletPage = await TestActions.waitForPageByUrlSubstring({

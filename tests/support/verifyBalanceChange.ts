@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 
 import { TEST_CONSTANTS } from './constants';
 import { checkBalanceUpdate } from './checkBalanceUpdate';
+import { VerifyBalanceChangeType } from './types';
 
 /**
  * Verifies balance change based on the action performed
@@ -13,11 +14,7 @@ export const verifyBalanceChange = async ({
   page,
   initialBalance,
   clickedButton
-}: {
-  page: Page;
-  initialBalance: number;
-  clickedButton: 'ping' | 'pong';
-}) => {
+}: VerifyBalanceChangeType) => {
   let expectedChange: number;
 
   if (clickedButton === 'ping') {

@@ -1,16 +1,13 @@
-import { expect, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 
-import { PingPongEnum, SelectorsEnum } from './testdata';
+import { SelectorsEnum } from './testdata';
+import { CheckButtonStatusType } from './types';
 
 export const checkButtonStatus = async ({
   page,
   type,
   lastClickedButton
-}: {
-  page: Page;
-  type: PingPongEnum;
-  lastClickedButton: 'ping' | 'pong' | null;
-}) => {
+}: CheckButtonStatusType) => {
   const container = page.locator(`#ping-pong-${type}`);
   const pingButton = container.getByTestId(SelectorsEnum.btnPing);
   const pongButton = container.getByTestId(SelectorsEnum.btnPong);

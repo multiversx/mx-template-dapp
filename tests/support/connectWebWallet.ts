@@ -1,17 +1,18 @@
-import { expect, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 
 import { OriginPageEnum, SelectorsEnum } from './testdata';
 import { waitForPageByUrlSubstring } from './waitForPageByUrlSubstring';
+import {
+  ConnectWebWalletType,
+  AuthenticateWithKeystoreType,
+  AuthenticateWithPemType
+} from './types';
 
 const authenticateWithKeystore = async ({
   walletPage,
   keystorePath,
   keystorePassword
-}: {
-  walletPage: Page;
-  keystorePath: string;
-  keystorePassword: string;
-}) => {
+}: AuthenticateWithKeystoreType) => {
   await walletPage.getByTestId(SelectorsEnum.keystoreBtn).click();
   await walletPage.setInputFiles(
     `[data-testid="${SelectorsEnum.walletFile}"]`,
@@ -29,10 +30,7 @@ const authenticateWithKeystore = async ({
 const authenticateWithPem = async ({
   walletPage,
   pemPath
-}: {
-  walletPage: Page;
-  pemPath: string;
-}) => {
+}: AuthenticateWithPemType) => {
   await walletPage.getByTestId(SelectorsEnum.pemBtn).click();
   await walletPage.setInputFiles(
     `[data-testid="${SelectorsEnum.walletFile}"]`,
@@ -44,14 +42,7 @@ const authenticateWithPem = async ({
 export const connectWebWallet = async ({
   page,
   loginMethod
-}: {
-  page: Page;
-  loginMethod: {
-    keystore?: string;
-    pem?: string;
-    password?: string;
-  };
-}) => {
+}: ConnectWebWalletType) => {
   // Click the cross-window button to open wallet
   await page.getByTestId(SelectorsEnum.crossWindow).click();
 
@@ -77,6 +68,7 @@ export const connectWebWallet = async ({
     );
   }
 
+  // Authenticate with keystore
   if (loginMethod.keystore) {
     if (!loginMethod.password) {
       throw new Error('Password is required when using a keystore.');
@@ -86,12 +78,20 @@ export const connectWebWallet = async ({
       keystorePath: loginMethod.keystore,
       keystorePassword: loginMethod.password
     });
-  } else if (loginMethod.pem) {
+    await walletPage.waitForEvent('close');
+    return;
+  }
+
+  // Authenticate with PEM
+  if (loginMethod.pem) {
     await authenticateWithPem({
       walletPage,
       pemPath: loginMethod.pem
     });
+    await walletPage.waitForEvent('close');
+    return;
   }
 
+  // Wait for the wallet page to be closed
   await walletPage.waitForEvent('close');
 };

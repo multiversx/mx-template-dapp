@@ -23,24 +23,19 @@ export const confirmWalletTransaction = async (
     pem?: string;
   }
 ) => {
-  let method: 'keystore' | 'pem' | 'none';
-  if (loginMethod.keystore) {
-    method = 'keystore';
-  } else if (loginMethod.pem) {
-    method = 'pem';
-  } else {
-    method = 'none';
-  }
-
-  switch (method) {
-    case 'keystore':
+  switch (true) {
+    // Authenticate with keystore
+    case !!loginMethod.keystore:
       await confirmWithKeystore(page, loginMethod.password ?? '');
-      break;
-    case 'pem':
+      return;
+
+    // Authenticate with PEM
+    case !!loginMethod.pem:
       await confirmWithPem(page, loginMethod.pem!);
-      break;
-    case 'none':
-      // No authentication method provided
-      break;
+      return;
+
+    // No authentication method provided
+    default:
+      return;
   }
 };

@@ -1,18 +1,14 @@
 import { BrowserContext, Page, expect } from '@playwright/test';
 
 import { pasteStringFromClipboard } from './pasteStringFromClipboard';
+import { CheckClipboardContainsType } from './types';
 
 export async function checkClipboardContains({
   page,
   context,
   text,
   timeout = 5000 // 5 seconds
-}: {
-  page: Page;
-  context: BrowserContext;
-  text: string;
-  timeout?: number;
-}) {
+}: CheckClipboardContainsType) {
   const startTime = Date.now();
   const maxAttempts = 10;
   let attempts = 0;
