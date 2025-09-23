@@ -60,8 +60,8 @@ export default defineConfig({
     }
   ],
   webServer: {
-    command: 'npm run start-devnet',
+    command: 'pnpm run start-devnet',
     timeout: 120 * 1000,
-    reuseExistingServer: true
+    reuseExistingServer: !process.env.CI
   }
 });
