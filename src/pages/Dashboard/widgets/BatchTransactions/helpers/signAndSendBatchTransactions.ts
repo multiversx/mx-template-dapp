@@ -4,7 +4,7 @@ import { TransactionProps } from 'types';
 import { getBatchTransactions } from './getBatchTransactions';
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 
-export const signAndAutoSendBatchTransactions = async ({
+export const signAndSendBatchTransactions = async ({
   address,
   nonce,
   chainID,
