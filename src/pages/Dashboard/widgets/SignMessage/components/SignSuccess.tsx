@@ -1,5 +1,6 @@
 import { Label } from 'components';
 import { CopyButton, Message } from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 
 import { decodeMessage } from '../helpers';
 
@@ -37,6 +38,7 @@ export const SignSuccess = (props: VerifyMessagePropsType) => {
           <Label>Signature:</Label>
 
           <textarea
+            data-testid={DataTestIdsEnum.messageSignature}
             readOnly
             className={styles.signatureText}
             rows={2}
@@ -49,13 +51,14 @@ export const SignSuccess = (props: VerifyMessagePropsType) => {
         <div className={styles.encodedMessageContainer}>
           <Label>Encoded message:</Label>
 
-          <p>{encodedMessage}</p>
+          <p data-testid={DataTestIdsEnum.encodedMessage}>{encodedMessage}</p>
         </div>
 
         <div className={styles.decodedMessageContainer}>
           <Label>Decoded message:</Label>
 
           <textarea
+            data-testid={DataTestIdsEnum.decodedMessage}
             readOnly
             className={styles.decodedMessageText}
             rows={1}

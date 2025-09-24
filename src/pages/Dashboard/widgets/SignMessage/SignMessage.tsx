@@ -38,7 +38,13 @@ export const SignMessage = () => {
   const { address } = useGetAccount();
   const provider = getAccountProvider();
 
+  const hasMessage = message.trim().length > 0;
+
   const handleSubmit = async () => {
+    if (!hasMessage) {
+      return;
+    }
+
     try {
       const messageToSign = new Message({
         address: new Address(address),
@@ -105,19 +111,21 @@ export const SignMessage = () => {
             />
           )}
 
-          <div className={styles.signMessagePasteButtonContainer}>
-            <button
-              onClick={handlePasteClick}
-              className={styles.signMessagePasteButton}
-            >
-              <span className={styles.signMessagePasteButtonText}>Paste</span>
+          {!['success', 'error'].includes(state) && (
+            <div className={styles.signMessagePasteButtonContainer}>
+              <button
+                onClick={handlePasteClick}
+                className={styles.signMessagePasteButton}
+              >
+                <span className={styles.signMessagePasteButtonText}>Paste</span>
 
-              <FontAwesomeIcon
-                icon={faPaste}
-                className={styles.signMessagePasteButtonText}
-              />
-            </button>
-          </div>
+                <FontAwesomeIcon
+                  icon={faPaste}
+                  className={styles.signMessagePasteButtonText}
+                />
+              </button>
+            </div>
+          )}
 
           {state === 'error' && <SignFailure />}
         </OutputContainer>
@@ -145,6 +153,7 @@ export const SignMessage = () => {
             data-testid='signMsgBtn'
             onClick={handleSubmit}
             size='small'
+            disabled={!hasMessage}
           >
             <FontAwesomeIcon
               icon={faPenNib}

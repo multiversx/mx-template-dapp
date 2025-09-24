@@ -14,6 +14,9 @@ export const BATCH_TRANSACTIONS_SC = {
   lock_MEX: {
     contract: 'erd1qqqqqqqqqqqqqpgq2l97gw2j4wnlem4y2rx7dudqlssjtwpu0n4sd0u3w2',
     data: 'ESDTTransfer@4D45582D613635396430@0de0b6b3a7640000@6c6f636b546f6b656e73@05a0'
+  },
+  multiTransfer_wEGLD_USDC: {
+    data: 'MultiESDTNFTTransfer@address@02@5745474C442D613238633539@00@06f05b59d3b20000@555344432D333530633465@00@0f4240'
   }
 };
 

@@ -1,8 +1,8 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
   faBell,
-  faCreditCard,
   faPowerOff,
+  faWallet,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -126,7 +126,7 @@ export const Header = () => {
         {isLoggedIn ? (
           <div className={styles.headerNavigationAddress}>
             <FontAwesomeIcon
-              icon={faCreditCard}
+              icon={faWallet}
               className={styles.headerNavigationAddressWallet}
             />
 
