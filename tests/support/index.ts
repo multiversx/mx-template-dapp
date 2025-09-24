@@ -15,7 +15,6 @@ export { checkButtonStatus } from './checkButtonStatus';
 // Balance related functions
 export { getCurrentBalance } from './getCurrentBalance';
 export { checkBalanceUpdate } from './checkBalanceUpdate';
-export { verifyBalanceChange } from './verifyBalanceChange';
 
 // Transaction and toast functions
 export { checkToastShowsTransactionsSigned } from './checkToastShowsTransactionsSigned';

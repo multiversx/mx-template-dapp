@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 
 import { SelectorsEnum } from './testdata';
 import { getTestIdSelector } from './testIdSelector';
+import { LoginMethodType } from './types';
 
 const confirmWithKeystore = async (walletPage: Page, password: string) => {
   await walletPage.getByTestId(SelectorsEnum.passwordInput).fill(password);
@@ -18,11 +19,7 @@ const confirmWithPem = async (walletPage: Page, pemPath: string) => {
 
 export const confirmWalletTransaction = async (
   page: Page,
-  loginMethod: {
-    keystore?: string;
-    password?: string;
-    pem?: string;
-  }
+  loginMethod: LoginMethodType
 ) => {
   switch (true) {
     // Authenticate with keystore

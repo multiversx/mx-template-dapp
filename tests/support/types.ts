@@ -15,12 +15,6 @@ export interface CheckBalanceUpdateType {
   expectedChange: number;
 }
 
-export interface VerifyBalanceChangeType {
-  page: Page;
-  initialBalance: number;
-  clickedButton: 'ping' | 'pong';
-}
-
 export interface CheckButtonStatusType {
   page: Page;
   type: PingPongEnum;

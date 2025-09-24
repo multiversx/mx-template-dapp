@@ -53,21 +53,19 @@ const getPageUrlSafely = (page: Page): string => {
   }
 };
 
-const getAvailablePagesUrls = (pages: Page[]): string => {
-  return pages.map((p) => getPageUrlSafely(p)).join(', ');
-};
+const getAvailablePagesUrls = (pages: Page[]): string =>
+  pages.map((p) => getPageUrlSafely(p)).join(', ');
 
 const createNotFoundError = ({
   urlSubstring,
   timeout,
   currentPageUrl,
   availablePagesUrls
-}: CreateNotFoundErrorType): Error => {
-  return new Error(
+}: CreateNotFoundErrorType): Error =>
+  new Error(
     `No page found with URL containing "${urlSubstring}" after ${timeout}ms. ` +
       `Current page URL: ${currentPageUrl}, Available pages: ${availablePagesUrls}`
   );
-};
 
 export const waitForPageByUrlSubstring = async ({
   page,

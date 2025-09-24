@@ -31,10 +31,10 @@ test.describe('Native auth', () => {
     await page.getByText('Native auth').first().click();
 
     // Check that the address is displayed
-    const trimFullAddress = page
+    const nativeAuthAddress = page
       .locator(SelectorsEnum.nativeAuthId)
       .getByTestId(SelectorsEnum.nativeAuthTrimFullAddress);
-    await expect(trimFullAddress).toHaveText(
+    await expect(nativeAuthAddress).toHaveText(
       TestDataEnums.keystoreWalletAddress
     );
   });

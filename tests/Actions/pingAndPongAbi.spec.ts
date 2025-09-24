@@ -67,10 +67,13 @@ test.describe('Ping & Pong', () => {
     await TestActions.waitForToastToBeDisplayed(page);
 
     // Check balance change based on the action performed
-    await TestActions.verifyBalanceChange({
+    await TestActions.checkBalanceUpdate({
       page,
       initialBalance,
-      clickedButton
+      expectedChange:
+        clickedButton === 'ping'
+          ? TEST_CONSTANTS.PING_BALANCE_CHANGE
+          : TEST_CONSTANTS.PONG_BALANCE_CHANGE
     });
 
     // Check that the button status changed after the action
