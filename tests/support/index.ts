@@ -24,3 +24,6 @@ export { signBatchTransactions } from './signBatchTransactions';
 // Clipboard helper functions
 export { pasteStringFromClipboard } from './pasteStringFromClipboard';
 export { checkClipboardContains } from './checkClipboardContains';
+
+// Utility helper functions
+export { getTestIdSelector } from './testIdSelector';

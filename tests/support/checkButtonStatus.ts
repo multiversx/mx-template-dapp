@@ -9,8 +9,8 @@ export const checkButtonStatus = async ({
   lastClickedButton
 }: CheckButtonStatusType) => {
   const container = page.locator(`#ping-pong-${type}`);
-  const pingButton = container.getByTestId(SelectorsEnum.btnPing);
-  const pongButton = container.getByTestId(SelectorsEnum.btnPong);
+  const pingButton = container.getByTestId(SelectorsEnum.pingButton);
+  const pongButton = container.getByTestId(SelectorsEnum.pongButton);
 
   // Check that ping button became disabled by looking for disabled attribute
   if (lastClickedButton === 'ping') {
@@ -22,8 +22,4 @@ export const checkButtonStatus = async ({
     await expect(pongButton.locator('button')).toHaveAttribute('disabled');
     return;
   }
-
-  throw new Error(
-    'No button click information found. Did you call handlePingPong first?'
-  );
 };

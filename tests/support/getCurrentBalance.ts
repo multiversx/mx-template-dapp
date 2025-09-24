@@ -1,6 +1,7 @@
 import { expect, Page } from '@playwright/test';
 
 import { SelectorsEnum } from './testdata';
+import { getTestIdSelector } from './testIdSelector';
 
 export const getCurrentBalance = async (page: Page): Promise<number> => {
   const topInfoElement = page.getByTestId(SelectorsEnum.topInfo);
@@ -10,14 +11,14 @@ export const getCurrentBalance = async (page: Page): Promise<number> => {
 
   // Get the integer part
   const intElement = balanceElement.locator(
-    `[data-testid="${SelectorsEnum.formatAmountInt}"]`
+    getTestIdSelector(SelectorsEnum.formatAmountInt)
   );
   await expect(intElement).toBeVisible();
   const intText = await intElement.textContent();
 
   // Get the decimals part
   const decimalsElement = balanceElement.locator(
-    `[data-testid="${SelectorsEnum.formatAmountDecimals}"]`
+    getTestIdSelector(SelectorsEnum.formatAmountDecimals)
   );
   await expect(decimalsElement).toBeVisible();
   const decimalsText = await decimalsElement.textContent();

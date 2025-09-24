@@ -1,4 +1,13 @@
 import { Page } from '@playwright/test';
+import { BrowserContext } from '@playwright/test';
+
+import { PingPongEnum } from '../support/testdata';
+
+export interface LoginMethodType {
+  keystore?: string;
+  password?: string;
+  pem?: string;
+}
 
 export interface CheckBalanceUpdateType {
   page: Page;
@@ -14,13 +23,13 @@ export interface VerifyBalanceChangeType {
 
 export interface CheckButtonStatusType {
   page: Page;
-  type: import('./testdata').PingPongEnum;
-  lastClickedButton: 'ping' | 'pong' | null;
+  type: PingPongEnum;
+  lastClickedButton: 'ping' | 'pong';
 }
 
 export interface HandlePingPongType {
   page: Page;
-  type: import('./testdata').PingPongEnum;
+  type: PingPongEnum;
 }
 
 export interface WaitForPageByUrlSubstringType {
@@ -44,11 +53,7 @@ export interface CreateNotFoundErrorType {
 
 export interface ConnectWebWalletType {
   page: Page;
-  loginMethod: {
-    keystore?: string;
-    pem?: string;
-    password?: string;
-  };
+  loginMethod: LoginMethodType;
 }
 
 export interface AuthenticateWithKeystoreType {
@@ -64,11 +69,7 @@ export interface AuthenticateWithPemType {
 
 export interface ConfirmWalletTransactionType {
   page: Page;
-  loginMethod: {
-    keystore?: string;
-    password?: string;
-    pem?: string;
-  };
+  loginMethod: LoginMethodType;
 }
 
 export interface SignBatchTransactionsType {
@@ -101,12 +102,12 @@ export interface CheckToastShowsTransactionsSignedType {
 
 export interface PasteStringFromClipboardType {
   page: Page;
-  context: import('@playwright/test').BrowserContext;
+  context: BrowserContext;
 }
 
 export interface CheckClipboardContainsType {
   page: Page;
-  context: import('@playwright/test').BrowserContext;
+  context: BrowserContext;
   text: string;
   timeout?: number;
 }

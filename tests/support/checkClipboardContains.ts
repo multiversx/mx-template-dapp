@@ -1,14 +1,14 @@
-import { BrowserContext, Page, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
 
 import { pasteStringFromClipboard } from './pasteStringFromClipboard';
 import { CheckClipboardContainsType } from './types';
 
-export async function checkClipboardContains({
+export const checkClipboardContains = async ({
   page,
   context,
   text,
   timeout = 5000 // 5 seconds
-}: CheckClipboardContainsType) {
+}: CheckClipboardContainsType) => {
   const startTime = Date.now();
   const maxAttempts = 10;
   let attempts = 0;
@@ -39,4 +39,4 @@ export async function checkClipboardContains({
   // Game over - we've exhausted all attempts
   const finalClipboardText = await pasteStringFromClipboard(page, context);
   expect(finalClipboardText).toContain(text);
-}
+};

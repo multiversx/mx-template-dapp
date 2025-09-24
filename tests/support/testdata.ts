@@ -20,17 +20,19 @@ export enum SelectorsEnum {
   signButton = 'signBtn',
   topInfo = 'topInfo',
   crossWindow = 'crossWindow',
-  keystoreBtn = 'keystoreBtn',
-  pemBtn = 'pemBtn',
-  btnPing = 'btnPing',
-  btnPong = 'btnPong',
+  keystoreButton = 'keystoreBtn',
+  pemButton = 'pemBtn',
+  pingButton = 'btnPing',
+  pongButton = 'btnPong',
   txToast = 'transactionToastContent',
   balance = 'balance',
   formatAmountInt = 'formatAmountInt',
   formatAmountDecimals = 'formatAmountDecimals',
-  signMsgBtn = 'signMsgBtn',
-  signMsgWalletBtn = 'signButton',
-  signAndBatchButton = 'sign-auto-send'
+  signMsgButton = 'signMsgBtn',
+  signMsgWalletButton = 'signButton',
+  signAndBatchButton = 'sign-auto-send',
+  nativeAuthId = '#native-auth',
+  nativeAuthTrimFullAddress = 'trimFullAddress'
 }
 
 export enum PingPongEnum {

@@ -36,7 +36,7 @@ test.describe('Sign Message', () => {
       .fill(message);
 
     // Click on Sign button
-    await page.getByTestId(SelectorsEnum.signMsgBtn).click();
+    await page.getByTestId(SelectorsEnum.signMsgButton).click();
 
     // Wait for the web wallet page to be loaded which is the new tab
     const walletPage = await TestActions.waitForPageByUrlSubstring({
@@ -48,7 +48,7 @@ test.describe('Sign Message', () => {
     await TestActions.confirmWalletTransaction(walletPage, keystoreConfig);
 
     // Click on Sign button to confirm the sign message in the web wallet
-    await walletPage.getByTestId(SelectorsEnum.signMsgWalletBtn).click();
+    await walletPage.getByTestId(SelectorsEnum.signMsgWalletButton).click();
 
     // Check that the decoded message is displayed which means the message was signed
     await expect(page.getByPlaceholder('Decoded message')).toHaveValue(message);

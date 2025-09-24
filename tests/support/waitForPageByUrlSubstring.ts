@@ -18,12 +18,8 @@ const getPagesSafely = async (page: Page): Promise<Page[]> => {
   }
 };
 
-const findPageByUrl = (
-  pages: Page[],
-  urlSubstring: string
-): Page | undefined => {
-  return pages.find((browserPage) => browserPage.url().includes(urlSubstring));
-};
+const findPageByUrl = (pages: Page[], urlSubstring: string): Page | undefined =>
+  pages.find((browserPage) => browserPage.url().includes(urlSubstring));
 
 const waitForCurrentPageNavigation = async (
   page: Page,

@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 
 import { OriginPageEnum, SelectorsEnum } from './testdata';
 import { waitForPageByUrlSubstring } from './waitForPageByUrlSubstring';
+import { getTestIdSelector } from './testIdSelector';
 import {
   ConnectWebWalletType,
   AuthenticateWithKeystoreType,
@@ -13,9 +14,9 @@ const authenticateWithKeystore = async ({
   keystorePath,
   keystorePassword
 }: AuthenticateWithKeystoreType) => {
-  await walletPage.getByTestId(SelectorsEnum.keystoreBtn).click();
+  await walletPage.getByTestId(SelectorsEnum.keystoreButton).click();
   await walletPage.setInputFiles(
-    `[data-testid="${SelectorsEnum.walletFile}"]`,
+    getTestIdSelector(SelectorsEnum.walletFile),
     keystorePath
   );
 
@@ -31,9 +32,9 @@ const authenticateWithPem = async ({
   walletPage,
   pemPath
 }: AuthenticateWithPemType) => {
-  await walletPage.getByTestId(SelectorsEnum.pemBtn).click();
+  await walletPage.getByTestId(SelectorsEnum.pemButton).click();
   await walletPage.setInputFiles(
-    `[data-testid="${SelectorsEnum.walletFile}"]`,
+    getTestIdSelector(SelectorsEnum.walletFile),
     pemPath
   );
   await walletPage.getByTestId(SelectorsEnum.submitButton).click();
@@ -48,12 +49,6 @@ export const connectWebWallet = async ({
 
   // Add a small delay to ensure the click is processed
   await page.waitForTimeout(1000);
-
-  // Debug: Check what pages exist before waiting
-  const pagesBefore = await page.context().pages();
-  console.log(
-    `Pages before waiting: ${pagesBefore.map((p) => p.url()).join(', ')}`
-  );
 
   // Wait for the web wallet page to be loaded which is the new tab
   const walletPage = await waitForPageByUrlSubstring({

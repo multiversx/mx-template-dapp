@@ -4,8 +4,8 @@ import { HandlePingPongType } from './types';
 
 export const handlePingPong = async ({ page, type }: HandlePingPongType) => {
   const container = page.locator(`#ping-pong-${type}`);
-  const pingButton = container.getByTestId(SelectorsEnum.btnPing);
-  const pongButton = container.getByTestId(SelectorsEnum.btnPong);
+  const pingButton = container.getByTestId(SelectorsEnum.pingButton);
+  const pongButton = container.getByTestId(SelectorsEnum.pongButton);
 
   // Check if buttons are enabled by looking for absence of disabled attribute
   const isPingEnabled =
