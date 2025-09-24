@@ -26,7 +26,7 @@ const styles = {
   pingPongContainer: 'ping-pong-container flex flex-col gap-6',
   infosContainer: 'infos-container flex flex-col gap-2',
   addressComponent: 'address-component flex w-full justify-between',
-  timeRemaining: 'text-red-600',
+  timeRemaining: 'time-remaining text-red-600',
   buttonsContainer: 'buttons-container flex flex-col gap-2',
   buttons: 'buttons flex justify-start gap-2',
   buttonContent: 'button-content text-sm font-normal'

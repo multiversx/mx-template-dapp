@@ -16,7 +16,7 @@ const styles = {
   footerDisclaimerLink: 'footer-disclaimer-link cursor-pointer hover:underline',
   footerDescription: 'footer-description flex items-center justify-center gap-1 text-sm text-neutral-500 gap-1',
   footerDescriptionNetwork: 'footer-description-network capitalize',
-  footerHeartIcon: 'text-red-500'
+  footerHeartIcon: 'footer-heart-icon text-red-500'
 } satisfies Record<string, string>;
 
 export const Footer = () => {

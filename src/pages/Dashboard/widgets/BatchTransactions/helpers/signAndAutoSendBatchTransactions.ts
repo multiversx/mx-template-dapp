@@ -18,13 +18,11 @@ export const signAndAutoSendBatchTransactions = async ({
 }) => {
   const provider = getAccountProvider();
 
-  const transactions = await Promise.all(
-    getBatchTransactions({
-      address,
-      nonce,
-      chainID
-    })
-  );
+  const transactions = await getBatchTransactions({
+    address,
+    nonce,
+    chainID
+  });
 
   const signedTransactions = await provider.signTransactions(transactions);
 

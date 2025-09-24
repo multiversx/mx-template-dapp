@@ -38,6 +38,8 @@ export const SignMessage = () => {
   const { address } = useGetAccount();
   const provider = getAccountProvider();
 
+  const isDefaultState = !['success', 'error'].includes(state);
+
   const hasMessage = message.trim().length > 0;
 
   const handleSubmit = async () => {
@@ -89,7 +91,7 @@ export const SignMessage = () => {
       <div className={styles.signMessage}>
         <label className={styles.signMessageLabel}>Message</label>
         <OutputContainer>
-          {!['success', 'error'].includes(state) && (
+          {isDefaultState && (
             <textarea
               placeholder='Write message here'
               className={styles.signMessageText}
@@ -111,7 +113,7 @@ export const SignMessage = () => {
             />
           )}
 
-          {!['success', 'error'].includes(state) && (
+          {isDefaultState && (
             <div className={styles.signMessagePasteButtonContainer}>
               <button
                 onClick={handlePasteClick}

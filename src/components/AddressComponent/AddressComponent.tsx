@@ -19,7 +19,7 @@ const styles = {
   trimmedAddress: 'trimmed-address !w-max',
   addressButtons: 'address-buttons flex gap-1 transition-all duration-200 ease-out',
   addressButton: 'address-button text-primary hover:text-accent transition-all duration-200 ease-out',
-  addressButtonHeader: '!text-link hover:!text-primary transition-all duration-200 ease-out'
+  addressButtonHeader: 'address-button-header !text-link hover:!text-primary transition-all duration-200 ease-out'
 } satisfies Record<string, string>;
 
 interface AddressComponentPropsType {

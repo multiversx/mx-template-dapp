@@ -1,8 +1,8 @@
 // prettier-ignore
 const styles = {
-    disclaimerContainer: 'prose-sm mx-auto my-auto  max-w-prose',
-    disclaimerTitle: 'mb-4 font-medium text-2xl text-primary',
-    disclaimerContent: 'flex flex-col gap-4 text-secondary'
+    disclaimerContainer: 'disclaimer-container prose-sm mx-auto my-auto  max-w-prose',
+    disclaimerTitle: 'disclaimer-title mb-4 font-medium text-2xl text-primary',
+    disclaimerContent: 'disclaimer-content flex flex-col gap-4 text-secondary'
 } satisfies Record<string, string>;
 
 export const Disclaimer = () => (

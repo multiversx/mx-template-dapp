@@ -12,7 +12,7 @@ const styles = {
   signatureText: 'signature-text w-full resize-none outline-none bg-transparent',
   encodedMessageContainer: 'encoded-message-container flex flex-row w-full gap-2',
   decodedMessageContainer: 'decoded-message-container flex flex-row w-full gap-2',
-  decodedMessageText: 'resize-none outline-none text-green-700 bg-transparent'
+  decodedMessageText: 'decoded-message-text resize-none outline-none text-green-700 bg-transparent'
 } satisfies Record<string, string>;
 
 interface VerifyMessagePropsType {

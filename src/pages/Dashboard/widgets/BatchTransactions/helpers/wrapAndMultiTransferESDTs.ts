@@ -2,34 +2,30 @@ import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
 import { TransactionProps } from 'types';
 
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';
-import { getWrapAndMultiTransferESDTsTransactions } from './getWrapAndMultiTransferESDTsTransactions';
+import { getWrapAndMultiTransferEsdtsTransactions } from './getWrapAndMultiTransferEsdtsTransactions';
 
-export const wrapAndMultiTransferESDTs = async ({
-  address,
-  nonce,
-  chainID,
-  transactionsDisplayInfo
-}: TransactionProps & {
+interface WrapAndMultiTransferEsdtsType extends TransactionProps {
   transactionsDisplayInfo?: TransactionsDisplayInfoType;
-}) => {
+}
+
+export const wrapAndMultiTransferEsdts = async (
+  props: WrapAndMultiTransferEsdtsType
+) => {
+  const { address, nonce, chainID, transactionsDisplayInfo } = props;
+
   const provider = getAccountProvider();
 
-  const transactionsToSign = getWrapAndMultiTransferESDTsTransactions({
+  const transactionsToSign = await getWrapAndMultiTransferEsdtsTransactions({
     address,
     chainID,
     nonce
   });
 
-  const [
-    wrapOneEGLDTransaction,
-    swapHalfWEGLDToUSDCTransaction,
-    multiTransferHalfWEGLDAndOneUSDC
-  ] = await provider.signTransactions(transactionsToSign);
+  const [wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld] =
+    await provider.signTransactions(transactionsToSign);
 
   const groupedTransactions = [
-    [wrapOneEGLDTransaction],
-    [swapHalfWEGLDToUSDCTransaction],
-    [multiTransferHalfWEGLDAndOneUSDC]
+    [wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld]
   ];
 
   const sessionId = await sendAndTrackTransactions({

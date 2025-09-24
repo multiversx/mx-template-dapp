@@ -18,7 +18,7 @@ import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 import {
   signAndAutoSendBatchTransactions,
   swapAndLockTokens,
-  wrapAndMultiTransferESDTs
+  wrapAndMultiTransferEsdts
 } from './helpers';
 
 // prettier-ignore
@@ -61,8 +61,8 @@ export const BatchTransactions = () => {
     setState(sessionId);
   };
 
-  const executeWrapMultiTransferESDTs = async () => {
-    const sessionId = await wrapAndMultiTransferESDTs({
+  const executeWrapMultiTransferEsdts = async () => {
+    const sessionId = await wrapAndMultiTransferEsdts({
       address,
       nonce,
       chainID: network.chainId,
@@ -101,7 +101,7 @@ export const BatchTransactions = () => {
     },
     {
       dataTestId: 'wrap-multi-transfer',
-      onClickFunction: executeWrapMultiTransferESDTs,
+      onClickFunction: executeWrapMultiTransferEsdts,
       icon: faPaperPlane,
       label: 'Wrap & Multi-Transfer'
     },

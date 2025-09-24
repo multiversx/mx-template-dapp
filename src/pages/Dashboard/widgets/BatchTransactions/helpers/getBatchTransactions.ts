@@ -10,24 +10,28 @@ import { TransactionProps } from 'types';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 
-export const getBatchTransactions = ({
+export const getBatchTransactions = async ({
   address,
   chainID
-}: TransactionProps): Promise<Transaction>[] => {
+}: TransactionProps): Promise<Transaction[]> => {
   const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
   const factoryConfig = new TransactionsFactoryConfig({ chainID });
   const factory = new TransferTransactionsFactory({ config: factoryConfig });
 
-  return transactions.map((id) => {
-    const tokenTransfer = factory.createTransactionForNativeTokenTransfer(
-      Address.newFromBech32(address),
-      {
-        receiver: Address.newFromBech32(address),
-        nativeAmount: BigInt(new BigNumber(id).plus(1).shiftedBy(18).toFixed())
-      }
-    );
+  return Promise.all(
+    transactions.map((id) => {
+      const tokenTransfer = factory.createTransactionForNativeTokenTransfer(
+        Address.newFromBech32(address),
+        {
+          receiver: Address.newFromBech32(address),
+          nativeAmount: BigInt(
+            new BigNumber(id).plus(1).shiftedBy(18).toFixed()
+          )
+        }
+      );
 
-    return tokenTransfer;
-  });
+      return tokenTransfer;
+    })
+  );
 };
