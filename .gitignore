@@ -36,3 +36,4 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /certificates/
+/temps/

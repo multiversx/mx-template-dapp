@@ -39,7 +39,9 @@
     "copy-devnet-config": "cp ./src/config/config.devnet.ts ./src/config/index.ts",
     "copy-testnet-config": "cp ./src/config/config.testnet.ts ./src/config/index.ts",
     "copy-mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "run-playwright-test": "playwright test",
+    "run-playwright-test-ui": "playwright test --ui"
   },
   "browserslist": [
     ">0.2%",
