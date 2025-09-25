@@ -9,14 +9,14 @@ import {
 } from '@multiversx/sdk-core/out';
 
 import { BATCH_TRANSACTIONS_SC } from 'config';
-import { Address, Transaction } from 'lib';
+import { Address } from 'lib';
 import { TransactionProps } from 'types';
 import { contractAddress } from 'config';
 
 export const getWrapAndMultiTransferEsdtsTransactions = async ({
   address,
   chainID
-}: TransactionProps): Promise<Transaction[]> => {
+}: TransactionProps) => {
   const factoryConfig = new TransactionsFactoryConfig({ chainID });
   const factory = new TransferTransactionsFactory({ config: factoryConfig });
   const factorySC = new SmartContractTransactionsFactory({
@@ -49,7 +49,7 @@ export const getWrapAndMultiTransferEsdtsTransactions = async ({
       gasLimit: BigInt(25500000),
       arguments: args,
       tokenTransfers: [
-        new TokenTransfer({ token: wEgldToken, amount: 500000000000000000n })
+        new TokenTransfer({ token: wEgldToken, amount: 500000000000000000n }) //0.5 xWEGLD
       ]
     }
   );
@@ -60,14 +60,14 @@ export const getWrapAndMultiTransferEsdtsTransactions = async ({
       tokenTransfers: [
         new TokenTransfer({
           token: wEgldToken,
-          amount: 500000000000000000n
+          amount: 500000000000000000n //0.5 xWEGLD
         }),
         new TokenTransfer({
           token: usdcToken,
-          amount: 1000000n
+          amount: 1000000n // 1 USDC
         })
       ]
     });
 
-  return [wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld];
+  return { wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld };
 };

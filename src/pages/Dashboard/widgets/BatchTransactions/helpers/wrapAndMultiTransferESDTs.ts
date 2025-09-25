@@ -23,11 +23,14 @@ export const wrapAndMultiTransferEsdts = async (
     nonce
   });
 
-  const [wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld] =
-    await provider.signTransactions(transactionsToSign);
+  const signedTransactions = await provider.signTransactions([
+    transactionsToSign.wrapOneEgld,
+    transactionsToSign.swapHalfWEgldToUsdc,
+    transactionsToSign.multiTransferOneUsdcHalfWEgld
+  ]);
 
   const groupedTransactions = [
-    [wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld]
+    [signedTransactions[0], signedTransactions[1], signedTransactions[2]]
   ];
 
   const sessionId = await sendAndTrackTransactions({

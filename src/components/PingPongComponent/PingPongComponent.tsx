@@ -63,11 +63,12 @@ export const PingPongComponent = ({
   tokenLogin
 }: PingPongComponentPropsType) => {
   const { network } = useGetNetworkConfig();
-  const [state, setState] = useState<string>();
+  const [currentSessionId, setCurrentSessionId] = useState<string>();
   const transactions = useGetPendingTransactions();
   const pendingSession = useGetPendingTransactionsSessions();
   const [sessionId] = Object.keys(pendingSession);
-  const pingPongTransactions = state === sessionId ? transactions : [];
+  const pingPongTransactions =
+    currentSessionId === sessionId ? transactions : [];
   const hasPendingTransactions = pingPongTransactions.length > 0;
   const explorerAddress = network.explorerAddress;
 
@@ -91,7 +92,7 @@ export const PingPongComponent = ({
   const onSendPingTransaction = async () => {
     if (pingAmount) {
       const sessionId = await sendPingTransaction({ amount: pingAmount });
-      setState(sessionId);
+      setCurrentSessionId(sessionId);
       return;
     }
 
@@ -108,13 +109,13 @@ export const PingPongComponent = ({
     const sessionId = await sendPingTransaction({
       transactions: [pingTransaction]
     });
-    setState(sessionId);
+    setCurrentSessionId(sessionId);
   };
 
   const onSendPongTransaction = async () => {
     if (pingAmount) {
       const sessionId = await sendPongTransaction();
-      setState(sessionId);
+      setCurrentSessionId(sessionId);
       return;
     }
 
@@ -129,7 +130,7 @@ export const PingPongComponent = ({
     }
 
     const sessionId = await sendPongTransaction([pongTransaction]);
-    setState(sessionId);
+    setCurrentSessionId(sessionId);
   };
 
   const timeRemaining = moment()

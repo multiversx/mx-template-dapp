@@ -1,17 +1,10 @@
-import {
-  Transaction,
-  TransactionManager,
-  TransactionsDisplayInfoType
-} from 'lib';
+import { TransactionManagerTrackOptionsType } from '@multiversx/sdk-dapp/out/managers/TransactionManager/TransactionManager.types';
+
+import { Transaction, TransactionManager } from 'lib';
 
 type SendAndTrackTransactionsType = {
   transactions: Transaction[] | Transaction[][];
-  options?: {
-    disableToasts?: boolean;
-    transactionsDisplayInfo?: TransactionsDisplayInfoType;
-    onFail?: (sessionId?: string) => Promise<void>;
-    onSuccess?: (sessionId?: string) => Promise<void>;
-  };
+  options?: TransactionManagerTrackOptionsType;
 };
 
 export const sendAndTrackTransactions = async ({

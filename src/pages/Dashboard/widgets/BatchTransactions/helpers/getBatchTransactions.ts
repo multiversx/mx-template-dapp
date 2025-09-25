@@ -20,16 +20,17 @@ export const getBatchTransactions = async ({
   const factory = new TransferTransactionsFactory({ config: factoryConfig });
 
   return Promise.all(
-    transactions.map((id) => {
-      const tokenTransfer = factory.createTransactionForNativeTokenTransfer(
-        Address.newFromBech32(address),
-        {
-          receiver: Address.newFromBech32(address),
-          nativeAmount: BigInt(
-            new BigNumber(id).plus(1).shiftedBy(18).toFixed()
-          )
-        }
-      );
+    transactions.map(async (id) => {
+      const nativeAmount = new BigNumber(id).plus(1).shiftedBy(18).toFixed();
+
+      const tokenTransfer =
+        await factory.createTransactionForNativeTokenTransfer(
+          Address.newFromBech32(address),
+          {
+            receiver: Address.newFromBech32(address),
+            nativeAmount: BigInt(nativeAmount)
+          }
+        );
 
       return tokenTransfer;
     })

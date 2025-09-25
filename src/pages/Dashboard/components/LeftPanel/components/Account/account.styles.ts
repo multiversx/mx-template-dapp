@@ -9,7 +9,7 @@ export default {
   connectedAccountDetailsHidden: 'hidden',
   connectedAccountInfo: 'connected-account-info flex h-14 gap-2 items-center',
   connectedAccountInfoIcon: 'connected-account-info-icon min-w-10 min-h-10 max-h-10 max-w-10 flex items-center justify-center text-tertiary border border-secondary rounded-lg overflow-hidden p-1.5 transition-all duration-200 ease-out',
-  connectedAccountInfoText: 'connected-account-info-text truncate flex flex-col',
+  connectedAccountInfoText: 'connected-account-info-text truncate flex flex-col !max-w-[80%]',
   connectedAccountInfoTextValue: 'connected-account-info-text-value text-primary transition-all duration-200 ease-out text-base',
   connectedAccountDetailsIcon: 'connected-account-details-icon w-6 h-6',
   connectedAccountDetailsHerotag: 'connected-account-details-herotag rounded-full',

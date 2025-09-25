@@ -38,12 +38,13 @@ interface BatchTransactionsButtonsType {
 export const BatchTransactions = () => {
   const { address, nonce } = useGetAccount();
   const { network } = useGetNetworkConfig();
-  const [state, setState] = useState('');
+  const [currentSessionId, setCurrentSessionId] = useState('');
   const pendingSession = useGetPendingTransactionsSessions();
   const [sessionId] = Object.keys(pendingSession);
   const transactions = useGetPendingTransactions();
-  const batchTransactions = state === sessionId ? transactions : [];
-  const hasPendingTransactions = batchTransactions.length > 0;
+  const pendingBatchTransactions =
+    currentSessionId === sessionId ? transactions : [];
+  const hasPendingTransactions = pendingBatchTransactions.length > 0;
 
   const executeSignAndAutoSendBatchTransactions = async () => {
     const sessionId = await signAndAutoSendBatchTransactions({
@@ -58,7 +59,7 @@ export const BatchTransactions = () => {
       }
     });
 
-    setState(sessionId);
+    setCurrentSessionId(sessionId);
   };
 
   const executeWrapMultiTransferEsdts = async () => {
@@ -74,7 +75,7 @@ export const BatchTransactions = () => {
       }
     });
 
-    setState(sessionId);
+    setCurrentSessionId(sessionId);
   };
 
   const executeSwapAndLockTokens = async () => {
@@ -89,7 +90,7 @@ export const BatchTransactions = () => {
       }
     });
 
-    setState(sessionId);
+    setCurrentSessionId(sessionId);
   };
 
   const batchTransactionsButtons: BatchTransactionsButtonsType[] = [
@@ -115,9 +116,9 @@ export const BatchTransactions = () => {
 
   return (
     <div id={ItemsIdentifiersEnum.batchTransactions} className={styles.batchTx}>
-      {batchTransactions.length > 0 && (
+      {pendingBatchTransactions.length > 0 && (
         <OutputContainer>
-          <TransactionsOutput transactions={batchTransactions} />
+          <TransactionsOutput transactions={pendingBatchTransactions} />
         </OutputContainer>
       )}
       <div className={styles.buttonsContainer}>
