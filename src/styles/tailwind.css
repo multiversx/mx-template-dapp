@@ -23,6 +23,8 @@
   --color-btn-primary: var(--mvx-button-text-primary);
   --color-btn-secondary: var(--mvx-button-text-secondary);
   --color-link: var(--mvx-link-color);
+  --color-success: var(--mvx-success-color);
+  --color-error: var(--mvx-error-color);
   --border-color-secondary: var(--mvx-border-color-secondary);
   --border-color-logo: var(--mvx-text-color-primary);
 }

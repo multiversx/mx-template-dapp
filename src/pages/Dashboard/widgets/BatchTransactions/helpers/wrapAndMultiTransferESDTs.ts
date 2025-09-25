@@ -1,3 +1,5 @@
+import { ToastManager } from '@multiversx/sdk-dapp/out/managers/internal';
+
 import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
 import { TransactionProps } from 'types';
 
@@ -31,7 +33,17 @@ export const wrapAndMultiTransferEsdts = async (
   const sessionId = await sendAndTrackTransactions({
     transactions: groupedTransactions,
     options: {
-      transactionsDisplayInfo
+      transactionsDisplayInfo,
+      onFail: async () => {
+        ToastManager.getInstance().createCustomToast({
+          toastId: 'multi-transfer-fail',
+          icon: 'times',
+          iconClassName: 'error text-error mt-1',
+          title: 'Multi-Transfer Failed',
+          message:
+            'Fix it by replacing multiTransfer receiver address with an actual user address.'
+        });
+      }
     }
   });
 

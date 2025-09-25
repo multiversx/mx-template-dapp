@@ -9,6 +9,8 @@ type SendAndTrackTransactionsType = {
   options?: {
     disableToasts?: boolean;
     transactionsDisplayInfo?: TransactionsDisplayInfoType;
+    onFail?: (sessionId?: string) => Promise<void>;
+    onSuccess?: (sessionId?: string) => Promise<void>;
   };
 };
 

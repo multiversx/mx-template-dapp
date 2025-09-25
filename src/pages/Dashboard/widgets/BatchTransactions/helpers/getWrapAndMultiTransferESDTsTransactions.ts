@@ -11,6 +11,7 @@ import {
 import { BATCH_TRANSACTIONS_SC } from 'config';
 import { Address, Transaction } from 'lib';
 import { TransactionProps } from 'types';
+import { contractAddress } from 'config';
 
 export const getWrapAndMultiTransferEsdtsTransactions = async ({
   address,
@@ -31,16 +32,12 @@ export const getWrapAndMultiTransferEsdtsTransactions = async ({
         BATCH_TRANSACTIONS_SC.egld_wEGLD.contract
       ),
       function: 'wrapEgld',
-      gasLimit: BigInt(10000000000000),
-      arguments: [],
+      gasLimit: BigInt(25500000),
       nativeTransferAmount: 1000000000000000000n
     }
   );
 
-  const args: any[] = [
-    new TokenIdentifierValue('USDC-350c4e'),
-    new U32Value(1)
-  ];
+  const args = [new TokenIdentifierValue('USDC-350c4e'), new U32Value(1)];
 
   const swapHalfWEgldToUsdc = await factorySC.createTransactionForExecute(
     Address.newFromBech32(address),
@@ -59,15 +56,15 @@ export const getWrapAndMultiTransferEsdtsTransactions = async ({
 
   const multiTransferOneUsdcHalfWEgld =
     await factory.createTransactionForTransfer(Address.newFromBech32(address), {
-      receiver: Address.newFromBech32(address),
+      receiver: Address.newFromBech32(contractAddress),
       tokenTransfers: [
-        new TokenTransfer({
-          token: usdcToken,
-          amount: 1000000n
-        }),
         new TokenTransfer({
           token: wEgldToken,
           amount: 500000000000000000n
+        }),
+        new TokenTransfer({
+          token: usdcToken,
+          amount: 1000000n
         })
       ]
     });
