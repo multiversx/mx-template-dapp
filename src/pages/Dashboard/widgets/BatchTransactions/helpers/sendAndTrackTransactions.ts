@@ -1,6 +1,8 @@
-import { TransactionManagerTrackOptionsType } from '@multiversx/sdk-dapp/out/managers/TransactionManager/TransactionManager.types';
-
-import { Transaction, TransactionManager } from 'lib';
+import {
+  Transaction,
+  TransactionManager,
+  TransactionManagerTrackOptionsType
+} from 'lib';
 
 type SendAndTrackTransactionsType = {
   transactions: Transaction[] | Transaction[][];

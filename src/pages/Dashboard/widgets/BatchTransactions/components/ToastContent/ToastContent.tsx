@@ -1,6 +1,7 @@
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ToastManager } from '@multiversx/sdk-dapp/out/managers/internal';
+
+import { ToastManager } from 'lib';
 
 // prettier-ignore
 const styles = {

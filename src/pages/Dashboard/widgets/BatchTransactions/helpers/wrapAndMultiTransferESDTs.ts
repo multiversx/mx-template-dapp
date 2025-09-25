@@ -1,6 +1,8 @@
-import { ToastManager } from '@multiversx/sdk-dapp/out/managers/internal';
-
-import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
+import {
+  getAccountProvider,
+  ToastManager,
+  TransactionsDisplayInfoType
+} from 'lib';
 import { TransactionProps } from 'types';
 
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';

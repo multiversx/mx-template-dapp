@@ -13,3 +13,4 @@ export { initApp } from '@multiversx/sdk-dapp/out/methods/initApp/initApp';
 export { setAxiosInterceptors } from '@multiversx/sdk-dapp/out/utils/network/setAxiosInterceptors';
 export { signTransactions } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/signTransactions';
 export { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
+export { ToastManager } from '@multiversx/sdk-dapp/out/managers/internal';

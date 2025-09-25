@@ -7,4 +7,5 @@ export type { ServerTransactionType } from '@multiversx/sdk-dapp/out/types/serve
 export type { SignedTransactionType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 export type { TransactionsDisplayInfoType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 export type { TransactionsRowType } from '@multiversx/sdk-dapp/out/controllers/TransactionsTableController/transactionsTableController.types';
+export type { TransactionManagerTrackOptionsType } from '@multiversx/sdk-dapp/out/managers/TransactionManager/TransactionManager.types';
 export { ThemesEnum } from '@multiversx/sdk-dapp/out/types/theme.types';

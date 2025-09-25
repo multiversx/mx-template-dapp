@@ -21,7 +21,11 @@ export const getBatchTransactions = async ({
 
   return Promise.all(
     transactions.map(async (id) => {
-      const nativeAmount = new BigNumber(id).plus(1).shiftedBy(18).toFixed();
+      const nativeAmount = new BigNumber(id)
+        .plus(1)
+        .dividedBy(10)
+        .shiftedBy(18)
+        .toFixed();
 
       const tokenTransfer =
         await factory.createTransactionForNativeTokenTransfer(

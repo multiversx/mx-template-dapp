@@ -1,7 +1,10 @@
-import { ToastManager } from '@multiversx/sdk-dapp/out/managers/internal';
 import { createRoot } from 'react-dom/client';
 
-import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
+import {
+  getAccountProvider,
+  ToastManager,
+  TransactionsDisplayInfoType
+} from 'lib';
 import { TransactionProps } from 'types';
 
 import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';
