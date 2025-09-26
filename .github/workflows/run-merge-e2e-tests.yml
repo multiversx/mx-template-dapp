@@ -1,4 +1,4 @@
-name: Playwright E2E Tests
+name: Playwright merge E2E Tests
 on: 
   pull_request:
     branches: [main]

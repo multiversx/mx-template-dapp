@@ -1,12 +1,20 @@
-import { expect, Page } from '@playwright/test';
+import { expect } from '@playwright/test';
 
 import { SelectorsEnum } from './testdata';
 import { getTestIdSelector } from './testIdSelector';
+import { ExtractBalanceFromContainerType } from './types';
 
-export const getCurrentBalance = async (page: Page): Promise<number> => {
-  const topInfoElement = page.getByTestId(SelectorsEnum.topInfo);
-  await topInfoElement.scrollIntoViewIfNeeded();
-  const balanceElement = topInfoElement.getByTestId(SelectorsEnum.balance);
+export const extractBalanceFromContainer = async ({
+  page,
+  containerSelector,
+  selectorType = 'testId'
+}: ExtractBalanceFromContainerType): Promise<number> => {
+  const containerElement =
+    selectorType === 'testId'
+      ? page.getByTestId(containerSelector)
+      : page.locator(containerSelector);
+  await containerElement.scrollIntoViewIfNeeded();
+  const balanceElement = containerElement.getByTestId(SelectorsEnum.balance);
   await expect(balanceElement).toBeVisible();
 
   // Get the integer part

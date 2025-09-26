@@ -9,7 +9,7 @@ export enum TestDataEnums {
 
 export enum OriginPageEnum {
   multiversxWallet = 'wallet.multiversx.com',
-  templateDashboard = 'dashboard'
+  templateDashboard = '/dashboard'
 }
 
 export enum SelectorsEnum {
@@ -18,7 +18,7 @@ export enum SelectorsEnum {
   submitButton = 'submitButton',
   confirmButton = 'confirmBtn',
   signButton = 'signBtn',
-  topInfo = 'topInfo',
+  topInfoContainer = 'topInfo',
   crossWindow = 'crossWindow',
   keystoreButton = 'keystoreBtn',
   pemButton = 'pemBtn',
@@ -31,8 +31,31 @@ export enum SelectorsEnum {
   signMsgButton = 'signMsgBtn',
   signMsgWalletButton = 'signButton',
   signAndBatchButton = 'sign-auto-send',
-  nativeAuthId = '#native-auth',
-  nativeAuthTrimFullAddress = 'trimFullAddress'
+  nativeAuthContainer = '#native-auth',
+  trimFullAddress = 'trimFullAddress',
+  pingPongAbiContainer = '#ping-pong-abi',
+  batchTransactionsContainer = '#batch-transactions',
+  signMessageContainer = '#sign-message',
+  accountAddress = 'accountAddress',
+  heroTag = 'heroTag',
+  shard = 'addressShard',
+
+  // Transaction table selectors
+  transactionLink = 'transactionLink',
+  transactionAge = 'transactionAge',
+  senderShard = 'senderShard',
+  receiverShard = 'receiverShard',
+  transactionSender = 'transactionSender',
+  transactionReceiver = 'transactionReceiver',
+  receiverLink = 'receiverLink',
+  method = 'method',
+  formatAmountSymbol = 'formatAmountSymbol',
+  errorIcon = '.mvx\\:text-error',
+
+  // Table containers
+  transactionsAllTable = '#transactions-all table.transactions-table',
+  transactionsPingPongTable = '#transactions-ping-pong table.transactions-table',
+  transactionsTableBodyRow = 'tbody tr.transactions-table-body-row'
 }
 
 export enum PingPongEnum {

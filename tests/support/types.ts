@@ -11,6 +11,7 @@ export interface LoginMethodType {
 
 export interface CheckBalanceUpdateType {
   page: Page;
+  containerSelector: string;
   initialBalance: number;
   expectedChange: number;
 }
@@ -30,12 +31,6 @@ export interface WaitForPageByUrlSubstringType {
   page: Page;
   urlSubstring: string;
   timeout?: number;
-}
-
-export interface WaitForNewPageType {
-  page: Page;
-  urlSubstring: string;
-  timeout: number;
 }
 
 export interface CreateNotFoundErrorType {
@@ -81,11 +76,17 @@ export interface NavigateToConnectWalletType {
   page: Page;
 }
 
-export interface GetCurrentBalanceType {
+export interface ExtractBalanceFromContainerType {
   page: Page;
+  containerSelector: string;
+  selectorType: 'testId' | 'locator';
 }
 
 export interface WaitForToastToBeDisplayedType {
+  page: Page;
+}
+
+export interface WaitForToastToBeClosedType {
   page: Page;
 }
 
@@ -104,4 +105,38 @@ export interface CheckClipboardContainsType {
   context: BrowserContext;
   text: string;
   timeout?: number;
+}
+
+export interface ParseTransactionsTableType {
+  page: Page;
+  tableSelector?: string;
+  tableType: 'all' | 'ping-pong';
+  maxRows?: number;
+  enableLogging?: boolean;
+}
+
+export interface TransactionRow {
+  hash: string;
+  age: string;
+  ageInMinutes: number;
+  senderShard: string;
+  receiverShard: string;
+  fromAddress: string;
+  toAddress: string;
+  method: string;
+  value: number;
+  symbol: string;
+  isFailed: boolean;
+}
+
+export interface TransactionFilter {
+  maxAgeInMinutes?: number;
+  minAgeInMinutes?: number;
+  methods?: string[];
+  exactValue?: number;
+  onlySuccessful?: boolean;
+  onlyFailed?: boolean;
+  fromAddress?: string;
+  toAddress?: string;
+  enableLogging?: boolean;
 }

@@ -1,4 +1,4 @@
-name: Playwright E2E Tests
+name: Playwright night E2E Tests
 on:
   schedule:
     - cron: '0 20 * * *'
