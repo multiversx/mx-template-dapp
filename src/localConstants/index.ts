@@ -1,4 +1,3 @@
-export * from './browser.enum';
 export * from './dashboard';
 export * from './dataTestIds.enum';
 export * from './installExtensionsLinks';

@@ -3,6 +3,9 @@ import './styles/style.css';
 
 import { walletConnectV2ProjectId } from 'config';
 
+import { EnvironmentsEnum, InitAppType } from './lib';
+
+/*
 // Enable this block to showcase a custom provider implementation
 
 import { EnvironmentsEnum, ICustomProvider, InitAppType } from './lib';
@@ -20,6 +23,7 @@ const providers: ICustomProvider[] = [
 (window as any).multiversx = {};
 // Option 1: Add providers using the `window.providers` array
 (window as any).multiversx.providers = providers;
+*/
 
 export const config: InitAppType = {
   storage: { getStorageCallback: () => sessionStorage },
@@ -30,6 +34,15 @@ export const config: InitAppType = {
     providers: {
       walletConnect: {
         walletConnectV2ProjectId
+      }
+    },
+    transactionTracking: {
+      successfulToastLifetime: 5000,
+      onSuccess: async (sessionId) => {
+        console.log('DEFAULT ON SUCCESS', sessionId);
+      },
+      onFail: async (sessionId) => {
+        console.log('DEFAULT ON FAIL', sessionId);
       }
     }
   }

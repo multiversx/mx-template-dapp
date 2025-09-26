@@ -37,7 +37,13 @@ export const signAndSendBatchTransactions = async ({
   const sessionId = await sendAndTrackTransactions({
     transactions: groupedTransactions,
     options: {
-      transactionsDisplayInfo
+      transactionsDisplayInfo,
+      onSuccess: async (sessionId) => {
+        console.log('BATCH TRANSACTIONS ON SUCCESS', sessionId);
+      },
+      onFail: async (sessionId) => {
+        console.log('BATCH TRANSACTIONS ON FAIL', sessionId);
+      }
     }
   });
 
