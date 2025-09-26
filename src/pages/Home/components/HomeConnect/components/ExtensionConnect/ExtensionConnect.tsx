@@ -12,12 +12,8 @@ import { ReactComponent as WalletBraveLogo } from 'assets/img/wallet-brave-logo.
 import { ReactComponent as WalletChromeLogo } from 'assets/img/wallet-chrome-logo.svg';
 import { ReactComponent as WalletFirefoxLogo } from 'assets/img/wallet-firefox-logo.svg';
 import { ReactComponent as WalletIcon } from 'assets/img/web-wallet-icon.svg';
-import { getDetectedBrowser } from 'helpers/getDetectedBrowser';
-import {
-  BrowserEnum,
-  CHROME_EXTENSION_LINK,
-  FIREFOX_ADDON_LINK
-} from 'localConstants';
+import { CHROME_EXTENSION_LINK, FIREFOX_ADDON_LINK } from 'localConstants';
+import { BrowserEnum, getDetectedBrowser } from 'lib';
 
 import { BrowserFrame } from './components';
 import styles from './extensionConnect.styles';
@@ -33,22 +29,22 @@ const browserLogos: BrowserLogo[] = [
   { icon: BraveLogo }
 ];
 
+const getBrowserIcon = (browser?: BrowserEnum) => {
+  switch (browser) {
+    case BrowserEnum.Firefox:
+      return <WalletFirefoxLogo />;
+    case BrowserEnum.Brave:
+      return <WalletBraveLogo />;
+    case BrowserEnum.Chrome:
+      return <WalletChromeLogo />;
+    default:
+      return <WalletIcon />;
+  }
+};
+
 export const ExtensionConnect = () => {
   const detectedBrowser = getDetectedBrowser();
   const isFirefox = detectedBrowser === BrowserEnum.Firefox;
-
-  const getBrowserIcon = (browser?: BrowserEnum) => {
-    switch (browser) {
-      case BrowserEnum.Firefox:
-        return <WalletFirefoxLogo />;
-      case BrowserEnum.Brave:
-        return <WalletBraveLogo />;
-      case BrowserEnum.Chrome:
-        return <WalletChromeLogo />;
-      default:
-        return <WalletIcon />;
-    }
-  };
 
   const icon = getBrowserIcon(detectedBrowser);
 
