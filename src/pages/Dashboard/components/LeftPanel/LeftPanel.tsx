@@ -8,8 +8,15 @@ import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as IconExpand } from 'assets/img/expand-up-down.svg';
-import { AddressComponent, Logo } from 'components';
-import { getAccountProvider, useGetAccountInfo, useGetIsLoggedIn } from 'lib';
+import { Logo } from 'components';
+import {
+  ACCOUNTS_ENDPOINT,
+  getAccountProvider,
+  MvxDataWithExplorerLink,
+  useGetAccountInfo,
+  useGetIsLoggedIn,
+  useGetNetworkConfig
+} from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 
 import { Account, SideMenu } from './components';
@@ -30,10 +37,14 @@ export const LeftPanel = ({
 
   const { address } = useGetAccountInfo();
 
+  const { network } = useGetNetworkConfig();
+
   const isLoggedIn = useGetIsLoggedIn();
 
   const provider = getAccountProvider();
   const navigate = useNavigate();
+
+  const explorerAddress = network.explorerAddress;
 
   const handleLogout = async () => {
     await provider.logout();
@@ -72,7 +83,13 @@ export const LeftPanel = ({
               className={styles.leftPanelMobileAddressIcon}
             />
 
-            <AddressComponent address={address} isHeader />
+            <div className={styles.leftPanelMobileAddressWithExplorerLink}>
+              <MvxDataWithExplorerLink
+                data={address}
+                withTooltip={true}
+                explorerLink={`${explorerAddress}/${ACCOUNTS_ENDPOINT}/${address}`}
+              />
+            </div>
           </div>
 
           {isLoggedIn && (
