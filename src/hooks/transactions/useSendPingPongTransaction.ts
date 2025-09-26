@@ -54,15 +54,17 @@ export const useSendPingPongTransaction = () => {
       version: 1
     });
 
-    await signAndSendTransactions({
+    const sessionId = await signAndSendTransactions({
       transactions: [pingTransaction],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPingTransactionFromAbi = async (amount: string) => {
     const scFactory = await getSmartContractFactory();
-    const pingTransaction = scFactory.createTransactionForExecute(
+    const pingTransaction = await scFactory.createTransactionForExecute(
       new Address(address),
       {
         gasLimit: BigInt(6000000),
@@ -72,19 +74,23 @@ export const useSendPingPongTransaction = () => {
       }
     );
 
-    await signAndSendTransactions({
+    const sessionId = await signAndSendTransactions({
       transactions: [pingTransaction],
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPingTransactionFromService = async (
     transactions: Transaction[]
   ) => {
-    await signAndSendTransactions({
+    const sessionId = await signAndSendTransactions({
       transactions,
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPongTransaction = async () => {
@@ -99,15 +105,17 @@ export const useSendPingPongTransaction = () => {
       version: 1
     });
 
-    await signAndSendTransactions({
+    const sessionId = await signAndSendTransactions({
       transactions: [pongTransaction],
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPongTransactionFromAbi = async () => {
     const scFactory = await getSmartContractFactory();
-    const pongTransaction = scFactory.createTransactionForExecute(
+    const pongTransaction = await scFactory.createTransactionForExecute(
       new Address(address),
       {
         gasLimit: BigInt(6000000),
@@ -117,10 +125,12 @@ export const useSendPingPongTransaction = () => {
       }
     );
 
-    await signAndSendTransactions({
+    const sessionId = await signAndSendTransactions({
       transactions: [pongTransaction],
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   const sendPongTransactionFromService = async (
@@ -130,10 +140,12 @@ export const useSendPingPongTransaction = () => {
       return;
     }
 
-    await signAndSendTransactions({
+    const sessionId = await signAndSendTransactions({
       transactions,
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
+
+    return sessionId;
   };
 
   return {

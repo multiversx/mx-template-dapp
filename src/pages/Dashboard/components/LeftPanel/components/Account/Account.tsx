@@ -18,6 +18,7 @@ import {
   useGetAccountInfo,
   useGetNetworkConfig
 } from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
 
 import { Username } from './components';
 import { useGetUserHerotag } from './hooks/useGetUserHerotag';
@@ -82,7 +83,9 @@ export const Account = () => {
         />
       ),
       label: 'Shard',
-      value: account.shard
+      value: (
+        <span data-testid={DataTestIdsEnum.addressShard}>{account.shard}</span>
+      )
     },
     {
       icon: <XLogo className={styles.connectedAccountDetailsXLogo} />,

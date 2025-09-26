@@ -9,9 +9,10 @@ export const PingPongAbi = () => {
     useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
 
-  const handlePingTransaction = (payload: PingTransactionPayloadType) => {
+  const handlePingTransaction = async (payload: PingTransactionPayloadType) => {
     if (payload.amount) {
-      sendPingTransactionFromAbi(payload.amount);
+      const sessionId = await sendPingTransactionFromAbi(payload.amount);
+      return sessionId;
     }
   };
 

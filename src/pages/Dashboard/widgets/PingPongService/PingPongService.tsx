@@ -18,9 +18,12 @@ export const PingPongService = () => {
   const { sendPingTransactionFromService, sendPongTransactionFromService } =
     useSendPingPongTransaction();
 
-  const handlePingTransaction = (payload: PingTransactionPayloadType) => {
+  const handlePingTransaction = async (payload: PingTransactionPayloadType) => {
     if (payload.transactions) {
-      sendPingTransactionFromService(payload.transactions);
+      const sessionId = await sendPingTransactionFromService(
+        payload.transactions
+      );
+      return sessionId;
     }
   };
 

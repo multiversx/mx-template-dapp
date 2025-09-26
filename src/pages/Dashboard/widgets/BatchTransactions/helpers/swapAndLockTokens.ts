@@ -1,8 +1,15 @@
-import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
+import { createRoot } from 'react-dom/client';
+
+import {
+  getAccountProvider,
+  ToastManager,
+  TransactionsDisplayInfoType
+} from 'lib';
 import { TransactionProps } from 'types';
 
 import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';
+import { ToastContent } from '../components';
 
 export const swapAndLockTokens = async ({
   address,
@@ -35,7 +42,19 @@ export const swapAndLockTokens = async ({
   const sessionId = await sendAndTrackTransactions({
     transactions: groupedTransactions,
     options: {
-      transactionsDisplayInfo
+      transactionsDisplayInfo,
+      onSuccess: async () => {
+        ToastManager.getInstance().createCustomToast({
+          toastId: 'swap-lock-toast',
+          hasCloseButton: false,
+          instantiateToastElement: () => {
+            const toastBody = document.createElement('div');
+            const root = createRoot(toastBody);
+            root.render(ToastContent());
+            return toastBody;
+          }
+        });
+      }
     }
   });
 

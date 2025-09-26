@@ -12,7 +12,12 @@ import {
 } from 'components';
 import { contractAddress } from 'config';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
-import { MvxButton, MvxDataWithExplorerLink, useGetNetworkConfig } from 'lib';
+import {
+  MvxButton,
+  MvxDataWithExplorerLink,
+  useGetNetworkConfig,
+  useGetPendingTransactionsSessions
+} from 'lib';
 import { ACCOUNTS_ENDPOINT, Transaction, useGetPendingTransactions } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
@@ -21,7 +26,7 @@ const styles = {
   pingPongContainer: 'ping-pong-container flex flex-col gap-6',
   infosContainer: 'infos-container flex flex-col gap-2',
   addressComponent: 'address-component flex w-full justify-between',
-  timeRemaining: 'text-red-600',
+  timeRemaining: 'time-remaining text-red-600',
   buttonsContainer: 'buttons-container flex flex-col gap-2',
   buttons: 'buttons flex justify-start gap-2',
   buttonContent: 'button-content text-sm font-normal'
@@ -34,8 +39,12 @@ export interface PingTransactionPayloadType {
 
 interface PingPongComponentPropsType {
   identifier: `${ItemsIdentifiersEnum}`;
-  sendPingTransaction: (payload: PingTransactionPayloadType) => void;
-  sendPongTransaction: (transactions?: Transaction[]) => Promise<void>;
+  sendPingTransaction: (
+    payload: PingTransactionPayloadType
+  ) => Promise<string | undefined>;
+  sendPongTransaction: (
+    transactions?: Transaction[]
+  ) => Promise<string | undefined>;
   getTimeToPong: () => Promise<number | null | undefined>;
   pingAmount?: string;
   getPingTransaction?: () => Promise<Transaction | null>;
@@ -54,8 +63,13 @@ export const PingPongComponent = ({
   tokenLogin
 }: PingPongComponentPropsType) => {
   const { network } = useGetNetworkConfig();
+  const [currentSessionId, setCurrentSessionId] = useState<string>();
   const transactions = useGetPendingTransactions();
-  const hasPendingTransactions = transactions.length > 0;
+  const pendingSession = useGetPendingTransactionsSessions();
+  const [sessionId] = Object.keys(pendingSession);
+  const pingPongTransactions =
+    currentSessionId === sessionId ? transactions : [];
+  const hasPendingTransactions = pingPongTransactions.length > 0;
   const explorerAddress = network.explorerAddress;
 
   const [hasPing, setHasPing] = useState(true);
@@ -77,7 +91,8 @@ export const PingPongComponent = ({
 
   const onSendPingTransaction = async () => {
     if (pingAmount) {
-      await sendPingTransaction({ amount: pingAmount });
+      const sessionId = await sendPingTransaction({ amount: pingAmount });
+      setCurrentSessionId(sessionId);
       return;
     }
 
@@ -91,12 +106,16 @@ export const PingPongComponent = ({
       return;
     }
 
-    await sendPingTransaction({ transactions: [pingTransaction] });
+    const sessionId = await sendPingTransaction({
+      transactions: [pingTransaction]
+    });
+    setCurrentSessionId(sessionId);
   };
 
   const onSendPongTransaction = async () => {
     if (pingAmount) {
-      await sendPongTransaction();
+      const sessionId = await sendPongTransaction();
+      setCurrentSessionId(sessionId);
       return;
     }
 
@@ -110,7 +129,8 @@ export const PingPongComponent = ({
       return;
     }
 
-    await sendPongTransaction([pongTransaction]);
+    const sessionId = await sendPongTransaction([pongTransaction]);
+    setCurrentSessionId(sessionId);
   };
 
   const timeRemaining = moment()
@@ -159,7 +179,7 @@ export const PingPongComponent = ({
           )}
 
           <PingPongOutput
-            transactions={transactions}
+            transactions={pingPongTransactions}
             pongAllowed={pongAllowed}
             timeRemaining={timeRemaining}
           />

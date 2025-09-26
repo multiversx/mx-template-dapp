@@ -18,7 +18,7 @@ export const signAndAutoSendBatchTransactions = async ({
 }) => {
   const provider = getAccountProvider();
 
-  const transactions = getBatchTransactions({
+  const transactions = await getBatchTransactions({
     address,
     nonce,
     chainID

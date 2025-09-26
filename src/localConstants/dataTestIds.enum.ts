@@ -1,6 +1,10 @@
 export enum DataTestIdsEnum {
+  addressShard = 'addressShard',
   balance = 'balance',
+  decodedMessage = 'decodedMessage',
+  encodedMessage = 'encodedMessage',
   heroTag = 'heroTag',
+  messageSignature = 'messageSignature',
   nftExplorerLink = 'nftExplorerLink',
   nftFormattedAmount = 'nftFormattedAmount',
   receiverLink = 'receiverLink',

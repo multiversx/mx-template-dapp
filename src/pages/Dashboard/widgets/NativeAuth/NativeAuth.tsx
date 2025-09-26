@@ -45,10 +45,16 @@ export const NativeAuth = () => {
 
   useEffect(() => {
     // On page refresh, tokenInfo is null which implies that we do not have access to loginInfo data
-    if (isLoggedIn && tokenLogin?.nativeAuthToken) {
+    if (!isLoggedIn || !tokenLogin || !tokenLogin?.nativeAuthToken) {
+      return;
+    }
+
+    const timer = setTimeout(() => {
       // native auth network call example
       getProfile();
-    }
+    });
+
+    return () => clearTimeout(timer);
   }, [isLoggedIn]);
 
   if (!tokenLogin?.nativeAuthToken && !isLoading) {

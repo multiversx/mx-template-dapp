@@ -3,15 +3,13 @@ import { ReactComponent as MetamaskIcon } from 'assets/img/metamask-icon.svg';
 import { ReactComponent as PasskeyIcon } from 'assets/img/passkey-icon.svg';
 import { ReactComponent as WebWalletIcon } from 'assets/img/web-wallet-icon.svg';
 import { ReactComponent as XPortalIcon } from 'assets/img/xportal-icon.svg';
-import { getDetectedBrowser } from 'helpers/getDetectedBrowser';
 import {
-  BrowserEnum,
   CHROME_METAMASK_EXTENSION_LINK,
   FIREFOX_METAMASK_ADDON_LINK,
   GET_LEDGER,
   GET_XPORTAL
 } from 'localConstants';
-import { useGetNetworkConfig } from 'lib';
+import { BrowserEnum, getDetectedBrowser, useGetNetworkConfig } from 'lib';
 
 import { ConnectCard, ExtensionConnect } from './components';
 
