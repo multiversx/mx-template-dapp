@@ -1,4 +1,5 @@
 export enum DataTestIdsEnum {
+  addressShard = 'addressShard',
   balance = 'balance',
   decodedMessage = 'decodedMessage',
   encodedMessage = 'encodedMessage',
