@@ -1,4 +1,3 @@
-export * from './AddressComponent';
 export * from './Button';
 export * from './Card';
 export * from './Drawer';
