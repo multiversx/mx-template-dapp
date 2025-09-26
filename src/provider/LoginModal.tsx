@@ -2,8 +2,6 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { createRoot } from 'react-dom/client';
 
-import { Button } from 'components';
-
 const modalStyles = {
   overlay: {
     position: 'fixed' as const,
@@ -35,7 +33,8 @@ const modalStyles = {
     backgroundColor: '#FFF',
     width: '100%',
     borderRadius: '4px',
-    border: '1px solid #ccc'
+    border: '1px solid #ccc',
+    color: 'black'
   },
   buttonGroup: {
     display: 'flex',
@@ -44,17 +43,21 @@ const modalStyles = {
     marginTop: '15px'
   },
   button: {
-    backgroundColor: '#2563eb',
-    color: 'white',
-    padding: '8px 16px',
-    borderRadius: '8px',
-    border: 'none',
+    backgroundColor: 'var(--mvx-button-bg-primary)',
+    color: 'var(--mvx-button-text-primary)',
+    paddingLeft: '16px',
+    paddingRight: '16px',
+    borderRadius: '12px',
     cursor: 'pointer',
-    fontSize: '14px',
-    fontWeight: '500',
-    ':hover': {
-      backgroundColor: '#1d4ed8'
-    }
+    height: '40px'
+  },
+  title: {
+    color: 'var(--mvx-text-color-primary)',
+    fontSize: '20px'
+  },
+  label: {
+    color: 'var(--mvx-text-color-secondary)',
+    fontSize: '16px'
   }
 };
 
@@ -67,7 +70,10 @@ const containerStyles = {
     padding: modalStyles.modal.padding,
     borderRadius: '8px',
     width: '100%',
-    maxWidth: '100%'
+    maxWidth: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px'
   }
 };
 
@@ -97,11 +103,12 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
   return createPortal(
     <div style={styles.overlay}>
       <div style={styles.modal}>
-        <h2>Authenticate</h2>
+        <label style={styles.title}>Authenticate</label>
+
         <form onSubmit={handleSubmit} style={styles.form}>
           {needsAddress && (
             <div>
-              <label>
+              <label style={styles.label}>
                 Address
                 <input
                   style={styles.input}
@@ -115,7 +122,7 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
             </div>
           )}
           <div>
-            <label>
+            <label style={styles.label}>
               Private Key
               <input
                 style={styles.input}
@@ -128,17 +135,13 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
             </label>
           </div>
           <div style={styles.buttonGroup}>
-            <Button
-              onClick={onClose}
-              label='Cancel'
-              {...{ style: styles.button }}
-            />
+            <button onClick={onClose} style={styles.button}>
+              Cancel
+            </button>
 
-            <Button
-              type='submit'
-              label='Submit'
-              {...{ style: styles.button }}
-            />
+            <button type='submit' style={styles.button}>
+              Submit
+            </button>
           </div>
         </form>
       </div>
