@@ -13,7 +13,7 @@ import {
   ACCOUNTS_ENDPOINT,
   getAccountProvider,
   MvxDataWithExplorerLink,
-  useGetAccountInfo,
+  useGetAccount,
   useGetIsLoggedIn,
   useGetNetworkConfig
 } from 'lib';
@@ -35,7 +35,7 @@ export const LeftPanel = ({
     setIsOpen(!isOpen);
   };
 
-  const { address } = useGetAccountInfo();
+  const { address } = useGetAccount();
 
   const { network } = useGetNetworkConfig();
 
