@@ -31,10 +31,10 @@ importers:
         version: 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
       '@multiversx/sdk-dapp':
         specifier: ^5.x
-        version: 5.1.6(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)
+        version: 5.2.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)
       '@multiversx/sdk-dapp-ui':
         specifier: ^0.x
-        version: 0.0.30(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.0.33(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@multiversx/sdk-dapp-utils':
         specifier: ^3.x
         version: 3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)
@@ -52,7 +52,7 @@ importers:
         version: 2.29.4
       motion:
         specifier: ^12.23.12
-        version: 12.23.18(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       protobufjs:
         specifier: ^7.5.3
         version: 7.5.4
@@ -64,7 +64,7 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-modal-sheet:
         specifier: ^4.4.0
-        version: 4.4.0(motion@12.23.18(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: 4.4.0(motion@12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       react-router-dom:
         specifier: 6.16.0
         version: 6.16.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -763,8 +763,8 @@ packages:
   '@ledgerhq/devices@8.0.3':
     resolution: {integrity: sha512-Q7/vqkGELSBuwFafFoTqlHIRyOjw8JqbSgiQwe2R38xN0RKtKIh+5E6UfMKyoExiq+SrQg0IC8P2LS+XdjOHLw==}
 
-  '@ledgerhq/devices@8.5.1':
-    resolution: {integrity: sha512-oW75YQQiP2muHveXTuwSAze6CBxJ7jOYILhFiJbsVzmgLPVqtdw4s0bJJlOBft4Aup67yNAjboFCIU7kTYQBFg==}
+  '@ledgerhq/devices@8.6.0':
+    resolution: {integrity: sha512-ISp5g6OfWr3WnAvmph0/iEHpFvWRDflRfhZH1/oDeXb/okmmAimKOnSUCMC0voOAou7CEoMTCtRkelHPok41Yg==}
 
   '@ledgerhq/errors@6.12.6':
     resolution: {integrity: sha512-D+r2B09vaRO06wfGoss+rNgwqWSoK0bCtsaJWzlD2hv1zxTtucqVtSztbRFypIqxWTCb3ix5Nh2dWHEJVTp2Xw==}
@@ -784,8 +784,8 @@ packages:
   '@ledgerhq/hw-transport@6.28.8':
     resolution: {integrity: sha512-XxQVl4htd018u/M66r0iu5nlHi+J6QfdPsORzDF6N39jaz+tMqItb7tUlXM/isggcuS5lc7GJo7NOuJ8rvHZaQ==}
 
-  '@ledgerhq/hw-transport@6.31.10':
-    resolution: {integrity: sha512-ruNtkTPMO3rFCaSM+oPTOXXerzxWFZF43pAHVAHhsjiQGhLWzLSkMc7qBEpWIpZPubKRAbWSXR2zXBIJPNy8oQ==}
+  '@ledgerhq/hw-transport@6.31.11':
+    resolution: {integrity: sha512-vAbZkYSa3ClHyvZxcnfzv8Mf1uaO+huB9a2lTiXP0V8QGYaGLU9CfGMtECvqqRRPEUomhelAzYTI+2UEWrokwg==}
 
   '@ledgerhq/logs@6.13.0':
     resolution: {integrity: sha512-4+qRW2Pc8V+btL0QEmdB2X+uyx0kOWMWE1/LWsq5sZy3Q5tpi4eItJS6mB0XL3wGW59RQ+8bchNQQ1OW/va8Og==}
@@ -853,8 +853,8 @@ packages:
       bignumber.js: ^9.0.1
       protobufjs: ^7.2.6
 
-  '@multiversx/sdk-dapp-ui@0.0.30':
-    resolution: {integrity: sha512-H2N+UEYQHBrbouGvqmlnBpHuqscgvzF9bkP+G3OrfBuMRDW/STxM0dvMygOdjvRAdI77Oh1YSjOp09G1Ctdr7w==}
+  '@multiversx/sdk-dapp-ui@0.0.33':
+    resolution: {integrity: sha512-mqmh9d3TjQ/yAjXr0sgbjTvGJTzyrz8IqGO4eoCPRYTw/IP2w8cNrnMxyKhnMZDTjhMjqKd+tPTxWTv8/yB8HQ==}
     engines: {node: '>=20.19.0'}
 
   '@multiversx/sdk-dapp-utils@3.0.2':
@@ -863,8 +863,8 @@ packages:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
       bignumber.js: ^9.x
 
-  '@multiversx/sdk-dapp@5.1.6':
-    resolution: {integrity: sha512-pJ77ShR7PoVCygnj2A9OZNS5YmcDs79OvN6t6fMKdRJpgEmTqnS05OOkgaFs5k2dvxOanGUd7ujpJ5qQlnKCKw==}
+  '@multiversx/sdk-dapp@5.2.2':
+    resolution: {integrity: sha512-yIqFJoga5oORHSBtLL4F23eSmGXpMJhFVj2D0w37BCi8IuB1qVAlbf6yZxAyhDrWayTTI09uE88scT2KHwc/3w==}
     peerDependencies:
       '@multiversx/sdk-core': ^14.x || ^15.x
       '@multiversx/sdk-dapp-utils': ^3.x
@@ -902,7 +902,6 @@ packages:
 
   '@multiversx/sdk-wallet@4.6.0':
     resolution: {integrity: sha512-SxO/hBTnAB+uWH4MJdwKLvfRk8cxdA8zi6JC4I9j1+V+XQJpfs2YHCvMmaVyIAqjmSg9i7Uk61exrDkR3bjPAw==}
-    deprecated: The functionality has been integrated into @multiversx/sdk-core, thus this package is no longer supported.
 
   '@multiversx/sdk-web-wallet-cross-window-provider@3.2.1':
     resolution: {integrity: sha512-INWbQ+GXtGz+aIRZZcmFhTIfJPyf4F5X2HrG0BQu9riT31QxoIjpwSd8M91QyODbgUEJHUVCKppOe038/Xb1xw==}
@@ -910,8 +909,8 @@ packages:
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
 
-  '@multiversx/sdk-web-wallet-iframe-provider@3.1.2':
-    resolution: {integrity: sha512-2n//06tnqfnV6FIKxmAQ2855HlNcClsxxHyiCpCInHV5oyUZ28FzStVKMakg66aL+eARHlaSXvu9j0R+I0eF4Q==}
+  '@multiversx/sdk-web-wallet-iframe-provider@4.0.0':
+    resolution: {integrity: sha512-V9eDWSublrau6yXASzQwCkdwr9ATxfQ8C8Ok27wSmx9Ok/JrSK1eCgN2XcrehFonn8nYnTHehYR1Qe0QZ6q+iw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
@@ -2026,9 +2025,9 @@ packages:
     resolution: {integrity: sha512-W0ArrZbs4M23POv8+FPsgHDFxg+wwklfZgLSsjVq2kpCmBCfIPxKSAOgTo/XrcH4We/OnshgBzxLcI+BHDgi4w==}
     engines: {node: ^16.13 || >=18}
 
-  '@zip.js/zip.js@2.8.2':
-    resolution: {integrity: sha512-PI6UdgpSeVoGvzguKHmy2bwOqI3UYkntLZOCpyJSKIi7234c5aJmQYkJB/P4P2YUJkqhbqvu7iM2/0eJZ178nA==}
-    engines: {bun: '>=0.7.0', deno: '>=1.0.0', node: '>=16.5.0'}
+  '@zip.js/zip.js@2.8.3':
+    resolution: {integrity: sha512-JptkKCqjj6acTiJhiwLqobhBe2pWHsE+Y/SM1nOAV0ROH0qDus7mCp8mTQAiP9X/RVABBCljPnI2pYsRoctB9A==}
+    engines: {bun: '>=0.7.0', deno: '>=1.0.0', node: '>=18.0.0'}
 
   abab@2.0.6:
     resolution: {integrity: sha512-j2afSsaIENvHZN2B8GOpF566vZ5WVk5opAiMTvWgaQT8DkbOqsTfvNAvHoRGU2zzP8cPoqys+xHTRDWW8L+/BA==}
@@ -2219,8 +2218,8 @@ packages:
   axios@1.10.0:
     resolution: {integrity: sha512-/1xYAC4MP/HEG+3duIhFr4ZQXR4sQXOIe+o6sdqzeykGLx6Upp/1p8MHqhINOvGeP7xyNHe7tsiJByc4SSVUxw==}
 
-  b4a@1.7.1:
-    resolution: {integrity: sha512-ZovbrBV0g6JxK5cGUF1Suby1vLfKjv4RWi8IxoaO/Mon8BDD9I21RxjHFtgQ+kskJqLAVyQZly3uMBui+vhc8Q==}
+  b4a@1.7.3:
+    resolution: {integrity: sha512-5Q2mfq2WfGuFp3uS//0s6baOJLMoVduPYVeNmDYxu5OUA1/cBfvr2RIS7vi62LdNj/urk1hfmj867I3qt6uZ7Q==}
     peerDependencies:
       react-native-b4a: '*'
     peerDependenciesMeta:
@@ -2258,8 +2257,8 @@ packages:
   bare-events@2.7.0:
     resolution: {integrity: sha512-b3N5eTW1g7vXkw+0CXh/HazGTcO5KYuu/RCNaJbDMPI6LHDi+7qe8EmxKUVe1sUbY2KZOVZFyj62x0OEz9qyAA==}
 
-  bare-fs@4.4.4:
-    resolution: {integrity: sha512-Q8yxM1eLhJfuM7KXVP3zjhBvtMJCYRByoTT+wHXjpdMELv0xICFJX+1w4c7csa+WZEOsq4ItJ4RGwvzid6m/dw==}
+  bare-fs@4.4.5:
+    resolution: {integrity: sha512-TCtu93KGLu6/aiGWzMr12TmSRS6nKdfhAnzTQRbXoSWxkbb9eRd53jQ51jG7g1gYjjtto3hbBrrhzg6djcgiKg==}
     engines: {bare: '>=1.16.0'}
     peerDependencies:
       bare-buffer: '*'
@@ -2294,8 +2293,8 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  baseline-browser-mapping@2.8.6:
-    resolution: {integrity: sha512-wrH5NNqren/QMtKUEEJf7z86YjfqW/2uw3IL3/xpqZUC95SSVIFXYQeeGjL6FT/X68IROu6RMehZQS5foy2BXw==}
+  baseline-browser-mapping@2.8.9:
+    resolution: {integrity: sha512-hY/u2lxLrbecMEWSB0IpGzGyDyeoMFQhCvZd2jGFSE5I17Fh01sYUBPCJtkWERw7zrac9+cIghxm/ytJa2X8iA==}
     hasBin: true
 
   basic-ftp@5.0.5:
@@ -2371,9 +2370,9 @@ packages:
     resolution: {integrity: sha512-YBjSAiTqM04ZVei6sXighu679a3SqWORA3qZTEqZImnlkDIFtKc6pNutpjyZ8RJTjQtuYfeetkxM11GwoYXMIQ==}
     engines: {node: '>= 0.10'}
 
-  browserify-sign@4.2.4:
-    resolution: {integrity: sha512-pbZw0FHibrwXcpLQlXwHp21A5undDBo+RaGNL0K3KOm8nK8uP6PThhS301VDzoMgURZPiVRWRrVHlo6NyU57kA==}
-    engines: {node: '>= 0.12'}
+  browserify-sign@4.2.5:
+    resolution: {integrity: sha512-C2AUdAJg6rlM2W5QMp2Q4KGQMVBwR1lIimTsUnutJ8bMpW5B52pGpR2gEnNBNwijumDo5FojQ0L9JrXA8m4YEw==}
+    engines: {node: '>= 0.10'}
 
   browserify-zlib@0.2.0:
     resolution: {integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==}
@@ -2447,8 +2446,8 @@ packages:
     resolution: {integrity: sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==}
     engines: {node: '>=10'}
 
-  caniuse-lite@1.0.30001743:
-    resolution: {integrity: sha512-e6Ojr7RV14Un7dz6ASD0aZDmQPT/A+eZU+nuTNfjqmRrmkmQlnTNWH0SKmqagx9PeW87UVqapSurtAXifmtdmw==}
+  caniuse-lite@1.0.30001745:
+    resolution: {integrity: sha512-ywt6i8FzvdgrrrGbr1jZVObnVv6adj+0if2/omv9cmR2oiZs30zL4DIyaptKcbOrBdOIc74QTMoJvSE2QHh5UQ==}
 
   chalk@3.0.0:
     resolution: {integrity: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==}
@@ -2494,8 +2493,8 @@ packages:
     resolution: {integrity: sha512-NIxF55hv4nSqQswkAeiOi1r83xy8JldOFDTWiug55KBu9Jnblncd2U6ViHmYgHf01TPZS77NJBhBMKdWj9HQMQ==}
     engines: {node: '>=8'}
 
-  cipher-base@1.0.6:
-    resolution: {integrity: sha512-3Ek9H3X6pj5TgenXYtNWdaBon1tgYCaebd+XPg0keyjEbEfkD4KkmAxkQ/i1vYvxdcT5nscLBfq9VJRmCBcFSw==}
+  cipher-base@1.0.7:
+    resolution: {integrity: sha512-Mz9QMT5fJe7bKI7MH31UilT5cEK5EHHRCccw/YRFsRY47AuNgaV6HY3rscp0/I4Q+tTW/5zoqpSeRRI54TkDWA==}
     engines: {node: '>= 0.10'}
 
   cjs-module-lexer@1.4.3:
@@ -2807,8 +2806,8 @@ packages:
     engines: {node: '>=0.10'}
     hasBin: true
 
-  detect-libc@2.1.0:
-    resolution: {integrity: sha512-vEtk+OcP7VBRtQZ1EJ3bdgzSfBjgnEalLTp5zjJrS+2Z1w2KZly4SBdac/WDU3hhsNAZ9E8SC96ME4Ey8MZ7cg==}
+  detect-libc@2.1.1:
+    resolution: {integrity: sha512-ecqj/sy1jcK1uWrwpR67UhYrIFQ+5WlGxth34WquCbamhFA6hkkwiu37o6J5xCHdo1oixJRfVRw+ywV+Hq/0Aw==}
     engines: {node: '>=8'}
 
   detect-newline@3.1.0:
@@ -2915,8 +2914,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  electron-to-chromium@1.5.222:
-    resolution: {integrity: sha512-gA7psSwSwQRE60CEoLz6JBCQPIxNeuzB2nL8vE03GK/OHxlvykbLyeiumQy1iH5C2f3YbRAZpGCMT12a/9ih9w==}
+  electron-to-chromium@1.5.227:
+    resolution: {integrity: sha512-ITxuoPfJu3lsNWUi2lBM2PaBPYgH3uqmxut5vmBxgYvyI4AlJ6P3Cai1O76mOrkJCBzq0IxWg/NtqOrpu/0gKA==}
 
   elliptic@6.6.1:
     resolution: {integrity: sha512-RaddvvMatK2LJHqFJ+YA4WysVN5Ita9E35botqIYspQ4TkRAlCicdzKOjlyv/1Za5RyTNn7di//eEV0uTAfe3g==}
@@ -3316,8 +3315,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@12.23.18:
-    resolution: {integrity: sha512-HBVXBL5x3nk/0WrYM5G4VgjBey99ytVYET5AX17s/pcnlH90cyaxVUqgoN8cpF4+PqZRVOhwWsv28F+hxA9Tzg==}
+  framer-motion@12.23.22:
+    resolution: {integrity: sha512-ZgGvdxXCw55ZYvhoZChTlG6pUuehecgvEAJz0BHoC5pQKW1EC5xf1Mul1ej5+ai+pVY0pylyFfdl45qnM1/GsA==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -4500,14 +4499,14 @@ packages:
   moment@2.29.4:
     resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
 
-  motion-dom@12.23.18:
-    resolution: {integrity: sha512-9piw3uOcP6DpS0qpnDF95bLDzmgMxLOg/jghLnHwYJ0YFizzuvbH/L8106dy39JNgHYmXFUTztoP9JQvUqlBwQ==}
+  motion-dom@12.23.21:
+    resolution: {integrity: sha512-5xDXx/AbhrfgsQmSE7YESMn4Dpo6x5/DTZ4Iyy4xqDvVHWvFVoV+V2Ri2S/ksx+D40wrZ7gPYiMWshkdoqNgNQ==}
 
   motion-utils@12.23.6:
     resolution: {integrity: sha512-eAWoPgr4eFEOFfg2WjIsMoqJTW6Z8MTUCgn/GZ3VRpClWBdnbjryiA3ZSNLyxCTmCQx4RmYX6jX1iWHbenUPNQ==}
 
-  motion@12.23.18:
-    resolution: {integrity: sha512-uzcEs9eInMnOL2Tm8z6Akje/vETSFUzAlGQyKV58+8vlEFDOKx8jNR/asKei4ETi+8wH6vTyf6gCKgu580x4+w==}
+  motion@12.23.22:
+    resolution: {integrity: sha512-iSq6X9vLHbeYwmHvhK//+U74ROaPnZmBuy60XZzqNl0QtZkWfoZyMDHYnpKuWFv0sNMqHgED8aCXk94LCoQPGg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -4764,9 +4763,9 @@ packages:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
 
-  parse-asn1@5.1.8:
-    resolution: {integrity: sha512-e90aVPe/1q/g7BrNeYvbJy++5tln4ShE+I3qZ5LxFpUbu+uavfKMuzH2R3SH141O7Pvruwif0BZRwKoVf6vW6w==}
-    engines: {node: '>= 0.12'}
+  parse-asn1@5.1.9:
+    resolution: {integrity: sha512-fIYNuZ/HastSb80baGOuPRo1O9cf4baWw5WsAp7dBuUzeTD/BoaG8sVTdlPFksBE2lF21dN+A1AnrpIjSWqHHg==}
+    engines: {node: '>= 0.10'}
 
   parse-json@5.2.0:
     resolution: {integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==}
@@ -4820,9 +4819,9 @@ packages:
   pathe@1.1.2:
     resolution: {integrity: sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==}
 
-  pbkdf2@3.1.4:
-    resolution: {integrity: sha512-0yPXNT01PxSUdkIxL85Fd+yPdeCcvGwFPAAHbR3Z2ukMERcRrJFfLUKK3oglbQ9eUPeX6qDY3QiELqiDarZYUQ==}
-    engines: {node: '>=0.12'}
+  pbkdf2@3.1.5:
+    resolution: {integrity: sha512-Q3CG/cYvCO1ye4QKkuH7EXxs3VC/rI1/trd+qX2+PolbaKG0H+bgcZzrTt96mMyRtejk+JMCiLUn3y29W8qmFQ==}
+    engines: {node: '>= 0.10'}
 
   pend@1.2.0:
     resolution: {integrity: sha512-F3asv42UuXchdzt+xXqfW1OGlVBe+mxa2mqI0pg5yAHZPvFmY3Y6drSf/GQ1A86WgWEN9Kzh/WrgKa6iGcHXLg==}
@@ -5574,8 +5573,8 @@ packages:
   tar-stream@3.1.7:
     resolution: {integrity: sha512-qJj60CXt7IU1Ffyc3NJMjh6EkuCFej46zUqJ4J7pqYlThyd9bO0XBTmcOIhSzZJVWfsLks0+nle/j538YAW9RQ==}
 
-  tar@7.4.4:
-    resolution: {integrity: sha512-O1z7ajPkjTgEgmTGz0v9X4eqeEXTDREPTO77pVC1Nbs86feBU1Zhdg+edzavPmYW1olxkwsqA2v4uOw6E8LeDg==}
+  tar@7.5.1:
+    resolution: {integrity: sha512-nlGpxf+hv0v7GkWBK2V9spgactGOp0qvfWRxUMjqHyzrt3SgwE48DIv/FhqPHJYLHpgW1opq3nERbz5Anq7n1g==}
     engines: {node: '>=18'}
 
   tcomb-validation@3.4.1:
@@ -5615,8 +5614,8 @@ packages:
   tmpl@1.0.5:
     resolution: {integrity: sha512-3f0uOEAQwIqGuWW2MVzYg8fV/QNnc/IpuJNG837rLuczAaLVHslWHZQj4IGiEl5Hs3kkbhwL9Ab7Hrsmuj+Smw==}
 
-  to-buffer@1.2.1:
-    resolution: {integrity: sha512-tB82LpAIWjhLYbqjx3X4zEeHN6M8CiuOEy2JY8SEQVdYRe3CCHOFaqrBW1doLDrfpWhplcW7BL+bO3/6S3pcDQ==}
+  to-buffer@1.2.2:
+    resolution: {integrity: sha512-db0E3UJjcFhpDhAF4tLo03oli3pwl3dbnzXOUIlRKrp+ldk/VUxzpWYZENsw2SZiuBjHAk7DfB0VU7NKdpb6sw==}
     engines: {node: '>= 0.4'}
 
   to-regex-range@5.0.1:
@@ -6856,7 +6855,7 @@ snapshots:
       rxjs: 6.6.7
       semver: 7.7.2
 
-  '@ledgerhq/devices@8.5.1':
+  '@ledgerhq/devices@8.6.0':
     dependencies:
       '@ledgerhq/errors': 6.25.0
       '@ledgerhq/logs': 6.13.0
@@ -6869,35 +6868,35 @@ snapshots:
 
   '@ledgerhq/hw-transport-web-ble@6.28.6':
     dependencies:
-      '@ledgerhq/devices': 8.5.1
+      '@ledgerhq/devices': 8.6.0
       '@ledgerhq/errors': 6.25.0
-      '@ledgerhq/hw-transport': 6.31.10
+      '@ledgerhq/hw-transport': 6.31.11
       '@ledgerhq/logs': 6.13.0
       rxjs: 7.8.2
 
   '@ledgerhq/hw-transport-webhid@6.28.6':
     dependencies:
-      '@ledgerhq/devices': 8.5.1
+      '@ledgerhq/devices': 8.6.0
       '@ledgerhq/errors': 6.25.0
-      '@ledgerhq/hw-transport': 6.31.10
+      '@ledgerhq/hw-transport': 6.31.11
       '@ledgerhq/logs': 6.13.0
 
   '@ledgerhq/hw-transport-webusb@6.28.6':
     dependencies:
-      '@ledgerhq/devices': 8.5.1
+      '@ledgerhq/devices': 8.6.0
       '@ledgerhq/errors': 6.25.0
-      '@ledgerhq/hw-transport': 6.31.10
+      '@ledgerhq/hw-transport': 6.31.11
       '@ledgerhq/logs': 6.13.0
 
   '@ledgerhq/hw-transport@6.28.8':
     dependencies:
-      '@ledgerhq/devices': 8.5.1
+      '@ledgerhq/devices': 8.6.0
       '@ledgerhq/errors': 6.25.0
       events: 3.3.0
 
-  '@ledgerhq/hw-transport@6.31.10':
+  '@ledgerhq/hw-transport@6.31.11':
     dependencies:
-      '@ledgerhq/devices': 8.5.1
+      '@ledgerhq/devices': 8.6.0
       '@ledgerhq/errors': 6.25.0
       '@ledgerhq/logs': 6.13.0
       events: 3.3.0
@@ -7022,7 +7021,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@multiversx/sdk-dapp-ui@0.0.30(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@multiversx/sdk-dapp-ui@0.0.33(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@fortawesome/fontawesome-svg-core': 7.0.1
       '@fortawesome/free-solid-svg-icons': 7.0.1
@@ -7043,7 +7042,7 @@ snapshots:
       '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
       bignumber.js: 9.3.1
 
-  '@multiversx/sdk-dapp@5.1.6(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)':
+  '@multiversx/sdk-dapp@5.2.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)':
     dependencies:
       '@lifeomic/axios-fetch': 3.0.1
       '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
@@ -7055,7 +7054,7 @@ snapshots:
       '@multiversx/sdk-wallet': 4.6.0
       '@multiversx/sdk-wallet-connect-provider': 6.1.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(typescript@5.2.2)
       '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))
-      '@multiversx/sdk-web-wallet-iframe-provider': 3.1.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)))
+      '@multiversx/sdk-web-wallet-iframe-provider': 4.0.0(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)))
       '@multiversx/sdk-web-wallet-provider': 5.1.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))
       '@multiversx/sdk-webview-provider': 3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)))
       axios: 1.10.0
@@ -7072,7 +7071,7 @@ snapshots:
       socket.io-client: 4.7.5
       zustand: 4.4.7(@types/react@18.2.23)(immer@10.1.1)(react@18.2.0)
     optionalDependencies:
-      '@multiversx/sdk-dapp-ui': 0.0.30(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@multiversx/sdk-dapp-ui': 0.0.33(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -7185,7 +7184,7 @@ snapshots:
       '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
       qs: 6.11.2
 
-  '@multiversx/sdk-web-wallet-iframe-provider@3.1.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
+  '@multiversx/sdk-web-wallet-iframe-provider@4.0.0(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
     dependencies:
       '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
       '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))
@@ -7756,8 +7755,8 @@ snapshots:
 
   '@tailwindcss/oxide@4.1.11':
     dependencies:
-      detect-libc: 2.1.0
-      tar: 7.4.4
+      detect-libc: 2.1.1
+      tar: 7.5.1
     optionalDependencies:
       '@tailwindcss/oxide-android-arm64': 4.1.11
       '@tailwindcss/oxide-darwin-arm64': 4.1.11
@@ -8616,7 +8615,7 @@ snapshots:
       - react-native-b4a
       - supports-color
 
-  '@zip.js/zip.js@2.8.2': {}
+  '@zip.js/zip.js@2.8.3': {}
 
   abab@2.0.6: {}
 
@@ -8831,7 +8830,7 @@ snapshots:
   autoprefixer@10.4.16(postcss@8.4.30):
     dependencies:
       browserslist: 4.26.2
-      caniuse-lite: 1.0.30001743
+      caniuse-lite: 1.0.30001745
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.1.1
@@ -8850,7 +8849,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  b4a@1.7.1: {}
+  b4a@1.7.3: {}
 
   babel-jest@29.7.0(@babel/core@7.28.4):
     dependencies:
@@ -8911,7 +8910,7 @@ snapshots:
 
   bare-events@2.7.0: {}
 
-  bare-fs@4.4.4:
+  bare-fs@4.4.5:
     dependencies:
       bare-events: 2.7.0
       bare-path: 3.0.0
@@ -8948,7 +8947,7 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  baseline-browser-mapping@2.8.6: {}
+  baseline-browser-mapping@2.8.9: {}
 
   basic-ftp@5.0.5: {}
 
@@ -8964,7 +8963,7 @@ snapshots:
     dependencies:
       '@types/node': 11.11.6
       create-hash: 1.2.0
-      pbkdf2: 3.1.4
+      pbkdf2: 3.1.5
       randombytes: 2.1.0
 
   bip39@3.1.0:
@@ -9016,7 +9015,7 @@ snapshots:
   browserify-aes@1.2.0:
     dependencies:
       buffer-xor: 1.0.3
-      cipher-base: 1.0.6
+      cipher-base: 1.0.7
       create-hash: 1.2.0
       evp_bytestokey: 1.0.3
       inherits: 2.0.4
@@ -9030,7 +9029,7 @@ snapshots:
 
   browserify-des@1.0.2:
     dependencies:
-      cipher-base: 1.0.6
+      cipher-base: 1.0.7
       des.js: 1.1.0
       inherits: 2.0.4
       safe-buffer: 5.2.1
@@ -9041,7 +9040,7 @@ snapshots:
       randombytes: 2.1.0
       safe-buffer: 5.2.1
 
-  browserify-sign@4.2.4:
+  browserify-sign@4.2.5:
     dependencies:
       bn.js: 5.2.2
       browserify-rsa: 4.1.1
@@ -9049,7 +9048,7 @@ snapshots:
       create-hmac: 1.1.7
       elliptic: 6.6.1
       inherits: 2.0.4
-      parse-asn1: 5.1.8
+      parse-asn1: 5.1.9
       readable-stream: 2.3.8
       safe-buffer: 5.2.1
 
@@ -9059,9 +9058,9 @@ snapshots:
 
   browserslist@4.26.2:
     dependencies:
-      baseline-browser-mapping: 2.8.6
-      caniuse-lite: 1.0.30001743
-      electron-to-chromium: 1.5.222
+      baseline-browser-mapping: 2.8.9
+      caniuse-lite: 1.0.30001745
+      electron-to-chromium: 1.5.227
       node-releases: 2.0.21
       update-browserslist-db: 1.1.3(browserslist@4.26.2)
 
@@ -9132,7 +9131,7 @@ snapshots:
 
   camelcase@6.3.0: {}
 
-  caniuse-lite@1.0.30001743: {}
+  caniuse-lite@1.0.30001745: {}
 
   chalk@3.0.0:
     dependencies:
@@ -9177,10 +9176,11 @@ snapshots:
 
   ci-info@3.9.0: {}
 
-  cipher-base@1.0.6:
+  cipher-base@1.0.7:
     dependencies:
       inherits: 2.0.4
       safe-buffer: 5.2.1
+      to-buffer: 1.2.2
 
   cjs-module-lexer@1.4.3: {}
 
@@ -9289,7 +9289,7 @@ snapshots:
 
   create-hash@1.2.0:
     dependencies:
-      cipher-base: 1.0.6
+      cipher-base: 1.0.7
       inherits: 2.0.4
       md5.js: 1.3.5
       ripemd160: 2.0.3
@@ -9297,7 +9297,7 @@ snapshots:
 
   create-hmac@1.1.7:
     dependencies:
-      cipher-base: 1.0.6
+      cipher-base: 1.0.7
       create-hash: 1.2.0
       inherits: 2.0.4
       ripemd160: 2.0.3
@@ -9340,14 +9340,14 @@ snapshots:
   crypto-browserify@3.12.1:
     dependencies:
       browserify-cipher: 1.0.1
-      browserify-sign: 4.2.4
+      browserify-sign: 4.2.5
       create-ecdh: 4.0.4
       create-hash: 1.2.0
       create-hmac: 1.1.7
       diffie-hellman: 5.0.3
       hash-base: 3.0.5
       inherits: 2.0.4
-      pbkdf2: 3.1.4
+      pbkdf2: 3.1.5
       public-encrypt: 4.0.3
       randombytes: 2.1.0
       randomfill: 1.0.4
@@ -9498,7 +9498,7 @@ snapshots:
 
   detect-libc@1.0.3: {}
 
-  detect-libc@2.1.0: {}
+  detect-libc@2.1.1: {}
 
   detect-newline@3.1.0: {}
 
@@ -9604,7 +9604,7 @@ snapshots:
   edgedriver@5.6.1:
     dependencies:
       '@wdio/logger': 8.38.0
-      '@zip.js/zip.js': 2.8.2
+      '@zip.js/zip.js': 2.8.3
       decamelize: 6.0.1
       edge-paths: 3.0.5
       fast-xml-parser: 4.5.3
@@ -9615,7 +9615,7 @@ snapshots:
     dependencies:
       jake: 10.9.4
 
-  electron-to-chromium@1.5.222: {}
+  electron-to-chromium@1.5.227: {}
 
   elliptic@6.6.1:
     dependencies:
@@ -10211,9 +10211,9 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@12.23.18(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  framer-motion@12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      motion-dom: 12.23.18
+      motion-dom: 12.23.21
       motion-utils: 12.23.6
       tslib: 2.8.1
     optionalDependencies:
@@ -10262,7 +10262,7 @@ snapshots:
   geckodriver@4.5.1:
     dependencies:
       '@wdio/logger': 9.18.0
-      '@zip.js/zip.js': 2.8.2
+      '@zip.js/zip.js': 2.8.3
       decamelize: 6.0.1
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
@@ -10459,7 +10459,7 @@ snapshots:
       inherits: 2.0.4
       readable-stream: 2.3.8
       safe-buffer: 5.2.1
-      to-buffer: 1.2.1
+      to-buffer: 1.2.2
 
   hash.js@1.1.7:
     dependencies:
@@ -11362,7 +11362,7 @@ snapshots:
 
   lightningcss@1.29.2:
     dependencies:
-      detect-libc: 2.1.0
+      detect-libc: 2.1.1
     optionalDependencies:
       lightningcss-darwin-arm64: 1.29.2
       lightningcss-darwin-x64: 1.29.2
@@ -11377,7 +11377,7 @@ snapshots:
 
   lightningcss@1.30.1:
     dependencies:
-      detect-libc: 2.1.0
+      detect-libc: 2.1.1
     optionalDependencies:
       lightningcss-darwin-arm64: 1.30.1
       lightningcss-darwin-x64: 1.30.1
@@ -11499,7 +11499,7 @@ snapshots:
 
   md5.js@1.3.5:
     dependencies:
-      hash-base: 3.0.5
+      hash-base: 3.1.2
       inherits: 2.0.4
       safe-buffer: 5.2.1
 
@@ -11615,15 +11615,15 @@ snapshots:
 
   moment@2.29.4: {}
 
-  motion-dom@12.23.18:
+  motion-dom@12.23.21:
     dependencies:
       motion-utils: 12.23.6
 
   motion-utils@12.23.6: {}
 
-  motion@12.23.18(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  motion@12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      framer-motion: 12.23.18(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      framer-motion: 12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       tslib: 2.8.1
     optionalDependencies:
       react: 18.2.0
@@ -11905,12 +11905,12 @@ snapshots:
     dependencies:
       callsites: 3.1.0
 
-  parse-asn1@5.1.8:
+  parse-asn1@5.1.9:
     dependencies:
       asn1.js: 4.10.1
       browserify-aes: 1.2.0
       evp_bytestokey: 1.0.3
-      pbkdf2: 3.1.4
+      pbkdf2: 3.1.5
       safe-buffer: 5.2.1
 
   parse-json@5.2.0:
@@ -11957,14 +11957,14 @@ snapshots:
 
   pathe@1.1.2: {}
 
-  pbkdf2@3.1.4:
+  pbkdf2@3.1.5:
     dependencies:
       create-hash: 1.2.0
       create-hmac: 1.1.7
       ripemd160: 2.0.3
       safe-buffer: 5.2.1
       sha.js: 2.4.12
-      to-buffer: 1.2.1
+      to-buffer: 1.2.2
 
   pend@1.2.0: {}
 
@@ -12145,7 +12145,7 @@ snapshots:
       bn.js: 4.12.2
       browserify-rsa: 4.1.1
       create-hash: 1.2.0
-      parse-asn1: 5.1.8
+      parse-asn1: 5.1.9
       randombytes: 2.1.0
       safe-buffer: 5.2.1
 
@@ -12237,9 +12237,9 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-modal-sheet@4.4.0(motion@12.23.18(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0):
+  react-modal-sheet@4.4.0(motion@12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0):
     dependencies:
-      motion: 12.23.18(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      motion: 12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
 
   react-property@2.0.2: {}
@@ -12514,7 +12514,7 @@ snapshots:
     dependencies:
       inherits: 2.0.4
       safe-buffer: 5.2.1
-      to-buffer: 1.2.1
+      to-buffer: 1.2.2
 
   shebang-command@2.0.0:
     dependencies:
@@ -12811,7 +12811,7 @@ snapshots:
       pump: 3.0.3
       tar-stream: 3.1.7
     optionalDependencies:
-      bare-fs: 4.4.4
+      bare-fs: 4.4.5
       bare-path: 3.0.0
     transitivePeerDependencies:
       - bare-buffer
@@ -12819,13 +12819,13 @@ snapshots:
 
   tar-stream@3.1.7:
     dependencies:
-      b4a: 1.7.1
+      b4a: 1.7.3
       fast-fifo: 1.3.2
       streamx: 2.23.0
     transitivePeerDependencies:
       - react-native-b4a
 
-  tar@7.4.4:
+  tar@7.5.1:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
@@ -12847,7 +12847,7 @@ snapshots:
 
   text-decoder@1.2.3:
     dependencies:
-      b4a: 1.7.1
+      b4a: 1.7.3
     transitivePeerDependencies:
       - react-native-b4a
 
@@ -12871,7 +12871,7 @@ snapshots:
 
   tmpl@1.0.5: {}
 
-  to-buffer@1.2.1:
+  to-buffer@1.2.2:
     dependencies:
       isarray: 2.0.5
       safe-buffer: 5.2.1
