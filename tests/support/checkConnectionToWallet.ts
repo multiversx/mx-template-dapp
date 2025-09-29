@@ -8,7 +8,7 @@ export const checkConnectionToWallet = async (
   page: Page,
   walletAddress: string
 ) => {
-  await expect(page.getByTestId(SelectorsEnum.topInfo)).toContainText(
+  await expect(page.getByTestId(SelectorsEnum.topInfoContainer)).toContainText(
     walletAddress
   );
 };

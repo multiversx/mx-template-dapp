@@ -1,18 +1,23 @@
 import { expect } from '@playwright/test';
 
 import { TEST_CONSTANTS } from './constants';
-import { getCurrentBalance } from './getCurrentBalance';
+import { extractBalanceFromContainer } from './extractBalanceFromContainer';
 import { CheckBalanceUpdateType } from './types';
 
 export const checkBalanceUpdate = async ({
   page,
+  containerSelector,
   initialBalance,
   expectedChange
 }: CheckBalanceUpdateType) => {
   const expectedBalance = initialBalance + expectedChange;
 
   const pollFunction = async () => {
-    const currentBalance = await getCurrentBalance(page);
+    const currentBalance = await extractBalanceFromContainer({
+      page,
+      containerSelector,
+      selectorType: 'testId'
+    });
     return currentBalance;
   };
 
@@ -29,7 +34,11 @@ export const checkBalanceUpdate = async ({
     // If expect.poll times out, get the current balance for debugging
     let currentBalance: number;
     try {
-      currentBalance = await getCurrentBalance(page);
+      currentBalance = await extractBalanceFromContainer({
+        page,
+        containerSelector,
+        selectorType: 'testId'
+      });
     } catch (getBalanceError) {
       currentBalance = initialBalance;
     }
@@ -43,7 +52,11 @@ export const checkBalanceUpdate = async ({
   }
 
   // If we get here, the balance has reached the expected value
-  const currentBalance = await getCurrentBalance(page);
+  const currentBalance = await extractBalanceFromContainer({
+    page,
+    containerSelector,
+    selectorType: 'testId'
+  });
   const actualChange = currentBalance - initialBalance;
 
   expect(actualChange).toBeCloseTo(

@@ -7,13 +7,14 @@ export { confirmWalletTransaction } from './confirmWalletTransaction';
 // Page navigation and waiting functions
 export { waitForPageByUrlSubstring } from './waitForPageByUrlSubstring';
 export { waitForToastToBeDisplayed } from './waitForToastToBeDisplayed';
+export { waitForToastToBeClosed } from './waitForToastToBeClosed';
 
 // Ping-Pong related functions
 export { handlePingPong } from './handlePingPong';
 export { checkButtonStatus } from './checkButtonStatus';
 
 // Balance related functions
-export { getCurrentBalance } from './getCurrentBalance';
+export { extractBalanceFromContainer } from './extractBalanceFromContainer';
 export { checkBalanceUpdate } from './checkBalanceUpdate';
 
 // Transaction and toast functions
@@ -26,3 +27,10 @@ export { checkClipboardContains } from './checkClipboardContains';
 
 // Utility helper functions
 export { getTestIdSelector } from './testIdSelector';
+
+// Table parsing functions
+export {
+  parseTransactionsTable,
+  filterTransactions,
+  countTransactions
+} from './parseTransactionsTable';
