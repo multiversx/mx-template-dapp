@@ -6,20 +6,20 @@ import {
 import { TransactionProps } from 'types';
 
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';
-import { getWrapAndMultiTransferEsdtsTransactions } from './getWrapAndMultiTransferEsdtsTransactions';
+import { getWrapAndMultiTransferTransactions } from './getWrapAndMultiTransferTransactions';
 
-interface WrapAndMultiTransferEsdtsType extends TransactionProps {
+interface WrapAndMultiTransferTransactionsType extends TransactionProps {
   transactionsDisplayInfo?: TransactionsDisplayInfoType;
 }
 
-export const wrapAndMultiTransferEsdts = async (
-  props: WrapAndMultiTransferEsdtsType
+export const wrapAndMultiTransferTransactions = async (
+  props: WrapAndMultiTransferTransactionsType
 ) => {
   const { address, nonce, chainID, transactionsDisplayInfo } = props;
 
   const provider = getAccountProvider();
 
-  const transactionsToSign = await getWrapAndMultiTransferEsdtsTransactions({
+  const transactionsToSign = await getWrapAndMultiTransferTransactions({
     address,
     chainID,
     nonce
