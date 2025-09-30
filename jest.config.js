@@ -1,25 +1,23 @@
 module.exports = {
   roots: ['<rootDir>/src'],
-  collectCoverageFrom: [
-    'src/**/*.{js,jsx,ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/mocks/**'
-  ],
+  collectCoverageFrom: ['src/**/tests/*.{test.ts,test.tsx,spec.tsx,spec.ts}'],
   coveragePathIgnorePatterns: [],
+  setupFilesAfterEnv: ['./src/setupTests.ts'],
   testEnvironment: 'jsdom',
   modulePaths: ['<rootDir>/src'],
   transform: {
-    '^.+\\.(ts|js|tsx|jsx)$': '@swc/jest'
+    '^.+\\.(ts|js|tsx|jsx)$': [
+      'jest-chain-transform',
+      {
+        transformers: ['@swc/jest']
+      }
+    ]
   },
-  transformIgnorePatterns: [
-    'node_modules/(?!(@multiversx/sdk-.*|@noble/ed25519|react-redux|swiper|ssr-window|dom7|axios|react-tooltip|uuid|uint8arrays|multiformats|@lifeomic/axios-fetch|@walletconnect)/)'
-  ],
+  transformIgnorePatterns: ['node_modules/(^.+\\\\.(ts|js)$)'],
+  testMatch: ['**/src/**/?(*.)+(spec|test|bgTest).ts?(x)'],
   moduleNameMapper: {
-    '^react-native$': 'react-native-web',
-    '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
-    '^@multiversx/sdk-(.*)$': '@multiversx/sdk-$1'
+    '\\.(css|sass|scss)$': 'identity-obj-proxy'
   },
-  setupFilesAfterEnv: ['./src/setupTests.ts'],
   moduleFileExtensions: [
     // Place tsx and ts to beginning as suggestion from Jest team
     // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
@@ -30,15 +28,15 @@ module.exports = {
     'web.ts',
     'web.tsx',
     'json',
-    'web.jsx',
-    'jsx',
     'node'
   ],
   watchPlugins: [
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname'
   ],
-  clearMocks: true,
-  resetMocks: true,
-  restoreMocks: true
+  moduleDirectories: ['node_modules', 'src'],
+  bail: 1,
+  workerIdleMemoryLimit: '512MB', // Memory used per worker. Required to prevent memory leaks
+  maxWorkers: '50%', // Maximum tests ran in parallel. Required to prevent CPU usage at 100%
+  resetMocks: false
 };

@@ -1,17 +1,27 @@
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
-  DECIMALS,
-  DIGITS,
-  FormatAmountController,
+  FormatAmount,
   getExplorerLink,
-  MvxExplorerLink,
-  MvxFormatAmount,
+  MvxCopyButton,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
-  useGetAccountInfo,
+  useGetAccount,
   useGetNetworkConfig
 } from 'lib';
+
+// prettier-ignore
+const styles = {
+  transactionContainer: 'transaction-container flex flex-col',
+  transactionElementContainer: 'transaction-elem-container flex gap-2',
+  transactionElement: 'transaction-elem flex gap-3 w-full',
+  buttons: 'buttons flex gap-2',
+  dataContainer: 'data-container whitespace-nowrap',
+  decodedData: 'decoded-data whitespace-normal break-words'
+} satisfies Record<string, string>;
 
 export const TransactionOutput = ({
   transaction
@@ -19,18 +29,10 @@ export const TransactionOutput = ({
   transaction: SignedTransactionType;
 }) => {
   const { network } = useGetNetworkConfig();
-  const { account } = useGetAccountInfo();
+  const { balance } = useGetAccount();
   const decodedData = transaction.data
     ? Buffer.from(transaction.data, 'base64').toString('ascii')
     : 'N/A';
-
-  const { isValid, valueDecimal, valueInteger, label } =
-    FormatAmountController.getData({
-      digits: DIGITS,
-      decimals: DECIMALS,
-      egldLabel: network.egldLabel,
-      input: account.balance
-    });
 
   const explorerAddress = network.explorerAddress;
   const hashExplorerLink = getExplorerLink({
@@ -43,35 +45,41 @@ export const TransactionOutput = ({
   });
 
   return (
-    <div className='flex flex-col'>
-      <p>
+    <div className={styles.transactionContainer}>
+      <div className={styles.transactionElementContainer}>
         <Label>Hash:</Label>
-        <MvxExplorerLink
-          link={hashExplorerLink}
-          className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
-        >
+
+        <div className={styles.transactionElement}>
           {transaction.hash}
-        </MvxExplorerLink>
-      </p>
-      <p>
+
+          <div className={styles.buttons}>
+            <MvxCopyButton text={transaction.hash} />
+
+            <a href={hashExplorerLink} target='_blank' rel='noreferrer'>
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.transactionElementContainer}>
         <Label>Receiver:</Label>
-        <MvxExplorerLink
-          link={receiverExplorerLink}
-          className='border-b border-dotted border-gray-500 hover:border-solid hover:border-gray-800'
-        >
+        <div className={styles.transactionElement}>
           {transaction.receiver}
-        </MvxExplorerLink>
-      </p>
+
+          <div className={styles.buttons}>
+            <MvxCopyButton text={transaction.receiver} />
+
+            <a href={receiverExplorerLink} target='_blank' rel='noreferrer'>
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
+          </div>
+        </div>
+      </div>
 
       <p>
         <Label>Amount: </Label>
-        <MvxFormatAmount
-          isValid={isValid}
-          valueInteger={valueInteger}
-          valueDecimal={valueDecimal}
-          label={label}
-          data-testid='balance'
-        />
+        <FormatAmount value={balance} data-testid='balance' />
       </p>
       <p>
         <Label>Gas price: </Label>
@@ -81,8 +89,9 @@ export const TransactionOutput = ({
         <Label>Gas limit: </Label>
         {transaction.gasLimit}
       </p>
-      <p className='whitespace-nowrap'>
-        <Label>Data: </Label> {decodedData}
+      <p className={styles.dataContainer}>
+        <Label>Data: </Label>
+        <span className={styles.decodedData}>{decodedData}</span>
       </p>
     </div>
   );

@@ -12,17 +12,31 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Fix permissions
+        run: |
+          sudo chown -R $USER:$USER ${{ github.workspace }}
+          sudo chmod -R 755 ${{ github.workspace }}
+        continue-on-error: true
       - uses: actions/checkout@v4
         with:
           ref: main
-      - name: Use Node.js
+          clean: true
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
-      - name: Setup yarn
-        run: npm install -g yarn
-      - run: yarn install
-      - run: yarn build-mainnet
+          node-version: 22
+      - name: Setup pnpm
+        run: npm install -g pnpm
+      - name: Install Dependencies
+        uses: nick-fields/retry@v3
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: true
+        with:
+          timeout_minutes: 120
+          retry_on: error
+          max_attempts: 2
+          command: pnpm install
+      - run: pnpm run build-mainnet
         env:
           CI: false
       - name: Configure AWS Credentials

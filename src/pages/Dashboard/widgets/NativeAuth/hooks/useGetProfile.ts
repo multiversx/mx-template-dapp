@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+
 import { API_URL } from 'config';
 import { ProfileType } from 'types';
 
@@ -18,7 +19,7 @@ export const useGetProfile = () => {
         setProfile(data);
       }
     } catch (err) {
-      console.error('Unable to fetch profile');
+      console.error(err, 'Unable to fetch profile');
     } finally {
       setIsLoading(false);
     }

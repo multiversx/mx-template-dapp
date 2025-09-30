@@ -23,11 +23,22 @@ export default defineConfig({
     react(),
     basicSsl(),
     tsconfigPaths(),
-    svgrPlugin(),
+    svgrPlugin({
+      svgrOptions: {
+        exportType: 'named',
+        ref: true,
+        titleProp: true,
+        svgo: false
+      },
+      include: '**/*.svg'
+    }),
     nodePolyfills({
       globals: { Buffer: true, global: true, process: true }
     })
   ],
+  css: {
+    postcss: './postcss.config.js'
+  },
   build: {
     outDir: 'build'
   },

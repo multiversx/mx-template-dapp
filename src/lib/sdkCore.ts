@@ -6,7 +6,6 @@ export {
   Message,
   MessageComputer,
   ProxyNetworkProvider,
-  SmartContract,
   SmartContractController,
   SmartContractTransactionsFactory,
   Token,

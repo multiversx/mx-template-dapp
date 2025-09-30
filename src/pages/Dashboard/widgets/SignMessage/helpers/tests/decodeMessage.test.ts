@@ -1,4 +1,5 @@
 import { Message } from '@multiversx/sdk-core/out';
+
 import { decodeMessage } from '../decodeMessage';
 
 const signature =

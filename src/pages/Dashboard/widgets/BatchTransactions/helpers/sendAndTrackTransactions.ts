@@ -1,15 +1,12 @@
 import {
   Transaction,
   TransactionManager,
-  TransactionsDisplayInfoType
+  TransactionManagerTrackOptionsType
 } from 'lib';
 
 type SendAndTrackTransactionsType = {
   transactions: Transaction[] | Transaction[][];
-  options?: {
-    disableToasts?: boolean;
-    transactionsDisplayInfo?: TransactionsDisplayInfoType;
-  };
+  options?: TransactionManagerTrackOptionsType;
 };
 
 export const sendAndTrackTransactions = async ({

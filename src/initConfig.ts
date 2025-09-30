@@ -1,6 +1,10 @@
-import './styles/globals.css';
+import './styles/tailwind.css';
+import './styles/style.css';
 
 import { walletConnectV2ProjectId } from 'config';
+
+// Enable this block to showcase a custom provider implementation
+
 import { EnvironmentsEnum, ICustomProvider, InitAppType } from './lib';
 import { InMemoryProvider } from './provider/inMemoryProvider';
 
@@ -22,6 +26,7 @@ export const config: InitAppType = {
   dAppConfig: {
     nativeAuth: true,
     environment: EnvironmentsEnum.devnet,
+    theme: 'mvx:dark-theme',
     providers: {
       walletConnect: {
         walletConnectV2ProjectId

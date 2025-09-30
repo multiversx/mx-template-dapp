@@ -1,6 +1,19 @@
 import { Label } from 'components';
 import { CopyButton, Message } from 'lib';
+import { DataTestIdsEnum } from 'localConstants';
+
 import { decodeMessage } from '../helpers';
+
+// prettier-ignore
+const styles = {
+  signSuccessContainer: 'sign-success-container flex flex-col gap-6',
+  signSuccess: 'sign-success flex flex-col w-[calc(100%-50px)]',
+  signatureContainer: 'signature-container flex flex-row w-full gap-2',
+  signatureText: 'signature-text w-full resize-none outline-none bg-transparent',
+  encodedMessageContainer: 'encoded-message-container flex flex-row w-full gap-2',
+  decodedMessageContainer: 'decoded-message-container flex flex-row w-full gap-2',
+  decodedMessageText: 'decoded-message-text resize-none outline-none text-green-700 bg-transparent'
+} satisfies Record<string, string>;
 
 interface VerifyMessagePropsType {
   message: Message;
@@ -19,30 +32,35 @@ export const SignSuccess = (props: VerifyMessagePropsType) => {
   });
 
   return (
-    <div className='flex flex-col gap-6'>
-      <div className='flex flex-col w-[calc(100%-50px)]'>
-        <div className='flex flex-row w-full gap-2'>
+    <div className={styles.signSuccessContainer}>
+      <div className={styles.signSuccess}>
+        <div className={styles.signatureContainer}>
           <Label>Signature:</Label>
 
           <textarea
+            data-testid={DataTestIdsEnum.messageSignature}
             readOnly
-            className='w-full resize-none outline-none bg-transparent'
+            className={styles.signatureText}
             rows={2}
             defaultValue={props.signature}
           />
+
           <CopyButton text={props.signature} />
         </div>
 
-        <div className='flex flex-row w-full gap-2'>
+        <div className={styles.encodedMessageContainer}>
           <Label>Encoded message:</Label>
-          <p>{encodedMessage}</p>
+
+          <p data-testid={DataTestIdsEnum.encodedMessage}>{encodedMessage}</p>
         </div>
 
-        <div className='flex flex-row w-full gap-2'>
+        <div className={styles.decodedMessageContainer}>
           <Label>Decoded message:</Label>
+
           <textarea
+            data-testid={DataTestIdsEnum.decodedMessage}
             readOnly
-            className='resize-none outline-none text-green-700 bg-transparent'
+            className={styles.decodedMessageText}
             rows={1}
             value={decodedMessage}
             placeholder='Decoded message'

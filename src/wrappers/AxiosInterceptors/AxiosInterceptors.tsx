@@ -1,4 +1,5 @@
 import { PropsWithChildren, useEffect } from 'react';
+
 import { sampleAuthenticatedDomains } from 'config';
 import { setAxiosInterceptors, useGetLoginInfo } from 'lib';
 

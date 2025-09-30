@@ -1,5 +1,6 @@
 import { getAccountProvider, TransactionsDisplayInfoType } from 'lib';
 import { TransactionProps } from 'types';
+
 import { getBatchTransactions } from './getBatchTransactions';
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 
@@ -17,7 +18,7 @@ export const signAndAutoSendBatchTransactions = async ({
 }) => {
   const provider = getAccountProvider();
 
-  const transactions = getBatchTransactions({
+  const transactions = await getBatchTransactions({
     address,
     nonce,
     chainID

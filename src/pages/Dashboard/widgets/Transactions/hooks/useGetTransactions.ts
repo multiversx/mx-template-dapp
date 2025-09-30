@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import { apiTimeout, transactionSize } from 'config';
 import {
   getInterpretedTransaction,
@@ -7,7 +8,8 @@ import {
   useGetAccount,
   useGetNetworkConfig
 } from 'lib';
-import { TransactionsPropsType } from '../types';
+
+import { TransactionsPropsType } from '../Transactions';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
   const { address } = useGetAccount();
@@ -43,5 +45,9 @@ export const useGetTransactions = (payload?: TransactionsPropsType) => {
     }
   };
 
-  return { isLoading, transactions, getTransactions: fetchTransactions };
+  return {
+    isLoading,
+    transactions,
+    getTransactions: fetchTransactions
+  };
 };
