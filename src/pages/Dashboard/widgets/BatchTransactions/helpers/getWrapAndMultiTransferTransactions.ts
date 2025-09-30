@@ -13,7 +13,7 @@ import { Address } from 'lib';
 import { TransactionProps } from 'types';
 import { contractAddress } from 'config';
 
-export const getWrapAndMultiTransferEsdtsTransactions = async ({
+export const getWrapAndMultiTransferTransactions = async ({
   address,
   chainID
 }: TransactionProps) => {
