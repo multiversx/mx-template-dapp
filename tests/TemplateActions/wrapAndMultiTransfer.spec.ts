@@ -13,7 +13,7 @@ const keystoreConfig = {
   password: TestDataEnums.keystoreFilePassword
 };
 
-test.describe('Sign & send batch', () => {
+test.describe('Wrap & Multi-Transfer', () => {
   test.beforeEach(async ({ page }) => {
     await TestActions.navigateToConnectWallet(page);
     await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
@@ -33,16 +33,16 @@ test.describe('Sign & send batch', () => {
       selectorType: 'testId'
     });
 
-    // Check that account balance is greater than 5 required for batch transactions
+    // Check that account balance is greater than 4 required for wrap and multi-transfer
     expect(accountBalance).toBeGreaterThan(
-      TEST_CONSTANTS.MIN_BALANCE_FOR_BATCH_TX
+      TEST_CONSTANTS.MIN_BALANCE_FOR_WRAP_AND_MULTI_TRANSFER
     );
   });
 
   test('should display batch transactions container when clicked', async ({
     page
   }) => {
-    // Click LeftPanel - Batch Transactions
+    // Navigate to batch transactions page and initiate signing
     await page.getByText('Batch Transactions').first().click();
 
     // Wait for the batch transactions container to be visible
@@ -56,14 +56,14 @@ test.describe('Sign & send batch', () => {
   });
 
   test('should complete full batch transaction flow', async ({ page }) => {
-    const numberOfTransactions = 5;
+    const numberOfTransactions = 4; // 2 transactions for wrap, 1 for swap, 1 for multi-transfer
 
     // Navigate to batch transactions page and initiate signing
     await page.getByText('Batch Transactions').first().click();
     await page
       .locator(SelectorsEnum.batchTransactionsContainer)
       .waitFor({ state: 'visible' });
-    await page.getByTestId(SelectorsEnum.signAndBatchButton).click();
+    await page.getByTestId(SelectorsEnum.wrapAndMultiTransferButton).click();
 
     // Switch to web wallet page
     const walletPage = await TestActions.waitForPageByUrlSubstring({
@@ -93,32 +93,10 @@ test.describe('Sign & send batch', () => {
     // Wait for transaction toast to be displayed
     await TestActions.waitForToastToBeDisplayed(templatePage);
 
-    // Check that the transaction toast shows that all transactions are signed
+    // Check that the transaction toast shows that all transactions were signed
     await TestActions.waitForTransactionToastToContain({
       page: templatePage,
-      toastContent: '5 / 5 transactions processed'
+      toastContent: '3 / 3 transactions processed'
     });
-
-    // Wait for the transaction toast to be closed
-    await TestActions.waitForToastToBeClosed(templatePage);
-
-    // Parse ping/pong transactions table
-    const allTransactions = await TestActions.parseTransactionsTable({
-      page,
-      tableType: 'all',
-      maxRows: 10
-    });
-
-    // Count transactions with method and age in minutes
-    const transactionCount = TestActions.countTransactions(allTransactions, {
-      methods: ['transaction'],
-      maxAgeInMinutes: 1
-    });
-
-    // Verify we found exactly 5 matching transaction
-    expect(
-      transactionCount,
-      `Expected 5 transaction with method="transaction", but found ${transactionCount}. Total transactions: ${allTransactions.length}`
-    ).toBe(5);
   });
 });

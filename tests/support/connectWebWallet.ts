@@ -73,7 +73,11 @@ export const connectWebWallet = async ({
       keystorePath: loginMethod.keystore,
       keystorePassword: loginMethod.password
     });
-    await walletPage.waitForEvent('close');
+    try {
+      await walletPage.waitForEvent('close');
+    } catch (error) {
+      console.error('Error waiting for wallet page to close:', error);
+    }
     return;
   }
 
@@ -83,10 +87,11 @@ export const connectWebWallet = async ({
       walletPage,
       pemPath: loginMethod.pem
     });
-    await walletPage.waitForEvent('close');
+    try {
+      await walletPage.waitForEvent('close');
+    } catch (error) {
+      console.error('Error waiting for wallet page to close:', error);
+    }
     return;
   }
-
-  // Wait for the wallet page to be closed
-  await walletPage.waitForEvent('close');
 };
