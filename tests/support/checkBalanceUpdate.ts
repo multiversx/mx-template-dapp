@@ -1,5 +1,4 @@
-import { expect } from '@playwright/test';
-
+import { expect, Page } from '@playwright/test';
 import { TEST_CONSTANTS } from './constants';
 import { extractBalanceFromContainer } from './extractBalanceFromContainer';
 import { CheckBalanceUpdateType } from './types';
@@ -34,7 +33,7 @@ export const checkPingPongBalanceUpdate = async ({
   initialBalance,
   isPing
 }: {
-  page: any;
+  page: Page;
   containerSelector: string;
   initialBalance: number;
   isPing: boolean;
