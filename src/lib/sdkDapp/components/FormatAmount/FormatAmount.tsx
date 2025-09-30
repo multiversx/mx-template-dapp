@@ -1,4 +1,5 @@
 import { WithClassnameType } from 'types';
+
 import { MvxFormatAmount } from '../../../sdkDappUI/sdkDappUI.components';
 import { MvxFormatAmountPropsType } from '../../../sdkDappUI/sdkDappUI.types';
 import { DECIMALS, DIGITS } from '../../../sdkDappUtils';
@@ -34,6 +35,8 @@ export const FormatAmount = (props: IFormatAmountProps) => {
       showLabel={props.showLabel}
       valueDecimal={valueDecimal}
       valueInteger={valueInteger}
+      decimalClass={props.decimalClass}
+      labelClass={props.labelClass}
     />
   );
 };

@@ -1,28 +1,53 @@
 import {
   faArrowsRotate,
-  faPaperPlane
+  faPaperPlane,
+  IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, OutputContainer, TransactionsOutput } from 'components';
+import { useState } from 'react';
+
+import { MvxButton, useGetPendingTransactionsSessions } from 'lib';
+import { OutputContainer, TransactionsOutput } from 'components';
 import {
   useGetAccount,
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'lib';
+import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
+
 import {
-  sendBatchTransactions,
   signAndAutoSendBatchTransactions,
-  swapAndLockTokens
+  swapAndLockTokens,
+  wrapAndMultiTransferTransactions
 } from './helpers';
+
+// prettier-ignore
+const styles = {
+  batchTx: 'batch-tx flex flex-col gap-6',
+  buttonsContainer: 'buttons-container flex flex-col md:flex-row gap-2 items-start',
+  batchTxButton: 'batch-tx-button text-sm font-normal'
+} satisfies Record<string, string>;
+
+interface BatchTransactionsButtonsType {
+  dataTestId: string;
+  onClickFunction: () => Promise<void>;
+  icon: IconDefinition;
+  label: string;
+}
 
 export const BatchTransactions = () => {
   const { address, nonce } = useGetAccount();
   const { network } = useGetNetworkConfig();
+  const [currentSessionId, setCurrentSessionId] = useState('');
+  const pendingSession = useGetPendingTransactionsSessions();
+  const [sessionId] = Object.keys(pendingSession);
   const transactions = useGetPendingTransactions();
-  const hasPendingTransactions = transactions.length > 0;
+  const pendingBatchTransactions =
+    currentSessionId === sessionId ? transactions : [];
+  const hasPendingTransactions = pendingBatchTransactions.length > 0;
 
   const executeSignAndAutoSendBatchTransactions = async () => {
-    await signAndAutoSendBatchTransactions({
+    const sessionId = await signAndAutoSendBatchTransactions({
       address,
       nonce,
       chainID: network.chainId,
@@ -33,18 +58,28 @@ export const BatchTransactions = () => {
         successMessage: 'Batch transactions successful'
       }
     });
+
+    setCurrentSessionId(sessionId);
   };
 
-  const executeBatchTransactions = async () => {
-    await sendBatchTransactions({
+  const executeWrapMultiTransferTransactions = async () => {
+    const sessionId = await wrapAndMultiTransferTransactions({
       address,
       nonce,
-      chainID: network.chainId
+      chainID: network.chainId,
+      transactionsDisplayInfo: {
+        processingMessage: 'Processing wrap and multi-transfer ESDTs',
+        errorMessage:
+          'An error has occurred during wrap and multi-transfer ESDTs',
+        successMessage: 'Wrap and multi-transfer ESDTs successful'
+      }
     });
+
+    setCurrentSessionId(sessionId);
   };
 
   const executeSwapAndLockTokens = async () => {
-    await swapAndLockTokens({
+    const sessionId = await swapAndLockTokens({
       address,
       nonce,
       chainID: network.chainId,
@@ -54,40 +89,56 @@ export const BatchTransactions = () => {
         successMessage: 'Swap and lock successful'
       }
     });
+
+    setCurrentSessionId(sessionId);
   };
 
-  return (
-    <div className='flex flex-col gap-6'>
-      <div className='flex flex-col md:flex-row gap-2 items-start'>
-        <Button
-          data-testid='sign-auto-send'
-          onClick={executeSignAndAutoSendBatchTransactions}
-          disabled={hasPendingTransactions}
-        >
-          <FontAwesomeIcon icon={faPaperPlane} className='mr-1' />
-          Sign & send batch
-        </Button>
-        <Button
-          data-testid='send-transactions'
-          onClick={executeBatchTransactions}
-          disabled={hasPendingTransactions}
-        >
-          <FontAwesomeIcon icon={faPaperPlane} className='mr-1' />
-          Sign batch & controlled sending
-        </Button>
-        <Button
-          data-testid='swap-lock'
-          onClick={executeSwapAndLockTokens}
-          disabled={hasPendingTransactions}
-        >
-          <FontAwesomeIcon icon={faArrowsRotate} className='mr-1' />
-          Swap & Lock
-        </Button>
-      </div>
+  const batchTransactionsButtons: BatchTransactionsButtonsType[] = [
+    {
+      dataTestId: 'sign-auto-send',
+      onClickFunction: executeSignAndAutoSendBatchTransactions,
+      icon: faPaperPlane,
+      label: 'Sign & send batch'
+    },
+    {
+      dataTestId: 'wrap-multi-transfer',
+      onClickFunction: executeWrapMultiTransferTransactions,
+      icon: faPaperPlane,
+      label: 'Wrap & Multi-Transfer'
+    },
+    {
+      dataTestId: 'swap-lock',
+      onClickFunction: executeSwapAndLockTokens,
+      icon: faArrowsRotate,
+      label: 'Swap & Lock'
+    }
+  ];
 
-      <OutputContainer>
-        <TransactionsOutput transactions={transactions} />
-      </OutputContainer>
+  return (
+    <div id={ItemsIdentifiersEnum.batchTransactions} className={styles.batchTx}>
+      {pendingBatchTransactions.length > 0 && (
+        <OutputContainer>
+          <TransactionsOutput transactions={pendingBatchTransactions} />
+        </OutputContainer>
+      )}
+      <div className={styles.buttonsContainer}>
+        {batchTransactionsButtons.map((button) => (
+          <MvxButton
+            key={button.dataTestId}
+            data-testid={button.dataTestId}
+            onClick={button.onClickFunction}
+            disabled={hasPendingTransactions}
+            size='small'
+          >
+            <FontAwesomeIcon
+              icon={button.icon}
+              className={styles.batchTxButton}
+            />
+
+            <span className={styles.batchTxButton}>{button.label}</span>
+          </MvxButton>
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,19 +1,27 @@
 import { OutputContainer } from '../OutputContainer';
 
+// prettier-ignore
+const styles = {
+  missingNativeAuthError: 'missing-native-auth-error flex items-center gap-1',
+  missingNativeAuthErrorText: 'missing-native-auth-error-text',
+  missingNativeAuthErrorDanger: 'missing-native-auth-error-danger text-red-500 font-bold',
+  missingNativeAuthErrorItalic: 'missing-native-auth-error-italic font-bold italic leading-none text-primary transition-all duration-200 ease-out'
+} satisfies Record<string, string>;
+
 export const MissingNativeAuthError = () => (
   <OutputContainer>
-    <div className='flex items-center gap-1'>
-      <p>
+    <p className={styles.missingNativeAuthError}>
+      <span className={styles.missingNativeAuthErrorText}>
         Information could
-        <span className='ml-1 mr-1 inline-block px-2 py-1 text-sm font-semibold leading-none bg-red-500 text-white rounded'>
-          NOT
-        </span>
+      </span>
+
+      <span className={styles.missingNativeAuthErrorDanger}>NOT</span>
+      <span className={styles.missingNativeAuthErrorText}>
         be displayed because
-        <span className='ml-1 mr-1 inline-block px-2 py-1 text-sm font-semibold leading-none bg-blue-500 text-white rounded'>
-          nativeAuth
-        </span>
-        is not active
-      </p>
-    </div>
+      </span>
+
+      <span className={styles.missingNativeAuthErrorItalic}>nativeAuth</span>
+      <span className={styles.missingNativeAuthErrorText}>is not active</span>
+    </p>
   </OutputContainer>
 );

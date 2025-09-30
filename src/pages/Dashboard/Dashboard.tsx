@@ -1,8 +1,11 @@
+import classNames from 'classnames';
+import { useEffect, useState } from 'react';
+
 import { contractAddress } from 'config';
 import { WidgetType } from 'types/widget.types';
-import { Widget } from './components';
+
+import { DashboardHeader, LeftPanel, Widget } from './components';
 import {
-  Account,
   BatchTransactions,
   NativeAuth,
   PingPongAbi,
@@ -11,14 +14,9 @@ import {
   SignMessage,
   Transactions
 } from './widgets';
+import styles from './dashboard.styles';
 
-const WIDGETS: WidgetType[] = [
-  {
-    title: 'Account',
-    widget: Account,
-    description: 'Connected account details',
-    reference: 'https://docs.multiversx.com/sdk-and-tools/sdk-dapp/#account'
-  },
+const dashboardWidgets: WidgetType[] = [
   {
     title: 'Ping & Pong (Manual)',
     widget: PingPongRaw,
@@ -65,14 +63,16 @@ const WIDGETS: WidgetType[] = [
   },
   {
     title: 'Transactions (All)',
-    widget: Transactions,
+    widget: () => <Transactions identifier='transactions-all' />,
     description: 'List transactions for the connected account',
     reference:
       'https://api.multiversx.com/#/accounts/AccountController_getAccountTransactions'
   },
   {
     title: 'Transactions (Ping & Pong)',
-    widget: Transactions,
+    widget: (props) => (
+      <Transactions identifier='transactions-ping-pong' {...props} />
+    ),
     props: { receiver: contractAddress },
     description: 'List transactions filtered for a given Smart Contract',
     reference:
@@ -81,11 +81,42 @@ const WIDGETS: WidgetType[] = [
 ];
 
 export const Dashboard = () => {
+  const [isMobilePanelOpen, setIsMobilePanelOpen] = useState(false);
+
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   return (
-    <div className='flex flex-col gap-6 max-w-3xl w-full'>
-      {WIDGETS.map((element) => (
-        <Widget key={element.title} {...element} />
-      ))}
+    <div className={styles.dashboardContainer}>
+      <div
+        className={classNames(
+          styles.mobilePanelContainer,
+          styles.desktopPanelContainer
+        )}
+      >
+        <LeftPanel
+          isOpen={isMobilePanelOpen}
+          setIsOpen={setIsMobilePanelOpen}
+        />
+      </div>
+
+      <div
+        style={{ backgroundImage: 'url(src/assets/img/background.svg)' }}
+        className={classNames(styles.dashboardContent, {
+          [styles.dashboardContentMobilePanelOpen]: isMobilePanelOpen
+        })}
+      >
+        <DashboardHeader />
+
+        <div className={styles.dashboardWidgets}>
+          {dashboardWidgets.map((element) => (
+            <Widget key={element.title} {...element} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

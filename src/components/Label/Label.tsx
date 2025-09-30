@@ -1,5 +1,10 @@
 import { PropsWithChildren } from 'react';
 
-export const Label = ({ children }: PropsWithChildren) => {
-  return <label className='text-gray-500'>{children}</label>;
-};
+// prettier-ignore
+const styles = {
+  labelContainer: 'label-container text-secondary transition-all duration-200 ease-out text-sm font-normal'
+} satisfies Record<string, string>;
+
+export const Label = ({ children }: PropsWithChildren) => (
+  <label className={styles.labelContainer}>{children}</label>
+);
