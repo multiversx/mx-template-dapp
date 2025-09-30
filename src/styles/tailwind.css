@@ -2,9 +2,9 @@
 
 @theme {
   --breakpoint-xs: 30rem; /* 480px */
-  --background-image-dark-theme: url('../dark-theme-bg.png');
-  --background-image-vibe-theme: url('../vibe-theme-bg.png');
-  --background-image-light-theme: url('../light-theme-bg.png');
+  --background-image-dark-theme: url('/dark-theme-bg.png');
+  --background-image-vibe-theme: url('/vibe-theme-bg.png');
+  --background-image-light-theme: url('/light-theme-bg.png');
   --background-color-primary: var(--mvx-bg-color-primary);
   --background-color-secondary: var(--mvx-bg-color-secondary);
   --background-color-tertiary: var(--mvx-hover-bg-primary);
