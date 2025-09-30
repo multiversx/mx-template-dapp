@@ -9,15 +9,7 @@ import { ReactNode, useState } from 'react';
 
 import { ReactComponent as XLogo } from 'assets/img/x-logo.svg';
 import { Label } from 'components';
-import {
-  DECIMALS,
-  DIGITS,
-  FormatAmountController,
-  MvxFormatAmount,
-  MvxTrim,
-  useGetAccount,
-  useGetNetworkConfig
-} from 'lib';
+import { FormatAmount, MvxTrim, useGetAccount } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 
 import { Username } from './components';
@@ -33,17 +25,8 @@ interface AccountDetailsType {
 export const Account = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const { network } = useGetNetworkConfig();
   const { address, balance, shard } = useGetAccount();
   const { herotag, profileUrl } = useGetUserHerotag();
-
-  const { isValid, valueDecimal, valueInteger, label } =
-    FormatAmountController.getData({
-      digits: DIGITS,
-      decimals: DECIMALS,
-      egldLabel: network.egldLabel,
-      input: balance
-    });
 
   const toggleCollapse = () => {
     setIsCollapsed((isCollapsed) => !isCollapsed);
@@ -89,14 +72,12 @@ export const Account = () => {
       icon: <XLogo className={styles.connectedAccountDetailsXLogo} />,
       label: 'Balance',
       value: (
-        <MvxFormatAmount
-          isValid={isValid}
-          valueInteger={valueInteger}
-          valueDecimal={valueDecimal}
-          label={label}
+        <FormatAmount
+          value={balance}
           data-testid='balance'
           decimalClass='opacity-70'
           labelClass='opacity-70'
+          showLabel={true}
         />
       )
     }

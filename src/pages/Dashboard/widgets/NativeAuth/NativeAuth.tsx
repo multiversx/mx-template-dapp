@@ -3,11 +3,8 @@ import { useEffect } from 'react';
 import { Label, MissingNativeAuthError, OutputContainer } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
-  DECIMALS,
-  DIGITS,
-  FormatAmountController,
+  FormatAmount,
   MvxDataWithExplorerLink,
-  MvxFormatAmount,
   useGetAccount,
   useGetLoginInfo,
   useGetNetworkConfig
@@ -31,17 +28,9 @@ const styles = {
 export const NativeAuth = () => {
   const { network } = useGetNetworkConfig();
   const { tokenLogin, isLoggedIn } = useGetLoginInfo();
-  const account = useGetAccount();
+  const { balance } = useGetAccount();
   const { isLoading, profile, getProfile } = useGetProfile();
   const explorerAddress = network.explorerAddress;
-
-  const { isValid, valueDecimal, valueInteger, label } =
-    FormatAmountController.getData({
-      digits: DIGITS,
-      decimals: DECIMALS,
-      egldLabel: network.egldLabel,
-      input: account.balance
-    });
 
   useEffect(() => {
     // On page refresh, tokenInfo is null which implies that we do not have access to loginInfo data
@@ -113,12 +102,10 @@ export const NativeAuth = () => {
 
           <OutputContainer isLoading={isLoading}>
             <div className={styles.nativeAuthAmount}>
-              <MvxFormatAmount
-                isValid={isValid}
-                valueInteger={valueInteger}
-                valueDecimal={valueDecimal}
-                label={label}
+              <FormatAmount
+                value={balance}
                 data-testid='balance'
+                showLabel={true}
               />
             </div>
           </OutputContainer>

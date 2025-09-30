@@ -35,6 +35,8 @@ export const FormatAmount = (props: IFormatAmountProps) => {
       showLabel={props.showLabel}
       valueDecimal={valueDecimal}
       valueInteger={valueInteger}
+      decimalClass={props.decimalClass}
+      labelClass={props.labelClass}
     />
   );
 };
