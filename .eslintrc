@@ -37,17 +37,25 @@
   ],
   "plugins": ["react-hooks", "prettier", "import", "sort-exports"],
   "rules": {
-    "no-nested-ternary":"warn",
-    "curly": ["error", "all"],
-    "sort-exports/sort-exports": "off",
-    "sort-imports": "off",
+    "sort-exports/sort-exports": "error",
+    "sort-imports": [
+      "error",
+      {
+        "ignoreCase": true,
+        "ignoreDeclarationSort": true,
+        "ignoreMemberSort": false
+      }
+    ],
     "import/order": [
       "error",
       {
         "groups": [
-          ["builtin", "external"],
+          "builtin",
+          "external",
           "internal",
-          ["parent", "sibling", "index"]
+          "parent",
+          "sibling",
+          "index"
         ],
         "pathGroups": [
           {
@@ -56,7 +64,11 @@
             "position": "before"
           }
         ],
-        "newlines-between": "always"
+        "newlines-between": "never",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
       }
     ],
     "prettier/prettier": [

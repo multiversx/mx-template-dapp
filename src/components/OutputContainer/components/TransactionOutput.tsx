@@ -9,7 +9,7 @@ import {
   MvxCopyButton,
   SignedTransactionType,
   TRANSACTIONS_ENDPOINT,
-  useGetAccountInfo,
+  useGetAccount,
   useGetNetworkConfig
 } from 'lib';
 
@@ -29,7 +29,7 @@ export const TransactionOutput = ({
   transaction: SignedTransactionType;
 }) => {
   const { network } = useGetNetworkConfig();
-  const { account } = useGetAccountInfo();
+  const { balance } = useGetAccount();
   const decodedData = transaction.data
     ? Buffer.from(transaction.data, 'base64').toString('ascii')
     : 'N/A';
@@ -79,7 +79,7 @@ export const TransactionOutput = ({
 
       <p>
         <Label>Amount: </Label>
-        <FormatAmount value={account.balance} data-testid='balance' />
+        <FormatAmount value={balance} data-testid='balance' />
       </p>
       <p>
         <Label>Gas price: </Label>

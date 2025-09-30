@@ -18,7 +18,7 @@ import {
   MvxButton,
   MvxDataWithExplorerLink,
   NotificationsFeedManager,
-  useGetAccountInfo,
+  useGetAccount,
   useGetIsLoggedIn,
   useGetNetworkConfig
 } from 'lib';
@@ -36,7 +36,7 @@ interface HeaderBrowseButtonType {
 
 export const Header = () => {
   const { network } = useGetNetworkConfig();
-  const { address } = useGetAccountInfo();
+  const { address } = useGetAccount();
 
   const isLoggedIn = useGetIsLoggedIn();
   const provider = getAccountProvider();

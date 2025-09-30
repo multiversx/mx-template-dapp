@@ -15,7 +15,7 @@ import {
   FormatAmountController,
   MvxFormatAmount,
   MvxTrim,
-  useGetAccountInfo,
+  useGetAccount,
   useGetNetworkConfig
 } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
@@ -34,7 +34,7 @@ export const Account = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const { network } = useGetNetworkConfig();
-  const { address, account } = useGetAccountInfo();
+  const { address, balance, shard } = useGetAccount();
   const { herotag, profileUrl } = useGetUserHerotag();
 
   const { isValid, valueDecimal, valueInteger, label } =
@@ -42,7 +42,7 @@ export const Account = () => {
       digits: DIGITS,
       decimals: DECIMALS,
       egldLabel: network.egldLabel,
-      input: account.balance
+      input: balance
     });
 
   const toggleCollapse = () => {
@@ -83,9 +83,7 @@ export const Account = () => {
         />
       ),
       label: 'Shard',
-      value: (
-        <span data-testid={DataTestIdsEnum.addressShard}>{account.shard}</span>
-      )
+      value: <span data-testid={DataTestIdsEnum.addressShard}>{shard}</span>
     },
     {
       icon: <XLogo className={styles.connectedAccountDetailsXLogo} />,
