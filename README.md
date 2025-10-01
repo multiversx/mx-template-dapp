@@ -182,6 +182,9 @@ Follow these steps to set it up.
 
 ### Step 1. Update `tailwind.css` file 
 
+This is the main place where you customize your theme. You add your project specific colors and update 
+CSS variables that style your elements, according to your theme.
+
 Define your color palette in the `:root` section:
 
 ```css
@@ -203,6 +206,10 @@ Next, configure your theme-specific variables:
 
 ### Step 2. Add your theme in `useHandleThemeManagement.ts` hook
 
+This hook registers and manages all available themes in your project.
+It maintains a list of all theme options, tracks the currently active theme and 
+provides a `handleThemeSwitch` function that updates the `data-mvx-theme` attribute. 
+
 ```typescript
 const allThemeOptions: ThemeOptionType[] =
 [
@@ -215,6 +222,9 @@ const allThemeOptions: ThemeOptionType[] =
 ```
 
 ### Step 3. Add colors for your theme tooltip in `ThemeTooltip.tsx`
+
+This allows you to see the theme options available in the project. They are listed in a tooltip
+dropdown in header with visual color previews for each theme.
 
 ```typescript
 const themeDotColors: Record<string, string[]> = 
@@ -243,7 +253,9 @@ Add a background image for your theme in `public` folder and reference it in `ta
 }
 ```
 
-And then update `themeExtraProperties` object with your values:
+And then update `themeExtraProperties` object with your values. These properties are used for 
+customizing your hero section from home page. It adds background image and icon + title for the 
+theme switch section in hero.
 
 ```typescript
 const themeExtraProperties: Record<
