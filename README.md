@@ -170,6 +170,107 @@ pnpm build-testnet
 pnpm build-mainnet
 ```
 
+## Configure Theme (Optional)
+
+This template comes with three built-in themes:
+- TealLab (mvx:dark-theme)
+- VibeMode (mvx:vibe-theme)
+- BrightLight (mvx:light-theme)
+
+But you can customize the appearance of your project by defining your own theme using CSS variables. 
+Follow these steps to set it up.
+
+### Step 1. Update `tailwind.css` file 
+
+Define your color palette in the `:root` section:
+
+```css
+:root {
+  --mvx-custom-primary-color: #your-color;
+  --mvx-custom-secondary-color: #your-color;
+}
+```
+
+Next, configure your theme-specific variables:
+
+```css
+:root[data-mvx-theme='mvx:your-theme'],
+[data-mvx-theme='mvx:your-theme'] {
+  --mvx-bg-color-primary: var(--mvx-custom-primary-color);
+  --mvx-bg-color-secondary: var(--mvx-custom-secondary-color);
+}
+```
+
+### Step 2. Add your theme in `useHandleThemeManagement.ts` hook
+
+```typescript
+const allThemeOptions: ThemeOptionType[] =
+[
+    { identifier: 'mvx:dark-theme', label: 'TealLab' },
+    { identifier: 'mvx:vibe-theme', label: 'VibeMode' },
+    { identifier: 'mvx:light-theme', label: 'BrightLight' },
+
+    { identifier: 'mvx:your-theme', label: 'Your Theme Label' }
+];
+```
+
+### Step 3. Add colors for your theme tooltip in `ThemeTooltip.tsx`
+
+```typescript
+const themeDotColors: Record<string, string[]> = 
+{
+  'mvx:dark-theme': ['#23F7DD', '#262626', '#B6B3AF', '#FFFFFF'],
+  'mvx:vibe-theme': ['#471150', '#5A2A62', '#D200FA', '#FFFFFF'],
+  'mvx:light-theme': ['#000000', '#A5A5A5', '#E2DEDC', '#F3EFED'],
+
+  'mvx:your-theme': ['#color1', '#color2', '#color3', '#color4']
+};
+```
+
+### Step 4. Add theme properties for hero section in `HomeHero.tsx`
+
+Add your icon in `assets` folder and import it as:
+
+```typescript
+import { ReactComponent as YourThemeIcon } from 'assets/icons/your-theme-icon.svg';
+```
+
+Add a background image for your theme in `public` folder and reference it in `tailwind.css`:
+
+```css
+@theme {
+  --background-image-your-theme: url('/your-theme-bg.png');
+}
+```
+
+And then update `themeExtraProperties` object with your values:
+
+```typescript
+const themeExtraProperties: Record<
+  string,
+  Omit<HomeThemeOptionType, keyof ThemeOptionType>
+> = {
+  // existing themes
+  'mvx:your-theme': {
+    icon: YourThemeIcon,
+    title: 'Your Title',
+    backgroundClass: 'bg-your-theme'
+  }
+};
+```
+
+### Step 5. Set your theme as default in `initConfig.ts`
+
+```typescript
+dAppConfig: {
+    theme: 'mvx:your-theme',
+  }
+```
+
+Now the project will start with your configured theme. 
+All variables will have the colors you have set. If you don't set custom colors, the default ones will apply.
+You can see the current theme in `data-mvx-theme` attribute in browser inspector.
+
 ## Learn More
 
 You can learn more in the [Vite documentation](https://vitejs.dev/).
