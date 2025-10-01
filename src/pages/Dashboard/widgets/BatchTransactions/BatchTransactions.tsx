@@ -16,7 +16,7 @@ import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 import {
   sendBatchTransactions,
-  signAndAutoSendBatchTransactions,
+  signAndSendBatchTransactions,
   swapAndLockTokens
 } from './helpers';
 
@@ -40,8 +40,8 @@ export const BatchTransactions = () => {
   const transactions = useGetPendingTransactions();
   const hasPendingTransactions = transactions.length > 0;
 
-  const executeSignAndAutoSendBatchTransactions = async () => {
-    await signAndAutoSendBatchTransactions({
+  const executeSignAndSendBatchTransactions = async () => {
+    await signAndSendBatchTransactions({
       address,
       nonce,
       chainID: network.chainId,
@@ -78,7 +78,7 @@ export const BatchTransactions = () => {
   const batchTransactionsButtons: BatchTransactionsButtonsType[] = [
     {
       dataTestId: 'sign-auto-send',
-      onClickFunction: executeSignAndAutoSendBatchTransactions,
+      onClickFunction: executeSignAndSendBatchTransactions,
       icon: faPaperPlane,
       label: 'Sign & send batch'
     },
