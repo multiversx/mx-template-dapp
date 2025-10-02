@@ -1,36 +1,46 @@
-import { expect, Page } from '@playwright/test';
-
-import { SelectorsEnum } from './testdata';
+import { expect } from '@playwright/test';
 import { TEST_CONSTANTS } from './constants';
+import { SelectorsEnum } from './testdata';
+import { WaitForTransactionToastToContainType } from './types';
 
 export const waitForTransactionToastToContain = async ({
   page,
-  toastContent
-}: {
-  page: Page;
-  toastContent?: string;
-}) => {
-  // Wait for at least one toast to appear
-  const toastContentElements = page.getByTestId(
-    SelectorsEnum.toastTransactionContent
-  );
-  const count = await toastContentElements.count();
-  expect(count).toBeGreaterThan(0);
+  toastTitle,
+  toastContent,
+  toastStatus,
+  toastIndex = 0
+}: WaitForTransactionToastToContainType) => {
+  if (!toastTitle && !toastContent && !toastStatus) {
+    throw new Error('Either toast title, content or status must be provided');
+  }
 
-  // Wait for any toast that contains the expected content
+  const titleLocator = page.getByTestId(SelectorsEnum.toastTitle);
+  const contentLocator = page.getByTestId(SelectorsEnum.toastContent);
+  const statusLocator = page.getByTestId(SelectorsEnum.toastStatus);
+
+  // Wait for toast visibility
+  await expect(contentLocator.nth(toastIndex)).toBeVisible({
+    timeout: TEST_CONSTANTS.TOAST_WAIT_TIMEOUT
+  });
+
+  if (toastTitle) {
+    await expect(titleLocator.nth(toastIndex)).toContainText(toastTitle, {
+      timeout: TEST_CONSTANTS.TOAST_WAIT_TIMEOUT,
+      useInnerText: true
+    });
+  }
+
   if (toastContent) {
-    await page.waitForFunction(
-      ({ expectedContent, testId }) => {
-        const toasts = document.querySelectorAll(`[data-testid="${testId}"]`);
-        return Array.from(toasts).some(
-          (toast) => toast.textContent?.includes(expectedContent)
-        );
-      },
-      {
-        expectedContent: toastContent,
-        testId: SelectorsEnum.toastTransactionContent
-      },
-      { timeout: TEST_CONSTANTS.TOAST_WAIT_TIMEOUT }
-    );
+    await expect(contentLocator.nth(toastIndex)).toContainText(toastContent, {
+      timeout: TEST_CONSTANTS.TOAST_WAIT_TIMEOUT,
+      useInnerText: true
+    });
+  }
+
+  if (toastStatus) {
+    await expect(statusLocator.nth(toastIndex)).toContainText(toastStatus, {
+      timeout: TEST_CONSTANTS.TOAST_WAIT_TIMEOUT,
+      useInnerText: true
+    });
   }
 };

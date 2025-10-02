@@ -1,10 +1,168 @@
-import {
-  ParseTransactionsTableType,
-  TransactionRow,
-  TransactionFilter
-} from './types';
 import { SelectorsEnum } from './testdata';
 import { getTestIdSelector } from './testIdSelector';
+import {
+  ParseTransactionsTableType,
+  TransactionFilter,
+  TransactionRow
+} from './types';
+
+// Function to count transactions with given filters
+export const countTransactions = (
+  transactions: TransactionRow[],
+  filter: TransactionFilter
+): number => {
+  const filteredTransactions = filterTransactions(transactions, filter);
+  const count = filteredTransactions.length;
+
+  if (filter.enableLogging) {
+    console.log(
+      `countTransactions: Found ${count} matching transactions out of ${transactions.length} total`
+    );
+  }
+
+  return count;
+};
+
+// Helper function to parse age text into minutes
+const parseAge = (ageText: string): number => {
+  const match = ageText.match(/(\d+)\s*(sec|min|hr|day)/);
+  if (!match) {
+    return 0;
+  }
+
+  const value = parseInt(match[1]);
+  const unit = match[2].toLowerCase();
+
+  // TODO: add more units if needed besides sec, min, hr, day
+  switch (unit) {
+    case 'sec':
+      return value / 60; // seconds to minutes
+    case 'min':
+      return value;
+    case 'hr':
+      return value * 60; // hours to minutes
+    case 'day':
+      return value * 24 * 60; // days to minutes
+    default:
+      return 1000; // default in case of unexpected unit
+  }
+};
+
+// Helper function to filter transactions
+export const filterTransactions = (
+  transactions: TransactionRow[],
+  filter: TransactionFilter
+): TransactionRow[] => {
+  const enableLogging = filter.enableLogging || false;
+
+  if (enableLogging) {
+    console.log(
+      `Filtering ${transactions.length} transactions with criteria:`,
+      {
+        exactValue: filter.exactValue,
+        methods: filter.methods,
+        maxAgeInMinutes: filter.maxAgeInMinutes,
+        minAgeInMinutes: filter.minAgeInMinutes,
+        onlySuccessful: filter.onlySuccessful,
+        onlyFailed: filter.onlyFailed,
+        fromAddress: filter.fromAddress,
+        toAddress: filter.toAddress
+      }
+    );
+  }
+
+  const filteredTransactions = transactions.filter((transaction, index) => {
+    let matches = true;
+    let reason = '';
+
+    // Age filter
+    if (
+      filter.maxAgeInMinutes !== undefined &&
+      transaction.ageInMinutes > filter.maxAgeInMinutes
+    ) {
+      matches = false;
+      reason = `age ${transaction.ageInMinutes} > max ${filter.maxAgeInMinutes}`;
+    }
+    if (
+      matches &&
+      filter.minAgeInMinutes !== undefined &&
+      transaction.ageInMinutes < filter.minAgeInMinutes
+    ) {
+      matches = false;
+      reason = `age ${transaction.ageInMinutes} < min ${filter.minAgeInMinutes}`;
+    }
+
+    // Method filter
+    if (
+      matches &&
+      filter.methods &&
+      !filter.methods.includes(transaction.method)
+    ) {
+      matches = false;
+      reason = `method "${transaction.method}" not in [${filter.methods.join(
+        ', '
+      )}]`;
+    }
+
+    // Value filter
+    if (
+      matches &&
+      filter.exactValue !== undefined &&
+      transaction.value !== filter.exactValue
+    ) {
+      matches = false;
+      reason = `value ${transaction.value} !== ${filter.exactValue}`;
+    }
+
+    // Status filter
+    if (matches && filter.onlySuccessful && transaction.isFailed) {
+      matches = false;
+      reason = 'transaction failed but onlySuccessful=true';
+    }
+    if (matches && filter.onlyFailed && !transaction.isFailed) {
+      matches = false;
+      reason = 'transaction successful but onlyFailed=true';
+    }
+
+    // Address filters
+    if (
+      matches &&
+      filter.fromAddress &&
+      !transaction.fromAddress.includes(filter.fromAddress)
+    ) {
+      matches = false;
+      reason = `fromAddress "${transaction.fromAddress}" does not contain "${filter.fromAddress}"`;
+    }
+    if (
+      matches &&
+      filter.toAddress &&
+      !transaction.toAddress.includes(filter.toAddress)
+    ) {
+      matches = false;
+      reason = `toAddress "${transaction.toAddress}" does not contain "${filter.toAddress}"`;
+    }
+
+    if (enableLogging) {
+      console.log(
+        `Transaction ${index + 1}: ${
+          matches ? 'MATCH' : 'FILTERED'
+        } - method="${transaction.method}", value=${transaction.value}, age=${
+          transaction.ageInMinutes
+        }min${reason ? `, reason: ${reason}` : ''}`
+      );
+    }
+
+    return matches;
+  });
+
+  if (enableLogging) {
+    console.log(
+      `Filtered ${transactions.length} transactions down to ${filteredTransactions.length} matches`
+    );
+  }
+
+  return filteredTransactions;
+};
 
 export const parseTransactionsTable = async ({
   page,
@@ -179,162 +337,4 @@ export const parseTransactionsTable = async ({
   }
 
   return transactions;
-};
-
-// Helper function to parse age text into minutes
-const parseAge = (ageText: string): number => {
-  const match = ageText.match(/(\d+)\s*(sec|min|hr|day)/);
-  if (!match) {
-    return 0;
-  }
-
-  const value = parseInt(match[1]);
-  const unit = match[2].toLowerCase();
-
-  // TODO: add more units if needed besides sec, min, hr, day
-  switch (unit) {
-    case 'sec':
-      return value / 60; // seconds to minutes
-    case 'min':
-      return value;
-    case 'hr':
-      return value * 60; // hours to minutes
-    case 'day':
-      return value * 24 * 60; // days to minutes
-    default:
-      return 1000; // default in case of unexpected unit
-  }
-};
-
-// Helper function to filter transactions
-export const filterTransactions = (
-  transactions: TransactionRow[],
-  filter: TransactionFilter
-): TransactionRow[] => {
-  const enableLogging = filter.enableLogging || false;
-
-  if (enableLogging) {
-    console.log(
-      `Filtering ${transactions.length} transactions with criteria:`,
-      {
-        exactValue: filter.exactValue,
-        methods: filter.methods,
-        maxAgeInMinutes: filter.maxAgeInMinutes,
-        minAgeInMinutes: filter.minAgeInMinutes,
-        onlySuccessful: filter.onlySuccessful,
-        onlyFailed: filter.onlyFailed,
-        fromAddress: filter.fromAddress,
-        toAddress: filter.toAddress
-      }
-    );
-  }
-
-  const filteredTransactions = transactions.filter((transaction, index) => {
-    let matches = true;
-    let reason = '';
-
-    // Age filter
-    if (
-      filter.maxAgeInMinutes !== undefined &&
-      transaction.ageInMinutes > filter.maxAgeInMinutes
-    ) {
-      matches = false;
-      reason = `age ${transaction.ageInMinutes} > max ${filter.maxAgeInMinutes}`;
-    }
-    if (
-      matches &&
-      filter.minAgeInMinutes !== undefined &&
-      transaction.ageInMinutes < filter.minAgeInMinutes
-    ) {
-      matches = false;
-      reason = `age ${transaction.ageInMinutes} < min ${filter.minAgeInMinutes}`;
-    }
-
-    // Method filter
-    if (
-      matches &&
-      filter.methods &&
-      !filter.methods.includes(transaction.method)
-    ) {
-      matches = false;
-      reason = `method "${transaction.method}" not in [${filter.methods.join(
-        ', '
-      )}]`;
-    }
-
-    // Value filter
-    if (
-      matches &&
-      filter.exactValue !== undefined &&
-      transaction.value !== filter.exactValue
-    ) {
-      matches = false;
-      reason = `value ${transaction.value} !== ${filter.exactValue}`;
-    }
-
-    // Status filter
-    if (matches && filter.onlySuccessful && transaction.isFailed) {
-      matches = false;
-      reason = 'transaction failed but onlySuccessful=true';
-    }
-    if (matches && filter.onlyFailed && !transaction.isFailed) {
-      matches = false;
-      reason = 'transaction successful but onlyFailed=true';
-    }
-
-    // Address filters
-    if (
-      matches &&
-      filter.fromAddress &&
-      !transaction.fromAddress.includes(filter.fromAddress)
-    ) {
-      matches = false;
-      reason = `fromAddress "${transaction.fromAddress}" does not contain "${filter.fromAddress}"`;
-    }
-    if (
-      matches &&
-      filter.toAddress &&
-      !transaction.toAddress.includes(filter.toAddress)
-    ) {
-      matches = false;
-      reason = `toAddress "${transaction.toAddress}" does not contain "${filter.toAddress}"`;
-    }
-
-    if (enableLogging) {
-      console.log(
-        `Transaction ${index + 1}: ${
-          matches ? 'MATCH' : 'FILTERED'
-        } - method="${transaction.method}", value=${transaction.value}, age=${
-          transaction.ageInMinutes
-        }min${reason ? `, reason: ${reason}` : ''}`
-      );
-    }
-
-    return matches;
-  });
-
-  if (enableLogging) {
-    console.log(
-      `Filtered ${transactions.length} transactions down to ${filteredTransactions.length} matches`
-    );
-  }
-
-  return filteredTransactions;
-};
-
-// Function to count transactions with given filters
-export const countTransactions = (
-  transactions: TransactionRow[],
-  filter: TransactionFilter
-): number => {
-  const filteredTransactions = filterTransactions(transactions, filter);
-  const count = filteredTransactions.length;
-
-  if (filter.enableLogging) {
-    console.log(
-      `countTransactions: Found ${count} matching transactions out of ${transactions.length} total`
-    );
-  }
-
-  return count;
 };

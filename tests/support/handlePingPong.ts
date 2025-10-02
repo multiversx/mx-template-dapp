@@ -1,5 +1,5 @@
-import { SelectorsEnum } from './testdata';
 import { TEST_CONSTANTS } from './constants';
+import { SelectorsEnum } from './testdata';
 import { HandlePingPongType } from './types';
 
 export const handlePingPong = async ({ page, type }: HandlePingPongType) => {

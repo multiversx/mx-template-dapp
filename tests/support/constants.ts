@@ -13,5 +13,7 @@ export const TEST_CONSTANTS = {
   PING_BALANCE_CHANGE: -1.0, // Balance decreases by 1 EGLD + gas fees
   PONG_BALANCE_CHANGE: 1.0, // Balance increases by 1 EGLD - gas fees
 
-  BALANCE_PRECISION: 2
+  BALANCE_PRECISION: 2,
+
+  PAGE_CLOSE_TIMEOUT: 10000 // 10 seconds
 } as const;

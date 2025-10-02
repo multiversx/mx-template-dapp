@@ -1,12 +1,17 @@
+/* eslint-disable sort-exports/sort-exports */
 import { Page } from '@playwright/test';
 import { BrowserContext } from '@playwright/test';
+import { PingPongEnum } from './testdata';
 
-import { PingPongEnum } from '../support/testdata';
+export interface AuthenticateWithKeystoreType {
+  walletPage: Page;
+  keystorePath: string;
+  keystorePassword: string;
+}
 
-export interface LoginMethodType {
-  keystore?: string;
-  password?: string;
-  pem?: string;
+export interface AuthenticateWithPemType {
+  walletPage: Page;
+  pemPath: string;
 }
 
 export interface CheckBalanceUpdateType {
@@ -22,15 +27,31 @@ export interface CheckButtonStatusType {
   lastClickedButton: 'ping' | 'pong';
 }
 
-export interface HandlePingPongType {
+export interface CheckClipboardContainsType {
   page: Page;
-  type: PingPongEnum;
+  context: BrowserContext;
+  text: string;
+  timeout?: number;
 }
 
-export interface WaitForPageByUrlSubstringType {
+export interface CheckConnectionToWalletType {
   page: Page;
-  urlSubstring: string;
-  timeout?: number;
+  walletAddress: string;
+}
+
+export interface CheckToastShowsTransactionsSignedType {
+  page: Page;
+  numberOfTransactions: number;
+}
+
+export interface ConfirmWalletTransactionType {
+  page: Page;
+  loginMethod: LoginMethodType;
+}
+
+export interface ConnectWebWalletType {
+  page: Page;
+  loginMethod: LoginMethodType;
 }
 
 export interface CreateNotFoundErrorType {
@@ -40,25 +61,38 @@ export interface CreateNotFoundErrorType {
   availablePagesUrls: string;
 }
 
-export interface ConnectWebWalletType {
+export interface ExtractBalanceFromContainerType {
   page: Page;
-  loginMethod: LoginMethodType;
+  containerSelector: string;
+  selectorType: 'testId' | 'locator';
 }
 
-export interface AuthenticateWithKeystoreType {
-  walletPage: Page;
-  keystorePath: string;
-  keystorePassword: string;
-}
-
-export interface AuthenticateWithPemType {
-  walletPage: Page;
-  pemPath: string;
-}
-
-export interface ConfirmWalletTransactionType {
+export interface HandlePingPongType {
   page: Page;
-  loginMethod: LoginMethodType;
+  type: PingPongEnum;
+}
+
+export interface LoginMethodType {
+  keystore?: string;
+  password?: string;
+  pem?: string;
+}
+
+export interface NavigateToConnectWalletType {
+  page: Page;
+}
+
+export interface ParseTransactionsTableType {
+  page: Page;
+  tableSelector?: string;
+  tableType: 'all' | 'ping-pong';
+  maxRows?: number;
+  enableLogging?: boolean;
+}
+
+export interface PasteStringFromClipboardType {
+  page: Page;
+  context: BrowserContext;
 }
 
 export interface SignBatchTransactionsType {
@@ -67,51 +101,15 @@ export interface SignBatchTransactionsType {
   numberOfTransactions: number;
 }
 
-export interface CheckConnectionToWalletType {
-  page: Page;
-  walletAddress: string;
-}
-
-export interface NavigateToConnectWalletType {
-  page: Page;
-}
-
-export interface ExtractBalanceFromContainerType {
-  page: Page;
-  containerSelector: string;
-  selectorType: 'testId' | 'locator';
-}
-
-export interface WaitForToastToBeDisplayedType {
-  page: Page;
-}
-
-export interface WaitForToastToBeClosedType {
-  page: Page;
-}
-
-export interface CheckToastShowsTransactionsSignedType {
-  page: Page;
-  numberOfTransactions: number;
-}
-
-export interface PasteStringFromClipboardType {
-  page: Page;
-  context: BrowserContext;
-}
-
-export interface CheckClipboardContainsType {
-  page: Page;
-  context: BrowserContext;
-  text: string;
-  timeout?: number;
-}
-
-export interface ParseTransactionsTableType {
-  page: Page;
-  tableSelector?: string;
-  tableType: 'all' | 'ping-pong';
-  maxRows?: number;
+export interface TransactionFilter {
+  maxAgeInMinutes?: number;
+  minAgeInMinutes?: number;
+  methods?: string[];
+  exactValue?: number;
+  onlySuccessful?: boolean;
+  onlyFailed?: boolean;
+  fromAddress?: string;
+  toAddress?: string;
   enableLogging?: boolean;
 }
 
@@ -129,20 +127,30 @@ export interface TransactionRow {
   isFailed: boolean;
 }
 
-export interface TransactionFilter {
-  maxAgeInMinutes?: number;
-  minAgeInMinutes?: number;
-  methods?: string[];
-  exactValue?: number;
-  onlySuccessful?: boolean;
-  onlyFailed?: boolean;
-  fromAddress?: string;
-  toAddress?: string;
-  enableLogging?: boolean;
+export interface WaitForPageByUrlSubstringType {
+  page: Page;
+  urlSubstring: string;
+  timeout?: number;
+}
+
+export interface WaitForToastToBeClosedType {
+  page: Page;
+}
+
+export interface WaitForToastToBeDisplayedType {
+  page: Page;
 }
 
 export interface WaitForTransactionToastToShowType {
   page: Page;
   toastTitle: string;
   toastContent: string;
+}
+
+export interface WaitForTransactionToastToContainType {
+  page: Page;
+  toastTitle?: string;
+  toastContent?: string;
+  toastStatus?: string;
+  toastIndex?: number;
 }
