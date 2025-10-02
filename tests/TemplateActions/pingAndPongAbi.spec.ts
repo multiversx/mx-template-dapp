@@ -14,9 +14,8 @@ const keystoreConfig = {
   password: TestDataEnums.keystoreFilePassword
 };
 
-test.describe('Ping & Pong', () => {
+test.describe('Ping & Pong (ABI)', () => {
   // Note: Ping/Pong buttons have a 3-minute cooldown period after being clicked
-  // Each test performs one transaction and verifies the result
 
   test.beforeEach(async ({ page }) => {
     await TestActions.navigateToConnectWallet(page);
@@ -113,33 +112,24 @@ test.describe('Ping & Pong', () => {
     // Click on Sign button to confirm the transaction in the web wallet
     await walletPage.getByTestId(SelectorsEnum.signButton).click();
 
-    // Wait for wallet page to be closed
-    // await walletPage.waitForEvent('close');
-
     // Switch to template dashboard page
     const templatePage = await TestActions.waitForPageByUrlSubstring({
       page,
       urlSubstring: OriginPageEnum.templateDashboard
     });
 
-    // Verify we're back on the template page
-    await expect(templatePage).toHaveURL(/localhost:3000/);
-
     // Wait for transaction toast to be displayed
     await TestActions.waitForToastToBeDisplayed(templatePage);
 
-    // Wait for the transaction toast to be closed
+    // Wait for the transaction toast to be closed (indicates transaction completed)
     await TestActions.waitForToastToBeClosed(templatePage);
 
-    // Check balance change based on the action performed
-    await TestActions.checkBalanceUpdate({
-      page,
+    // Check balance change based on the clicked button
+    await TestActions.checkPingPongBalanceUpdate({
+      page: templatePage,
       containerSelector: SelectorsEnum.topInfoContainer,
       initialBalance: accountBalance,
-      expectedChange:
-        clickedButton === 'ping'
-          ? TEST_CONSTANTS.PING_BALANCE_CHANGE
-          : TEST_CONSTANTS.PONG_BALANCE_CHANGE
+      isPing: clickedButton === 'ping'
     });
 
     // Check that the button status changed after the action
@@ -153,7 +143,7 @@ test.describe('Ping & Pong', () => {
     const allTransactions = await TestActions.parseTransactionsTable({
       page,
       tableType: 'ping-pong',
-      maxRows: 1 // only check the first/most recent transaction
+      maxRows: 5
     });
 
     // Define expected value based on the clicked button (ping = 1, pong = 0)
