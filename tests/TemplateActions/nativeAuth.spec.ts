@@ -1,12 +1,11 @@
-import { test, expect } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
 import * as TestActions from '../support';
-import { TestDataEnums, SelectorsEnum } from '../support/testdata';
 import { extractBalanceFromContainer } from '../support';
+import { SelectorsEnum, TestDataEnums } from '../support/testdata';
 
 const keystoreConfig = {
-  keystore: TestDataEnums.keystoreFilePath,
-  password: TestDataEnums.keystoreFilePassword
+  keystore: TestDataEnums.keystoreFilePath1,
+  password: TestDataEnums.keystorePassword
 };
 
 test.describe('Native auth', () => {
@@ -15,7 +14,7 @@ test.describe('Native auth', () => {
     await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
     await TestActions.checkConnectionToWallet(
       page,
-      TestDataEnums.keystoreWalletAddress
+      TestDataEnums.keystoreWalletAddress1
     );
   });
 
@@ -63,7 +62,7 @@ test.describe('Native auth', () => {
       .getByTestId(SelectorsEnum.trimFullAddress);
 
     await expect(nativeAuthAddress).toHaveText(
-      TestDataEnums.keystoreWalletAddress
+      TestDataEnums.keystoreWalletAddress1
     );
 
     // Check that the balance is displayed and matches the account balance

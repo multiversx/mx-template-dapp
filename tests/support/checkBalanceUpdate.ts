@@ -12,11 +12,13 @@ export const checkBalanceUpdate = async ({
   const expectedBalance = initialBalance + expectedChange;
 
   const pollFunction = async () => {
-    return await extractBalanceFromContainer({
+    const balance = await extractBalanceFromContainer({
       page,
       containerSelector,
       selectorType: 'testId'
     });
+
+    return balance;
   };
 
   await expect
