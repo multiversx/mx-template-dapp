@@ -8,7 +8,7 @@ export enum TestDataEnums {
 }
 
 export enum OriginPageEnum {
-  multiversxWallet = 'wallet.multiversx.com',
+  multiversxWallet = '/devnet-wallet.multiversx.com/',
   templateDashboard = '/dashboard'
 }
 
@@ -24,13 +24,16 @@ export enum SelectorsEnum {
   pemButton = 'pemBtn',
   pingButton = 'btnPing',
   pongButton = 'btnPong',
-  txToast = 'transactionToastContent',
+  toastTransactionContent = 'transactionToastContent',
+  toastTransactionDetails = 'transactionDetailsStatus',
   balance = 'balance',
   formatAmountInt = 'formatAmountInt',
   formatAmountDecimals = 'formatAmountDecimals',
   signMsgButton = 'signMsgBtn',
   signMsgWalletButton = 'signButton',
   signAndBatchButton = 'sign-auto-send',
+  wrapAndMultiTransferButton = 'wrap-multi-transfer',
+  swapAndLockButton = 'swap-lock',
   nativeAuthContainer = '#native-auth',
   trimFullAddress = 'trimFullAddress',
   pingPongAbiContainer = '#ping-pong-abi',
@@ -39,6 +42,7 @@ export enum SelectorsEnum {
   accountAddress = 'accountAddress',
   heroTag = 'heroTag',
   shard = 'addressShard',
+  decodedMessage = 'decodedMessage',
 
   // Transaction table selectors
   transactionLink = 'transactionLink',

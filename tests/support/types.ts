@@ -140,3 +140,9 @@ export interface TransactionFilter {
   toAddress?: string;
   enableLogging?: boolean;
 }
+
+export interface WaitForTransactionToastToShowType {
+  page: Page;
+  toastTitle: string;
+  toastContent: string;
+}

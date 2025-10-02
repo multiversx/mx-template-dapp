@@ -10,9 +10,6 @@ const keystoreConfig = {
 };
 
 test.describe('Native auth', () => {
-  // Native auth tests verify secure authentication token functionality
-  // Each test focuses on a specific aspect of the native auth feature
-
   test.beforeEach(async ({ page }) => {
     await TestActions.navigateToConnectWallet(page);
     await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });

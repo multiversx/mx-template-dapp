@@ -72,7 +72,7 @@ const containerStyles = {
     width: '100%',
     maxWidth: '100%',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as const,
     gap: '10px'
   }
 };

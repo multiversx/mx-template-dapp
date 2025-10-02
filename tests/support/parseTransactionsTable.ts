@@ -126,9 +126,26 @@ export const parseTransactionsTable = async ({
         getTestIdSelector(SelectorsEnum.formatAmountSymbol)
       );
 
-      const valueInt = (await valueIntElement.textContent()) || '0';
-      const valueDecimals = (await valueDecimalsElement.textContent()) || '.00';
-      const valueSymbol = (await valueSymbolElement.textContent()) || '';
+      // Check if elements exist before trying to get text content
+      const valueIntElementCount = await valueIntElement.count();
+      const valueDecimalsElementCount = await valueDecimalsElement.count();
+      const valueSymbolElementCount = await valueSymbolElement.count();
+
+      // Extract value components with fallbacks for missing elements
+      // Some transaction rows may not have all value elements (e.g., failed transactions)
+      const valueInt =
+        valueIntElementCount > 0
+          ? (await valueIntElement.textContent()) || '0'
+          : '0';
+      const valueDecimals =
+        valueDecimalsElementCount > 0
+          ? (await valueDecimalsElement.textContent()) || '.00'
+          : '.00';
+      const valueSymbol =
+        valueSymbolElementCount > 0
+          ? (await valueSymbolElement.textContent()) || ''
+          : '';
+
       const value = parseFloat(`${valueInt}${valueDecimals}`);
 
       // Check if transaction failed (has error icon)

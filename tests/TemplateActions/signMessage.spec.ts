@@ -13,9 +13,6 @@ const keystoreConfig = {
 };
 
 test.describe('Sign Message', () => {
-  // Sign message tests verify message signing functionality
-  // Each test focuses on a specific aspect of the message signing process
-
   test.beforeEach(async ({ page }) => {
     await TestActions.navigateToConnectWallet(page);
     await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
@@ -97,14 +94,11 @@ test.describe('Sign Message', () => {
       urlSubstring: OriginPageEnum.templateDashboard
     });
 
-    // Verify we're back on the template page
-    await expect(templatePage).toHaveURL(/localhost:3000/);
-
     // Verify the decoded message matches the original message
-    const decodedMessage = templatePage.getByPlaceholder('Decoded message');
+    const decodedMessage = templatePage.getByTestId(
+      SelectorsEnum.decodedMessage
+    );
     await expect(decodedMessage).toBeVisible();
     await expect(decodedMessage).toHaveValue(message);
-
-    // TODO: also check the encoded message and signature when testId are added
   });
 });

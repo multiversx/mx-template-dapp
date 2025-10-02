@@ -16,9 +16,10 @@ export { checkButtonStatus } from './checkButtonStatus';
 // Balance related functions
 export { extractBalanceFromContainer } from './extractBalanceFromContainer';
 export { checkBalanceUpdate } from './checkBalanceUpdate';
+export { checkPingPongBalanceUpdate } from './checkBalanceUpdate';
 
 // Transaction and toast functions
-export { checkToastShowsTransactionsSigned } from './checkToastShowsTransactionsSigned';
+export { waitForTransactionToastToContain } from './waitForTransactionToastToShow';
 export { signBatchTransactions } from './signBatchTransactions';
 
 // Clipboard helper functions
@@ -29,8 +30,6 @@ export { checkClipboardContains } from './checkClipboardContains';
 export { getTestIdSelector } from './testIdSelector';
 
 // Table parsing functions
-export {
-  parseTransactionsTable,
-  filterTransactions,
-  countTransactions
-} from './parseTransactionsTable';
+export { parseTransactionsTable } from './parseTransactionsTable';
+export { filterTransactions } from './parseTransactionsTable';
+export { countTransactions } from './parseTransactionsTable';

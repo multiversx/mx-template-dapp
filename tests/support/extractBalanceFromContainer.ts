@@ -33,5 +33,6 @@ export const extractBalanceFromContainer = async ({
 
   // Combine integer and decimals to form the complete number
   const fullNumber = `${intText}${decimalsText}`;
+
   return parseFloat(fullNumber || '0');
 };
