@@ -60,7 +60,7 @@ export const useSendPingPongTransaction = () => {
 
     const transactionCost =
       await networkProvider.estimateTransactionCost(pingTransaction);
-    pingTransaction.gasLimit = BigInt(transactionCost.gasLimit);
+    pingTransaction.gasLimit = BigInt(transactionCost.gasLimit); // overwrite default gas limit with estimation
 
     const sessionId = await signAndSendTransactions({
       transactions: [pingTransaction],
@@ -93,8 +93,6 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransactionFromService = async (
     transactions: Transaction[]
   ) => {
-    transactions.forEach((tx) => (tx.version = 2));
-
     const sessionId = await signAndSendTransactions({
       transactions,
       transactionsDisplayInfo: PING_TRANSACTION_INFO
@@ -121,7 +119,7 @@ export const useSendPingPongTransaction = () => {
 
     const transactionCost =
       await networkProvider.estimateTransactionCost(pongTransaction);
-    pongTransaction.gasLimit = BigInt(transactionCost.gasLimit);
+    pongTransaction.gasLimit = BigInt(transactionCost.gasLimit); // overwrite default gas limit with estimation
 
     const sessionId = await signAndSendTransactions({
       transactions: [pongTransaction],
@@ -157,8 +155,6 @@ export const useSendPingPongTransaction = () => {
     if (!transactions) {
       return;
     }
-
-    transactions.forEach((tx) => (tx.version = 2));
 
     const sessionId = await signAndSendTransactions({
       transactions,
