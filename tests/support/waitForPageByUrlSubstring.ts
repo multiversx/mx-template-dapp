@@ -1,9 +1,8 @@
 import { Page } from '@playwright/test';
-
 import { TEST_CONSTANTS } from './constants';
 import {
-  WaitForPageByUrlSubstringType,
-  CreateNotFoundErrorType
+  CreateNotFoundErrorType,
+  WaitForPageByUrlSubstringType
 } from './types';
 
 const getPagesSafely = async (page: Page): Promise<Page[]> => {

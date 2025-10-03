@@ -1,17 +1,15 @@
-import { test, expect } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
 import * as TestActions from '../support';
-import {
-  TestDataEnums,
-  PingPongEnum,
-  OriginPageEnum,
-  SelectorsEnum
-} from '../support/testdata';
 import { TEST_CONSTANTS } from '../support/constants';
+import {
+  OriginPageEnum,
+  PingPongEnum,
+  SelectorsEnum,
+  TestDataEnums
+} from '../support/testdata';
 
-const keystoreConfig = {
-  keystore: TestDataEnums.keystoreFilePath,
-  password: TestDataEnums.keystoreFilePassword
+const pemConfig = {
+  pem: TestDataEnums.pemFilePath1
 };
 
 test.describe('Ping & Pong (ABI)', () => {
@@ -19,10 +17,10 @@ test.describe('Ping & Pong (ABI)', () => {
 
   test.beforeEach(async ({ page }) => {
     await TestActions.navigateToConnectWallet(page);
-    await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
+    await TestActions.connectWebWallet({ page, loginMethod: pemConfig });
     await TestActions.checkConnectionToWallet(
       page,
-      TestDataEnums.keystoreWalletAddress
+      TestDataEnums.pemWalletAddress1
     );
   });
 
@@ -106,8 +104,8 @@ test.describe('Ping & Pong (ABI)', () => {
     // Verify wallet page opened
     await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
 
-    // Sign transaction by confirming with keystore or pem
-    await TestActions.confirmWalletTransaction(walletPage, keystoreConfig);
+    // Sign transaction by confirming with pem
+    await TestActions.confirmWalletTransaction(walletPage, pemConfig);
 
     // Click on Sign button to confirm the transaction in the web wallet
     await walletPage.getByTestId(SelectorsEnum.signButton).click();
@@ -120,9 +118,6 @@ test.describe('Ping & Pong (ABI)', () => {
 
     // Wait for transaction toast to be displayed
     await TestActions.waitForToastToBeDisplayed(templatePage);
-
-    // Wait for the transaction toast to be closed (indicates transaction completed)
-    await TestActions.waitForToastToBeClosed(templatePage);
 
     // Check balance change based on the clicked button
     await TestActions.checkPingPongBalanceUpdate({

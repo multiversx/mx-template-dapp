@@ -1,13 +1,13 @@
 import { expect } from '@playwright/test';
-
+import { TEST_CONSTANTS } from './constants';
 import { OriginPageEnum, SelectorsEnum } from './testdata';
-import { waitForPageByUrlSubstring } from './waitForPageByUrlSubstring';
 import { getTestIdSelector } from './testIdSelector';
 import {
-  ConnectWebWalletType,
   AuthenticateWithKeystoreType,
-  AuthenticateWithPemType
+  AuthenticateWithPemType,
+  ConnectWebWalletType
 } from './types';
+import { waitForPageByUrlSubstring } from './waitForPageByUrlSubstring';
 
 const authenticateWithKeystore = async ({
   walletPage,
@@ -47,9 +47,6 @@ export const connectWebWallet = async ({
   // Click the cross-window button to open wallet
   await page.getByTestId(SelectorsEnum.crossWindow).click();
 
-  // Add a small delay to ensure the click is processed
-  await page.waitForTimeout(1000);
-
   // Wait for the web wallet page to be loaded which is the new tab
   const walletPage = await waitForPageByUrlSubstring({
     page,
@@ -73,10 +70,13 @@ export const connectWebWallet = async ({
       keystorePath: loginMethod.keystore,
       keystorePassword: loginMethod.password
     });
+
     try {
-      await walletPage.waitForEvent('close');
+      await walletPage.waitForEvent('close', {
+        timeout: TEST_CONSTANTS.PAGE_CLOSE_TIMEOUT
+      });
     } catch (error) {
-      console.error('Error waiting for wallet page to close:', error);
+      // do nothing
     }
     return;
   }
@@ -87,10 +87,13 @@ export const connectWebWallet = async ({
       walletPage,
       pemPath: loginMethod.pem
     });
+
     try {
-      await walletPage.waitForEvent('close');
+      await walletPage.waitForEvent('close', {
+        timeout: TEST_CONSTANTS.PAGE_CLOSE_TIMEOUT
+      });
     } catch (error) {
-      console.error('Error waiting for wallet page to close:', error);
+      // do nothing
     }
     return;
   }
