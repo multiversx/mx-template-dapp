@@ -1,5 +1,5 @@
+import { ProxyNetworkProvider } from '@multiversx/sdk-core/out';
 import axios from 'axios';
-
 import { contractAddress } from 'config';
 import { signAndSendTransactions } from 'helpers';
 import {
@@ -51,8 +51,16 @@ export const useSendPingPongTransaction = () => {
       gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
       sender: new Address(address),
-      version: 1
+      version: 2
     });
+
+    const networkProvider = new ProxyNetworkProvider(network.apiAddress);
+    const account = await networkProvider.getAccount(new Address(address));
+    pingTransaction.nonce = account.nonce;
+
+    const transactionCost =
+      await networkProvider.estimateTransactionCost(pingTransaction);
+    pingTransaction.gasLimit = BigInt(transactionCost.gasLimit);
 
     const sessionId = await signAndSendTransactions({
       transactions: [pingTransaction],
@@ -85,6 +93,8 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransactionFromService = async (
     transactions: Transaction[]
   ) => {
+    transactions.forEach((tx) => (tx.version = 2));
+
     const sessionId = await signAndSendTransactions({
       transactions,
       transactionsDisplayInfo: PING_TRANSACTION_INFO
@@ -102,8 +112,16 @@ export const useSendPingPongTransaction = () => {
       gasPrice: BigInt(GAS_PRICE),
       chainID: network.chainId,
       sender: new Address(address),
-      version: 1
+      version: 2
     });
+
+    const networkProvider = new ProxyNetworkProvider(network.apiAddress);
+    const account = await networkProvider.getAccount(new Address(address));
+    pongTransaction.nonce = account.nonce;
+
+    const transactionCost =
+      await networkProvider.estimateTransactionCost(pongTransaction);
+    pongTransaction.gasLimit = BigInt(transactionCost.gasLimit);
 
     const sessionId = await signAndSendTransactions({
       transactions: [pongTransaction],
@@ -139,6 +157,8 @@ export const useSendPingPongTransaction = () => {
     if (!transactions) {
       return;
     }
+
+    transactions.forEach((tx) => (tx.version = 2));
 
     const sessionId = await signAndSendTransactions({
       transactions,
