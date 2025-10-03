@@ -2,9 +2,6 @@ import './styles/tailwind.css';
 import './styles/style.css';
 
 import { walletConnectV2ProjectId } from 'config';
-
-// Enable this block to showcase a custom provider implementation
-
 import { EnvironmentsEnum, ICustomProvider, InitAppType } from './lib';
 import { InMemoryProvider } from './provider/inMemoryProvider';
 

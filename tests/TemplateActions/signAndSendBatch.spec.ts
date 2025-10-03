@@ -1,16 +1,15 @@
-import { test, expect } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
 import * as TestActions from '../support';
-import {
-  TestDataEnums,
-  SelectorsEnum,
-  OriginPageEnum
-} from '../support/testdata';
 import { TEST_CONSTANTS } from '../support/constants';
+import {
+  OriginPageEnum,
+  SelectorsEnum,
+  TestDataEnums
+} from '../support/testdata';
 
 const keystoreConfig = {
-  keystore: TestDataEnums.keystoreFilePath,
-  password: TestDataEnums.keystoreFilePassword
+  keystore: TestDataEnums.keystoreFilePath2,
+  password: TestDataEnums.keystorePassword
 };
 
 test.describe('Sign & send batch', () => {
@@ -19,7 +18,7 @@ test.describe('Sign & send batch', () => {
     await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
     await TestActions.checkConnectionToWallet(
       page,
-      TestDataEnums.keystoreWalletAddress
+      TestDataEnums.keystoreWalletAddress2
     );
   });
 
@@ -96,7 +95,7 @@ test.describe('Sign & send batch', () => {
     // Check that the transaction toast shows that all transactions are signed
     await TestActions.waitForTransactionToastToContain({
       page: templatePage,
-      toastContent: '5 / 5 transactions processed'
+      toastStatus: '5 / 5 transactions processed'
     });
 
     // Wait for the transaction toast to be closed

@@ -1,15 +1,14 @@
-import { test, expect } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
 import * as TestActions from '../support';
 import {
-  TestDataEnums,
+  OriginPageEnum,
   SelectorsEnum,
-  OriginPageEnum
+  TestDataEnums
 } from '../support/testdata';
 
 const keystoreConfig = {
-  keystore: TestDataEnums.keystoreFilePath,
-  password: TestDataEnums.keystoreFilePassword
+  keystore: TestDataEnums.keystoreFilePath1,
+  password: TestDataEnums.keystorePassword
 };
 
 test.describe('Sign Message', () => {
@@ -18,7 +17,7 @@ test.describe('Sign Message', () => {
     await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
     await TestActions.checkConnectionToWallet(
       page,
-      TestDataEnums.keystoreWalletAddress
+      TestDataEnums.keystoreWalletAddress1
     );
   });
 

@@ -1,5 +1,4 @@
 import { expect } from '@playwright/test';
-
 import { SelectorsEnum } from './testdata';
 import { CheckButtonStatusType } from './types';
 

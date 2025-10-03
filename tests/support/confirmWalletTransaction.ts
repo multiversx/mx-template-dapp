@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-
 import { SelectorsEnum } from './testdata';
 import { getTestIdSelector } from './testIdSelector';
 import { LoginMethodType } from './types';

@@ -1,5 +1,4 @@
 import { expect, Page } from '@playwright/test';
-
 import { SelectorsEnum } from './testdata';
 
 // Check if the template is connected to the web wallet by veryfing that

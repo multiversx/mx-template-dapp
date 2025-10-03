@@ -1,20 +1,18 @@
-import { test, expect } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
 import * as TestActions from '../support';
-import { TestDataEnums, SelectorsEnum } from '../support/testdata';
+import { SelectorsEnum, TestDataEnums } from '../support/testdata';
 
 const keystoreConfig = {
-  keystore: TestDataEnums.keystoreFilePath,
-  password: TestDataEnums.keystoreFilePassword
+  keystore: TestDataEnums.keystoreFilePath1,
+  password: TestDataEnums.keystorePassword
 };
 
 const pemConfig = {
-  pem: TestDataEnums.pemFilePath
+  pem: TestDataEnums.pemFilePath1
 };
 
 test.describe('Connect a wallet', () => {
   // Connect wallet tests verify wallet connection functionality
-  // Each test focuses on a specific aspect of the wallet connection process
 
   test.beforeEach(async ({ page }) => {
     await TestActions.navigateToConnectWallet(page);
@@ -26,7 +24,7 @@ test.describe('Connect a wallet', () => {
 
       await TestActions.checkConnectionToWallet(
         page,
-        TestDataEnums.keystoreWalletAddress
+        TestDataEnums.keystoreWalletAddress1
       );
     });
   });
@@ -37,7 +35,7 @@ test.describe('Connect a wallet', () => {
 
       await TestActions.checkConnectionToWallet(
         page,
-        TestDataEnums.pemWalletAddress
+        TestDataEnums.pemWalletAddress1
       );
     });
   });
@@ -46,7 +44,7 @@ test.describe('Connect a wallet', () => {
     test('should handle missing password for keystore', async ({ page }) => {
       // Test with keystore but no password
       const invalidKeystoreConfig = {
-        keystore: TestDataEnums.keystoreFilePath,
+        keystore: TestDataEnums.keystoreFilePath1,
         password: undefined
       };
 
@@ -66,7 +64,10 @@ test.describe('Connect a wallet', () => {
     }) => {
       // Connect with keystore
       await TestActions.navigateToConnectWallet(page);
-      await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
+      await TestActions.connectWebWallet({
+        page,
+        loginMethod: keystoreConfig
+      });
 
       // Verify the topInfo container is visible
       const topInfoContainer = page.getByTestId(SelectorsEnum.topInfoContainer);
@@ -78,7 +79,7 @@ test.describe('Connect a wallet', () => {
       );
       await expect(addressElement).toBeVisible();
       await expect(addressElement).toContainText(
-        TestDataEnums.keystoreWalletAddress
+        TestDataEnums.keystoreWalletAddress1
       );
 
       // Verify herotag section is present and should be N/A

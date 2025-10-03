@@ -1,5 +1,4 @@
 import { expect } from '@playwright/test';
-
 import { pasteStringFromClipboard } from './pasteStringFromClipboard';
 import { CheckClipboardContainsType } from './types';
 

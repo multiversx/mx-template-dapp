@@ -40,7 +40,8 @@
     "copy-mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "test": "jest",
     "run-playwright-test": "playwright test",
-    "run-playwright-test-ui": "playwright test --ui"
+    "run-playwright-test-ui": "playwright test --ui",
+    "run-playwright-test-grep": "playwright test --grep \"$npm_config_grep\""
   },
   "browserslist": [
     ">0.2%",

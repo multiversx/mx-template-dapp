@@ -1,25 +1,24 @@
-import { test, expect } from '@playwright/test';
-
+import { expect, test } from '@playwright/test';
 import * as TestActions from '../support';
-import {
-  TestDataEnums,
-  SelectorsEnum,
-  OriginPageEnum
-} from '../support/testdata';
 import { TEST_CONSTANTS } from '../support/constants';
+import {
+  OriginPageEnum,
+  SelectorsEnum,
+  TestDataEnums
+} from '../support/testdata';
 
 const keystoreConfig = {
-  keystore: TestDataEnums.keystoreFilePath,
-  password: TestDataEnums.keystoreFilePassword
+  keystore: TestDataEnums.keystoreFilePath4,
+  password: TestDataEnums.keystorePassword
 };
 
-test.describe('Wrap & Multi-Transfer', () => {
+test.describe('Wrap & Multi-Transfer', async () => {
   test.beforeEach(async ({ page }) => {
     await TestActions.navigateToConnectWallet(page);
     await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
     await TestActions.checkConnectionToWallet(
       page,
-      TestDataEnums.keystoreWalletAddress
+      TestDataEnums.keystoreWalletAddress4
     );
   });
 
@@ -93,10 +92,17 @@ test.describe('Wrap & Multi-Transfer', () => {
     // Wait for transaction toast to be displayed
     await TestActions.waitForToastToBeDisplayed(templatePage);
 
-    // Check that the transaction toast shows that all transactions were signed
+    // Check that the first 2 transactions were signed
+    // the third transaction is expected to fail
     await TestActions.waitForTransactionToastToContain({
       page: templatePage,
-      toastContent: '3 / 3 transactions processed'
+      toastStatus: '3 / 3 transactions processed'
+    });
+
+    // Check that the third transaction failed
+    await TestActions.waitForTransactionToastToContain({
+      page: templatePage,
+      toastTitle: 'Multi-Transfer Failed'
     });
   });
 });
