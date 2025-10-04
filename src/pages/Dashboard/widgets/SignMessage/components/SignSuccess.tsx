@@ -11,8 +11,9 @@ const styles = {
   signatureContainer: 'signature-container flex flex-row w-full gap-2',
   signatureText: 'signature-text w-full resize-none outline-none bg-transparent',
   encodedMessageContainer: 'encoded-message-container flex flex-row w-full gap-2',
+  encodedMessageText: 'encoded-message-text flex-1 break-all',
   decodedMessageContainer: 'decoded-message-container flex flex-row w-full gap-2',
-  decodedMessageText: 'decoded-message-text resize-none outline-none text-green-700 bg-transparent'
+  decodedMessageText: 'decoded-message-text flex-1 break-all resize-none outline-none text-green-700 bg-transparent'
 } satisfies Record<string, string>;
 
 interface VerifyMessagePropsType {
@@ -51,20 +52,13 @@ export const SignSuccess = (props: VerifyMessagePropsType) => {
         <div className={styles.encodedMessageContainer}>
           <Label>Encoded message:</Label>
 
-          <p data-testid={DataTestIdsEnum.encodedMessage}>{encodedMessage}</p>
+          <p data-testid={DataTestIdsEnum.encodedMessage} className={styles.encodedMessageText}>{encodedMessage}</p>
         </div>
 
         <div className={styles.decodedMessageContainer}>
           <Label>Decoded message:</Label>
 
-          <textarea
-            data-testid={DataTestIdsEnum.decodedMessage}
-            readOnly
-            className={styles.decodedMessageText}
-            rows={1}
-            value={decodedMessage}
-            placeholder='Decoded message'
-          />
+          <p data-testid={DataTestIdsEnum.decodedMessage} className={styles.decodedMessageText}>{decodedMessage}</p>
         </div>
       </div>
     </div>
