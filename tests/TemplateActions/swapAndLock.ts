@@ -9,7 +9,7 @@ import {
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath3,
-  password: TestDataEnums.keystorePassword
+  password: TestDataEnums.keystorePassword3
 };
 
 test.describe('Swap & Lock', () => {

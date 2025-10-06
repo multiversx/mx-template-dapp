@@ -37,3 +37,6 @@ node_modules/
 /playwright/.cache/
 /certificates/
 /temps/
+ 
+# secrets (local only)
+tests/support/wallets/
