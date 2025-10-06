@@ -1,6 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { createRoot } from 'react-dom/client';
+import { DataTestIdsEnum } from 'localConstants';
 
 const modalStyles = {
   overlay: {
@@ -111,6 +112,7 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
               <label style={styles.label}>
                 Address
                 <input
+                  data-testid={DataTestIdsEnum.addressInput}
                   style={styles.input}
                   type='text'
                   name='address'
@@ -125,6 +127,7 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
             <label style={styles.label}>
               Private Key
               <input
+                data-testid={DataTestIdsEnum.privateKeyInput}
                 style={styles.input}
                 type='text'
                 name='privateKey'
@@ -135,11 +138,19 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
             </label>
           </div>
           <div style={styles.buttonGroup}>
-            <button onClick={onClose} style={styles.button}>
+            <button
+              data-testid={DataTestIdsEnum.cancelButton}
+              onClick={onClose}
+              style={styles.button}
+            >
               Cancel
             </button>
 
-            <button type='submit' style={styles.button}>
+            <button
+              data-testid={DataTestIdsEnum.submitButton}
+              type='submit'
+              style={styles.button}
+            >
               Submit
             </button>
           </div>
