@@ -119,6 +119,8 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
                   placeholder='Public key'
                   autoFocus
                   required
+                  pattern='^erd1[a-z0-9]{58}$'
+                  title='Please enter a valid address!'
                 />
               </label>
             </div>
@@ -134,6 +136,8 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
                 placeholder='Private key'
                 autoFocus={!needsAddress}
                 required
+                pattern='^[a-fA-F0-9]{64}$'
+                title='Please enter a valid private key!'
               />
             </label>
           </div>
