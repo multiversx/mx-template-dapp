@@ -9,7 +9,7 @@ import {
 } from '../support/testdata';
 
 const pemConfig = {
-  pem: TestDataEnums.pemFilePath1
+  pem: TestDataEnums.keystoreFilePath5
 };
 
 test.describe('Ping & Pong (ABI)', () => {
@@ -20,7 +20,7 @@ test.describe('Ping & Pong (ABI)', () => {
     await TestActions.connectWebWallet({ page, loginMethod: pemConfig });
     await TestActions.checkConnectionToWallet(
       page,
-      TestDataEnums.pemWalletAddress1
+      TestDataEnums.keystoreWalletAddress5
     );
   });
 

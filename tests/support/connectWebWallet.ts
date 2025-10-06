@@ -65,6 +65,7 @@ export const connectWebWallet = async ({
     if (!loginMethod.password) {
       throw new Error('Password is required when using a keystore.');
     }
+
     await authenticateWithKeystore({
       walletPage,
       keystorePath: loginMethod.keystore,
