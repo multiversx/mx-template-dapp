@@ -10,6 +10,7 @@ import { TEST_CONFIG } from './tests/config';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  globalSetup: './tests/support/globalSetup.ts',
   /* timeout for each test */
   timeout: TEST_CONFIG.timeout,
   /* timeout for locators */

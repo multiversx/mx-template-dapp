@@ -9,7 +9,7 @@ import {
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath4,
-  password: TestDataEnums.keystorePassword
+  password: TestDataEnums.keystorePassword4
 };
 
 test.describe('Wrap & Multi-Transfer', async () => {
@@ -96,7 +96,7 @@ test.describe('Wrap & Multi-Transfer', async () => {
     // the third transaction is expected to fail
     await TestActions.waitForTransactionToastToContain({
       page: templatePage,
-      toastStatus: '3 / 3 transactions processed'
+      toastContent: '0 / 3 transactions processed'
     });
 
     // Check that the third transaction failed

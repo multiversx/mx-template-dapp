@@ -4,11 +4,11 @@ import { SelectorsEnum, TestDataEnums } from '../support/testdata';
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath1,
-  password: TestDataEnums.keystorePassword
+  password: TestDataEnums.keystorePassword1
 };
 
 const pemConfig = {
-  pem: TestDataEnums.pemFilePath1
+  pem: TestDataEnums.keystoreFilePath5
 };
 
 test.describe('Connect a wallet', () => {
@@ -35,7 +35,7 @@ test.describe('Connect a wallet', () => {
 
       await TestActions.checkConnectionToWallet(
         page,
-        TestDataEnums.pemWalletAddress1
+        TestDataEnums.keystoreWalletAddress5
       );
     });
   });
