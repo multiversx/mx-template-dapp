@@ -19,6 +19,25 @@ jobs:
   E2E-RUN:
     runs-on: runner-dapp
     needs: Slack-Notification
+    env:
+      KEYSTORE1_JSON_B64: ${{ secrets.KEYSTORE1_JSON_B64 }}
+      KEYSTORE1_PASSWORD: ${{ secrets.KEYSTORE1_PASSWORD }}
+      KEYSTORE1_ADDRESS: ${{ secrets.KEYSTORE1_ADDRESS }}
+      
+      KEYSTORE2_JSON_B64: ${{ secrets.KEYSTORE2_JSON_B64 }}
+      KEYSTORE2_PASSWORD: ${{ secrets.KEYSTORE2_PASSWORD }}
+      KEYSTORE2_ADDRESS: ${{ secrets.KEYSTORE2_ADDRESS }}
+      
+      KEYSTORE3_JSON_B64: ${{ secrets.KEYSTORE3_JSON_B64 }}
+      KEYSTORE3_PASSWORD: ${{ secrets.KEYSTORE3_PASSWORD }}
+      KEYSTORE3_ADDRESS: ${{ secrets.KEYSTORE3_ADDRESS }}
+      
+      KEYSTORE4_JSON_B64: ${{ secrets.KEYSTORE4_JSON_B64 }}
+      KEYSTORE4_PASSWORD: ${{ secrets.KEYSTORE4_PASSWORD }}
+      KEYSTORE4_ADDRESS: ${{ secrets.KEYSTORE4_ADDRESS }}
+      
+      KEYSTORE5_PEM_B64: ${{ secrets.KEYSTORE5_PEM_B64 }}
+      KEYSTORE5_ADDRESS: ${{ secrets.KEYSTORE5_ADDRESS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

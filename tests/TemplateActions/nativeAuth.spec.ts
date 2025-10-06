@@ -5,17 +5,17 @@ import { SelectorsEnum, TestDataEnums } from '../support/testdata';
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath1,
-  password: TestDataEnums.keystorePassword
+  password: TestDataEnums.keystorePassword1,
+  address: TestDataEnums.keystoreWalletAddress1
 };
+
+console.log('keystoreConfig', keystoreConfig);
 
 test.describe('Native auth', () => {
   test.beforeEach(async ({ page }) => {
     await TestActions.navigateToConnectWallet(page);
     await TestActions.connectWebWallet({ page, loginMethod: keystoreConfig });
-    await TestActions.checkConnectionToWallet(
-      page,
-      TestDataEnums.keystoreWalletAddress1
-    );
+    await TestActions.checkConnectionToWallet(page, keystoreConfig.address);
   });
 
   test('should display native auth container when clicked', async ({
@@ -61,9 +61,7 @@ test.describe('Native auth', () => {
       .locator(SelectorsEnum.nativeAuthContainer)
       .getByTestId(SelectorsEnum.trimFullAddress);
 
-    await expect(nativeAuthAddress).toHaveText(
-      TestDataEnums.keystoreWalletAddress1
-    );
+    await expect(nativeAuthAddress).toHaveText(keystoreConfig.address);
 
     // Check that the balance is displayed and matches the account balance
     const nativeAuthBalance = await extractBalanceFromContainer({

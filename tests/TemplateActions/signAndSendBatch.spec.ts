@@ -9,7 +9,7 @@ import {
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath2,
-  password: TestDataEnums.keystorePassword
+  password: TestDataEnums.keystorePassword2
 };
 
 test.describe('Sign & send batch', () => {

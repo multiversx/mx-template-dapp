@@ -8,7 +8,7 @@ import {
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath1,
-  password: TestDataEnums.keystorePassword
+  password: TestDataEnums.keystorePassword1
 };
 
 test.describe('Sign Message', () => {

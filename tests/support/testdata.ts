@@ -1,3 +1,7 @@
+import { PATHS } from './constants';
+
+const walletsDir = process.env.WALLETS_DIR || PATHS.WALLETS_DIR;
+
 export enum OriginPageEnum {
   multiversxWallet = '/devnet-wallet.multiversx.com/',
   templateDashboard = '/dashboard'
@@ -60,29 +64,23 @@ export enum SelectorsEnum {
   transactionsTableBodyRow = 'tbody tr.transactions-table-body-row'
 }
 
-export enum TestDataEnums {
-  // Keystore files
-  keystorePassword = 'multiversX1~',
+// Test data is parameterized via environment variables so secrets (passwords,
+// addresses, keystores) come from GitHub Secrets in CI or from local .env.
+export const TestDataEnums = {
+  keystorePassword1: process.env.KEYSTORE1_PASSWORD || '',
+  keystorePassword2: process.env.KEYSTORE2_PASSWORD || '',
+  keystorePassword3: process.env.KEYSTORE3_PASSWORD || '',
+  keystorePassword4: process.env.KEYSTORE4_PASSWORD || '',
 
-  keystoreFilePath1 = 'tests/support/wallets/keystoreFile1.json',
-  keystoreWalletAddress1 = 'erd1357nhm7c90m53xy9x2xeydqadzd93ksawy7ne2wzrd0muvnsx22savqukc',
+  keystoreWalletAddress1: process.env.KEYSTORE1_ADDRESS || '',
+  keystoreWalletAddress2: process.env.KEYSTORE2_ADDRESS || '',
+  keystoreWalletAddress3: process.env.KEYSTORE3_ADDRESS || '',
+  keystoreWalletAddress4: process.env.KEYSTORE4_ADDRESS || '',
+  keystoreWalletAddress5: process.env.KEYSTORE5_ADDRESS || '',
 
-  keystoreFilePath2 = 'tests/support/wallets/keystoreFile2.json',
-  keystoreWalletAddress2 = 'erd1x8lzae5pckdkwfavahpaa05ulqaeewl5fa876m02jtszyksp2ytsqqap0c',
-
-  keystoreFilePath3 = 'tests/support/wallets/keystoreFile3.json',
-  keystoreWalletAddress3 = 'erd1hhmd7uehzg28cmuh2vmsvwrfz8whxrncfgqz22rwlxj7celrxkcsaad4d9',
-
-  keystoreFilePath4 = 'tests/support/wallets/keystoreFile4.json',
-  keystoreWalletAddress4 = 'erd19qeszhth84mtq384c7qfqd2zpzcnvgfe4pfaegg0e936ujwa0y7qke80kx',
-
-  // PEM files
-  pemFilePath1 = 'tests/support/wallets/pemFile1.pem',
-  pemWalletAddress1 = 'erd1c8dnqn56flfu5jdngl3tq0y667tjqvx0lqz99z3020q93fl7jk9qsxmq57'
-}
-
-export enum TransactionIndexEnum {
-  ping = 0,
-  swapLock = 3,
-  signBatch = 4
-}
+  keystoreFilePath1: `${walletsDir}/keystoreFile1.json`,
+  keystoreFilePath2: `${walletsDir}/keystoreFile2.json`,
+  keystoreFilePath3: `${walletsDir}/keystoreFile3.json`,
+  keystoreFilePath4: `${walletsDir}/keystoreFile4.json`,
+  keystoreFilePath5: `${walletsDir}/keystoreFile5.pem`
+} as const;

@@ -1,3 +1,7 @@
+export const PATHS = {
+  WALLETS_DIR: 'tests/support/wallets'
+} as const;
+
 export const TEST_CONSTANTS = {
   MIN_BALANCE_FOR_PING_PONG: 1, // 1 EGLD
   MIN_BALANCE_FOR_BATCH_TX: 5, // 5 EGLD
