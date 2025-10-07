@@ -1,6 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { createRoot } from 'react-dom/client';
+import { DataTestIdsEnum } from 'localConstants';
 
 const modalStyles = {
   overlay: {
@@ -111,12 +112,15 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
               <label style={styles.label}>
                 Address
                 <input
+                  data-testid={DataTestIdsEnum.addressInput}
                   style={styles.input}
                   type='text'
                   name='address'
                   placeholder='Public key'
                   autoFocus
                   required
+                  pattern='^erd1[a-z0-9]{58}$'
+                  title='Please enter a valid address!'
                 />
               </label>
             </div>
@@ -125,21 +129,32 @@ const Modal = ({ onSubmit, onClose, needsAddress, anchor }: ModalProps) => {
             <label style={styles.label}>
               Private Key
               <input
+                data-testid={DataTestIdsEnum.privateKeyInput}
                 style={styles.input}
                 type='text'
                 name='privateKey'
                 placeholder='Private key'
                 autoFocus={!needsAddress}
                 required
+                pattern='^[a-fA-F0-9]{64}$'
+                title='Please enter a valid private key!'
               />
             </label>
           </div>
           <div style={styles.buttonGroup}>
-            <button onClick={onClose} style={styles.button}>
+            <button
+              data-testid={DataTestIdsEnum.cancelButton}
+              onClick={onClose}
+              style={styles.button}
+            >
               Cancel
             </button>
 
-            <button type='submit' style={styles.button}>
+            <button
+              data-testid={DataTestIdsEnum.submitButton}
+              type='submit'
+              style={styles.button}
+            >
               Submit
             </button>
           </div>

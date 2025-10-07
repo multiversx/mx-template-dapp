@@ -37,13 +37,14 @@
   --mvx-purple-850: #431c4e;
   --mvx-purple-875: #471150;
   --mvx-purple-925: #3c1543;
+  --mvx-purple-975: #310339;
 }
 
 :root[data-mvx-theme='mvx:vibe-theme'],
 [data-mvx-theme='mvx:vibe-theme'] {
   --mvx-bg-color-primary: var(--mvx-purple-925);
   --mvx-bg-color-secondary: var(--mvx-purple-875);
-  --mvx-bg-accent-color: var(--mvx-purple-925);
+  --mvx-bg-accent-color: var(--mvx-purple-975);
   --mvx-bg-accent-variant-color: var(--mvx-purple-925);
   --mvx-hover-color-primary: var(--mvx-purple-850);
   --mvx-text-color-primary: var(--mvx-white);
