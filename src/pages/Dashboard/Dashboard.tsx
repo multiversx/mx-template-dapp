@@ -104,7 +104,7 @@ export const Dashboard = () => {
       </div>
 
       <div
-        style={{ backgroundImage: 'url(src/assets/img/background.svg)' }}
+        style={{ backgroundImage: 'url(/background.svg)' }}
         className={classNames(styles.dashboardContent, {
           [styles.dashboardContentMobilePanelOpen]: isMobilePanelOpen
         })}
