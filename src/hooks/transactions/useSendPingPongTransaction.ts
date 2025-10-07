@@ -92,7 +92,8 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransactionFromService = async (
     transactions: Transaction[]
   ) => {
-    const versionTwoTransactions = transactions.map((tx) => {
+    const versionTwoTransactions = transactions.map((transaction) => {
+      const tx = Transaction.newFromPlainObject(transaction.toPlainObject());
       tx.version = 2;
       return tx;
     });
@@ -160,7 +161,8 @@ export const useSendPingPongTransaction = () => {
       return;
     }
 
-    const versionTwoTransactions = transactions.map((tx) => {
+    const versionTwoTransactions = transactions.map((transaction) => {
+      const tx = Transaction.newFromPlainObject(transaction.toPlainObject());
       tx.version = 2;
       return tx;
     });
