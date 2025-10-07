@@ -92,10 +92,13 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransactionFromService = async (
     transactions: Transaction[]
   ) => {
-    transactions.forEach((tx) => (tx.version = 2));
+    const versionTwoTransactions = transactions.map((tx) => {
+      tx.version = 2;
+      return tx;
+    });
 
     const sessionId = await signAndSendTransactions({
-      transactions,
+      transactions: versionTwoTransactions,
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
 
@@ -157,10 +160,13 @@ export const useSendPingPongTransaction = () => {
       return;
     }
 
-    transactions.forEach((tx) => (tx.version = 2));
+    const versionTwoTransactions = transactions.map((tx) => {
+      tx.version = 2;
+      return tx;
+    });
 
     const sessionId = await signAndSendTransactions({
-      transactions,
+      transactions: versionTwoTransactions,
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
 
