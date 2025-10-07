@@ -1,6 +1,5 @@
 import { Fragment, FunctionComponent, MouseEvent, SVGProps } from 'react';
-import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ReactComponent as ArrowUpRightIcon } from 'assets/icons/arrow-up-right-icon.svg';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 
@@ -94,10 +93,7 @@ export const HomeHero = () => {
               See Documentation
             </span>
 
-            <FontAwesomeIcon
-              icon={faArrowRightLong}
-              className={styles.heroSectionTopDocButtonIcon}
-            />
+            <ArrowUpRightIcon />
           </a>
         </div>
       </div>

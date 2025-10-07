@@ -1,6 +1,6 @@
 import { ProxyNetworkProvider } from '@multiversx/sdk-core/out';
-import axios from 'axios';
 import { contractAddress } from 'config';
+import pingPongAbi from 'contracts/ping-pong.abi.json';
 import { signAndSendTransactions } from 'helpers';
 import {
   AbiRegistry,
@@ -30,8 +30,7 @@ export const useSendPingPongTransaction = () => {
   const { address } = useGetAccount();
 
   const getSmartContractFactory = async () => {
-    const response = await axios.get('src/contracts/ping-pong.abi.json');
-    const abi = AbiRegistry.create(response.data);
+    const abi = AbiRegistry.create(pingPongAbi);
     const scFactory = new SmartContractTransactionsFactory({
       config: new TransactionsFactoryConfig({
         chainID: network.chainId
@@ -93,8 +92,14 @@ export const useSendPingPongTransaction = () => {
   const sendPingTransactionFromService = async (
     transactions: Transaction[]
   ) => {
+    const versionTwoTransactions = transactions.map((transaction) => {
+      const tx = Transaction.newFromPlainObject(transaction.toPlainObject());
+      tx.version = 2;
+      return tx;
+    });
+
     const sessionId = await signAndSendTransactions({
-      transactions,
+      transactions: versionTwoTransactions,
       transactionsDisplayInfo: PING_TRANSACTION_INFO
     });
 
@@ -156,8 +161,14 @@ export const useSendPingPongTransaction = () => {
       return;
     }
 
+    const versionTwoTransactions = transactions.map((transaction) => {
+      const tx = Transaction.newFromPlainObject(transaction.toPlainObject());
+      tx.version = 2;
+      return tx;
+    });
+
     const sessionId = await signAndSendTransactions({
-      transactions,
+      transactions: versionTwoTransactions,
       transactionsDisplayInfo: PONG_TRANSACTION_INFO
     });
 
