@@ -43,12 +43,15 @@ export const confirmWalletTransaction = async (
   loginMethod: WebWalletLoginMethodType
 ) => {
   try {
-    console.log('🔧 confirmWalletTransaction Debug:');
-    console.log('  - Page closed:', page.isClosed());
-    console.log('  - Login method keystore:', !!loginMethod.keystore);
-    console.log('  - Login method pem:', !!loginMethod.pem);
-    console.log('  - Keystore path:', loginMethod.keystore);
-    console.log('  - Pem path:', loginMethod.pem);
+    // Debug logging can be enabled by setting DEBUG_CONFIRM_WALLET=true
+    if (process.env.DEBUG_CONFIRM_WALLET === 'true') {
+      console.log('🔧 confirmWalletTransaction Debug:');
+      console.log('  - Page closed:', page.isClosed());
+      console.log('  - Login method keystore:', !!loginMethod.keystore);
+      console.log('  - Login method pem:', !!loginMethod.pem);
+      console.log('  - Keystore path:', loginMethod.keystore);
+      console.log('  - Pem path:', loginMethod.pem);
+    }
 
     switch (true) {
       // Authenticate with keystore
@@ -63,7 +66,9 @@ export const confirmWalletTransaction = async (
 
       // No authentication method provided
       default:
-        console.log('  - No authentication method provided');
+        if (process.env.DEBUG_CONFIRM_WALLET === 'true') {
+          console.log('  - No authentication method provided');
+        }
         return;
     }
   } catch (error) {

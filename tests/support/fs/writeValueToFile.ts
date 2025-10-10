@@ -12,7 +12,9 @@ export const writeValueToFile = (
 
   // base64 -> decode to string and write as UTF-8
   if (encoding === 'base64') {
-    const decodedString = Buffer.from(value, 'base64').toString('utf8');
+    // Remove any newline characters from base64 content before decoding
+    const cleanBase64 = value.replace(/\n/g, '').replace(/\r/g, '');
+    const decodedString = Buffer.from(cleanBase64, 'base64').toString('utf8');
     fs.writeFileSync(outPath, decodedString, { encoding: 'utf8' });
     return;
   }

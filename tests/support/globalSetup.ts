@@ -40,10 +40,13 @@ async function writeKeystoreFilesFromEnv(
     ? path.resolve(process.env.WALLETS_DIR)
     : path.resolve(__dirname, 'wallets');
 
-  console.log('🔧 Global Setup Debug Info:');
-  console.log('  - WALLETS_DIR:', process.env.WALLETS_DIR || 'not set');
-  console.log('  - Resolved walletsDir:', walletsDir);
-  console.log('  - __dirname:', __dirname);
+  // Debug logging can be enabled by setting DEBUG_GLOBAL_SETUP=true
+  if (process.env.DEBUG_GLOBAL_SETUP === 'true') {
+    console.log('🔧 Global Setup Debug Info:');
+    console.log('  - WALLETS_DIR:', process.env.WALLETS_DIR || 'not set');
+    console.log('  - Resolved walletsDir:', walletsDir);
+    console.log('  - __dirname:', __dirname);
+  }
   const mappings: Array<{
     envKey: string;
     outPath: string;
@@ -84,20 +87,77 @@ async function writeKeystoreFilesFromEnv(
   // Write keystore files from environment variables
   for (const { envKey, outPath, encoding } of mappings) {
     const value = process.env[envKey];
-    console.log(
-      `  - ${envKey}: ${value ? 'present' : 'missing'} (${
-        value ? value.length : 0
-      } chars)`
-    );
+    if (process.env.DEBUG_GLOBAL_SETUP === 'true') {
+      console.log(
+        `  - ${envKey}: ${value ? 'present' : 'missing'} (${
+          value ? value.length : 0
+        } chars)`
+      );
+      if (value && value.length > 0) {
+        console.log(`    📝 First 50 chars: ${value.substring(0, 50)}...`);
+        console.log(
+          `    📝 Last 50 chars: ...${value.substring(value.length - 50)}`
+        );
+
+        // Check for newline characters in base64 content
+        if (encoding === 'base64' && value.includes('\n')) {
+          console.log(
+            '    ⚠️  WARNING: Base64 content contains newline characters!'
+          );
+          console.log(
+            `    📊 Newline count: ${(value.match(/\n/g) || []).length}`
+          );
+          console.log(
+            `    📊 Content without newlines: ${
+              value.replace(/\n/g, '').length
+            } chars`
+          );
+        }
+      }
+    }
     if (value && value.trim().length > 0) {
       try {
         writeValueToFile(value, outPath, encoding ?? defaultEncoding);
-        console.log(`    ✅ Successfully wrote ${outPath}`);
+
+        // Validate the written file content
+        const fs = require('fs');
+        const writtenContent = fs.readFileSync(outPath, 'utf8');
+        const isValidJson = (() => {
+          try {
+            JSON.parse(writtenContent);
+            return true;
+          } catch {
+            return false;
+          }
+        })();
+
+        if (process.env.DEBUG_GLOBAL_SETUP === 'true') {
+          console.log(`    ✅ Successfully wrote ${outPath}`);
+          console.log(`    📄 File size: ${writtenContent.length} chars`);
+          console.log(`    🔍 Valid JSON: ${isValidJson}`);
+          if (!isValidJson) {
+            console.log(
+              `    ⚠️  Invalid JSON content: ${writtenContent.substring(
+                0,
+                100
+              )}...`
+            );
+          }
+        }
+
+        // Always log warnings for invalid JSON files
+        if (!isValidJson) {
+          console.warn(
+            `⚠️  WARNING: ${outPath} contains invalid JSON! This may cause test failures.`
+          );
+        }
       } catch (error) {
         console.error(`    ❌ Failed to write ${outPath}:`, error);
       }
     } else {
-      console.log(`    ⚠️  Skipping ${outPath} - no value or empty`);
+      if (process.env.DEBUG_GLOBAL_SETUP === 'true') {
+        console.log(`    ⚠️  Skipping ${outPath} - no value or empty`);
+      }
     }
   }
 }
