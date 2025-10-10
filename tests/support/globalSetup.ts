@@ -33,7 +33,8 @@ try {
 
 // Write keystore files from environment variables
 async function writeKeystoreFilesFromEnv(
-  defaultEncoding: FileEncoding = 'base64'
+  defaultEncoding: FileEncoding = 'base64',
+  skipIfExists: boolean = false
 ) {
   // Resolve wallets directory without relying on process.cwd
   const walletsDir = process.env.WALLETS_DIR
@@ -80,17 +81,26 @@ async function writeKeystoreFilesFromEnv(
   // Write keystore files from environment variables
   for (const { envKey, outPath, encoding } of mappings) {
     const value = process.env[envKey];
-    if (value && value.trim().length > 0) {
-      try {
-        writeValueToFile(value, outPath, encoding ?? defaultEncoding);
-      } catch (error) {
-        console.error(`Failed to write ${outPath}:`, error);
-      }
+    if (!value?.trim()) {
+      console.warn(`[globalSetup] Missing or empty env var: ${envKey}`);
+      continue;
+    }
+
+    try {
+      writeValueToFile(
+        value,
+        outPath,
+        encoding ?? defaultEncoding,
+        skipIfExists
+      );
+      console.log(`[globalSetup] Wrote ${outPath}`);
+    } catch (error) {
+      console.error(`[globalSetup] Failed to write ${outPath}:`, error);
     }
   }
 }
 
 // Global setup function
 export default async function globalSetup() {
-  await writeKeystoreFilesFromEnv();
+  await writeKeystoreFilesFromEnv('base64', true);
 }

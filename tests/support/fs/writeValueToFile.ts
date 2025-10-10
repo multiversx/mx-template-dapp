@@ -5,8 +5,14 @@ import { ensureDirectoryExists } from './ensureDirectoryExists';
 export const writeValueToFile = (
   value: string,
   outPath: string,
-  encoding: FileEncoding
+  encoding: FileEncoding,
+  skipIfExists: boolean = false
 ) => {
+  // Check if file exists and skip if requested
+  if (skipIfExists && fs.existsSync(outPath)) {
+    return;
+  }
+
   // ensure directory exists
   ensureDirectoryExists(outPath);
 
