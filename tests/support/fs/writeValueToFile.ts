@@ -5,22 +5,32 @@ import { ensureDirectoryExists } from './ensureDirectoryExists';
 export const writeValueToFile = (
   value: string,
   outPath: string,
-  encoding: FileEncoding
+  encoding: FileEncoding,
+  skipIfExists: boolean = false
 ) => {
+  // Check if file exists and skip if requested
+  if (skipIfExists && fs.existsSync(outPath)) {
+    return;
+  }
+
   // ensure directory exists
   ensureDirectoryExists(outPath);
 
-  // base64 -> write buffer with base64 encoding
-  if (encoding === 'base64') {
-    const buffer = Buffer.from(value, 'base64');
-    fs.writeFileSync(outPath, new Uint8Array(buffer));
-    return;
+  switch (encoding) {
+    case 'base64':
+      fs.writeFileSync(
+        outPath,
+        Buffer.from(value, 'base64').toString('utf8'),
+        'utf8'
+      );
+      break;
+    case 'utf8':
+      fs.writeFileSync(outPath, value, 'utf8');
+      break;
+    case 'none':
+      fs.writeFileSync(outPath, value);
+      break;
+    default:
+      throw new Error(`Unsupported encoding: ${encoding}`);
   }
-  // utf8 -> write string with utf8 encoding
-  if (encoding === 'utf8') {
-    fs.writeFileSync(outPath, value, { encoding: 'utf8' });
-    return;
-  }
-  // no encoding -> write raw string with no encoding
-  fs.writeFileSync(outPath, value);
 };
