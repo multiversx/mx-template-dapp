@@ -22,12 +22,15 @@ const authenticateWithKeystore = async ({
     keystorePath
   );
 
-  // Small wait to ensure all processing is complete
-  await walletPage.waitForTimeout(1500);
+  // Wait for file processing to complete
+  await walletPage.waitForLoadState();
 
   // Fill the password input
   const passwordInput = walletPage.getByTestId(SelectorsEnum.passwordInput);
   await passwordInput.fill(keystorePassword);
+
+  // Wait for file processing to complete
+  await walletPage.waitForLoadState();
 
   // Click the submit button
   await walletPage.getByTestId(SelectorsEnum.submitButton).click();
@@ -49,8 +52,8 @@ const authenticateWithPem = async ({
     pemPath
   );
 
-  // Small wait to ensure all processing is complete
-  await walletPage.waitForTimeout(1500);
+  // Wait for file processing to complete
+  await walletPage.waitForLoadState();
 
   // Click the submit button
   await walletPage.getByTestId(SelectorsEnum.submitButton).click();
