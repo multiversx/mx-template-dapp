@@ -39,6 +39,11 @@ async function writeKeystoreFilesFromEnv(
   const walletsDir = process.env.WALLETS_DIR
     ? path.resolve(process.env.WALLETS_DIR)
     : path.resolve(__dirname, 'wallets');
+
+  console.log('🔧 Global Setup Debug Info:');
+  console.log('  - WALLETS_DIR:', process.env.WALLETS_DIR || 'not set');
+  console.log('  - Resolved walletsDir:', walletsDir);
+  console.log('  - __dirname:', __dirname);
   const mappings: Array<{
     envKey: string;
     outPath: string;
@@ -79,8 +84,20 @@ async function writeKeystoreFilesFromEnv(
   // Write keystore files from environment variables
   for (const { envKey, outPath, encoding } of mappings) {
     const value = process.env[envKey];
+    console.log(
+      `  - ${envKey}: ${value ? 'present' : 'missing'} (${
+        value ? value.length : 0
+      } chars)`
+    );
     if (value && value.trim().length > 0) {
-      writeValueToFile(value, outPath, encoding ?? defaultEncoding);
+      try {
+        writeValueToFile(value, outPath, encoding ?? defaultEncoding);
+        console.log(`    ✅ Successfully wrote ${outPath}`);
+      } catch (error) {
+        console.error(`    ❌ Failed to write ${outPath}:`, error);
+      }
+    } else {
+      console.log(`    ⚠️  Skipping ${outPath} - no value or empty`);
     }
   }
 }

@@ -10,10 +10,10 @@ export const writeValueToFile = (
   // ensure directory exists
   ensureDirectoryExists(outPath);
 
-  // base64 -> write buffer with base64 encoding
+  // base64 -> decode to string and write as UTF-8
   if (encoding === 'base64') {
-    const buffer = Buffer.from(value, 'base64');
-    fs.writeFileSync(outPath, new Uint8Array(buffer));
+    const decodedString = Buffer.from(value, 'base64').toString('utf8');
+    fs.writeFileSync(outPath, decodedString, { encoding: 'utf8' });
     return;
   }
   // utf8 -> write string with utf8 encoding

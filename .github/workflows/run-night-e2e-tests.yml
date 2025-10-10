@@ -72,15 +72,17 @@ jobs:
         uses: rtCamp/action-slack-notify@master
         if: success()
         env:
+          SLACK_ICON_EMOJI: ':robot_face:'
           SLACK_USERNAME: Playwright Bot
-          SLACK_MESSAGE: 'E2E Night Tests completed successfully! https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} 📁 Artifact Download: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts'
+          SLACK_MESSAGE: 'E2E Night Tests completed successfully!'
           SLACK_TITLE: 'Playwright E2E Tests - SUCCESS'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       - name: Slack Failure Notification
         uses: rtCamp/action-slack-notify@master
         if: failure()
         env:
+          SLACK_ICON_EMOJI: ':robot_face:'
           SLACK_USERNAME: Playwright Bot
-          SLACK_MESSAGE: 'E2E Night Tests failed! https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }} 📁 Artifact Download: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts'
+          SLACK_MESSAGE: 'E2E Night Tests failed!'
           SLACK_TITLE: 'Playwright E2E Tests - FAILED'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
