@@ -14,14 +14,18 @@ export enum PingPongEnum {
 }
 
 export enum SelectorsEnum {
+  // TODO: arange selectors by template dashboard, web wallet, transaction table, table containers
+  // Template dashboard selectors
   walletFile = 'walletFile',
   passwordInput = 'accessPass',
   submitButton = 'submitButton',
   confirmButton = 'confirmBtn',
+  keystoreCloseModalButton = 'keystoreCloseModalBtn',
   signButton = 'signBtn',
   topInfoContainer = 'topInfo',
   crossWindow = 'crossWindow',
   keystoreButton = 'keystoreBtn',
+  inMemoryButton = 'inMemoryProvider',
   pemButton = 'pemBtn',
   pingButton = 'btnPing',
   pongButton = 'btnPong',
@@ -45,6 +49,14 @@ export enum SelectorsEnum {
   heroTag = 'heroTag',
   shard = 'addressShard',
   decodedMessage = 'decodedMessage',
+  addressInput = 'addressInput',
+  privateKeyInput = 'privateKeyInput',
+  cancelButton = 'cancelButton',
+  sidePanel = '#side-panel',
+  sidePanelCloseIcon = 'mvx-close-icon',
+
+  // Web wallet selectors
+  signCancelButton = 'signCancelBtn',
 
   // Transaction table selectors
   transactionLink = 'transactionLink',
@@ -77,10 +89,12 @@ export const TestDataEnums = {
   keystoreWalletAddress3: process.env.KEYSTORE3_ADDRESS || '',
   keystoreWalletAddress4: process.env.KEYSTORE4_ADDRESS || '',
   keystoreWalletAddress5: process.env.KEYSTORE5_ADDRESS || '',
+  keystoreWalletAddress6: process.env.KEYSTORE6_ADDRESS || '',
 
   keystoreFilePath1: `${walletsDir}/keystoreFile1.json`,
   keystoreFilePath2: `${walletsDir}/keystoreFile2.json`,
   keystoreFilePath3: `${walletsDir}/keystoreFile3.json`,
   keystoreFilePath4: `${walletsDir}/keystoreFile4.json`,
-  keystoreFilePath5: `${walletsDir}/keystoreFile5.pem`
+  keystoreFilePath5: `${walletsDir}/keystoreFile5.pem`,
+  keystoreFilePath6: `${walletsDir}/keystoreFile6.key`
 } as const;

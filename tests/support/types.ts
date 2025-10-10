@@ -3,10 +3,17 @@ import { Page } from '@playwright/test';
 import { BrowserContext } from '@playwright/test';
 import { PingPongEnum } from './testdata';
 
+export type FileEncoding = 'base64' | 'utf8' | 'none';
+
 export interface AuthenticateWithKeystoreType {
   walletPage: Page;
   keystorePath: string;
   keystorePassword: string;
+}
+
+export interface InMemoryProviderType {
+  page: Page;
+  loginMethod: InMemoryProviderLoginMethodType;
 }
 
 export interface AuthenticateWithPemType {
@@ -46,12 +53,12 @@ export interface CheckToastShowsTransactionsSignedType {
 
 export interface ConfirmWalletTransactionType {
   page: Page;
-  loginMethod: LoginMethodType;
+  loginMethod: WebWalletLoginMethodType;
 }
 
 export interface ConnectWebWalletType {
   page: Page;
-  loginMethod: LoginMethodType;
+  loginMethod: WebWalletLoginMethodType;
 }
 
 export interface CreateNotFoundErrorType {
@@ -72,12 +79,16 @@ export interface HandlePingPongType {
   type: PingPongEnum;
 }
 
-export interface LoginMethodType {
+export interface WebWalletLoginMethodType {
   keystore?: string;
   password?: string;
   pem?: string;
 }
 
+export interface InMemoryProviderLoginMethodType {
+  address: string;
+  privateKey: string;
+}
 export interface NavigateToConnectWalletType {
   page: Page;
 }

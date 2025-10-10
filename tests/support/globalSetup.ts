@@ -12,9 +12,10 @@
 //   WALLETS_DIR on startup. Passwords/addresses are read directly from env
 //   by the tests and are never written to disk.
 
-import fs from 'fs';
 import path from 'path';
 import { loadEnv } from 'vite';
+import { writeValueToFile } from '../support';
+import { type FileEncoding } from './types';
 
 // Load environment variables for local runs using Vite's loadEnv
 // In CI, secrets are already in process.env and will be preserved
@@ -30,52 +31,56 @@ try {
   // If vite isn't available in this context, skip; CI provides env
 }
 
-// Helper function to ensure directory exists
-function ensureDirectoryExists(filePath: string) {
-  const dir = path.dirname(filePath);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-}
-
-// Helper function to decode base64 to a file
-function decodeBase64ToFile(base64: string, outPath: string) {
-  ensureDirectoryExists(outPath);
-  const buffer = Buffer.from(base64, 'base64');
-  fs.writeFileSync(outPath, buffer.toString('utf-8'));
-}
-
 // Write keystore files from environment variables
-async function writeKeystoreFilesFromEnv() {
-  const walletsDir = process.env.WALLETS_DIR || 'tests/support/wallets';
-  const mappings: Array<{ envKey: string; outPath: string }> = [
+async function writeKeystoreFilesFromEnv(
+  defaultEncoding: FileEncoding = 'base64'
+) {
+  // Resolve wallets directory without relying on process.cwd
+  const walletsDir = process.env.WALLETS_DIR
+    ? path.resolve(process.env.WALLETS_DIR)
+    : path.resolve(__dirname, 'wallets');
+  const mappings: Array<{
+    envKey: string;
+    outPath: string;
+    encoding?: FileEncoding;
+  }> = [
     {
       envKey: 'KEYSTORE1_JSON_B64',
-      outPath: `${walletsDir}/keystoreFile1.json`
+      outPath: `${walletsDir}/keystoreFile1.json`,
+      encoding: 'base64'
     },
     {
       envKey: 'KEYSTORE2_JSON_B64',
-      outPath: `${walletsDir}/keystoreFile2.json`
+      outPath: `${walletsDir}/keystoreFile2.json`,
+      encoding: 'base64'
     },
     {
       envKey: 'KEYSTORE3_JSON_B64',
-      outPath: `${walletsDir}/keystoreFile3.json`
+      outPath: `${walletsDir}/keystoreFile3.json`,
+      encoding: 'base64'
     },
     {
       envKey: 'KEYSTORE4_JSON_B64',
-      outPath: `${walletsDir}/keystoreFile4.json`
+      outPath: `${walletsDir}/keystoreFile4.json`,
+      encoding: 'base64'
     },
     {
       envKey: 'KEYSTORE5_PEM_B64',
-      outPath: `${walletsDir}/keystoreFile5.pem`
+      outPath: `${walletsDir}/keystoreFile5.pem`,
+      encoding: 'base64'
+    },
+    {
+      envKey: 'KEYSTORE6_PRIVATE_KEY_UTF8',
+      outPath: `${walletsDir}/keystoreFile6.key`,
+      encoding: 'none'
     }
   ];
 
   // Write keystore files from environment variables
-  for (const { envKey, outPath } of mappings) {
-    const b64 = process.env[envKey];
-    if (b64 && b64.trim().length > 0) {
-      decodeBase64ToFile(b64, outPath);
+  for (const { envKey, outPath, encoding } of mappings) {
+    const value = process.env[envKey];
+    if (value && value.trim().length > 0) {
+      writeValueToFile(value, outPath, encoding ?? defaultEncoding);
     }
   }
 }

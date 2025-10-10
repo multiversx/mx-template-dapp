@@ -1,15 +1,15 @@
-// import { ReactComponent as PasskeyIcon } from 'assets/img/passkey-icon.svg';
 import { ReactComponent as LedgerIcon } from 'assets/img/ledger-icon.svg';
 import { ReactComponent as MetamaskIcon } from 'assets/img/metamask-icon.svg';
+import { ReactComponent as PasskeyIcon } from 'assets/img/passkey-icon.svg';
 import { ReactComponent as WebWalletIcon } from 'assets/img/web-wallet-icon.svg';
 import { ReactComponent as XPortalIcon } from 'assets/img/xportal-icon.svg';
+import { BrowserEnum, getDetectedBrowser, getNetworkConfig } from 'lib';
 import {
   CHROME_METAMASK_EXTENSION_LINK,
   FIREFOX_METAMASK_ADDON_LINK,
   GET_LEDGER,
   GET_XPORTAL
 } from 'localConstants';
-import { BrowserEnum, getDetectedBrowser, getNetworkConfig } from 'lib';
 import { ConnectCard, ExtensionConnect } from './components';
 
 // prettier-ignore
@@ -39,14 +39,14 @@ export const HomeConnect = () => {
         ? FIREFOX_METAMASK_ADDON_LINK
         : CHROME_METAMASK_EXTENSION_LINK
     },
-    // {
-    //   icon: PasskeyIcon,
-    //   title: 'Passkey',
-    //   description:
-    //     'Passkeys offer a more secure and user-friendly way to authenticate and sign transactions.',
-    //   linkTitle: 'Get Passkey',
-    //   linkDownloadAddress: walletAddress
-    // },
+    {
+      icon: PasskeyIcon,
+      title: 'Passkey',
+      description:
+        'Passkeys offer a more secure and user-friendly way to authenticate and sign transactions.',
+      linkTitle: 'Get Passkey',
+      linkDownloadAddress: walletAddress
+    },
     {
       icon: XPortalIcon,
       title: 'xPortal Wallet',
