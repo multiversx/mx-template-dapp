@@ -113,6 +113,17 @@ async function writeKeystoreFilesFromEnv(
             } chars`
           );
         }
+
+        // Check for potential Base64 padding issues
+        if (encoding === 'base64' && value.length > 0) {
+          const cleanBase64 = value.replace(/\n/g, '').replace(/\r/g, '');
+          const paddingNeeded = (4 - (cleanBase64.length % 4)) % 4;
+          if (paddingNeeded > 0) {
+            console.log(
+              `    ⚠️  WARNING: Base64 content may need ${paddingNeeded} padding characters`
+            );
+          }
+        }
       }
     }
     if (value && value.trim().length > 0) {
@@ -122,31 +133,42 @@ async function writeKeystoreFilesFromEnv(
         // Validate the written file content
         const fs = require('fs');
         const writtenContent = fs.readFileSync(outPath, 'utf8');
-        const isValidJson = (() => {
-          try {
-            JSON.parse(writtenContent);
-            return true;
-          } catch {
-            return false;
-          }
-        })();
+
+        // Only validate JSON files (not PEM or private key files)
+        const isJsonFile = outPath.endsWith('.json');
+        const isValidJson = isJsonFile
+          ? (() => {
+              try {
+                JSON.parse(writtenContent);
+                return true;
+              } catch (error) {
+                if (process.env.DEBUG_GLOBAL_SETUP === 'true') {
+                  console.log(`    ❌ JSON Parse Error: ${error.message}`);
+                }
+                return false;
+              }
+            })()
+          : true; // Non-JSON files are considered "valid" for this check
 
         if (process.env.DEBUG_GLOBAL_SETUP === 'true') {
           console.log(`    ✅ Successfully wrote ${outPath}`);
           console.log(`    📄 File size: ${writtenContent.length} chars`);
           console.log(`    🔍 Valid JSON: ${isValidJson}`);
-          if (!isValidJson) {
+          if (!isValidJson && isJsonFile) {
             console.log(
               `    ⚠️  Invalid JSON content: ${writtenContent.substring(
                 0,
-                100
+                200
               )}...`
+            );
+            console.log(
+              `    📄 Full content length: ${writtenContent.length} chars`
             );
           }
         }
 
         // Always log warnings for invalid JSON files
-        if (!isValidJson) {
+        if (!isValidJson && isJsonFile) {
           console.warn(
             `⚠️  WARNING: ${outPath} contains invalid JSON! This may cause test failures.`
           );
