@@ -9,8 +9,6 @@ const keystoreConfig = {
   address: TestDataEnums.keystoreWalletAddress1
 };
 
-console.log('keystoreConfig', keystoreConfig);
-
 test.describe('Native auth', () => {
   test.beforeEach(async ({ page }) => {
     await TestActions.navigateToConnectWallet(page);
