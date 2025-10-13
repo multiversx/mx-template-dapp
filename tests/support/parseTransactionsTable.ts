@@ -179,7 +179,39 @@ export const parseTransactionsTable = async ({
 
   const finalTableSelector = tableSelector || defaultTableSelector;
   const table = page.locator(finalTableSelector);
-  await table.waitFor({ state: 'visible' });
+
+  // Debug: Log the selector being used
+  console.log(`Waiting for table with selector: ${finalTableSelector}`);
+
+  // Wait for the table to be visible with a reasonable timeout
+  try {
+    await table.waitFor({ state: 'visible', timeout: 30000 });
+  } catch (error) {
+    console.log(`Table not found with selector: ${finalTableSelector}`);
+    console.log('Available elements on page:');
+
+    // Debug: Check if the page has any tables
+    const allTables = await page.locator('table').count();
+    console.log(`Found ${allTables} tables on the page`);
+
+    // Check if the transactions section exists
+    const transactionsSection = await page
+      .locator('#transactions-ping-pong')
+      .count();
+    console.log(
+      `Found ${transactionsSection} elements with id 'transactions-ping-pong'`
+    );
+
+    // Check if any table exists in the transactions section
+    const tablesInSection = await page
+      .locator('#transactions-ping-pong table')
+      .count();
+    console.log(
+      `Found ${tablesInSection} tables in transactions-ping-pong section`
+    );
+
+    throw error;
+  }
   await table.scrollIntoViewIfNeeded();
 
   // Get all table rows (excluding header)

@@ -134,6 +134,15 @@ test.describe('Ping & Pong (ABI)', () => {
       lastClickedButton: clickedButton
     });
 
+    // Wait for transactions section to be ready
+    await page.locator('#transactions-ping-pong').waitFor({
+      state: 'visible',
+      timeout: 30000
+    });
+
+    // Wait a bit more for the table to load
+    await page.waitForTimeout(2000);
+
     // Parse ping/pong transactions table
     const allTransactions = await TestActions.parseTransactionsTable({
       page,
