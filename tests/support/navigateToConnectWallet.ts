@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 
 export const navigateToConnectWallet = async (page: Page) => {
-  // Retry navigation with exponential backoff
+  // Sometimes the navigation fails, so we retry it
   let retries = 3;
   while (retries > 0) {
     try {
@@ -13,7 +13,6 @@ export const navigateToConnectWallet = async (page: Page) => {
         throw error;
       }
       console.log(`Navigation failed, retrying... (${retries} attempts left)`);
-      await page.waitForTimeout(2000);
     }
   }
 
