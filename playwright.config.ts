@@ -61,10 +61,9 @@ export default defineConfig({
   ],
   webServer: {
     command: 'pnpm run start-devnet',
-    port: 3000,
+    url: 'https://localhost:3000',
     timeout: 120 * 1000,
     reuseExistingServer: !process.env.CI,
-    url: 'https://localhost:3000',
     stdout: 'pipe',
     stderr: 'pipe'
   }
