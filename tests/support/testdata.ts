@@ -71,7 +71,7 @@ export enum SelectorsEnum {
   errorIcon = '.mvx\\:text-error',
 
   // Table containers
-  transactionsAllTable = '#transactions-all table.transactions-table',
+  transactionsAllTable = '#transactions-all table',
   transactionsPingPongTable = '#transactions-ping-pong table',
   transactionsTableBodyRow = 'tbody tr.transactions-table-body-row'
 }
