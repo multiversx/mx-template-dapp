@@ -68,13 +68,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 1
-      - name: Upload Playwright traces
-        uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: playwright-traces
-          path: test-results/
-          retention-days: 1
       # - name: Slack Success Notification
       #   uses: rtCamp/action-slack-notify@master
       #   if: success()

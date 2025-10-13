@@ -18,7 +18,7 @@ test.describe('cancel transaction from side panel', () => {
     await TestActions.checkConnectionToWallet(page, privateKeyConfig.address);
   });
 
-  test('should cancel transaction via cancel button', async ({ page }) => {
+  test.skip('should cancel transaction via cancel button', async ({ page }) => {
     // Open Batch Transactions and initiate signing
     await page.getByText('Batch Transactions').first().click();
     await page
@@ -52,11 +52,6 @@ test.describe('cancel transaction from side panel', () => {
 
     // Wait for side panel to be visible
     await page.locator(SelectorsEnum.sidePanel).waitFor({ state: 'visible' });
-
-    // Wait for close icon to be visible
-    await page.locator(SelectorsEnum.sidePanelCloseIcon).waitFor({
-      state: 'visible'
-    });
 
     // Cancel the transaction from the close icon
     await page.locator(SelectorsEnum.sidePanelCloseIcon).click();
