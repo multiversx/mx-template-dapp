@@ -72,7 +72,7 @@ export enum SelectorsEnum {
 
   // Table containers
   transactionsAllTable = '#transactions-all table.transactions-table',
-  transactionsPingPongTable = '#transactions-ping-pong table.transactions-table',
+  transactionsPingPongTable = '#transactions-ping-pong table',
   transactionsTableBodyRow = 'tbody tr.transactions-table-body-row'
 }
 
