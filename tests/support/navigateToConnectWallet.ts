@@ -5,7 +5,7 @@ export const navigateToConnectWallet = async (page: Page) => {
   const maxRetries = 3;
   for (let i = 0; i < maxRetries; i++) {
     try {
-      await page.goto('/', { waitUntil: 'load', timeout: 30000 });
+      await page.goto('/', { waitUntil: 'load', timeout: 30 * 1000 });
       break;
     } catch (error) {
       if (i === maxRetries - 1) throw error;
