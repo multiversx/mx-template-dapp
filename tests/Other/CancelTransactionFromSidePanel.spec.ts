@@ -62,36 +62,91 @@ test.describe('cancel transaction from side panel', () => {
       await page.locator(SelectorsEnum.sidePanel).isVisible()
     );
 
-    // Try multiple selectors for the close icon
-    const closeSelectors = [
-      SelectorsEnum.sidePanelCloseIcon, // 'mvx-close-icon'
-      '.close-icon',
-      '[data-testid="mvx-close-icon"]',
-      'button[aria-label*="close"]',
-      'button[aria-label*="Close"]',
+    // Get the side panel element and inspect its content
+    const sidePanel = page.locator(SelectorsEnum.sidePanel);
+    const sidePanelHTML = await sidePanel.innerHTML();
+    console.log('Side panel HTML content:', sidePanelHTML);
+
+    // Check for any buttons or clickable elements in the side panel
+    const allButtons = await sidePanel.locator('button').count();
+    const allClickable = await sidePanel
+      .locator('button, a, [role="button"], [onclick]')
+      .count();
+    console.log(
+      `Found ${allButtons} buttons and ${allClickable} clickable elements in side panel`
+    );
+
+    // List all elements with their attributes
+    const allElements = await sidePanel.locator('*').all();
+    console.log('All elements in side panel:');
+    for (let i = 0; i < Math.min(allElements.length, 20); i++) {
+      const element = allElements[i];
+      const tagName = await element.evaluate((el) => el.tagName);
+      const className = await element.evaluate((el) => el.className);
+      const id = await element.evaluate((el) => el.id);
+      const dataTestId = await element.evaluate((el) =>
+        el.getAttribute('data-testid')
+      );
+      console.log(
+        `  ${i}: ${tagName} class="${className}" id="${id}" data-testid="${dataTestId}"`
+      );
+    }
+
+    // Try to find any element that might be a close button
+    const possibleCloseElements = [
+      'button',
+      'a',
+      '[role="button"]',
+      'svg',
+      'i',
       '[class*="close"]',
-      'svg[class*="close"]',
-      'i[class*="close"]'
+      '[class*="Close"]',
+      '[class*="CLOSE"]',
+      '[aria-label*="close"]',
+      '[aria-label*="Close"]',
+      '[title*="close"]',
+      '[title*="Close"]',
+      '[alt*="close"]',
+      '[alt*="Close"]'
     ];
 
     let closeIconFound = false;
-    for (const selector of closeSelectors) {
-      const element = page.locator(selector);
+    for (const selector of possibleCloseElements) {
+      const element = sidePanel.locator(selector);
       const count = await element.count();
-      console.log(`Selector "${selector}": found ${count} elements`);
+      console.log(`Side panel selector "${selector}": found ${count} elements`);
 
       if (count > 0) {
-        console.log(`Using selector: ${selector}`);
-        await element.first().waitFor({ state: 'visible', timeout: 5000 });
-        await element.first().click();
-        closeIconFound = true;
-        break;
+        // Check if any of these elements are visible and clickable
+        for (let i = 0; i < count; i++) {
+          const el = element.nth(i);
+          const isVisible = await el.isVisible();
+          const isEnabled = await el.isEnabled();
+          console.log(
+            `  Element ${i}: visible=${isVisible}, enabled=${isEnabled}`
+          );
+
+          if (isVisible && isEnabled) {
+            console.log(
+              `Trying to click element ${i} with selector: ${selector}`
+            );
+            try {
+              await el.click();
+              closeIconFound = true;
+              break;
+            } catch (error) {
+              console.log(`Failed to click element ${i}: ${error.message}`);
+            }
+          }
+        }
+        if (closeIconFound) break;
       }
     }
 
     if (!closeIconFound) {
       // Take a screenshot for debugging
       await page.screenshot({ path: 'debug-side-panel.png' });
+      console.log('Screenshot saved as debug-side-panel.png');
       throw new Error('Close icon not found with any selector');
     }
 
