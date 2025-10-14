@@ -98,6 +98,6 @@ test.describe('Sign Message', () => {
       SelectorsEnum.decodedMessage
     );
     await expect(decodedMessage).toBeVisible();
-    await expect(decodedMessage).toHaveValue(message);
+    await expect(decodedMessage).toHaveText(message);
   });
 });

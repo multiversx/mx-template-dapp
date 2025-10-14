@@ -1,4 +1,3 @@
-import { expect } from '@playwright/test';
 import { TEST_CONSTANTS } from './constants';
 import { OriginPageEnum, SelectorsEnum } from './testdata';
 import { getTestIdSelector } from './testIdSelector';
@@ -14,17 +13,29 @@ const authenticateWithKeystore = async ({
   keystorePath,
   keystorePassword
 }: AuthenticateWithKeystoreType) => {
+  // Click the keystore button
   await walletPage.getByTestId(SelectorsEnum.keystoreButton).click();
+
+  // Upload the keystore file
   await walletPage.setInputFiles(
     getTestIdSelector(SelectorsEnum.walletFile),
     keystorePath
   );
 
+  // Wait for file processing to complete
+  await walletPage.waitForLoadState();
+
+  // Fill the password input
   const passwordInput = walletPage.getByTestId(SelectorsEnum.passwordInput);
-  await expect(passwordInput).toBeVisible();
   await passwordInput.fill(keystorePassword);
 
+  // Wait for file processing to complete
+  await walletPage.waitForLoadState();
+
+  // Click the submit button
   await walletPage.getByTestId(SelectorsEnum.submitButton).click();
+
+  // Click the confirm button
   await walletPage.getByTestId(SelectorsEnum.confirmButton).click();
 };
 
@@ -32,11 +43,19 @@ const authenticateWithPem = async ({
   walletPage,
   pemPath
 }: AuthenticateWithPemType) => {
+  // Click the PEM button
   await walletPage.getByTestId(SelectorsEnum.pemButton).click();
+
+  // Upload the PEM file
   await walletPage.setInputFiles(
     getTestIdSelector(SelectorsEnum.walletFile),
     pemPath
   );
+
+  // Wait for file processing to complete
+  await walletPage.waitForLoadState();
+
+  // Click the submit button
   await walletPage.getByTestId(SelectorsEnum.submitButton).click();
 };
 

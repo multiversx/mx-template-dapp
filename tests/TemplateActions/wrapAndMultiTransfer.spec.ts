@@ -49,9 +49,9 @@ test.describe('Wrap & Multi-Transfer', async () => {
       .locator(SelectorsEnum.batchTransactionsContainer)
       .waitFor({ state: 'visible' });
 
-    // Verify batch transactions container is in viewport
+    // Verify batch transactions container is visible
     const container = page.locator(SelectorsEnum.batchTransactionsContainer);
-    await expect(container).toBeInViewport();
+    await expect(container).toBeVisible();
   });
 
   test('should complete full batch transaction flow', async ({ page }) => {

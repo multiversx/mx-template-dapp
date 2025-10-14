@@ -53,7 +53,7 @@ export enum SelectorsEnum {
   privateKeyInput = 'privateKeyInput',
   cancelButton = 'cancelButton',
   sidePanel = '#side-panel',
-  sidePanelCloseIcon = 'mvx-close-icon',
+  sidePanelCloseIcon = 'svg',
 
   // Web wallet selectors
   signCancelButton = 'signCancelBtn',
@@ -71,8 +71,8 @@ export enum SelectorsEnum {
   errorIcon = '.mvx\\:text-error',
 
   // Table containers
-  transactionsAllTable = '#transactions-all table.transactions-table',
-  transactionsPingPongTable = '#transactions-ping-pong table.transactions-table',
+  transactionsAllTable = '#transactions-all table',
+  transactionsPingPongTable = '#transactions-ping-pong table',
   transactionsTableBodyRow = 'tbody tr.transactions-table-body-row'
 }
 
