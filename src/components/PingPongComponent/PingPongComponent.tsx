@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
-import moment from 'moment';
-
+import { Duration } from 'luxon';
+import { useEffect, useState } from 'react';
 import {
   Label,
   MissingNativeAuthError,
@@ -31,26 +30,6 @@ const styles = {
   buttons: 'buttons flex justify-start gap-2',
   buttonContent: 'button-content text-sm font-normal'
 } satisfies Record<string, string>;
-
-export interface PingTransactionPayloadType {
-  amount?: string;
-  transactions?: Transaction[];
-}
-
-interface PingPongComponentPropsType {
-  identifier: `${ItemsIdentifiersEnum}`;
-  sendPingTransaction: (
-    payload: PingTransactionPayloadType
-  ) => Promise<string | undefined>;
-  sendPongTransaction: (
-    transactions?: Transaction[]
-  ) => Promise<string | undefined>;
-  getTimeToPong: () => Promise<number | null | undefined>;
-  pingAmount?: string;
-  getPingTransaction?: () => Promise<Transaction | null>;
-  getPongTransaction?: () => Promise<Transaction | null>;
-  tokenLogin?: TokenLoginType | null;
-}
 
 export const PingPongComponent = ({
   identifier,
@@ -133,10 +112,9 @@ export const PingPongComponent = ({
     setCurrentSessionId(sessionId);
   };
 
-  const timeRemaining = moment()
-    .startOf('day')
-    .seconds(secondsLeft ?? 0)
-    .format('mm:ss');
+  const timeRemaining = Duration.fromObject({
+    seconds: secondsLeft ?? 0
+  }).toFormat('mm:ss');
 
   const pongAllowed = secondsLeft === 0;
 
@@ -220,3 +198,23 @@ export const PingPongComponent = ({
     </div>
   );
 };
+
+interface PingPongComponentPropsType {
+  identifier: `${ItemsIdentifiersEnum}`;
+  sendPingTransaction: (
+    payload: PingTransactionPayloadType
+  ) => Promise<string | undefined>;
+  sendPongTransaction: (
+    transactions?: Transaction[]
+  ) => Promise<string | undefined>;
+  getTimeToPong: () => Promise<number | null | undefined>;
+  pingAmount?: string;
+  getPingTransaction?: () => Promise<Transaction | null>;
+  getPongTransaction?: () => Promise<Transaction | null>;
+  tokenLogin?: TokenLoginType | null;
+}
+
+export interface PingTransactionPayloadType {
+  amount?: string;
+  transactions?: Transaction[];
+}
