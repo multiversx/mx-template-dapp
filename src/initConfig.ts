@@ -23,9 +23,6 @@ export const config: InitAppType = {
   dAppConfig: {
     nativeAuth: true,
     environment: EnvironmentsEnum.devnet,
-    network: {
-      walletAddress: 'https://localhost:3002'
-    },
     theme: 'mvx:dark-theme',
     providers: {
       walletConnect: {
