@@ -6,10 +6,9 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import classNames from 'classnames';
-
 import { Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
 import {
@@ -23,7 +22,6 @@ import {
   useGetNetworkConfig
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
-
 import { ThemeTooltip } from './components';
 import styles from './header.styles';
 

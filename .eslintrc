@@ -37,7 +37,6 @@
   ],
   "plugins": ["react-hooks", "prettier", "import", "sort-exports"],
   "rules": {
-    "sort-exports/sort-exports": "error",
     "sort-imports": [
       "error",
       {

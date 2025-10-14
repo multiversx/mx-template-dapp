@@ -9,14 +9,12 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useState } from 'react';
-
 import { ReactComponent as IconBatch } from 'assets/img/batch-tx.svg';
 import { ReactComponent as IconAbi } from 'assets/img/ping-pong-abi.svg';
 import { ReactComponent as IconBackend } from 'assets/img/ping-pong-backend.svg';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
-
-import styles from './sideMenu.styles';
 import { ItemIcon } from './components';
+import styles from './sideMenu.styles';
 import { MenuItemsType, SideMenuPropsType } from './sideMenu.types';
 
 const menuItems: MenuItemsType[] = [
