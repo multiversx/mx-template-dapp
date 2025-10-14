@@ -41,6 +41,10 @@ jobs:
 
       KEYSTORE6_PRIVATE_KEY_UTF8: ${{ secrets.KEYSTORE6_PRIVATE_KEY_UTF8 }}
       KEYSTORE6_ADDRESS: ${{ secrets.KEYSTORE6_ADDRESS }}
+
+      METAMASK_MNEMONIC: ${{ secrets.METAMASK_MNEMONIC }}
+      METAMASK_ADDRESS: ${{ secrets.METAMASK_ADDRESS }}
+      METAMASK_PASSWORD: ${{ secrets.METAMASK_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -59,6 +63,8 @@ jobs:
           command: pnpm install
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
+      - name: Setup Synpress Cache
+        run: npx synpress
       - name: Run Playwright E2E Tests
         run: pnpm run run-playwright-test
       - name: Upload Playwright test report

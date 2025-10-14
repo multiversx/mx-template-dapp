@@ -2,8 +2,11 @@ import { PATHS } from './constants';
 
 const walletsDir = process.env.WALLETS_DIR || PATHS.WALLETS_DIR;
 
+export const NA = 'N/A';
+
 export enum OriginPageEnum {
   multiversxWallet = '/devnet-wallet.multiversx.com/',
+  localhost = 'localhost:3000',
   templateDashboard = '/dashboard'
 }
 
@@ -57,6 +60,7 @@ export enum SelectorsEnum {
 
   // Web wallet selectors
   signCancelButton = 'signCancelBtn',
+  snapPrivacyWarningScroll = 'snap-privacy-warning-scroll',
 
   // Transaction table selectors
   transactionLink = 'transactionLink',
@@ -79,17 +83,21 @@ export enum SelectorsEnum {
 // Test data is parameterized via environment variables so secrets (passwords,
 // addresses, keystores) come from GitHub Secrets in CI or from local .env.
 export const TestDataEnums = {
-  keystorePassword1: process.env.KEYSTORE1_PASSWORD || '',
-  keystorePassword2: process.env.KEYSTORE2_PASSWORD || '',
-  keystorePassword3: process.env.KEYSTORE3_PASSWORD || '',
-  keystorePassword4: process.env.KEYSTORE4_PASSWORD || '',
+  keystorePassword1: process.env.KEYSTORE1_PASSWORD || NA,
+  keystorePassword2: process.env.KEYSTORE2_PASSWORD || NA,
+  keystorePassword3: process.env.KEYSTORE3_PASSWORD || NA,
+  keystorePassword4: process.env.KEYSTORE4_PASSWORD || NA,
 
-  keystoreWalletAddress1: process.env.KEYSTORE1_ADDRESS || '',
-  keystoreWalletAddress2: process.env.KEYSTORE2_ADDRESS || '',
-  keystoreWalletAddress3: process.env.KEYSTORE3_ADDRESS || '',
-  keystoreWalletAddress4: process.env.KEYSTORE4_ADDRESS || '',
-  keystoreWalletAddress5: process.env.KEYSTORE5_ADDRESS || '',
-  keystoreWalletAddress6: process.env.KEYSTORE6_ADDRESS || '',
+  keystoreWalletAddress1: process.env.KEYSTORE1_ADDRESS || NA,
+  keystoreWalletAddress2: process.env.KEYSTORE2_ADDRESS || NA,
+  keystoreWalletAddress3: process.env.KEYSTORE3_ADDRESS || NA,
+  keystoreWalletAddress4: process.env.KEYSTORE4_ADDRESS || NA,
+  keystoreWalletAddress5: process.env.KEYSTORE5_ADDRESS || NA,
+  keystoreWalletAddress6: process.env.KEYSTORE6_ADDRESS || NA,
+
+  metamaskMnemonic: process.env.METAMASK_MNEMONIC || NA,
+  metamaskAddress: process.env.METAMASK_ADDRESS || NA,
+  metamaskPassword: process.env.METAMASK_PASSWORD || NA,
 
   keystoreFilePath1: `${walletsDir}/keystoreFile1.json`,
   keystoreFilePath2: `${walletsDir}/keystoreFile2.json`,
