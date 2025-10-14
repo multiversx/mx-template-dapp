@@ -48,8 +48,8 @@ importers:
         specifier: 2.3.2
         version: 2.3.2
       luxon:
-        specifier: ^3.5.0
-        version: 3.7.2
+        specifier: 3.5.0
+        version: 3.5.0
       motion:
         specifier: ^12.23.12
         version: 12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -103,8 +103,8 @@ importers:
         specifier: 29.5.5
         version: 29.5.5
       '@types/luxon':
-        specifier: ^3.4.2
-        version: 3.7.1
+        specifier: 3.4.2
+        version: 3.4.2
       '@types/node':
         specifier: 20.7.1
         version: 20.7.1
@@ -1646,8 +1646,8 @@ packages:
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
-  '@types/luxon@3.7.1':
-    resolution: {integrity: sha512-H3iskjFIAn5SlJU7OuxUmTEpebK6TKB8rxZShDslBMZJ5u9S//KM1sbdAisiSrqwLQncVjnpi2OK2J51h+4lsg==}
+  '@types/luxon@3.4.2':
+    resolution: {integrity: sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==}
 
   '@types/mocha@10.0.10':
     resolution: {integrity: sha512-xPyYSz1cMPnJQhl0CLMH68j3gprKZaTjG3s5Vi+fDgx+uhG9NOXwbVt52eFS8ECyXhyKcjDLCBEqBExKuiZb7Q==}
@@ -4272,8 +4272,8 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
-  luxon@3.7.2:
-    resolution: {integrity: sha512-vtEhXh/gNjI9Yg1u4jX/0YVPMvxzHuGgCm6tC5kZyb08yjGWGnqAjGJvcXbqQR2P3MyMEFnRbpcdFS6PBcLqew==}
+  luxon@3.5.0:
+    resolution: {integrity: sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==}
     engines: {node: '>=12'}
 
   lz-string@1.5.0:
@@ -7654,7 +7654,7 @@ snapshots:
 
   '@types/json5@0.0.29': {}
 
-  '@types/luxon@3.7.1': {}
+  '@types/luxon@3.4.2': {}
 
   '@types/mocha@10.0.10': {}
 
@@ -11192,7 +11192,7 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
-  luxon@3.7.2: {}
+  luxon@3.5.0: {}
 
   lz-string@1.5.0: {}
 
