@@ -5,26 +5,24 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-
-import { MvxButton, useGetPendingTransactionsSessions } from 'lib';
 import { OutputContainer, TransactionsOutput } from 'components';
+import { MvxButton, useGetPendingTransactionsSessions } from 'lib';
 import {
   useGetAccount,
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
-
 import {
   signAndAutoSendBatchTransactions,
   swapAndLockTokens,
   wrapAndMultiTransferTransactions
 } from './helpers';
 
-// prettier-ignore
 const styles = {
   batchTx: 'batch-tx flex flex-col gap-6',
-  buttonsContainer: 'buttons-container flex flex-col md:flex-row gap-2 items-start',
+  buttonsContainer:
+    'buttons-container flex flex-col md:flex-row gap-2 items-start',
   batchTxButton: 'batch-tx-button text-sm font-normal'
 } satisfies Record<string, string>;
 

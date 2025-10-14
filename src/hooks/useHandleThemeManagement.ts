@@ -1,5 +1,4 @@
 import { MouseEvent, useEffect, useState } from 'react';
-
 import { ThemesEnum } from 'lib';
 
 export interface ThemeOptionType {

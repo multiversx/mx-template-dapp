@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { contractAddress } from 'config';
 import pingPongAbi from 'contracts/ping-pong.abi.json';
 import {

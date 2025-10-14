@@ -1,9 +1,7 @@
 import classNames from 'classnames';
 import { Fragment, MouseEvent, PropsWithChildren, ReactNode } from 'react';
 import { Sheet } from 'react-modal-sheet';
-
 import { WithClassnameType } from 'types';
-
 import styles from './drawer.styles';
 
 interface DrawerPropsType extends PropsWithChildren, WithClassnameType {

@@ -1,6 +1,5 @@
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
@@ -12,7 +11,6 @@ import {
   useGetNetworkConfig
 } from 'lib';
 
-// prettier-ignore
 const styles = {
   transactionContainer: 'transaction-container flex flex-col',
   transactionElementContainer: 'transaction-elem-container flex gap-2',
