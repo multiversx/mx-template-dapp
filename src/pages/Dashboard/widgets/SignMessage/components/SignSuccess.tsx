@@ -1,7 +1,6 @@
 import { Label } from 'components';
 import { CopyButton, Message } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
-
 import { decodeMessage } from '../helpers';
 
 // prettier-ignore

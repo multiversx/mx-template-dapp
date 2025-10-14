@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
-import moment from 'moment';
-
+import { Duration } from 'luxon';
+import { useEffect, useState } from 'react';
 import {
   Label,
   MissingNativeAuthError,
@@ -21,7 +20,6 @@ import {
 import { ACCOUNTS_ENDPOINT, Transaction, useGetPendingTransactions } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
-// prettier-ignore
 const styles = {
   pingPongContainer: 'ping-pong-container flex flex-col gap-6',
   infosContainer: 'infos-container flex flex-col gap-2',
@@ -133,10 +131,9 @@ export const PingPongComponent = ({
     setCurrentSessionId(sessionId);
   };
 
-  const timeRemaining = moment()
-    .startOf('day')
-    .seconds(secondsLeft ?? 0)
-    .format('mm:ss');
+  const timeRemaining = Duration.fromObject({
+    seconds: secondsLeft ?? 0
+  }).toFormat('mm:ss');
 
   const pongAllowed = secondsLeft === 0;
 

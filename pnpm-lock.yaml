@@ -47,9 +47,9 @@ importers:
       classnames:
         specifier: 2.3.2
         version: 2.3.2
-      moment:
-        specifier: 2.29.4
-        version: 2.29.4
+      luxon:
+        specifier: 3.5.0
+        version: 3.5.0
       motion:
         specifier: ^12.23.12
         version: 12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -102,6 +102,9 @@ importers:
       '@types/jest':
         specifier: 29.5.5
         version: 29.5.5
+      '@types/luxon':
+        specifier: 3.4.2
+        version: 3.4.2
       '@types/node':
         specifier: 20.7.1
         version: 20.7.1
@@ -1642,6 +1645,9 @@ packages:
 
   '@types/json5@0.0.29':
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+
+  '@types/luxon@3.4.2':
+    resolution: {integrity: sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==}
 
   '@types/mocha@10.0.10':
     resolution: {integrity: sha512-xPyYSz1cMPnJQhl0CLMH68j3gprKZaTjG3s5Vi+fDgx+uhG9NOXwbVt52eFS8ECyXhyKcjDLCBEqBExKuiZb7Q==}
@@ -4266,6 +4272,10 @@ packages:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
 
+  luxon@3.5.0:
+    resolution: {integrity: sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==}
+    engines: {node: '>=12'}
+
   lz-string@1.5.0:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
@@ -4388,9 +4398,6 @@ packages:
   mochawesome-report-generator@6.2.0:
     resolution: {integrity: sha512-Ghw8JhQFizF0Vjbtp9B0i//+BOkV5OWcQCPpbO0NGOoxV33o+gKDYU0Pr2pGxkIHnqZ+g5mYiXF7GMNgAcDpSg==}
     hasBin: true
-
-  moment@2.29.4:
-    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
 
   motion-dom@12.23.21:
     resolution: {integrity: sha512-5xDXx/AbhrfgsQmSE7YESMn4Dpo6x5/DTZ4Iyy4xqDvVHWvFVoV+V2Ri2S/ksx+D40wrZ7gPYiMWshkdoqNgNQ==}
@@ -7646,6 +7653,8 @@ snapshots:
   '@types/json-schema@7.0.15': {}
 
   '@types/json5@0.0.29': {}
+
+  '@types/luxon@3.4.2': {}
 
   '@types/mocha@10.0.10': {}
 
@@ -11183,6 +11192,8 @@ snapshots:
 
   lru-cache@7.18.3: {}
 
+  luxon@3.5.0: {}
+
   lz-string@1.5.0: {}
 
   magic-string@0.30.19:
@@ -11314,8 +11325,6 @@ snapshots:
       tcomb-validation: 3.4.1
       validator: 13.15.15
       yargs: 17.7.2
-
-  moment@2.29.4: {}
 
   motion-dom@12.23.21:
     dependencies:

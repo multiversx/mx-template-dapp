@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { HomeHero } from './components/HomeHero';
 import { HomeConnect } from './components/HomeConnect';
+import { HomeHero } from './components/HomeHero';
 
 // prettier-ignore
 const styles = {
