@@ -5,7 +5,6 @@ import * as TestActions from '../support';
 import { OriginPageEnum, SelectorsEnum } from '../support/testdata';
 import basicSetup, {
   METAMASK_ADDRESS,
-  METAMASK_MNEMONIC,
   METAMASK_PASSWORD
 } from '../test/wallet-setup/basic.setup';
 
@@ -14,13 +13,6 @@ const test = testWithSynpress(metaMaskFixtures(basicSetup));
 
 // Extract expect function from test
 const { expect } = test;
-
-// MetaMask configuration from basic.setup
-const metamaskConfig = {
-  mnemonic: METAMASK_MNEMONIC,
-  address: METAMASK_ADDRESS,
-  password: METAMASK_PASSWORD
-};
 
 test.describe('Connect a wallet', () => {
   // Connect wallet tests verify wallet connection functionality
@@ -37,12 +29,7 @@ test.describe('Connect a wallet', () => {
       extensionId
     }) => {
       // Create a new MetaMask instance
-      new MetaMask(
-        context,
-        metamaskPage,
-        basicSetup.walletPassword,
-        extensionId
-      );
+      new MetaMask(context, metamaskPage, METAMASK_PASSWORD, extensionId);
 
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
@@ -60,7 +47,7 @@ test.describe('Connect a wallet', () => {
       await expect(walletPage).toHaveURL(OriginPageEnum.templateDashboard);
 
       // Verify connection using TestActions helper
-      await TestActions.checkConnectionToWallet(page, metamaskConfig.address);
+      await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);
     });
   });
 
@@ -72,12 +59,7 @@ test.describe('Connect a wallet', () => {
       extensionId
     }) => {
       // Create a new MetaMask instance
-      new MetaMask(
-        context,
-        metamaskPage,
-        basicSetup.walletPassword,
-        extensionId
-      );
+      new MetaMask(context, metamaskPage, METAMASK_PASSWORD, extensionId);
 
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
@@ -95,7 +77,7 @@ test.describe('Connect a wallet', () => {
       await expect(walletPage).toHaveURL(OriginPageEnum.templateDashboard);
 
       // Verify connection using TestActions helper
-      await TestActions.checkConnectionToWallet(page, metamaskConfig.address);
+      await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);
 
       // Verify the topInfo container is visible
       const topInfoContainer = page.getByTestId(SelectorsEnum.topInfoContainer);
@@ -106,7 +88,7 @@ test.describe('Connect a wallet', () => {
         .getByTestId(SelectorsEnum.accountAddress)
         .getByTestId(SelectorsEnum.trimFullAddress);
       await expect(addressElement).toBeVisible();
-      await expect(addressElement).toContainText(metamaskConfig.address);
+      await expect(addressElement).toContainText(METAMASK_ADDRESS);
 
       // Verify herotag section is present and should be N/A
       const herotagElement = topInfoContainer.getByTestId(
