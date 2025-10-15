@@ -2,12 +2,12 @@
 import { testWithSynpress } from '@synthetixio/synpress';
 import { MetaMask, metaMaskFixtures } from '@synthetixio/synpress/playwright';
 import * as TestActions from '../support';
-import {
-  OriginPageEnum,
-  SelectorsEnum,
-  TestDataEnums
-} from '../support/testdata';
-import basicSetup from '../test/wallet-setup/basic.setup';
+import { OriginPageEnum, SelectorsEnum } from '../support/testdata';
+import basicSetup, {
+  METAMASK_ADDRESS,
+  METAMASK_MNEMONIC,
+  METAMASK_PASSWORD
+} from '../test/wallet-setup/basic.setup';
 
 // Create a test instance with Synpress and MetaMask fixtures
 const test = testWithSynpress(metaMaskFixtures(basicSetup));
@@ -15,10 +15,11 @@ const test = testWithSynpress(metaMaskFixtures(basicSetup));
 // Extract expect function from test
 const { expect } = test;
 
-// MetaMask configuration from environment variables
+// MetaMask configuration from basic.setup
 const metamaskConfig = {
-  mnemonic: TestDataEnums.metamaskMnemonic,
-  address: TestDataEnums.metamaskAddress
+  mnemonic: METAMASK_MNEMONIC,
+  address: METAMASK_ADDRESS,
+  password: METAMASK_PASSWORD
 };
 
 test.describe('Connect a wallet', () => {

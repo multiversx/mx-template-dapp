@@ -95,9 +95,9 @@ export const TestDataEnums = {
   keystoreWalletAddress5: process.env.KEYSTORE5_ADDRESS || NA,
   keystoreWalletAddress6: process.env.KEYSTORE6_ADDRESS || NA,
 
-  metamaskMnemonic: process.env.METAMASK_MNEMONIC || NA,
-  metamaskAddress: process.env.METAMASK_ADDRESS || NA,
-  metamaskPassword: process.env.METAMASK_PASSWORD || NA,
+  metamaskMnemonic: process.env.METAMASK_MNEMONIC,
+  metamaskAddress: process.env.METAMASK_ADDRESS,
+  metamaskPassword: process.env.METAMASK_PASSWORD,
 
   keystoreFilePath1: `${walletsDir}/keystoreFile1.json`,
   keystoreFilePath2: `${walletsDir}/keystoreFile2.json`,
