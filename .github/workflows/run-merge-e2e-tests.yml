@@ -64,6 +64,7 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
       - name: Setup Synpress Cache
+        working-directory: tests
         run: npx synpress
       - name: Run Playwright E2E Tests
         run: pnpm run run-playwright-test
