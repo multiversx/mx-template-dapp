@@ -16,11 +16,7 @@ module.exports = {
   transformIgnorePatterns: ['node_modules/(^.+\\\\.(ts|js)$)'],
   testMatch: ['**/src/**/?(*.)+(spec|test|bgTest).ts?(x)'],
   moduleNameMapper: {
-    '\\.(css|sass|scss)$': 'identity-obj-proxy',
-    '^@multiversx/sdk-dapp-ui$':
-      '<rootDir>/src/__mocks__/@multiversx/sdk-dapp-ui.ts',
-    '^@multiversx/sdk-dapp-ui/(.*)$':
-      '<rootDir>/src/__mocks__/@multiversx/sdk-dapp-ui.ts'
+    '\\.(css|sass|scss)$': 'identity-obj-proxy'
   },
   moduleFileExtensions: [
     // Place tsx and ts to beginning as suggestion from Jest team

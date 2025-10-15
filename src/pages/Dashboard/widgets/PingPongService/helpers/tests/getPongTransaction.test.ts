@@ -1,6 +1,5 @@
-import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-import { useGetPongTransaction } from '../useGetPongTransaction';
+import { getPongTransaction } from '../getPongTransaction';
 
 const pongTransaction = {
   nonce: 10702,
@@ -20,18 +19,14 @@ describe('useGetPongTransaction', () => {
       data: pongTransaction
     });
 
-    const { result } = renderHook(() => useGetPongTransaction());
-    const transactionReceived = await result.current();
-
+    const transactionReceived = await getPongTransaction();
     expect(transactionReceived).toBe(pongTransaction);
   });
 
   it('should return null', async () => {
     jest.spyOn(axios, 'post').mockRejectedValueOnce(new Error('error'));
 
-    const { result } = renderHook(() => useGetPongTransaction());
-    const transactionReceived = await result.current();
-
+    const transactionReceived = await getPongTransaction();
     expect(transactionReceived).toBeNull();
   });
 });

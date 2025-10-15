@@ -1,6 +1,5 @@
-import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-import { useGetTimeToPong } from '../useGetTimeToPong';
+import { getTimeToPong } from '../getTimeToPong';
 
 describe('useGetTimeToPong', () => {
   it('should return 180 seconds', async () => {
@@ -11,8 +10,7 @@ describe('useGetTimeToPong', () => {
       }
     });
 
-    const { result } = renderHook(() => useGetTimeToPong());
-    const timeToPong = await result.current();
+    const timeToPong = await getTimeToPong();
 
     expect(timeToPong).toBe(180);
   });
@@ -24,8 +22,7 @@ describe('useGetTimeToPong', () => {
       }
     });
 
-    const { result } = renderHook(() => useGetTimeToPong());
-    const timeToPong = await result.current();
+    const timeToPong = await getTimeToPong();
 
     expect(timeToPong).toBeUndefined();
   });
@@ -33,9 +30,8 @@ describe('useGetTimeToPong', () => {
   it('should return null', async () => {
     jest.spyOn(axios, 'get').mockRejectedValueOnce(new Error('error'));
 
-    const { result } = renderHook(() => useGetTimeToPong());
+    const timeToPong = await getTimeToPong();
 
-    const timeToPong = await result.current();
     expect(timeToPong).toBeNull();
   });
 });
