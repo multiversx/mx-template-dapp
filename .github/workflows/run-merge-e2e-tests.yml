@@ -67,7 +67,7 @@ jobs:
         working-directory: tests
         run: pnpm exec synpress tests/test/wallet-setup --headless
       - name: Run Playwright E2E Tests
-        # working-directory: tests
+        working-directory: tests
         run: pnpm run run-playwright-test
       - name: Upload Playwright test report
         uses: actions/upload-artifact@v4

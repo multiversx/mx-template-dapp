@@ -3,13 +3,21 @@ import { testWithSynpress } from '@synthetixio/synpress';
 import { MetaMask, metaMaskFixtures } from '@synthetixio/synpress/playwright';
 import * as TestActions from '../support';
 import { OriginPageEnum, SelectorsEnum } from '../support/testdata';
-import basicSetup, {
-  METAMASK_ADDRESS,
-  METAMASK_PASSWORD
-} from '../test/wallet-setup/basic.setup';
+import walletSetup from '../test/wallet-setup/basic.setup';
+
+// Get password and mnemonic from environment variables
+const METAMASK_ADDRESS = process.env.METAMASK_ADDRESS;
+const METAMASK_PASSWORD = process.env.METAMASK_PASSWORD;
+
+// Validate that required environment variables are present
+if (!METAMASK_PASSWORD || !METAMASK_ADDRESS) {
+  throw new Error(
+    'METAMASK_PASSWORD, and METAMASK_ADDRESS environment variables are missing. Please set them in .env.test.local for local development or as a GitHub Secret for CI.'
+  );
+}
 
 // Create a test instance with Synpress and MetaMask fixtures
-const test = testWithSynpress(metaMaskFixtures(basicSetup));
+const test = testWithSynpress(metaMaskFixtures(walletSetup));
 
 // Extract expect function from test
 const { expect } = test;
