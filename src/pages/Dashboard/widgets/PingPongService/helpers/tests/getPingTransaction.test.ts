@@ -20,7 +20,17 @@ describe('useGetPingTransaction', () => {
     });
 
     const transactionReceived = await getPingTransaction();
-    expect(transactionReceived).toBe(pingTransaction);
+    expect(transactionReceived?.toPlainObject()).toEqual({
+      ...pingTransaction,
+      guardian: undefined,
+      guardianSignature: undefined,
+      options: undefined,
+      receiverUsername: undefined,
+      relayer: undefined,
+      relayerSignature: undefined,
+      senderUsername: undefined,
+      signature: undefined
+    });
   });
 
   it('should return null', async () => {

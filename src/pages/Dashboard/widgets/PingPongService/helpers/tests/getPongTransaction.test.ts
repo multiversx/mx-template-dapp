@@ -20,7 +20,17 @@ describe('useGetPongTransaction', () => {
     });
 
     const transactionReceived = await getPongTransaction();
-    expect(transactionReceived).toBe(pongTransaction);
+    expect(transactionReceived?.toPlainObject()).toEqual({
+      ...pongTransaction,
+      guardian: undefined,
+      guardianSignature: undefined,
+      options: undefined,
+      receiverUsername: undefined,
+      relayer: undefined,
+      relayerSignature: undefined,
+      senderUsername: undefined,
+      signature: undefined
+    });
   });
 
   it('should return null', async () => {
