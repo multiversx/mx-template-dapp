@@ -72,7 +72,7 @@ export const handleMetaMaskSnapWarning = async (
       // A new notification page should appear for approve connection
       const modalPage2 = await TestActions.waitForPageByUrlSubstring({
         page,
-        urlSubstring: '/snap-install-result',
+        urlSubstring: '/notification.html#confirmation',
         timeout
       });
 
