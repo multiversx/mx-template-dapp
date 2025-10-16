@@ -57,6 +57,9 @@ export const handleMetaMaskSnapApproval = async (
         currentPage,
         metamaskPage,
         async () => {
+          // Wait for page state to be fully loaded before clicking
+          await currentPage.waitForLoadState('domcontentloaded', { timeout });
+
           // Wait for element to be visible and clickable before clicking
           if (action.type === 'testId') {
             const element = currentPage.getByTestId(action.name);
