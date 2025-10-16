@@ -147,19 +147,16 @@ export const handleMetaMaskSnapWarning = async (
         const pageContent = await modalPage.content();
         console.log('Extension page content length:', pageContent.length);
         console.log('Extension page has content:', pageContent.length > 0);
-
-        // Check if we can access the document
-        const documentTitle = await modalPage.evaluate(() => document.title);
-        console.log('Document title via evaluate:', documentTitle);
-
-        // Check if we can access window object
-        const windowLocation = await modalPage.evaluate(
-          () => window.location.href
+        console.log(
+          'Note: LavaMoat security prevents page.evaluate() calls on MetaMask pages'
         );
-        console.log('Window location via evaluate:', windowLocation);
       } catch (error) {
         console.log('Could not access extension page content:', error);
       }
+
+      // Wait for dynamic content to load (MetaMask uses dynamic rendering)
+      console.log('Waiting for MetaMask dynamic content to load...');
+      await modalPage.waitForTimeout(3000); // Give MetaMask time to render
     }
 
     // Check if the snap privacy warning scroll element exists
@@ -171,6 +168,15 @@ export const handleMetaMaskSnapWarning = async (
       console.log('Snap privacy warning scroll element visible:', isVisible);
     } catch (error) {
       console.log('Could not find snap privacy warning scroll element:', error);
+    }
+
+    // Wait for any buttons to appear (MetaMask renders dynamically)
+    console.log('Waiting for MetaMask UI elements to appear...');
+    try {
+      await modalPage.waitForSelector('button', { timeout: 10000 });
+      console.log('Found at least one button on the page');
+    } catch (error) {
+      console.log('No buttons found after waiting:', error);
     }
 
     // Debug: Check what elements are available on the modal page
@@ -279,6 +285,22 @@ export const handleMetaMaskSnapWarning = async (
         {
           name: 'Approve button',
           action: () => modalPage.getByRole('button', { name: 'Approve' }),
+          optional: true
+        },
+        // Add some generic button selectors as fallbacks
+        {
+          name: 'Any button with Connect text',
+          action: () => modalPage.locator('button:has-text("Connect")'),
+          optional: true
+        },
+        {
+          name: 'Any button with Accept text',
+          action: () => modalPage.locator('button:has-text("Accept")'),
+          optional: true
+        },
+        {
+          name: 'Any button with Approve text',
+          action: () => modalPage.locator('button:has-text("Approve")'),
           optional: true
         }
       ];
