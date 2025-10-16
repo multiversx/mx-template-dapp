@@ -28,16 +28,16 @@ importers:
         version: 0.2.0(@fortawesome/fontawesome-svg-core@6.5.1)(react@18.2.0)
       '@multiversx/sdk-core':
         specifier: ^15.x
-        version: 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
+        version: 15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       '@multiversx/sdk-dapp':
         specifier: ^5.x
         version: 5.2.6(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)(zod@3.22.4)
       '@multiversx/sdk-dapp-ui':
         specifier: ^0.x
-        version: 0.0.35(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.0.36(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@multiversx/sdk-dapp-utils':
         specifier: ^3.x
-        version: 3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)
+        version: 3.0.2(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)
       axios:
         specifier: 1.10.0
         version: 1.10.0
@@ -52,7 +52,7 @@ importers:
         version: 3.5.0
       motion:
         specifier: ^12.23.12
-        version: 12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 12.23.24(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       protobufjs:
         specifier: ^7.5.3
         version: 7.5.4
@@ -64,13 +64,13 @@ importers:
         version: 18.2.0(react@18.2.0)
       react-modal-sheet:
         specifier: ^4.4.0
-        version: 4.4.0(motion@12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: 4.4.0(motion@12.23.24(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       react-router-dom:
         specifier: 6.16.0
         version: 6.16.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react-tooltip:
         specifier: ^5.28.0
-        version: 5.29.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 5.30.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     devDependencies:
       '@playwright/test':
         specifier: 1.49.1
@@ -116,7 +116,7 @@ importers:
         version: 18.2.23
       '@types/react-dom':
         specifier: ^19.1.7
-        version: 19.2.0(@types/react@18.2.23)
+        version: 19.2.2(@types/react@18.2.23)
       '@types/react-router-dom':
         specifier: 5.3.3
         version: 5.3.3
@@ -1181,14 +1181,14 @@ packages:
     resolution: {integrity: sha512-c0tIdQUnbBLSt6NYU+OpeGPYdL0+GV547HeHT8Xc0BKQ7Cj0v82QUoA2QRtWrR1G4MNZmLsIacZSsf6DrIS2Bw==}
     engines: {node: '>=8.9.0'}
 
-  '@multiversx/sdk-core@15.2.0':
-    resolution: {integrity: sha512-Qqcrs52ujsg+xFd2TdWKHx6ueL+mQTY/nxxW7MdemBGB8wNpmLWxNE34zbLmzkWauOQopThq573QgO7IOv3iGg==}
+  '@multiversx/sdk-core@15.2.1':
+    resolution: {integrity: sha512-rTfV5kWCt+I5g1T/WxETj4lbRTCwhc7kDuXQMTsiDCTf7nnflOYB/2jfeEHezJYGFTXIFGESTLNSyldBKemEjg==}
     peerDependencies:
       bignumber.js: ^9.0.1
       protobufjs: ^7.2.6
 
-  '@multiversx/sdk-dapp-ui@0.0.35':
-    resolution: {integrity: sha512-b56hPvnKCsorz27y9jFgN2+a1En2ut+pRkE1noDEfPk9wQuKfv1NOsT3SVBP149COknnfFP2hzWlJ8ddWzEKKQ==}
+  '@multiversx/sdk-dapp-ui@0.0.36':
+    resolution: {integrity: sha512-AMvcmacFNxoNooohvERuD6x0+JkqwAewF4YwhaZt1w8rbN3yP/N4h4f/qU6bAScu/R819d9HQBo7WRkQfDYp/Q==}
     engines: {node: '>=20.19.0'}
 
   '@multiversx/sdk-dapp-utils@3.0.2':
@@ -1197,8 +1197,8 @@ packages:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
       bignumber.js: ^9.x
 
-  '@multiversx/sdk-dapp@5.2.6':
-    resolution: {integrity: sha512-+sgX5UhVS+EP8KDHW0ouLtHjR39VDbD8bxiG5osZwx1LJV9evZ0HFu2Rluhof4NNPJE5G4Dtd7Rw7cNiUq9FEg==}
+  '@multiversx/sdk-dapp@5.2.9':
+    resolution: {integrity: sha512-9vEgO3y+MjT2ZJ+gcnbfJA96GdlePnMp/mh7twqJw0fF/096VtPKXv52mhqS9JXdSEJ+mXbQX5IKwv24p4CGbg==}
     peerDependencies:
       '@multiversx/sdk-core': ^14.x || ^15.x
       '@multiversx/sdk-dapp-utils': ^3.x
@@ -1247,8 +1247,8 @@ packages:
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0  || ^15.0.0
 
-  '@multiversx/sdk-webview-provider@3.2.1':
-    resolution: {integrity: sha512-EhuxYawcnFRTsTnzcX5RUb8KC55dOPoHwXWBLGvmKV0XE3SqxYB2amjDGYOuHmjbMIo7/zKTSBpIIdz3jocGrQ==}
+  '@multiversx/sdk-webview-provider@3.2.3':
+    resolution: {integrity: sha512-VjNkzfA2yRSka9a33/zKInCrIXlvHebKTI8yfZFsFxZczp/s5a7WA8+DS7UnCJ19/owrZ9OX8gDRIS6JVkMlUQ==}
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
       '@multiversx/sdk-web-wallet-cross-window-provider': ^3.x
@@ -1651,8 +1651,8 @@ packages:
   '@socket.io/component-emitter@3.1.2':
     resolution: {integrity: sha512-9BCxFwvbGg/RsZK9tjXd8s4UcwR0MWeFQ1XEKIQVVvAGJyINdrqKMcTRyLoK8Rse1GjzLV9cwjWV1olXRWEXVA==}
 
-  '@stencil/core@4.38.0':
-    resolution: {integrity: sha512-oC3QFKO0X1yXVvETgc8OLY525MNKhn9vISBrbtKnGoPlokJ6rI8Vk1RK22TevnNrHLI4SExNLbcDnqilKR35JQ==}
+  '@stencil/core@4.38.1':
+    resolution: {integrity: sha512-qImplYLSp2wSZJo3oMZ3HrTaI+uULcRB4Knrua7UT9VjN/va+TDfk4JAKwDyDfTDkD2laDPcy6QJP2S3hVxZFQ==}
     engines: {node: '>=16.0.0', npm: '>=7.10.0'}
     hasBin: true
 
@@ -2228,8 +2228,8 @@ packages:
     peerDependencies:
       '@types/react': ^18.0.0
 
-  '@types/react-dom@19.2.0':
-    resolution: {integrity: sha512-brtBs0MnE9SMx7px208g39lRmC5uHZs96caOJfTjFcYSLHNamvaSMfJNagChVNkup2SdtOxKX1FDBkRSJe1ZAg==}
+  '@types/react-dom@19.2.2':
+    resolution: {integrity: sha512-9KQPoO6mZCi7jcIStSnlOWn2nEF3mNmyr3rIAsGnAbQKYbRLyqmeSc39EVgtxXVia+LMT8j3knZLAZAh+xLmrw==}
     peerDependencies:
       '@types/react': ^19.2.0
 
@@ -2496,8 +2496,8 @@ packages:
     resolution: {integrity: sha512-W0ArrZbs4M23POv8+FPsgHDFxg+wwklfZgLSsjVq2kpCmBCfIPxKSAOgTo/XrcH4We/OnshgBzxLcI+BHDgi4w==}
     engines: {node: ^16.13 || >=18}
 
-  '@zip.js/zip.js@2.8.7':
-    resolution: {integrity: sha512-8daf29EMM3gUpH/vSBSCYo2bY/wbamgRPxPpE2b+cDnbOLBHAcZikWad79R4Guemth/qtipzEHrZMq1lFXxWIA==}
+  '@zip.js/zip.js@2.8.8':
+    resolution: {integrity: sha512-v0KutehhSAuaoFAFGLp+V4+UiZ1mIxQ8vNOYMD7k9ZJaBbtQV49MYlg568oRLiuwWDg2Di58Iw3Q0ESNWR+5JA==}
     engines: {bun: '>=0.7.0', deno: '>=1.0.0', node: '>=18.0.0'}
 
   abab@2.0.6:
@@ -2745,11 +2745,16 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  bare-events@2.7.0:
-    resolution: {integrity: sha512-b3N5eTW1g7vXkw+0CXh/HazGTcO5KYuu/RCNaJbDMPI6LHDi+7qe8EmxKUVe1sUbY2KZOVZFyj62x0OEz9qyAA==}
+  bare-events@2.8.0:
+    resolution: {integrity: sha512-AOhh6Bg5QmFIXdViHbMc2tLDsBIRxdkIaIddPslJF9Z5De3APBScuqGP2uThXnIpqFrgoxMNC6km7uXNIMLHXA==}
+    peerDependencies:
+      bare-abort-controller: '*'
+    peerDependenciesMeta:
+      bare-abort-controller:
+        optional: true
 
-  bare-fs@4.4.5:
-    resolution: {integrity: sha512-TCtu93KGLu6/aiGWzMr12TmSRS6nKdfhAnzTQRbXoSWxkbb9eRd53jQ51jG7g1gYjjtto3hbBrrhzg6djcgiKg==}
+  bare-fs@4.4.11:
+    resolution: {integrity: sha512-Bejmm9zRMvMTRoHS+2adgmXw1ANZnCNx+B5dgZpGwlP1E3x6Yuxea8RToddHUbWtVV0iUMWqsgZr8+jcgUI2SA==}
     engines: {bare: '>=1.16.0'}
     peerDependencies:
       bare-buffer: '*'
@@ -2787,8 +2792,8 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  baseline-browser-mapping@2.8.12:
-    resolution: {integrity: sha512-vAPMQdnyKCBtkmQA6FMCBvU9qFIppS3nzyXnEM+Lo2IAhG4Mpjv9cCxMudhgV3YdNNJv6TNqXy97dfRVL2LmaQ==}
+  baseline-browser-mapping@2.8.16:
+    resolution: {integrity: sha512-OMu3BGQ4E7P1ErFsIPpbJh0qvDudM/UuJeHgkAvfWe+0HFJCXh+t/l8L6fVLR55RI/UbKrVLnAXZSVwd9ysWYw==}
     hasBin: true
 
   basic-ftp@5.0.5:
@@ -3071,8 +3076,8 @@ packages:
   code-block-writer@13.0.3:
     resolution: {integrity: sha512-Oofo0pq3IKnsFtuHqSF7TqBfr71aeyZDVJ0HpmqB7FBM2qEigL0iPONSCZSO9pE9dZTAxANe5XHG9Uy0YMv8cg==}
 
-  collect-v8-coverage@1.0.2:
-    resolution: {integrity: sha512-lHl4d5/ONEbLlJvaJNtsF/Lz+WvB07u2ycqTYbdrq7UypDXailES4valYb2eWiJFxZlVmpGekfqoxQhzyFdT4Q==}
+  collect-v8-coverage@1.0.3:
+    resolution: {integrity: sha512-1L5aqIkwPfiodaMgQunkF1zRhNqifHBmtbbbxcr6yVxxBnliw4TDOW6NxpO8DJLgJ16OT+Y4ztZqP6p/FtXnAw==}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -3457,8 +3462,8 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
 
-  electron-to-chromium@1.5.230:
-    resolution: {integrity: sha512-A6A6Fd3+gMdaed9wX83CvHYJb4UuapPD5X5SLq72VZJzxHSY0/LUweGXRWmQlh2ln7KV7iw7jnwXK7dlPoOnHQ==}
+  electron-to-chromium@1.5.237:
+    resolution: {integrity: sha512-icUt1NvfhGLar5lSWH3tHNzablaA5js3HVHacQimfP8ViEBOQv+L7DKEuHdbTZ0SKCO1ogTJTIL1Gwk9S6Qvcg==}
 
   elliptic@6.6.1:
     resolution: {integrity: sha512-RaddvvMatK2LJHqFJ+YA4WysVN5Ita9E35botqIYspQ4TkRAlCicdzKOjlyv/1Za5RyTNn7di//eEV0uTAfe3g==}
@@ -3868,8 +3873,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@12.23.22:
-    resolution: {integrity: sha512-ZgGvdxXCw55ZYvhoZChTlG6pUuehecgvEAJz0BHoC5pQKW1EC5xf1Mul1ej5+ai+pVY0pylyFfdl45qnM1/GsA==}
+  framer-motion@12.23.24:
+    resolution: {integrity: sha512-HMi5HRoRCTou+3fb3h9oTLyJGBxHfW+HnNE25tAXOvVx/IvwMHK0cx7IR4a2ZU6sh3IX1Z+4ts32PcYBOqka8w==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -3982,8 +3987,8 @@ packages:
     resolution: {integrity: sha512-w9UMqWwJxHNOvoNzSJ2oPF5wvYcvP7jUvYzhp67yEhTi17ZDBBC1z9pTdGuzjD+EFIqLSYRweZjqfiPzQ06Ebg==}
     engines: {node: '>= 0.4'}
 
-  get-tsconfig@4.10.1:
-    resolution: {integrity: sha512-auHyJ4AgMz7vgS8Hp3N6HXSmlMdUyhSUrfBF16w153rxtLIEOE+HGqaBppczZvnHLqQJfiHotCYpNhl0lUROFQ==}
+  get-tsconfig@4.12.0:
+    resolution: {integrity: sha512-LScr2aNr2FbjAjZh2C6X6BxRx1/x+aTDExct/xyq2XKbYOiG5c0aK7pMsSuyc0brz3ibr/lbQiHD9jzt4lccJw==}
 
   get-uri@6.0.5:
     resolution: {integrity: sha512-b1O07XYq8eRuVzBNgJLstU6FYc1tS6wnMtF1I1D9lE8LxZSOGZ7LhxN54yPP6mGw5f2CkXY2BQUL9Fx41qvcIg==}
@@ -4125,8 +4130,8 @@ packages:
   html-escaper@2.0.2:
     resolution: {integrity: sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==}
 
-  html-react-parser@5.2.6:
-    resolution: {integrity: sha512-qcpPWLaSvqXi+TndiHbCa+z8qt0tVzjMwFGFBAa41ggC+ZA5BHaMIeMJla9g3VSp4SmiZb9qyQbmbpHYpIfPOg==}
+  html-react-parser@5.2.7:
+    resolution: {integrity: sha512-WzIAcqQoZoF49J9aev8NBDLz9TJvt2RmipeYA+/5+5x0sWCwFxqKiq0lysieiSA/G6dbUZ6KGGy65Cx2fjie5Q==}
     peerDependencies:
       '@types/react': 0.14 || 15 || 16 || 17 || 18 || 19
       react: 0.14 || 15 || 16 || 17 || 18 || 19
@@ -5123,14 +5128,14 @@ packages:
     resolution: {integrity: sha512-Ghw8JhQFizF0Vjbtp9B0i//+BOkV5OWcQCPpbO0NGOoxV33o+gKDYU0Pr2pGxkIHnqZ+g5mYiXF7GMNgAcDpSg==}
     hasBin: true
 
-  motion-dom@12.23.21:
-    resolution: {integrity: sha512-5xDXx/AbhrfgsQmSE7YESMn4Dpo6x5/DTZ4Iyy4xqDvVHWvFVoV+V2Ri2S/ksx+D40wrZ7gPYiMWshkdoqNgNQ==}
+  motion-dom@12.23.23:
+    resolution: {integrity: sha512-n5yolOs0TQQBRUFImrRfs/+6X4p3Q4n1dUEqt/H58Vx7OW6RF+foWEgmTVDhIWJIMXOuNNL0apKH2S16en9eiA==}
 
   motion-utils@12.23.6:
     resolution: {integrity: sha512-eAWoPgr4eFEOFfg2WjIsMoqJTW6Z8MTUCgn/GZ3VRpClWBdnbjryiA3ZSNLyxCTmCQx4RmYX6jX1iWHbenUPNQ==}
 
-  motion@12.23.22:
-    resolution: {integrity: sha512-iSq6X9vLHbeYwmHvhK//+U74ROaPnZmBuy60XZzqNl0QtZkWfoZyMDHYnpKuWFv0sNMqHgED8aCXk94LCoQPGg==}
+  motion@12.23.24:
+    resolution: {integrity: sha512-Rc5E7oe2YZ72N//S3QXGzbnXgqNrTESv8KKxABR20q2FLch9gHLo0JLyYo2hZ238bZ9Gx6cWhj9VO0IgwbMjCw==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -5218,8 +5223,8 @@ packages:
   node-mock-http@1.0.3:
     resolution: {integrity: sha512-jN8dK25fsfnMrVsEhluUTPkBFY+6ybu7jSB1n+ri/vOGjJxU8J9CZhpSGkHXSkFjtUhbmoncG/YG9ta5Ludqog==}
 
-  node-releases@2.0.23:
-    resolution: {integrity: sha512-cCmFDMSm26S6tQSDpBCg/NR8NENrVPhAJSf+XbxBG4rPFaaonlEoE9wHQmun+cls499TQGSb7ZyPBRlzgKfpeg==}
+  node-releases@2.0.25:
+    resolution: {integrity: sha512-4auku8B/vw5psvTiiN9j1dAOsXvMoGqJuKJcR+dTdqiXEK20mMTk1UEo3HS16LeGQsVG6+qKTPM9u/qQ2LqATA==}
 
   node-stdlib-browser@1.3.1:
     resolution: {integrity: sha512-X75ZN8DCLftGM5iKwoYLA3rjnrAEs97MkzvSd4q2746Tgpg8b8XWiBGiBG4ZpgcAqBgtgPHTiAc8ZMCvZuikDw==}
@@ -5714,8 +5719,8 @@ packages:
     resolution: {integrity: sha512-88JZckqgbfXJaGcDQoTFKRmBwHBF0Ddaxz3PL9Q+vywAJruBY+NdN+ZiKSBe7r/pWtjbt0naZdtH5oNI1X3FLA==}
     engines: {node: '>=14.0.0'}
 
-  react-tooltip@5.29.1:
-    resolution: {integrity: sha512-rmJmEb/p99xWhwmVT7F7riLG08wwKykjHiMGbDPloNJk3tdI73oHsVOwzZ4SRjqMdd5/xwb/4nmz0RcoMfY7Bw==}
+  react-tooltip@5.30.0:
+    resolution: {integrity: sha512-Yn8PfbgQ/wmqnL7oBpz1QiDaLKrzZMdSUUdk7nVeGTwzbxCAJiJzR4VSYW+eIO42F1INt57sPUmpgKv0KwJKtg==}
     peerDependencies:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
@@ -5923,8 +5928,8 @@ packages:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
     hasBin: true
 
-  semver@7.7.2:
-    resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
+  semver@7.7.3:
+    resolution: {integrity: sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -6169,8 +6174,8 @@ packages:
   strnum@1.1.2:
     resolution: {integrity: sha512-vrN+B7DBIoTTZjnPNewwhx6cBA/H+IS7rfW68n7XxC1y7uoiGQBxaKzqucGUgavX15dJgiGztLJ8vxuEzwqBdA==}
 
-  style-to-js@1.1.17:
-    resolution: {integrity: sha512-xQcBGDxJb6jjFCTzvQtfiPn6YvvP2O8U1MDIPNfJQlWMYfktPy+iGsHE7cssjs7y84d9fQaK4UF3RIJaAHSoYA==}
+  style-to-js@1.1.18:
+    resolution: {integrity: sha512-JFPn62D4kJaPTnhFUI244MThx+FEGbi+9dw1b9yBBQ+1CZpV7QAT8kUtJ7b7EUNdHajjF/0x8fT+16oLJoojLg==}
 
   style-to-object@1.0.9:
     resolution: {integrity: sha512-G4qppLgKu/k6FwRpHiGiKPaPTFcG3g4wNVX/Qsfu+RqQM30E7Tyu/TEgxcL9PNLF5pdRLwQdE3YKKf+KF2Dzlw==}
@@ -7873,7 +7878,7 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       '@types/node': 20.7.1
       chalk: 4.1.2
-      collect-v8-coverage: 1.0.2
+      collect-v8-coverage: 1.0.3
       exit: 0.1.2
       glob: 7.2.3
       graceful-fs: 4.2.11
@@ -7907,7 +7912,7 @@ snapshots:
       '@jest/console': 29.7.0
       '@jest/types': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
-      collect-v8-coverage: 1.0.2
+      collect-v8-coverage: 1.0.3
 
   '@jest/test-sequencer@29.7.0':
     dependencies:
@@ -7979,17 +7984,17 @@ snapshots:
 
   '@ledgerhq/devices@8.0.3':
     dependencies:
-      '@ledgerhq/errors': 6.26.0
+      '@ledgerhq/errors': 6.12.6
       '@ledgerhq/logs': 6.13.0
       rxjs: 6.6.7
-      semver: 7.7.2
+      semver: 7.7.3
 
   '@ledgerhq/devices@8.6.1':
     dependencies:
       '@ledgerhq/errors': 6.26.0
       '@ledgerhq/logs': 6.13.0
       rxjs: 7.8.2
-      semver: 7.7.2
+      semver: 7.7.3
 
   '@ledgerhq/errors@6.12.6': {}
 
@@ -8049,7 +8054,7 @@ snapshots:
   '@multiversx/sdk-bls-wasm@0.3.5':
     optional: true
 
-  '@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)':
+  '@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)':
     dependencies:
       '@multiversx/sdk-transaction-decoder': 1.0.2
       '@noble/ed25519': 1.7.3
@@ -8073,10 +8078,10 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@multiversx/sdk-dapp-ui@0.0.35(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@multiversx/sdk-dapp-ui@0.0.36(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
-      '@stencil/core': 4.38.0
-      '@stencil/react-output-target': 1.2.0(@stencil/core@4.38.0)(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@stencil/core': 4.38.1
+      '@stencil/react-output-target': 1.2.0(@stencil/core@4.38.1)(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       classnames: 2.5.1
       lodash.capitalize: 4.2.1
       lodash.inrange: 3.3.6
@@ -8087,18 +8092,18 @@ snapshots:
       - react
       - react-dom
 
-  '@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)':
+  '@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)':
     dependencies:
-      '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
+      '@multiversx/sdk-core': 15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       bignumber.js: 9.3.1
 
   '@multiversx/sdk-dapp@5.2.6(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)(zod@3.22.4)':
     dependencies:
       '@lifeomic/axios-fetch': 3.0.1
-      '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
-      '@multiversx/sdk-dapp-utils': 3.0.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)
-      '@multiversx/sdk-extension-provider': 5.1.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))
-      '@multiversx/sdk-hw-provider': 8.1.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))
+      '@multiversx/sdk-core': 15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
+      '@multiversx/sdk-dapp-utils': 3.0.2(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)
+      '@multiversx/sdk-extension-provider': 5.1.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
+      '@multiversx/sdk-hw-provider': 8.1.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
       '@multiversx/sdk-native-auth-client': 2.0.1(axios@1.10.0)
       '@multiversx/sdk-wallet-connect-provider': 6.1.2(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(typescript@5.2.2)(zod@3.22.4)
       '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))
@@ -8119,7 +8124,7 @@ snapshots:
       socket.io-client: 4.7.5
       zustand: 4.4.7(@types/react@18.2.23)(immer@10.1.1)(react@18.2.0)
     optionalDependencies:
-      '@multiversx/sdk-dapp-ui': 0.0.35(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@multiversx/sdk-dapp-ui': 0.0.36(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -8149,11 +8154,11 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@multiversx/sdk-extension-provider@5.1.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))':
+  '@multiversx/sdk-extension-provider@5.1.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
     dependencies:
-      '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
+      '@multiversx/sdk-core': 15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
 
-  '@multiversx/sdk-hw-provider@8.1.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))':
+  '@multiversx/sdk-hw-provider@8.1.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
     dependencies:
       '@ledgerhq/devices': 8.0.3
       '@ledgerhq/errors': 6.12.6
@@ -8161,7 +8166,7 @@ snapshots:
       '@ledgerhq/hw-transport-web-ble': 6.28.6
       '@ledgerhq/hw-transport-webhid': 6.28.6
       '@ledgerhq/hw-transport-webusb': 6.28.6
-      '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
+      '@multiversx/sdk-core': 15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       buffer: 6.0.3
       platform: 1.3.6
 
@@ -8204,28 +8209,28 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))':
+  '@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
     dependencies:
-      '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
+      '@multiversx/sdk-core': 15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       qs: 6.11.2
 
-  '@multiversx/sdk-web-wallet-iframe-provider@4.0.0(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
+  '@multiversx/sdk-web-wallet-iframe-provider@4.0.0(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
     dependencies:
-      '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
-      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))
+      '@multiversx/sdk-core': 15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
+      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
       '@types/jest': 29.5.14
       '@types/qs': 6.9.10
       qs: 6.11.2
 
-  '@multiversx/sdk-web-wallet-provider@5.1.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))':
+  '@multiversx/sdk-web-wallet-provider@5.1.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
     dependencies:
-      '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
+      '@multiversx/sdk-core': 15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       qs: 6.10.3
 
-  '@multiversx/sdk-webview-provider@3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
+  '@multiversx/sdk-webview-provider@3.2.3(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
     dependencies:
-      '@multiversx/sdk-core': 15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4)
-      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.2.0(bignumber.js@9.3.1)(protobufjs@7.5.4))
+      '@multiversx/sdk-core': 15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
+      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.2.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
 
   '@noble/ciphers@1.3.0': {}
 
@@ -8375,6 +8380,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.2.2
     transitivePeerDependencies:
+      - bare-abort-controller
       - react-native-b4a
       - supports-color
 
@@ -8388,6 +8394,7 @@ snapshots:
       unbzip2-stream: 1.4.3
       yargs: 17.7.2
     transitivePeerDependencies:
+      - bare-abort-controller
       - react-native-b4a
       - supports-color
 
@@ -8539,7 +8546,7 @@ snapshots:
 
   '@socket.io/component-emitter@3.1.2': {}
 
-  '@stencil/core@4.38.0':
+  '@stencil/core@4.38.1':
     optionalDependencies:
       '@rollup/rollup-darwin-arm64': 4.34.9
       '@rollup/rollup-darwin-x64': 4.34.9
@@ -8550,11 +8557,11 @@ snapshots:
       '@rollup/rollup-win32-arm64-msvc': 4.34.9
       '@rollup/rollup-win32-x64-msvc': 4.34.9
 
-  '@stencil/react-output-target@1.2.0(@stencil/core@4.38.0)(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@stencil/react-output-target@1.2.0(@stencil/core@4.38.1)(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@lit/react': 1.0.8(@types/react@18.2.23)
-      '@stencil/core': 4.38.0
-      html-react-parser: 5.2.6(@types/react@18.2.23)(react@18.2.0)
+      '@stencil/core': 4.38.1
+      html-react-parser: 5.2.7(@types/react@18.2.23)(react@18.2.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-style-stringify: 1.2.0
@@ -9145,7 +9152,7 @@ snapshots:
     dependencies:
       '@types/react': 18.2.23
 
-  '@types/react-dom@19.2.0(@types/react@18.2.23)':
+  '@types/react-dom@19.2.2(@types/react@18.2.23)':
     dependencies:
       '@types/react': 18.2.23
 
@@ -9210,7 +9217,7 @@ snapshots:
       graphemer: 1.4.0
       ignore: 5.3.2
       natural-compare: 1.4.0
-      semver: 7.7.2
+      semver: 7.7.3
       ts-api-utils: 1.4.3(typescript@5.2.2)
     optionalDependencies:
       typescript: 5.2.2
@@ -9256,7 +9263,7 @@ snapshots:
       debug: 4.4.3(supports-color@8.1.1)
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.7.2
+      semver: 7.7.3
       ts-api-utils: 1.4.3(typescript@5.2.2)
     optionalDependencies:
       typescript: 5.2.2
@@ -9272,7 +9279,7 @@ snapshots:
       '@typescript-eslint/types': 6.7.0
       '@typescript-eslint/typescript-estree': 6.7.0(typescript@5.2.2)
       eslint: 8.50.0
-      semver: 7.7.2
+      semver: 7.7.3
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -9608,6 +9615,7 @@ snapshots:
       webdriverio: 8.33.1(typescript@5.2.2)
       yargs: 17.7.2
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - devtools
@@ -9634,6 +9642,7 @@ snapshots:
       glob: 10.4.5
       import-meta-resolve: 4.2.0
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - react-native-b4a
       - supports-color
@@ -9648,6 +9657,7 @@ snapshots:
       glob: 10.4.5
       import-meta-resolve: 4.2.0
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - react-native-b4a
       - supports-color
@@ -9657,6 +9667,7 @@ snapshots:
       expect-webdriverio: 4.15.4(typescript@5.2.2)
       webdriverio: 8.32.4(typescript@5.2.2)
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - devtools
@@ -9671,6 +9682,7 @@ snapshots:
       expect-webdriverio: 4.15.4(typescript@5.2.2)
       webdriverio: 8.33.1(typescript@5.2.2)
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - devtools
@@ -9691,6 +9703,7 @@ snapshots:
       split2: 4.2.0
       stream-buffers: 3.0.3
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - devtools
@@ -9731,6 +9744,7 @@ snapshots:
       '@wdio/utils': 8.32.4
       mocha: 10.8.2
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - react-native-b4a
       - supports-color
@@ -9763,6 +9777,7 @@ snapshots:
       webdriver: 8.32.4
       webdriverio: 8.32.4(typescript@5.2.2)
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - devtools
@@ -9800,6 +9815,7 @@ snapshots:
       split2: 4.2.0
       wait-port: 1.1.0
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - react-native-b4a
       - supports-color
@@ -9820,11 +9836,12 @@ snapshots:
       split2: 4.2.0
       wait-port: 1.1.0
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - react-native-b4a
       - supports-color
 
-  '@zip.js/zip.js@2.8.7': {}
+  '@zip.js/zip.js@2.8.8': {}
 
   abab@2.0.6: {}
 
@@ -9930,6 +9947,7 @@ snapshots:
       tar-stream: 3.1.7
       zip-stream: 5.0.2
     transitivePeerDependencies:
+      - bare-abort-controller
       - react-native-b4a
 
   archiver@7.0.1:
@@ -9942,6 +9960,7 @@ snapshots:
       tar-stream: 3.1.7
       zip-stream: 6.0.1
     transitivePeerDependencies:
+      - bare-abort-controller
       - react-native-b4a
 
   arg@4.1.3: {}
@@ -10049,7 +10068,7 @@ snapshots:
   autoprefixer@10.4.16(postcss@8.4.30):
     dependencies:
       browserslist: 4.26.3
-      caniuse-lite: 1.0.30001748
+      caniuse-lite: 1.0.30001751
       fraction.js: 4.3.7
       normalize-range: 0.1.2
       picocolors: 1.1.1
@@ -10135,16 +10154,17 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  bare-events@2.7.0: {}
+  bare-events@2.8.0: {}
 
-  bare-fs@4.4.5:
+  bare-fs@4.4.11:
     dependencies:
-      bare-events: 2.7.0
+      bare-events: 2.8.0
       bare-path: 3.0.0
-      bare-stream: 2.7.0(bare-events@2.7.0)
-      bare-url: 2.2.2
+      bare-stream: 2.7.0(bare-events@2.8.0)
+      bare-url: 2.3.0
       fast-fifo: 1.3.2
     transitivePeerDependencies:
+      - bare-abort-controller
       - react-native-b4a
     optional: true
 
@@ -10156,16 +10176,17 @@ snapshots:
       bare-os: 3.6.2
     optional: true
 
-  bare-stream@2.7.0(bare-events@2.7.0):
+  bare-stream@2.7.0(bare-events@2.8.0):
     dependencies:
       streamx: 2.23.0
     optionalDependencies:
-      bare-events: 2.7.0
+      bare-events: 2.8.0
     transitivePeerDependencies:
+      - bare-abort-controller
       - react-native-b4a
     optional: true
 
-  bare-url@2.2.2:
+  bare-url@2.3.0:
     dependencies:
       bare-path: 3.0.0
     optional: true
@@ -10176,7 +10197,7 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  baseline-browser-mapping@2.8.12: {}
+  baseline-browser-mapping@2.8.16: {}
 
   basic-ftp@5.0.5: {}
 
@@ -10297,10 +10318,10 @@ snapshots:
 
   browserslist@4.26.3:
     dependencies:
-      baseline-browser-mapping: 2.8.12
-      caniuse-lite: 1.0.30001748
-      electron-to-chromium: 1.5.230
-      node-releases: 2.0.23
+      baseline-browser-mapping: 2.8.16
+      caniuse-lite: 1.0.30001751
+      electron-to-chromium: 1.5.237
+      node-releases: 2.0.25
       update-browserslist-db: 1.1.3(browserslist@4.26.3)
 
   bs-logger@0.2.6:
@@ -10480,7 +10501,7 @@ snapshots:
 
   code-block-writer@13.0.3: {}
 
-  collect-v8-coverage@1.0.2: {}
+  collect-v8-coverage@1.0.3: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -10872,7 +10893,7 @@ snapshots:
   edgedriver@5.6.1:
     dependencies:
       '@wdio/logger': 8.38.0
-      '@zip.js/zip.js': 2.8.7
+      '@zip.js/zip.js': 2.8.8
       decamelize: 6.0.1
       edge-paths: 3.0.5
       fast-xml-parser: 4.5.3
@@ -10883,7 +10904,7 @@ snapshots:
     dependencies:
       jake: 10.9.4
 
-  electron-to-chromium@1.5.230: {}
+  electron-to-chromium@1.5.237: {}
 
   elliptic@6.6.1:
     dependencies:
@@ -11162,7 +11183,7 @@ snapshots:
       eslint-module-utils: 2.12.1(@typescript-eslint/parser@6.7.0(eslint@8.50.0)(typescript@5.2.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.50.0)
       eslint-plugin-import: 2.28.1(@typescript-eslint/parser@6.7.0(eslint@8.50.0)(typescript@5.2.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.50.0)
       fast-glob: 3.3.3
-      get-tsconfig: 4.10.1
+      get-tsconfig: 4.12.0
       is-core-module: 2.16.1
       is-glob: 4.0.3
     transitivePeerDependencies:
@@ -11362,7 +11383,9 @@ snapshots:
 
   events-universal@1.0.1:
     dependencies:
-      bare-events: 2.7.0
+      bare-events: 2.8.0
+    transitivePeerDependencies:
+      - bare-abort-controller
 
   events@3.3.0: {}
 
@@ -11416,10 +11439,11 @@ snapshots:
       jest-matcher-utils: 29.7.0
       lodash.isequal: 4.5.0
     optionalDependencies:
-      '@wdio/globals': 8.33.1(typescript@5.2.2)
+      '@wdio/globals': 8.32.4(typescript@5.2.2)
       '@wdio/logger': 8.28.0
-      webdriverio: 8.33.1(typescript@5.2.2)
+      webdriverio: 8.32.4(typescript@5.2.2)
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - devtools
@@ -11445,7 +11469,7 @@ snapshots:
 
   extract-zip@2.0.1:
     dependencies:
-      debug: 4.4.3(supports-color@8.1.1)
+      debug: 4.3.4
       get-stream: 5.2.0
       yauzl: 2.10.0
     optionalDependencies:
@@ -11567,9 +11591,9 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  framer-motion@12.23.24(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      motion-dom: 12.23.21
+      motion-dom: 12.23.23
       motion-utils: 12.23.6
       tslib: 2.8.1
     optionalDependencies:
@@ -11631,7 +11655,7 @@ snapshots:
   geckodriver@4.5.1:
     dependencies:
       '@wdio/logger': 9.18.0
-      '@zip.js/zip.js': 2.8.7
+      '@zip.js/zip.js': 2.8.8
       decamelize: 6.0.1
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
@@ -11639,6 +11663,7 @@ snapshots:
       tar-fs: 3.1.1
       which: 4.0.0
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - react-native-b4a
       - supports-color
@@ -11687,7 +11712,7 @@ snapshots:
       es-errors: 1.3.0
       get-intrinsic: 1.3.0
 
-  get-tsconfig@4.10.1:
+  get-tsconfig@4.12.0:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
@@ -11695,7 +11720,7 @@ snapshots:
     dependencies:
       basic-ftp: 5.0.5
       data-uri-to-buffer: 6.0.2
-      debug: 4.4.3(supports-color@8.1.1)
+      debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
 
@@ -11879,13 +11904,13 @@ snapshots:
 
   html-escaper@2.0.2: {}
 
-  html-react-parser@5.2.6(@types/react@18.2.23)(react@18.2.0):
+  html-react-parser@5.2.7(@types/react@18.2.23)(react@18.2.0):
     dependencies:
       domhandler: 5.0.3
       html-dom-parser: 5.1.1
       react: 18.2.0
       react-property: 2.0.2
-      style-to-js: 1.1.17
+      style-to-js: 1.1.18
     optionalDependencies:
       '@types/react': 18.2.23
 
@@ -12201,7 +12226,7 @@ snapshots:
       '@babel/parser': 7.28.4
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
-      semver: 7.7.2
+      semver: 7.7.3
     transitivePeerDependencies:
       - supports-color
 
@@ -12491,7 +12516,7 @@ snapshots:
       '@types/node': 20.7.1
       chalk: 4.1.2
       cjs-module-lexer: 1.4.3
-      collect-v8-coverage: 1.0.2
+      collect-v8-coverage: 1.0.3
       glob: 7.2.3
       graceful-fs: 4.2.11
       jest-haste-map: 29.7.0
@@ -12527,7 +12552,7 @@ snapshots:
       jest-util: 29.7.0
       natural-compare: 1.4.0
       pretty-format: 29.7.0
-      semver: 7.7.2
+      semver: 7.7.3
     transitivePeerDependencies:
       - supports-color
 
@@ -12916,7 +12941,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.7.2
+      semver: 7.7.3
 
   make-error@1.3.6: {}
 
@@ -13044,15 +13069,15 @@ snapshots:
       validator: 13.15.15
       yargs: 17.7.2
 
-  motion-dom@12.23.21:
+  motion-dom@12.23.23:
     dependencies:
       motion-utils: 12.23.6
 
   motion-utils@12.23.6: {}
 
-  motion@12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  motion@12.23.24(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      framer-motion: 12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      framer-motion: 12.23.24(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       tslib: 2.8.1
     optionalDependencies:
       react: 18.2.0
@@ -13111,7 +13136,7 @@ snapshots:
 
   node-mock-http@1.0.3: {}
 
-  node-releases@2.0.23: {}
+  node-releases@2.0.25: {}
 
   node-stdlib-browser@1.3.1:
     dependencies:
@@ -13146,7 +13171,7 @@ snapshots:
   normalize-package-data@6.0.2:
     dependencies:
       hosted-git-info: 7.0.2
-      semver: 7.7.2
+      semver: 7.7.3
       validate-npm-package-license: 3.0.4
 
   normalize-path@3.0.0: {}
@@ -13318,7 +13343,7 @@ snapshots:
     dependencies:
       '@tootallnate/quickjs-emscripten': 0.23.0
       agent-base: 7.1.4
-      debug: 4.4.3(supports-color@8.1.1)
+      debug: 4.3.4
       get-uri: 6.0.5
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
@@ -13537,7 +13562,7 @@ snapshots:
   proxy-agent@6.3.0:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.3(supports-color@8.1.1)
+      debug: 4.3.4
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
       lru-cache: 7.18.3
@@ -13550,7 +13575,7 @@ snapshots:
   proxy-agent@6.3.1:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.3(supports-color@8.1.1)
+      debug: 4.3.4
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
       lru-cache: 7.18.3
@@ -13595,6 +13620,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.2.2
     transitivePeerDependencies:
+      - bare-abort-controller
       - bufferutil
       - encoding
       - react-native-b4a
@@ -13663,9 +13689,9 @@ snapshots:
 
   react-is@18.3.1: {}
 
-  react-modal-sheet@4.4.0(motion@12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0):
+  react-modal-sheet@4.4.0(motion@12.23.24(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0):
     dependencies:
-      motion: 12.23.22(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      motion: 12.23.24(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       react: 18.2.0
 
   react-property@2.0.2: {}
@@ -13688,7 +13714,7 @@ snapshots:
     dependencies:
       '@emotion/unitless': 0.10.0
 
-  react-tooltip@5.29.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-tooltip@5.30.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       '@floating-ui/dom': 1.7.4
       classnames: 2.3.2
@@ -13934,7 +13960,7 @@ snapshots:
 
   semver@6.3.1: {}
 
-  semver@7.7.2: {}
+  semver@7.7.3: {}
 
   serialize-error@11.0.3:
     dependencies:
@@ -14048,7 +14074,7 @@ snapshots:
   socks-proxy-agent@8.0.5:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.4.3(supports-color@8.1.1)
+      debug: 4.3.4
       socks: 2.8.7
     transitivePeerDependencies:
       - supports-color
@@ -14128,6 +14154,7 @@ snapshots:
       fast-fifo: 1.3.2
       text-decoder: 1.2.3
     transitivePeerDependencies:
+      - bare-abort-controller
       - react-native-b4a
 
   strict-uri-encode@2.0.0: {}
@@ -14225,11 +14252,11 @@ snapshots:
 
   strnum@1.1.2: {}
 
-  style-to-js@1.1.17:
+  style-to-js@1.1.18:
     dependencies:
-      style-to-object: 1.0.9
+      style-to-object: 1.0.11
 
-  style-to-object@1.0.9:
+  style-to-object@1.0.11:
     dependencies:
       inline-style-parser: 0.2.4
 
@@ -14278,6 +14305,7 @@ snapshots:
       pump: 3.0.3
       tar-stream: 3.1.7
     transitivePeerDependencies:
+      - bare-abort-controller
       - react-native-b4a
 
   tar-fs@3.1.1:
@@ -14285,9 +14313,10 @@ snapshots:
       pump: 3.0.3
       tar-stream: 3.1.7
     optionalDependencies:
-      bare-fs: 4.4.5
+      bare-fs: 4.4.11
       bare-path: 3.0.0
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - react-native-b4a
 
@@ -14297,6 +14326,7 @@ snapshots:
       fast-fifo: 1.3.2
       streamx: 2.23.0
     transitivePeerDependencies:
+      - bare-abort-controller
       - react-native-b4a
 
   tar@7.5.1:
@@ -14406,7 +14436,7 @@ snapshots:
       json5: 2.2.3
       lodash.memoize: 4.1.2
       make-error: 1.3.6
-      semver: 7.7.2
+      semver: 7.7.3
       typescript: 5.2.2
       yargs-parser: 21.1.1
     optionalDependencies:
@@ -14761,6 +14791,7 @@ snapshots:
       ky: 0.33.3
       ws: 8.18.3
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - react-native-b4a
@@ -14781,6 +14812,7 @@ snapshots:
       ky: 0.33.3
       ws: 8.18.3
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - react-native-b4a
@@ -14814,6 +14846,7 @@ snapshots:
       serialize-error: 11.0.3
       webdriver: 8.32.4
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - encoding
@@ -14849,6 +14882,7 @@ snapshots:
       serialize-error: 11.0.3
       webdriver: 8.33.1
     transitivePeerDependencies:
+      - bare-abort-controller
       - bare-buffer
       - bufferutil
       - encoding

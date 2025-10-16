@@ -42,7 +42,7 @@
     "run-playwright-test": "playwright test",
     "run-playwright-test-ui": "playwright test --ui",
     "run-playwright-test-grep": "playwright test --grep \"$npm_config_grep\"",
-    "run-synpress": "npx synpress"
+    "run-synpress": "synpress"
   },
   "browserslist": [
     ">0.2%",
