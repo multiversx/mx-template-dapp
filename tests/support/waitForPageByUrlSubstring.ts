@@ -7,11 +7,20 @@ import {
 
 const getPagesSafely = async (page: Page): Promise<Page[]> => {
   try {
-    // Check if context is still valid before accessing pages
-    if (!page.context().browser()?.isConnected()) {
+    const context = page.context();
+    if (!context) {
+      throw new Error('Page context is null or undefined');
+    }
+
+    const browser = context.browser();
+    if (!browser) {
+      console.log('Browser is undefined, but attempting to get pages anyway');
+      // Try to get pages even if browser is undefined
+    } else if (!browser.isConnected()) {
       throw new Error('Browser context is closed or disconnected');
     }
-    return await page.context().pages();
+
+    return await context.pages();
   } catch (error) {
     throw new Error(
       'Browser context is closed or invalid. Cannot access pages. ' +
@@ -47,6 +56,7 @@ export const waitForPageByUrlSubstring = async ({
   urlSubstring,
   timeout = TEST_CONSTANTS.PAGE_WAIT_TIMEOUT
 }: WaitForPageByUrlSubstringType) => {
+  console.log(`waitForPageByUrlSubstring called for: ${urlSubstring}`);
   const startTime = Date.now();
   const searchInterval = 100; // Check every 100ms
 
@@ -54,19 +64,35 @@ export const waitForPageByUrlSubstring = async ({
   while (Date.now() - startTime < timeout) {
     try {
       // Check if the original page context is still valid
-      if (!page.context().browser()?.isConnected()) {
+      const context = page.context();
+      if (!context) {
+        throw new Error('Page context is null or undefined');
+      }
+
+      const browser = context.browser();
+      if (browser && !browser.isConnected()) {
         throw new Error('Original page context is closed or disconnected');
       }
 
       const allPages = await getPagesSafely(page);
+      console.log(
+        `Found ${allPages.length} pages, looking for: ${urlSubstring}`
+      );
+      const pageUrls = allPages.map((p) => p.url());
+      console.log('Available page URLs:', pageUrls);
+
       const foundPage = findPageByUrl(allPages, urlSubstring);
 
       if (foundPage) {
+        console.log(`Found matching page: ${foundPage.url()}`);
         return foundPage;
       }
     } catch (error) {
       // If context is closed, throw immediately instead of continuing the loop
-      if (error.message.includes('closed') || error.message.includes('disconnected')) {
+      if (
+        error.message.includes('closed') ||
+        error.message.includes('disconnected')
+      ) {
         throw error;
       }
       // For other errors, log and continue
