@@ -1,6 +1,5 @@
-import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-import { useGetPingTransaction } from '../useGetPingTransaction';
+import { getPingTransaction } from '../getPingTransaction';
 
 const pingTransaction = {
   nonce: 10705,
@@ -20,18 +19,24 @@ describe('useGetPingTransaction', () => {
       data: pingTransaction
     });
 
-    const { result } = renderHook(() => useGetPingTransaction());
-    const transactionReceived = await result.current();
-
-    expect(transactionReceived).toBe(pingTransaction);
+    const transactionReceived = await getPingTransaction();
+    expect(transactionReceived?.toPlainObject()).toEqual({
+      ...pingTransaction,
+      guardian: undefined,
+      guardianSignature: undefined,
+      options: undefined,
+      receiverUsername: undefined,
+      relayer: undefined,
+      relayerSignature: undefined,
+      senderUsername: undefined,
+      signature: undefined
+    });
   });
 
   it('should return null', async () => {
     jest.spyOn(axios, 'post').mockRejectedValueOnce(new Error('error'));
 
-    const { result } = renderHook(() => useGetPingTransaction());
-    const transactionReceived = await result.current();
-
+    const transactionReceived = await getPingTransaction();
     expect(transactionReceived).toBeNull();
   });
 });

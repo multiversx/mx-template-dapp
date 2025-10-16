@@ -5,7 +5,7 @@ import {
   useGetPingTransaction,
   useGetPongTransaction,
   useGetTimeToPong
-} from './hooks';
+} from './helpers';
 
 // The transactions are being done by directly requesting to template-dapp service
 export const PingPongService = () => {
