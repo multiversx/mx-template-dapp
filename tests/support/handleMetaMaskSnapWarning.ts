@@ -15,7 +15,9 @@ export const handleMetaMaskSnapWarning = async (
     });
 
     // console log available pages
-    console.log('Available pages:', await modalPage.context().pages());
+    const pages = await modalPage.context().pages();
+    const pageUrls = pages.map((p) => p.url());
+    console.log('Available pages:', pageUrls);
 
     // Wait for the modal page to be ready
     await modalPage.waitForLoadState('networkidle');

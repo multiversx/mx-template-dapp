@@ -67,13 +67,25 @@ test.describe('Connect a wallet', () => {
       extensionId
     }) => {
       // Create a new MetaMask instance
-      new MetaMask(context, metamaskPage, METAMASK_PASSWORD, extensionId);
+      const metamask = new MetaMask(
+        context,
+        metamaskPage,
+        METAMASK_PASSWORD,
+        extensionId
+      );
 
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
 
       // Handle MetaMask Snap privacy warning if it appears
-      await TestActions.handleMetaMaskSnapWarning(page, 15000);
+      // await TestActions.handleMetaMaskSnapWarning(page, 15000);
+
+      // Connect MetaMask to the dapp (this handles the MetaMask approval popup)
+      await metamask.connectToDapp();
+
+      await metamask.approveNewNetwork();
+
+      await metamask.approveSwitchNetwork();
 
       // Switch to web wallet page
       const walletPage = await TestActions.waitForPageByUrlSubstring({
