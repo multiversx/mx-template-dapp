@@ -22,18 +22,24 @@ export const handleMetaMaskSnapWarning = async (
     // Wait for the modal page to be ready
     await modalPage.waitForLoadState('networkidle');
 
+    // Wait for the modal page to be ready
+    await modalPage.waitForLoadState('domcontentloaded');
+
+    // Wait for the modal page to be ready
+    await modalPage.waitForLoadState('load');
+
     // Check for privacy warning and handle it
     try {
-      // Check if the context is still valid
-      if (modalPage.context().browser()?.isConnected() === false) {
-        console.log('Browser context is closed, skipping MetaMask interaction');
-        return false;
-      }
+      // Take screenshot of the modal page
+      await modalPage.screenshot();
 
       // Click the snap privacy warning scroll down button
       await modalPage
         .getByTestId(SelectorsEnum.snapPrivacyWarningScroll)
         .click({ timeout: 10000 });
+
+      // Take screenshot of the modal page
+      await modalPage.screenshot();
 
       await modalPage
         .getByRole('button', {
@@ -41,11 +47,18 @@ export const handleMetaMaskSnapWarning = async (
         })
         .click({ timeout: 10000 });
 
+      // Take screenshot of the modal page
+      await modalPage.screenshot();
+
+      // Click the Accept button
       await modalPage
         .getByRole('button', {
           name: 'Connect'
         })
         .click({ timeout: 10000 });
+
+      // Take screenshot of the modal page
+      await modalPage.screenshot();
 
       await modalPage
         .getByRole('button', {

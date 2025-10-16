@@ -49,6 +49,9 @@ export const waitForPageByUrlSubstring = async ({
   // Search for the page by URL substring
   while (Date.now() - startTime < timeout) {
     const allPages = await getPagesSafely(page);
+    const pageUrls = allPages.map((p) => getPageUrlSafely(p));
+    console.log(`Found ${allPages.length} pages, looking for: ${urlSubstring}`);
+    console.log('Available pages:', pageUrls);
     const foundPage = findPageByUrl(allPages, urlSubstring);
 
     if (foundPage) {
