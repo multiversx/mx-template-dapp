@@ -20,49 +20,49 @@ export const handleMetaMaskSnapWarning = async (
       // Click the snap privacy warning scroll down button
       await notificationPage
         .getByTestId(SelectorsEnum.snapPrivacyWarningScroll)
-        .click();
+        .click({ timeout: 10000 });
 
       await notificationPage
         .getByRole('button', {
           name: 'Accept'
         })
-        .click();
+        .click({ timeout: 10000 });
 
       await notificationPage
         .getByRole('button', {
           name: 'Connect'
         })
-        .click();
+        .click({ timeout: 10000 });
 
       await notificationPage
         .getByRole('button', {
           name: 'Install'
         })
-        .click();
+        .click({ timeout: 10000 });
 
       await notificationPage
         .getByRole('checkbox', {
           name: 'MultiversX'
         })
-        .click();
+        .click({ timeout: 10000 });
 
       await notificationPage
         .getByRole('button', {
           name: 'Confirm'
         })
-        .click();
+        .click({ timeout: 10000 });
 
       await notificationPage
         .getByRole('button', {
           name: 'Ok'
         })
-        .click();
+        .click({ timeout: 10000 });
 
       await notificationPage
         .getByRole('button', {
           name: 'Approve'
         })
-        .click();
+        .click({ timeout: 10000 });
 
       console.log('Successfully handled MetaMask Snap privacy warning');
       return true;
