@@ -9,7 +9,7 @@ const clickAndRefreshPage = async (
   metamaskPage: Page,
   clickAction: () => Promise<void>,
   actionName: string,
-  timeout: number = 5000
+  timeout: number = 10000
 ): Promise<Page> => {
   try {
     console.log(`Executing action: ${actionName}`);
@@ -59,7 +59,7 @@ export const handleMetaMaskSnapApproval = async (
           // Wait for element to be visible and clickable before clicking
           if (action.type === 'testId') {
             const element = currentPage.getByTestId(action.name);
-            await element.waitFor({ state: 'visible', timeout: 10000 });
+            await element.waitFor({ state: 'visible', timeout });
             await element.click();
             return;
           }
@@ -68,7 +68,7 @@ export const handleMetaMaskSnapApproval = async (
             const element = currentPage.getByRole('checkbox', {
               name: action.name
             });
-            await element.waitFor({ state: 'visible', timeout: 10000 });
+            await element.waitFor({ state: 'visible', timeout });
             await element.click();
             return;
           }
@@ -76,18 +76,12 @@ export const handleMetaMaskSnapApproval = async (
           const element = currentPage.getByRole('button', {
             name: action.name
           });
-          await element.waitFor({ state: 'visible', timeout: 10000 });
+          await element.waitFor({ state: 'visible', timeout });
           await element.click();
         },
         `${action.type}: ${action.name}`,
         timeout
       );
-
-      // Add a small delay after "Confirm" to allow the next button to become enabled
-      if (action.name === 'Confirm') {
-        console.log('Waiting for UI to update after Confirm...');
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-      }
     }
 
     console.log('Successfully handled MetaMask Snap privacy warning');
