@@ -37,10 +37,9 @@ test.describe('Connect a wallet', () => {
       extensionId
     }) => {
       // Debug: Check context validity before starting
-      console.log(
-        'Test started - Context valid:',
-        context.browser()?.isConnected()
-      );
+      const browser = context.browser();
+      console.log('Test started - Browser exists:', !!browser);
+      console.log('Test started - Browser connected:', browser?.isConnected());
       console.log('Test started - Page URL:', page.url());
 
       // Create a new MetaMask instance
@@ -53,27 +52,36 @@ test.describe('Connect a wallet', () => {
       console.log('MetaMask instance created successfully:', !!metamask);
 
       // Debug: Check context validity after MetaMask creation
+      const browserAfter = context.browser();
+      console.log('After MetaMask creation - Browser exists:', !!browserAfter);
       console.log(
-        'After MetaMask creation - Context valid:',
-        context.browser()?.isConnected()
+        'After MetaMask creation - Browser connected:',
+        browserAfter?.isConnected()
       );
 
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
 
       // Debug: Check context validity after clicking MetaMask button
+      const browserAfterClick = context.browser();
       console.log(
-        'After clicking MetaMask button - Context valid:',
-        context.browser()?.isConnected()
+        'After clicking MetaMask button - Browser exists:',
+        !!browserAfterClick
+      );
+      console.log(
+        'After clicking MetaMask button - Browser connected:',
+        browserAfterClick?.isConnected()
       );
 
       // Add a small delay to allow MetaMask to process the click
       await page.waitForTimeout(2000);
 
       // Debug: Check context validity after delay
+      const browserAfterDelay = context.browser();
+      console.log('After delay - Browser exists:', !!browserAfterDelay);
       console.log(
-        'After delay - Context valid:',
-        context.browser()?.isConnected()
+        'After delay - Browser connected:',
+        browserAfterDelay?.isConnected()
       );
 
       // Handle MetaMask Snap privacy warning if it appears

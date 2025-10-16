@@ -4,8 +4,23 @@ import * as TestActions from './index';
 
 const isContextValid = (page: Page): boolean => {
   try {
-    return page.context().browser()?.isConnected() === true;
-  } catch {
+    const context = page.context();
+    if (!context) {
+      console.log('Context is null or undefined');
+      return false;
+    }
+
+    const browser = context.browser();
+    if (!browser) {
+      console.log('Browser is null or undefined');
+      return false;
+    }
+
+    const isConnected = browser.isConnected();
+    console.log('Browser isConnected result:', isConnected);
+    return isConnected === true;
+  } catch (error) {
+    console.log('Error checking context validity:', error);
     return false;
   }
 };
@@ -16,10 +31,19 @@ const safeClick = async (
   timeout: number = 5000
 ): Promise<boolean> => {
   try {
-    if (!isContextValid(page)) {
-      console.log('Context is invalid, skipping click operation');
+    // Try to access the page first
+    try {
+      await page.url();
+    } catch (error) {
+      console.log('Page is not accessible for click operation:', error);
       return false;
     }
+
+    // Check context validity but don't fail if it's undefined
+    if (!isContextValid(page)) {
+      console.log('Context is invalid, but attempting click anyway');
+    }
+
     await selector.click({ timeout });
     return true;
   } catch (error) {
@@ -36,19 +60,24 @@ export const handleMetaMaskSnapWarning = async (
     console.log('handleMetaMaskSnapWarning called with timeout:', timeout);
     console.log('Page URL at start:', page.url());
 
-    // Check if the original page context is still valid
-    if (!isContextValid(page)) {
-      console.log(
-        'Original page context is invalid, skipping MetaMask warning handling'
-      );
-      console.log(
-        'Context browser connected:',
-        page.context().browser()?.isConnected()
-      );
+    // Try to access the page to see if it's still valid
+    try {
+      await page.url(); // This will throw if the page is closed
+      console.log('Page is accessible');
+    } catch (error) {
+      console.log('Page is not accessible:', error);
       return false;
     }
 
-    console.log('Context is valid, proceeding with warning handling');
+    // Check if the original page context is still valid
+    if (!isContextValid(page)) {
+      console.log(
+        'Original page context is invalid, but page is accessible - proceeding with warning handling'
+      );
+      // Don't return false here, try to proceed anyway since the page is accessible
+    } else {
+      console.log('Context is valid, proceeding with warning handling');
+    }
 
     // Wait for the MetaMask notification page (where Snap privacy warning appears)
     const modalPage = await TestActions.waitForPageByUrlSubstring({
