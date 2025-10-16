@@ -7,6 +7,10 @@ import {
 
 const getPagesSafely = async (page: Page): Promise<Page[]> => {
   try {
+    // Check if context is still valid before accessing pages
+    if (!page.context().browser()?.isConnected()) {
+      throw new Error('Browser context is closed or disconnected');
+    }
     return await page.context().pages();
   } catch (error) {
     throw new Error(
@@ -48,11 +52,25 @@ export const waitForPageByUrlSubstring = async ({
 
   // Search for the page by URL substring
   while (Date.now() - startTime < timeout) {
-    const allPages = await getPagesSafely(page);
-    const foundPage = findPageByUrl(allPages, urlSubstring);
+    try {
+      // Check if the original page context is still valid
+      if (!page.context().browser()?.isConnected()) {
+        throw new Error('Original page context is closed or disconnected');
+      }
 
-    if (foundPage) {
-      return foundPage;
+      const allPages = await getPagesSafely(page);
+      const foundPage = findPageByUrl(allPages, urlSubstring);
+
+      if (foundPage) {
+        return foundPage;
+      }
+    } catch (error) {
+      // If context is closed, throw immediately instead of continuing the loop
+      if (error.message.includes('closed') || error.message.includes('disconnected')) {
+        throw error;
+      }
+      // For other errors, log and continue
+      console.log(`Error during page search: ${error}`);
     }
 
     // Wait before next search
