@@ -3,8 +3,8 @@ import { TEST_CONSTANTS } from './constants';
 import { SelectorsEnum } from './testdata';
 import * as TestActions from './index';
 
-// Helper function to click an element and get updated notification page
-const clickAndRefreshPage = async (
+// Helper function to refresh page and then click an element
+const refreshPageAndClick = async (
   page: Page,
   metamaskPage: Page,
   clickAction: () => Promise<void>,
@@ -12,9 +12,7 @@ const clickAndRefreshPage = async (
   timeout: number = 10000
 ): Promise<Page> => {
   try {
-    console.log(`Executing action: ${actionName}`);
-    await clickAction();
-    console.log(`Successfully clicked: ${actionName}`);
+    console.log(`Refreshing page before action: ${actionName}`);
 
     const updatedPage = await TestActions.waitForPageByUrlSubstring({
       page: metamaskPage,
@@ -22,7 +20,10 @@ const clickAndRefreshPage = async (
       timeout
     });
 
-    console.log(`Page refreshed after: ${actionName}`);
+    console.log(`Page refreshed, executing action: ${actionName}`);
+    await clickAction();
+    console.log(`Successfully clicked: ${actionName}`);
+
     return updatedPage;
   } catch (error) {
     console.log(`Failed to execute action ${actionName}:`, error);
@@ -52,7 +53,7 @@ export const handleMetaMaskSnapApproval = async (
     let currentPage = snapApprovalPage;
 
     for (const action of actions) {
-      currentPage = await clickAndRefreshPage(
+      currentPage = await refreshPageAndClick(
         currentPage,
         metamaskPage,
         async () => {
