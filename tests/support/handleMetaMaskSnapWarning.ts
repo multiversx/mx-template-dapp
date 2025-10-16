@@ -98,14 +98,42 @@ export const handleMetaMaskSnapWarning = async (
     // Wait for the modal page to be ready
     await modalPage.waitForLoadState('networkidle');
 
+    // Debug: Check what's available on the modal page
+    console.log('Modal page URL:', modalPage.url());
+    console.log('Modal page title:', await modalPage.title());
+
+    // Check if the snap privacy warning scroll element exists
+    try {
+      const scrollElement = modalPage.getByTestId(
+        SelectorsEnum.snapPrivacyWarningScroll
+      );
+      const isVisible = await scrollElement.isVisible();
+      console.log('Snap privacy warning scroll element visible:', isVisible);
+    } catch (error) {
+      console.log('Could not find snap privacy warning scroll element:', error);
+    }
+
     // Check for privacy warning and handle it
     try {
+      // Try to access the modal page to see if it's still valid
+      try {
+        await modalPage.url(); // This will throw if the page is closed
+        console.log('Modal page is accessible');
+      } catch (error) {
+        console.log('Modal page is not accessible:', error);
+        return false;
+      }
+
       // Check if the context is still valid
       if (!isContextValid(modalPage)) {
         console.log(
-          'Modal page context is invalid, skipping MetaMask interaction'
+          'Modal page context is invalid, but page is accessible - proceeding with MetaMask interaction'
         );
-        return false;
+        // Don't return false here, try to proceed anyway since the page is accessible
+      } else {
+        console.log(
+          'Modal page context is valid, proceeding with MetaMask interaction'
+        );
       }
 
       // Define the sequence of operations with error handling
@@ -147,11 +175,21 @@ export const handleMetaMaskSnapWarning = async (
 
       // Execute operations sequentially with error handling
       for (const operation of operations) {
-        if (!isContextValid(modalPage)) {
+        // Check if modal page is still accessible
+        try {
+          await modalPage.url();
+        } catch (error) {
           console.log(
-            `Context became invalid during ${operation.name}, stopping operations`
+            `Modal page became inaccessible during ${operation.name}, stopping operations`
           );
           return false;
+        }
+
+        // Check context validity but don't fail if it's undefined
+        if (!isContextValid(modalPage)) {
+          console.log(
+            `Context is invalid during ${operation.name}, but attempting operation anyway`
+          );
         }
 
         const success = await safeClick(modalPage, operation.action(), 10000);
