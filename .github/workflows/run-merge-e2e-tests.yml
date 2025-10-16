@@ -63,14 +63,14 @@ jobs:
           command: pnpm install
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
+      - name: Start Xvfb
+        run: Xvfb :99 -screen 0 1024x768x16
+        env:
+          DISPLAY: :99
       - name: Setup Synpress Cache
-        run: Xvfb :99 & pnpm exec synpress tests/test/wallet-setup
-        env:
-          DISPLAY: :99
+        run: pnpm exec synpress tests/test/wallet-setup
       - name: Run Playwright E2E Tests
-        run: Xvfb :99 & pnpm run run-playwright-test
-        env:
-          DISPLAY: :99
+        run: pnpm run run-playwright-test
       - name: Upload Playwright test report
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
