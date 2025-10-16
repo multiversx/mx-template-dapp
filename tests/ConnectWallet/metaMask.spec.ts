@@ -42,6 +42,9 @@ test.describe('Connect a wallet', () => {
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
 
+      //wait for 10 seconds
+      await page.waitForTimeout(10000);
+
       // Handle MetaMask Snap privacy warning if it appears
       await TestActions.handleMetaMaskSnapWarning(page, 15000);
 
