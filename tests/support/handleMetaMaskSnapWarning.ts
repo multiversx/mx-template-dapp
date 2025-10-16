@@ -4,12 +4,13 @@ import * as TestActions from './index';
 
 export const handleMetaMaskSnapWarning = async (
   page: Page,
+  metamaskPage: Page,
   timeout: number = 10000
 ): Promise<boolean> => {
   try {
     // Wait for the MetaMask notification page (where Snap privacy warning appears)
     const notificationPage = await TestActions.waitForPageByUrlSubstring({
-      page,
+      page: metamaskPage,
       urlSubstring: '/notification.html',
       timeout
     });

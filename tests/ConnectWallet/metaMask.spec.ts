@@ -43,7 +43,7 @@ test.describe('Connect a wallet', () => {
       await page.getByTestId('metamask').click();
 
       // Handle MetaMask Snap privacy warning if it appears
-      await TestActions.handleMetaMaskSnapWarning(page, 60000);
+      await TestActions.handleMetaMaskSnapWarning(page, metamaskPage, 60000);
 
       // Switch to web wallet page
       const walletPage = await TestActions.waitForPageByUrlSubstring({
@@ -73,7 +73,7 @@ test.describe('Connect a wallet', () => {
       await page.getByTestId('metamask').click();
 
       // Handle MetaMask Snap privacy warning if it appears
-      await TestActions.handleMetaMaskSnapWarning(page, 15000);
+      await TestActions.handleMetaMaskSnapWarning(page, metamaskPage, 15000);
 
       // Switch to web wallet page
       const walletPage = await TestActions.waitForPageByUrlSubstring({
