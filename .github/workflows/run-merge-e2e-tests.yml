@@ -1,5 +1,5 @@
 name: Playwright merge E2E Tests
-on: 
+on:
   pull_request:
     branches: [main, development]
   workflow_dispatch:
@@ -23,19 +23,19 @@ jobs:
       KEYSTORE1_JSON_B64: ${{ secrets.KEYSTORE1_JSON_B64 }}
       KEYSTORE1_PASSWORD: ${{ secrets.KEYSTORE1_PASSWORD }}
       KEYSTORE1_ADDRESS: ${{ secrets.KEYSTORE1_ADDRESS }}
-      
+
       KEYSTORE2_JSON_B64: ${{ secrets.KEYSTORE2_JSON_B64 }}
       KEYSTORE2_PASSWORD: ${{ secrets.KEYSTORE2_PASSWORD }}
       KEYSTORE2_ADDRESS: ${{ secrets.KEYSTORE2_ADDRESS }}
-      
+
       KEYSTORE3_JSON_B64: ${{ secrets.KEYSTORE3_JSON_B64 }}
       KEYSTORE3_PASSWORD: ${{ secrets.KEYSTORE3_PASSWORD }}
       KEYSTORE3_ADDRESS: ${{ secrets.KEYSTORE3_ADDRESS }}
-      
+
       KEYSTORE4_JSON_B64: ${{ secrets.KEYSTORE4_JSON_B64 }}
       KEYSTORE4_PASSWORD: ${{ secrets.KEYSTORE4_PASSWORD }}
       KEYSTORE4_ADDRESS: ${{ secrets.KEYSTORE4_ADDRESS }}
-      
+
       KEYSTORE5_PEM_B64: ${{ secrets.KEYSTORE5_PEM_B64 }}
       KEYSTORE5_ADDRESS: ${{ secrets.KEYSTORE5_ADDRESS }}
 
@@ -61,12 +61,32 @@ jobs:
           retry_on: error
           max_attempts: 2
           command: pnpm install
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
-      - name: Setup Synpress Cache
-        run: xvfb-run pnpm exec synpress tests/test/wallet-setup
-      - name: Run Playwright E2E Tests
-        run: xvfb-run pnpm run run-playwright-test
+      - name: Prepare Environment and Run E2E Tests
+        run: |
+          # Update and install Chrome/Chromium dependencies
+          sudo apt-get update
+          sudo apt-get install -y \
+            libnss3 libxss1 libasound2 libatk1.0-0 \
+            libatk-bridge2.0-0 libcups2 libdrm2 libgbm1 \
+            libgtk-3-0 libxcomposite1 libxrandr2 \
+            libxdamage1 libxfixes3 libxshmfence1 libxtst6 \
+            libpangocairo-1.0-0
+
+          # Install Playwright browsers (with required system deps)
+          pnpm exec playwright install --with-deps
+
+          # Setup Synpress (runs MetaMask initialization)
+          xvfb-run --auto-servernum --server-args="-screen 0 1280x720x24" \
+            pnpm exec synpress tests/test/wallet-setup
+
+          # Run Playwright E2E tests under Xvfb
+          xvfb-run --auto-servernum --server-args="-screen 0 1280x720x24" \
+            pnpm run run-playwright-test
+        shell: bash
+        env:
+          METAMASK_MNEMONIC: ${{ secrets.METAMASK_MNEMONIC }}
+          METAMASK_PASSWORD: ${{ secrets.METAMASK_PASSWORD }}
+          METAMASK_ADDRESS: ${{ secrets.METAMASK_ADDRESS }}
       - name: Upload Playwright test report
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
@@ -92,4 +112,3 @@ jobs:
       #     SLACK_MESSAGE: 'E2E merge Tests failed!'
       #     SLACK_TITLE: 'Playwright E2E Tests - FAILED'
       #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-
