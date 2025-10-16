@@ -45,11 +45,6 @@ test.describe('Connect a wallet', () => {
       // Handle MetaMask Snap privacy warning if it appears
       await TestActions.handleMetaMaskSnapWarning(page, 60000);
 
-      // console log available pages
-      const pages = await page.context().pages();
-      const pageUrls = pages.map((p) => p.url());
-      console.log('Available pages 2:', pageUrls);
-
       // Switch to web wallet page
       const walletPage = await TestActions.waitForPageByUrlSubstring({
         page,

@@ -41,7 +41,8 @@ const createNotFoundError = ({
 export const waitForPageByUrlSubstring = async ({
   page,
   urlSubstring,
-  timeout = TEST_CONSTANTS.PAGE_WAIT_TIMEOUT
+  timeout = TEST_CONSTANTS.PAGE_WAIT_TIMEOUT,
+  enableLogging = false
 }: WaitForPageByUrlSubstringType) => {
   const startTime = Date.now();
   const searchInterval = 100; // Check every 100ms
@@ -49,9 +50,14 @@ export const waitForPageByUrlSubstring = async ({
   // Search for the page by URL substring
   while (Date.now() - startTime < timeout) {
     const allPages = await getPagesSafely(page);
-    const pageUrls = allPages.map((p) => getPageUrlSafely(p));
-    console.log(`Found ${allPages.length} pages, looking for: ${urlSubstring}`);
-    console.log('Available pages:', pageUrls);
+
+    if (enableLogging) {
+      const pageUrls = allPages.map((p) => getPageUrlSafely(p));
+      console.log(
+        `Found ${allPages.length} pages, looking for: ${urlSubstring}`
+      );
+      console.log('Available pages:', pageUrls);
+    }
     const foundPage = findPageByUrl(allPages, urlSubstring);
 
     if (foundPage) {
