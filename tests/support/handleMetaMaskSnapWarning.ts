@@ -19,36 +19,18 @@ export const handleMetaMaskSnapWarning = async (
     const pageUrls = pages.map((p) => p.url());
     console.log('Available pages 1:', pageUrls);
 
-    // Wait for the modal page to be ready
-    await modalPage.waitForLoadState('networkidle');
-
-    // Wait for the modal page to be ready
-    await modalPage.waitForLoadState('domcontentloaded');
-
-    // Wait for the modal page to be ready
-    await modalPage.waitForLoadState('load');
-
     // Check for privacy warning and handle it
     try {
-      // Take screenshot of the modal page
-      await modalPage.screenshot();
-
       // Click the snap privacy warning scroll down button
       await modalPage
         .getByTestId(SelectorsEnum.snapPrivacyWarningScroll)
         .click({ timeout: 10000 });
-
-      // Take screenshot of the modal page
-      await modalPage.screenshot();
 
       await modalPage
         .getByRole('button', {
           name: 'Accept'
         })
         .click({ timeout: 10000 });
-
-      // Take screenshot of the modal page
-      await modalPage.screenshot();
 
       // Click the Accept button
       await modalPage
