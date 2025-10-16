@@ -8,7 +8,7 @@ export enum OriginPageEnum {
   multiversxWallet = '/devnet-wallet.multiversx.com/',
   localhost = 'localhost:3000',
   templateDashboard = '/dashboard',
-  unlockedPage = '/unlocked'
+  unlockPage = '/unlock'
 }
 
 export enum PingPongEnum {

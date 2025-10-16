@@ -98,11 +98,11 @@ test.describe('Connect a wallet', () => {
       // Switch to web wallet page
       const walletPage = await TestActions.waitForPageByUrlSubstring({
         page,
-        urlSubstring: OriginPageEnum.unlockedPage
+        urlSubstring: OriginPageEnum.unlockPage
       });
 
       // Verify wallet page opened
-      await expect(walletPage).toHaveURL(OriginPageEnum.unlockedPage);
+      await expect(walletPage).toHaveURL(OriginPageEnum.unlockPage);
 
       // Verify connection using TestActions helper
       await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);
