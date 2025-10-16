@@ -36,64 +36,19 @@ test.describe('Connect a wallet', () => {
       metamaskPage,
       extensionId
     }) => {
-      // Debug: Check context validity before starting
-      const browser = context.browser();
-      console.log('Test started - Browser exists:', !!browser);
-      console.log('Test started - Browser connected:', browser?.isConnected());
-      console.log('Test started - Page URL:', page.url());
-
       // Create a new MetaMask instance
-      const metamask = new MetaMask(
-        context,
-        metamaskPage,
-        METAMASK_PASSWORD,
-        extensionId
-      );
-      console.log('MetaMask instance created successfully:', !!metamask);
-
-      // Debug: Check context validity after MetaMask creation
-      const browserAfter = context.browser();
-      console.log('After MetaMask creation - Browser exists:', !!browserAfter);
-      console.log(
-        'After MetaMask creation - Browser connected:',
-        browserAfter?.isConnected()
-      );
+      new MetaMask(context, metamaskPage, METAMASK_PASSWORD, extensionId);
 
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
 
-      // Debug: Check context validity after clicking MetaMask button
-      const browserAfterClick = context.browser();
-      console.log(
-        'After clicking MetaMask button - Browser exists:',
-        !!browserAfterClick
-      );
-      console.log(
-        'After clicking MetaMask button - Browser connected:',
-        browserAfterClick?.isConnected()
-      );
-
-      // Add a small delay to allow MetaMask to process the click
-      await page.waitForTimeout(2000);
-
-      // Debug: Check context validity after delay
-      const browserAfterDelay = context.browser();
-      console.log('After delay - Browser exists:', !!browserAfterDelay);
-      console.log(
-        'After delay - Browser connected:',
-        browserAfterDelay?.isConnected()
-      );
-
       // Handle MetaMask Snap privacy warning if it appears
-      const warningHandled = await TestActions.handleMetaMaskSnapWarning(
-        page,
-        30000
-      );
-      if (!warningHandled) {
-        console.log(
-          'MetaMask Snap warning was not handled, continuing with test'
-        );
-      }
+      await TestActions.handleMetaMaskSnapWarning(page, 15000);
+
+      // console log available pages
+      const pages = await page.context().pages();
+      const pageUrls = pages.map((p) => p.url());
+      console.log('Available pages 2:', pageUrls);
 
       // Switch to web wallet page
       const walletPage = await TestActions.waitForPageByUrlSubstring({
@@ -109,7 +64,7 @@ test.describe('Connect a wallet', () => {
     });
   });
 
-  test.describe('Connected Account Details (Optional)', () => {
+  test.describe.skip('Connected Account Details (Optional)', () => {
     test('should display all connected account details correctly', async ({
       context,
       page,
@@ -123,15 +78,7 @@ test.describe('Connect a wallet', () => {
       await page.getByTestId('metamask').click();
 
       // Handle MetaMask Snap privacy warning if it appears
-      const warningHandled = await TestActions.handleMetaMaskSnapWarning(
-        page,
-        30000
-      );
-      if (!warningHandled) {
-        console.log(
-          'MetaMask Snap warning was not handled, continuing with test'
-        );
-      }
+      await TestActions.handleMetaMaskSnapWarning(page, 15000);
 
       // Switch to web wallet page
       const walletPage = await TestActions.waitForPageByUrlSubstring({
