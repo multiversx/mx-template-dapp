@@ -10,14 +10,14 @@ export const handleMetaMaskSnapWarning = async (
     // Wait for the MetaMask notification page (where Snap privacy warning appears)
     const modalPage = await TestActions.waitForPageByUrlSubstring({
       page,
-      urlSubstring: 'notification.html',
+      urlSubstring: '/notification.html',
       timeout
     });
 
     // console log available pages
     const pages = await modalPage.context().pages();
     const pageUrls = pages.map((p) => p.url());
-    console.log('Available pages:', pageUrls);
+    console.log('Available pages 1:', pageUrls);
 
     // Wait for the modal page to be ready
     await modalPage.waitForLoadState('networkidle');
@@ -33,7 +33,7 @@ export const handleMetaMaskSnapWarning = async (
       // Click the snap privacy warning scroll down button
       await modalPage
         .getByTestId(SelectorsEnum.snapPrivacyWarningScroll)
-        .click({ timeout: 5000 });
+        .click({ timeout: 15000 });
 
       await modalPage
         .getByRole('button', {
