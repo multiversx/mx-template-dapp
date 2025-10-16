@@ -69,8 +69,20 @@ export const handleMetaMaskSnapWarning = async (
         })
         .click({ timeout: 10000 });
 
+      // A new notification page should appear for approve connection
+      const modalPage2 = await TestActions.waitForPageByUrlSubstring({
+        page,
+        urlSubstring: '/notification.html',
+        timeout
+      });
+
+      // console log available pages
+      const pages2 = await modalPage2.context().pages();
+      const pageUrls2 = pages2.map((p) => p.url());
+      console.log('Available pages 2:', pageUrls2);
+
       // click Approve button
-      await modalPage
+      await modalPage2
         .getByRole('button', {
           name: 'Approve'
         })
