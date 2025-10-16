@@ -42,17 +42,17 @@ test.describe('Connect a wallet', () => {
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
 
-      // Handle MetaMask Snap privacy warning if it appears
+      // Handle MetaMask Snap privacy warning
       await TestActions.handleMetaMaskSnapWarning(page, metamaskPage, 60000);
 
-      // Switch to web wallet page
-      const walletPage = await TestActions.waitForPageByUrlSubstring({
+      // Switch to template page
+      const templatePage = await TestActions.waitForPageByUrlSubstring({
         page,
         urlSubstring: OriginPageEnum.unlockPage
       });
 
-      // Verify wallet page opened
-      await expect(walletPage).toHaveURL(OriginPageEnum.unlockPage);
+      // Verify template page opened
+      await expect(templatePage).toHaveURL(OriginPageEnum.unlockPage);
 
       // Verify connection using TestActions helper
       await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);
