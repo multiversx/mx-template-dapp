@@ -24,7 +24,7 @@ export { filterTransactions } from './parseTransactionsTable';
 
 export { getTestIdSelector } from './testIdSelector';
 
-export { handleMetaMaskSnapWarning } from './handleMetaMaskSnapWarning';
+export { handleMetaMaskSnapApproval } from './handleMetaMaskSnapApproval';
 
 export { handlePingPong } from './handlePingPong';
 

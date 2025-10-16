@@ -1,0 +1,99 @@
+import { Page } from '@playwright/test';
+import { TEST_CONSTANTS } from './constants';
+import { SelectorsEnum } from './testdata';
+import * as TestActions from './index';
+
+// Helper function to click an element and get updated notification page
+const clickAndRefreshPage = async (
+  page: Page,
+  metamaskPage: Page,
+  clickAction: () => Promise<void>,
+  actionName: string,
+  timeout: number = 5000
+): Promise<Page> => {
+  try {
+    console.log(`Executing action: ${actionName}`);
+    await clickAction();
+    console.log(`Successfully clicked: ${actionName}`);
+
+    const updatedPage = await TestActions.waitForPageByUrlSubstring({
+      page: metamaskPage,
+      urlSubstring: '/notification.html',
+      timeout
+    });
+
+    console.log(`Page refreshed after: ${actionName}`);
+    return updatedPage;
+  } catch (error) {
+    console.log(`Failed to execute action ${actionName}:`, error);
+    throw error;
+  }
+};
+
+export const handleMetaMaskSnapApproval = async (
+  snapApprovalPage: Page,
+  metamaskPage: Page,
+  timeout: number = TEST_CONSTANTS.PAGE_WAIT_TIMEOUT
+): Promise<boolean> => {
+  try {
+    // Define the sequence of actions to perform on the snap approval page
+    const actions = [
+      { type: 'testId', name: SelectorsEnum.snapPrivacyWarningScroll },
+      { type: 'button', name: 'Accept' },
+      { type: 'button', name: 'Connect' },
+      { type: 'button', name: 'Install' },
+      { type: 'checkbox', name: 'MultiversX' },
+      { type: 'button', name: 'Confirm' },
+      { type: 'button', name: 'Ok' },
+      { type: 'button', name: 'Approve' }
+    ];
+
+    // Execute each action and refresh the snap approval page
+    let currentPage = snapApprovalPage;
+
+    for (const action of actions) {
+      currentPage = await clickAndRefreshPage(
+        currentPage,
+        metamaskPage,
+        async () => {
+          // Wait for element to be visible and clickable before clicking
+          if (action.type === 'testId') {
+            const element = currentPage.getByTestId(action.name);
+            await element.waitFor({ state: 'visible', timeout: 10000 });
+            await element.click();
+            return;
+          }
+
+          if (action.type === 'checkbox') {
+            const element = currentPage.getByRole('checkbox', {
+              name: action.name
+            });
+            await element.waitFor({ state: 'visible', timeout: 10000 });
+            await element.click();
+            return;
+          }
+
+          const element = currentPage.getByRole('button', {
+            name: action.name
+          });
+          await element.waitFor({ state: 'visible', timeout: 10000 });
+          await element.click();
+        },
+        `${action.type}: ${action.name}`,
+        timeout
+      );
+
+      // Add a small delay after "Confirm" to allow the next button to become enabled
+      if (action.name === 'Confirm') {
+        console.log('Waiting for UI to update after Confirm...');
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+    }
+
+    console.log('Successfully handled MetaMask Snap privacy warning');
+    return true;
+  } catch (error) {
+    console.log('No privacy warning found or error clicking:', error);
+    return false;
+  }
+};

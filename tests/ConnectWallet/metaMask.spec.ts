@@ -42,8 +42,17 @@ test.describe('Connect a wallet', () => {
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
 
+      // Wait for MetaMask Snap approval page to appear
+      const snapApprovalPage = await TestActions.waitForPageByUrlSubstring({
+        page: metamaskPage,
+        urlSubstring: '/notification.html'
+      });
+
       // Handle MetaMask Snap privacy warning
-      await TestActions.handleMetaMaskSnapWarning(page, metamaskPage);
+      await TestActions.handleMetaMaskSnapApproval(
+        snapApprovalPage,
+        metamaskPage
+      );
 
       // Switch to template page
       const templatePage = await TestActions.waitForPageByUrlSubstring({
@@ -72,8 +81,17 @@ test.describe('Connect a wallet', () => {
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
 
+      // Wait for MetaMask Snap approval page to appear
+      const snapApprovalPage = await TestActions.waitForPageByUrlSubstring({
+        page: metamaskPage,
+        urlSubstring: '/notification.html'
+      });
+
       // Handle MetaMask Snap privacy warning if it appears
-      await TestActions.handleMetaMaskSnapWarning(page, metamaskPage);
+      await TestActions.handleMetaMaskSnapApproval(
+        snapApprovalPage,
+        metamaskPage
+      );
 
       // Switch to web wallet page
       const walletPage = await TestActions.waitForPageByUrlSubstring({
