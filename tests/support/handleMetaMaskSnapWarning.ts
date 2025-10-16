@@ -39,13 +39,44 @@ const safeClick = async (
       return false;
     }
 
+    // Check if this is a chrome extension page
+    const isChromeExtension = page.url().startsWith('chrome-extension://');
+    if (isChromeExtension) {
+      console.log(
+        'Attempting click on chrome extension page - using extended timeout'
+      );
+      timeout = Math.max(timeout, 10000); // Use at least 10 seconds for extension pages
+    }
+
     // Check context validity but don't fail if it's undefined
     if (!isContextValid(page)) {
       console.log('Context is invalid, but attempting click anyway');
     }
 
-    await selector.click({ timeout });
-    return true;
+    // For chrome extension pages, try different click strategies
+    if (isChromeExtension) {
+      try {
+        // First try normal click
+        await selector.click({ timeout });
+        return true;
+      } catch (error) {
+        console.log(
+          'Normal click failed on extension page, trying force click:',
+          error
+        );
+        try {
+          // Try force click for extension pages
+          await selector.click({ timeout, force: true });
+          return true;
+        } catch (forceError) {
+          console.log('Force click also failed:', forceError);
+          throw forceError;
+        }
+      }
+    } else {
+      await selector.click({ timeout });
+      return true;
+    }
   } catch (error) {
     console.log(`Click operation failed: ${error}`);
     return false;
@@ -102,6 +133,35 @@ export const handleMetaMaskSnapWarning = async (
     console.log('Modal page URL:', modalPage.url());
     console.log('Modal page title:', await modalPage.title());
 
+    // Check if this is a chrome extension page
+    const isChromeExtension = modalPage.url().startsWith('chrome-extension://');
+    console.log('Is chrome extension page:', isChromeExtension);
+
+    if (isChromeExtension) {
+      console.log(
+        'Working with chrome extension page - this may have different security restrictions'
+      );
+
+      // Try to get more information about the extension page
+      try {
+        const pageContent = await modalPage.content();
+        console.log('Extension page content length:', pageContent.length);
+        console.log('Extension page has content:', pageContent.length > 0);
+
+        // Check if we can access the document
+        const documentTitle = await modalPage.evaluate(() => document.title);
+        console.log('Document title via evaluate:', documentTitle);
+
+        // Check if we can access window object
+        const windowLocation = await modalPage.evaluate(
+          () => window.location.href
+        );
+        console.log('Window location via evaluate:', windowLocation);
+      } catch (error) {
+        console.log('Could not access extension page content:', error);
+      }
+    }
+
     // Check if the snap privacy warning scroll element exists
     try {
       const scrollElement = modalPage.getByTestId(
@@ -111,6 +171,47 @@ export const handleMetaMaskSnapWarning = async (
       console.log('Snap privacy warning scroll element visible:', isVisible);
     } catch (error) {
       console.log('Could not find snap privacy warning scroll element:', error);
+    }
+
+    // Debug: Check what elements are available on the modal page
+    try {
+      const buttons = await modalPage.locator('button').all();
+      console.log(`Found ${buttons.length} buttons on the page`);
+
+      // Check for common button texts
+      const buttonTexts: string[] = [];
+      for (const button of buttons.slice(0, 10)) {
+        // Check first 10 buttons
+        try {
+          const text = await button.textContent();
+          if (text) buttonTexts.push(text.trim());
+        } catch (e) {
+          // Ignore errors getting text
+        }
+      }
+      console.log('Button texts found:', buttonTexts);
+    } catch (error) {
+      console.log('Could not get button information:', error);
+    }
+
+    // Check for any elements with test IDs
+    try {
+      const testIdElements = await modalPage.locator('[data-testid]').all();
+      console.log(`Found ${testIdElements.length} elements with test IDs`);
+
+      const testIds: string[] = [];
+      for (const element of testIdElements.slice(0, 10)) {
+        // Check first 10 elements
+        try {
+          const testId = await element.getAttribute('data-testid');
+          if (testId) testIds.push(testId);
+        } catch (e) {
+          // Ignore errors getting test ID
+        }
+      }
+      console.log('Test IDs found:', testIds);
+    } catch (error) {
+      console.log('Could not get test ID information:', error);
     }
 
     // Check for privacy warning and handle it
@@ -137,39 +238,48 @@ export const handleMetaMaskSnapWarning = async (
       }
 
       // Define the sequence of operations with error handling
+      // Try to find elements by multiple methods for better compatibility
       const operations = [
         {
           name: 'snap privacy warning scroll',
           action: () =>
-            modalPage.getByTestId(SelectorsEnum.snapPrivacyWarningScroll)
+            modalPage.getByTestId(SelectorsEnum.snapPrivacyWarningScroll),
+          optional: true // This element might not exist in all MetaMask versions
         },
         {
           name: 'Accept button',
-          action: () => modalPage.getByRole('button', { name: 'Accept' })
+          action: () => modalPage.getByRole('button', { name: 'Accept' }),
+          optional: true
         },
         {
           name: 'Connect button',
-          action: () => modalPage.getByRole('button', { name: 'Connect' })
+          action: () => modalPage.getByRole('button', { name: 'Connect' }),
+          optional: true
         },
         {
           name: 'Install button',
-          action: () => modalPage.getByRole('button', { name: 'Install' })
+          action: () => modalPage.getByRole('button', { name: 'Install' }),
+          optional: true
         },
         {
           name: 'MultiversX checkbox',
-          action: () => modalPage.getByRole('checkbox', { name: 'MultiversX' })
+          action: () => modalPage.getByRole('checkbox', { name: 'MultiversX' }),
+          optional: true
         },
         {
           name: 'Confirm button',
-          action: () => modalPage.getByRole('button', { name: 'Confirm' })
+          action: () => modalPage.getByRole('button', { name: 'Confirm' }),
+          optional: true
         },
         {
           name: 'Ok button',
-          action: () => modalPage.getByRole('button', { name: 'Ok' })
+          action: () => modalPage.getByRole('button', { name: 'Ok' }),
+          optional: true
         },
         {
           name: 'Approve button',
-          action: () => modalPage.getByRole('button', { name: 'Approve' })
+          action: () => modalPage.getByRole('button', { name: 'Approve' }),
+          optional: true
         }
       ];
 
@@ -192,12 +302,66 @@ export const handleMetaMaskSnapWarning = async (
           );
         }
 
+        // Check if element exists before trying to click
+        try {
+          const element = operation.action();
+
+          // For chrome extension pages, use different visibility check
+          const isChromeExtension = modalPage
+            .url()
+            .startsWith('chrome-extension://');
+          let isVisible = false;
+
+          if (isChromeExtension) {
+            try {
+              // For extension pages, try to check if element exists first
+              const count = await element.count();
+              isVisible = count > 0;
+              console.log(`${operation.name} element count: ${count}`);
+            } catch (error) {
+              console.log(`${operation.name} count check failed: ${error}`);
+              isVisible = false;
+            }
+          } else {
+            isVisible = await element.isVisible({ timeout: 2000 });
+          }
+
+          if (!isVisible) {
+            if (operation.optional) {
+              console.log(
+                `${operation.name} is not visible (optional), skipping`
+              );
+              continue;
+            } else {
+              console.log(
+                `${operation.name} is not visible (required), continuing anyway`
+              );
+            }
+          }
+        } catch (error) {
+          if (operation.optional) {
+            console.log(
+              `${operation.name} not found (optional), skipping: ${error}`
+            );
+            continue;
+          } else {
+            console.log(
+              `${operation.name} not found (required), continuing anyway: ${error}`
+            );
+          }
+        }
+
         const success = await safeClick(modalPage, operation.action(), 10000);
         if (!success) {
-          console.log(
-            `Failed to click ${operation.name}, continuing with next operation`
-          );
-          // Continue with next operation instead of failing completely
+          if (operation.optional) {
+            console.log(
+              `Failed to click ${operation.name} (optional), skipping`
+            );
+          } else {
+            console.log(
+              `Failed to click ${operation.name} (required), continuing with next operation`
+            );
+          }
         }
       }
 
