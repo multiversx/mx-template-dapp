@@ -7,7 +7,8 @@ export const NA = 'N/A';
 export enum OriginPageEnum {
   multiversxWallet = '/devnet-wallet.multiversx.com/',
   localhost = 'localhost:3000',
-  templateDashboard = '/dashboard'
+  templateDashboard = '/dashboard',
+  unlockedPage = '/unlocked'
 }
 
 export enum PingPongEnum {

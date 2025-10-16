@@ -2,7 +2,7 @@ export const TEST_CONFIG = {
   /* Retry on CI only */
   retries: process.env.CI ? 0 : 0, // TODO: re-enable retries
   /* Parallel tests on CI only. */
-  workers: 1, // Temporarily reduce workers to debug context issues
+  workers: 10,
   /* Timeout for each test */
   timeout: 90_000,
   /* Timeout for locators */
