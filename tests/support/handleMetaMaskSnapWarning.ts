@@ -33,13 +33,22 @@ export const handleMetaMaskSnapWarning = async (
   timeout: number = 10000
 ): Promise<boolean> => {
   try {
+    console.log('handleMetaMaskSnapWarning called with timeout:', timeout);
+    console.log('Page URL at start:', page.url());
+
     // Check if the original page context is still valid
     if (!isContextValid(page)) {
       console.log(
         'Original page context is invalid, skipping MetaMask warning handling'
       );
+      console.log(
+        'Context browser connected:',
+        page.context().browser()?.isConnected()
+      );
       return false;
     }
+
+    console.log('Context is valid, proceeding with warning handling');
 
     // Wait for the MetaMask notification page (where Snap privacy warning appears)
     const modalPage = await TestActions.waitForPageByUrlSubstring({
