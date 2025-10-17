@@ -68,7 +68,7 @@ test.describe('Connect a wallet', () => {
     });
   });
 
-  test.describe.skip('Connected Account Details (Optional)', () => {
+  test.describe('MetaMask Connection', () => {
     test('should display all connected account details correctly', async ({
       context,
       page,

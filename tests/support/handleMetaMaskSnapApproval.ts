@@ -5,6 +5,7 @@ import { waitUntilStable } from './waitUntilStable';
 import * as TestActions from './index';
 
 const SNAP_APPROVAL_MAX_RETRIES = 2;
+const CLICK_ACTION_TIMEOUT = 5000;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -109,6 +110,10 @@ export const handleMetaMaskSnapApproval = async (
             // Click the element based on the action type
             if (action.type === 'testId') {
               const element = freshPage.getByTestId(action.name);
+              await element.waitFor({
+                state: 'visible',
+                timeout: CLICK_ACTION_TIMEOUT
+              });
               await element.click();
               return;
             }
@@ -117,6 +122,10 @@ export const handleMetaMaskSnapApproval = async (
               const element = freshPage.getByRole('checkbox', {
                 name: action.name
               });
+              await element.waitFor({
+                state: 'visible',
+                timeout: CLICK_ACTION_TIMEOUT
+              });
               await element.click();
               return;
             }
@@ -124,6 +133,10 @@ export const handleMetaMaskSnapApproval = async (
             if (action.type === 'button') {
               const element = freshPage.getByRole('button', {
                 name: action.name
+              });
+              await element.waitFor({
+                state: 'visible',
+                timeout: CLICK_ACTION_TIMEOUT
               });
               await element.click();
               return;
