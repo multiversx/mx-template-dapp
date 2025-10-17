@@ -2,6 +2,7 @@
 import { testWithSynpress } from '@synthetixio/synpress';
 import { MetaMask, metaMaskFixtures } from '@synthetixio/synpress/playwright';
 import * as TestActions from '../support';
+import { getNotificationPageAndWaitForLoad } from '../support/getNotificationPageAndWaitForLoad';
 import { OriginPageEnum, SelectorsEnum } from '../support/testdata';
 import walletSetup from '../test/wallet-setup/basic.setup';
 
@@ -42,17 +43,14 @@ test.describe('Connect a wallet', () => {
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
 
-      // Wait for MetaMask Snap approval page to appear
-      const snapApprovalPage = await TestActions.waitForPageByUrlSubstring({
-        page: metamaskPage,
-        urlSubstring: '/notification.html'
-      });
+      // Get the notification page and wait for it to load
+      const notificationPage = await getNotificationPageAndWaitForLoad(
+        context,
+        extensionId
+      );
 
       // Handle MetaMask Snap privacy warning
-      await TestActions.handleMetaMaskSnapApproval(
-        snapApprovalPage,
-        metamaskPage
-      );
+      await TestActions.handleMetaMaskSnapApproval(notificationPage);
 
       // Switch to template page
       const templatePage = await TestActions.waitForPageByUrlSubstring({
@@ -81,17 +79,14 @@ test.describe('Connect a wallet', () => {
       // Click the connect MetaMask button
       await page.getByTestId('metamask').click();
 
-      // Wait for MetaMask Snap approval page to appear
-      const snapApprovalPage = await TestActions.waitForPageByUrlSubstring({
-        page: metamaskPage,
-        urlSubstring: '/notification.html'
-      });
-
-      // Handle MetaMask Snap privacy warning if it appears
-      await TestActions.handleMetaMaskSnapApproval(
-        snapApprovalPage,
-        metamaskPage
+      // Get the notification page and wait for it to load
+      const notificationPage = await getNotificationPageAndWaitForLoad(
+        context,
+        extensionId
       );
+
+      // Handle MetaMask Snap privacy warning
+      await TestActions.handleMetaMaskSnapApproval(notificationPage);
 
       // Switch to template page
       const templatePage = await TestActions.waitForPageByUrlSubstring({

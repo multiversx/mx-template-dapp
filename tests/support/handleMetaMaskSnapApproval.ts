@@ -1,18 +1,23 @@
 import { Page } from '@playwright/test';
-import { TEST_CONSTANTS } from './constants';
 import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
-import * as TestActions from './index';
 
 const SNAP_APPROVAL_MAX_RETRIES = 3;
 const CLICK_ACTION_TIMEOUT = 5000;
+const CLICK_DELAY = 300;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// Clicks an element on the page based on its type (testId, checkbox, button)
+//Catch transient "detached element" / "page closed" issues
+const isTransientError = (error: any) =>
+  error.message?.includes('Target page, context or browser has been closed') ||
+  error.message?.includes('detached') ||
+  error.message?.includes('Timeout');
+
+// Clicks an element based on type (testId, checkbox, button)
 const clickElement = async (
   page: Page,
-  type: 'testId' | 'checkbox' | 'button',
+  type: string,
   name: string,
   timeout: number
 ): Promise<void> => {
@@ -25,61 +30,20 @@ const clickElement = async (
   const element = selectorMap[type];
   if (!element) throw new Error(`Unknown element type: ${type}`);
 
-  await element.waitFor({ state: 'visible', timeout });
-  await element.click();
-};
-
-// Waits for a MetaMask notification page (notification.html) and performs a click action.
-// Includes retry logic for resilience in flaky environments (CI, headless mode).
-const withNotificationPage = async (
-  contextPage: Page,
-  metamaskPage: Page,
-  action: (page: Page) => Promise<void>,
-  description: string,
-  timeout = 15000,
-  maxRetries = SNAP_APPROVAL_MAX_RETRIES
-): Promise<Page> => {
-  for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
-    try {
-      const notifPage = await TestActions.waitForPageByUrlSubstring({
-        page: metamaskPage,
-        urlSubstring: '/notification.html',
-        timeout
-      });
-
-      await waitUntilStable(notifPage);
-      await notifPage.setViewportSize({ width: 360, height: 592 });
-      await waitUntilStable(notifPage);
-
-      // Verify page is still valid
-      await notifPage.url();
-
-      await action(notifPage);
-      return notifPage;
-    } catch (error) {
-      const lastAttempt = attempt === maxRetries + 1;
-      const message = `[withNotificationPage] Action "${description}" failed (attempt ${attempt}/${maxRetries})`;
-
-      if (lastAttempt) {
-        console.error(`${message} - giving up`);
-        throw error;
-      }
-
-      console.warn(`${message} - retrying...`);
-      await sleep(1500 * attempt);
-    }
+  try {
+    await element.waitFor({ state: 'visible', timeout });
+    await element.click();
+    await sleep(CLICK_DELAY);
+  } catch (err) {
+    throw new Error(
+      `[clickElement] Failed to click ${type}:${name} — ${err.message}`
+    );
   }
-
-  throw new Error(
-    `[withNotificationPage] Unexpected exit for "${description}"`
-  );
 };
 
-// Handles the MetaMask Snap approval flow (scroll, accept, install, confirm, approve, etc.)
+// Handles the MetaMask Snap approval flow
 export const handleMetaMaskSnapApproval = async (
-  initialPage: Page,
-  metamaskPage: Page,
-  timeout = TEST_CONSTANTS.PAGE_WAIT_TIMEOUT,
+  notificationPage: Page,
   maxRetries = SNAP_APPROVAL_MAX_RETRIES
 ): Promise<boolean> => {
   const actions = [
@@ -95,27 +59,20 @@ export const handleMetaMaskSnapApproval = async (
 
   for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
     try {
-      let currentPage = initialPage;
+      await waitUntilStable(notificationPage);
 
       for (const { type, name } of actions) {
-        currentPage = await withNotificationPage(
-          currentPage,
-          metamaskPage,
-          async (notifPage) =>
-            clickElement(notifPage, type, name, CLICK_ACTION_TIMEOUT),
-          `${type}: ${name}`,
-          timeout,
-          maxRetries
-        );
+        await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
       }
 
+      console.log('All actions completed successfully.');
       return true;
     } catch (error) {
       const lastAttempt = attempt === maxRetries + 1;
-      const message = `[handleMetaMaskSnapApproval] Failed (attempt ${attempt}/${maxRetries})`;
+      const message = `Failed (attempt ${attempt}/${maxRetries})`;
 
-      if (lastAttempt) {
-        console.error(`${message} - giving up`);
+      if (lastAttempt || !isTransientError(error)) {
+        console.error(`${message} - giving up. Reason:`, error.message);
         return false;
       }
 
