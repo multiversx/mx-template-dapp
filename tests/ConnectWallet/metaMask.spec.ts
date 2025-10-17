@@ -93,14 +93,14 @@ test.describe('Connect a wallet', () => {
         metamaskPage
       );
 
-      // Switch to web wallet page
-      const walletPage = await TestActions.waitForPageByUrlSubstring({
+      // Switch to template page
+      const templatePage = await TestActions.waitForPageByUrlSubstring({
         page,
         urlSubstring: OriginPageEnum.templateDashboard
       });
 
-      // Verify wallet page opened
-      await expect(walletPage).toHaveURL(OriginPageEnum.templateDashboard);
+      // Verify template page opened
+      await expect(templatePage).toHaveURL(OriginPageEnum.templateDashboard);
 
       // Verify connection using TestActions helper
       await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);

@@ -109,7 +109,6 @@ export const handleMetaMaskSnapApproval = async (
             // Click the element based on the action type
             if (action.type === 'testId') {
               const element = freshPage.getByTestId(action.name);
-              await element.waitFor({ state: 'visible', timeout });
               await element.click();
               return;
             }
@@ -118,7 +117,6 @@ export const handleMetaMaskSnapApproval = async (
               const element = freshPage.getByRole('checkbox', {
                 name: action.name
               });
-              await element.waitFor({ state: 'visible', timeout });
               await element.click();
               return;
             }
@@ -127,7 +125,6 @@ export const handleMetaMaskSnapApproval = async (
               const element = freshPage.getByRole('button', {
                 name: action.name
               });
-              await element.waitFor({ state: 'visible', timeout });
               await element.click();
               return;
             }
