@@ -9,7 +9,7 @@ const refreshPageAndClick = async (
   metamaskPage: Page,
   clickAction: (freshPage: Page) => Promise<void>,
   actionName: string,
-  timeout: number = 10000
+  timeout: number = 15000
 ): Promise<Page> => {
   try {
     console.log(`Refreshing page before action: ${actionName}`);
@@ -21,10 +21,15 @@ const refreshPageAndClick = async (
       timeout
     });
 
+    // Debug: Show available pages before click action
+    const availablePages = await freshPage.context().pages();
+    const pageUrls = availablePages.map((p) => p.url());
+    console.log('Available pages before click action:', pageUrls);
+
     // Wait for the page to be fully loaded before proceeding
     console.log('Waiting for notification page to load completely...');
     await freshPage.waitForLoadState('domcontentloaded', { timeout });
-    await freshPage.waitForLoadState('networkidle', { timeout: 5000 });
+    await freshPage.waitForLoadState('networkidle', { timeout: 10000 });
 
     console.log(`Page refreshed and loaded, executing action: ${actionName}`);
     await clickAction(freshPage);
