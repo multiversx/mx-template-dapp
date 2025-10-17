@@ -4,7 +4,7 @@ import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
 import * as TestActions from './index';
 
-const SNAP_APPROVAL_MAX_RETRIES = 5;
+const SNAP_APPROVAL_MAX_RETRIES = 3;
 const CLICK_ACTION_TIMEOUT = 5000;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
