@@ -9,171 +9,120 @@ const CLICK_ACTION_TIMEOUT = 5000;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// Helper function to click element by type
-const clickElementByType = async (
+// Clicks an element on the page based on its type (testId, checkbox, button)
+const clickElement = async (
   page: Page,
-  type: string,
+  type: 'testId' | 'checkbox' | 'button',
   name: string,
   timeout: number
-) => {
-  if (type === 'testId') {
-    const element = page.getByTestId(name);
-    await element.waitFor({ state: 'visible', timeout });
-    await element.click();
-    return;
-  }
+): Promise<void> => {
+  const selectorMap = {
+    testId: page.getByTestId(name),
+    checkbox: page.getByRole('checkbox', { name }),
+    button: page.getByRole('button', { name })
+  };
 
-  if (type === 'checkbox') {
-    const element = page.getByRole('checkbox', { name });
-    await element.waitFor({ state: 'visible', timeout });
-    await element.click();
-    return;
-  }
+  const element = selectorMap[type];
+  if (!element) throw new Error(`Unknown element type: ${type}`);
 
-  if (type === 'button') {
-    const element = page.getByRole('button', { name });
-    await element.waitFor({ state: 'visible', timeout });
-    await element.click();
-    return;
-  }
+  await element.waitFor({ state: 'visible', timeout });
+  await element.click();
 };
 
-// Helper function to refresh page and then click an element with retry logic
-const refreshPageAndClick = async (
-  page: Page,
+// Waits for a MetaMask notification page (notification.html) and performs a click action.
+// Includes retry logic for resilience in flaky environments (CI, headless mode).
+const withNotificationPage = async (
+  contextPage: Page,
   metamaskPage: Page,
-  clickAction: (freshPage: Page) => Promise<void>,
-  actionName: string,
-  timeout: number = 15000,
-  maxRetries: number = SNAP_APPROVAL_MAX_RETRIES
+  action: (page: Page) => Promise<void>,
+  description: string,
+  timeout = 15000,
+  maxRetries = SNAP_APPROVAL_MAX_RETRIES
 ): Promise<Page> => {
-  let retries = 0;
-
-  while (retries <= maxRetries) {
+  for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
     try {
-      // Get the fresh notification page first
-      const freshPage = await TestActions.waitForPageByUrlSubstring({
+      const notifPage = await TestActions.waitForPageByUrlSubstring({
         page: metamaskPage,
         urlSubstring: '/notification.html',
         timeout
       });
 
-      // Ensure page is fully loaded
-      await waitUntilStable(freshPage as Page);
+      await waitUntilStable(notifPage);
+      await notifPage.setViewportSize({ width: 360, height: 592 });
+      await waitUntilStable(notifPage);
 
-      // Set viewport size to ensure proper display of MetaMask notification
-      // This is important to avoid issues where "Approve" button is out of view
-      await freshPage.setViewportSize({
-        width: 360,
-        height: 592
-      });
+      // Verify page is still valid
+      await notifPage.url();
 
-      // Wait for the page to be fully loaded before proceeding
-      await waitUntilStable(freshPage);
-
-      // Verify the page is still accessible
-      try {
-        await freshPage.url();
-      } catch (error) {
-        throw new Error('Page context is closed');
-      }
-
-      await clickAction(freshPage);
-
-      return freshPage;
+      await action(notifPage);
+      return notifPage;
     } catch (error) {
-      retries++;
+      const lastAttempt = attempt === maxRetries + 1;
+      const message = `[withNotificationPage] Action "${description}" failed (attempt ${attempt}/${maxRetries}).`;
 
-      if (retries <= maxRetries) {
-        console.warn(
-          `[refreshPageAndClick] Failed to execute action ${actionName}, retrying (attempt ${retries}/${maxRetries})... Error: ${error}`
-        );
-
-        // Wait before retrying with exponential backoff
-        await sleep(1000 * retries);
-        continue;
+      if (lastAttempt) {
+        console.error(`${message} No more retries.`, error);
+        throw error;
       }
 
-      // If all retries failed, throw the error
-      console.error(
-        `[refreshPageAndClick] Failed to execute action ${actionName} after ${maxRetries} retries:`,
-        error
-      );
-      throw error;
+      console.warn(`${message} Retrying...`, error);
+      await sleep(1000 * attempt);
     }
   }
 
-  // This should never be reached due to the throw in the catch block
   throw new Error(
-    `[refreshPageAndClick] Unexpected end of function reached for action: ${actionName}`
+    `[withNotificationPage] Unexpected exit for "${description}"`
   );
 };
 
+// Handles the MetaMask Snap approval flow (scroll, accept, install, confirm, approve, etc.)
 export const handleMetaMaskSnapApproval = async (
-  snapApprovalPage: Page,
+  initialPage: Page,
   metamaskPage: Page,
-  timeout: number = TEST_CONSTANTS.PAGE_WAIT_TIMEOUT,
-  maxRetries: number = SNAP_APPROVAL_MAX_RETRIES
+  timeout = TEST_CONSTANTS.PAGE_WAIT_TIMEOUT,
+  maxRetries = SNAP_APPROVAL_MAX_RETRIES
 ): Promise<boolean> => {
-  let retries = 0;
+  const actions = [
+    { type: 'testId', name: SelectorsEnum.snapPrivacyWarningScroll },
+    { type: 'button', name: 'Accept' },
+    { type: 'button', name: 'Connect' },
+    { type: 'button', name: 'Install' },
+    { type: 'checkbox', name: 'MultiversX' },
+    { type: 'button', name: 'Confirm' },
+    { type: 'button', name: 'Ok' },
+    { type: 'button', name: 'Approve' }
+  ] as const;
 
-  while (retries <= maxRetries) {
+  for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
     try {
-      // Define the sequence of actions to perform on the snap approval page
-      const actions = [
-        { type: 'testId', name: SelectorsEnum.snapPrivacyWarningScroll },
-        { type: 'button', name: 'Accept' },
-        { type: 'button', name: 'Connect' },
-        { type: 'button', name: 'Install' },
-        { type: 'checkbox', name: 'MultiversX' },
-        { type: 'button', name: 'Confirm' },
-        { type: 'button', name: 'Ok' },
-        { type: 'button', name: 'Approve' }
-      ];
+      let currentPage = initialPage;
 
-      // Execute each action and refresh the snap approval page
-      let currentPage = snapApprovalPage;
-
-      for (const action of actions) {
-        currentPage = await refreshPageAndClick(
+      for (const { type, name } of actions) {
+        currentPage = await withNotificationPage(
           currentPage,
           metamaskPage,
-          async (freshPage) => {
-            await clickElementByType(
-              freshPage,
-              action.type,
-              action.name,
-              CLICK_ACTION_TIMEOUT
-            );
-          },
-          `${action.type}: ${action.name}`,
-          timeout
+          async (notifPage) =>
+            clickElement(notifPage, type, name, CLICK_ACTION_TIMEOUT),
+          `${type}: ${name}`,
+          timeout,
+          maxRetries
         );
       }
 
       return true;
     } catch (error) {
-      retries++;
+      const lastAttempt = attempt === maxRetries + 1;
+      const message = `[handleMetaMaskSnapApproval] Failed (attempt ${attempt}/${maxRetries}).`;
 
-      if (retries <= maxRetries) {
-        console.warn(
-          `[handleMetaMaskSnapApproval] Snap approval failed, retrying (attempt ${retries}/${maxRetries})... Error: ${error}`
-        );
-
-        // Wait before retrying with exponential backoff
-        await sleep(2000 * retries);
-        continue;
+      if (lastAttempt) {
+        console.error(`${message} Giving up.`, error);
+        return false;
       }
 
-      // If all retries failed, log and return false
-      console.error(
-        `[handleMetaMaskSnapApproval] Snap approval failed after ${maxRetries} retries:`,
-        error
-      );
-      return false;
+      console.warn(`${message} Retrying...`, error);
+      await sleep(2000 * attempt);
     }
   }
 
-  // This should never be reached due to the return in the catch block
   return false;
 };
