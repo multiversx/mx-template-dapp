@@ -3,27 +3,29 @@ import { TEST_CONSTANTS } from './constants';
 import { SelectorsEnum } from './testdata';
 import * as TestActions from './index';
 
-// Helper function to click an element and then refresh the page
-const clickAndRefreshPage = async (
+// Helper function to refresh page and then click an element
+const refreshPageAndClick = async (
   page: Page,
   metamaskPage: Page,
-  clickAction: () => Promise<void>,
+  clickAction: (freshPage: Page) => Promise<void>,
   actionName: string,
   timeout: number = 10000
 ): Promise<Page> => {
   try {
-    console.log(`Executing action: ${actionName}`);
-    await clickAction();
-    console.log(`Successfully clicked: ${actionName}`);
+    console.log(`Refreshing page before action: ${actionName}`);
 
-    const updatedPage = await TestActions.waitForPageByUrlSubstring({
+    // Get the fresh notification page first
+    const freshPage = await TestActions.waitForPageByUrlSubstring({
       page: metamaskPage,
       urlSubstring: '/notification.html',
       timeout
     });
 
-    console.log(`Page refreshed after: ${actionName}`);
-    return updatedPage;
+    console.log(`Page refreshed, executing action: ${actionName}`);
+    await clickAction(freshPage);
+    console.log(`Successfully clicked: ${actionName}`);
+
+    return freshPage;
   } catch (error) {
     console.log(`Failed to execute action ${actionName}:`, error);
     throw error;
@@ -52,12 +54,12 @@ export const handleMetaMaskSnapApproval = async (
     let currentPage = snapApprovalPage;
 
     for (const action of actions) {
-      currentPage = await clickAndRefreshPage(
+      currentPage = await refreshPageAndClick(
         currentPage,
         metamaskPage,
-        async () => {
+        async (freshPage) => {
           // Debug: Show available pages before click action
-          const availablePages = await currentPage.context().pages();
+          const availablePages = await freshPage.context().pages();
           const pageUrls = availablePages.map((p) => p.url());
           console.log(
             `Available pages before ${action.type}: ${action.name}:`,
@@ -65,18 +67,18 @@ export const handleMetaMaskSnapApproval = async (
           );
 
           // Wait for page state to be fully loaded before clicking
-          await currentPage.waitForLoadState('domcontentloaded', { timeout });
+          await freshPage.waitForLoadState('domcontentloaded', { timeout });
 
-          // Wait for element to be visible and clickable before clicking
+          // Click the element based on the action type
           if (action.type === 'testId') {
-            const element = currentPage.getByTestId(action.name);
+            const element = freshPage.getByTestId(action.name);
             await element.waitFor({ state: 'visible', timeout });
             await element.click();
             return;
           }
 
           if (action.type === 'checkbox') {
-            const element = currentPage.getByRole('checkbox', {
+            const element = freshPage.getByRole('checkbox', {
               name: action.name
             });
             await element.waitFor({ state: 'visible', timeout });
@@ -84,11 +86,14 @@ export const handleMetaMaskSnapApproval = async (
             return;
           }
 
-          const element = currentPage.getByRole('button', {
-            name: action.name
-          });
-          await element.waitFor({ state: 'visible', timeout });
-          await element.click();
+          if (action.type === 'button') {
+            const element = freshPage.getByRole('button', {
+              name: action.name
+            });
+            await element.waitFor({ state: 'visible', timeout });
+            await element.click();
+            return;
+          }
         },
         `${action.type}: ${action.name}`,
         timeout
