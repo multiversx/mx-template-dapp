@@ -4,7 +4,7 @@ import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
 import * as TestActions from './index';
 
-const SNAP_APPROVAL_MAX_RETRIES = 2;
+const SNAP_APPROVAL_MAX_RETRIES = 5;
 const CLICK_ACTION_TIMEOUT = 5000;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -58,15 +58,15 @@ const withNotificationPage = async (
       return notifPage;
     } catch (error) {
       const lastAttempt = attempt === maxRetries + 1;
-      const message = `[withNotificationPage] Action "${description}" failed (attempt ${attempt}/${maxRetries}).`;
+      const message = `[withNotificationPage] Action "${description}" failed (attempt ${attempt}/${maxRetries})`;
 
       if (lastAttempt) {
-        console.error(`${message} No more retries.`, error);
+        console.error(`${message} - giving up`);
         throw error;
       }
 
-      console.warn(`${message} Retrying...`, error);
-      await sleep(1000 * attempt);
+      console.warn(`${message} - retrying...`);
+      await sleep(1500 * attempt);
     }
   }
 
@@ -112,14 +112,14 @@ export const handleMetaMaskSnapApproval = async (
       return true;
     } catch (error) {
       const lastAttempt = attempt === maxRetries + 1;
-      const message = `[handleMetaMaskSnapApproval] Failed (attempt ${attempt}/${maxRetries}).`;
+      const message = `[handleMetaMaskSnapApproval] Failed (attempt ${attempt}/${maxRetries})`;
 
       if (lastAttempt) {
-        console.error(`${message} Giving up.`, error);
+        console.error(`${message} - giving up`);
         return false;
       }
 
-      console.warn(`${message} Retrying...`, error);
+      console.warn(`${message} - retrying...`);
       await sleep(2000 * attempt);
     }
   }
