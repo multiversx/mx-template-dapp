@@ -56,6 +56,14 @@ export const handleMetaMaskSnapApproval = async (
         currentPage,
         metamaskPage,
         async () => {
+          // Debug: Show available pages before click action
+          const availablePages = await currentPage.context().pages();
+          const pageUrls = availablePages.map((p) => p.url());
+          console.log(
+            `Available pages before ${action.type}: ${action.name}:`,
+            pageUrls
+          );
+
           // Wait for page state to be fully loaded before clicking
           await currentPage.waitForLoadState('domcontentloaded', { timeout });
 
