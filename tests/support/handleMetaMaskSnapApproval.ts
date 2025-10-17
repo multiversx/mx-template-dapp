@@ -28,6 +28,12 @@ const refreshPageAndClick = async (
       timeout
     });
 
+    // Set viewport size to ensure proper display of MetaMask notification
+    await freshPage.setViewportSize({
+      width: 360,
+      height: 592
+    });
+
     // Wait for the page to be fully loaded before proceeding
     await waitUntilStable(freshPage);
 
@@ -71,12 +77,6 @@ export const handleMetaMaskSnapApproval = async (
 
     // Execute each action and refresh the snap approval page
     let currentPage = snapApprovalPage;
-
-    // Set viewport size to make sure that the page is visible and clickable
-    await currentPage.setViewportSize({
-      width: 360,
-      height: 592
-    });
 
     for (const action of actions) {
       currentPage = await refreshPageAndClick(
