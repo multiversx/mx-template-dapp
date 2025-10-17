@@ -3,6 +3,13 @@ import { TEST_CONSTANTS } from './constants';
 import { SelectorsEnum } from './testdata';
 import * as TestActions from './index';
 
+const DEFAULT_TIMEOUT = 10000;
+
+export const waitUntilStable = async (page: Page) => {
+  await page.waitForLoadState('domcontentloaded', { timeout: DEFAULT_TIMEOUT });
+  await page.waitForLoadState('networkidle', { timeout: DEFAULT_TIMEOUT });
+};
+
 // Helper function to refresh page and then click an element
 const refreshPageAndClick = async (
   page: Page,
@@ -22,12 +29,7 @@ const refreshPageAndClick = async (
     });
 
     // Wait for the page to be fully loaded before proceeding
-    console.log('Waiting for notification page to load completely...');
-    await freshPage.waitForLoadState('domcontentloaded', { timeout });
-
-    // Simple wait for UI to be ready
-    console.log('Waiting for UI to be ready...');
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await waitUntilStable(freshPage);
 
     // Verify the page is still accessible
     try {
