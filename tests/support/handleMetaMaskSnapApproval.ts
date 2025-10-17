@@ -29,7 +29,19 @@ const refreshPageAndClick = async (
     // Wait for the page to be fully loaded before proceeding
     console.log('Waiting for notification page to load completely...');
     await freshPage.waitForLoadState('domcontentloaded', { timeout });
-    await freshPage.waitForLoadState('networkidle', { timeout: 10000 });
+
+    // Simple wait for UI to be ready
+    console.log('Waiting for UI to be ready...');
+    await new Promise((resolve) => setTimeout(resolve, 10000));
+
+    // Verify the page is still accessible
+    try {
+      await freshPage.url();
+      console.log('Page is accessible, proceeding...');
+    } catch (error) {
+      console.log('Page is not accessible, skipping action');
+      throw new Error('Page context is closed');
+    }
 
     console.log(`Page refreshed and loaded, executing action: ${actionName}`);
     await clickAction(freshPage);
@@ -68,16 +80,6 @@ export const handleMetaMaskSnapApproval = async (
         currentPage,
         metamaskPage,
         async (freshPage) => {
-          // Debug: Show available pages before click action
-          const availablePages = await freshPage.context().pages();
-          const pageUrls = availablePages.map((p) => p.url());
-          console.log(
-            `Available pages before ${action.type}: ${action.name}:`,
-            pageUrls
-          );
-
-          // Page is already loaded from the helper function
-
           // Click the element based on the action type
           if (action.type === 'testId') {
             const element = freshPage.getByTestId(action.name);
