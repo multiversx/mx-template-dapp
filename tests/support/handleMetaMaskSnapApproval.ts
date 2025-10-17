@@ -21,7 +21,12 @@ const refreshPageAndClick = async (
       timeout
     });
 
-    console.log(`Page refreshed, executing action: ${actionName}`);
+    // Wait for the page to be fully loaded before proceeding
+    console.log('Waiting for notification page to load completely...');
+    await freshPage.waitForLoadState('domcontentloaded', { timeout });
+    await freshPage.waitForLoadState('networkidle', { timeout: 5000 });
+
+    console.log(`Page refreshed and loaded, executing action: ${actionName}`);
     await clickAction(freshPage);
     console.log(`Successfully clicked: ${actionName}`);
 
@@ -66,8 +71,7 @@ export const handleMetaMaskSnapApproval = async (
             pageUrls
           );
 
-          // Wait for page state to be fully loaded before clicking
-          await freshPage.waitForLoadState('domcontentloaded', { timeout });
+          // Page is already loaded from the helper function
 
           // Click the element based on the action type
           if (action.type === 'testId') {
