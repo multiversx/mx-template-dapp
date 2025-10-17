@@ -21,18 +21,13 @@ const refreshPageAndClick = async (
       timeout
     });
 
-    // Debug: Show available pages before click action
-    const availablePages = await freshPage.context().pages();
-    const pageUrls = availablePages.map((p) => p.url());
-    console.log('Available pages before click action:', pageUrls);
-
     // Wait for the page to be fully loaded before proceeding
     console.log('Waiting for notification page to load completely...');
     await freshPage.waitForLoadState('domcontentloaded', { timeout });
 
     // Simple wait for UI to be ready
     console.log('Waiting for UI to be ready...');
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     // Verify the page is still accessible
     try {
@@ -80,6 +75,14 @@ export const handleMetaMaskSnapApproval = async (
         currentPage,
         metamaskPage,
         async (freshPage) => {
+          // Debug: Show available pages before click action
+          const availablePages = await freshPage.context().pages();
+          const pageUrls = availablePages.map((p) => p.url());
+          console.log(
+            `Available pages before ${action.type}: ${action.name}:`,
+            pageUrls
+          );
+
           // Click the element based on the action type
           if (action.type === 'testId') {
             const element = freshPage.getByTestId(action.name);
@@ -102,6 +105,7 @@ export const handleMetaMaskSnapApproval = async (
               name: action.name
             });
             await element.waitFor({ state: 'visible', timeout });
+            await element.waitFor({ state: 'attached', timeout });
             await element.click();
             return;
           }
