@@ -23,6 +23,10 @@ const test = testWithSynpress(metaMaskFixtures(walletSetup));
 // Extract expect function from test
 const { expect } = test;
 
+// This is to ensure that the MetaMask tests run sequentially
+// which is required for the MetaMask tests to work correctly
+test.describe.configure({ mode: 'serial' });
+
 test.describe('Connect a wallet', () => {
   // Connect wallet tests verify wallet connection functionality
 
