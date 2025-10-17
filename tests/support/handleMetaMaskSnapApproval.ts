@@ -50,9 +50,8 @@ export const handleMetaMaskSnapApproval = async (
   ] as const;
 
   try {
-    await waitUntilStable(notificationPage);
-
     for (const { type, name } of actions) {
+      await waitUntilStable(notificationPage);
       await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
     }
     return true;
