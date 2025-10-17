@@ -46,4 +46,6 @@ export { waitForToastToBeDisplayed } from './waitForToastToBeDisplayed';
 
 export { waitForTransactionToastToContain } from './waitForTransactionToastToShow';
 
+export { waitUntilStable } from './waitUntilStable';
+
 export { writeValueToFile } from './fs/writeValueToFile';

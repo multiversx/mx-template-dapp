@@ -1,17 +1,12 @@
 import { Page } from '@playwright/test';
 import { TEST_CONSTANTS } from './constants';
 import { SelectorsEnum } from './testdata';
+import { waitUntilStable } from './waitUntilStable';
 import * as TestActions from './index';
 
-const DEFAULT_TIMEOUT = 10000;
 const SNAP_APPROVAL_MAX_RETRIES = 2;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-export const waitUntilStable = async (page: Page) => {
-  await page.waitForLoadState('domcontentloaded', { timeout: DEFAULT_TIMEOUT });
-  await page.waitForLoadState('networkidle', { timeout: DEFAULT_TIMEOUT });
-};
 
 // Helper function to refresh page and then click an element with retry logic
 const refreshPageAndClick = async (
@@ -26,12 +21,6 @@ const refreshPageAndClick = async (
 
   while (retries <= maxRetries) {
     try {
-      console.log(
-        `Refreshing page before action: ${actionName} (attempt ${retries + 1}/${
-          maxRetries + 1
-        })`
-      );
-
       // Get the fresh notification page first
       const freshPage = await TestActions.waitForPageByUrlSubstring({
         page: metamaskPage,
@@ -40,6 +29,7 @@ const refreshPageAndClick = async (
       });
 
       // Set viewport size to ensure proper display of MetaMask notification
+      // This is important to avoid issues where "Approve" button is out of view
       await freshPage.setViewportSize({
         width: 360,
         height: 592
@@ -51,15 +41,11 @@ const refreshPageAndClick = async (
       // Verify the page is still accessible
       try {
         await freshPage.url();
-        console.log('Page is accessible, proceeding...');
       } catch (error) {
-        console.log('Page is not accessible, skipping action');
         throw new Error('Page context is closed');
       }
 
-      console.log(`Page refreshed and loaded, executing action: ${actionName}`);
       await clickAction(freshPage);
-      console.log(`Successfully clicked: ${actionName}`);
 
       return freshPage;
     } catch (error) {
@@ -100,12 +86,6 @@ export const handleMetaMaskSnapApproval = async (
 
   while (retries <= maxRetries) {
     try {
-      console.log(
-        `[handleMetaMaskSnapApproval] Starting snap approval process (attempt ${
-          retries + 1
-        }/${maxRetries + 1})`
-      );
-
       // Define the sequence of actions to perform on the snap approval page
       const actions = [
         { type: 'testId', name: SelectorsEnum.snapPrivacyWarningScroll },
@@ -126,14 +106,6 @@ export const handleMetaMaskSnapApproval = async (
           currentPage,
           metamaskPage,
           async (freshPage) => {
-            // Debug: Show available pages before click action
-            const availablePages = await freshPage.context().pages();
-            const pageUrls = availablePages.map((p) => p.url());
-            console.log(
-              `Available pages before ${action.type}: ${action.name}:`,
-              pageUrls
-            );
-
             // Click the element based on the action type
             if (action.type === 'testId') {
               const element = freshPage.getByTestId(action.name);
@@ -165,14 +137,13 @@ export const handleMetaMaskSnapApproval = async (
         );
       }
 
-      console.log('Successfully handled MetaMask Snap approval');
       return true;
     } catch (error) {
       retries++;
 
       if (retries <= maxRetries) {
         console.warn(
-          `Snap approval failed, retrying (attempt ${retries}/${maxRetries})... Error: ${error}`
+          `[handleMetaMaskSnapApproval] Snap approval failed, retrying (attempt ${retries}/${maxRetries})... Error: ${error}`
         );
 
         // Wait before retrying with exponential backoff
@@ -181,7 +152,10 @@ export const handleMetaMaskSnapApproval = async (
       }
 
       // If all retries failed, log and return false
-      console.error(`Snap approval failed after ${maxRetries} retries:`, error);
+      console.error(
+        `[handleMetaMaskSnapApproval] Snap approval failed after ${maxRetries} retries:`,
+        error
+      );
       return false;
     }
   }
