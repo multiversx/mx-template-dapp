@@ -27,7 +27,7 @@ const refreshPageAndClick = async (
 
     // Simple wait for UI to be ready
     console.log('Waiting for UI to be ready...');
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Verify the page is still accessible
     try {
@@ -105,7 +105,6 @@ export const handleMetaMaskSnapApproval = async (
               name: action.name
             });
             await element.waitFor({ state: 'visible', timeout });
-            await element.waitFor({ state: 'attached', timeout });
             await element.click();
             return;
           }
