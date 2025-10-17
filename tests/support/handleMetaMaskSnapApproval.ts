@@ -104,7 +104,7 @@ export const handleMetaMaskSnapApproval = async (
             const element = freshPage.getByRole('button', {
               name: action.name
             });
-            await element.waitFor({ state: 'visible', timeout });
+            await element.waitFor({ state: 'attached', timeout });
             await element.click();
             return;
           }
@@ -114,10 +114,10 @@ export const handleMetaMaskSnapApproval = async (
       );
     }
 
-    console.log('Successfully handled MetaMask Snap privacy warning');
+    console.log('Successfully handled MetaMask Snap approval');
     return true;
   } catch (error) {
-    console.log('No privacy warning found or error clicking:', error);
+    console.log('No MetaMask Snap approval found or error clicking:', error);
     return false;
   }
 };
