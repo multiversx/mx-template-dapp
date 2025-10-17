@@ -2,27 +2,31 @@ import { Page } from '@playwright/test';
 import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
 
-const CLICK_ACTION_TIMEOUT = 5000;
+const CLICK_ACTION_TIMEOUT = 10000;
 const CLICK_DELAY = 300;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Clicks an element based on type (testId, checkbox, button)
 const clickElement = async (
-  page: Page,
+  notificationPage: Page,
   type: string,
   name: string,
   timeout: number
 ): Promise<void> => {
   const selectorMap = {
-    testId: page.getByTestId(name),
-    checkbox: page.getByRole('checkbox', { name }),
-    button: page.getByRole('button', { name })
+    testId: notificationPage.getByTestId(name),
+    checkbox: notificationPage.getByRole('checkbox', { name }),
+    button: notificationPage.getByRole('button', { name })
   };
 
   const element = selectorMap[type];
   if (!element) throw new Error(`Unknown element type: ${type}`);
 
+  // Ensure the notification page is fully loaded
+  await waitUntilStable(notificationPage);
+
+  // Try to click the element
   try {
     await element.waitFor({ state: 'visible', timeout });
     await element.click();
@@ -51,7 +55,6 @@ export const handleMetaMaskSnapApproval = async (
 
   try {
     for (const { type, name } of actions) {
-      await waitUntilStable(notificationPage);
       await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
     }
     return true;
