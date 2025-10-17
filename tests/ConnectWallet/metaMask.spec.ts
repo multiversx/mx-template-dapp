@@ -55,11 +55,11 @@ test.describe('Connect a wallet', () => {
       // Switch to template page
       const templatePage = await TestActions.waitForPageByUrlSubstring({
         page,
-        urlSubstring: OriginPageEnum.unlockPage
+        urlSubstring: OriginPageEnum.templateDashboard
       });
 
       // Verify template page opened
-      await expect(templatePage).toHaveURL(OriginPageEnum.unlockPage);
+      await expect(templatePage).toHaveURL(OriginPageEnum.templateDashboard);
 
       // Verify connection using TestActions helper
       await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);

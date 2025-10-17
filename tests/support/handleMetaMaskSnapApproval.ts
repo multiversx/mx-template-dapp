@@ -69,14 +69,16 @@ export const handleMetaMaskSnapApproval = async (
       return true;
     } catch (error) {
       const lastAttempt = attempt === maxRetries + 1;
-      const message = `Failed (attempt ${attempt}/${maxRetries})`;
+      const message = `[handleMetaMaskSnapApproval] Failed (attempt ${attempt}/${maxRetries})`;
 
       if (lastAttempt || !isTransientError(error)) {
-        console.error(`${message} - giving up. Reason:`, error.message);
+        console.error(
+          `[handleMetaMaskSnapApproval] ${message} - giving up. Reason: ${error.message}`
+        );
         return false;
       }
 
-      console.warn(`${message} - retrying...`);
+      console.warn(`[handleMetaMaskSnapApproval] ${message} - retrying...`);
       await sleep(2000 * attempt);
     }
   }
