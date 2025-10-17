@@ -70,6 +70,12 @@ export const handleMetaMaskSnapApproval = async (
     // Execute each action and refresh the snap approval page
     let currentPage = snapApprovalPage;
 
+    // Set viewport size to make sure that the page is visible and clickable
+    await currentPage.setViewportSize({
+      width: 360,
+      height: 592
+    });
+
     for (const action of actions) {
       currentPage = await refreshPageAndClick(
         currentPage,
@@ -104,7 +110,7 @@ export const handleMetaMaskSnapApproval = async (
             const element = freshPage.getByRole('button', {
               name: action.name
             });
-            await element.waitFor({ state: 'attached', timeout });
+            await element.waitFor({ state: 'visible', timeout });
             await element.click();
             return;
           }
