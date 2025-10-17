@@ -36,7 +36,7 @@ export const waitForMetaMaskLoad = async (page: Page) => {
     );
   } catch (error) {
     // Log error but don't fail - the page might be usable anyway
-    console.warn('Warning during MetaMask load:', error);
+    console.warn('Warning during MetaMask load:', error.message);
   }
 
   // Add a small delay to ensure UI is fully ready
@@ -61,7 +61,7 @@ export const waitForSelector = async (
       console.log(
         `Error while waiting for loading indicator '${selector}' to disappear`
       );
-      throw error;
+      throw error.message;
     }
   }
 };

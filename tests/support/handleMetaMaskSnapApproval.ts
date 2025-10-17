@@ -2,17 +2,10 @@ import { Page } from '@playwright/test';
 import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
 
-const SNAP_APPROVAL_MAX_RETRIES = 3;
 const CLICK_ACTION_TIMEOUT = 5000;
 const CLICK_DELAY = 300;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-//Catch transient "detached element" / "page closed" issues
-const isTransientError = (error: any) =>
-  error.message?.includes('Target page, context or browser has been closed') ||
-  error.message?.includes('detached') ||
-  error.message?.includes('Timeout');
 
 // Clicks an element based on type (testId, checkbox, button)
 const clickElement = async (
@@ -43,8 +36,7 @@ const clickElement = async (
 
 // Handles the MetaMask Snap approval flow
 export const handleMetaMaskSnapApproval = async (
-  notificationPage: Page,
-  maxRetries = SNAP_APPROVAL_MAX_RETRIES
+  notificationPage: Page
 ): Promise<boolean> => {
   const actions = [
     { type: 'testId', name: SelectorsEnum.snapPrivacyWarningScroll },
@@ -57,31 +49,15 @@ export const handleMetaMaskSnapApproval = async (
     { type: 'button', name: 'Approve' }
   ] as const;
 
-  for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
-    try {
-      await waitUntilStable(notificationPage);
+  try {
+    await waitUntilStable(notificationPage);
 
-      for (const { type, name } of actions) {
-        await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
-      }
-
-      console.log('All actions completed successfully.');
-      return true;
-    } catch (error) {
-      const lastAttempt = attempt === maxRetries + 1;
-      const message = `[handleMetaMaskSnapApproval] Failed (attempt ${attempt}/${maxRetries})`;
-
-      if (lastAttempt || !isTransientError(error)) {
-        console.error(
-          `[handleMetaMaskSnapApproval] ${message} - giving up. Reason: ${error.message}`
-        );
-        return false;
-      }
-
-      console.warn(`[handleMetaMaskSnapApproval] ${message} - retrying...`);
-      await sleep(2000 * attempt);
+    for (const { type, name } of actions) {
+      await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
     }
+    return true;
+  } catch (error) {
+    console.error(`[handleMetaMaskSnapApproval] Failed: ${error.message}`);
+    return false;
   }
-
-  return false;
 };
