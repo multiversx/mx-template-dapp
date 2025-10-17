@@ -9,6 +9,35 @@ const CLICK_ACTION_TIMEOUT = 5000;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
+// Helper function to click element by type
+const clickElementByType = async (
+  page: Page,
+  type: string,
+  name: string,
+  timeout: number
+) => {
+  if (type === 'testId') {
+    const element = page.getByTestId(name);
+    await element.waitFor({ state: 'visible', timeout });
+    await element.click();
+    return;
+  }
+
+  if (type === 'checkbox') {
+    const element = page.getByRole('checkbox', { name });
+    await element.waitFor({ state: 'visible', timeout });
+    await element.click();
+    return;
+  }
+
+  if (type === 'button') {
+    const element = page.getByRole('button', { name });
+    await element.waitFor({ state: 'visible', timeout });
+    await element.click();
+    return;
+  }
+};
+
 // Helper function to refresh page and then click an element with retry logic
 const refreshPageAndClick = async (
   page: Page,
@@ -28,6 +57,9 @@ const refreshPageAndClick = async (
         urlSubstring: '/notification.html',
         timeout
       });
+
+      // Ensure page is fully loaded
+      await waitUntilStable(freshPage as Page);
 
       // Set viewport size to ensure proper display of MetaMask notification
       // This is important to avoid issues where "Approve" button is out of view
@@ -107,40 +139,12 @@ export const handleMetaMaskSnapApproval = async (
           currentPage,
           metamaskPage,
           async (freshPage) => {
-            // Click the element based on the action type
-            if (action.type === 'testId') {
-              const element = freshPage.getByTestId(action.name);
-              await element.waitFor({
-                state: 'visible',
-                timeout: CLICK_ACTION_TIMEOUT
-              });
-              await element.click();
-              return;
-            }
-
-            if (action.type === 'checkbox') {
-              const element = freshPage.getByRole('checkbox', {
-                name: action.name
-              });
-              await element.waitFor({
-                state: 'visible',
-                timeout: CLICK_ACTION_TIMEOUT
-              });
-              await element.click();
-              return;
-            }
-
-            if (action.type === 'button') {
-              const element = freshPage.getByRole('button', {
-                name: action.name
-              });
-              await element.waitFor({
-                state: 'visible',
-                timeout: CLICK_ACTION_TIMEOUT
-              });
-              await element.click();
-              return;
-            }
+            await clickElementByType(
+              freshPage,
+              action.type,
+              action.name,
+              CLICK_ACTION_TIMEOUT
+            );
           },
           `${action.type}: ${action.name}`,
           timeout
