@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { SelectorsEnum } from './testdata';
+import { waitForMetaMaskLoad } from './waitForMetaMaskLoad';
 import { waitUntilStable } from './waitUntilStable';
 
 const CLICK_ACTION_TIMEOUT = 10000;
@@ -55,8 +56,11 @@ export const handleMetaMaskSnapApproval = async (
   while (attempt <= maxRetries) {
     try {
       for (const { type, name } of actions) {
-        // Ensure the notification page is fully loaded before clicking any elements
-        await waitUntilStable(notificationPage);
+        // Ensure page is fully loaded
+        await waitUntilStable(notificationPage as Page);
+
+        // Wait for MetaMask UI to load
+        await waitForMetaMaskLoad(notificationPage);
 
         // Click the element based on type (testId, checkbox, button)
         await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
