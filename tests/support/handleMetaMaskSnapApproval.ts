@@ -7,13 +7,13 @@ const RETRY_DELAY_BASE = 1000;
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const attemptClickElement = async (
-  page: Page,
+  notificationPage: Page,
   action: { type: 'testId' | 'checkbox' | 'button'; name: string }
 ) => {
   const selectorMap = {
-    testId: page.getByTestId(action.name),
-    checkbox: page.getByRole('checkbox', { name: action.name }),
-    button: page.getByRole('button', { name: action.name })
+    testId: notificationPage.getByTestId(action.name),
+    checkbox: notificationPage.getByRole('checkbox', { name: action.name }),
+    button: notificationPage.getByRole('button', { name: action.name })
   };
 
   const element = selectorMap[action.type];
@@ -22,9 +22,9 @@ const attemptClickElement = async (
   try {
     await element.click();
   } catch (error) {
-    if (page.isClosed()) {
-      return;
-    }
+    // if (notificationPage.isClosed()) {
+    //   return;
+    // }
 
     throw new Error(
       `[attemptClickElement] Failed to click ${action.type}:${action.name} — ${error.message}`
