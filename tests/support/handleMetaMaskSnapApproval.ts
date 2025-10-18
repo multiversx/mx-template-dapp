@@ -3,77 +3,86 @@ import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
 
 const RETRY_DELAY_BASE = 1000;
+const CLICK_TIMEOUT = 10000;
+const SCREENSHOT_DIR = './__debug__';
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+const ensureDebugDir = async () => {
+  // create debug dir if missing (don't fail test if mkdir fails)
+  try {
+    // Using node APIs directly, but keep it quiet on errors
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const fs = require('fs');
+    if (!fs.existsSync(SCREENSHOT_DIR)) {
+      fs.mkdirSync(SCREENSHOT_DIR, { recursive: true });
+    }
+  } catch (e) {
+    // ignore
+  }
+};
 
 const attemptClickElement = async (
-  notificationPage: Page,
-  action: { type: 'testId' | 'checkbox' | 'button'; name: string }
+  page: Page,
+  action: { type: 'testId' | 'checkbox' | 'button'; name: string },
+  debugTag = ''
 ) => {
   const selectorMap = {
-    testId: notificationPage.getByTestId(action.name),
-    checkbox: notificationPage.getByRole('checkbox', { name: action.name }),
-    button: notificationPage.getByRole('button', { name: action.name })
-  };
+    testId: page.getByTestId(action.name),
+    checkbox: page.getByRole('checkbox', { name: action.name }),
+    button: page.getByRole('button', { name: action.name })
+  } as const;
 
   const element = selectorMap[action.type];
   if (!element) throw new Error(`Unknown element type: ${action.type}`);
 
-  // 🔍 Debugging logs
   console.log(
-    `[Debugging][attemptClickElement] Attempting ${action.type}:${action.name}`
+    `${debugTag}[attemptClickElement] Attempting ${action.type}:${action.name}`
   );
   console.log(
-    '[Debugging][attemptClickElement] notificationPage.isClosed():',
-    notificationPage.isClosed()
+    `${debugTag}[attemptClickElement] page.isClosed():`,
+    page.isClosed()
   );
-  console.log(
-    '[Debugging][attemptClickElement] notificationPage.url():',
-    notificationPage.url()
-  );
-
   try {
-    await element.waitFor({ state: 'visible', timeout: 10000 });
     console.log(
-      `[Debugging][attemptClickElement] Element "${action.name}" visible`
+      `${debugTag}[attemptClickElement] waiting for "${action.name}" to be visible`
     );
+    await element.waitFor({ state: 'visible', timeout: CLICK_TIMEOUT });
     await element.click();
-    console.log(`[Debugging][attemptClickElement] Clicked "${action.name}"`);
-  } catch (error) {
+    console.log(`${debugTag}[attemptClickElement] Clicked "${action.name}"`);
+  } catch (err: any) {
     console.log(
-      `[Debugging][attemptClickElement] Error clicking "${action.name}":`,
-      error.message
+      `${debugTag}[attemptClickElement] Error clicking "${action.name}": ${
+        err?.message || err
+      }`
     );
-
-    // 🚨 Throw if page closed (so retry logic is triggered)
-    if (notificationPage.isClosed()) {
-      console.log(
-        `[Debugging][attemptClickElement] Page closed mid-click for "${action.name}"`
-      );
-      throw new Error(
-        `[attemptClickElement] Page closed unexpectedly while clicking "${action.name}"`
-      );
-    }
-
-    // Screenshot for CI debugging
+    // Add screenshot for debugging (if page still open)
     try {
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      await notificationPage.screenshot({
-        path: `./screenshots/debug-click-${action.name}-${timestamp}.png`,
-        fullPage: true
-      });
-      console.log(
-        `[Debugging][attemptClickElement] Screenshot saved for "${action.name}"`
-      );
-    } catch (ssError) {
-      console.log(
-        `[Debugging][attemptClickElement] Screenshot failed: ${ssError.message}`
+      await ensureDebugDir();
+      if (!page.isClosed()) {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        await page.screenshot({
+          path: `${SCREENSHOT_DIR}/click-fail-${action.name}-${timestamp}.png`,
+          fullPage: true
+        });
+        console.log(
+          `${debugTag}[attemptClickElement] Saved screenshot for "${action.name}"`
+        );
+      } else {
+        console.log(
+          `${debugTag}[attemptClickElement] page closed, no screenshot`
+        );
+      }
+    } catch (ssErr) {
+      console.warn(
+        `${debugTag}[attemptClickElement] Screenshot failed: ${
+          (ssErr as Error).message
+        }`
       );
     }
 
-    throw new Error(
-      `[attemptClickElement] Failed to click ${action.type}:${action.name} — ${error.message}`
-    );
+    // Throw so outer logic retries / reacquires page
+    throw err;
   }
 };
 
@@ -94,7 +103,7 @@ export const handleMetaMaskSnapApproval = async (
 
   console.log('[Debugging][handleMetaMaskSnapApproval] START');
   console.log(
-    '[Debugging][handleMetaMaskSnapApproval] notificationPage URL:',
+    '[Debugging][handleMetaMaskSnapApproval] initial notificationPage URL:',
     notificationPage.url()
   );
   console.log(
@@ -102,130 +111,226 @@ export const handleMetaMaskSnapApproval = async (
     notificationPage.isClosed()
   );
 
-  try {
-    const title = await notificationPage.title().catch(() => 'N/A');
-    console.log(
-      `[Debugging][handleMetaMaskSnapApproval] Page title: "${title}"`
-    );
-  } catch (e) {
-    console.log(
-      `[Debugging][handleMetaMaskSnapApproval] Failed to get title: ${e.message}`
-    );
-  }
-
+  // allow swapping out the page reference when it closes and a new one appears
+  let pageRef: Page = notificationPage;
   let attempt = 0;
+  // startIndex remembers which action to (re)start from after a page reload/reacquire
+  let startIndex = 0;
+
   while (attempt <= maxRetries) {
     try {
       console.log(
         `[Debugging][handleMetaMaskSnapApproval] Attempt ${
           attempt + 1
-        }/${maxRetries}`
+        }/${maxRetries} - startIndex=${startIndex}`
       );
 
-      await waitUntilStable(notificationPage);
-      console.log(
-        '[Debugging][handleMetaMaskSnapApproval] Page stable, executing actions...'
-      );
-
-      for (const action of actions) {
-        await attemptClickElement(notificationPage, action);
-
-        // ⏳ After clicking "Ok", MetaMask may refresh the page internally
-        if (action.name === 'Ok') {
+      // If the page is closed, try to reacquire it before waiting for stability
+      if (pageRef.isClosed()) {
+        console.log(
+          '[Debugging][handleMetaMaskSnapApproval] pageRef was closed; attempting to reacquire from context pages'
+        );
+        const ctxPages = pageRef.context().pages();
+        const newPage = ctxPages.find((p) =>
+          p.url().includes('notification.html')
+        );
+        if (newPage) {
+          pageRef = newPage;
           console.log(
-            '[Debugging][handleMetaMaskSnapApproval] Waiting for possible page reload after "Ok"'
+            '[Debugging][handleMetaMaskSnapApproval] reacquired notification page via context.pages()'
           );
-          await waitUntilStable(notificationPage);
+        } else {
+          // wait briefly for a new page event in case MetaMask opens a fresh popup
+          try {
+            const candidate = await pageRef.context().waitForEvent('page', {
+              timeout: 3000
+            });
+            if (candidate.url().includes('notification.html')) {
+              pageRef = candidate;
+              console.log(
+                '[Debugging][handleMetaMaskSnapApproval] reacquired notification page via waitForEvent'
+              );
+            } else {
+              // not the notification page; continue to next attempt
+              console.log(
+                '[Debugging][handleMetaMaskSnapApproval] newly opened page is not notification.html'
+              );
+            }
+          } catch {
+            console.log(
+              '[Debugging][handleMetaMaskSnapApproval] no new page event within short timeout'
+            );
+          }
         }
       }
 
+      // Wait for page to be stable (domcontent + network idle)
+      try {
+        await waitUntilStable(pageRef);
+      } catch (e) {
+        // If page closed while waiting, trigger a retry
+        if (pageRef.isClosed())
+          throw new Error(
+            'notification page closed while waiting for stability'
+          );
+        throw e;
+      }
+
+      // Execute actions starting from startIndex
+      for (let i = startIndex; i < actions.length; i++) {
+        const action = actions[i];
+
+        // Save index we're about to perform so we can resume here if it fails
+        startIndex = i;
+
+        // Debugging log: which action we're about to attempt
+        console.log(
+          `[Debugging][handleMetaMaskSnapApproval] Performing action [${i}] ${action.type}:${action.name}`
+        );
+
+        // If clicking "Ok" we expect the page might reload or transition — small stabilization wait after it
+        await attemptClickElement(pageRef, action, '[Debugging] ');
+
+        if (action.name === 'Ok') {
+          // small pause + stability check because MetaMask often transitions after "Ok"
+          console.log(
+            '[Debugging][handleMetaMaskSnapApproval] waiting after "Ok" for possible internal navigation'
+          );
+          await sleep(400); // brief allow internal transitions
+          try {
+            await waitUntilStable(pageRef);
+          } catch {
+            // if page closed / reloads, the outer try/catch will catch and trigger reacquire
+            if (pageRef.isClosed())
+              throw new Error('notification page closed after "Ok" click');
+          }
+        }
+      }
+
+      // If we got here, all actions succeeded
       console.log(
         '[Debugging][handleMetaMaskSnapApproval] ✅ All actions succeeded'
       );
-      break;
-    } catch (error) {
+      return;
+    } catch (err: any) {
       attempt++;
       console.warn(
-        `[handleMetaMaskSnapApproval] Attempt ${attempt}/${maxRetries} failed: ${error.message}`
+        `[handleMetaMaskSnapApproval] Attempt ${attempt}/${maxRetries} failed: ${
+          err?.message || err
+        }`
       );
 
-      // 🧭 Log all open pages to understand MetaMask behavior in CI
-      const pages = notificationPage.context().pages();
-      console.log(
-        `[Debugging][handleMetaMaskSnapApproval] Open pages count: ${pages.length}`
-      );
-      pages.forEach((p, i) => {
-        console.log(
-          `   Page[${i}] URL: ${p.url()} | isClosed: ${p.isClosed()}`
-        );
-      });
-
-      // Screenshot on failure
+      // Show open pages for context (helps in CI)
       try {
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        await notificationPage.screenshot({
-          path: `./screenshots/debug-attempt-${attempt}-${timestamp}.png`,
-          fullPage: true
-        });
+        const pages = pageRef.context().pages();
         console.log(
-          '[Debugging][handleMetaMaskSnapApproval] Screenshot captured for failed attempt'
+          `[Debugging][handleMetaMaskSnapApproval] Open pages count: ${pages.length}`
         );
-      } catch (ssError) {
-        console.log(
-          `[Debugging][handleMetaMaskSnapApproval] Screenshot failed: ${ssError.message}`
+        pages.forEach((p, idx) =>
+          console.log(`   Page[${idx}] url=${p.url()} closed=${p.isClosed()}`)
+        );
+      } catch (e) {
+        console.warn(
+          '[Debugging][handleMetaMaskSnapApproval] Failed to list pages:',
+          (e as Error).message
         );
       }
 
-      if (attempt <= maxRetries) {
-        const delay = RETRY_DELAY_BASE * 2 ** (attempt - 1);
-        console.log(
-          `[Debugging][handleMetaMaskSnapApproval] Retrying in ${delay}ms...`
-        );
-        await sleep(delay);
-
-        // Try to reload or reacquire notification page if it’s closed
-        if (notificationPage.isClosed()) {
+      // Try to save screenshot if possible
+      try {
+        await ensureDebugDir();
+        if (!pageRef.isClosed()) {
+          const ts = new Date().toISOString().replace(/[:.]/g, '-');
+          await pageRef.screenshot({
+            path: `${SCREENSHOT_DIR}/attempt-${attempt}-${ts}.png`,
+            fullPage: true
+          });
           console.log(
-            '[Debugging][handleMetaMaskSnapApproval] Page is closed. Attempting to reacquire...'
+            '[Debugging][handleMetaMaskSnapApproval] screenshot saved for failed attempt'
           );
-          const newPages = notificationPage.context().pages();
-          const newNotification = newPages.find((p) =>
-            p.url().includes('notification.html')
+        }
+      } catch (ssErr) {
+        console.warn(
+          '[Debugging][handleMetaMaskSnapApproval] screenshot failed:',
+          (ssErr as Error).message
+        );
+      }
+
+      if (attempt > maxRetries) break;
+
+      // exponential backoff
+      const delay = RETRY_DELAY_BASE * 2 ** (attempt - 1);
+      console.log(
+        `[Debugging][handleMetaMaskSnapApproval] Retrying in ${delay}ms (will resume at action index ${startIndex})...`
+      );
+      await sleep(delay);
+
+      // If page closed try to reacquire one more time before next attempt
+      if (pageRef.isClosed()) {
+        console.log(
+          '[Debugging][handleMetaMaskSnapApproval] pageRef closed — searching for a new notification page'
+        );
+        const ctxPages = pageRef.context().pages();
+        const candidate = ctxPages.find((p) =>
+          p.url().includes('notification.html')
+        );
+        if (candidate) {
+          pageRef = candidate;
+          console.log(
+            '[Debugging][handleMetaMaskSnapApproval] reacquired notification page from context.pages()'
           );
-          if (newNotification) {
-            console.log(
-              '[Debugging][handleMetaMaskSnapApproval] Reacquired notification page.'
-            );
-            notificationPage = newNotification;
-          } else {
-            console.log(
-              '[Debugging][handleMetaMaskSnapApproval] No notification page found to reacquire.'
-            );
-          }
         } else {
+          // try waiting for a short-lived page event (MetaMask might open a new popup)
           try {
+            const newPage = await pageRef
+              .context()
+              .waitForEvent('page', { timeout: 5000 });
+            if (newPage.url().includes('notification.html')) {
+              pageRef = newPage;
+              console.log(
+                '[Debugging][handleMetaMaskSnapApproval] reacquired notification page via waitForEvent'
+              );
+            } else {
+              console.log(
+                '[Debugging][handleMetaMaskSnapApproval] new page opened but not notification.html'
+              );
+            }
+          } catch {
             console.log(
-              '[Debugging][handleMetaMaskSnapApproval] Reloading notification page...'
-            );
-            await notificationPage.reload();
-            await waitUntilStable(notificationPage);
-            console.log(
-              '[Debugging][handleMetaMaskSnapApproval] Reload complete'
-            );
-          } catch (reloadError) {
-            console.warn(
-              `[handleMetaMaskSnapApproval] Failed to reload: ${reloadError.message}`
+              '[Debugging][handleMetaMaskSnapApproval] no new notification page appeared in short timeout'
             );
           }
         }
-        continue;
+      } else {
+        // if page is still open, try reload to ensure DOM is in consistent state
+        try {
+          console.log(
+            '[Debugging][handleMetaMaskSnapApproval] Reloading pageRef to recover state'
+          );
+          await pageRef.reload();
+          await waitUntilStable(pageRef);
+          console.log(
+            '[Debugging][handleMetaMaskSnapApproval] reload completed'
+          );
+        } catch (reloadErr) {
+          console.warn(
+            '[Debugging][handleMetaMaskSnapApproval] reload failed:',
+            (reloadErr as Error).message
+          );
+        }
       }
 
-      console.error(
-        `[handleMetaMaskSnapApproval] ❌ Failed after ${maxRetries} retries: ${error.message}`
-      );
+      // Important: do NOT reset startIndex — we intentionally resume from the failing index
+      // unless you want to restart from the beginning; keeping resume behavior preserves work done.
+      continue;
     }
   }
 
-  console.log('[Debugging][handleMetaMaskSnapApproval] END');
+  // If we exit loop without returning, report failure
+  console.error(
+    '[handleMetaMaskSnapApproval] ❌ All retries exhausted — actions not completed'
+  );
+  throw new Error(
+    'handleMetaMaskSnapApproval: Unable to complete snap approval after retries'
+  );
 };
