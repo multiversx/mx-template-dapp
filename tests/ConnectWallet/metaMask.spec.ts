@@ -83,7 +83,7 @@ test.describe('Connect a wallet', () => {
 
       // Get the notification page and wait for it to load
       const notificationPage = await getNotificationPageAndWaitForLoad(
-        context,
+        page.context(),
         extensionId
       );
 

@@ -4,7 +4,7 @@ import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
 
 const RETRY_DELAY_BASE = 1000;
-const CLICK_TIMEOUT = 10000;
+const CLICK_TIMEOUT = 5000;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -25,6 +25,13 @@ const attemptClickElement = async (
   console.log(
     `${debugTag}[attemptClickElement] Attempting ${action.type}:${action.name}`
   );
+
+  // Special handling for MultiversX checkbox
+  if (action.type === 'checkbox' && action.name === 'MultiversX') {
+    console.log('[Debugging] Special handling for MultiversX checkbox');
+    await sleep(1000);
+  }
+
   try {
     await element.waitFor({ state: 'visible', timeout: CLICK_TIMEOUT });
     await element.click();
