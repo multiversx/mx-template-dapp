@@ -23,9 +23,6 @@ const clickElement = async (
   const element = selectorMap[type];
   if (!element) throw new Error(`Unknown element type: ${type}`);
 
-  // Ensure the notification page is fully loaded
-  await waitUntilStable(notificationPage);
-
   // Try to click the element
   try {
     await element.waitFor({ state: 'visible', timeout });
@@ -55,6 +52,10 @@ export const handleMetaMaskSnapApproval = async (
 
   try {
     for (const { type, name } of actions) {
+      // Ensure the notification page is fully loaded before clicking any elements
+      await waitUntilStable(notificationPage);
+
+      // Click the element based on type (testId, checkbox, button)
       await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
     }
     return true;

@@ -53,6 +53,12 @@ test.describe('Connect a wallet', () => {
         extensionId
       );
 
+      if (!notificationPage) {
+        throw new Error(
+          'Notification page not found after clicking connect MetaMask button'
+        );
+      }
+
       // Handle MetaMask Snap privacy warning
       await TestActions.handleMetaMaskSnapApproval(notificationPage);
 
