@@ -19,7 +19,6 @@ const attemptClickElement = async (
   const element = selectorMap[action.type];
   if (!element) throw new Error(`Unknown element type: ${action.type}`);
 
-  // 🔍 Debugging logs
   console.log(
     `[Debugging][attemptClickElement] Attempting ${action.type}:${action.name}`
   );
@@ -31,6 +30,14 @@ const attemptClickElement = async (
     '[Debugging][attemptClickElement] notificationPage.url():',
     notificationPage.url()
   );
+
+  // ✅ NEW: skip action if the popup closed
+  if (notificationPage.isClosed()) {
+    console.log(
+      `[Debugging][attemptClickElement] Skipping "${action.name}" because page already closed`
+    );
+    return;
+  }
 
   try {
     await element.waitFor({ state: 'visible', timeout: 10000 });
@@ -44,6 +51,8 @@ const attemptClickElement = async (
       `[Debugging][attemptClickElement] Error clicking "${action.name}":`,
       error.message
     );
+
+    // ✅ NEW: safely handle closure mid-click
     if (notificationPage.isClosed()) {
       console.log(
         `[Debugging][attemptClickElement] Page closed mid-click for "${action.name}"`
