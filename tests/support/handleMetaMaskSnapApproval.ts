@@ -19,6 +19,7 @@ const attemptClickElement = async (
   const element = selectorMap[action.type];
   if (!element) throw new Error(`Unknown element type: ${action.type}`);
 
+  // 🔍 Debugging logs
   console.log(
     `[Debugging][attemptClickElement] Attempting ${action.type}:${action.name}`
   );
@@ -30,14 +31,6 @@ const attemptClickElement = async (
     '[Debugging][attemptClickElement] notificationPage.url():',
     notificationPage.url()
   );
-
-  // ✅ NEW: skip action if the popup closed
-  if (notificationPage.isClosed()) {
-    console.log(
-      `[Debugging][attemptClickElement] Skipping "${action.name}" because page already closed`
-    );
-    return;
-  }
 
   try {
     await element.waitFor({ state: 'visible', timeout: 10000 });
@@ -52,12 +45,14 @@ const attemptClickElement = async (
       error.message
     );
 
-    // ✅ NEW: safely handle closure mid-click
+    // 🚨 Throw if page closed (so retry logic is triggered)
     if (notificationPage.isClosed()) {
       console.log(
         `[Debugging][attemptClickElement] Page closed mid-click for "${action.name}"`
       );
-      return;
+      throw new Error(
+        `[attemptClickElement] Page closed unexpectedly while clicking "${action.name}"`
+      );
     }
 
     // Screenshot for CI debugging
@@ -134,6 +129,14 @@ export const handleMetaMaskSnapApproval = async (
 
       for (const action of actions) {
         await attemptClickElement(notificationPage, action);
+
+        // ⏳ After clicking "Ok", MetaMask may refresh the page internally
+        if (action.name === 'Ok') {
+          console.log(
+            '[Debugging][handleMetaMaskSnapApproval] Waiting for possible page reload after "Ok"'
+          );
+          await waitUntilStable(notificationPage);
+        }
       }
 
       console.log(
@@ -146,16 +149,18 @@ export const handleMetaMaskSnapApproval = async (
         `[handleMetaMaskSnapApproval] Attempt ${attempt}/${maxRetries} failed: ${error.message}`
       );
 
-      // Capture debugging info and screenshot
+      // 🧭 Log all open pages to understand MetaMask behavior in CI
+      const pages = notificationPage.context().pages();
       console.log(
-        '[Debugging][handleMetaMaskSnapApproval] notificationPage.isClosed():',
-        notificationPage.isClosed()
+        `[Debugging][handleMetaMaskSnapApproval] Open pages count: ${pages.length}`
       );
-      console.log(
-        '[Debugging][handleMetaMaskSnapApproval] notificationPage.url():',
-        notificationPage.url()
-      );
+      pages.forEach((p, i) => {
+        console.log(
+          `   Page[${i}] URL: ${p.url()} | isClosed: ${p.isClosed()}`
+        );
+      });
 
+      // Screenshot on failure
       try {
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         await notificationPage.screenshot({
@@ -178,7 +183,26 @@ export const handleMetaMaskSnapApproval = async (
         );
         await sleep(delay);
 
-        if (!notificationPage.isClosed()) {
+        // Try to reload or reacquire notification page if it’s closed
+        if (notificationPage.isClosed()) {
+          console.log(
+            '[Debugging][handleMetaMaskSnapApproval] Page is closed. Attempting to reacquire...'
+          );
+          const newPages = notificationPage.context().pages();
+          const newNotification = newPages.find((p) =>
+            p.url().includes('notification.html')
+          );
+          if (newNotification) {
+            console.log(
+              '[Debugging][handleMetaMaskSnapApproval] Reacquired notification page.'
+            );
+            notificationPage = newNotification;
+          } else {
+            console.log(
+              '[Debugging][handleMetaMaskSnapApproval] No notification page found to reacquire.'
+            );
+          }
+        } else {
           try {
             console.log(
               '[Debugging][handleMetaMaskSnapApproval] Reloading notification page...'
