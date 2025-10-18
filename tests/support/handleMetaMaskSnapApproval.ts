@@ -1,38 +1,33 @@
 import { Page } from '@playwright/test';
 import { SelectorsEnum } from './testdata';
 import { waitForMetaMaskLoad } from './waitForMetaMaskLoad';
-import { waitUntilStable } from './waitUntilStable';
 
-const CLICK_ACTION_TIMEOUT = 10000;
-const CLICK_DELAY = 300;
 const RETRY_DELAY_BASE = 1000;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// Clicks an element based on type (testId, checkbox, button)
-const clickElement = async (
-  notificationPage: Page,
-  type: string,
-  name: string,
-  timeout: number
-): Promise<void> => {
+const attemptClickElement = async (
+  page: Page,
+  action: { type: 'testId' | 'checkbox' | 'button'; name: string }
+) => {
   const selectorMap = {
-    testId: notificationPage.getByTestId(name),
-    checkbox: notificationPage.getByRole('checkbox', { name }),
-    button: notificationPage.getByRole('button', { name })
+    testId: page.getByTestId(action.name),
+    checkbox: page.getByRole('checkbox', { name: action.name }),
+    button: page.getByRole('button', { name: action.name })
   };
 
-  const element = selectorMap[type];
-  if (!element) throw new Error(`Unknown element type: ${type}`);
+  const element = selectorMap[action.type];
+  if (!element) throw new Error(`Unknown element type: ${action.type}`);
 
-  // Try to click the element
   try {
-    await element.waitFor({ state: 'visible', timeout });
     await element.click();
-    await sleep(CLICK_DELAY);
-  } catch (err) {
+  } catch (error) {
+    if (page.isClosed()) {
+      return;
+    }
+
     throw new Error(
-      `[clickElement] Failed to click ${type}:${name} — ${err.message}`
+      `[attemptClickElement] Failed to click ${action.type}:${action.name} — ${error.message}`
     );
   }
 };
@@ -56,12 +51,8 @@ export const handleMetaMaskSnapApproval = async (
   let attempt = 0;
   while (attempt <= maxRetries) {
     try {
-      for (const { type, name } of actions) {
-        // Ensure page is fully loaded
-        await waitUntilStable(notificationPage as Page);
-
-        // Click the element based on type (testId, checkbox, button)
-        await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
+      for (const action of actions) {
+        await attemptClickElement(notificationPage, action);
       }
     } catch (error) {
       attempt++;
