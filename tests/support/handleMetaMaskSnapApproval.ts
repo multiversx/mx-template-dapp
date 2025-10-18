@@ -20,11 +20,12 @@ const attemptClickElement = async (
   if (!element) throw new Error(`Unknown element type: ${action.type}`);
 
   try {
+    await element.waitFor({ state: 'visible', timeout: 10000 });
     await element.click();
   } catch (error) {
-    // if (notificationPage.isClosed()) {
-    //   return;
-    // }
+    if (notificationPage.isClosed()) {
+      return;
+    }
 
     throw new Error(
       `[attemptClickElement] Failed to click ${action.type}:${action.name} — ${error.message}`
