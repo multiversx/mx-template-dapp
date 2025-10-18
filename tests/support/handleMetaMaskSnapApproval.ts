@@ -5,6 +5,7 @@ import { waitUntilStable } from './waitUntilStable';
 
 const CLICK_ACTION_TIMEOUT = 10000;
 const CLICK_DELAY = 300;
+const RETRY_DELAY_BASE = 1000;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -39,8 +40,8 @@ const clickElement = async (
 // Handles the MetaMask Snap approval flow
 export const handleMetaMaskSnapApproval = async (
   notificationPage: Page,
-  maxRetries = 2
-): Promise<boolean> => {
+  maxRetries = 5
+): Promise<void> => {
   const actions = [
     { type: 'testId', name: SelectorsEnum.snapPrivacyWarningScroll },
     { type: 'button', name: 'Accept' },
@@ -59,28 +60,38 @@ export const handleMetaMaskSnapApproval = async (
         // Ensure page is fully loaded
         await waitUntilStable(notificationPage as Page);
 
-        // Wait for MetaMask UI to load
-        await waitForMetaMaskLoad(notificationPage);
-
         // Click the element based on type (testId, checkbox, button)
         await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
       }
-      return true;
     } catch (error) {
       attempt++;
       if (attempt <= maxRetries) {
         console.warn(
-          `[handleMetaMaskSnapApproval] Attempt ${attempt}/${maxRetries} failed: ${error.message}. Retrying...`
+          `[handleMetaMaskSnapApproval] Attempt ${attempt}/${maxRetries} failed: ${error.message}`
         );
-        await sleep(1000 * attempt);
+
+        // Exponential backoff delay
+        const delay = RETRY_DELAY_BASE * 2 ** (attempt - 1);
+        console.log(`[handleMetaMaskSnapApproval] Retrying in ${delay}ms...`);
+        await sleep(delay);
+
+        // Try to reload the page and wait for MetaMask UI to be ready before retrying
+        if (!notificationPage.isClosed()) {
+          try {
+            await notificationPage.reload();
+            await waitForMetaMaskLoad(notificationPage);
+          } catch (reloadError) {
+            console.warn(
+              `[handleMetaMaskSnapApproval] Failed to reload page before retry: ${reloadError}`
+            );
+            // Continue with retry anyway
+          }
+        }
         continue;
       }
       console.error(
         `[handleMetaMaskSnapApproval] Failed after ${maxRetries} retries: ${error.message}`
       );
-      return false;
     }
   }
-
-  return false;
 };
