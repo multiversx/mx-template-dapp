@@ -142,6 +142,7 @@ export interface WaitForPageByUrlSubstringType {
   page: Page;
   urlSubstring: string;
   timeout?: number;
+  enableLogging?: boolean;
 }
 
 export interface WaitForToastToBeClosedType {
