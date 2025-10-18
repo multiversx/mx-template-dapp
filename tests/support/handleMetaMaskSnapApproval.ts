@@ -37,7 +37,8 @@ const clickElement = async (
 
 // Handles the MetaMask Snap approval flow
 export const handleMetaMaskSnapApproval = async (
-  notificationPage: Page
+  notificationPage: Page,
+  maxRetries = 2
 ): Promise<boolean> => {
   const actions = [
     { type: 'testId', name: SelectorsEnum.snapPrivacyWarningScroll },
@@ -50,17 +51,32 @@ export const handleMetaMaskSnapApproval = async (
     { type: 'button', name: 'Approve' }
   ] as const;
 
-  try {
-    for (const { type, name } of actions) {
-      // Ensure the notification page is fully loaded before clicking any elements
-      await waitUntilStable(notificationPage);
+  let attempt = 0;
+  while (attempt <= maxRetries) {
+    try {
+      for (const { type, name } of actions) {
+        // Ensure the notification page is fully loaded before clicking any elements
+        await waitUntilStable(notificationPage);
 
-      // Click the element based on type (testId, checkbox, button)
-      await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
+        // Click the element based on type (testId, checkbox, button)
+        await clickElement(notificationPage, type, name, CLICK_ACTION_TIMEOUT);
+      }
+      return true;
+    } catch (error) {
+      attempt++;
+      if (attempt <= maxRetries) {
+        console.warn(
+          `[handleMetaMaskSnapApproval] Attempt ${attempt}/${maxRetries} failed: ${error.message}. Retrying...`
+        );
+        await sleep(1000 * attempt);
+        continue;
+      }
+      console.error(
+        `[handleMetaMaskSnapApproval] Failed after ${maxRetries} retries: ${error.message}`
+      );
+      return false;
     }
-    return true;
-  } catch (error) {
-    console.error(`[handleMetaMaskSnapApproval] Failed: ${error.message}`);
-    return false;
   }
+
+  return false;
 };
