@@ -3,29 +3,44 @@ import { getNotificationPageAndWaitForLoad } from './getNotificationPageAndWaitF
 import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
 
-const RETRY_DELAY_BASE = 500;
-const CLICK_TIMEOUT = 2500;
+const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+const RETRY_BASE_DELAY = 500; // ms
+const DEFAULT_ACTION_TIMEOUT = 2500; // ms
+const LONG_ACTION_TIMEOUT = 5000; // ms
 
-const attemptClickElement = async (
+async function attemptClickElement(
   page: Page,
-  action: { type: 'testId' | 'checkbox' | 'button'; name: string },
-  debugTag = ''
-) => {
+  action: { type: 'testId' | 'checkbox' | 'button'; name: string }
+) {
   const selectorMap = {
     testId: page.getByTestId(action.name),
     checkbox: page.getByRole('checkbox', { name: action.name }),
     button: page.getByRole('button', { name: action.name })
-  } as const;
-
+  };
   const element = selectorMap[action.type];
   if (!element) throw new Error(`Unknown element type: ${action.type}`);
 
-  console.log(
-    `${debugTag}[attemptClickElement] Attempting ${action.type}:${action.name}`
-  );
+  // smarter timeout based on step
+  const timeout =
+    action.name === 'Install' || action.name === 'Approve'
+      ? LONG_ACTION_TIMEOUT
+      : DEFAULT_ACTION_TIMEOUT;
 
+  // anticipatory wait for MetaMask route transitions
+  if (action.name === 'Install') {
+    await page.waitForURL(/snap-install/, { timeout: 7000 }).catch(() => {});
+  } else if (action.name === 'Approve') {
+    await page
+      .waitForURL(/confirmation|snap-install-result/, {
+        timeout: 7000
+      })
+      .catch(() => {});
+  }
+
+  console.log(
+    `[Debugging] [attemptClickElement] Attempting ${action.type}:${action.name}`
+  );
   console.log(
     `[Debugging] ${action.name} Is page still open?`,
     !page.isClosed(),
@@ -33,23 +48,25 @@ const attemptClickElement = async (
   );
 
   try {
-    await element.waitFor({ state: 'visible', timeout: CLICK_TIMEOUT });
+    await element.waitFor({ state: 'visible', timeout });
     await element.click();
-    console.log(`${debugTag}[attemptClickElement] Clicked "${action.name}"`);
-  } catch (err: any) {
+    console.log(`[Debugging] [attemptClickElement] Clicked "${action.name}"`);
+  } catch (error: any) {
     console.log(
-      `${debugTag}[attemptClickElement] Error clicking "${action.name}": ${
-        err?.message || err
-      }`
+      `[Debugging] [attemptClickElement] Error clicking "${action.name}": ${error.message}`
     );
-    throw err;
+    if (page.isClosed())
+      console.log(
+        `[Debugging] [attemptClickElement] Page closed mid-click for "${action.name}"`
+      );
+    throw error;
   }
-};
+}
 
 export const handleMetaMaskSnapApproval = async (
   context: BrowserContext,
+  notificationPage: Page,
   extensionId: string,
-  initialPage: Page,
   maxRetries = 5
 ): Promise<void> => {
   const actions = [
@@ -65,31 +82,23 @@ export const handleMetaMaskSnapApproval = async (
 
   console.log('[Debugging][handleMetaMaskSnapApproval] START');
   console.log(
-    '[Debugging][handleMetaMaskSnapApproval] initial URL:',
-    initialPage.url()
+    `[Debugging][handleMetaMaskSnapApproval] initial URL: ${notificationPage.url()}`
   );
 
-  let pageRef: Page = initialPage;
   let attempt = 0;
   let startIndex = 0;
 
-  while (attempt <= maxRetries) {
+  while (attempt < maxRetries) {
     try {
       console.log(
         `[Debugging][handleMetaMaskSnapApproval] Attempt ${
           attempt + 1
         }/${maxRetries} (startIndex=${startIndex})`
       );
-
-      await waitUntilStable(pageRef);
-      console.log(
-        '[Debugging][handleMetaMaskSnapApproval] Page stable, executing actions...'
-      );
+      await waitUntilStable(notificationPage);
 
       for (let i = startIndex; i < actions.length; i++) {
         const action = actions[i];
-        startIndex = i; // remember which step we’re at
-
         console.log(
           `[Debugging][handleMetaMaskSnapApproval] Performing ${action.type}:${action.name}`
         );
@@ -99,7 +108,7 @@ export const handleMetaMaskSnapApproval = async (
           context.pages().map((p) => p.url())
         );
 
-        await attemptClickElement(pageRef, action, '[Debugging] ');
+        await attemptClickElement(notificationPage, action);
 
         console.log(
           '[Debugging][handleMetaMaskSnapApproval] All open pages after action:',
@@ -111,48 +120,39 @@ export const handleMetaMaskSnapApproval = async (
         '[Debugging][handleMetaMaskSnapApproval] ✅ All actions succeeded'
       );
       return;
-    } catch (err: any) {
+    } catch (error: any) {
       attempt++;
       console.warn(
-        `[handleMetaMaskSnapApproval] Attempt ${attempt}/${maxRetries} failed: ${
-          err?.message || err
-        }`
+        `[handleMetaMaskSnapApproval] Attempt ${attempt}/${maxRetries} failed: ${error.message}`
       );
 
-      // If we hit retry limit, throw
-      if (attempt > maxRetries) {
-        console.error('[handleMetaMaskSnapApproval] ❌ All retries exhausted');
-        throw err;
-      }
-
-      // Try reacquiring a fresh notification page
+      // reacquire notification page if closed or stale
       console.log(
         '[Debugging][handleMetaMaskSnapApproval] Trying to reacquire notification page...'
       );
-      try {
-        pageRef = await getNotificationPageAndWaitForLoad(context, extensionId);
-        console.log(
-          '[Debugging][handleMetaMaskSnapApproval] Successfully reacquired notification page.'
-        );
-        await waitUntilStable(pageRef);
-      } catch (reaqErr) {
-        console.error(
-          `[handleMetaMaskSnapApproval] Failed to reacquire notification page: ${
-            (reaqErr as Error).message
-          }`
-        );
-        throw reaqErr;
-      }
+      notificationPage = await getNotificationPageAndWaitForLoad(
+        context,
+        extensionId
+      ).catch(() => notificationPage);
+      console.log(
+        '[Debugging][handleMetaMaskSnapApproval] Successfully reacquired notification page.'
+      );
 
-      // Wait before retrying same action
-      const delay = RETRY_DELAY_BASE * 2 ** (attempt - 1);
+      const delay = RETRY_BASE_DELAY * 2 ** (attempt - 1);
       console.log(
         `[Debugging][handleMetaMaskSnapApproval] Retrying in ${delay}ms...`
       );
       await sleep(delay);
+
+      // resume from last unfinished action
+      if (error.message?.includes('clicking')) {
+        const match = actions.findIndex((a) => error.message.includes(a.name));
+        if (match !== -1) startIndex = match;
+      }
     }
   }
 
-  console.error('[handleMetaMaskSnapApproval] ❌ Unexpected end of function');
-  throw new Error('handleMetaMaskSnapApproval failed unexpectedly');
+  throw new Error(
+    `[handleMetaMaskSnapApproval] ❌ Failed after ${maxRetries} retries`
+  );
 };
