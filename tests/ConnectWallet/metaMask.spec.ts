@@ -50,8 +50,8 @@ test.describe('Connect a wallet', () => {
       // Handle MetaMask Snap privacy warning
       await TestActions.handleMetaMaskSnapApproval(
         context,
-        notificationPage,
-        extensionId
+        extensionId,
+        notificationPage
       );
 
       // Switch to template page
@@ -90,8 +90,8 @@ test.describe('Connect a wallet', () => {
       // Handle MetaMask Snap privacy warning
       await TestActions.handleMetaMaskSnapApproval(
         context,
-        notificationPage,
-        extensionId
+        extensionId,
+        notificationPage
       );
 
       // Switch to template page
