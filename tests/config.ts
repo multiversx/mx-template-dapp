@@ -8,5 +8,5 @@ export const TEST_CONFIG = {
   /* Timeout for locators */
   expectTimeout: 60_000,
   /* Run tests in files in parallel */
-  fullyParallel: true
+  fullyParallel: false
 } as const;

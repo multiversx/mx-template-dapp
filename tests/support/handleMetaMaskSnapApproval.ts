@@ -3,8 +3,8 @@ import { getNotificationPageAndWaitForLoad } from './getNotificationPageAndWaitF
 import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
 
-const RETRY_DELAY_BASE = 1000;
-const CLICK_TIMEOUT = 5000;
+const RETRY_DELAY_BASE = 500;
+const CLICK_TIMEOUT = 2500;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -26,10 +26,11 @@ const attemptClickElement = async (
     `${debugTag}[attemptClickElement] Attempting ${action.type}:${action.name}`
   );
 
-  if (action.name === 'Approve' || action.name === 'MultiversX') {
-    await page.waitForTimeout(2000);
-    console.log('[Debugging] Still open?', !page.isClosed(), page.url());
-  }
+  console.log(
+    `[Debugging] ${action.name} Is page still open?`,
+    !page.isClosed(),
+    page.url()
+  );
 
   try {
     await element.waitFor({ state: 'visible', timeout: CLICK_TIMEOUT });
@@ -93,7 +94,17 @@ export const handleMetaMaskSnapApproval = async (
           `[Debugging][handleMetaMaskSnapApproval] Performing ${action.type}:${action.name}`
         );
 
+        console.log(
+          '[Debugging][handleMetaMaskSnapApproval] All open pages before action:',
+          context.pages().map((p) => p.url())
+        );
+
         await attemptClickElement(pageRef, action, '[Debugging] ');
+
+        console.log(
+          '[Debugging][handleMetaMaskSnapApproval] All open pages after action:',
+          context.pages().map((p) => p.url())
+        );
       }
 
       console.log(
