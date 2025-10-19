@@ -1,7 +1,7 @@
 name: Playwright merge E2E Tests
 on: 
   pull_request:
-    branches: [main, development]
+    branches: [main]
   workflow_dispatch:
 jobs:
   # Slack-Notification:
