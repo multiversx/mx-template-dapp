@@ -26,12 +26,6 @@ const attemptClickElement = async (
     `${debugTag}[attemptClickElement] Attempting ${action.type}:${action.name}`
   );
 
-  // Special handling for MultiversX checkbox
-  if (action.type === 'checkbox' && action.name === 'MultiversX') {
-    console.log('[Debugging] Special handling for MultiversX checkbox');
-    await sleep(1000);
-  }
-
   try {
     await element.waitFor({ state: 'visible', timeout: CLICK_TIMEOUT });
     await element.click();
@@ -95,15 +89,6 @@ export const handleMetaMaskSnapApproval = async (
         );
 
         await attemptClickElement(pageRef, action, '[Debugging] ');
-
-        // Handle internal page refresh after “Ok”
-        if (action.name === 'Ok') {
-          console.log(
-            '[Debugging][handleMetaMaskSnapApproval] Waiting after "Ok" for potential reload...'
-          );
-          await sleep(500);
-          await waitUntilStable(pageRef);
-        }
       }
 
       console.log(
