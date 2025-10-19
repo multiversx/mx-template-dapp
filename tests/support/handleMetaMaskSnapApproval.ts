@@ -26,6 +26,11 @@ const attemptClickElement = async (
     `${debugTag}[attemptClickElement] Attempting ${action.type}:${action.name}`
   );
 
+  if (action.name === 'Approve' || action.name === 'MultiversX') {
+    await page.waitForTimeout(2000);
+    console.log('[Debugging] Still open?', !page.isClosed(), page.url());
+  }
+
   try {
     await element.waitFor({ state: 'visible', timeout: CLICK_TIMEOUT });
     await element.click();
