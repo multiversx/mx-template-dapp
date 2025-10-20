@@ -7,7 +7,10 @@ export const checkConnectionToWallet = async (
   page: Page,
   walletAddress: string
 ) => {
-  await expect(page.getByTestId(SelectorsEnum.topInfoContainer)).toContainText(
-    walletAddress
-  );
+  const topInfoContainer = page.getByTestId(SelectorsEnum.topInfoContainer);
+
+  const addressElement = topInfoContainer
+    .getByTestId(SelectorsEnum.accountAddress)
+    .getByTestId(SelectorsEnum.trimFullAddress);
+  await expect(addressElement).toContainText(walletAddress);
 };

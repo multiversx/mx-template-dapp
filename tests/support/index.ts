@@ -24,6 +24,8 @@ export { filterTransactions } from './parseTransactionsTable';
 
 export { getTestIdSelector } from './testIdSelector';
 
+export { handleMetaMaskSnapApproval } from './handleMetaMaskSnapApproval';
+
 export { handlePingPong } from './handlePingPong';
 
 export { navigateToConnectWallet } from './navigateToConnectWallet';
@@ -43,5 +45,7 @@ export { waitForToastToBeClosed } from './waitForToastToBeClosed';
 export { waitForToastToBeDisplayed } from './waitForToastToBeDisplayed';
 
 export { waitForTransactionToastToContain } from './waitForTransactionToastToShow';
+
+export { waitUntilStable } from './waitUntilStable';
 
 export { writeValueToFile } from './fs/writeValueToFile';
