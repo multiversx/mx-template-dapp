@@ -73,10 +73,10 @@ test.describe('Sign Message', () => {
     await page.getByTestId(SelectorsEnum.signMsgButton).click();
 
     // Switch to web wallet page
-    const walletPage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.multiversxWallet
-    });
+    const walletPage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.multiversxWallet
+    );
 
     // Verify wallet page opened
     await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
@@ -88,10 +88,10 @@ test.describe('Sign Message', () => {
     await walletPage.getByTestId(SelectorsEnum.signMsgWalletButton).click();
 
     // Switch to template dashboard page
-    const templatePage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.templateDashboard
-    });
+    const templatePage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.templateDashboard
+    );
 
     // Verify the decoded message matches the original message
     const decodedMessage = templatePage.getByTestId(

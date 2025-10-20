@@ -96,10 +96,10 @@ test.describe('Ping & Pong (ABI)', () => {
     });
 
     // Switch to web wallet page
-    const walletPage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.multiversxWallet
-    });
+    const walletPage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.multiversxWallet
+    );
 
     // Verify wallet page opened
     await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
@@ -111,10 +111,10 @@ test.describe('Ping & Pong (ABI)', () => {
     await walletPage.getByTestId(SelectorsEnum.signButton).click();
 
     // Switch to template dashboard page
-    const templatePage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.templateDashboard
-    });
+    const templatePage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.templateDashboard
+    );
 
     // Wait for transaction toast to be displayed
     await TestActions.waitForToastToBeDisplayed(templatePage);

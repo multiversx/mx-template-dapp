@@ -5,10 +5,10 @@ const walletsDir = process.env.WALLETS_DIR || PATHS.WALLETS_DIR;
 export const NA = 'N/A';
 
 export enum OriginPageEnum {
-  multiversxWallet = '/devnet-wallet.multiversx.com/',
-  localhost = 'localhost:3000',
-  templateDashboard = '/dashboard',
-  unlockPage = '/unlock'
+  multiversxWallet = 'devnet-wallet.multiversx.com',
+  templateHome = 'localhost:3000/home',
+  templateDashboard = 'localhost:3000/dashboard',
+  templateUnlock = 'localhost:3000/unlock'
 }
 
 export enum PingPongEnum {

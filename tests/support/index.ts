@@ -38,7 +38,7 @@ export { readValueFromFile } from './fs/readValueFromFile';
 
 export { signBatchTransactions } from './signBatchTransactions';
 
-export { waitForPageByUrlSubstring } from './waitForPageByUrlSubstring';
+export { getPageAndWaitForLoad } from './getPageAndWaitForLoad';
 
 export { waitForToastToBeClosed } from './waitForToastToBeClosed';
 
