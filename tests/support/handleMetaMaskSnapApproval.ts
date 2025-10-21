@@ -1,5 +1,5 @@
 import { BrowserContext, Page } from '@playwright/test';
-import { getNotificationPageAndWaitForLoad } from './getNotificationPageAndWaitForLoad';
+import { getPageAndWaitForLoad } from './getPageAndWaitForLoad';
 import { SelectorsEnum } from './testdata';
 import { waitUntilStable } from './waitUntilStable';
 
@@ -86,7 +86,13 @@ export const handleMetaMaskSnapApproval = async (
 
       // Try to reacquire a new popup
       try {
-        pageRef = await getNotificationPageAndWaitForLoad(context, extensionId);
+        pageRef = await getPageAndWaitForLoad(
+          context,
+          `chrome-extension://${extensionId}/notification.html`,
+          {
+            viewport: { width: 360, height: 592 }
+          }
+        );
         await waitUntilStable(pageRef);
         console.warn('[MetaMaskSnapApproval] Reacquired notification page.');
       } catch (reaqErr) {

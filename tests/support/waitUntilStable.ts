@@ -11,8 +11,8 @@ export const waitUntilStable = async (page: Page) => {
   } catch (error) {
     console.error(
       '[waitUntilStable] Error waiting for page to be stable:',
-      error
+      error.message
     );
-    throw error.message;
+    throw new Error(error.message);
   }
 };

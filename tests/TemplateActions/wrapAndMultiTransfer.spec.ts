@@ -4,7 +4,8 @@ import { TEST_CONSTANTS } from '../support/constants';
 import {
   OriginPageEnum,
   SelectorsEnum,
-  TestDataEnums
+  TestDataEnums,
+  UrlRegex
 } from '../support/testdata';
 
 const keystoreConfig = {
@@ -65,13 +66,13 @@ test.describe('Wrap & Multi-Transfer', async () => {
     await page.getByTestId(SelectorsEnum.wrapAndMultiTransferButton).click();
 
     // Switch to web wallet page
-    const walletPage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.multiversxWallet
-    });
+    const walletPage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.multiversxWallet
+    );
 
     // Verify wallet page opened
-    await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
+    await expect(walletPage).toHaveURL(UrlRegex.multiversxWallet);
 
     // Sign transaction by confirming with keystore in the web wallet
     await TestActions.confirmWalletTransaction(walletPage, keystoreConfig);
@@ -84,10 +85,10 @@ test.describe('Wrap & Multi-Transfer', async () => {
     });
 
     // Switch to template page
-    const templatePage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.templateDashboard
-    });
+    const templatePage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.templateDashboard
+    );
 
     // Wait for transaction toast to be displayed
     await TestActions.waitForToastToBeDisplayed(templatePage);

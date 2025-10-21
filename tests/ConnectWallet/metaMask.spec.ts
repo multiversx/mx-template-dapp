@@ -1,12 +1,12 @@
-// Import necessary Synpress modules and setup
 import { testWithSynpress } from '@synthetixio/synpress';
 import { MetaMask, metaMaskFixtures } from '@synthetixio/synpress/playwright';
 import * as TestActions from '../support';
-import { getNotificationPageAndWaitForLoad } from '../support/getNotificationPageAndWaitForLoad';
-import { OriginPageEnum, SelectorsEnum } from '../support/testdata';
+import { getPageAndWaitForLoad } from '../support/getPageAndWaitForLoad';
+import { OriginPageEnum, SelectorsEnum, UrlRegex } from '../support/testdata';
 import walletSetup from '../test/wallet-setup/basic.setup';
 
-// Get password and mnemonic from environment variables
+// TODO: Load variables from .env.test.local when running locally
+// Get password and address from environment variables
 const METAMASK_ADDRESS = process.env.METAMASK_ADDRESS;
 const METAMASK_PASSWORD = process.env.METAMASK_PASSWORD;
 
@@ -42,9 +42,12 @@ test.describe('Connect a wallet', () => {
       await page.getByTestId('metamask').click();
 
       // Get the notification page and wait for it to load
-      const notificationPage = await getNotificationPageAndWaitForLoad(
+      const notificationPage = await getPageAndWaitForLoad(
         page.context(),
-        extensionId
+        `chrome-extension://${extensionId}/notification.html`,
+        {
+          viewport: { width: 360, height: 592 }
+        }
       );
 
       // Handle MetaMask Snap privacy warning
@@ -55,13 +58,13 @@ test.describe('Connect a wallet', () => {
       );
 
       // Switch to template page
-      const templatePage = await TestActions.waitForPageByUrlSubstring({
-        page,
-        urlSubstring: OriginPageEnum.templateDashboard
-      });
+      const templatePage = await getPageAndWaitForLoad(
+        page.context(),
+        OriginPageEnum.templateDashboard
+      );
 
       // Verify template page opened
-      await expect(templatePage).toHaveURL(OriginPageEnum.templateDashboard);
+      await expect(templatePage).toHaveURL(UrlRegex.templateDashboard);
 
       // Verify connection using TestActions helper
       await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);
@@ -82,9 +85,12 @@ test.describe('Connect a wallet', () => {
       await page.getByTestId('metamask').click();
 
       // Get the notification page and wait for it to load
-      const notificationPage = await getNotificationPageAndWaitForLoad(
+      const notificationPage = await getPageAndWaitForLoad(
         page.context(),
-        extensionId
+        `chrome-extension://${extensionId}/notification.html`,
+        {
+          viewport: { width: 360, height: 592 }
+        }
       );
 
       // Handle MetaMask Snap privacy warning
@@ -95,13 +101,13 @@ test.describe('Connect a wallet', () => {
       );
 
       // Switch to template page
-      const templatePage = await TestActions.waitForPageByUrlSubstring({
-        page,
-        urlSubstring: OriginPageEnum.templateDashboard
-      });
+      const templatePage = await getPageAndWaitForLoad(
+        page.context(),
+        OriginPageEnum.templateDashboard
+      );
 
       // Verify template page opened
-      await expect(templatePage).toHaveURL(OriginPageEnum.templateDashboard);
+      await expect(templatePage).toHaveURL(UrlRegex.templateDashboard);
 
       // Verify connection using TestActions helper
       await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);

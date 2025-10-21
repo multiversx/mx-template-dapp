@@ -3,7 +3,8 @@ import * as TestActions from '../support';
 import {
   OriginPageEnum,
   SelectorsEnum,
-  TestDataEnums
+  TestDataEnums,
+  UrlRegex
 } from '../support/testdata';
 
 const keystoreConfig = {
@@ -73,13 +74,13 @@ test.describe('Sign Message', () => {
     await page.getByTestId(SelectorsEnum.signMsgButton).click();
 
     // Switch to web wallet page
-    const walletPage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.multiversxWallet
-    });
+    const walletPage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.multiversxWallet
+    );
 
     // Verify wallet page opened
-    await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
+    await expect(walletPage).toHaveURL(UrlRegex.multiversxWallet);
 
     // Sign transaction by confirming with keystore in the web wallet
     await TestActions.confirmWalletTransaction(walletPage, keystoreConfig);
@@ -88,10 +89,10 @@ test.describe('Sign Message', () => {
     await walletPage.getByTestId(SelectorsEnum.signMsgWalletButton).click();
 
     // Switch to template dashboard page
-    const templatePage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.templateDashboard
-    });
+    const templatePage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.templateDashboard
+    );
 
     // Verify the decoded message matches the original message
     const decodedMessage = templatePage.getByTestId(
