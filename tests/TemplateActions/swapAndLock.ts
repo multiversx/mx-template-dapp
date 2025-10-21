@@ -4,7 +4,8 @@ import { TEST_CONSTANTS } from '../support/constants';
 import {
   OriginPageEnum,
   SelectorsEnum,
-  TestDataEnums
+  TestDataEnums,
+  UrlRegex
 } from '../support/testdata';
 
 const keystoreConfig = {
@@ -75,7 +76,7 @@ test.describe('Swap & Lock', () => {
     );
 
     // Verify wallet page opened
-    await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
+    await expect(walletPage).toHaveURL(UrlRegex.multiversxWallet);
 
     // Sign transaction by confirming with keystore in the web wallet
     await TestActions.confirmWalletTransaction(walletPage, keystoreConfig);

@@ -3,7 +3,8 @@ import * as TestActions from '../support';
 import {
   OriginPageEnum,
   SelectorsEnum,
-  TestDataEnums
+  TestDataEnums,
+  UrlRegex
 } from '../support/testdata';
 
 const keystoreConfig = {
@@ -34,7 +35,7 @@ test.describe('cancel transaction from wallet window', () => {
       page.context(),
       OriginPageEnum.multiversxWallet
     );
-    await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
+    await expect(walletPage).toHaveURL(UrlRegex.multiversxWallet);
 
     // Cancel the transaction from the wallet window
     await walletPage

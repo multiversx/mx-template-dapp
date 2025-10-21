@@ -5,7 +5,8 @@ import {
   OriginPageEnum,
   PingPongEnum,
   SelectorsEnum,
-  TestDataEnums
+  TestDataEnums,
+  UrlRegex
 } from '../support/testdata';
 
 const pemConfig = {
@@ -102,7 +103,7 @@ test.describe('Ping & Pong (ABI)', () => {
     );
 
     // Verify wallet page opened
-    await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
+    await expect(walletPage).toHaveURL(UrlRegex.multiversxWallet);
 
     // Sign transaction by confirming with pem
     await TestActions.confirmWalletTransaction(walletPage, pemConfig);

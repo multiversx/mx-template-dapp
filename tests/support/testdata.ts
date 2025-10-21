@@ -11,6 +11,11 @@ export enum OriginPageEnum {
   templateUnlock = 'localhost:3000/unlock'
 }
 
+export const UrlRegex = {
+  templateDashboard: /localhost:3000\/dashboard/,
+  multiversxWallet: /devnet-wallet\.multiversx\.com/
+} as const;
+
 export enum PingPongEnum {
   raw = 'raw',
   abi = 'abi',

@@ -2,7 +2,7 @@ import { testWithSynpress } from '@synthetixio/synpress';
 import { MetaMask, metaMaskFixtures } from '@synthetixio/synpress/playwright';
 import * as TestActions from '../support';
 import { getPageAndWaitForLoad } from '../support/getPageAndWaitForLoad';
-import { OriginPageEnum, SelectorsEnum } from '../support/testdata';
+import { OriginPageEnum, SelectorsEnum, UrlRegex } from '../support/testdata';
 import walletSetup from '../test/wallet-setup/basic.setup';
 
 // TODO: Load variables from .env.test.local when running locally
@@ -64,7 +64,7 @@ test.describe('Connect a wallet', () => {
       );
 
       // Verify template page opened
-      await expect(templatePage).toHaveURL(/localhost:3000\/dashboard/);
+      await expect(templatePage).toHaveURL(UrlRegex.templateDashboard);
 
       // Verify connection using TestActions helper
       await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);
@@ -107,7 +107,7 @@ test.describe('Connect a wallet', () => {
       );
 
       // Verify template page opened
-      await expect(templatePage).toHaveURL(/localhost:3000\/dashboard/);
+      await expect(templatePage).toHaveURL(UrlRegex.templateDashboard);
 
       // Verify connection using TestActions helper
       await TestActions.checkConnectionToWallet(page, METAMASK_ADDRESS);
