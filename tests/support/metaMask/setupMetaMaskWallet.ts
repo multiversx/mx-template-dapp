@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { handleMetaMetrics } from '../metaMask/handleMetrics';
+import { getPageAndWaitForLoad } from '../template/getPageAndWaitForLoad';
 import { waitUntilStable } from '../template/waitUntilStable';
 import { createPassword } from './createPassword';
 import { fillSecretRecoveryPhrase } from './fillSecretRecoveryPhrase';
@@ -21,22 +22,11 @@ export async function setupMetaMaskWallet(
       throw new Error('Failed to get MetaMask extension ID');
     }
 
-    // Try to find any extension page or open the popup
-    let metamaskPage: Page | undefined;
-
-    // First check if there's already an extension page
-    const existingPages = context.pages();
-    metamaskPage = existingPages.find((page) =>
-      page.url().startsWith('chrome-extension://')
+    // Get the extension page
+    const metamaskPage = await getPageAndWaitForLoad(
+      context,
+      `chrome-extension://${extensionId}/`
     );
-
-    // If not found, navigate to the extension's popup page
-    if (!metamaskPage) {
-      metamaskPage = await context.newPage();
-      await metamaskPage.goto(`chrome-extension://${extensionId}/popup.html`, {
-        waitUntil: 'load'
-      });
-    }
 
     // Wait for the page to be stable and loaded
     await waitUntilStable(metamaskPage);
