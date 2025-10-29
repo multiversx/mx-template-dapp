@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { chromium, ChromiumBrowserContext } from '@playwright/test';
 import { METAMASK_CACHE_DIR_NAME } from '../template/constants';
+import { waitUntilStable } from '../template/waitUntilStable';
 import { prepareExtension } from './prepareExtension';
 
 // Get the extension ID from a browser context using background pages or service workers
@@ -13,11 +14,7 @@ export async function getExtensionId(
       throw new Error('Browser context is required');
     }
 
-    // Create a page to ensure the browser is stable
-    const page = await context.newPage();
-    await page.goto('about:blank');
-
-    // Try to find chrome-extension service worker first
+    // Get the extension ID from the service worker
     const serviceWorkers = context.serviceWorkers();
 
     for (const serviceWorker of serviceWorkers) {
@@ -27,36 +24,15 @@ export async function getExtensionId(
         if (serviceWorkerUrl.startsWith('chrome-extension://')) {
           const id = serviceWorkerUrl.split('/')[2];
           if (id && id.length > 0) {
-            await page.close();
             return id;
           }
         }
       } catch (error) {
-        // Skip invalid service worker, continue to next
-        continue;
+        throw new Error(
+          `Failed to get extension ID: ${(error as Error).message}`
+        );
       }
     }
-
-    // Fallback to background pages if no service worker found
-    const backgrounds = context.backgroundPages();
-
-    for (const background of backgrounds) {
-      try {
-        const backgroundUrl = background.url();
-        if (backgroundUrl.startsWith('chrome-extension://')) {
-          const id = backgroundUrl.split('/')[2];
-          if (id && id.length > 0) {
-            await page.close();
-            return id;
-          }
-        }
-      } catch (error) {
-        // Skip invalid background page, continue to next
-        continue;
-      }
-    }
-
-    await page.close();
 
     throw new Error(
       'Could not find extension ID. This might mean the extension is not loaded properly.'
@@ -146,8 +122,8 @@ export async function setupMetaMaskExtension(): Promise<{
       throw new Error('Failed to create browser context');
     }
 
-    // Wait for the browser to be stable
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    // Wait for the page to be stable and loaded
+    await waitUntilStable(context.pages()[0]);
 
     // Get the extension ID from service worker
     const extensionId = await getExtensionId(context, 'MetaMask');

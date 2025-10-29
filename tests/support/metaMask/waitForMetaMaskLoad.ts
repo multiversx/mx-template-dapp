@@ -1,5 +1,5 @@
 import { errors, Page } from '@playwright/test';
-import { waitUntilStable } from './waitUntilStable';
+import { waitUntilStable } from '../template/waitUntilStable';
 
 const DEFAULT_TIMEOUT = 10000;
 

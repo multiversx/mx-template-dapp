@@ -8,7 +8,7 @@ export const waitUntilStable = async (page: Page) => {
     await page.waitForLoadState('domcontentloaded', {
       timeout: DEFAULT_TIMEOUT
     });
-    await page.waitForLoadState('networkidle', { timeout: DEFAULT_TIMEOUT });
+    await page.waitForLoadState('load', { timeout: DEFAULT_TIMEOUT });
 
     await new Promise((resolve) => setTimeout(resolve, RESOURCES_LOAD_DELAY));
   } catch (error) {

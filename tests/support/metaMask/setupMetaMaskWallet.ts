@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
 import { handleMetaMetrics } from '../metaMask/handleMetrics';
+import { waitUntilStable } from '../template/waitUntilStable';
 import { createPassword } from './createPassword';
 import { fillSecretRecoveryPhrase } from './fillSecretRecoveryPhrase';
 import { setupMetaMaskExtension } from './loadExtension';
@@ -33,41 +34,43 @@ export async function setupMetaMaskWallet(
     if (!metamaskPage) {
       metamaskPage = await context.newPage();
       await metamaskPage.goto(`chrome-extension://${extensionId}/popup.html`, {
-        waitUntil: 'load',
-        timeout: 10000
+        waitUntil: 'load'
       });
     }
 
-    // Wait for the page to fully load
-    await metamaskPage.waitForLoadState('domcontentloaded');
+    // Wait for the page to be stable and loaded
+    await waitUntilStable(metamaskPage);
 
-    // Check if we're in onboarding or unlock mode by checking element visibility
+    // Wait for either unlock button or import button to appear
     const unlockButton = metamaskPage.getByTestId('unlock-password');
     const importButton = metamaskPage.getByTestId('onboarding-import-wallet');
 
-    // Check if unlock button is visible (wallet already set up)
-    if (await unlockButton.isVisible()) {
+    // Wait for unlock button or import button to appear (whichever appears first)
+    const result = await Promise.race([
+      unlockButton
+        .waitFor({ state: 'visible', timeout: 10000 })
+        .then(() => 'unlock' as const),
+      importButton
+        .waitFor({ state: 'visible', timeout: 10000 })
+        .then(() => 'import' as const)
+    ]).catch(() => null);
+
+    if (result === 'unlock') {
       // Enter password
       await unlockButton.fill(password);
       await unlockButton.press('Enter');
 
-      // Wait for unlock to complete
-      await new Promise((resolve) => setTimeout(resolve, 2000));
       return { context, extensionId, metamaskPage };
     }
 
-    // Check if import button is visible (onboarding needed)
-    if (!(await importButton.isVisible())) {
+    if (result === 'import') {
+      // Start onboarding
+      await importButton.click();
+    } else {
       throw new Error(
-        'Could not find onboarding-import-wallet or unlock-password button'
+        'Could not find onboarding-import-wallet or unlock-password button after waiting 10 seconds'
       );
     }
-
-    // Start onboarding
-    await importButton.click();
-
-    // Wait a moment for the UI to load
-    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Click "Import using Secret Recovery Phrase" button
     const seedPhraseButton = metamaskPage.getByTestId(
@@ -75,9 +78,6 @@ export async function setupMetaMaskWallet(
     );
     await seedPhraseButton.waitFor({ state: 'visible', timeout: 10000 });
     await seedPhraseButton.click();
-
-    // Wait a moment for the import form to load
-    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Enter only the first word in the initial textarea to trigger SRP inputs
     const seedPhraseInput = metamaskPage.getByTestId(
@@ -91,26 +91,14 @@ export async function setupMetaMaskWallet(
     // Press Enter to trigger the individual word inputs
     await seedPhraseInput.press('Enter');
 
-    // Wait for the individual word inputs to appear
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
     // Fill the secret recovery phrase using individual word inputs
     await fillSecretRecoveryPhrase(metamaskPage, mnemonic);
-
-    // Wait a moment for the next step to load
-    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Create password
     await createPassword(metamaskPage, password);
 
-    // Wait a moment for MetaMetrics screen to load
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
     // Handle MetaMetrics opt-in
     await handleMetaMetrics(metamaskPage);
-
-    // Wait a moment for the import to complete
-    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     return { context, extensionId, metamaskPage };
   } catch (error) {
