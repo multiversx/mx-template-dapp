@@ -1,6 +1,7 @@
 import { Page } from '@playwright/test';
 
 const DEFAULT_TIMEOUT = 10000;
+const RESOURCES_LOAD_DELAY = 1000; // Extra delay for font resources to load
 
 export const waitUntilStable = async (page: Page) => {
   try {
@@ -8,11 +9,13 @@ export const waitUntilStable = async (page: Page) => {
       timeout: DEFAULT_TIMEOUT
     });
     await page.waitForLoadState('networkidle', { timeout: DEFAULT_TIMEOUT });
+
+    await new Promise((resolve) => setTimeout(resolve, RESOURCES_LOAD_DELAY));
   } catch (error) {
-    console.error(
-      '[waitUntilStable] Error waiting for page to be stable:',
-      error.message
+    throw new Error(
+      `Failed to wait for page stability: ${
+        error instanceof Error ? error.message : 'Unknown error'
+      }`
     );
-    throw new Error(error.message);
   }
 };

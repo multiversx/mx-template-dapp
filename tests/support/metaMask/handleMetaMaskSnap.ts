@@ -1,7 +1,6 @@
 import { BrowserContext, Page } from '@playwright/test';
-import { getPageAndWaitForLoad } from './getPageAndWaitForLoad';
-import { SelectorsEnum } from './testdata';
-import { waitUntilStable } from './waitUntilStable';
+import { getPageAndWaitForLoad } from '../template/getPageAndWaitForLoad';
+import { waitUntilStable } from '../template/waitUntilStable';
 
 const RETRY_DELAY_BASE = 500;
 const CLICK_TIMEOUT = 2500;
@@ -36,19 +35,19 @@ async function attemptClickElement(
   }
 }
 
-export const handleMetaMaskSnapApproval = async (
+export const handleMetaMaskSnap = async (
   context: BrowserContext,
   extensionId: string,
   initialPage: Page,
   maxRetries = 5
 ): Promise<void> => {
   const actions = [
-    { type: 'testId', name: SelectorsEnum.snapPrivacyWarningScroll },
+    { type: 'testId', name: 'snap-privacy-warning-scroll' },
     { type: 'button', name: 'Accept' },
     { type: 'button', name: 'Connect' },
-    { type: 'button', name: 'Install' },
-    { type: 'checkbox', name: 'MultiversX' },
     { type: 'button', name: 'Confirm' },
+    { type: 'checkbox', name: 'MultiversX' },
+    { type: 'testId', name: 'snap-install-warning-modal-confirm' },
     { type: 'button', name: 'Ok' },
     { type: 'button', name: 'Approve' }
   ] as const;
@@ -61,6 +60,20 @@ export const handleMetaMaskSnapApproval = async (
     try {
       await waitUntilStable(pageRef);
 
+      // Check if confirmation-submit-button exists (approves snap connection)
+      const confirmationSubmitButton = pageRef.getByTestId(
+        'confirmation-submit-button'
+      );
+      const isConfirmationButtonVisible = await confirmationSubmitButton
+        .isVisible()
+        .catch(() => false);
+
+      if (isConfirmationButtonVisible) {
+        await confirmationSubmitButton.click();
+        return; // Snap connection approved, we're done
+      }
+
+      // If confirmation button not found, proceed with regular actions
       for (let i = startIndex; i < actions.length; i++) {
         const action = actions[i];
         startIndex = i;

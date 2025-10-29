@@ -14,7 +14,7 @@
 
 import path from 'path';
 import { loadEnv } from 'vite';
-import { writeValueToFile } from '../support';
+import { writeValueToFile } from '../fs/writeValueToFile';
 import { type FileEncoding } from './types';
 
 // Load environment variables for local runs using Vite's loadEnv

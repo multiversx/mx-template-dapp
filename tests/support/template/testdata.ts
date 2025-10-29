@@ -66,7 +66,6 @@ export enum SelectorsEnum {
 
   // Web wallet selectors
   signCancelButton = 'signCancelBtn',
-  snapPrivacyWarningScroll = 'snap-privacy-warning-scroll',
 
   // Transaction table selectors
   transactionLink = 'transactionLink',
