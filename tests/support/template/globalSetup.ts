@@ -39,7 +39,7 @@ async function writeKeystoreFilesFromEnv(
   // Resolve wallets directory without relying on process.cwd
   const walletsDir = process.env.WALLETS_DIR
     ? path.resolve(process.env.WALLETS_DIR)
-    : path.resolve(__dirname, 'wallets');
+    : path.resolve(__dirname, '..', 'wallets');
 
   const mappings: Array<{
     envKey: string;

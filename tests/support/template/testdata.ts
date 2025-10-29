@@ -1,6 +1,8 @@
-import { PATHS } from './constants';
+import path from 'path';
 
-const walletsDir = process.env.WALLETS_DIR || PATHS.WALLETS_DIR;
+const walletsDir = process.env.WALLETS_DIR
+  ? path.resolve(process.env.WALLETS_DIR)
+  : path.resolve(__dirname, '..', 'wallets');
 
 export const NA = 'N/A';
 
