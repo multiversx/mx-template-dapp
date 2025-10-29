@@ -1,38 +1,50 @@
 import { Page } from '@playwright/test';
 
-const stepSelectors = {
-  secretRecoveryPhraseWord: (index: number) =>
-    `[data-testid="import-srp__srp-word-${index}"]`,
-  confirmSecretRecoveryPhraseButton: '[data-testid="import-srp-confirm"]',
-  error: '[data-testid="import-srp__error"]'
+const secretRecoverySelectors = {
+  wordInput: (index: number) => `[data-testid="import-srp__srp-word-${index}"]`,
+  confirmButton: '[data-testid="import-srp-confirm"]',
+  errorMessage: '[data-testid="import-srp__error"]'
 };
 
 export async function fillSecretRecoveryPhrase(page: Page, seedPhrase: string) {
-  const seedPhraseWords = seedPhrase.split(' ');
+  const words = seedPhrase.split(' ');
+  await fillSeedWords(page, words);
+  await confirmSeedPhrase(page);
+}
 
-  // Skip the first word since it's already entered in the initial textarea
-  for (const [index, word] of seedPhraseWords.slice(1).entries()) {
-    const wordInput = page.locator(
-      stepSelectors.secretRecoveryPhraseWord(index + 1)
-    );
-    await wordInput.fill(word);
-    await wordInput.press('Enter');
+async function fillSeedWords(page: Page, words: string[]) {
+  // Skip first word (already filled in the textarea)
+  const remainingWords = words.slice(1);
+
+  for (const [index, word] of remainingWords.entries()) {
+    const inputSelector = secretRecoverySelectors.wordInput(index + 1);
+    await fillSingleWord(page, inputSelector, word);
   }
+}
 
-  const continueButton = page.locator(
-    stepSelectors.confirmSecretRecoveryPhraseButton
-  );
+async function fillSingleWord(page: Page, selector: string, word: string) {
+  const input = page.locator(selector);
+  await input.fill(word);
+  await input.press('Enter');
+}
 
-  // Check if something went wrong during the filling process
-  if (await continueButton.isDisabled()) {
-    const errorText = await page.locator(stepSelectors.error).textContent({
-      timeout: 1000
-    });
+async function confirmSeedPhrase(page: Page) {
+  const confirmButton = page.locator(secretRecoverySelectors.confirmButton);
 
+  if (await confirmButton.isDisabled()) {
+    const errorText = await getErrorText(page);
     throw new Error(
-      `[ConfirmSecretRecoveryPhrase] Invalid seed phrase. Error from MetaMask: ${errorText}`
+      `[ConfirmSecretRecoveryPhrase] Invalid seed phrase. MetaMask error: ${errorText}`
     );
   }
 
-  await continueButton.click();
+  await confirmButton.click();
+}
+
+async function getErrorText(page: Page): Promise<string> {
+  return (
+    (await page
+      .locator(secretRecoverySelectors.errorMessage)
+      .textContent({ timeout: 1000 })) || 'Unknown error'
+  );
 }

@@ -1,31 +1,29 @@
+// prepareExtension.ts
 import path from 'node:path';
 import fs from 'fs-extra';
 import { downloadFileFromUrl } from '../fs/downloadFileFromUrl';
-import { ensureDirectoryExists } from '../fs/ensureDirectoryExists';
-import { DEFAULT_METAMASK_VERSION, EXTENSION_DOWNLOAD_URL } from './constants';
+import { buildMetamaskZipUrl, resolveMetamaskVersion } from './constants';
 import { unzipArchive } from './unzipArchive';
 
 export async function prepareExtension(forceCache = true): Promise<string> {
-  let outputDir = '';
-  if (forceCache) {
-    outputDir = path.join(process.cwd(), '.cache');
-    ensureDirectoryExists(path.join(outputDir, 'ensure-dir'));
-  } else {
-    outputDir = path.resolve('./', 'downloads');
-    if (!(await fs.exists(outputDir))) {
-      fs.mkdirSync(outputDir);
-    }
-  }
+  const version = resolveMetamaskVersion();
 
-  const downloadResult = await downloadFileFromUrl({
-    url: EXTENSION_DOWNLOAD_URL,
+  const outputDir = forceCache
+    ? path.join(process.cwd(), '.cache')
+    : path.resolve('./', 'downloads');
+
+  await fs.ensureDir(outputDir); // make sure folder exists
+
+  const fileName = `metamask-chrome-${version}.zip`;
+  const url = buildMetamaskZipUrl(version);
+
+  const { filePath } = await downloadFileFromUrl({
+    url,
     outputDir,
-    fileName: `metamask-chrome-${DEFAULT_METAMASK_VERSION}.zip`
+    fileName,
+    overrideFile: false
   });
 
-  const unzipResult = await unzipArchive({
-    archivePath: downloadResult.filePath
-  });
-
-  return unzipResult.outputPath;
+  const { outputPath } = await unzipArchive({ archivePath: filePath });
+  return outputPath;
 }

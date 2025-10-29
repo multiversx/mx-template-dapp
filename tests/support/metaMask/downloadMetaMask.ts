@@ -1,51 +1,41 @@
+// downloadFileFromUrl.ts
 import path from 'node:path';
 import { pipeline } from 'stream/promises';
 import axios from 'axios';
 import fs from 'fs-extra';
 
-type DownloaderOptions = {
+type Options = {
   url: string;
   outputDir: string;
   fileName: string;
-  overrideFile?: boolean;
+  overwrite?: boolean;
 };
 
-type DownloadFileResult = {
-  filePath: string;
-  downloadSkipped: boolean;
-};
+export async function downloadFileFromUrl({
+  url,
+  outputDir,
+  fileName,
+  overwrite = false
+}: Options): Promise<{ filePath: string; downloadSkipped: boolean }> {
+  const filePath = path.join(outputDir, fileName);
 
-export async function downloadMetaMask(
-  options: DownloaderOptions
-): Promise<DownloadFileResult> {
-  try {
-    const { url, outputDir, fileName, overrideFile } = options;
-    const filePath = path.join(outputDir, fileName);
+  await fs.ensureDir(outputDir);
 
-    const fileExists = await fs.pathExists(filePath);
-    if (fileExists && !overrideFile) {
-      return {
-        filePath,
-        downloadSkipped: true
-      };
-    }
-
-    const response = await axios.get(url, {
-      responseType: 'stream'
-    });
-
-    const writer = fs.createWriteStream(filePath);
-    await pipeline(response.data, writer);
-
-    return {
-      filePath,
-      downloadSkipped: false
-    };
-  } catch (error) {
-    throw new Error(
-      `Failed to download file: ${
-        error instanceof Error ? error.message : 'Unknown error'
-      }`
-    );
+  if (!overwrite && (await fs.pathExists(filePath))) {
+    return { filePath, downloadSkipped: true };
   }
+
+  const response = await axios.get(url, {
+    responseType: 'stream',
+    validateStatus: () => true
+  });
+  if (response.status !== 200) {
+    throw new Error(`Download failed (${response.status}) for ${url}`);
+  }
+
+  const tmpPath = `${filePath}.part`;
+  await pipeline(response.data, fs.createWriteStream(tmpPath));
+  await fs.move(tmpPath, filePath, { overwrite: true });
+
+  return { filePath, downloadSkipped: false };
 }

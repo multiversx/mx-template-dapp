@@ -2,46 +2,14 @@ import { BrowserContext, Page } from '@playwright/test';
 import { getPageAndWaitForLoad } from '../template/getPageAndWaitForLoad';
 import { waitUntilStable } from '../template/waitUntilStable';
 
-const RETRY_DELAY_BASE = 500;
-const CLICK_TIMEOUT = 2500;
+const RETRY_DELAY_BASE_MS = 500;
+const CLICK_TIMEOUT_MS = 2500;
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function attemptClickElement(
-  page: Page,
-  action: { type: 'testId' | 'checkbox' | 'button'; name: string }
-) {
-  const selectorMap = {
-    testId: page.getByTestId(action.name),
-    checkbox: page.getByRole('checkbox', { name: action.name }),
-    button: page.getByRole('button', { name: action.name })
-  } as const;
-
-  const element = selectorMap[action.type];
-  if (!element) throw new Error(`Unknown element type: ${action.type}`);
-
-  try {
-    await element.waitFor({ state: 'visible', timeout: CLICK_TIMEOUT });
-    await element.click();
-  } catch (err: any) {
-    const msg = err?.message || String(err);
-    console.error(
-      `[attemptClickElement] Failed to click "${action.name}": ${msg}`
-    );
-    console.error(
-      `[attemptClickElement] Page state: closed=${page.isClosed()} url=${page.url()}`
-    );
-    throw err;
-  }
-}
-
-export const handleMetaMaskSnap = async (
-  context: BrowserContext,
-  extensionId: string,
-  initialPage: Page,
-  maxRetries = 5
-): Promise<void> => {
-  const actions = [
+const snapSelectors = {
+  confirmationSubmitButton: '[data-testid="confirmation-submit-button"]',
+  actions: [
     { type: 'testId', name: 'snap-privacy-warning-scroll' },
     { type: 'button', name: 'Accept' },
     { type: 'button', name: 'Connect' },
@@ -50,79 +18,133 @@ export const handleMetaMaskSnap = async (
     { type: 'testId', name: 'snap-install-warning-modal-confirm' },
     { type: 'button', name: 'Ok' },
     { type: 'button', name: 'Approve' }
-  ] as const;
+  ] as const
+};
 
-  let pageRef: Page = initialPage;
+export async function handleMetaMaskSnap(
+  context: BrowserContext,
+  extensionId: string,
+  initialPage: Page,
+  maxRetries = 5
+): Promise<void> {
+  let page = initialPage;
   let attempt = 0;
-  let startIndex = 0;
+  let currentActionIndex = 0;
 
   while (attempt <= maxRetries) {
     try {
-      await waitUntilStable(pageRef);
+      await waitUntilStable(page);
 
-      // Check if confirmation-submit-button exists (approves snap connection)
-      const confirmationSubmitButton = pageRef.getByTestId(
-        'confirmation-submit-button'
-      );
-      const isConfirmationButtonVisible = await confirmationSubmitButton
-        .isVisible()
-        .catch(() => false);
+      if (await clickIfConfirmationVisible(page)) return;
 
-      if (isConfirmationButtonVisible) {
-        await confirmationSubmitButton.click();
-        return; // Snap connection approved, we're done
+      for (let i = currentActionIndex; i < snapSelectors.actions.length; i++) {
+        const action = snapSelectors.actions[i];
+        currentActionIndex = i;
+        await attemptClick(page, action);
       }
 
-      // If confirmation button not found, proceed with regular actions
-      for (let i = startIndex; i < actions.length; i++) {
-        const action = actions[i];
-        startIndex = i;
-        await attemptClickElement(pageRef, action);
-      }
-
-      return; // Successfully completed all actions
-    } catch (err: any) {
+      return; // All steps completed successfully
+    } catch (error: any) {
       attempt++;
-      const msg = err?.message || String(err);
-      console.warn(
-        `[MetaMaskSnapApproval] Attempt ${attempt}/${maxRetries} failed: ${msg}`
-      );
 
-      // Dump open pages to help debugging
-      const openPages = context.pages().map((p) => p.url());
-      console.warn('[MetaMaskSnapApproval] Open pages at failure:', openPages);
+      console.warn(
+        `[MetaMaskSnap] Attempt ${attempt}/${maxRetries} failed: ${
+          error?.message || error
+        }`
+      );
+      console.warn(
+        '[MetaMaskSnap] Open pages at failure:',
+        context.pages().map((p) => p.url())
+      );
 
       if (attempt > maxRetries) {
-        console.error('[MetaMaskSnapApproval] Max retries reached.');
-        throw err;
+        throw new Error('[MetaMaskSnap] Max retries reached.');
       }
 
-      // Try to reacquire a new popup
-      try {
-        pageRef = await getPageAndWaitForLoad(
-          context,
-          `chrome-extension://${extensionId}/notification.html`,
-          {
-            viewport: { width: 360, height: 592 }
-          }
-        );
-        await waitUntilStable(pageRef);
-        console.warn('[MetaMaskSnapApproval] Reacquired notification page.');
-      } catch (reaqErr) {
-        console.error(
-          `[MetaMaskSnapApproval] Failed to reacquire notification page: ${
-            (reaqErr as Error).message
-          }`
-        );
-        throw reaqErr;
-      }
-
-      // exponential backoff
-      const delay = RETRY_DELAY_BASE * 2 ** (attempt - 1);
-      console.warn(`[MetaMaskSnapApproval] Retrying in ${delay}ms...`);
-      await sleep(delay);
+      page = await reacquireNotificationPage(context, extensionId);
+      await exponentialBackoff(attempt);
     }
   }
 
-  throw new Error('[MetaMaskSnapApproval] Unexpected end of flow.');
-};
+  throw new Error('[MetaMaskSnap] Unexpected end of flow.');
+}
+
+async function attemptClick(
+  page: Page,
+  action: { type: 'testId' | 'checkbox' | 'button'; name: string }
+) {
+  const element = getLocator(page, action);
+
+  try {
+    await element.waitFor({ state: 'visible', timeout: CLICK_TIMEOUT_MS });
+    await element.click();
+  } catch (error: any) {
+    console.error(
+      `[MetaMaskSnap] Failed to click "${action.name}": ${
+        error?.message || error
+      }`
+    );
+    console.error(
+      `[MetaMaskSnap] Page state -> closed: ${page.isClosed()}, url: ${page.url()}`
+    );
+    throw error;
+  }
+}
+
+function getLocator(
+  page: Page,
+  action: { type: 'testId' | 'checkbox' | 'button'; name: string }
+) {
+  switch (action.type) {
+    case 'testId':
+      return page.getByTestId(action.name);
+    case 'checkbox':
+      return page.getByRole('checkbox', { name: action.name });
+    case 'button':
+      return page.getByRole('button', { name: action.name });
+    default:
+      throw new Error(`Unknown action type: ${action.type}`);
+  }
+}
+
+async function clickIfConfirmationVisible(page: Page): Promise<boolean> {
+  const confirmationButton = page.locator(
+    snapSelectors.confirmationSubmitButton
+  );
+  const isVisible = await confirmationButton.isVisible().catch(() => false);
+
+  if (isVisible) {
+    await confirmationButton.click();
+    return true;
+  }
+
+  return false;
+}
+
+async function reacquireNotificationPage(
+  context: BrowserContext,
+  extensionId: string
+): Promise<Page> {
+  try {
+    const page = await getPageAndWaitForLoad(
+      context,
+      `chrome-extension://${extensionId}/notification.html`,
+      { viewport: { width: 360, height: 592 } }
+    );
+    await waitUntilStable(page);
+    console.warn('[MetaMaskSnap] Reacquired notification page.');
+    return page;
+  } catch (error) {
+    throw new Error(
+      `[MetaMaskSnap] Failed to reacquire notification page: ${
+        (error as Error).message
+      }`
+    );
+  }
+}
+
+async function exponentialBackoff(attempt: number) {
+  const delay = RETRY_DELAY_BASE_MS * 2 ** (attempt - 1);
+  console.warn(`[MetaMaskSnap] Retrying in ${delay}ms...`);
+  await sleep(delay);
+}

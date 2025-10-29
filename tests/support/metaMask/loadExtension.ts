@@ -1,73 +1,71 @@
 import path from 'node:path';
-import { chromium, ChromiumBrowserContext } from '@playwright/test';
+import { chromium, type ChromiumBrowserContext } from '@playwright/test';
 import { METAMASK_CACHE_DIR_NAME } from '../template/constants';
 import { waitUntilStable } from '../template/waitUntilStable';
 import { prepareExtension } from './prepareExtension';
 
-// Get the extension ID from a browser context using background pages or service workers
-export async function getExtensionId(
-  context: ChromiumBrowserContext,
-  _extensionName: string
-): Promise<string> {
-  try {
-    if (!context) {
-      throw new Error('Browser context is required');
-    }
+const METAMASK_USER_DIR = 'metamask-user-data';
+const CONTEXT_RELEASE_GRACE_MS = 1000;
+const SERVICE_WORKER_RETRIES = 3;
+const SERVICE_WORKER_RETRY_DELAY_MS = 300;
 
-    // Get the extension ID from the service worker
-    const serviceWorkers = context.serviceWorkers();
+// Utility: delay
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
-    for (const serviceWorker of serviceWorkers) {
-      try {
-        const serviceWorkerUrl = serviceWorker.url();
-
-        if (serviceWorkerUrl.startsWith('chrome-extension://')) {
-          const id = serviceWorkerUrl.split('/')[2];
-          if (id && id.length > 0) {
-            return id;
-          }
-        }
-      } catch (error) {
-        throw new Error(
-          `Failed to get extension ID: ${(error as Error).message}`
-        );
-      }
-    }
-
-    throw new Error(
-      'Could not find extension ID. This might mean the extension is not loaded properly.'
-    );
-  } catch (error) {
-    throw new Error(
-      `Failed to get extension ID: ${
-        error instanceof Error ? error.message : 'Unknown error'
-      }`
-    );
-  }
+// Utility: fail early with types preserved
+function ensure<T>(value: T | null | undefined, message: string): T {
+  if (value == null) throw new Error(message);
+  return value;
 }
 
-// Create a browser context with the MetaMask extension loaded
+// Extract extension id from a service worker url
+function extractExtensionIdFromUrl(url: string): string | null {
+  if (!url.startsWith('chrome-extension://')) return null;
+  const id = url.split('/')[2];
+  return id && id.length > 0 ? id : null;
+}
+
+// Try to read the extension id from existing service workers (with a small retry window for CI flakiness).
+export async function getExtensionId(
+  context: ChromiumBrowserContext,
+  _extensionName: string // kept for signature parity / future filtering if needed
+): Promise<string> {
+  if (!context) throw new Error('Browser context is required');
+
+  for (let attempt = 0; attempt <= SERVICE_WORKER_RETRIES; attempt++) {
+    const workers = context.serviceWorkers();
+    for (const sw of workers) {
+      const id = extractExtensionIdFromUrl(sw.url());
+      if (id) return id;
+    }
+    if (attempt < SERVICE_WORKER_RETRIES) {
+      await sleep(SERVICE_WORKER_RETRY_DELAY_MS);
+    }
+  }
+
+  throw new Error(
+    'Could not find extension ID from service workers. The extension may not be loaded yet.'
+  );
+}
+
+// Launch a persistent Chromium context with a single loaded extension.
 export async function createBrowserContextWithExtension(
   extensionPath: string
 ): Promise<ChromiumBrowserContext> {
+  const absoluteExtensionPath = path.resolve(
+    ensure(extensionPath, 'Extension path is required')
+  );
+
+  const userDataDir = path.join(
+    process.cwd(),
+    METAMASK_CACHE_DIR_NAME,
+    METAMASK_USER_DIR
+  );
+
+  // Give the previous persistent context time to fully release its lock on userDataDir.
+  await sleep(CONTEXT_RELEASE_GRACE_MS);
+
   try {
-    if (!extensionPath) {
-      throw new Error('Extension path is required');
-    }
-
-    const METAMASK_USER_DIR = 'metamask-user-data';
-    // Ensure the extension path uses absolute path
-    const absoluteExtensionPath = path.resolve(extensionPath);
-    const userDataDir = path.join(
-      process.cwd(),
-      METAMASK_CACHE_DIR_NAME,
-      METAMASK_USER_DIR
-    );
-
-    // Add a delay to ensure any previous context is fully closed
-    // Persistent contexts need time to release the userDataDir lock
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
     const context = await chromium.launchPersistentContext(userDataDir, {
       headless: false,
       args: [
@@ -76,68 +74,50 @@ export async function createBrowserContextWithExtension(
       ]
     });
 
-    if (!context) {
-      throw new Error('Failed to create browser context');
-    }
-
-    return context;
+    return ensure(context, 'Failed to create browser context');
   } catch (error) {
-    if (
-      error instanceof Error &&
-      (error.message.includes(
-        'Target page, context or browser has been closed'
-      ) ||
-        error.message.includes('userDataDir') ||
-        error.message.includes('already in use'))
-    ) {
+    const msg = error instanceof Error ? error.message : String(error);
+    const isBusy =
+      msg.includes('Target page, context or browser has been closed') ||
+      msg.includes('userDataDir') ||
+      msg.includes('already in use');
+
+    if (isBusy) {
       throw new Error(
-        `Failed to create browser context with extension: Previous context may still be closing. Please ensure contexts are properly closed before creating new ones. Original error: ${error.message}`
+        'Failed to create browser context: previous persistent context may still be closing. ' +
+          `Ensure contexts are closed before launching a new one. Original error: ${msg}`
       );
     }
-    throw new Error(
-      `Failed to create browser context with extension: ${
-        error instanceof Error ? error.message : 'Unknown error'
-      }`
-    );
+    throw new Error(`Failed to create browser context with extension: ${msg}`);
   }
 }
 
-// Setup MetaMask extension and return the browser context and extension ID
+// Prepare the MetaMask extension, start a browser context, stabilize, and return the context + extensionId.
 export async function setupMetaMaskExtension(): Promise<{
   context: ChromiumBrowserContext;
   extensionId: string;
 }> {
-  try {
-    // Download and unzip MetaMask if not already done
-    const extensionPath = await prepareExtension();
+  // 1) Ensure extension bits exist on disk (download/unzip if needed).
+  const extensionPath = ensure(
+    await prepareExtension(),
+    'Failed to prepare MetaMask extension'
+  );
 
-    if (!extensionPath) {
-      throw new Error('Failed to prepare MetaMask extension');
-    }
+  // 2) Launch a persistent context with the extension.
+  const context = await createBrowserContextWithExtension(extensionPath);
 
-    // Create browser context with extension
-    const context = await createBrowserContextWithExtension(extensionPath);
+  // 3) Wait for the first page to be interactive (extension often opens a tab).
+  const firstPage = ensure(
+    context.pages()[0],
+    'Extension did not open an initial page'
+  );
+  await waitUntilStable(firstPage);
 
-    if (!context) {
-      throw new Error('Failed to create browser context');
-    }
+  // 4) Resolve the extension id via service worker.
+  const extensionId = ensure(
+    await getExtensionId(context, 'MetaMask'),
+    'Failed to get extension ID'
+  );
 
-    // Wait for the page to be stable and loaded
-    await waitUntilStable(context.pages()[0]);
-
-    // Get the extension ID from service worker
-    const extensionId = await getExtensionId(context, 'MetaMask');
-
-    if (!extensionId || extensionId.length === 0) {
-      throw new Error('Failed to get extension ID');
-    }
-
-    return { context, extensionId };
-  } catch (error) {
-    throw new Error(
-      `Failed to setup MetaMask extension: ${
-        error instanceof Error ? error.message : 'Unknown error'
-      }`
-    );
-  }
+  return { context, extensionId };
 }

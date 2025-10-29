@@ -1,35 +1,43 @@
 import { Page } from '@playwright/test';
 
-const stepSelectors = {
-  passwordInput: '[data-testid="create-password-new-input"]',
+const DEFAULT_TIMEOUT = 10000;
+
+const createPasswordSelectors = {
+  newPasswordInput: '[data-testid="create-password-new-input"]',
   confirmPasswordInput: '[data-testid="create-password-confirm-input"]',
   termsCheckbox: '[data-testid="create-password-terms"]',
   submitButton: '[data-testid="create-password-submit"]'
 };
 
-const DEFAULT_TIMEOUT = 10000;
-
 export async function createPassword(page: Page, password: string) {
-  // Enter the password
-  const passwordInput = page.locator(stepSelectors.passwordInput);
-  await passwordInput.waitFor({ state: 'visible', timeout: DEFAULT_TIMEOUT });
-  await passwordInput.fill(password);
+  await enterPassword(page, password);
+  await confirmPassword(page, password);
+  await acceptTerms(page);
+  await submitPasswordForm(page);
+}
 
-  // Confirm the password
-  const confirmPasswordInput = page.locator(stepSelectors.confirmPasswordInput);
-  await confirmPasswordInput.waitFor({
-    state: 'visible',
-    timeout: DEFAULT_TIMEOUT
-  });
-  await confirmPasswordInput.fill(password);
+async function enterPassword(page: Page, password: string) {
+  const passwordField = page.locator(createPasswordSelectors.newPasswordInput);
+  await passwordField.waitFor({ state: 'visible', timeout: DEFAULT_TIMEOUT });
+  await passwordField.fill(password);
+}
 
-  // Check the terms checkbox
-  const termsCheckbox = page.locator(stepSelectors.termsCheckbox);
-  await termsCheckbox.waitFor({ state: 'visible', timeout: DEFAULT_TIMEOUT });
-  await termsCheckbox.click();
+async function confirmPassword(page: Page, password: string) {
+  const confirmField = page.locator(
+    createPasswordSelectors.confirmPasswordInput
+  );
+  await confirmField.waitFor({ state: 'visible', timeout: DEFAULT_TIMEOUT });
+  await confirmField.fill(password);
+}
 
-  // Click the create password button
-  const submitButton = page.locator(stepSelectors.submitButton);
+async function acceptTerms(page: Page) {
+  const checkbox = page.locator(createPasswordSelectors.termsCheckbox);
+  await checkbox.waitFor({ state: 'visible', timeout: DEFAULT_TIMEOUT });
+  await checkbox.click();
+}
+
+async function submitPasswordForm(page: Page) {
+  const submitButton = page.locator(createPasswordSelectors.submitButton);
   await submitButton.waitFor({ state: 'visible', timeout: DEFAULT_TIMEOUT });
   await submitButton.click();
 }
