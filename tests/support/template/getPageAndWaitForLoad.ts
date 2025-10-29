@@ -1,100 +1,46 @@
-import type { BrowserContext, Page } from '@playwright/test';
-import { errors } from '@playwright/test';
-import type {
-  GetPageAndWaitForLoad,
-  GetPageAndWaitForLoadOptions
-} from './types';
+import { BrowserContext, Page } from '@playwright/test';
 import { waitUntilStable } from './waitUntilStable';
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const DEFAULT_WAIT_TIMEOUT = 15_000;
 
-const DEFAULT_PAGE_TIMEOUT = 5000;
-
-// Waits for a page matching a specific URL (or partial URL) to open within a given context
-export const getPageAndWaitForLoad: GetPageAndWaitForLoad = async (
+export async function getPageAndWaitForLoad(
   context: BrowserContext,
-  urlSubstring: string | RegExp,
-  options: GetPageAndWaitForLoadOptions = {}
-) => {
-  const {
-    maxRetries = 3,
-    timeout = DEFAULT_PAGE_TIMEOUT,
-    viewport,
-    waitForReady
-  } = options;
-
-  const isTargetPage = (page: Page) =>
-    typeof urlSubstring === 'string'
-      ? page.url().includes(urlSubstring)
-      : urlSubstring.test(page.url());
-
+  pageUrlFragment: string,
+  options?: { viewport?: { width: number; height: number } }
+): Promise<Page> {
   let retries = 0;
-  let targetPage: Page | undefined;
+  const maxRetries = 3;
 
-  while (retries <= maxRetries) {
+  while (retries < maxRetries) {
     try {
-      // Find an existing page matching criteria
-      targetPage = context.pages().find(isTargetPage);
+      const page =
+        context.pages().find((p) => p.url().includes(pageUrlFragment)) ||
+        (await context.waitForEvent('page', {
+          predicate: (p) => p.url().includes(pageUrlFragment),
+          timeout: DEFAULT_WAIT_TIMEOUT
+        }));
 
-      // If not found, wait for it to appear
-      if (!targetPage) {
-        targetPage = await context.waitForEvent('page', {
-          predicate: isTargetPage,
-          timeout
-        });
+      if (!page) throw new Error('Notification page not found');
+
+      if (options?.viewport) {
+        await page.setViewportSize(options.viewport);
       }
 
-      // Ensure page is stable
-      await waitUntilStable(targetPage);
+      // Wait for the page to be stable
+      await waitUntilStable(page);
 
-      // Optionally set viewport (useful for extension popups)
-      if (viewport) {
-        await targetPage.setViewportSize(viewport);
-      }
-
-      // Optional custom "ready" callback
-      if (waitForReady) {
-        return await waitForReady(targetPage);
-      }
-
-      return targetPage;
+      return page;
     } catch (error) {
       retries++;
-
-      if (retries <= maxRetries) {
-        console.warn(
-          `[getPageAndWaitForLoad] Retry ${retries}/${maxRetries} after error: ${
-            (error as Error).message
-          }`
-        );
-        await sleep(1000 * retries);
-        continue;
-      }
-
-      const openPages = context
-        .pages()
-        .map((p) => {
-          try {
-            return p.url();
-          } catch {
-            return '[closed]';
-          }
-        })
-        .join(', ');
-
-      if (error instanceof errors.TimeoutError) {
-        throw new Error(
-          `[getPageAndWaitForLoad] Page did not appear within ${timeout}ms after ${maxRetries} retries (url: ${urlSubstring}) | open pages: ${openPages}`
-        );
-      }
-
-      throw new Error(
-        `[getPageAndWaitForLoad] Failed to get target page (url: ${urlSubstring}): ${
-          (error as Error).message
-        } | open pages: ${openPages}`
+      const message = error instanceof Error ? error.message : 'Unknown error';
+      console.warn(
+        `[getPageAndWaitForLoad] Retry ${retries}/3 after error: ${message}`
       );
+
+      if (retries >= maxRetries) throw error;
+      await new Promise((r) => setTimeout(r, 1000 * retries));
     }
   }
 
-  throw new Error('[getPageAndWaitForLoad] Unexpected unreachable state.');
-};
+  throw new Error('getPageAndWaitForLoad: Unexpected end of retries');
+}
