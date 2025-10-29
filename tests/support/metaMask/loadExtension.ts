@@ -93,7 +93,7 @@ export async function createBrowserContextWithExtension(
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     const context = await chromium.launchPersistentContext(userDataDir, {
-      headless: false,
+      headless: true,
       args: [
         `--disable-extensions-except=${absoluteExtensionPath}`,
         `--load-extension=${absoluteExtensionPath}`
