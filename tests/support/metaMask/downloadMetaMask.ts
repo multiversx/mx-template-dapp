@@ -1,8 +1,9 @@
 // downloadFileFromUrl.ts
+import { createWriteStream } from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pipeline } from 'stream/promises';
 import axios from 'axios';
-import fs from 'fs-extra';
 
 type Options = {
   url: string;
@@ -19,9 +20,9 @@ export async function downloadFileFromUrl({
 }: Options): Promise<{ filePath: string; downloadSkipped: boolean }> {
   const filePath = path.join(outputDir, fileName);
 
-  await fs.ensureDir(outputDir);
+  await fs.mkdir(outputDir, { recursive: true });
 
-  if (!overwrite && (await fs.pathExists(filePath))) {
+  if (!overwrite && (await exists(filePath))) {
     return { filePath, downloadSkipped: true };
   }
 
@@ -34,8 +35,21 @@ export async function downloadFileFromUrl({
   }
 
   const tmpPath = `${filePath}.part`;
-  await pipeline(response.data, fs.createWriteStream(tmpPath));
-  await fs.move(tmpPath, filePath, { overwrite: true });
+  await pipeline(response.data, createWriteStream(tmpPath));
+  // remove target file if exists, then rename
+  try {
+    await fs.rm(filePath, { force: true });
+  } catch {}
+  await fs.rename(tmpPath, filePath);
 
   return { filePath, downloadSkipped: false };
+}
+
+async function exists(p: string): Promise<boolean> {
+  try {
+    await fs.access(p);
+    return true;
+  } catch {
+    return false;
+  }
 }

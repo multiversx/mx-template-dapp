@@ -1,7 +1,8 @@
+import { createWriteStream } from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import { pipeline } from 'stream/promises';
 import axios from 'axios';
-import fs from 'fs-extra';
 
 type DownloaderOptions = {
   url: string;
@@ -22,7 +23,9 @@ export async function downloadFileFromUrl(
     const { url, outputDir, fileName, overrideFile } = options;
     const filePath = path.join(outputDir, fileName);
 
-    const fileExists = await fs.pathExists(filePath);
+    await fs.mkdir(outputDir, { recursive: true });
+
+    const fileExists = await fileExistsSafe(filePath);
     if (fileExists && !overrideFile) {
       return {
         filePath,
@@ -34,7 +37,7 @@ export async function downloadFileFromUrl(
       responseType: 'stream'
     });
 
-    const writer = fs.createWriteStream(filePath);
+    const writer = createWriteStream(filePath);
     await pipeline(response.data, writer);
 
     return {
@@ -47,5 +50,14 @@ export async function downloadFileFromUrl(
         error instanceof Error ? error.message : 'Unknown error'
       }`
     );
+  }
+}
+
+async function fileExistsSafe(p: string): Promise<boolean> {
+  try {
+    await fs.access(p);
+    return true;
+  } catch {
+    return false;
   }
 }

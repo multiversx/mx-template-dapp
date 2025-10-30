@@ -1,6 +1,9 @@
+import { execFile } from 'node:child_process';
+import fs from 'node:fs/promises';
 import path from 'node:path';
-import fs from 'fs-extra';
-import unzipper from 'unzipper';
+import { promisify } from 'node:util';
+
+const execFileAsync = promisify(execFile);
 
 type UnzipArchiveOptions = {
   archivePath: string;
@@ -12,13 +15,12 @@ type UnzipArchiveResult = {
   unzipSkipped: boolean;
 };
 
-// Unzips an archive to a folder named after the archive (minus its extension).
-// Returns the extraction path and whether the unzip was skipped due to cache.
+// Unzips an archive using the system `unzip` command.
+//Returns the extraction path and whether extraction was skipped due to cache.
 export async function unzipArchive(
   options: UnzipArchiveOptions
 ): Promise<UnzipArchiveResult> {
   const { archivePath, overwrite = false } = options;
-
   const outputPath = deriveOutputPath(archivePath);
 
   if (await shouldSkipUnzip(outputPath, overwrite)) {
@@ -26,49 +28,50 @@ export async function unzipArchive(
   }
 
   await ensureCleanOutputDir(outputPath, overwrite);
-  await extractArchive(archivePath, outputPath);
+  await extractZipArchive(archivePath, outputPath);
 
   return { outputPath, unzipSkipped: false };
 }
 
-// Derives the output folder name from the archive path.
 function deriveOutputPath(archivePath: string): string {
-  const parsed = path.parse(archivePath);
-  return path.join(parsed.dir, parsed.name);
+  const { dir, name } = path.parse(archivePath);
+  return path.join(dir, name);
 }
 
-// Checks if the existing unzipped folder should be reused.
 async function shouldSkipUnzip(
   outputPath: string,
   overwrite: boolean
 ): Promise<boolean> {
-  const exists = await fs.pathExists(outputPath);
-  return exists && !overwrite;
+  try {
+    await fs.access(outputPath);
+    return !overwrite;
+  } catch {
+    return false;
+  }
 }
 
-// Ensures the output directory is empty and ready.
 async function ensureCleanOutputDir(
   outputPath: string,
   overwrite: boolean
 ): Promise<void> {
-  if (await fs.pathExists(outputPath)) {
+  try {
     if (overwrite) {
-      await fs.remove(outputPath);
-    } else {
-      return;
+      await fs.rm(outputPath, { recursive: true, force: true });
     }
+  } catch {
+    // ignore
   }
-  await fs.mkdirp(outputPath);
+  await fs.mkdir(outputPath, { recursive: true });
 }
 
-// Performs the actual extraction using unzipper’s promise interface.
-async function extractArchive(
+// Extracts a ZIP archive using the system `unzip` utility.
+// Requires `unzip` to be available on the system (default on macOS/Linux, available via WSL on Windows).
+async function extractZipArchive(
   archivePath: string,
   outputPath: string
 ): Promise<void> {
   try {
-    const directory = await unzipper.Open.file(archivePath);
-    await directory.extract({ path: outputPath, concurrency: 5 });
+    await execFileAsync('unzip', ['-o', archivePath, '-d', outputPath]);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     throw new Error(
