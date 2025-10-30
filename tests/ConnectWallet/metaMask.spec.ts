@@ -68,8 +68,7 @@ test.describe('Connect a wallet', () => {
         context,
         `chrome-extension://${extensionId}/notification.html`,
         {
-          viewport: { width: 360, height: 592 },
-          timeout: 10000
+          viewport: { width: 360, height: 592 }
         }
       );
 

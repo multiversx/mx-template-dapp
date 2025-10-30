@@ -6,7 +6,7 @@ const DEFAULT_WAIT_TIMEOUT = 15_000;
 export async function getPageAndWaitForLoad(
   context: BrowserContext,
   pageUrlFragment: string,
-  options?: { viewport?: { width: number; height: number } }
+  options?: { viewport?: { width: number; height: number }; timeout?: number }
 ): Promise<Page> {
   let retries = 0;
   const maxRetries = 3;
@@ -17,7 +17,7 @@ export async function getPageAndWaitForLoad(
         context.pages().find((p) => p.url().includes(pageUrlFragment)) ||
         (await context.waitForEvent('page', {
           predicate: (p) => p.url().includes(pageUrlFragment),
-          timeout: DEFAULT_WAIT_TIMEOUT
+          timeout: options?.timeout || DEFAULT_WAIT_TIMEOUT
         }));
 
       if (!page) throw new Error('Notification page not found');
