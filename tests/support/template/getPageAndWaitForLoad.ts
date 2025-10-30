@@ -13,12 +13,15 @@ export async function getPageAndWaitForLoad(
 
   while (retries < maxRetries) {
     try {
+      const timeoutMs = options?.timeout || DEFAULT_WAIT_TIMEOUT;
+
+      // Try to find an already open page or wait (by polling) for a page to
+      // navigate to the expected URL. Relying on the 'page' event can
+      // miss cases where the page already exists (about:blank) and then
+      // navigates later, or when navigation happens in the same tab.
       const page =
         context.pages().find((p) => p.url().includes(pageUrlFragment)) ||
-        (await context.waitForEvent('page', {
-          predicate: (p) => p.url().includes(pageUrlFragment),
-          timeout: options?.timeout || DEFAULT_WAIT_TIMEOUT
-        }));
+        (await waitForPageByUrlFragment(context, pageUrlFragment, timeoutMs));
 
       if (!page) throw new Error('Notification page not found');
 
@@ -43,4 +46,27 @@ export async function getPageAndWaitForLoad(
   }
 
   throw new Error('getPageAndWaitForLoad: Unexpected end of retries');
+}
+
+async function waitForPageByUrlFragment(
+  context: BrowserContext,
+  fragment: string,
+  timeoutMs: number
+): Promise<Page | null> {
+  const pollIntervalMs = 250;
+  const deadline = Date.now() + timeoutMs;
+
+  while (Date.now() < deadline) {
+    const match = context.pages().find((p) => p.url().includes(fragment));
+    if (match) return match;
+
+    // Briefly wait for any new page to appear; ignore timeouts and keep polling.
+    try {
+      await context.waitForEvent('page', { timeout: pollIntervalMs });
+    } catch {
+      // no-op; continue polling
+    }
+  }
+
+  return null;
 }
