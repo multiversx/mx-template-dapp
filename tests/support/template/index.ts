@@ -16,7 +16,7 @@ export { connectWebWallet } from './connectWebWallet';
 
 export { countTransactions } from './parseTransactionsTable';
 
-export { ensureDirectoryExists } from './fs/ensureDirectoryExists';
+export { ensureDirectoryExists } from '../fs/ensureDirectoryExists';
 
 export { extractBalanceFromContainer } from './extractBalanceFromContainer';
 
@@ -24,7 +24,7 @@ export { filterTransactions } from './parseTransactionsTable';
 
 export { getTestIdSelector } from './testIdSelector';
 
-export { handleMetaMaskSnapApproval } from './handleMetaMaskSnapApproval';
+export { handleMetaMaskSnap } from '../metaMask/handleMetaMaskSnap';
 
 export { handlePingPong } from './handlePingPong';
 
@@ -34,7 +34,7 @@ export { parseTransactionsTable } from './parseTransactionsTable';
 
 export { pasteStringFromClipboard } from './pasteStringFromClipboard';
 
-export { readValueFromFile } from './fs/readValueFromFile';
+export { readValueFromFile } from '../fs/readValueFromFile';
 
 export { signBatchTransactions } from './signBatchTransactions';
 
@@ -48,4 +48,4 @@ export { waitForTransactionToastToContain } from './waitForTransactionToastToSho
 
 export { waitUntilStable } from './waitUntilStable';
 
-export { writeValueToFile } from './fs/writeValueToFile';
+export { writeValueToFile } from '../fs/writeValueToFile';

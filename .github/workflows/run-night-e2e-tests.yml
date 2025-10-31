@@ -50,8 +50,6 @@ jobs:
           command: pnpm install
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
-      - name: Setup Synpress Cache
-        run: xvfb-run pnpm exec synpress tests/test/wallet-setup
       - name: Run Playwright E2E Tests
         working-directory: tests
         run: xvfb-run pnpm run run-playwright-test

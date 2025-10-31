@@ -13,7 +13,8 @@ export default defineConfig({
     https: true,
     watch: {
       usePolling: false,
-      useFsEvents: false
+      useFsEvents: false,
+      ignored: ['**/.cache/**']
     },
     hmr: {
       overlay: false

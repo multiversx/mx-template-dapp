@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
-import * as TestActions from '../support';
+import * as TestActions from '../support/template';
 import {
   OriginPageEnum,
   SelectorsEnum,
   TestDataEnums,
   UrlRegex
-} from '../support/testdata';
+} from '../support/template/testdata';
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath1,
