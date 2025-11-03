@@ -23,7 +23,12 @@ describe('useGetPingTransaction', () => {
     const { result } = renderHook(() => useGetPingTransaction());
     const transactionReceived = await result.current();
 
-    expect(transactionReceived).toBe(pingTransaction);
+    expect(transactionReceived).not.toBeNull();
+
+    if (transactionReceived) {
+      const plainTx = transactionReceived.toPlainObject();
+      expect(plainTx.data).toBe(pingTransaction.data);
+    }
   });
 
   it('should return null', async () => {

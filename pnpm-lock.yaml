@@ -34,7 +34,7 @@ importers:
         version: 5.2.13(@multiversx/sdk-core@15.3.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.3.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)(zod@3.22.4)
       '@multiversx/sdk-dapp-ui':
         specifier: ^0.x
-        version: 0.0.36(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.1.1(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@multiversx/sdk-dapp-utils':
         specifier: ^3.x
         version: 3.0.2(@multiversx/sdk-core@15.3.0(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)
@@ -795,8 +795,8 @@ packages:
       bignumber.js: ^9.0.1
       protobufjs: ^7.2.6
 
-  '@multiversx/sdk-dapp-ui@0.0.36':
-    resolution: {integrity: sha512-AMvcmacFNxoNooohvERuD6x0+JkqwAewF4YwhaZt1w8rbN3yP/N4h4f/qU6bAScu/R819d9HQBo7WRkQfDYp/Q==}
+  '@multiversx/sdk-dapp-ui@0.1.1':
+    resolution: {integrity: sha512-LaZqqfeD/ojcjm2Z2XYcfThoM4B9HoNEMJ5TN5F3yU7sblS85scA5Aa4xkRf5ZrQAfOBp8JUvSIisloKMO8k7g==}
     engines: {node: '>=20.19.0'}
 
   '@multiversx/sdk-dapp-utils@3.0.2':
@@ -6880,7 +6880,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@multiversx/sdk-dapp-ui@0.0.36(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@multiversx/sdk-dapp-ui@0.1.1(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@stencil/core': 4.38.2
       '@stencil/react-output-target': 1.2.0(@stencil/core@4.38.2)(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -6926,7 +6926,7 @@ snapshots:
       socket.io-client: 4.7.5
       zustand: 4.4.7(@types/react@18.2.23)(immer@10.1.1)(react@18.2.0)
     optionalDependencies:
-      '@multiversx/sdk-dapp-ui': 0.0.36(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@multiversx/sdk-dapp-ui': 0.1.1(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'

@@ -15,13 +15,7 @@ module.exports = {
   },
   transformIgnorePatterns: ['node_modules/(^.+\\\\.(ts|js)$)'],
   testMatch: ['**/src/**/?(*.)+(spec|test|bgTest).ts?(x)'],
-  moduleNameMapper: {
-    '\\.(css|sass|scss)$': 'identity-obj-proxy',
-    '^@multiversx/sdk-dapp-ui$':
-      '<rootDir>/src/__mocks__/@multiversx/sdk-dapp-ui.ts',
-    '^@multiversx/sdk-dapp-ui/(.*)$':
-      '<rootDir>/src/__mocks__/@multiversx/sdk-dapp-ui.ts'
-  },
+
   moduleFileExtensions: [
     // Place tsx and ts to beginning as suggestion from Jest team
     // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
@@ -45,5 +39,6 @@ module.exports = {
   bail: 1,
   workerIdleMemoryLimit: '512MB', // Memory used per worker. Required to prevent memory leaks
   maxWorkers: '50%', // Maximum tests ran in parallel. Required to prevent CPU usage at 100%
-  resetMocks: false
+  resetMocks: false,
+  snapshotSerializers: []
 };
