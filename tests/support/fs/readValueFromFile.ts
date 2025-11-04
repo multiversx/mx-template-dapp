@@ -6,7 +6,8 @@ export const readValueFromFile = (
 ): string => {
   if (encoding === 'buffer') {
     const data = fs.readFileSync(inPath);
-    return Buffer.from(data.buffer).toString('utf8');
+    return data.toString('utf8');
   }
+
   return fs.readFileSync(inPath, 'utf8');
 };

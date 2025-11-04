@@ -7,11 +7,10 @@ import {
   TransferTransactionsFactory,
   U32Value
 } from '@multiversx/sdk-core/out';
-
 import { BATCH_TRANSACTIONS_SC } from 'config';
+import { contractAddress } from 'config';
 import { Address } from 'lib';
 import { TransactionProps } from 'types';
-import { contractAddress } from 'config';
 
 export const getWrapAndMultiTransferTransactions = async ({
   address,

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
-import * as TestActions from '../support';
-import { SelectorsEnum, TestDataEnums } from '../support/testdata';
+import * as TestActions from '../support/template';
+import { SelectorsEnum, TestDataEnums } from '../support/template/testdata';
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath1,

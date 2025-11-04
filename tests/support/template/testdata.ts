@@ -1,11 +1,22 @@
-import { PATHS } from './constants';
+import path from 'path';
 
-const walletsDir = process.env.WALLETS_DIR || PATHS.WALLETS_DIR;
+const walletsDir = process.env.WALLETS_DIR
+  ? path.resolve(process.env.WALLETS_DIR)
+  : path.resolve(__dirname, '..', 'wallets');
+
+export const NA = 'N/A';
 
 export enum OriginPageEnum {
-  multiversxWallet = '/devnet-wallet.multiversx.com/',
-  templateDashboard = '/dashboard'
+  multiversxWallet = 'devnet-wallet.multiversx.com',
+  templateHome = 'localhost:3000/home',
+  templateDashboard = 'localhost:3000/dashboard',
+  templateUnlock = 'localhost:3000/unlock'
 }
+
+export const UrlRegex = {
+  templateDashboard: /localhost:3000\/dashboard/,
+  multiversxWallet: /devnet-wallet\.multiversx\.com/
+} as const;
 
 export enum PingPongEnum {
   raw = 'raw',
@@ -53,7 +64,7 @@ export enum SelectorsEnum {
   privateKeyInput = 'privateKeyInput',
   cancelButton = 'cancelButton',
   sidePanel = '#side-panel',
-  sidePanelCloseIcon = 'mvx-close-icon',
+  sidePanelCloseIcon = 'svg',
 
   // Web wallet selectors
   signCancelButton = 'signCancelBtn',
@@ -71,25 +82,29 @@ export enum SelectorsEnum {
   errorIcon = '.mvx\\:text-error',
 
   // Table containers
-  transactionsAllTable = '#transactions-all table.transactions-table',
-  transactionsPingPongTable = '#transactions-ping-pong table.transactions-table',
+  transactionsAllTable = '#transactions-all table',
+  transactionsPingPongTable = '#transactions-ping-pong table',
   transactionsTableBodyRow = 'tbody tr.transactions-table-body-row'
 }
 
 // Test data is parameterized via environment variables so secrets (passwords,
 // addresses, keystores) come from GitHub Secrets in CI or from local .env.
 export const TestDataEnums = {
-  keystorePassword1: process.env.KEYSTORE1_PASSWORD || '',
-  keystorePassword2: process.env.KEYSTORE2_PASSWORD || '',
-  keystorePassword3: process.env.KEYSTORE3_PASSWORD || '',
-  keystorePassword4: process.env.KEYSTORE4_PASSWORD || '',
+  keystorePassword1: process.env.KEYSTORE1_PASSWORD || NA,
+  keystorePassword2: process.env.KEYSTORE2_PASSWORD || NA,
+  keystorePassword3: process.env.KEYSTORE3_PASSWORD || NA,
+  keystorePassword4: process.env.KEYSTORE4_PASSWORD || NA,
 
-  keystoreWalletAddress1: process.env.KEYSTORE1_ADDRESS || '',
-  keystoreWalletAddress2: process.env.KEYSTORE2_ADDRESS || '',
-  keystoreWalletAddress3: process.env.KEYSTORE3_ADDRESS || '',
-  keystoreWalletAddress4: process.env.KEYSTORE4_ADDRESS || '',
-  keystoreWalletAddress5: process.env.KEYSTORE5_ADDRESS || '',
-  keystoreWalletAddress6: process.env.KEYSTORE6_ADDRESS || '',
+  keystoreWalletAddress1: process.env.KEYSTORE1_ADDRESS || NA,
+  keystoreWalletAddress2: process.env.KEYSTORE2_ADDRESS || NA,
+  keystoreWalletAddress3: process.env.KEYSTORE3_ADDRESS || NA,
+  keystoreWalletAddress4: process.env.KEYSTORE4_ADDRESS || NA,
+  keystoreWalletAddress5: process.env.KEYSTORE5_ADDRESS || NA,
+  keystoreWalletAddress6: process.env.KEYSTORE6_ADDRESS || NA,
+
+  metamaskMnemonic: process.env.METAMASK_MNEMONIC,
+  metamaskAddress: process.env.METAMASK_ADDRESS,
+  metamaskPassword: process.env.METAMASK_PASSWORD,
 
   keystoreFilePath1: `${walletsDir}/keystoreFile1.json`,
   keystoreFilePath2: `${walletsDir}/keystoreFile2.json`,

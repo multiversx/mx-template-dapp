@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 import { ITooltip as ReactTooltipPropsType } from 'react-tooltip';
-
 import { WithClassnameType } from 'types';
 
 export enum TooltipPlaceEnum {

@@ -7,11 +7,9 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MvxButton } from '@multiversx/sdk-dapp-ui/react';
 import { MouseEvent, useState } from 'react';
-
 import { OutputContainer } from 'components';
 import { Address, getAccountProvider, Message, useGetAccount } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
-
 import { SignFailure, SignSuccess } from './components';
 
 // prettier-ignore

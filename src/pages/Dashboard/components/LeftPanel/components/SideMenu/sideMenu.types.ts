@@ -1,6 +1,5 @@
-import { FunctionComponent, SVGProps } from 'react';
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-
+import { FunctionComponent, SVGProps } from 'react';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 
 export interface SideMenuPropsType {

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-
 import { ID_API_URL, USERS_API_URL } from 'config/config.mainnet';
 import { useGetAccount } from 'lib';
 

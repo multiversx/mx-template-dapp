@@ -1,12 +1,10 @@
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { useGetNetworkConfig } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
-
 import { version } from '../../../package.json';
 
 // prettier-ignore
@@ -22,7 +20,7 @@ const styles = {
 export const Footer = () => {
   const { network } = useGetNetworkConfig();
   const navigate = useNavigate();
-  const currentYear = moment().year();
+  const currentYear = DateTime.now().year;
 
   const handleDisclaimerClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();

@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { OutputContainer, TransactionsTable } from 'components';
 import { getActiveTransactionsStatus } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
-
 import { useGetTransactions } from './hooks';
 
 // prettier-ignore

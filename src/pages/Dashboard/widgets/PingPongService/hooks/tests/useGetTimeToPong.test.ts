@@ -1,6 +1,5 @@
 import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-
 import { useGetTimeToPong } from '../useGetTimeToPong';
 
 describe('useGetTimeToPong', () => {

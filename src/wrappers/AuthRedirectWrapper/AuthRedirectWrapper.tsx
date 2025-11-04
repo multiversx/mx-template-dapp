@@ -1,6 +1,5 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
-
 import { useGetIsLoggedIn } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
 import { routes } from 'routes';

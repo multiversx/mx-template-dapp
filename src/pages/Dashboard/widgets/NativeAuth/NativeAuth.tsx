@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-
 import { Label, MissingNativeAuthError, OutputContainer } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
@@ -11,7 +10,6 @@ import {
 } from 'lib';
 import { Username } from 'pages/Dashboard/components/LeftPanel/components/Account/components';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
-
 import { useGetProfile } from './hooks';
 
 // prettier-ignore

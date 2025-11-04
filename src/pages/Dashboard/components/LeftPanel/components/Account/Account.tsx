@@ -6,15 +6,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
-
 import { ReactComponent as XLogo } from 'assets/img/x-logo.svg';
 import { Label } from 'components';
 import { FormatAmount, MvxTrim, useGetAccount } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
-
+import styles from './account.styles';
 import { Username } from './components';
 import { useGetUserHerotag } from './hooks/useGetUserHerotag';
-import styles from './account.styles';
 
 interface AccountDetailsType {
   icon: ReactNode;

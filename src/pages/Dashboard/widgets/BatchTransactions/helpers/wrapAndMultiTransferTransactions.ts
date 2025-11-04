@@ -4,9 +4,8 @@ import {
   TransactionsDisplayInfoType
 } from 'lib';
 import { TransactionProps } from 'types';
-
-import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 import { getWrapAndMultiTransferTransactions } from './getWrapAndMultiTransferTransactions';
+import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 
 interface WrapAndMultiTransferTransactionsType extends TransactionProps {
   transactionsDisplayInfo?: TransactionsDisplayInfoType;

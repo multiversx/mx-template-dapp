@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-
 import { ThemeTooltipDotsPropsType } from './themeTooltipDots.types';
 
 // prettier-ignore

@@ -1,11 +1,11 @@
 import { expect, test } from '@playwright/test';
-import * as TestActions from '../support';
-import { readValueFromFile } from '../support';
+import * as TestActions from '../support/template';
+import { readValueFromFile } from '../support/template';
 import {
   PingPongEnum,
   SelectorsEnum,
   TestDataEnums
-} from '../support/testdata';
+} from '../support/template/testdata';
 
 const privateKeyConfig = {
   address: TestDataEnums.keystoreWalletAddress6,

@@ -1,18 +1,16 @@
-import { Fragment, FunctionComponent, MouseEvent, SVGProps } from 'react';
-import { ReactComponent as ArrowUpRightIcon } from 'assets/icons/arrow-up-right-icon.svg';
-import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-
-import {
-  useHandleThemeManagement,
-  ThemeOptionType
-} from 'hooks/useHandleThemeManagement';
+import { Fragment, FunctionComponent, MouseEvent, SVGProps } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ReactComponent as ArrowUpRightIcon } from 'assets/icons/arrow-up-right-icon.svg';
+import { ReactComponent as HomeDarkThemeIcon } from 'assets/icons/home-dark-theme-icon.svg';
 import { ReactComponent as HomeLightThemeIcon } from 'assets/img/bright-light-icon.svg';
 import { ReactComponent as HomeVibeThemeIcon } from 'assets/img/vibe-mode-icon.svg';
-import { ReactComponent as HomeDarkThemeIcon } from 'assets/icons/home-dark-theme-icon.svg';
 import { Button } from 'components';
+import {
+  ThemeOptionType,
+  useHandleThemeManagement
+} from 'hooks/useHandleThemeManagement';
 import { DOCUMENTATION_LINK, RouteNamesEnum } from 'localConstants';
-
 import styles from './homeHero.styles';
 
 interface HomeThemeOptionType extends ThemeOptionType {

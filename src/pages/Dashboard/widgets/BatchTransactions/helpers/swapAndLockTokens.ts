@@ -1,15 +1,13 @@
 import { createRoot } from 'react-dom/client';
-
 import {
   getAccountProvider,
   ToastManager,
   TransactionsDisplayInfoType
 } from 'lib';
 import { TransactionProps } from 'types';
-
+import { ToastContent } from '../components';
 import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';
-import { ToastContent } from '../components';
 
 export const swapAndLockTokens = async ({
   address,

@@ -1,9 +1,7 @@
 import { trimUsernameDomain } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
-
 import { useGetUserHerotag } from '../hooks/useGetUserHerotag';
 
-// prettier-ignore
 const styles = {
   usernameContainer: 'username-container flex gap-0.5',
   herotag: 'herotag text-accent transition-all duration-200 ease-out'

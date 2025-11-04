@@ -1,6 +1,5 @@
 /* eslint-disable sort-exports/sort-exports */
-import { Page } from '@playwright/test';
-import { BrowserContext } from '@playwright/test';
+import { BrowserContext, Page } from '@playwright/test';
 import { PingPongEnum } from './testdata';
 
 export type FileEncoding = 'base64' | 'utf8' | 'none';
@@ -138,12 +137,6 @@ export interface TransactionRow {
   isFailed: boolean;
 }
 
-export interface WaitForPageByUrlSubstringType {
-  page: Page;
-  urlSubstring: string;
-  timeout?: number;
-}
-
 export interface WaitForToastToBeClosedType {
   page: Page;
 }
@@ -165,3 +158,16 @@ export interface WaitForTransactionToastToContainType {
   toastStatus?: string;
   toastIndex?: number;
 }
+
+export interface GetPageAndWaitForLoadOptions {
+  maxRetries?: number;
+  timeout?: number;
+  viewport?: { width: number; height: number };
+  waitForReady?: (page: Page) => Promise<Page>;
+}
+
+export type GetPageAndWaitForLoad = (
+  context: BrowserContext,
+  urlSubstring: string | RegExp,
+  options?: GetPageAndWaitForLoadOptions
+) => Promise<Page>;

@@ -1,6 +1,5 @@
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { Label } from 'components';
 import { contractAddress } from 'config';
 import {
@@ -10,10 +9,8 @@ import {
   SignedTransactionType,
   useGetNetworkConfig
 } from 'lib';
-
 import { TransactionsOutput } from './TransactionsOutput';
 
-// prettier-ignore
 const styles = {
   pingPongAddressContainer: 'ping-pong-address-container flex gap-3 mb-4',
   pingPongButtons: 'ping-pong-buttons flex gap-2',

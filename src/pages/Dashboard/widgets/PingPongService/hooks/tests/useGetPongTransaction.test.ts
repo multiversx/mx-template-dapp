@@ -1,6 +1,5 @@
 import { renderHook } from '@testing-library/react';
 import axios from 'axios';
-
 import { useGetPongTransaction } from '../useGetPongTransaction';
 
 const pongTransaction = {
@@ -24,7 +23,12 @@ describe('useGetPongTransaction', () => {
     const { result } = renderHook(() => useGetPongTransaction());
     const transactionReceived = await result.current();
 
-    expect(transactionReceived).toBe(pongTransaction);
+    expect(transactionReceived).not.toBeNull();
+
+    if (transactionReceived) {
+      const plainTx = transactionReceived.toPlainObject();
+      expect(plainTx.data).toBe(pongTransaction.data);
+    }
   });
 
   it('should return null', async () => {

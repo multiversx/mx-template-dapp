@@ -1,7 +1,6 @@
 import { faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FunctionComponent, SVGProps } from 'react';
-
 import { ReactComponent as ArcLogo } from 'assets/img/arc-logo.svg';
 import { ReactComponent as BraveLogo } from 'assets/img/brave-logo.svg';
 import { ReactComponent as ChromeLogo } from 'assets/img/chrome-logo.svg';
@@ -12,9 +11,8 @@ import { ReactComponent as WalletBraveLogo } from 'assets/img/wallet-brave-logo.
 import { ReactComponent as WalletChromeLogo } from 'assets/img/wallet-chrome-logo.svg';
 import { ReactComponent as WalletFirefoxLogo } from 'assets/img/wallet-firefox-logo.svg';
 import { ReactComponent as WalletIcon } from 'assets/img/web-wallet-icon.svg';
-import { CHROME_EXTENSION_LINK, FIREFOX_ADDON_LINK } from 'localConstants';
 import { BrowserEnum, getDetectedBrowser } from 'lib';
-
+import { CHROME_EXTENSION_LINK, FIREFOX_ADDON_LINK } from 'localConstants';
 import { BrowserFrame } from './components';
 import styles from './extensionConnect.styles';
 

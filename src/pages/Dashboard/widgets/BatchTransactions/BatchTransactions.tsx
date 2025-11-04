@@ -1,20 +1,18 @@
+import { useState } from 'react';
 import {
   faArrowsRotate,
   faPaperPlane,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
-
-import { MvxButton, useGetPendingTransactionsSessions } from 'lib';
 import { OutputContainer, TransactionsOutput } from 'components';
+import { MvxButton, useGetPendingTransactionsSessions } from 'lib';
 import {
   useGetAccount,
   useGetNetworkConfig,
   useGetPendingTransactions
 } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
-
 import {
   signAndAutoSendBatchTransactions,
   swapAndLockTokens,
