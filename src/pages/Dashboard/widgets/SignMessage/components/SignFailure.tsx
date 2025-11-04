@@ -1,4 +1,3 @@
-// prettier-ignore
 const styles = {
   signFailureContainer: 'sign-failure-container flex flex-col',
   signFailureErrorMessage: 'sign-failure-error-message flex gap-1'

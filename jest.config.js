@@ -15,9 +15,7 @@ module.exports = {
   },
   transformIgnorePatterns: ['node_modules/(^.+\\\\.(ts|js)$)'],
   testMatch: ['**/src/**/?(*.)+(spec|test|bgTest).ts?(x)'],
-  moduleNameMapper: {
-    '\\.(css|sass|scss)$': 'identity-obj-proxy'
-  },
+
   moduleFileExtensions: [
     // Place tsx and ts to beginning as suggestion from Jest team
     // https://jestjs.io/docs/configuration#modulefileextensions-arraystring
@@ -25,6 +23,9 @@ module.exports = {
     'ts',
     'web.js',
     'js',
+    'jsx',
+    'cjs',
+    'mjs',
     'web.ts',
     'web.tsx',
     'json',

@@ -1,7 +1,6 @@
 import { PingPongComponent, PingTransactionPayloadType } from 'components';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetLoginInfo } from 'lib';
-
 import {
   useGetPingTransaction,
   useGetPongTransaction,

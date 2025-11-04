@@ -1,9 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-
 import { PageNotFound } from 'pages/PageNotFound/PageNotFound';
 import { routes } from 'routes';
 import { AxiosInterceptors, BatchTransactionsContextProvider } from 'wrappers';
-
 import { Layout } from './components';
 
 export const App = () => {

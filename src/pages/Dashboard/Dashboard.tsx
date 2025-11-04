@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-
 import { contractAddress } from 'config';
 import { WidgetType } from 'types/widget.types';
-
 import { DashboardHeader, LeftPanel, Widget } from './components';
+import styles from './dashboard.styles';
 import {
   BatchTransactions,
   NativeAuth,
@@ -14,7 +13,6 @@ import {
   SignMessage,
   Transactions
 } from './widgets';
-import styles from './dashboard.styles';
 
 const dashboardWidgets: WidgetType[] = [
   {

@@ -10,7 +10,6 @@ import {
   UserSecretKey,
   UserSigner
 } from 'lib';
-
 import { LoginModal } from './LoginModal';
 
 const notInitializedError = (caller: string) => () => {

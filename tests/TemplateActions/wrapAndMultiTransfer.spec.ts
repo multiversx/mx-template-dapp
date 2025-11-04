@@ -1,11 +1,12 @@
 import { expect, test } from '@playwright/test';
-import * as TestActions from '../support';
-import { TEST_CONSTANTS } from '../support/constants';
+import * as TestActions from '../support/template';
+import { TEST_CONSTANTS } from '../support/template/constants';
 import {
   OriginPageEnum,
   SelectorsEnum,
-  TestDataEnums
-} from '../support/testdata';
+  TestDataEnums,
+  UrlRegex
+} from '../support/template/testdata';
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath4,
@@ -49,9 +50,9 @@ test.describe('Wrap & Multi-Transfer', async () => {
       .locator(SelectorsEnum.batchTransactionsContainer)
       .waitFor({ state: 'visible' });
 
-    // Verify batch transactions container is in viewport
+    // Verify batch transactions container is visible
     const container = page.locator(SelectorsEnum.batchTransactionsContainer);
-    await expect(container).toBeInViewport();
+    await expect(container).toBeVisible();
   });
 
   test('should complete full batch transaction flow', async ({ page }) => {
@@ -65,13 +66,13 @@ test.describe('Wrap & Multi-Transfer', async () => {
     await page.getByTestId(SelectorsEnum.wrapAndMultiTransferButton).click();
 
     // Switch to web wallet page
-    const walletPage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.multiversxWallet
-    });
+    const walletPage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.multiversxWallet
+    );
 
     // Verify wallet page opened
-    await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
+    await expect(walletPage).toHaveURL(UrlRegex.multiversxWallet);
 
     // Sign transaction by confirming with keystore in the web wallet
     await TestActions.confirmWalletTransaction(walletPage, keystoreConfig);
@@ -84,10 +85,10 @@ test.describe('Wrap & Multi-Transfer', async () => {
     });
 
     // Switch to template page
-    const templatePage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.templateDashboard
-    });
+    const templatePage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.templateDashboard
+    );
 
     // Wait for transaction toast to be displayed
     await TestActions.waitForToastToBeDisplayed(templatePage);

@@ -4,13 +4,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-
 import { Tooltip } from 'components/Tooltip/Tooltip';
 import {
-  useHandleThemeManagement,
-  ThemeOptionType
+  ThemeOptionType,
+  useHandleThemeManagement
 } from 'hooks/useHandleThemeManagement';
-
 import { ThemeTooltipDots } from './components';
 import styles from './themeTooltip.styles';
 

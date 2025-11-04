@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
-import * as TestActions from '../support';
-import { readValueFromFile } from '../support';
-import { SelectorsEnum, TestDataEnums } from '../support/testdata';
+import * as TestActions from '../support/template';
+import { readValueFromFile } from '../support/template';
+import { SelectorsEnum, TestDataEnums } from '../support/template/testdata';
 
 const privateKeyConfig = {
   address: TestDataEnums.keystoreWalletAddress6,
@@ -53,8 +53,11 @@ test.describe('cancel transaction from side panel', () => {
     // Wait for side panel to be visible
     await page.locator(SelectorsEnum.sidePanel).waitFor({ state: 'visible' });
 
-    // Cancel the transaction from the modal close button
-    await page.locator(SelectorsEnum.sidePanelCloseIcon).click();
+    // Click the close icon
+    await page
+      .locator(SelectorsEnum.sidePanel)
+      .locator(SelectorsEnum.sidePanelCloseIcon)
+      .click();
 
     // Wait for toast to be displayed
     await TestActions.waitForToastToBeDisplayed(page);

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { apiTimeout, transactionSize } from 'config';
 import {
   getInterpretedTransaction,
@@ -8,7 +7,6 @@ import {
   useGetAccount,
   useGetNetworkConfig
 } from 'lib';
-
 import { TransactionsPropsType } from '../Transactions';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
@@ -33,8 +31,9 @@ export const useGetTransactions = (payload?: TransactionsPropsType) => {
         ...(payload ?? {})
       });
 
-      const interpretedTransactions = data.map((transaction) =>
-        getInterpretedTransaction({ transaction, address, explorerAddress })
+      const interpretedTransactions = data.map(
+        (transaction: ServerTransactionType) =>
+          getInterpretedTransaction({ transaction, address, explorerAddress })
       );
 
       setTransactions(interpretedTransactions);
