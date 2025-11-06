@@ -1,6 +1,7 @@
 import { BrowserContext, Page } from '@playwright/test';
 import { getPageAndWaitForLoad } from '../template/getPageAndWaitForLoad';
-import { waitForMetaMaskLoad } from './waitForMetaMaskLoad';
+// import { waitForMetaMaskLoad } from './waitForMetaMaskLoad';
+import { waitUntilStable } from '../template/waitUntilStable';
 
 const RETRY_DELAY_BASE_MS = 500;
 const CLICK_TIMEOUT_MS = 6000;
@@ -33,7 +34,8 @@ export async function handleMetaMaskSnap(
 
   while (attempt <= maxRetries) {
     try {
-      await waitForMetaMaskLoad(page, { skipInitialStabilityWait: false });
+      // await waitForMetaMaskLoad(page, { skipInitialStabilityWait: false });
+      await waitUntilStable(page);
 
       if (await clickIfConfirmationVisible(page)) return;
 
@@ -131,7 +133,8 @@ async function reacquireNotificationPage(
       `chrome-extension://${extensionId}/notification.html`,
       { viewport: { width: 360, height: 592 } }
     );
-    await waitForMetaMaskLoad(page, { skipInitialStabilityWait: true });
+    // await waitForMetaMaskLoad(page, { skipInitialStabilityWait: true });
+    await waitUntilStable(page);
     console.warn('[MetaMaskSnap] Reacquired notification page.');
     return page;
   } catch (error) {
