@@ -179,7 +179,6 @@ export type GetPageAndWaitForLoad = (
 export type WaitForMetaMaskLoadOptions = {
   selectorTimeoutMs?: number;
   extraLoadingSelectors?: string[];
-  postDelayMs?: number;
   skipInitialStabilityWait?: boolean;
   concurrency?: number;
 };
