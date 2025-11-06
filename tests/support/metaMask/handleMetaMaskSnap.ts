@@ -1,7 +1,6 @@
 import { BrowserContext, Page } from '@playwright/test';
 import { getPageAndWaitForLoad } from '../template/getPageAndWaitForLoad';
 import { waitUntilStable } from '../template/waitUntilStable';
-import { waitForMetaMaskLoad } from './waitForMetaMaskLoad';
 
 const RETRY_DELAY_BASE_MS = 500;
 const CLICK_TIMEOUT_MS = 2500;
@@ -34,7 +33,7 @@ export async function handleMetaMaskSnap(
 
   while (attempt <= maxRetries) {
     try {
-      await waitForMetaMaskLoad(page);
+      await waitUntilStable(page);
 
       if (await clickIfConfirmationVisible(page)) return;
 
