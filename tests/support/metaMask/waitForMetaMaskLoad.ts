@@ -3,7 +3,7 @@ import { WaitForMetaMaskLoadOptions } from '../template/types';
 import { waitUntilStable } from '../template/waitUntilStable';
 
 const DEFAULT_TIMEOUT = 10_000;
-const DEFAULT_POST_DELAY_MS = 300;
+// const DEFAULT_POST_DELAY_MS = 300;
 const DEFAULT_CONCURRENCY = 3;
 
 const BASE_LOADING_SELECTORS: readonly string[] = [
@@ -34,7 +34,7 @@ export async function waitForMetaMaskLoad(
   const {
     selectorTimeoutMs = DEFAULT_TIMEOUT,
     extraLoadingSelectors = [],
-    postDelayMs = DEFAULT_POST_DELAY_MS,
+    // postDelayMs = DEFAULT_POST_DELAY_MS,
     skipInitialStabilityWait = false,
     concurrency = DEFAULT_CONCURRENCY // how many selectors to wait on in parallel
   } = options;
@@ -60,14 +60,14 @@ export async function waitForMetaMaskLoad(
   }
 
   // Smarter post-delay: only wait if we still see a common loader possibly flickering
-  const residualSpinner = page.locator('.mm-button-base__icon-loading');
-  if (await residualSpinner.isVisible().catch(() => false)) {
-    await residualSpinner
-      .waitFor({ state: 'hidden', timeout: Math.min(1000, selectorTimeoutMs) })
-      .catch(() => {});
-  } else {
-    await page.waitForTimeout(postDelayMs);
-  }
+  // const residualSpinner = page.locator('.mm-button-base__icon-loading');
+  // if (await residualSpinner.isVisible().catch(() => false)) {
+  //   await residualSpinner
+  //     .waitFor({ state: 'hidden', timeout: Math.min(1000, selectorTimeoutMs) })
+  //     .catch(() => {});
+  // } else {
+  //   await page.waitForTimeout(postDelayMs);
+  // }
 
   return page;
 }
