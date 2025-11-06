@@ -1,5 +1,6 @@
 import { BrowserContext, expect, Page, test } from '@playwright/test';
 import { setupMetaMaskWallet } from '../support/metaMask/setupMetaMaskWallet';
+import { waitForMetaMaskLoad } from '../support/metaMask/waitForMetaMaskLoad';
 import * as TestActions from '../support/template';
 import { getPageAndWaitForLoad } from '../support/template/getPageAndWaitForLoad';
 import {
@@ -72,6 +73,11 @@ test.describe('Connect a wallet', () => {
         }
       );
 
+      // Ensure the MetaMask UI is fully usable
+      await waitForMetaMaskLoad(notificationPage, {
+        skipInitialStabilityWait: true
+      });
+
       // Handle MetaMask Snap privacy warning
       await TestActions.handleMetaMaskSnap(
         context,
@@ -108,6 +114,11 @@ test.describe('Connect a wallet', () => {
           viewport: { width: 360, height: 592 }
         }
       );
+
+      // Ensure the MetaMask UI is fully usable
+      await waitForMetaMaskLoad(notificationPage, {
+        skipInitialStabilityWait: true
+      });
 
       // Handle MetaMask Snap privacy warning
       await TestActions.handleMetaMaskSnap(

@@ -3,8 +3,8 @@ import { waitUntilStable } from '../template/waitUntilStable';
 
 const DEFAULT_TIMEOUT = 10_000;
 const DEFAULT_POST_DELAY_MS = 300;
+const DEFAULT_CONCURRENCY = 3;
 
-// Core loading indicators commonly found in MetaMask screens
 const BASE_LOADING_SELECTORS: readonly string[] = [
   '.loading-logo',
   '.loading-spinner',
@@ -21,20 +21,19 @@ const BASE_LOADING_SELECTORS: readonly string[] = [
 ];
 
 type WaitForMetaMaskLoadOptions = {
-  // Per-selector timeout while waiting to become hidden (defaults to 10s).
   selectorTimeoutMs?: number;
-  // Additional page selectors that should also be hidden before continuing.
   extraLoadingSelectors?: string[];
-  // Milliseconds to sleep after the page looks ready (defaults to 300ms).
   postDelayMs?: number;
-  // Skip the initial stable wait if you’ve already done it.
   skipInitialStabilityWait?: boolean;
+  concurrency?: number; // how many selectors to wait on in parallel
 };
 
-// Waits for MetaMask UI to become usable:
-// 1) (optionally) waits for DOM/network to settle
-// 2) waits for known loading indicators to disappear (best-effort)
-// 3) small post-delay to avoid flakiness on slow CI
+/**
+ * Waits for MetaMask UI to be usable:
+ * 1) (optional) wait for page stability
+ * 2) wait for known loading indicators to hide (best-effort)
+ * 3) brief post delay (conditional)
+ */
 export async function waitForMetaMaskLoad(
   page: Page,
   options: WaitForMetaMaskLoadOptions = {}
@@ -43,7 +42,8 @@ export async function waitForMetaMaskLoad(
     selectorTimeoutMs = DEFAULT_TIMEOUT,
     extraLoadingSelectors = [],
     postDelayMs = DEFAULT_POST_DELAY_MS,
-    skipInitialStabilityWait = false
+    skipInitialStabilityWait = false,
+    concurrency = DEFAULT_CONCURRENCY
   } = options;
 
   try {
@@ -51,40 +51,63 @@ export async function waitForMetaMaskLoad(
       await waitUntilStable(page);
     }
 
-    const selectors = [...BASE_LOADING_SELECTORS, ...extraLoadingSelectors];
+    const selectors = Array.from(
+      new Set([...BASE_LOADING_SELECTORS, ...extraLoadingSelectors])
+    );
 
-    await waitForSelectorsHidden(page, selectors, selectorTimeoutMs);
+    await waitSelectorsHiddenWithConcurrency(
+      page,
+      selectors,
+      selectorTimeoutMs,
+      concurrency
+    );
   } catch (err) {
-    // Don’t fail the test — UI might still be interactive
     const msg = err instanceof Error ? err.message : String(err);
     console.warn(`[waitForMetaMaskLoad] Non-fatal warning: ${msg}`);
   }
 
-  await page.waitForTimeout(postDelayMs);
+  // Smarter post-delay: only wait if we still see a common loader possibly flickering
+  const residualSpinner = page.locator('.mm-button-base__icon-loading');
+  if (await residualSpinner.isVisible().catch(() => false)) {
+    await residualSpinner
+      .waitFor({ state: 'hidden', timeout: Math.min(1000, selectorTimeoutMs) })
+      .catch(() => {});
+  } else {
+    await page.waitForTimeout(postDelayMs);
+  }
+
   return page;
 }
 
-// Wait until each selector is hidden; ignore timeouts (selector may not exist on this screen).
-async function waitForSelectorsHidden(
+async function waitSelectorsHiddenWithConcurrency(
   page: Page,
   selectors: string[],
-  perSelectorTimeoutMs: number
-): Promise<void> {
-  await Promise.all(
-    selectors.map(async (selector) => {
-      try {
-        await waitUntilStable(page);
-        await page.waitForSelector(selector, {
-          state: 'hidden',
-          timeout: perSelectorTimeoutMs
-        });
-      } catch (err) {
-        if (err instanceof errors.TimeoutError) {
-          // OK: selector may never appear on this view; continue
-          return;
+  perSelectorTimeoutMs: number,
+  concurrency: number
+) {
+  // One stability wait per batch, not per selector
+  await waitUntilStable(page);
+
+  // Process selectors with a small concurrency to reduce polling contention in CI
+  let i = 0;
+  while (i < selectors.length) {
+    const batch = selectors.slice(i, i + Math.max(1, concurrency));
+    await Promise.all(
+      batch.map(async (selector) => {
+        try {
+          await page.waitForSelector(selector, {
+            state: 'hidden',
+            timeout: perSelectorTimeoutMs
+          });
+        } catch (err) {
+          if (err instanceof errors.TimeoutError) {
+            // OK if a selector never appears on this screen
+            return;
+          }
+          throw err;
         }
-        throw err;
-      }
-    })
-  );
+      })
+    );
+    i += batch.length;
+  }
 }
