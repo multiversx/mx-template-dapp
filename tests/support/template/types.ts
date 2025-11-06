@@ -10,6 +10,10 @@ export interface AuthenticateWithKeystoreType {
   keystorePassword: string;
 }
 
+export interface ConnectPasskeyWalletType {
+  page: Page;
+}
+
 export interface InMemoryProviderType {
   page: Page;
   loginMethod: InMemoryProviderLoginMethodType;
@@ -171,3 +175,10 @@ export type GetPageAndWaitForLoad = (
   urlSubstring: string | RegExp,
   options?: GetPageAndWaitForLoadOptions
 ) => Promise<Page>;
+
+export type WaitForMetaMaskLoadOptions = {
+  selectorTimeoutMs?: number;
+  extraLoadingSelectors?: string[];
+  skipInitialStabilityWait?: boolean;
+  concurrency?: number;
+};
