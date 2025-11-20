@@ -1,20 +1,15 @@
 import { useEffect } from 'react';
-
-import { OutputContainer, TransactionsTable } from 'components';
+import { OutputContainer } from 'components/OutputContainer';
+import { TransactionsTable } from 'components/TransactionsTable';
 import { getActiveTransactionsStatus } from 'lib';
-import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
 import { useGetTransactions } from './hooks';
+import { TransactionsPropsType } from './transactions.types';
 
 // prettier-ignore
 const styles = {
   transactionsContainer: 'transactions-container flex flex-col border border-secondary rounded-xl transition-all duration-200 ease-out',
   transactionsTable: 'transactions-table w-full h-full overflow-x-auto shadow rounded-lg'
 } satisfies Record<string, string>;
-
-export interface TransactionsPropsType {
-  receiver?: string;
-  identifier?: `${ItemsIdentifiersEnum}`;
-}
 
 export const Transactions = (props: TransactionsPropsType) => {
   const { success } = getActiveTransactionsStatus();

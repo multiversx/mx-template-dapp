@@ -7,7 +7,7 @@ import {
   useGetAccount,
   useGetNetworkConfig
 } from 'lib';
-import { TransactionsPropsType } from '../Transactions';
+import { TransactionsPropsType } from '../transactions.types';
 
 export const useGetTransactions = (payload?: TransactionsPropsType) => {
   const { address } = useGetAccount();
