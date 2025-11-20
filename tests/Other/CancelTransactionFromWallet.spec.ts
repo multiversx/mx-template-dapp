@@ -1,10 +1,11 @@
 import { expect, test } from '@playwright/test';
-import * as TestActions from '../support';
+import * as TestActions from '../support/template';
 import {
   OriginPageEnum,
   SelectorsEnum,
-  TestDataEnums
-} from '../support/testdata';
+  TestDataEnums,
+  UrlRegex
+} from '../support/template/testdata';
 
 const keystoreConfig = {
   keystore: TestDataEnums.keystoreFilePath3,
@@ -30,11 +31,11 @@ test.describe('cancel transaction from wallet window', () => {
     await page.getByTestId(SelectorsEnum.signAndBatchButton).click();
 
     // Switch to web wallet page
-    const walletPage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.multiversxWallet
-    });
-    await expect(walletPage).toHaveURL(/devnet-wallet\.multiversx\.com/);
+    const walletPage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.multiversxWallet
+    );
+    await expect(walletPage).toHaveURL(UrlRegex.multiversxWallet);
 
     // Cancel the transaction from the wallet window
     await walletPage
@@ -42,10 +43,10 @@ test.describe('cancel transaction from wallet window', () => {
       .click();
 
     // Switch back to template dashboard and verify a toast is shown
-    const templatePage = await TestActions.waitForPageByUrlSubstring({
-      page,
-      urlSubstring: OriginPageEnum.templateDashboard
-    });
+    const templatePage = await TestActions.getPageAndWaitForLoad(
+      page.context(),
+      OriginPageEnum.templateDashboard
+    );
 
     // Wait for toast to be displayed
     await TestActions.waitForToastToBeDisplayed(templatePage);

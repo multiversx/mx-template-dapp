@@ -1,4 +1,5 @@
 import { TEST_CONSTANTS } from './constants';
+import { getPageAndWaitForLoad } from './getPageAndWaitForLoad';
 import { OriginPageEnum, SelectorsEnum } from './testdata';
 import { getTestIdSelector } from './testIdSelector';
 import {
@@ -6,7 +7,6 @@ import {
   AuthenticateWithPemType,
   ConnectWebWalletType
 } from './types';
-import { waitForPageByUrlSubstring } from './waitForPageByUrlSubstring';
 
 const authenticateWithKeystore = async ({
   walletPage,
@@ -67,10 +67,10 @@ export const connectWebWallet = async ({
   await page.getByTestId(SelectorsEnum.crossWindow).click();
 
   // Wait for the web wallet page to be loaded which is the new tab
-  const walletPage = await waitForPageByUrlSubstring({
-    page,
-    urlSubstring: OriginPageEnum.multiversxWallet
-  });
+  const walletPage = await getPageAndWaitForLoad(
+    page.context(),
+    OriginPageEnum.multiversxWallet
+  );
 
   // If the web wallet page is not loaded, throw an error
   if (!walletPage) {

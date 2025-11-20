@@ -40,8 +40,7 @@
     "copy-mainnet-config": "cp ./src/config/config.mainnet.ts ./src/config/index.ts",
     "test": "jest",
     "run-playwright-test": "playwright test",
-    "run-playwright-test-ui": "playwright test --ui",
-    "run-playwright-test-grep": "playwright test --grep \"$npm_config_grep\""
+    "run-playwright-test-ui": "playwright test --ui"
   },
   "browserslist": [
     ">0.2%",
@@ -58,6 +57,7 @@
     "@testing-library/jest-dom": "6.1.3",
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.5.1",
+    "@types/fs-extra": "11.0.4",
     "@types/jest": "29.5.5",
     "@types/luxon": "3.4.2",
     "@types/node": "20.7.1",

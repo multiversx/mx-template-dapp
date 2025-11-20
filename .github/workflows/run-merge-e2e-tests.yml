@@ -4,21 +4,8 @@ on:
     branches: [main]
   workflow_dispatch:
 jobs:
-  # Slack-Notification:
-  #   runs-on: runner-dapp
-  #   steps:
-  #     - name: Slack Notification
-  #       uses: rtCamp/action-slack-notify@master
-  #       env:
-  #         if: always()
-  #         SLACK_ICON_EMOJI: ':robot_face:'
-  #         SLACK_USERNAME: Playwright Bot
-  #         SLACK_MESSAGE: E2E merge tests are now running. A new notification will be sent when completed.
-  #         SLACK_TITLE : 'Playwright E2E Template RUN'
-  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
   E2E-RUN:
     runs-on: runner-dapp
-    # needs: Slack-Notification
     env:
       KEYSTORE1_JSON_B64: ${{ secrets.KEYSTORE1_JSON_B64 }}
       KEYSTORE1_PASSWORD: ${{ secrets.KEYSTORE1_PASSWORD }}
@@ -41,6 +28,10 @@ jobs:
 
       KEYSTORE6_PRIVATE_KEY_UTF8: ${{ secrets.KEYSTORE6_PRIVATE_KEY_UTF8 }}
       KEYSTORE6_ADDRESS: ${{ secrets.KEYSTORE6_ADDRESS }}
+
+      METAMASK_MNEMONIC: ${{ secrets.METAMASK_MNEMONIC }}
+      METAMASK_ADDRESS: ${{ secrets.METAMASK_ADDRESS }}
+      METAMASK_PASSWORD: ${{ secrets.METAMASK_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -60,7 +51,7 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
       - name: Run Playwright E2E Tests
-        run: pnpm run run-playwright-test
+        run: xvfb-run pnpm run run-playwright-test
       - name: Upload Playwright test report
         uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

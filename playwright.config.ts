@@ -10,7 +10,7 @@ import { TEST_CONFIG } from './tests/config';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  globalSetup: './tests/support/globalSetup.ts',
+  globalSetup: './tests/support/template/globalSetup.ts',
   /* timeout for each test */
   timeout: TEST_CONFIG.timeout,
   /* timeout for locators */
@@ -54,7 +54,11 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         launchOptions: {
-          args: ['--start-maximized']
+          args: [
+            '--start-maximized',
+            '--disable-web-security',
+            '--disable-features=VizDisplayCompositor'
+          ]
         }
       }
     }
