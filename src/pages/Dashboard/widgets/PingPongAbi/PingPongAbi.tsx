@@ -3,10 +3,10 @@ import {
   PingTransactionPayloadType
 } from 'components/PingPongComponent';
 import { useSendPingPongTransaction } from 'hooks';
-import { useGetPingAmount, useGetTimeToPong } from './hooks';
+import { getTimeToPong } from '../PingPongService/helpers/getTimeToPong';
+import { useGetPingAmount } from './hooks';
 
 export const PingPongAbi = () => {
-  const getTimeToPong = useGetTimeToPong();
   const { sendPingTransactionFromAbi, sendPongTransactionFromAbi } =
     useSendPingPongTransaction();
   const pingAmount = useGetPingAmount();
