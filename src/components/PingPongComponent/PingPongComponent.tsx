@@ -3,12 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TokenLoginType } from '@multiversx/sdk-dapp/out/types/login.types';
 import { Duration } from 'luxon';
 import { useEffect, useState } from 'react';
-import {
-  Label,
-  MissingNativeAuthError,
-  OutputContainer,
-  PingPongOutput
-} from 'components';
 import { contractAddress } from 'config';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import {
@@ -19,6 +13,10 @@ import {
 } from 'lib';
 import { ACCOUNTS_ENDPOINT, Transaction, useGetPendingTransactions } from 'lib';
 import { ItemsIdentifiersEnum } from 'pages/Dashboard/dashboard.types';
+import { Label } from '../Label';
+import { MissingNativeAuthError } from '../MissingNativeAuthError';
+import { OutputContainer } from '../OutputContainer';
+import { PingPongOutput } from '../OutputContainer/components';
 
 const styles = {
   pingPongContainer: 'ping-pong-container flex flex-col gap-6',

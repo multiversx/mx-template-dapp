@@ -5,7 +5,7 @@ import { ReactComponent as ArrowUpRightIcon } from 'assets/icons/arrow-up-right-
 import { ReactComponent as HomeDarkThemeIcon } from 'assets/icons/home-dark-theme-icon.svg';
 import { ReactComponent as HomeLightThemeIcon } from 'assets/img/bright-light-icon.svg';
 import { ReactComponent as HomeVibeThemeIcon } from 'assets/img/vibe-mode-icon.svg';
-import { Button } from 'components';
+import { Button } from 'components/Button';
 import {
   ThemeOptionType,
   useHandleThemeManagement
