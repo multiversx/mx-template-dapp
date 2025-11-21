@@ -1,17 +1,16 @@
-import { PingPongComponent, PingTransactionPayloadType } from 'components';
+import {
+  PingPongComponent,
+  PingTransactionPayloadType
+} from 'components/PingPongComponent';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetLoginInfo } from 'lib';
-import {
-  useGetPingTransaction,
-  useGetPongTransaction,
-  useGetTimeToPong
-} from './hooks';
+import { useGetTimeToPong } from '../PingPongAbi/hooks';
+import { getPingTransaction } from './helpers/getPingTransaction';
+import { getPongTransaction } from './helpers/getPongTransaction';
 
 // The transactions are being done by directly requesting to template-dapp service
 export const PingPongService = () => {
   const getTimeToPong = useGetTimeToPong();
-  const getPingTransaction = useGetPingTransaction();
-  const getPongTransaction = useGetPongTransaction();
 
   const { tokenLogin } = useGetLoginInfo();
   const { sendPingTransactionFromService, sendPongTransactionFromService } =

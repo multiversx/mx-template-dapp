@@ -1,9 +1,7 @@
 import classNames from 'classnames';
 import { CSSProperties, MouseEvent, useState } from 'react';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
-
-import { Drawer } from 'components';
-
+import { Drawer } from '../Drawer';
 import { TooltipPlaceEnum, TooltipPropsType } from './tooltip.types';
 
 // prettier-ignore

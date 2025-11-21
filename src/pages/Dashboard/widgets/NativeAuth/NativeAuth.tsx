@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
-import { Label, MissingNativeAuthError, OutputContainer } from 'components';
+import { Label } from 'components/Label';
+import { MissingNativeAuthError } from 'components/MissingNativeAuthError';
+import { OutputContainer } from 'components/OutputContainer';
 import {
   ACCOUNTS_ENDPOINT,
   FormatAmount,

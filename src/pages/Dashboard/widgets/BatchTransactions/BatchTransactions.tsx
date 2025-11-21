@@ -5,7 +5,8 @@ import {
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { OutputContainer, TransactionsOutput } from 'components';
+import { OutputContainer } from 'components/OutputContainer';
+import { TransactionsOutput } from 'components/OutputContainer/components';
 import { MvxButton, useGetPendingTransactionsSessions } from 'lib';
 import {
   useGetAccount,

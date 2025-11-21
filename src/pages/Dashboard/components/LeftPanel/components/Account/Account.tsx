@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { ReactNode, useState } from 'react';
 import { ReactComponent as XLogo } from 'assets/img/x-logo.svg';
-import { Label } from 'components';
+import { Label } from 'components/Label';
 import { FormatAmount, MvxTrim, useGetAccount } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import styles from './account.styles';
