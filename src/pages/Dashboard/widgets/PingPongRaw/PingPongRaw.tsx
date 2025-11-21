@@ -1,4 +1,7 @@
-import { PingPongComponent, PingTransactionPayloadType } from 'components';
+import {
+  PingPongComponent,
+  PingTransactionPayloadType
+} from 'components/PingPongComponent';
 import { useSendPingPongTransaction } from 'hooks';
 import { useGetPingAmount, useGetTimeToPong } from './hooks';
 

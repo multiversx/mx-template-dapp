@@ -1,6 +1,5 @@
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Label } from 'components';
 import {
   ACCOUNTS_ENDPOINT,
   FormatAmount,
@@ -10,6 +9,7 @@ import {
   TRANSACTIONS_ENDPOINT,
   useGetNetworkConfig
 } from 'lib';
+import { Label } from '../../Label';
 
 const styles = {
   transactionContainer: 'transaction-container flex flex-col',

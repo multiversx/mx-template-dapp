@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { MouseEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Logo, Tooltip } from 'components';
 import { GITHUB_REPO_URL } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
@@ -22,6 +21,8 @@ import {
   useGetNetworkConfig
 } from 'lib';
 import { RouteNamesEnum } from 'localConstants';
+import { Logo } from '../Logo';
+import { Tooltip } from '../Tooltip';
 import { ThemeTooltip } from './components';
 import styles from './header.styles';
 

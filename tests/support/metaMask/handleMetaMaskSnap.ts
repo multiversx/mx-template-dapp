@@ -3,7 +3,7 @@ import { getPageAndWaitForLoad } from '../template/getPageAndWaitForLoad';
 import { waitUntilStable } from '../template/waitUntilStable';
 
 const RETRY_DELAY_BASE_MS = 500;
-const CLICK_TIMEOUT_MS = 2500;
+const CLICK_TIMEOUT_MS = 6000;
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 

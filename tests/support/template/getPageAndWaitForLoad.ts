@@ -36,8 +36,14 @@ export async function getPageAndWaitForLoad(
     } catch (error) {
       retries++;
       const message = error instanceof Error ? error.message : 'Unknown error';
+      const openedPageUrls = context
+        .pages()
+        .map((p) => p.url())
+        .filter(Boolean);
       console.warn(
-        `[getPageAndWaitForLoad] Retry ${retries}/3 after error: ${message}`
+        `[getPageAndWaitForLoad] Retry ${retries}/3 after error: ${message}. Open pages (${
+          openedPageUrls.length
+        }): ${openedPageUrls.join(', ')}`
       );
 
       if (retries >= maxRetries) throw error;

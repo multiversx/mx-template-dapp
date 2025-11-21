@@ -1,6 +1,5 @@
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Label } from 'components';
 import { contractAddress } from 'config';
 import {
   ACCOUNTS_ENDPOINT,
@@ -9,6 +8,7 @@ import {
   SignedTransactionType,
   useGetNetworkConfig
 } from 'lib';
+import { Label } from '../../Label';
 import { TransactionsOutput } from './TransactionsOutput';
 
 const styles = {

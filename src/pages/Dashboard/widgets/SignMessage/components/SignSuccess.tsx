@@ -1,4 +1,4 @@
-import { Label } from 'components';
+import { Label } from 'components/Label';
 import { CopyButton, Message } from 'lib';
 import { DataTestIdsEnum } from 'localConstants';
 import { decodeMessage } from '../helpers';
