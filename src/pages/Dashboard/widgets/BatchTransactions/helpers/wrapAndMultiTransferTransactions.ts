@@ -14,11 +14,12 @@ interface WrapAndMultiTransferTransactionsType extends TransactionProps {
 export const wrapAndMultiTransferTransactions = async (
   props: WrapAndMultiTransferTransactionsType
 ) => {
-  const { address, nonce, chainID, transactionsDisplayInfo } = props;
+  const { address, nonce, chainID, transactionsDisplayInfo, isGuarded } = props;
 
   const provider = getAccountProvider();
 
   const transactionsToSign = await getWrapAndMultiTransferTransactions({
+    isGuarded,
     address,
     chainID,
     nonce

@@ -13,6 +13,7 @@ import { Address } from 'lib';
 import { TransactionProps } from 'types';
 
 export const getWrapAndMultiTransferTransactions = async ({
+  isGuarded,
   address,
   chainID
 }: TransactionProps) => {
@@ -67,6 +68,14 @@ export const getWrapAndMultiTransferTransactions = async ({
         })
       ]
     });
+
+  if (isGuarded) {
+    wrapOneEgld.gasLimit = wrapOneEgld.gasLimit + BigInt(50_000);
+    swapHalfWEgldToUsdc.gasLimit =
+      swapHalfWEgldToUsdc.gasLimit + BigInt(50_000);
+    multiTransferOneUsdcHalfWEgld.gasLimit =
+      multiTransferOneUsdcHalfWEgld.gasLimit + BigInt(50_000);
+  }
 
   return { wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld };
 };

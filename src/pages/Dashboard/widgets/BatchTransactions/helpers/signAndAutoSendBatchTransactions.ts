@@ -4,6 +4,7 @@ import { getBatchTransactions } from './getBatchTransactions';
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 
 export const signAndAutoSendBatchTransactions = async ({
+  isGuarded,
   address,
   nonce,
   chainID,
@@ -18,6 +19,7 @@ export const signAndAutoSendBatchTransactions = async ({
   const provider = getAccountProvider();
 
   const transactions = await getBatchTransactions({
+    isGuarded,
     address,
     nonce,
     chainID
