@@ -71,13 +71,11 @@ export const getWrapAndMultiTransferTransactions = async ({
     });
 
   if (isGuarded) {
-    wrapOneEgld.gasLimit =
-      wrapOneEgld.gasLimit + BigInt(GUARDED_TX_EXTRA_GAS_LIMIT);
-    swapHalfWEgldToUsdc.gasLimit =
-      swapHalfWEgldToUsdc.gasLimit + BigInt(GUARDED_TX_EXTRA_GAS_LIMIT);
-    multiTransferOneUsdcHalfWEgld.gasLimit =
-      multiTransferOneUsdcHalfWEgld.gasLimit +
-      BigInt(GUARDED_TX_EXTRA_GAS_LIMIT);
+    [wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld].forEach(
+      (tx) => {
+        tx.gasLimit += BigInt(GUARDED_TX_EXTRA_GAS_LIMIT);
+      }
+    );
   }
 
   return { wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld };
