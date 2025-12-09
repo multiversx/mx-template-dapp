@@ -31,10 +31,10 @@ importers:
         version: 15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       '@multiversx/sdk-dapp':
         specifier: ^5.x
-        version: 5.3.3(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)
+        version: 5.5.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)(vue@3.5.25(typescript@5.2.2))
       '@multiversx/sdk-dapp-ui':
         specifier: ^0.x
-        version: 0.1.3(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        version: 0.1.4(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue@3.5.25(typescript@5.2.2))
       '@multiversx/sdk-dapp-utils':
         specifier: ^3.x
         version: 3.0.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)
@@ -795,8 +795,8 @@ packages:
       bignumber.js: ^9.0.1
       protobufjs: ^7.2.6
 
-  '@multiversx/sdk-dapp-ui@0.1.3':
-    resolution: {integrity: sha512-fanVRAETKoOlkpYZjOq/I+v1S483LQWUbNax9xpcL7fZ7gc6f7ls3f0+f7AKKS69GDkeFTk1Re8mdidzQV/Vmg==}
+  '@multiversx/sdk-dapp-ui@0.1.4':
+    resolution: {integrity: sha512-87a7D+Qg1HrQBBfKTlIBD4gWB4zodyTuFUUDCDfXWPO5LMSQYtP/D2QUB5uHrNVn0Ng9QcBbY/wGTD/dQs3SMA==}
     engines: {node: '>=20.19.0'}
 
   '@multiversx/sdk-dapp-utils@3.0.2':
@@ -805,8 +805,8 @@ packages:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
       bignumber.js: ^9.x
 
-  '@multiversx/sdk-dapp@5.3.3':
-    resolution: {integrity: sha512-vQ1t02AYKQUc6xt2/0x1Pu2pi/iCJZHzwQwf3mRUsjbxeKB9efhcJFKIBtbVmIUn9DpAu+/bON4XMnxiOyg5cQ==}
+  '@multiversx/sdk-dapp@5.5.1':
+    resolution: {integrity: sha512-thK7NLuEwza4HB7XaZFlalVucCYVy/c2tloLGkmhkKdWMXKqQvqDUP7wxcMOk8m4gaC2aNh4BKtYKVLNJC4zEQ==}
     peerDependencies:
       '@multiversx/sdk-core': ^14.x || ^15.x
       '@multiversx/sdk-dapp-utils': ^3.x
@@ -814,13 +814,13 @@ packages:
       bignumber.js: ^9.x
       protobufjs: ^7.2.6
 
-  '@multiversx/sdk-extension-provider@5.1.1':
-    resolution: {integrity: sha512-q24eSFiXQ4SQG3UZU8FILGut/fw9WL9o6UjTSzF6CIUuFHtSQ/bLJnMIHM1ZHTeqhOYNfXhI6ozOIwtP3mR+xQ==}
+  '@multiversx/sdk-extension-provider@5.1.2':
+    resolution: {integrity: sha512-jxu18WKnc8ZLaLdl6ePcLStG2aZB1f9W0m2wPJt2UbHnPMhnk/okoYZYWlHfiF/L8WZGzQn8VXwcmras/vdwlw==}
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
 
-  '@multiversx/sdk-hw-provider@8.1.1':
-    resolution: {integrity: sha512-vrCoqTRPmXDFyR8LeRlEk/oyrUXhD1nk9tAltXyzJgRIUcuyPJJKd45pi8mumBP0DTmzICeJKgi+A8wHxogL8g==}
+  '@multiversx/sdk-hw-provider@8.1.2':
+    resolution: {integrity: sha512-Q/cIOi+3JiZ4/FV/608kEcaQAprv9NP2GmuxONdPW5YACIHGdS5WILsQTL6xqDxBsNEfN71DbbNHKEr7pqnq6Q==}
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
 
@@ -832,31 +832,26 @@ packages:
   '@multiversx/sdk-transaction-decoder@1.0.2':
     resolution: {integrity: sha512-j43QsKquu8N51WLmVlJ7dV2P3A1448R7/ktvl8r3i6wRMpfdtzDPNofTdHmMRT7DdQdvs4+RNgz8hVKL11Etsw==}
 
-  '@multiversx/sdk-wallet-connect-provider@6.1.3':
-    resolution: {integrity: sha512-hulgy2aXqE/nYt7sYjKKvkU+h3OSJM57+6WSdUUdyslp/J3Gqe5vc0mWMkkEMDr0pDEpMlLGMu3J1SjtbMd+9w==}
+  '@multiversx/sdk-wallet-connect-provider@6.1.4':
+    resolution: {integrity: sha512-uiRLQ9oBM4KAUxuYlh/QgbYGRjgJuxHTuvjtmDgh5GYbfdiPeXXkoQsUI01IYgCvMl/8iVv4ss4YAfgob6riOw==}
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
 
-  '@multiversx/sdk-web-wallet-cross-window-provider@3.2.1':
-    resolution: {integrity: sha512-INWbQ+GXtGz+aIRZZcmFhTIfJPyf4F5X2HrG0BQu9riT31QxoIjpwSd8M91QyODbgUEJHUVCKppOe038/Xb1xw==}
+  '@multiversx/sdk-web-wallet-cross-window-provider@3.2.2':
+    resolution: {integrity: sha512-CBMrf+oNKoBa/YFDTqzItLrERaW4n0pJIlGsP67H0Vr6bUlFLIlc30qsOGvWNoZvMDeDxvhvR7crayypETJSJw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
 
-  '@multiversx/sdk-web-wallet-iframe-provider@4.0.0':
-    resolution: {integrity: sha512-V9eDWSublrau6yXASzQwCkdwr9ATxfQ8C8Ok27wSmx9Ok/JrSK1eCgN2XcrehFonn8nYnTHehYR1Qe0QZ6q+iw==}
+  '@multiversx/sdk-web-wallet-iframe-provider@4.0.1':
+    resolution: {integrity: sha512-zIIKX4G1xYk7XSBQsHuihOag7pUAVGMZ1q3vug9XpwBwcQvgcSwC5RHzrYQusPpVdkTHIn3qa3JHqjwNj1VtGA==}
     engines: {node: '>=18'}
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
       '@multiversx/sdk-web-wallet-cross-window-provider': ^3.x
 
-  '@multiversx/sdk-web-wallet-provider@5.1.1':
-    resolution: {integrity: sha512-3ZKA3vhOKPkPzmpcRZRoAATBWOXnO7kOu/9yC2TEHQImQi38CoLkWCUH1uHWOlccZ32ciDsp/YIfOP/DgG1KiQ==}
-    peerDependencies:
-      '@multiversx/sdk-core': ^14.0.0  || ^15.0.0
-
-  '@multiversx/sdk-webview-provider@3.2.5':
-    resolution: {integrity: sha512-mHpQfuJc7xVXcyMx9iz/BLxM6pBftdibfFU4RLEGivBuw57xxY2veCWyfYW/MpaN9qFa7XA/X9N5PhEb6zbRsQ==}
+  '@multiversx/sdk-webview-provider@3.2.6':
+    resolution: {integrity: sha512-Zq+mjdbPavnSLRvt4TuFqfIbnh0esADbEJgxs0lbGP6YxyL1zDbyxoDpWNpjYDb6o6X87buZMrO8qlHaInxQ6g==}
     peerDependencies:
       '@multiversx/sdk-core': ^14.0.0 || ^15.0.0
       '@multiversx/sdk-web-wallet-cross-window-provider': ^3.x
@@ -1144,6 +1139,18 @@ packages:
       '@stencil/core': '>=3 || >= 4.0.0-beta.0 || >= 4.0.0'
       react: ^18 || ^19
       react-dom: ^18 || ^19
+
+  '@stencil/vue-output-target@0.11.8':
+    resolution: {integrity: sha512-R/kQoN15irgL7NJxWaUNSmwDLfoDBZjlYaXNnW3LHlF30TYfyez6pRgD7ZglSSTVktMtCXz6ZPhg0uq59VkhOw==}
+    peerDependencies:
+      '@stencil/core': '>=2.0.0 || >=3 || >= 4.0.0-beta.0 || >= 4.0.0'
+      vue: ^3.4.38
+      vue-router: ^4.5.0
+    peerDependenciesMeta:
+      '@stencil/core':
+        optional: true
+      vue-router:
+        optional: true
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0':
     resolution: {integrity: sha512-b9MIk7yhdS1pMCZM8VeNfUlSKVRhsHZNMl5O9SfaX0l0t5wjdgu4IDzGB8bpnGBBOjGST3rRFVsaaEtI4W6f7g==}
@@ -1806,6 +1813,35 @@ packages:
 
   '@vitest/snapshot@2.1.9':
     resolution: {integrity: sha512-oBO82rEjsxLNJincVhLhaxxZdEtV0EFHMK5Kmx5sJ6H9L183dHECjiefOAdnqpIgT5eZwT04PoggUnW88vOBNQ==}
+
+  '@vue/compiler-core@3.5.25':
+    resolution: {integrity: sha512-vay5/oQJdsNHmliWoZfHPoVZZRmnSWhug0BYT34njkYTPqClh3DNWLkZNJBVSjsNMrg0CCrBfoKkjZQPM/QVUw==}
+
+  '@vue/compiler-dom@3.5.25':
+    resolution: {integrity: sha512-4We0OAcMZsKgYoGlMjzYvaoErltdFI2/25wqanuTu+S4gismOTRTBPi4IASOjxWdzIwrYSjnqONfKvuqkXzE2Q==}
+
+  '@vue/compiler-sfc@3.5.25':
+    resolution: {integrity: sha512-PUgKp2rn8fFsI++lF2sO7gwO2d9Yj57Utr5yEsDf3GNaQcowCLKL7sf+LvVFvtJDXUp/03+dC6f2+LCv5aK1ag==}
+
+  '@vue/compiler-ssr@3.5.25':
+    resolution: {integrity: sha512-ritPSKLBcParnsKYi+GNtbdbrIE1mtuFEJ4U1sWeuOMlIziK5GtOL85t5RhsNy4uWIXPgk+OUdpnXiTdzn8o3A==}
+
+  '@vue/reactivity@3.5.25':
+    resolution: {integrity: sha512-5xfAypCQepv4Jog1U4zn8cZIcbKKFka3AgWHEFQeK65OW+Ys4XybP6z2kKgws4YB43KGpqp5D/K3go2UPPunLA==}
+
+  '@vue/runtime-core@3.5.25':
+    resolution: {integrity: sha512-Z751v203YWwYzy460bzsYQISDfPjHTl+6Zzwo/a3CsAf+0ccEjQ8c+0CdX1WsumRTHeywvyUFtW6KvNukT/smA==}
+
+  '@vue/runtime-dom@3.5.25':
+    resolution: {integrity: sha512-a4WrkYFbb19i9pjkz38zJBg8wa/rboNERq3+hRRb0dHiJh13c+6kAbgqCPfMaJ2gg4weWD3APZswASOfmKwamA==}
+
+  '@vue/server-renderer@3.5.25':
+    resolution: {integrity: sha512-UJaXR54vMG61i8XNIzTSf2Q7MOqZHpp8+x3XLGtE3+fL+nQd+k7O5+X3D/uWrnQXOdMw5VPih+Uremcw+u1woQ==}
+    peerDependencies:
+      vue: 3.5.25
+
+  '@vue/shared@3.5.25':
+    resolution: {integrity: sha512-AbOPdQQnAnzs58H2FrrDxYj/TJfmeS2jdfEEhgiKINy+bnOANmVizIEgq1r+C5zsbs6l1CCQxtcj71rwNQ4jWg==}
 
   '@walletconnect/core@2.22.4':
     resolution: {integrity: sha512-ZQnyDDpqDPAk5lyLV19BRccQ3wwK3LmAwibuIv3X+44aT/dOs2kQGu9pla3iW2LgZ5qRMYvgvvfr5g3WlDGceQ==}
@@ -4880,10 +4916,6 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  qs@6.10.3:
-    resolution: {integrity: sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ==}
-    engines: {node: '>=0.6'}
-
   qs@6.11.2:
     resolution: {integrity: sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==}
     engines: {node: '>=0.6'}
@@ -5818,6 +5850,14 @@ packages:
   vm-browserify@1.1.2:
     resolution: {integrity: sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==}
 
+  vue@3.5.25:
+    resolution: {integrity: sha512-YLVdgv2K13WJ6n+kD5owehKtEXwdwXuj2TTyJMsO7pSeKw2bfRNZGjhB7YzrpbMYj5b5QsUebHpOqR3R3ziy/g==}
+    peerDependencies:
+      typescript: '*'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   w3c-xmlserializer@4.0.0:
     resolution: {integrity: sha512-d+BFHzbiCx6zGfz0HyQ6Rg69w9k19nviJspaj4yNscGjrHu94sVP+aRm75yEbCh+r2/yR+7q6hux9LVtbuTGBw==}
     engines: {node: '>=14'}
@@ -6668,7 +6708,7 @@ snapshots:
 
   '@ledgerhq/devices@8.0.3':
     dependencies:
-      '@ledgerhq/errors': 6.12.6
+      '@ledgerhq/errors': 6.27.0
       '@ledgerhq/logs': 6.13.0
       rxjs: 6.6.7
       semver: 7.7.3
@@ -6762,10 +6802,11 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@multiversx/sdk-dapp-ui@0.1.3(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@multiversx/sdk-dapp-ui@0.1.4(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue@3.5.25(typescript@5.2.2))':
     dependencies:
       '@stencil/core': 4.38.3
       '@stencil/react-output-target': 1.2.0(@stencil/core@4.38.3)(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@stencil/vue-output-target': 0.11.8(@stencil/core@4.38.3)(vue@3.5.25(typescript@5.2.2))
       classnames: 2.5.1
       lodash.capitalize: 4.2.1
       lodash.inrange: 3.3.6
@@ -6775,25 +6816,26 @@ snapshots:
       - '@types/react'
       - react
       - react-dom
+      - vue
+      - vue-router
 
   '@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)':
     dependencies:
       '@multiversx/sdk-core': 15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       bignumber.js: 9.3.1
 
-  '@multiversx/sdk-dapp@5.3.3(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)':
+  '@multiversx/sdk-dapp@5.5.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-dapp-utils@3.0.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1))(@types/react@18.2.23)(axios@1.10.0)(bignumber.js@9.3.1)(protobufjs@7.5.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.2.2)(vue@3.5.25(typescript@5.2.2))':
     dependencies:
       '@lifeomic/axios-fetch': 3.0.1
       '@multiversx/sdk-core': 15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       '@multiversx/sdk-dapp-utils': 3.0.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(bignumber.js@9.3.1)
-      '@multiversx/sdk-extension-provider': 5.1.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
-      '@multiversx/sdk-hw-provider': 8.1.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
+      '@multiversx/sdk-extension-provider': 5.1.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
+      '@multiversx/sdk-hw-provider': 8.1.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
       '@multiversx/sdk-native-auth-client': 2.0.1(axios@1.10.0)
-      '@multiversx/sdk-wallet-connect-provider': 6.1.3(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(typescript@5.2.2)
-      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
-      '@multiversx/sdk-web-wallet-iframe-provider': 4.0.0(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))
-      '@multiversx/sdk-web-wallet-provider': 5.1.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
-      '@multiversx/sdk-webview-provider': 3.2.5(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))
+      '@multiversx/sdk-wallet-connect-provider': 6.1.4(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(typescript@5.2.2)
+      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
+      '@multiversx/sdk-web-wallet-iframe-provider': 4.0.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))
+      '@multiversx/sdk-webview-provider': 3.2.6(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))
       axios: 1.10.0
       bignumber.js: 9.3.1
       immer: 10.1.1
@@ -6808,7 +6850,7 @@ snapshots:
       socket.io-client: 4.7.5
       zustand: 4.4.7(@types/react@18.2.23)(immer@10.1.1)(react@18.2.0)
     optionalDependencies:
-      '@multiversx/sdk-dapp-ui': 0.1.3(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@multiversx/sdk-dapp-ui': 0.1.4(@types/react@18.2.23)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue@3.5.25(typescript@5.2.2))
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -6836,13 +6878,15 @@ snapshots:
       - typescript
       - uploadthing
       - utf-8-validate
+      - vue
+      - vue-router
       - zod
 
-  '@multiversx/sdk-extension-provider@5.1.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
+  '@multiversx/sdk-extension-provider@5.1.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
     dependencies:
       '@multiversx/sdk-core': 15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
 
-  '@multiversx/sdk-hw-provider@8.1.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
+  '@multiversx/sdk-hw-provider@8.1.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
     dependencies:
       '@ledgerhq/devices': 8.0.3
       '@ledgerhq/errors': 6.12.6
@@ -6862,7 +6906,7 @@ snapshots:
     dependencies:
       bech32: 2.0.0
 
-  '@multiversx/sdk-wallet-connect-provider@6.1.3(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(typescript@5.2.2)':
+  '@multiversx/sdk-wallet-connect-provider@6.1.4(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(typescript@5.2.2)':
     dependencies:
       '@multiversx/sdk-core': 15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       '@walletconnect/sign-client': 2.22.4(typescript@5.2.2)
@@ -6893,28 +6937,23 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
+  '@multiversx/sdk-web-wallet-cross-window-provider@3.2.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
     dependencies:
       '@multiversx/sdk-core': 15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
       qs: 6.11.2
 
-  '@multiversx/sdk-web-wallet-iframe-provider@4.0.0(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
+  '@multiversx/sdk-web-wallet-iframe-provider@4.0.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
     dependencies:
       '@multiversx/sdk-core': 15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
-      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
+      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
       '@types/jest': 29.5.14
       '@types/qs': 6.9.10
       qs: 6.11.2
 
-  '@multiversx/sdk-web-wallet-provider@5.1.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))':
+  '@multiversx/sdk-webview-provider@3.2.6(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
     dependencies:
       '@multiversx/sdk-core': 15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
-      qs: 6.10.3
-
-  '@multiversx/sdk-webview-provider@3.2.5(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))(@multiversx/sdk-web-wallet-cross-window-provider@3.2.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)))':
-    dependencies:
-      '@multiversx/sdk-core': 15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4)
-      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.1(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
+      '@multiversx/sdk-web-wallet-cross-window-provider': 3.2.2(@multiversx/sdk-core@15.3.1(bignumber.js@9.3.1)(protobufjs@7.5.4))
 
   '@noble/ciphers@1.3.0': {}
 
@@ -7167,6 +7206,12 @@ snapshots:
       ts-morph: 22.0.0
     transitivePeerDependencies:
       - '@types/react'
+
+  '@stencil/vue-output-target@0.11.8(@stencil/core@4.38.3)(vue@3.5.25(typescript@5.2.2))':
+    dependencies:
+      vue: 3.5.25(typescript@5.2.2)
+    optionalDependencies:
+      '@stencil/core': 4.38.3
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.28.5)':
     dependencies:
@@ -7816,6 +7861,60 @@ snapshots:
       '@vitest/pretty-format': 2.1.9
       magic-string: 0.30.21
       pathe: 1.1.2
+
+  '@vue/compiler-core@3.5.25':
+    dependencies:
+      '@babel/parser': 7.28.5
+      '@vue/shared': 3.5.25
+      entities: 4.5.0
+      estree-walker: 2.0.2
+      source-map-js: 1.2.1
+
+  '@vue/compiler-dom@3.5.25':
+    dependencies:
+      '@vue/compiler-core': 3.5.25
+      '@vue/shared': 3.5.25
+
+  '@vue/compiler-sfc@3.5.25':
+    dependencies:
+      '@babel/parser': 7.28.5
+      '@vue/compiler-core': 3.5.25
+      '@vue/compiler-dom': 3.5.25
+      '@vue/compiler-ssr': 3.5.25
+      '@vue/shared': 3.5.25
+      estree-walker: 2.0.2
+      magic-string: 0.30.21
+      postcss: 8.5.6
+      source-map-js: 1.2.1
+
+  '@vue/compiler-ssr@3.5.25':
+    dependencies:
+      '@vue/compiler-dom': 3.5.25
+      '@vue/shared': 3.5.25
+
+  '@vue/reactivity@3.5.25':
+    dependencies:
+      '@vue/shared': 3.5.25
+
+  '@vue/runtime-core@3.5.25':
+    dependencies:
+      '@vue/reactivity': 3.5.25
+      '@vue/shared': 3.5.25
+
+  '@vue/runtime-dom@3.5.25':
+    dependencies:
+      '@vue/reactivity': 3.5.25
+      '@vue/runtime-core': 3.5.25
+      '@vue/shared': 3.5.25
+      csstype: 3.2.3
+
+  '@vue/server-renderer@3.5.25(vue@3.5.25(typescript@5.2.2))':
+    dependencies:
+      '@vue/compiler-ssr': 3.5.25
+      '@vue/shared': 3.5.25
+      vue: 3.5.25(typescript@5.2.2)
+
+  '@vue/shared@3.5.25': {}
 
   '@walletconnect/core@2.22.4(typescript@5.2.2)':
     dependencies:
@@ -9784,7 +9883,7 @@ snapshots:
 
   extract-zip@2.0.1:
     dependencies:
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@8.1.1)
       get-stream: 5.2.0
       yauzl: 2.10.0
     optionalDependencies:
@@ -10016,7 +10115,7 @@ snapshots:
     dependencies:
       basic-ftp: 5.0.5
       data-uri-to-buffer: 6.0.2
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -11567,7 +11666,7 @@ snapshots:
     dependencies:
       '@tootallnate/quickjs-emscripten': 0.23.0
       agent-base: 7.1.4
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@8.1.1)
       get-uri: 6.0.5
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
@@ -11777,7 +11876,7 @@ snapshots:
   proxy-agent@6.3.0:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@8.1.1)
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
       lru-cache: 7.18.3
@@ -11790,7 +11889,7 @@ snapshots:
   proxy-agent@6.3.1:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@8.1.1)
       http-proxy-agent: 7.0.2
       https-proxy-agent: 7.0.6
       lru-cache: 7.18.3
@@ -11849,10 +11948,6 @@ snapshots:
       dijkstrajs: 1.0.3
       pngjs: 5.0.0
       yargs: 15.4.1
-
-  qs@6.10.3:
-    dependencies:
-      side-channel: 1.1.0
 
   qs@6.11.2:
     dependencies:
@@ -12250,7 +12345,7 @@ snapshots:
   socks-proxy-agent@8.0.5:
     dependencies:
       agent-base: 7.1.4
-      debug: 4.3.4
+      debug: 4.4.3(supports-color@8.1.1)
       socks: 2.8.7
     transitivePeerDependencies:
       - supports-color
@@ -12807,6 +12902,16 @@ snapshots:
       lightningcss: 1.30.1
 
   vm-browserify@1.1.2: {}
+
+  vue@3.5.25(typescript@5.2.2):
+    dependencies:
+      '@vue/compiler-dom': 3.5.25
+      '@vue/compiler-sfc': 3.5.25
+      '@vue/runtime-dom': 3.5.25
+      '@vue/server-renderer': 3.5.25(vue@3.5.25(typescript@5.2.2))
+      '@vue/shared': 3.5.25
+    optionalDependencies:
+      typescript: 5.2.2
 
   w3c-xmlserializer@4.0.0:
     dependencies:

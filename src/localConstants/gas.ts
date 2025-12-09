@@ -1,0 +1,1 @@
+export const GUARDED_TX_EXTRA_GAS_LIMIT = 50_000;

@@ -5,13 +5,15 @@ import {
   TransactionsFactoryConfig,
   TransferTransactionsFactory
 } from 'lib';
+import { GUARDED_TX_EXTRA_GAS_LIMIT } from 'localConstants/gas';
 import { TransactionProps } from 'types';
 
 const NUMBER_OF_TRANSACTIONS = 5;
 
 export const getBatchTransactions = async ({
   address,
-  chainID
+  chainID,
+  isGuarded
 }: TransactionProps): Promise<Transaction[]> => {
   const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
@@ -34,6 +36,11 @@ export const getBatchTransactions = async ({
             nativeAmount: BigInt(nativeAmount)
           }
         );
+
+      if (isGuarded) {
+        tokenTransfer.gasLimit =
+          tokenTransfer.gasLimit + BigInt(GUARDED_TX_EXTRA_GAS_LIMIT);
+      }
 
       return tokenTransfer;
     })

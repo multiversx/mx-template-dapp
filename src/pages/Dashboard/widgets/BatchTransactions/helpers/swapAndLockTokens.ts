@@ -10,6 +10,7 @@ import { getSwapAndLockTransactions } from './getSwapAndLockTransactions';
 import { sendAndTrackTransactions } from './sendAndTrackTransactions';
 
 export const swapAndLockTokens = async ({
+  isGuarded,
   address,
   nonce,
   chainID,
@@ -24,6 +25,7 @@ export const swapAndLockTokens = async ({
   const provider = getAccountProvider();
 
   const transactionsToSign = getSwapAndLockTransactions({
+    isGuarded,
     address,
     chainID,
     nonce

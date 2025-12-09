@@ -10,9 +10,11 @@ import {
 import { BATCH_TRANSACTIONS_SC } from 'config';
 import { contractAddress } from 'config';
 import { Address } from 'lib';
+import { GUARDED_TX_EXTRA_GAS_LIMIT } from 'localConstants/gas';
 import { TransactionProps } from 'types';
 
 export const getWrapAndMultiTransferTransactions = async ({
+  isGuarded,
   address,
   chainID
 }: TransactionProps) => {
@@ -67,6 +69,14 @@ export const getWrapAndMultiTransferTransactions = async ({
         })
       ]
     });
+
+  if (isGuarded) {
+    [wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld].forEach(
+      (tx) => {
+        tx.gasLimit += BigInt(GUARDED_TX_EXTRA_GAS_LIMIT);
+      }
+    );
+  }
 
   return { wrapOneEgld, swapHalfWEgldToUsdc, multiTransferOneUsdcHalfWEgld };
 };
