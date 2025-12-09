@@ -5,6 +5,7 @@ import {
   TransactionsFactoryConfig,
   TransferTransactionsFactory
 } from 'lib';
+import { GUARDED_TX_EXTRA_GAS_LIMIT } from 'localConstants/gas';
 import { TransactionProps } from 'types';
 
 const NUMBER_OF_TRANSACTIONS = 5;
@@ -37,7 +38,8 @@ export const getBatchTransactions = async ({
         );
 
       if (isGuarded) {
-        tokenTransfer.gasLimit = tokenTransfer.gasLimit + BigInt(50_000);
+        tokenTransfer.gasLimit =
+          tokenTransfer.gasLimit + BigInt(GUARDED_TX_EXTRA_GAS_LIMIT);
       }
 
       return tokenTransfer;
