@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import {
   faArrowsRotate,
   faPaperPlane,
   IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
 import { OutputContainer } from 'components/OutputContainer';
 import { TransactionsOutput } from 'components/OutputContainer/components';
 import { MvxButton, useGetPendingTransactionsSessions } from 'lib';
@@ -35,7 +35,7 @@ interface BatchTransactionsButtonsType {
 }
 
 export const BatchTransactions = () => {
-  const { address, nonce } = useGetAccount();
+  const { address, nonce, isGuarded } = useGetAccount();
   const { network } = useGetNetworkConfig();
   const [currentSessionId, setCurrentSessionId] = useState('');
   const pendingSession = useGetPendingTransactionsSessions();
@@ -47,6 +47,7 @@ export const BatchTransactions = () => {
 
   const executeSignAndAutoSendBatchTransactions = async () => {
     const sessionId = await signAndAutoSendBatchTransactions({
+      isGuarded,
       address,
       nonce,
       chainID: network.chainId,
@@ -63,6 +64,7 @@ export const BatchTransactions = () => {
 
   const executeWrapMultiTransferTransactions = async () => {
     const sessionId = await wrapAndMultiTransferTransactions({
+      isGuarded,
       address,
       nonce,
       chainID: network.chainId,
@@ -79,6 +81,7 @@ export const BatchTransactions = () => {
 
   const executeSwapAndLockTokens = async () => {
     const sessionId = await swapAndLockTokens({
+      isGuarded,
       address,
       nonce,
       chainID: network.chainId,

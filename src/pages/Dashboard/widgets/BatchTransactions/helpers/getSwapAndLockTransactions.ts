@@ -1,13 +1,15 @@
 import { BATCH_TRANSACTIONS_SC } from 'config';
 import { Address, GAS_PRICE, Transaction, VERSION } from 'lib';
+import { GUARDED_TX_EXTRA_GAS_LIMIT } from 'localConstants/gas';
 import { TransactionProps } from 'types';
 
 export const getSwapAndLockTransactions = ({
+  isGuarded,
   address,
   chainID,
   nonce
 }: TransactionProps): Transaction[] => {
-  return [
+  const transactions = [
     new Transaction({
       chainID,
       gasLimit: BigInt(4200000),
@@ -57,4 +59,12 @@ export const getSwapAndLockTransactions = ({
       data: Uint8Array.from(Buffer.from(BATCH_TRANSACTIONS_SC.lock_MEX.data))
     })
   ];
+
+  if (isGuarded) {
+    transactions.forEach((tx) => {
+      tx.gasLimit = tx.gasLimit + BigInt(GUARDED_TX_EXTRA_GAS_LIMIT);
+    });
+  }
+
+  return transactions;
 };
