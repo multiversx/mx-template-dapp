@@ -11,7 +11,8 @@ const NUMBER_OF_TRANSACTIONS = 5;
 
 export const getBatchTransactions = async ({
   address,
-  chainID
+  chainID,
+  isGuarded
 }: TransactionProps): Promise<Transaction[]> => {
   const transactions = Array.from(Array(NUMBER_OF_TRANSACTIONS).keys());
 
@@ -34,6 +35,10 @@ export const getBatchTransactions = async ({
             nativeAmount: BigInt(nativeAmount)
           }
         );
+
+      if (isGuarded) {
+        tokenTransfer.gasLimit = tokenTransfer.gasLimit + BigInt(50_000);
+      }
 
       return tokenTransfer;
     })

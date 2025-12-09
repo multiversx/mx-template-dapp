@@ -3,11 +3,12 @@ import { Address, GAS_PRICE, Transaction, VERSION } from 'lib';
 import { TransactionProps } from 'types';
 
 export const getSwapAndLockTransactions = ({
+  isGuarded,
   address,
   chainID,
   nonce
 }: TransactionProps): Transaction[] => {
-  return [
+  const transcations = [
     new Transaction({
       chainID,
       gasLimit: BigInt(4200000),
@@ -57,4 +58,12 @@ export const getSwapAndLockTransactions = ({
       data: Uint8Array.from(Buffer.from(BATCH_TRANSACTIONS_SC.lock_MEX.data))
     })
   ];
+
+  if (isGuarded) {
+    transcations.forEach((tx) => {
+      tx.gasLimit = tx.gasLimit + BigInt(50_000);
+    });
+  }
+
+  return transcations;
 };
