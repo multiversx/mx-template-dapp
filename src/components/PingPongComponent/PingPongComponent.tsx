@@ -76,7 +76,14 @@ export const PingPongComponent = ({
       return;
     }
 
-    const secondsRemaining = await getTimeToPong();
+    const msRemaining = await getTimeToPong();
+
+    // If backend now returns milliseconds, convert to whole seconds
+    const secondsRemaining =
+      msRemaining == null
+        ? msRemaining
+        : Math.max(0, Math.floor(msRemaining / 1000));
+
     const { canPing, timeRemaining } = setTimeRemaining(secondsRemaining);
 
     setHasPing(canPing);
