@@ -154,6 +154,9 @@ export const PingPongComponent = ({
     return <MissingNativeAuthError />;
   }
 
+  const isPingDisabled = !hasPing || hasPendingTransactions;
+  const isPongDisabled = !pongAllowed || hasPing || hasPendingTransactions;
+
   return (
     <div id={identifier} className={styles.pingPongContainer}>
       <div className={styles.infosContainer}>
@@ -192,8 +195,8 @@ export const PingPongComponent = ({
         <div className={styles.buttons}>
           <MvxButton
             data-testid='btnPing'
-            disabled={!hasPing || hasPendingTransactions}
-            onClick={onSendPingTransaction}
+            disabled={isPingDisabled}
+            onClick={isPingDisabled ? undefined : onSendPingTransaction}
             size='small'
           >
             <FontAwesomeIcon
@@ -206,8 +209,8 @@ export const PingPongComponent = ({
 
           <MvxButton
             data-testid='btnPong'
-            disabled={!pongAllowed || hasPing || hasPendingTransactions}
-            onClick={onSendPongTransaction}
+            disabled={isPongDisabled}
+            onClick={isPongDisabled ? undefined : onSendPongTransaction}
             size='small'
           >
             <FontAwesomeIcon
