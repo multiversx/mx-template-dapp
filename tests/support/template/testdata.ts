@@ -64,7 +64,7 @@ export enum SelectorsEnum {
   privateKeyInput = 'privateKeyInput',
   cancelButton = 'cancelButton',
   sidePanel = '#side-panel',
-  sidePanelCloseIcon = 'svg',
+  sidePanelCloseIcon = 'side-panel-close-button',
 
   // Web wallet selectors
   signCancelButton = 'signCancelBtn',

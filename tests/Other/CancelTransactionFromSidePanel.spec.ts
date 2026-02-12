@@ -54,10 +54,7 @@ test.describe('cancel transaction from side panel', () => {
     await page.locator(SelectorsEnum.sidePanel).waitFor({ state: 'visible' });
 
     // Click the close icon
-    await page
-      .locator(SelectorsEnum.sidePanel)
-      .locator(SelectorsEnum.sidePanelCloseIcon)
-      .click();
+    await page.getByTestId('side-panel-close-button').getByRole('img').click();
 
     // Wait for toast to be displayed
     await TestActions.waitForToastToBeDisplayed(page);
