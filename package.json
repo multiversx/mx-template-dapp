@@ -15,7 +15,7 @@
     "@multiversx/sdk-dapp": "^5.x",
     "@multiversx/sdk-dapp-ui": "^0.x",
     "@multiversx/sdk-dapp-utils": "^3.x",
-    "axios": "1.12.2",
+    "axios": "1.13.6",
     "bignumber.js": "^9.x",
     "classnames": "2.3.2",
     "luxon": "3.5.0",

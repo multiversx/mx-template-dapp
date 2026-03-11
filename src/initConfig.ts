@@ -1,8 +1,8 @@
 import './styles/tailwind.css';
 import './styles/style.css';
 
-import { walletConnectV2ProjectId } from 'config';
-import { EnvironmentsEnum, ICustomProvider, InitAppType } from './lib';
+import { environment, walletConnectV2ProjectId } from 'config';
+import { ICustomProvider, InitAppType } from './lib';
 import { InMemoryProvider } from './provider/inMemoryProvider';
 
 const providers: ICustomProvider[] = [
@@ -22,7 +22,7 @@ export const config: InitAppType = {
   storage: { getStorageCallback: () => sessionStorage },
   dAppConfig: {
     nativeAuth: true,
-    environment: EnvironmentsEnum.devnet,
+    environment: environment,
     theme: 'mvx:dark-theme',
     providers: {
       walletConnect: {
