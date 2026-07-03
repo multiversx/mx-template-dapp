@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import svgrPlugin from 'vite-plugin-svgr';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
   server: {
@@ -23,7 +22,6 @@ export default defineConfig({
   plugins: [
     react(),
     basicSsl(),
-    tsconfigPaths(),
     svgrPlugin({
       svgrOptions: {
         exportType: 'named',
@@ -37,6 +35,9 @@ export default defineConfig({
       globals: { Buffer: true, global: true, process: true }
     })
   ],
+  resolve: {    
+    tsconfigPaths: true
+  },
   css: {
     postcss: './postcss.config.js'
   },

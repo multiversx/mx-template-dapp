@@ -1,0 +1,6 @@
+allowBuilds:
+  '@swc/core': false
+  esbuild: false
+  keccak: false
+  protobufjs: false
+  unrs-resolver: false

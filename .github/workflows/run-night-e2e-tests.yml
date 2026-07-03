@@ -10,19 +10,19 @@ jobs:
       KEYSTORE1_JSON_B64: ${{ secrets.KEYSTORE1_JSON_B64 }}
       KEYSTORE1_PASSWORD: ${{ secrets.KEYSTORE1_PASSWORD }}
       KEYSTORE1_ADDRESS: ${{ secrets.KEYSTORE1_ADDRESS }}
-      
+
       KEYSTORE2_JSON_B64: ${{ secrets.KEYSTORE2_JSON_B64 }}
       KEYSTORE2_PASSWORD: ${{ secrets.KEYSTORE2_PASSWORD }}
       KEYSTORE2_ADDRESS: ${{ secrets.KEYSTORE2_ADDRESS }}
-      
+
       KEYSTORE3_JSON_B64: ${{ secrets.KEYSTORE3_JSON_B64 }}
       KEYSTORE3_PASSWORD: ${{ secrets.KEYSTORE3_PASSWORD }}
       KEYSTORE3_ADDRESS: ${{ secrets.KEYSTORE3_ADDRESS }}
-      
+
       KEYSTORE4_JSON_B64: ${{ secrets.KEYSTORE4_JSON_B64 }}
       KEYSTORE4_PASSWORD: ${{ secrets.KEYSTORE4_PASSWORD }}
       KEYSTORE4_ADDRESS: ${{ secrets.KEYSTORE4_ADDRESS }}
-      
+
       KEYSTORE5_PEM_B64: ${{ secrets.KEYSTORE5_PEM_B64 }}
       KEYSTORE5_ADDRESS: ${{ secrets.KEYSTORE5_ADDRESS }}
 
@@ -34,11 +34,11 @@ jobs:
       METAMASK_PASSWORD: ${{ secrets.METAMASK_PASSWORD }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
       - name: Setup pnpm
         run: npm install -g pnpm
       - name: Install Dependencies
@@ -54,7 +54,7 @@ jobs:
         working-directory: tests
         run: xvfb-run pnpm run run-playwright-test
       - name: Upload Playwright test report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
