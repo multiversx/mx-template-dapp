@@ -14,7 +14,7 @@ const getUserProfileData = async (address?: string) => {
     });
 
     return data;
-  } catch (err) {
+  } catch {
     console.error('Unable to fetch profile url');
   }
 };

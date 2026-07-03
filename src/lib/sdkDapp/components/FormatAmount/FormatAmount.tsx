@@ -6,8 +6,7 @@ import { FormatAmountController } from '../../sdkDapp.helpers';
 import { useGetNetworkConfig } from '../../sdkDapp.hooks';
 
 interface IFormatAmountProps
-  extends Partial<MvxFormatAmountPropsType>,
-    WithClassnameType {
+  extends Partial<MvxFormatAmountPropsType>, WithClassnameType {
   value: string;
 }
 
