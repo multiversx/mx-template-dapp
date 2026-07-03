@@ -13,7 +13,7 @@ See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
 
 ## Requirements
 
-- Node.js version 18+
+- Node.js version 20+
 - pnpm version 10+
 
 ## Getting Started
