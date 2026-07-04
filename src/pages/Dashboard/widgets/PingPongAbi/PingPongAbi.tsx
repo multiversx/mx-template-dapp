@@ -7,9 +7,9 @@ import { getTimeToPong } from '../PingPongService/helpers/getTimeToPong';
 import { useGetPingAmount } from './hooks';
 
 export const PingPongAbi = () => {
+  const pingAmount = useGetPingAmount();
   const { sendPingTransactionFromAbi, sendPongTransactionFromAbi } =
     useSendPingPongTransaction();
-  const pingAmount = useGetPingAmount();
 
   const handlePingTransaction = async (payload: PingTransactionPayloadType) => {
     if (payload.amount) {

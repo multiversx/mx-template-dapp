@@ -1,20 +1,21 @@
 {
   "buildInfo": {
     "rustc": {
-      "version": "1.61.0-nightly",
-      "commitHash": "1d9c262eea411ec5230f8a4c9ba50b3647064da4",
-      "commitDate": "2022-03-26",
-      "channel": "Nightly",
-      "short": "rustc 1.61.0-nightly (1d9c262ee 2022-03-26)"
+      "version": "1.91.1",
+      "commitHash": "ed61e7d7e242494fb7057f2657300d9e77bb4fcb",
+      "commitDate": "2025-11-07",
+      "channel": "Stable",
+      "host": "x86_64-unknown-linux-gnu",
+      "short": "rustc 1.91.1 (ed61e7d7e 2025-11-07)",
+      "llvmVersion": "21.1"
     },
     "contractCrate": {
       "name": "ping-pong",
-      "version": "0.0.2",
-      "git_version": "23ff9bd"
+      "version": "0.0.2"
     },
     "framework": {
-      "name": "elrond-wasm",
-      "version": "0.34.1"
+      "name": "multiversx-sc",
+      "version": "0.63.3"
     }
   },
   "docs": [
@@ -31,7 +32,7 @@
     "docs": [
       "Necessary configuration when deploying:",
       "`ping_amount` - the exact amount that needs to be sent when `ping`-ing.  ",
-      "`duration_in_seconds` - how much time (in seconds) until `pong` can be called after the initial `ping` call  ",
+      "`duration_in_millis` - how much time (in milliseconds) until `pong` can be called after the initial `ping` call  ",
       "`token_id` - Optional. The Token Identifier of the token that is going to be used. Default is \"EGLD\"."
     ],
     "inputs": [
@@ -40,13 +41,26 @@
         "type": "BigUint"
       },
       {
-        "name": "duration_in_seconds",
+        "name": "duration_in_millis",
         "type": "u64"
       },
       {
         "name": "opt_token_id",
         "type": "optional<EgldOrEsdtTokenIdentifier>",
         "multi_arg": true
+      }
+    ],
+    "outputs": []
+  },
+  "upgradeConstructor": {
+    "inputs": [
+      {
+        "name": "ping_amount",
+        "type": "BigUint"
+      },
+      {
+        "name": "duration_in_millis",
+        "type": "u64"
       }
     ],
     "outputs": []
@@ -176,6 +190,7 @@
       ]
     }
   ],
+  "esdtAttributes": [],
   "hasCallback": false,
-  "types": []
+  "types": {}
 }

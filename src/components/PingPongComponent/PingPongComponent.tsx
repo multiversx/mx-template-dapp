@@ -76,7 +76,14 @@ export const PingPongComponent = ({
       return;
     }
 
-    const secondsRemaining = await getTimeToPong();
+    const msRemaining = await getTimeToPong();
+
+    // If backend now returns milliseconds, convert to whole seconds
+    const secondsRemaining =
+      msRemaining == null
+        ? msRemaining
+        : Math.max(0, Math.floor(msRemaining / 1000));
+
     const { canPing, timeRemaining } = setTimeRemaining(secondsRemaining);
 
     setHasPing(canPing);
@@ -147,6 +154,9 @@ export const PingPongComponent = ({
     return <MissingNativeAuthError />;
   }
 
+  const isPingDisabled = !hasPing || hasPendingTransactions;
+  const isPongDisabled = !pongAllowed || hasPing || hasPendingTransactions;
+
   return (
     <div id={identifier} className={styles.pingPongContainer}>
       <div className={styles.infosContainer}>
@@ -185,8 +195,8 @@ export const PingPongComponent = ({
         <div className={styles.buttons}>
           <MvxButton
             data-testid='btnPing'
-            disabled={!hasPing || hasPendingTransactions}
-            onClick={onSendPingTransaction}
+            disabled={isPingDisabled}
+            onClick={isPingDisabled ? undefined : onSendPingTransaction}
             size='small'
           >
             <FontAwesomeIcon
@@ -199,8 +209,8 @@ export const PingPongComponent = ({
 
           <MvxButton
             data-testid='btnPong'
-            disabled={!pongAllowed || hasPing || hasPendingTransactions}
-            onClick={onSendPongTransaction}
+            disabled={isPongDisabled}
+            onClick={isPongDisabled ? undefined : onSendPongTransaction}
             size='small'
           >
             <FontAwesomeIcon

@@ -11,9 +11,14 @@ export const getTimeToPong = async () => {
       }
     );
 
+    if (data.timeToPong == null) {
+      // no timeToPong field → no cooldown
+      return 0;
+    }
+
     return data.timeToPong;
   } catch (err) {
     console.error(err);
-    return null;
+    return 0;
   }
 };
