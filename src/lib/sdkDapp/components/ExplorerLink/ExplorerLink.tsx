@@ -23,7 +23,6 @@ export const ExplorerLink = ({
 };
 
 export interface ExplorerLinkPropsType
-  extends WithClassnameType,
-    PropsWithChildren {
+  extends WithClassnameType, PropsWithChildren {
   page: string;
 }

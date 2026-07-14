@@ -7,11 +7,9 @@ export const handlePingPong = async ({ page, type }: HandlePingPongType) => {
   const pingButton = container.getByTestId(SelectorsEnum.pingButton);
   const pongButton = container.getByTestId(SelectorsEnum.pongButton);
 
-  // Check if buttons are enabled by looking for absence of disabled attribute
-  const isPingEnabled =
-    (await pingButton.locator('button').getAttribute('disabled')) === null;
-  const isPongEnabled =
-    (await pongButton.locator('button').getAttribute('disabled')) === null;
+  // The testid is on a native <button>, so read its disabled state directly.
+  const isPingEnabled = !(await pingButton.isDisabled());
+  const isPongEnabled = !(await pongButton.isDisabled());
 
   if (isPingEnabled) {
     await pingButton.click();

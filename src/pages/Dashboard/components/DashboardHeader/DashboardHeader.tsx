@@ -3,7 +3,6 @@ import {
   SDK_DAPP_PACKAGE_LINK,
   TYPESCRIPT_LINK
 } from 'localConstants';
-
 import { DashboardHeaderTextLink } from './components/DashboardHeaderTextLink';
 
 // prettier-ignore

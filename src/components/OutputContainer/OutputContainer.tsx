@@ -9,8 +9,7 @@ const styles = {
 } satisfies Record<string, string>;
 
 interface OutputContainerPropsType
-  extends PropsWithChildren,
-    WithClassnameType {
+  extends PropsWithChildren, WithClassnameType {
   isLoading?: boolean;
 }
 

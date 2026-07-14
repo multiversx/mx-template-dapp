@@ -109,7 +109,9 @@ test.describe('Ping & Pong (ABI)', () => {
     await TestActions.confirmWalletTransaction(walletPage, pemConfig);
 
     // Click on Sign button to confirm the transaction in the web wallet
-    await walletPage.getByTestId(SelectorsEnum.signButton).click();
+    await walletPage
+      .getByTestId(SelectorsEnum.signNextTransactionButton)
+      .click();
 
     // Switch to template dashboard page
     const templatePage = await TestActions.getPageAndWaitForLoad(
