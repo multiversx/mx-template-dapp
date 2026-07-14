@@ -1,46 +1,105 @@
-# @multiversx/template-dapp
-
-This project was bootstrapped with [Vite](https://vitejs.dev/guide/).
-
-The **MultiversX dApp Template**, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
-It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and TX signing.
-
-See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
-
-### Tests
+# MultiversX Template dApp (React + TypeScript)
 
 [![E2E tests](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml/badge.svg)](https://github.com/multiversx/mx-template-dapp/actions/workflows/playwright.yml)
 
+The **MultiversX dApp Template**, built with [React](https://react.dev/) 18, [TypeScript](https://www.typescriptlang.org/) and [Vite](https://vitejs.dev/). It is the canonical reference implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), demonstrating:
+
+- wallet authentication (browser extension, xPortal / WalletConnect, web wallet, Ledger, passkeys, and a custom in-memory provider)
+- transaction signing, sending, and tracking (single + batch transactions)
+- message signing and native auth
+- smart-contract interaction (a Ping-Pong contract)
+
+See [Template dApp](https://template-dapp.multiversx.com/) for a live demo.
+
+> **Looking for another framework?** The same dApp exists for Next.js, Vue, Angular, SolidJS, plain-JavaScript React, and React Native — see [Other templates](#other-templates).
+
 ## Requirements
 
-- Node.js version 20+
-- pnpm version 10+
+- Node.js 20+
+- pnpm 10+ (the repo ships a `pnpm-lock.yaml` — use pnpm, not npm or yarn)
 
-## Getting Started
+## Getting started
 
-### Step 1. Install modules
-
-From a terminal, navigate to the project folder and run:
+### 1. Install dependencies
 
 ```bash
 pnpm install
 ```
 
-### Step 2. Running in development mode
-
-In the project folder run:
+### 2. Start the dev server on the desired network
 
 ```bash
-pnpm start-devnet
-pnpm start-testnet
-pnpm start-mainnet
+pnpm start-devnet     # or start-testnet / start-mainnet
 ```
 
-This will start the React app in development mode, using the configs found in the `vite.config.ts` file.
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [https://localhost:3000](https://localhost:3000) (note **https** — the dev server uses a self-signed certificate, because wallet providers only work on secure origins; accept the browser warning).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The page reloads on edits, and lint errors show in the console.
+
+### 3. Build for production
+
+```bash
+pnpm build-devnet     # or build-testnet / build-mainnet
+```
+
+The output goes to the `build/` folder, ready to deploy to any static host.
+
+## Available scripts
+
+| Script | Description |
+| --- | --- |
+| `pnpm start-devnet` / `start-testnet` / `start-mainnet` | Copy the network config, then run the Vite dev server on `https://localhost:3000` |
+| `pnpm build-devnet` / `build-testnet` / `build-mainnet` | Type-check, copy the network config, and build to `build/` |
+| `pnpm copy-devnet-config` (also `testnet` / `mainnet`) | Copy `src/config/config.<network>.ts` over `src/config/index.ts` |
+| `pnpm test` | Run the Jest unit tests |
+| `pnpm run-playwright-test` | Run the Playwright E2E suite (auto-starts the devnet dev server) |
+| `pnpm run-playwright-test-ui` | Playwright in interactive UI mode |
+| `pnpm lint` | ESLint with `--fix` over `src` |
+
+## Network configuration
+
+There is **no `.env` file**. The active network (devnet / testnet / mainnet) is selected at dev/build time by copying one of the per-network config files over the generated index:
+
+- `src/config/config.devnet.ts`, `config.testnet.ts`, `config.mainnet.ts` — per-network values (API URL, contract address, `environment`)
+- `src/config/sharedConfig.ts` — values common to all networks (WalletConnect project ID, batch-transaction contracts, etc.)
+- `src/config/index.ts` — **generated** by the `copy-*-config` scripts; never edit it by hand, it is overwritten on every `start-*` / `build-*`
+
+The `environment` exported by the active config is passed to sdk-dapp's `initApp` in `src/initConfig.ts`, so the copy mechanism is the single source of truth for the network.
+
+## Project structure
+
+```
+src/
+├── assets/          # images, icons
+├── components/      # shared presentational components
+├── config/          # per-network configs (see Network configuration)
+├── contracts/       # Ping-Pong contract ABI + query/transaction helpers
+├── helpers/         # generic utilities
+├── hooks/           # shared React hooks
+├── lib/             # SDK re-export layer — the only place with deep @multiversx/* imports
+├── localConstants/  # route names, misc constants
+├── pages/           # Home, Dashboard (feature widgets), Unlock, Disclaimer, PageNotFound
+├── provider/        # custom InMemoryProvider (login without an external wallet)
+├── routes/          # declarative route array consumed by App.tsx
+├── styles/          # Tailwind v4 styles + theme CSS variables
+├── types/           # shared TypeScript types
+├── wrappers/        # app-wide providers (AxiosInterceptors, BatchTransactions, AuthRedirect)
+├── initConfig.ts    # the InitAppType config passed to sdk-dapp's initApp
+└── index.tsx        # entry: awaits initApp(config), then renders <App />
+```
+
+## How sdk-dapp is used
+
+1. **Bootstrap** — `src/index.tsx` calls `initApp(config)` (config in `src/initConfig.ts`: environment, native auth, theme, custom providers) and renders the app only after it resolves.
+2. **SDK import layer** — app code never imports `@multiversx/sdk-*` deep paths directly; everything is funneled through `src/lib/` (`sdkCore`, `sdkDapp`, `sdkDappUI`, `sdkDappUtils`). Add new SDK symbols to the matching `lib` re-export and import from `lib`.
+3. **Login** — the Unlock page opens sdk-dapp's `UnlockPanelManager`, which lists all available providers (including the custom `InMemoryProvider` registered in `initConfig.ts`).
+4. **Transactions** — widgets build `Transaction` objects with sdk-core, sign via `getAccountProvider().signTransactions()`, then send and track them through `TransactionManager` (toast notifications included). See the Dashboard `widgets/` for canonical examples.
+5. **State** — account, network, and transaction-session data come from sdk-dapp's store via React hooks (`useGetAccount`, `useGetNetworkConfig`, `useGetIsLoggedIn`, ...).
+
+## Testing
+
+- **Unit tests** — Jest (`@swc/jest`, jsdom): `pnpm test`. Run a single file with `pnpm test -- path/to/File.test.tsx` or filter by name with `pnpm test -- -t "name"`.
+- **E2E tests** — Playwright specs in `tests/` covering connect-wallet flows (memory provider, MetaMask snap, web wallet) and transaction cancel flows: `pnpm run-playwright-test`. The runner auto-starts the devnet dev server.
 
 ## Passkey Testing Setup (CRITICAL for Passkey Development)
 
@@ -76,6 +135,7 @@ mkcert localhost.multiversx.com localhost 127.0.0.1 ::1
 ```
 
 This creates two files in `certificates` folder:
+
 - `localhost.multiversx.com+3.pem` (certificate)
 - `localhost.multiversx.com+3-key.pem` (private key)
 
@@ -120,6 +180,7 @@ pnpm start-devnet --force
 ```
 
 **Test URLs:**
+
 - **Template dApp**: https://localhost.multiversx.com
 
 ### Troubleshooting WebAuthn TLS Errors
@@ -132,57 +193,20 @@ If you encounter `NotAllowedError: WebAuthn is not supported on sites with TLS c
 4. ✅ Browser shows a valid HTTPS lock icon
 5. ✅ No mixed content warnings in DevTools
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `pnpm start` / `pnpm start-devnet`
-
-Runs the app in the development mode.
-**For passkey testing**: Run with `pnpm start` and open [https://localhost.multiversx.com](https://localhost.multiversx.com) to view it in the browser.
-
-The page will reload if you make edits.
-You will also see any lint errors in the console.
-
-### `pnpm test`
-
-Launches the test runner in the interactive watch mode.
-See the section about [running tests](https://vitejs.dev/guide/static-deploy.html#testing-the-app-locally) for more information.
-
-### `pnpm build` / `pnpm build-devnet`
-
-Builds the app for production to the `build` folder.
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.
-Your app is ready to be deployed!
-
-See the section about [deployment](https://vitejs.dev/guide/static-deploy.html#building-the-app) for more information.
-
-### Build for testing and production use
-
-A build of the app is necessary to deploy for testing purposes or for production use.
-To build the project run:
-
-```bash
-pnpm build-devnet
-pnpm build-testnet
-pnpm build-mainnet
-```
-
 ## Configure Theme (Optional)
 
 This template comes with three built-in themes:
+
 - TealLab (mvx:dark-theme)
 - VibeMode (mvx:vibe-theme)
 - BrightLight (mvx:light-theme)
 
-But you can customize the appearance of your project by defining your own theme using CSS variables. 
+But you can customize the appearance of your project by defining your own theme using CSS variables.
 Follow these steps to set it up.
 
-### Step 1. Update `tailwind.css` file 
+### Step 1. Update `tailwind.css` file
 
-This is the main place where you customize your theme. You add your project specific colors and update 
+This is the main place where you customize your theme. You add your project specific colors and update
 CSS variables that style your elements, according to your theme.
 
 Define your color palette in the `:root` section:
@@ -207,8 +231,8 @@ Next, configure your theme-specific variables:
 ### Step 2. Add your theme in `useHandleThemeManagement.ts` hook
 
 This hook registers and manages all available themes in your project.
-It maintains a list of all theme options, tracks the currently active theme and 
-provides a `handleThemeSwitch` function that updates the `data-mvx-theme` attribute. 
+It maintains a list of all theme options, tracks the currently active theme and
+provides a `handleThemeSwitch` function that updates the `data-mvx-theme` attribute.
 
 ```typescript
 const allThemeOptions: ThemeOptionType[] =
@@ -227,7 +251,7 @@ This allows you to see the theme options available in the project. They are list
 dropdown in header with visual color previews for each theme.
 
 ```typescript
-const themeDotColors: Record<string, string[]> = 
+const themeDotColors: Record<string, string[]> =
 {
   'mvx:dark-theme': ['#23F7DD', '#262626', '#B6B3AF', '#FFFFFF'],
   'mvx:vibe-theme': ['#471150', '#5A2A62', '#D200FA', '#FFFFFF'],
@@ -253,8 +277,8 @@ Add a background image for your theme in `public` folder and reference it in `ta
 }
 ```
 
-And then update `themeExtraProperties` object with your values. These properties are used for 
-customizing your hero section from home page. It adds background image and icon + title for the 
+And then update `themeExtraProperties` object with your values. These properties are used for
+customizing your hero section from home page. It adds background image and icon + title for the
 theme switch section in hero.
 
 ```typescript
@@ -279,15 +303,29 @@ dAppConfig: {
   }
 ```
 
-Now the project will start with your configured theme. 
+Now the project will start with your configured theme.
 All variables will have the colors you have set. If you don't set custom colors, the default ones will apply.
 You can see the current theme in `data-mvx-theme` attribute in browser inspector.
 
-## Learn More
+## Other templates
 
-You can learn more in the [Vite documentation](https://vitejs.dev/).
+The same template dApp is implemented across several frameworks. If another stack suits your project better, start from one of these instead:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Template | Stack | Repository |
+| --- | --- | --- |
+| React (TypeScript) **← this repo** | React 18 · TypeScript · Vite | [mx-template-dapp](https://github.com/multiversx/mx-template-dapp) |
+| React (JavaScript) | React 19 · JSX · Vite | [mx-template-dapp-reactjs](https://github.com/multiversx/mx-template-dapp-reactjs) |
+| Next.js | Next.js 16 (App Router) · TypeScript | [mx-template-dapp-nextjs](https://github.com/multiversx/mx-template-dapp-nextjs) |
+| SolidJS | SolidJS · TypeScript · Vite | [mx-template-dapp-solidjs](https://github.com/multiversx/mx-template-dapp-solidjs) |
+| Vue | Vue 3 · TypeScript · Vite | [mx-template-dapp-vue](https://github.com/multiversx/mx-template-dapp-vue) |
+| Angular | Angular 20 · TypeScript | [mx-template-dapp-angular](https://github.com/multiversx/mx-template-dapp-angular) |
+| React Native | React Native | [mx-template-dapp-react-native](https://github.com/multiversx/mx-template-dapp-react-native) |
+
+## Links
+
+- [@multiversx/sdk-dapp on GitHub](https://github.com/multiversx/mx-sdk-dapp) · [on npm](https://www.npmjs.com/package/@multiversx/sdk-dapp)
+- [MultiversX developer docs](https://docs.multiversx.com/)
+- [Migration guide (sdk-dapp 4.x → 5.x)](./MIGRATION_GUIDE.md)
 
 ## Roadmap
 
