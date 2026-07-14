@@ -11,7 +11,7 @@ export const Unlock = () => {
     loginHandler: () => {
       navigate(RouteNamesEnum.dashboard);
     },
-    onClose: () => {
+    onClose: async () => {
       navigate(RouteNamesEnum.home);
     }
   });

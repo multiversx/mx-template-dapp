@@ -15,13 +15,16 @@ const METAMASK_ADDRESS = process.env.METAMASK_ADDRESS || '';
 const METAMASK_PASSWORD = process.env.METAMASK_PASSWORD || '';
 
 // Validate that required environment variables are present
-if (!METAMASK_PASSWORD || !METAMASK_ADDRESS || !METAMASK_MNEMONIC) {
-  throw new Error(
-    'METAMASK_PASSWORD, METAMASK_MNEMONIC, and METAMASK_ADDRESS environment variables are missing. Please set them in .env.test.local for local development or as a GitHub Secret for CI.'
-  );
-}
+const hasMetaMaskEnv = Boolean(
+  METAMASK_PASSWORD && METAMASK_ADDRESS && METAMASK_MNEMONIC
+);
 
 test.describe('Connect a wallet', () => {
+  test.skip(
+    !hasMetaMaskEnv,
+    'MetaMask env vars missing (set METAMASK_* in .env.test.local or CI secrets)'
+  );
+
   let metamaskContext: BrowserContext;
   let extensionId: string;
   let dAppPage: Page;

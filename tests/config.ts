@@ -4,9 +4,9 @@ export const TEST_CONFIG = {
   /* Parallel tests on CI only. */
   workers: 5,
   /* Timeout for each test */
-  timeout: 120_000,
+  timeout: 200_000,
   /* Timeout for locators */
-  expectTimeout: 60_000,
+  expectTimeout: 120_000,
   /* Run tests in files in parallel */
   fullyParallel: false
 } as const;

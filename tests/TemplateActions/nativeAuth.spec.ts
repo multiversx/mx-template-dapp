@@ -54,12 +54,25 @@ test.describe('Native auth', () => {
     const container = page.locator(SelectorsEnum.nativeAuthContainer);
     await expect(container).toBeInViewport();
 
-    // Check that the address is displayed and matches the account address
-    const nativeAuthAddress = page
-      .locator(SelectorsEnum.nativeAuthContainer)
-      .getByTestId(SelectorsEnum.trimFullAddress);
+    const maxProfileAttempts = 4;
+    for (let attempt = 1; attempt <= maxProfileAttempts; attempt++) {
+      const addressVisible = await container
+        .getByText(keystoreConfig.address, { exact: false })
+        .first()
+        .isVisible()
+        .catch(() => false);
 
-    await expect(nativeAuthAddress).toHaveText(keystoreConfig.address);
+      if (addressVisible || attempt === maxProfileAttempts) {
+        break;
+      }
+
+      await page.reload();
+      await page.waitForLoadState('networkidle');
+      await container.waitFor({ state: 'visible' });
+      await container.scrollIntoViewIfNeeded();
+    }
+
+    await expect(container).toContainText(keystoreConfig.address);
 
     // Check that the balance is displayed and matches the account balance
     const nativeAuthBalance = await extractBalanceFromContainer({

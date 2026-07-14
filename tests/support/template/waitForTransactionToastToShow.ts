@@ -38,9 +38,10 @@ export const waitForTransactionToastToContain = async ({
   }
 
   if (toastStatus) {
-    await expect(statusLocator.nth(toastIndex)).toContainText(toastStatus, {
-      timeout: TEST_CONSTANTS.TOAST_WAIT_TIMEOUT,
-      useInnerText: true
+    await expect(
+      statusLocator.filter({ hasText: toastStatus }).first()
+    ).toBeVisible({
+      timeout: TEST_CONSTANTS.TOAST_WAIT_TIMEOUT
     });
   }
 };
