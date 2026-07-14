@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { contractAddress } from 'config';
 import { getCountdownSeconds, setTimeRemaining } from 'helpers';
 import {
-  MvxButton,
   MvxDataWithExplorerLink,
   useGetNetworkConfig,
   useGetPendingTransactionsSessions
@@ -25,6 +24,8 @@ const styles = {
   timeRemaining: 'time-remaining text-red-600',
   buttonsContainer: 'buttons-container flex flex-col gap-2',
   buttons: 'buttons flex justify-start gap-2',
+  actionButton:
+    'action-button flex items-center justify-center gap-2 px-4 h-8 lg:h-10 rounded-xl font-bold leading-none cursor-pointer transition-all duration-200 ease-in-out bg-btn-primary text-btn-primary hover:opacity-75 disabled:bg-transparent disabled:text-secondary disabled:border disabled:border-secondary disabled:cursor-default disabled:hover:opacity-100',
   buttonContent: 'button-content text-sm font-normal'
 } satisfies Record<string, string>;
 
@@ -183,11 +184,11 @@ export const PingPongComponent = ({
 
       <div className={styles.buttonsContainer}>
         <div className={styles.buttons}>
-          <MvxButton
+          <button
             data-testid='btnPing'
             disabled={!hasPing || hasPendingTransactions}
             onClick={onSendPingTransaction}
-            size='small'
+            className={styles.actionButton}
           >
             <FontAwesomeIcon
               icon={faArrowUp}
@@ -195,13 +196,13 @@ export const PingPongComponent = ({
             />
 
             <span className={styles.buttonContent}>Ping</span>
-          </MvxButton>
+          </button>
 
-          <MvxButton
+          <button
             data-testid='btnPong'
             disabled={!pongAllowed || hasPing || hasPendingTransactions}
             onClick={onSendPongTransaction}
-            size='small'
+            className={styles.actionButton}
           >
             <FontAwesomeIcon
               icon={faArrowDown}
@@ -209,7 +210,7 @@ export const PingPongComponent = ({
             />
 
             <span className={styles.buttonContent}>Pong</span>
-          </MvxButton>
+          </button>
         </div>
       </div>
     </div>

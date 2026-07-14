@@ -9,6 +9,8 @@ export const signBatchTransactions = async ({
   let i = buttonSelector === 'swap-lock' ? 1 : 0;
   for (i; i < numberOfTransactions; i++) {
     await walletPage.waitForLoadState();
-    await walletPage.getByTestId(SelectorsEnum.signButton).click();
+    await walletPage
+      .getByTestId(SelectorsEnum.signNextTransactionButton)
+      .click();
   }
 };

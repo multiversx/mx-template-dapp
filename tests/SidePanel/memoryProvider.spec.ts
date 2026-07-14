@@ -49,7 +49,7 @@ test.describe('Confirm Transaction With Private Key', () => {
       // Check sent amount is as expected
       await expect(
         page.getByTestId('signTransactionsOverviewAmountValue')
-      ).toHaveText(`${expectedValue} xEGLD`);
+      ).toHaveText(`${expectedValue}xEGLD`);
 
       // Confirm transaction
       await page.getByTestId('signNextTransactionBtn').click();
