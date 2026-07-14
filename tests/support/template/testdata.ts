@@ -33,6 +33,7 @@ export enum SelectorsEnum {
   confirmButton = 'confirmBtn',
   keystoreCloseModalButton = 'keystoreCloseModalBtn',
   signButton = 'signBtn',
+  signNextTransactionButton = 'signNextTransactionBtn',
   topInfoContainer = 'topInfo',
   crossWindow = 'crossWindow',
   keystoreButton = 'keystoreBtn',

@@ -11,14 +11,14 @@ export const checkButtonStatus = async ({
   const pingButton = container.getByTestId(SelectorsEnum.pingButton);
   const pongButton = container.getByTestId(SelectorsEnum.pongButton);
 
-  // Check that ping button became disabled by looking for disabled attribute
+  // The testid is on a native <button>, so assert it became disabled directly.
   if (lastClickedButton === 'ping') {
-    await expect(pingButton.locator('button')).toHaveAttribute('disabled');
+    await expect(pingButton).toBeDisabled();
     return;
   }
 
   if (lastClickedButton === 'pong') {
-    await expect(pongButton.locator('button')).toHaveAttribute('disabled');
+    await expect(pongButton).toBeDisabled();
     return;
   }
 };

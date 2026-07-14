@@ -13,23 +13,13 @@
 //   by the tests and are never written to disk.
 
 import path from 'path';
-import { loadEnv } from 'vite';
 import { writeValueToFile } from '../fs/writeValueToFile';
+import { loadLocalEnv } from './loadLocalEnv';
 import { type FileEncoding } from './types';
 
-// Load environment variables for local runs using Vite's loadEnv
-// In CI, secrets are already in process.env and will be preserved
-try {
-  const mode = process.env.MODE || 'test';
-  const localEnv = loadEnv(mode, process.cwd(), '');
-  for (const [key, value] of Object.entries(localEnv)) {
-    if (process.env[key] === undefined) {
-      process.env[key] = value;
-    }
-  }
-} catch (_) {
-  // If vite isn't available in this context, skip; CI provides env
-}
+// Load environment variables for local runs from .env.test.local.
+// In CI, secrets are already in process.env and will be preserved.
+loadLocalEnv('test');
 
 // Write keystore files from environment variables
 async function writeKeystoreFilesFromEnv(

@@ -32,11 +32,8 @@ const authenticateWithKeystore = async ({
   // Wait for file processing to complete
   await walletPage.waitForLoadState();
 
-  // Click the submit button
+  // Click the submit ("Access Wallet") button
   await walletPage.getByTestId(SelectorsEnum.submitButton).click();
-
-  // Click the confirm button
-  await walletPage.getByTestId(SelectorsEnum.confirmButton).click();
 };
 
 const authenticateWithPem = async ({
