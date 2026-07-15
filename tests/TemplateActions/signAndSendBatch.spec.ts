@@ -80,7 +80,6 @@ test.describe('Sign & send batch', () => {
     // Sign batch transactions in the web wallet
     await TestActions.signBatchTransactions({
       walletPage,
-      buttonSelector: SelectorsEnum.signAndBatchButton,
       numberOfTransactions
     });
 

@@ -111,7 +111,6 @@ export interface PasteStringFromClipboardType {
 
 export interface SignBatchTransactionsType {
   walletPage: Page;
-  buttonSelector: string;
   numberOfTransactions: number;
 }
 

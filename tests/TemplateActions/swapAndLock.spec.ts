@@ -23,7 +23,7 @@ test.describe('Swap & Lock', () => {
     );
   });
 
-  test('should have sufficient balance for batch transactions', async ({
+  test('should have sufficient balance for swap & lock transactions', async ({
     page
   }) => {
     // Get account balance before any actions
@@ -84,7 +84,6 @@ test.describe('Swap & Lock', () => {
     // Sign swap and lock transactions in the web wallet
     await TestActions.signBatchTransactions({
       walletPage,
-      buttonSelector: SelectorsEnum.signAndBatchButton,
       numberOfTransactions
     });
 
@@ -102,6 +101,14 @@ test.describe('Swap & Lock', () => {
       page: templatePage,
       toastStatus: '4 / 4 transactions processed'
     });
+
+    // Swap & lock ends with a custom success toast that has no close button and
+    // only dismisses via its "Close" link
+    await expect(
+      templatePage.getByText('Transactions successfully sent!')
+    ).toBeVisible();
+
+    await templatePage.getByText('Close', { exact: true }).click();
 
     // Wait for the transaction toast to be closed
     await TestActions.waitForToastToBeClosed(templatePage);
