@@ -23,7 +23,7 @@ test.describe('Wrap & Multi-Transfer', async () => {
     );
   });
 
-  test('should have sufficient balance for wrap & muti transfer transactions', async ({
+  test('should have sufficient balance for wrap & multi transfer transactions', async ({
     page
   }) => {
     // Get account balance before any actions
