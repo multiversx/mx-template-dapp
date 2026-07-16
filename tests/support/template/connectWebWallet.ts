@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import { TEST_CONSTANTS } from './constants';
 import { getPageAndWaitForLoad } from './getPageAndWaitForLoad';
 import { OriginPageEnum, SelectorsEnum } from './testdata';
@@ -7,6 +8,17 @@ import {
   AuthenticateWithPemType,
   ConnectWebWalletType
 } from './types';
+
+// The wallet shows the address table only for keystores it can derive multiple
+// addresses from, which it decides by the file's `kind`.
+const isMnemonicKeystore = (keystorePath: string) => {
+  try {
+    const { kind } = JSON.parse(readFileSync(keystorePath, 'utf8'));
+    return kind === 'mnemonic';
+  } catch (error) {
+    return false;
+  }
+};
 
 const authenticateWithKeystore = async ({
   walletPage,
@@ -34,6 +46,26 @@ const authenticateWithKeystore = async ({
 
   // Click the submit ("Access Wallet") button
   await walletPage.getByTestId(SelectorsEnum.submitButton).click();
+
+  if (!isMnemonicKeystore(keystorePath)) {
+    return;
+  }
+
+  const confirmButton = walletPage.getByTestId(SelectorsEnum.confirmButton);
+
+  try {
+    await confirmButton.waitFor({
+      state: 'visible',
+      timeout: TEST_CONSTANTS.ADDRESS_SELECTION_TIMEOUT
+    });
+  } catch (error) {
+    // Relogin reuses the keystore session and skips the table, so its absence
+    // is not an error
+    return;
+  }
+
+  // The table preselects the first address, so confirming is all that is needed
+  await confirmButton.click();
 };
 
 const authenticateWithPem = async ({

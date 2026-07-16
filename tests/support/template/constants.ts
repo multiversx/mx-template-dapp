@@ -14,6 +14,7 @@ export const TEST_CONSTANTS = {
   BALANCE_POLLING_TIMEOUT: 90000, // 90 seconds
   PAGE_WAIT_TIMEOUT: 30000, // 30 seconds
   TOAST_WAIT_TIMEOUT: 60000, // 60 seconds
+  ADDRESS_SELECTION_TIMEOUT: 10000, // 10 seconds, only paid on mnemonic keystores
 
   PING_PONG_COOLDOWN: 3 * 60 * 1000, // 3 minutes in milliseconds
   PING_BALANCE_CHANGE: -1.0, // Balance decreases by 1 EGLD + gas fees
