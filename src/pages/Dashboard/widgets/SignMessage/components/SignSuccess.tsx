@@ -8,11 +8,14 @@ const styles = {
   signSuccessContainer: 'sign-success-container flex flex-col gap-6',
   signSuccess: 'sign-success flex flex-col w-[calc(100%-50px)]',
   signatureContainer: 'signature-container flex flex-row w-full gap-2',
-  signatureText: 'signature-text w-full resize-none outline-none bg-transparent',
-  encodedMessageContainer: 'encoded-message-container flex flex-row w-full gap-2',
+  signatureText:
+    'signature-text w-full resize-none outline-none bg-transparent',
+  encodedMessageContainer:
+    'encoded-message-container flex flex-row w-full gap-2',
   encodedMessageText: 'encoded-message-text flex-1 break-all',
-  decodedMessageContainer: 'decoded-message-container flex flex-row w-full gap-2',
-  decodedMessageText: 'decoded-message-text flex-1 break-all resize-none outline-none text-green-700 bg-transparent'
+  decodedMessageContainer:
+    'decoded-message-container flex flex-row w-full gap-2',
+  decodedMessageText: 'decoded-message-text flex-1 break-all text-green-700'
 } satisfies Record<string, string>;
 
 interface VerifyMessagePropsType {
@@ -51,13 +54,23 @@ export const SignSuccess = (props: VerifyMessagePropsType) => {
         <div className={styles.encodedMessageContainer}>
           <Label>Encoded message:</Label>
 
-          <p data-testid={DataTestIdsEnum.encodedMessage} className={styles.encodedMessageText}>{encodedMessage}</p>
+          <p
+            data-testid={DataTestIdsEnum.encodedMessage}
+            className={styles.encodedMessageText}
+          >
+            {encodedMessage}
+          </p>
         </div>
 
         <div className={styles.decodedMessageContainer}>
           <Label>Decoded message:</Label>
 
-          <p data-testid={DataTestIdsEnum.decodedMessage} className={styles.decodedMessageText}>{decodedMessage}</p>
+          <p
+            data-testid={DataTestIdsEnum.decodedMessage}
+            className={styles.decodedMessageText}
+          >
+            {decodedMessage}
+          </p>
         </div>
       </div>
     </div>
