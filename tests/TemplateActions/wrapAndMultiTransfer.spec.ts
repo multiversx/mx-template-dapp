@@ -23,7 +23,7 @@ test.describe('Wrap & Multi-Transfer', async () => {
     );
   });
 
-  test('should have sufficient balance for batch transactions', async ({
+  test('should have sufficient balance for wrap & multi transfer transactions', async ({
     page
   }) => {
     // Get account balance before any actions
@@ -55,7 +55,9 @@ test.describe('Wrap & Multi-Transfer', async () => {
     await expect(container).toBeVisible();
   });
 
-  test('should complete full batch transaction flow', async ({ page }) => {
+  test('should complete full wrap and transfer transaction flow', async ({
+    page
+  }) => {
     const numberOfTransactions = 4; // 2 transactions for wrap, 1 for swap, 1 for multi-transfer
 
     // Navigate to batch transactions page and initiate signing
@@ -80,7 +82,6 @@ test.describe('Wrap & Multi-Transfer', async () => {
     // Sign batch transactions in the web wallet
     await TestActions.signBatchTransactions({
       walletPage,
-      buttonSelector: SelectorsEnum.signAndBatchButton,
       numberOfTransactions
     });
 
