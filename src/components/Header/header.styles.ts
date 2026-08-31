@@ -14,7 +14,7 @@ export default {
   headerNavigationConnectMobile: 'header-navigation-connect-mobile w-8 h-8 bg-btn-tertiary cursor-pointer flex justify-center items-center sm:hidden text-xs rounded-xl',
   headerNavigationConnectIcon: 'header-navigation-connect-icon text-accent',
   headerNavigationAddress: 'header-navigation-address h-8 lg:h-10 w-8 lg:w-full text-primary justify-center text-xs rounded-xl lg:text-base lg:pr-4 lg:pl-5 max-w-100 flex relative lg:border lg:border-secondary lg:rounded-full items-center gap-3 after:absolute after:bg-btn-tertiary after:rounded-xl lg:after:rounded-full after:opacity-40 after:left-0 after:right-0 after:top-0 after:bottom-0 after:pointer-events-none',
-  headerNavigationAddressWallet: 'header-navigation-address-wallet relative z-1 text-accent hidden lg:flex!',
+  headerNavigationAddressWallet: 'header-navigation-address-wallet relative z-1 text-accent hidden lg:flex',
   headerNavigationAddressExplorer: 'header-navigation-address-explorer min-w-0 relative z-1 hidden lg:block!',
   headerNavigationAddressLogout: 'header-navigation-address-logout text-tertiary cursor-pointer relative z-1 transition-all duration-200 ease-out hover:text-accent',
 } satisfies Record<string, string>;

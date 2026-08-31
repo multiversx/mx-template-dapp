@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import '@fortawesome/fontawesome-svg-core/styles.css' layer(base);
 
 @theme {
   --breakpoint-xs: 30rem; /* 480px */

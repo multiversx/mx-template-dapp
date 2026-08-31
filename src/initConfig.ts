@@ -1,9 +1,12 @@
 import './styles/tailwind.css';
 import './styles/style.css';
 
+import { config as fontAwesomeConfig } from '@fortawesome/fontawesome-svg-core';
 import { environment, walletConnectV2ProjectId } from 'config';
 import { ICustomProvider, InitAppType } from './lib';
 import { InMemoryProvider } from './provider/inMemoryProvider';
+
+fontAwesomeConfig.autoAddCss = false;
 
 const providers: ICustomProvider[] = [
   {
